@@ -10,6 +10,8 @@ export class AppComponent implements OnInit {
     
     public constructor() {}
     
-    public ngOnInit(): void {}
+    public ngOnInit(): void {
+        console.log('pis og lort', process.env.NODE_ENV, process.env.ENV)
+    }
     
 }
