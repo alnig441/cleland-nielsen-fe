@@ -7,7 +7,7 @@ module.exports = {
     entry: {
         "polyfills": "./src/polyfills.ts",
         "vendor": "./src/vendor.ts",
-        "app": "./src/main.ts"
+        "app": [ "bootstrap-loader", "./src/main.ts" ]
     },
 
     resolve: {
@@ -42,13 +42,37 @@ module.exports = {
             {
                 test: /\.css$/,
                 exclude: helpers.root("src", "app"),
-                use: ExtractTextPlugin.extract({ fallbackLoader: "style-loader", loader: "css-loader?sourceMap" })
+                use: ExtractTextPlugin.extract({ fallback: "style-loader", use: "css-loader?sourceMap" })
             },
             {
                 test: /\.css$/,
                 include: helpers.root("src", "app"),
                 use: "raw-loader"
+            },
+
+            // LOAD BOOTSTRAP JQUERY SCRIPTS
+
+            // {    // BOOTSTRAP4 - appears not working
+            //     test: /bootstrap\/dist\/js\/umd\//,
+            //     use: 'imports-loader?jQuery=jquery'
+            // },
+
+            // {   // BOOTSTRAP3 - appears not necessary
+            //     test: /bootstrap-sass\/assets\/javascripts\//,
+            //     use: 'imports-loader?jQuery=jquery'
+            // },
+
+            // LOAD BOOTSTRAP ICON FONTS
+            {
+                test: /\.(woff2?|svg)$/,
+                use: 'url-loader?limit=10000'
+            },
+
+            {
+                test: /\.(ttf|eot)$/,
+                use: 'file-loader'
             }
+
         ]
     },
 
@@ -68,6 +92,17 @@ module.exports = {
             {
                 // your Angular Async Route paths relative to this root directory
             }
-        )
+        ),
+
+        // FOR BOOTSTRAP 4 - appears not working ..
+        // new ExtractTextPlugin({fileName: 'app.css', allChunks: true}),
+
+        new webpack.ProvidePlugin({
+            $: "jquery",
+            jQuery: "jquery",
+            "window.jQuery": "jquery",
+            Tether: "tether",
+            "window.Tether": "tether"
+        })
     ]
 };

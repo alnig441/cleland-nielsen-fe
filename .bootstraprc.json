@@ -1,0 +1,38 @@
+{
+//  "bootstrapVersion": 4,
+
+  "loglevel": "debug",
+
+  "env": {
+    "development": {
+      "styleLoaders": [
+        "style-loader",
+        "css-loader",
+        "resolve-url-loader",
+        "postcss-loader",
+        "sass-loader"
+      ]
+    },
+
+    "production": {
+      "styleLoaders": [
+        "style-loader",
+        "css-loader",
+        "postcss-loader",
+        "sass-loader"
+      ]
+    }
+  }
+
+//  "scripts": "false"
+
+//  "styles": {
+//    "normalize": true,
+//    "print": true
+//  }
+
+//  "scripts": {
+//    "alert": true,
+//    "button": true
+//  }
+}
