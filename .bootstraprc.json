@@ -1,4 +1,5 @@
 {
+//  DEFAULT: v3
 //  "bootstrapVersion": 4,
 
   "loglevel": "debug",
@@ -24,15 +25,4 @@
     }
   }
 
-//  "scripts": "false"
-
-//  "styles": {
-//    "normalize": true,
-//    "print": true
-//  }
-
-//  "scripts": {
-//    "alert": true,
-//    "button": true
-//  }
 }
