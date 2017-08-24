@@ -68,12 +68,6 @@ module.exports = {
             {
                 // your Angular Async Route paths relative to this root directory
             }
-        ),
-        new webpack.ProvidePlugin({ // inject ES5 modules as global vars
-            $: 'jquery',
-            jQuery: 'jquery',
-            'window.jQuery': 'jquery',
-            Tether: 'tether'
-        })
+        )
     ]
 };
