@@ -19,9 +19,12 @@ module.exports = webpackMerge(commonConfig, {
     plugins: [
         new webpack.NoEmitOnErrorsPlugin(),
         new webpack.optimize.UglifyJsPlugin({ // https://github.com/angular/angular/issues/10618
+            beautify: false,
             mangle: {
-                keep_fnames: true
-            }
+                keep_fnames: true,
+                screw_ie8: true
+            },
+            comments: false
         }),
         new ExtractTextPlugin("[name].[hash].css"),
         new webpack.DefinePlugin({
@@ -31,10 +34,14 @@ module.exports = webpackMerge(commonConfig, {
         }),
         new webpack.LoaderOptionsPlugin({
             options: {
-                htmlLoader: {
-                    minimize: false // workaround for ng2
-                }
+                minimize: true,
+                debug: true
             }
+            // options: {
+            //     htmlLoader: {
+            //         minimize: false // workaround for ng2
+            //     }
+            // }
         })
     ]
 });
