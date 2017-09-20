@@ -15,7 +15,7 @@ const port = isDeveloping ? 3000 : process.env.PORT;
 const app = express();
 
 if (isDeveloping) {
-    console.log('running dev mode (express)');
+    console.log('running express dev mode');
     const compiler = webpack(config);
     const middleware = webpackMiddleware(compiler, {
         publicPath: config.output.publicPath,
