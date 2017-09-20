@@ -14,16 +14,6 @@
         "lint": "tslint -c config/tslint.json \"src/app/**/*.ts\"",
         "pretest": "npm run lint",
         "build": "rimraf dist && webpack --config config/webpack.prod.js --progress --profile --bail",
-        "postinstall": "node deploy"
-    },
-    "old_scripts": {
-        "start": "webpack-dev-server --inline --config config/webpack.dev.js --progress --port 3000",
-        "test": "karma start config/karma.conf.js",
-        "lint": "tslint -c config/tslint.json \"src/app/**/*.ts\"",
-        "pretest": "npm run lint",
-        "build": "rimraf dist && webpack --config config/webpack.prod.js --progress --profile --bail",
-        "express": "node server",
-        "heroku-postbuild": "rimraf dist && --config config/webpack.prod.js --progress --profile --bail"
     },
     "dependencies": {
         "@angular/common": "^4.3.6",
