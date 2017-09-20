@@ -14,7 +14,7 @@
         "lint": "tslint -c config/tslint.json \"src/app/**/*.ts\"",
         "pretest": "npm run lint",
         "build": "rimraf dist && webpack --config config/webpack.prod.js --progress --profile --bail",
-        "heroku-postbuild": "rimraf dist && --config config/webpack.prod.js --progress --profile --bail"
+        "postinstall": "rimraf dist && --config config/webpack.prod.js --progress --profile --bail"
     },
     "old_scripts": {
         "start": "webpack-dev-server --inline --config config/webpack.dev.js --progress --port 3000",
