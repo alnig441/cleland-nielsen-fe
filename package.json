@@ -38,18 +38,11 @@
         "bootstrap-loader": "^2.2.0",
         "core-js": "^2.4.1",
         "express": "^4.15.4",
-        "extract-text-webpack-plugin": "^3.0.0",
-        "html-webpack-plugin": "^2.30.1",
         "jquery": "^3.2.1",
         "popper.js": "^1.12.3",
         "postcss": "^6.0.9",
-        "rimraf": "^2.6.2",
         "rxjs": "^5.1.0",
         "tether": "^1.4.0",
-        "webpack": "^3.6.0",
-        "webpack-dev-middleware": "^1.12.0",
-        "webpack-hot-middleware": "^2.19.1",
-        "webpack-merge": "^4.1.0",
         "zone.js": "^0.8.17"
     },
     "devDependencies": {
@@ -60,8 +53,10 @@
         "codelyzer": "~2.0.0",
         "copy-webpack-plugin": "^4.0.1",
         "css-loader": "^0.28.5",
+        "extract-text-webpack-plugin": "^3.0.0",
         "file-loader": "^0.8.5",
         "html-loader": "^0.4.3",
+        "html-webpack-plugin": "^2.30.1",
         "jasmine-core": "^2.8.0",
         "karma": "^1.4.0",
         "karma-chrome-launcher": "^2.0.0",
@@ -78,12 +73,17 @@
         "raw-loader": "^0.5.1",
         "reflect-metadata": "^0.1.8",
         "resolve-url-loader": "^2.1.0",
+        "rimraf": "^2.6.2",
         "sass-loader": "^6.0.6",
         "style-loader": "^0.18.2",
         "ts-loader": "~2.0.3",
         "tslint": "~4.5.0",
         "typescript": "~2.2.0",
         "url-loader": "^0.5.9",
-        "webpack-dev-server": "^2.7.1"
+        "webpack": "^3.6.0",
+        "webpack-dev-middleware": "^1.12.0",
+        "webpack-dev-server": "^2.7.1",
+        "webpack-hot-middleware": "^2.19.1",
+        "webpack-merge": "^4.1.0"
     }
 }
