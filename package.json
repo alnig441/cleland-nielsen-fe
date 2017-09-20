@@ -44,6 +44,7 @@
         "tether": "^1.4.0",
         "webpack": "^3.6.0",
         "webpack-dev-middleware": "^1.12.0",
+        "webpack-hot-middleware": "^2.19.1",
         "zone.js": "^0.8.17"
     },
     "devDependencies": {
@@ -82,7 +83,6 @@
         "typescript": "~2.2.0",
         "url-loader": "^0.5.9",
         "webpack-dev-server": "^2.7.1",
-        "webpack-hot-middleware": "^2.19.1",
         "webpack-merge": "~2.4.0"
     }
 }
