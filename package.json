@@ -8,6 +8,15 @@
         "url": "https://github.com/Plum-Crazy/angular-seed"
     },
     "scripts": {
+        "start": "node server",
+        "webpack": "webpack-dev-server --inline --config config/webpack.dev.js --progress --port 3000",
+        "test": "karma start config/karma.conf.js",
+        "lint": "tslint -c config/tslint.json \"src/app/**/*.ts\"",
+        "pretest": "npm run lint",
+        "build": "rimraf dist && webpack --config config/webpack.prod.js --progress --profile --bail",
+        "heroku-postbuild": "webpack -p --config ./webpack.prod.js --progress"
+    },
+    "old_scripts": {
         "start": "webpack-dev-server --inline --config config/webpack.dev.js --progress --port 3000",
         "test": "karma start config/karma.conf.js",
         "lint": "tslint -c config/tslint.json \"src/app/**/*.ts\"",
@@ -30,6 +39,7 @@
         "jquery": "^3.2.1",
         "popper.js": "^1.12.3",
         "postcss": "^6.0.9",
+        "rifraf": "^2.0.3",
         "rxjs": "^5.1.0",
         "tether": "^1.4.0",
         "zone.js": "^0.8.17"
@@ -69,7 +79,7 @@
         "tslint": "~4.5.0",
         "typescript": "~2.2.0",
         "url-loader": "^0.5.9",
-        "webpack": "^3.5.5",
+        "webpack": "^3.6.0",
         "webpack-dev-server": "^2.7.1",
         "webpack-hot-middleware": "^2.19.1",
         "webpack-merge": "~2.4.0"
