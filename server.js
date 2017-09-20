@@ -2,9 +2,8 @@
 
 const path = require('path');
 const express = require('express');
-const isDeveloping = process.env.NODE_ENV !== 'production';
-const hostName = isDeveloping ? "localhost" : "0.0.0.0";
-const port = isDeveloping ? 3000 : process.env.PORT;
+const hostName = "0.0.0.0";
+const port = process.env.PORT;
 const app = express();
 
 app.use(express.static(__dirname + '/dist'));
