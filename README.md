@@ -9,8 +9,8 @@ A basic Angular 4 seed project utilizing the following technologies:
 * PugJS (template engine)
 * SASS (css superset)
 * Webpack 2+ (build tools)
-* Bootstrap 3/4 - manual config in index file via CDN
-* Bootstrap 3 available through webpack config / bootstrap-loader
+* Bootstrap 3
+* Font-Awesome
 
 
 ### Commands
