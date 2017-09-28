@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
+var SiteCopy = require("../../../../api/site_copy.json");
 
 @Component({
     selector: "plum-home",
@@ -12,14 +13,18 @@ export class HomeComponent implements OnInit {
 
     private home: string[];
 
+    private myApi: string[];
+
     public ngOnInit(): void {
+
+        this.home = SiteCopy.Home;
 
         this.http.get<ItemsResponse>("../api/site_copy.json")
         //RETRY ON FAILURE
             .retry(3)
             .subscribe(data => {
-                this.home = data.appComponents["home"];
-                console.log('home component: ', this.home);
+                this.myApi = data.Home;
+                console.log('home component: ', this.myApi);
             }, err => {
                 //    IMPLEMENT ERROR HANDLING
                 console.log('error: ', err);
@@ -28,5 +33,5 @@ export class HomeComponent implements OnInit {
 }
 
 interface ItemsResponse {
-    appComponents: string[];
+    Home: string[];
 }

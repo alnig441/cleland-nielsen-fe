@@ -20,7 +20,9 @@ export class AppComponent implements OnInit {
             //RETRY ON FAILURE
             .retry(3)
             .subscribe(data => {
-            this.app = data.appComponents;
+            this.app = data.App;
+            console.log(this.app["test"]);
+
             }, err => {
             //    IMPLEMENT ERROR HANDLING
             console.log('error: ', err);
@@ -31,5 +33,5 @@ export class AppComponent implements OnInit {
 }
 
 interface ItemsResponse {
-    appComponents: string[];
+    App: string[];
 }

@@ -1,8 +1,8 @@
 {
-  "appComponents": {
-    "app": { },
-    "home": {
-      "header": "welcome to home component"
-    }
+  "App": {
+    "test": "app comp OK"
+  },
+  "Home": {
+    "test": "home comp OK"
   }
 }
