@@ -8,7 +8,6 @@ import { HttpModule } from "@angular/http";
 import { ROUTING } from "./app.routing";
 
 import { HomeComponent } from "./route/home/home.component";
-import {HttpClient} from "@angular/common/http";
 
 @NgModule({
     imports: [

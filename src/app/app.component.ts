@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewEncapsulation } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
-import "rxjs/add/operator/retry";
+const SiteCopy = require("../../api/site_copy.json");
 
 @Component({
     selector: "plum-app",
@@ -10,28 +10,12 @@ import "rxjs/add/operator/retry";
 })
 export class AppComponent implements OnInit {
 
-    private app: string[];
+    private app: string[] = SiteCopy.App;
 
     constructor(private http: HttpClient) {}
 
     public ngOnInit(): void {
 
-        this.http.get<ItemsResponse>("../api/site_copy.json")
-            //RETRY ON FAILURE
-            .retry(3)
-            .subscribe(data => {
-            this.app = data.App;
-            console.log(this.app["test"]);
-
-            }, err => {
-            //    IMPLEMENT ERROR HANDLING
-            console.log('error: ', err);
-        })
-
     }
 
-}
-
-interface ItemsResponse {
-    App: string[];
 }
