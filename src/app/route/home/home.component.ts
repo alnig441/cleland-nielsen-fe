@@ -10,7 +10,7 @@ export class HomeComponent implements OnInit {
 
     constructor(private http: HttpClient) {}
 
-    private component: string[];
+    private home: string[];
 
     public ngOnInit(): void {
 
@@ -18,12 +18,12 @@ export class HomeComponent implements OnInit {
         //RETRY ON FAILURE
             .retry(3)
             .subscribe(data => {
-                this.component = data.appComponents["home"];
+                this.home = data.appComponents["home"];
+                console.log('home component: ', this.home);
             }, err => {
                 //    IMPLEMENT ERROR HANDLING
                 console.log('error: ', err);
             })
-
     }
 }
 

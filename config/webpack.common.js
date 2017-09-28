@@ -77,8 +77,14 @@ module.exports = {
                 test: /font-awesome\.config\.js/,
                 use: [ "style-loader", "font-awesome-loader" ]
 
-            }
+            },
             // LOAD FONT-AWESOME CONFIG FILE - END
+
+            // JSON LOADER
+            {
+                test: /\.json$/,
+                loader: 'json-loader'
+            }
 
         ]
     },

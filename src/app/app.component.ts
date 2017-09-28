@@ -10,7 +10,7 @@ import "rxjs/add/operator/retry";
 })
 export class AppComponent implements OnInit {
 
-    private component: string[];
+    private app: string[];
 
     constructor(private http: HttpClient) {}
 
@@ -20,7 +20,7 @@ export class AppComponent implements OnInit {
             //RETRY ON FAILURE
             .retry(3)
             .subscribe(data => {
-            this.component = data.appComponents;
+            this.app = data.appComponents;
             }, err => {
             //    IMPLEMENT ERROR HANDLING
             console.log('error: ', err);
