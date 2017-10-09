@@ -28,7 +28,18 @@ module.exports = {
             },
             {
                 test: /\.pug$/,
-                use: [ "raw-loader", "pug-html-loader" ]
+                // use: [ "raw-loader", "pug-html-loader" ]
+                use: [
+                    {
+                        loader: "raw-loader"
+                    },
+                    {
+                        loader: "pug-html-loader",
+                        options: {
+                            doctype: "html"
+                        }
+                    }
+                ]
             },
             {
                 test: /\.scss$/,

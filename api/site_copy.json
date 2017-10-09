@@ -1,8 +1,9 @@
 {
   "App": {
-    "test": "app comp OK"
+    "test": "app comp loaded from JSON OK",
+    "test2": "bla2",
+    "test3": "bla3"
   },
-  "Home": {
-    "test": "home comp OK"
-  }
+  "Home": ["one", "two", "three"]
+
 }

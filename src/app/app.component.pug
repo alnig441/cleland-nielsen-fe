@@ -59,6 +59,8 @@ div.plumApp
                         li
                             a(href="#") Separated link
     main
-
-        p {{ app.test }}
         router-outlet
+
+        template-test(#myChild)
+
+        button('(click)'="myChild.runMe('yes')") run child function

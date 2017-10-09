@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation } from "@angular/core";
+import { Component, OnInit, ViewEncapsulation, ElementRef, ViewChild } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 const SiteCopy = require("../../api/site_copy.json");
 
@@ -10,11 +10,15 @@ const SiteCopy = require("../../api/site_copy.json");
 })
 export class AppComponent implements OnInit {
 
+    @ViewChild('myChild') child: any;
+
     private app: string[] = SiteCopy.App;
 
     constructor(private http: HttpClient) {}
 
     public ngOnInit(): void {
+
+        console.log('childView working: ', this.child)
 
     }
 
