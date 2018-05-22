@@ -1,0 +1,23 @@
+div(class="" tabindex="-1" role="dialog")
+    div(class="modal-dialog" role="document")
+        div(class="modal-content")
+            form((ngSubmit)="onSubmit()", #loginForm="ngForm")
+                div(class="modal-body")
+                    div(class="form-group")
+                        label(for="userId") User ID
+                        input(type="email" class="form-control" id="userId" aria-describedby="emailHelp" placeholder="Enter User ID"
+                        required,
+                        [(ngModel)]="loginModel.userId" name="userId",
+                        #userId="ngModel")
+
+                    div(class="alert alert-danger",[hidden]="userId.valid || userId.pristine") User ID Required
+                    div(class="form-group")
+                        label(for="password" required) Password
+                        input(type="password" class="form-control" id="password" placeholder="Password"
+                        required,
+                        [(ngModel)]="loginModel.password" name="password",
+                        #password="ngModel")
+                    div(class="alert alert-danger",[hidden]="password.valid || password.pristine") Password Required
+                div(class="modal-footer")
+                    button(type="button" class="btn btn-secondary" data-dismiss="modal", (click)="onCancel()") Close
+                    button(type="submit" class="btn btn-primary") Submit

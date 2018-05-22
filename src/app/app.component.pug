@@ -1,4 +1,4 @@
-div.plumApp
+div
 
     // BOOTSTRAP 3 NAVBAR
     nav(class="navbar navbar-default")
@@ -11,56 +11,28 @@ div.plumApp
                     span(class="icon-bar")
                     span(class="icon-bar")
                 a(class="navbar-brand" href="#") Brand &#8200;
-                    i(class="fa fa-linkedin") &#8200;
-                    i(class="fa fa-twitter") &#8200;
+                    //i(class="fa fa-linkedin") &#8200;
+                    //i(class="fa fa-twitter") &#8200;
 
 
-        div(class="collapse navbar-collapse" id="bs-example-navbar-collapse-1")
-            ul(class="nav navbar-nav")
-                li(class="active")
-                    a(href="#") Link
-                        span(class="sr-only" current)
-                li
-                    a(href="#") Link
-                li(class="dropdown")
-                    a(href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false") Dropdown
-                        span(class="caret")
-                    ul(class="dropdown-menu")
-                        li
-                            a(href="#") Action
-                        li
-                            a(href="#") Another action
-                        li
-                            a(href="#") Something else here
-                        li(role="separator" class="divider")
-                        li
-                            a(href="#") Separated link
-                        li(role="separator" class="divider")
-                        li
-                            a(href="#") One more separated link
-            form(class="navbar-form navbar-left")
-                div(class="form-group")
-                    input(type="text" class="form-control" placeholder="Search")
-                button(type="submit" class="btn btn-default") Submit
-            ul(class="nav navbar-nav navbar-right")
-                li
-                    a(href="#") Link
-                li(class="dropdown")
-                    a(href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false") Dropdown
-                        span(class="caret")
-                    ul(class="dropdown-menu")
-                        li
-                            a(href="#") Action
-                        li
-                            a(href="#") Another action
-                        li
-                            a(href="#") Something else here
-                        li(role="separator" class="divider")
-                        li
-                            a(href="#") Separated link
+            div(class="collapse navbar-collapse" id="bs-example-navbar-collapse-1")
+                ul(class="nav navbar-nav")
+                    li(class="")
+                        a(href="#") Link
+                            span(class="sr-only" current)
+                    li
+                        a(href="#") Link
+                    li
+                        a(href="#") Link
+                    li
+                        a(href="#") Link
+
+                ul(class="nav navbar-nav navbar-right")
+                    li
+                        a(routerLink="/login" routerLinkActive='active') Login
     main
         router-outlet
 
-        template-test(#myChild)
+        //template-test(#myChild)
 
-        button('(click)'="myChild.runMe('yes')") run child function
+        //button('(click)'="myChild.runMe('yes')") run child function

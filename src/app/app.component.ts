@@ -3,7 +3,7 @@ import { HttpClient } from "@angular/common/http";
 const SiteCopy = require("../../api/site_copy.json");
 
 @Component({
-    selector: "plum-app",
+    selector: "app-root",
     template: require("./app.component.pug"),
     styleUrls: [ "./app.component.scss" ],
     encapsulation: ViewEncapsulation.None

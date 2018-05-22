@@ -10,6 +10,8 @@ import { ROUTING } from "./app.routing";
 
 import { HomeComponent } from "./route/home/home.component";
 import { NgForComponent } from "./route/ngFor/ngfor.component";
+import {LoginRoutingModule} from "./route/login/login-routing.module";
+import {LoginComponent} from "./route/login/login.component";
 
 
 @NgModule({
@@ -19,12 +21,14 @@ import { NgForComponent } from "./route/ngFor/ngfor.component";
         FormsModule,
         HttpModule,
         CommonModule,
+        LoginRoutingModule,
         ROUTING
     ],
     declarations: [
         AppComponent,
         HomeComponent,
-        NgForComponent
+        NgForComponent,
+        LoginComponent
     ],
     bootstrap: [
         AppComponent
