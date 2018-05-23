@@ -5,7 +5,7 @@ import {AdminComponent} from "./admin/admin.component";
 
 const privateRoutes: Routes = [
     {
-        path: "private",
+        path: "",
         component: PrivateComponent
     },
     {

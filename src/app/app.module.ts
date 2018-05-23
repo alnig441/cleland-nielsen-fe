@@ -6,12 +6,12 @@ import { FormsModule } from "@angular/forms";
 import { HttpModule } from "@angular/http";
 import { CommonModule } from "@angular/common";
 
-import { ROUTING } from "./app.routing";
+import { AppRouting } from "./app.routing";
 
 import { HomeComponent } from "./route/home/home.component";
 import { NgForComponent } from "./route/ngFor/ngfor.component";
-import {LoginRoutingModule} from "./route/login/login-routing.module";
-import {LoginComponent} from "./route/login/login.component";
+import { LoginRoutingModule } from "./route/login/login-routing.module";
+import { LoginComponent } from "./route/login/login.component";
 
 
 @NgModule({
@@ -22,7 +22,8 @@ import {LoginComponent} from "./route/login/login.component";
         HttpModule,
         CommonModule,
         LoginRoutingModule,
-        ROUTING
+        AppRouting
+        // ROUTING
     ],
     declarations: [
         AppComponent,
