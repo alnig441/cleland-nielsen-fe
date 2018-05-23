@@ -1,16 +1,22 @@
 import { NgModule} from "@angular/core";
 import { RouterModule, Routes} from "@angular/router";
 import { PrivateComponent } from "./private.component";
-import {AdminComponent} from "./admin/admin.component";
+import { AdminComponent } from "./admin/admin.component";
 
 const privateRoutes: Routes = [
     {
         path: "",
-        component: PrivateComponent
-    },
-    {
-        path: "admin",
-        component: AdminComponent
+        component: PrivateComponent,
+        canActivate: [],
+        children: [
+            {
+                path: "admin",
+                component: AdminComponent,
+                children: [
+
+                ]
+            }
+        ]
     }
 ];
 

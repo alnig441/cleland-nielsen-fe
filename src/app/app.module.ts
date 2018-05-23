@@ -9,9 +9,10 @@ import { CommonModule } from "@angular/common";
 import { AppRouting } from "./app.routing";
 
 import { HomeComponent } from "./route/home/home.component";
-import { NgForComponent } from "./route/ngFor/ngfor.component";
 import { LoginRoutingModule } from "./route/login/login-routing.module";
 import { LoginComponent } from "./route/login/login.component";
+import { PrivateComponent } from "./route/private/private.component";
+import { AdminComponent } from "./route/private/admin/admin.component";
 
 
 @NgModule({
@@ -22,14 +23,14 @@ import { LoginComponent } from "./route/login/login.component";
         HttpModule,
         CommonModule,
         LoginRoutingModule,
-        AppRouting
-        // ROUTING
+        AppRouting,
     ],
     declarations: [
         AppComponent,
         HomeComponent,
-        NgForComponent,
-        LoginComponent
+        LoginComponent,
+        PrivateComponent,
+        AdminComponent
     ],
     bootstrap: [
         AppComponent

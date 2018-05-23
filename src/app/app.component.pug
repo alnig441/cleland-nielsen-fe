@@ -11,21 +11,18 @@ div
                     span(class="icon-bar")
                     span(class="icon-bar")
                 a(class="navbar-brand" href="#") Brand &#8200;
-                    //i(class="fa fa-linkedin") &#8200;
-                    //i(class="fa fa-twitter") &#8200;
-
 
             div(class="collapse navbar-collapse" id="bs-example-navbar-collapse-1")
                 ul(class="nav navbar-nav")
                     li(class="")
-                        a(href="#") Link
+                        a(routerLink="" routerLinkActive="active") Home
                             span(class="sr-only" current)
                     li
-                        a(href="#") Link
+                        a(href="#") Public Link 1
                     li
-                        a(href="#") Link
+                        a(href="#") Public Link 2
                     li
-                        a(href="#") Link
+                        a(href="#") Public Link 3
 
                 ul(class="nav navbar-nav navbar-right")
                     li
@@ -33,6 +30,4 @@ div
     main
         router-outlet
 
-        //template-test(#myChild)
-
-        //button('(click)'="myChild.runMe('yes')") run child function
+        p(routerLink="/private")
