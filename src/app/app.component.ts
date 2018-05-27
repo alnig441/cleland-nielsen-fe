@@ -23,15 +23,19 @@ export class AppComponent implements OnInit {
             .map(() => this.router.routerState.snapshot.root.children[0].data)
             .subscribe((links) => {
 
-                let array = [];
+                let route = this.router.routerState.snapshot.url;
 
-                for(var link in links) {
-                    let obj = {name: ''};
-                    obj.name = links[link];
-                    array.push(obj);
+                if(route === '/' || route === '/private') {
+                    let array = [];
+
+                    for(var link in links) {
+                        let obj = {name: ''};
+                        obj.name = links[link];
+                        array.push(obj);
+                    }
+
+                    this.navbarLinks = array;
                 }
-
-                this.navbarLinks = array;
 
             })
     }
