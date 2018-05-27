@@ -13,17 +13,10 @@ div
                 a(class="navbar-brand" href="#") Brand &#8200;
 
             div(class="collapse navbar-collapse" id="bs-example-navbar-collapse-1")
-                ul(class="nav navbar-nav")
+                ul(*ngFor="let link of navbarLinks" class="nav navbar-nav")
                     li(class="")
-                        a(routerLink="" routerLinkActive="active") Home
+                        a(routerLink="{{link.name}}" routerLinkActive="active") {{link.name}}
                             span(class="sr-only" current)
-                    li
-                        a(href="#") Public Link 1
-                    li
-                        a(href="#") Public Link 2
-                    li
-                        a(href="#") Public Link 3
-
                 ul(class="nav navbar-nav navbar-right")
                     li
                         a(routerLink="/login" routerLinkActive='active') Login

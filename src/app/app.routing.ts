@@ -10,13 +10,13 @@ const APP_ROUTES: Routes = [
     {
         path: "",
         component: HomeComponent,
-        data: ['public link 1', 'public link 2', 'public link 3']
+        data: ['home', 'about', 'work', 'contact']
     },
     {
         path: "private",
         component: PrivateComponent,
         canActivate: [AuthGuardService],
-        data: ['private link 1', "private link 2", "private link 3"],
+        data: ['images', "events", "latest"],
         canLoad: [],
         children: [
             {

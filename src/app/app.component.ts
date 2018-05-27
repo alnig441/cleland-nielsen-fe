@@ -13,15 +13,25 @@ export class AppComponent implements OnInit {
 
     private app: string[] = SiteCopy.App;
 
+    navbarLinks:any;
+
     constructor(private http: HttpClient, private router: Router, private activatedRoute: ActivatedRoute) {}
 
     public ngOnInit(): void {
 
         this.router.events.filter((event)=> event instanceof NavigationEnd)
             .map(() => this.router.routerState.snapshot.root.children[0].data)
-            .subscribe((x) => {
+            .subscribe((links) => {
 
-                console.log('mapped links: ', x);
+                let array = [];
+
+                for(var link in links) {
+                    let obj = {name: ''};
+                    obj.name = links[link];
+                    array.push(obj);
+                }
+
+                this.navbarLinks = array;
 
             })
     }
