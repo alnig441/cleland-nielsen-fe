@@ -9,12 +9,14 @@ import { AuthGuardService } from "./services/auth-guard.service";
 const APP_ROUTES: Routes = [
     {
         path: "",
-        component: HomeComponent
+        component: HomeComponent,
+        data: ['public link 1', 'public link 2', 'public link 3']
     },
     {
         path: "private",
         component: PrivateComponent,
         canActivate: [AuthGuardService],
+        data: ['private link 1', "private link 2", "private link 3"],
         canLoad: [],
         children: [
             {
@@ -38,7 +40,7 @@ const APP_ROUTES: Routes = [
         RouterModule.forRoot(
             APP_ROUTES,
             {
-                enableTracing: true
+                enableTracing: false
             }
         )
     ],

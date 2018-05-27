@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewEncapsulation } from "@angular/core";
-import { NavigationExtras, Router } from "@angular/router";
+import { NavigationExtras, Router, NavigationEnd, NavigationStart } from "@angular/router";
 import { HttpClient } from "@angular/common/http";
 import { LoginModel } from "../../models/login.model";
 import { AuthService } from "../../services/auth.service";
@@ -23,6 +23,13 @@ export class LoginComponent implements OnInit {
 
     onSubmit(): void {
         console.log('login form submitted: ', this.loginModel);
+
+        // this.router.events.filter((event)=> event instanceof NavigationStart)
+        //     // .map(() => this.activatedRoute)
+        //     .subscribe((event) => {
+        //         console.log('navigation started: ', event);
+        //     })
+
         this.authService.login().subscribe(() => {
             console.log("am I logged in? ", this.authService.isLoggedIn);
 

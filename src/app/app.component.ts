@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewEncapsulation, ElementRef, ViewChild } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
+import { Router, NavigationStart, ActivatedRoute, NavigationEnd } from "@angular/router";
 const SiteCopy = require("../../api/site_copy.json");
 
 @Component({
@@ -10,16 +11,19 @@ const SiteCopy = require("../../api/site_copy.json");
 })
 export class AppComponent implements OnInit {
 
-    @ViewChild('myChild') child: any;
-
     private app: string[] = SiteCopy.App;
 
-    constructor(private http: HttpClient) {}
+    constructor(private http: HttpClient, private router: Router, private activatedRoute: ActivatedRoute) {}
 
     public ngOnInit(): void {
 
-        console.log('childView working: ', this.child)
+        this.router.events.filter((event)=> event instanceof NavigationEnd)
+            .map(() => this.router.routerState.snapshot.root.children[0].data)
+            .subscribe((x) => {
 
+                console.log('mapped links: ', x);
+
+            })
     }
 
 }
