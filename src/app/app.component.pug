@@ -15,7 +15,7 @@ div
             div(class="collapse navbar-collapse" id="bs-example-navbar-collapse-1")
                 ul(*ngFor="let link of navbarLinks, let i = index" class="nav navbar-nav")
                     li(class="")
-                        a(routerLink="{{link.name}}" routerLinkActive="active") {{link.name}}
+                        a(routerLink="{{link}}" routerLinkActive="active") {{link}}
                             span(class="sr-only" current)
                 ul(class="nav navbar-nav navbar-right")
                     li

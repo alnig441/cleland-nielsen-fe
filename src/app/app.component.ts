@@ -13,7 +13,7 @@ export class AppComponent implements OnInit {
 
     public: boolean = true;
 
-    navbarLinks:any;
+    navbarLinks = new Array();
 
     constructor(private http: HttpClient, private router: Router, private activatedRoute: ActivatedRoute) {}
 
@@ -28,15 +28,9 @@ export class AppComponent implements OnInit {
                 route === '/private' ? this.public = false : this.public = true ;
 
                 if(route === '/' || route === '/private') {
-                    let array = [];
-
                     for(var link in links) {
-                        let obj = {name: ''};
-                        obj.name = links[link];
-                        array.push(obj);
-                    }
-
-                    this.navbarLinks = array;
+                        this.navbarLinks.push(links[link]);
+                    };
                 }
 
             })
