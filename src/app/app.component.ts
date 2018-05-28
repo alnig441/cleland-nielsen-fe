@@ -11,7 +11,7 @@ const SiteCopy = require("../../api/site_copy.json");
 })
 export class AppComponent implements OnInit {
 
-    private app: string[] = SiteCopy.App;
+    public: boolean = true;
 
     navbarLinks:any;
 
@@ -24,6 +24,8 @@ export class AppComponent implements OnInit {
             .subscribe((links) => {
 
                 let route = this.router.routerState.snapshot.url;
+
+                route === '/private' ? this.public = false : this.public = true ;
 
                 if(route === '/' || route === '/private') {
                     let array = [];
@@ -38,6 +40,10 @@ export class AppComponent implements OnInit {
                 }
 
             })
+    }
+
+    logout() : void {
+        this.router.navigateByUrl('/');
     }
 
 }

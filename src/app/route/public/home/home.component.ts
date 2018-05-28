@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
-const SiteCopy = require("../../../../api/site_copy.json");
+const SiteCopy = require("../../../../../api/site_copy.json");
 
 @Component({
     selector: "app-home",
@@ -14,7 +14,7 @@ export class HomeComponent implements OnInit {
     private home: string[] = SiteCopy.Home;
 
     public ngOnInit(): void {
-
+        console.log('home component initialised');
     }
 }
 

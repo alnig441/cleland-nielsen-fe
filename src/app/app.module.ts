@@ -8,11 +8,14 @@ import { CommonModule } from "@angular/common";
 
 import { AppRouting } from "./app.routing";
 
-import { HomeComponent } from "./route/home/home.component";
+import { HomeComponent } from "./route/public/home/home.component";
 import { LoginRoutingModule } from "./route/login/login-routing.module";
 import { LoginComponent } from "./route/login/login.component";
 import { PrivateComponent } from "./route/private/private.component";
 import { AdminComponent } from "./route/private/admin/admin.component";
+import { AboutComponent } from "./route/public/about/about.component";
+import { ContactComponent } from "./route/public/contact/contact.component";
+import { WorkComponent } from "./route/public/work/work.component";
 
 
 @NgModule({
@@ -30,7 +33,10 @@ import { AdminComponent } from "./route/private/admin/admin.component";
         HomeComponent,
         LoginComponent,
         PrivateComponent,
-        AdminComponent
+        AdminComponent,
+        AboutComponent,
+        ContactComponent,
+        WorkComponent
     ],
     bootstrap: [
         AppComponent

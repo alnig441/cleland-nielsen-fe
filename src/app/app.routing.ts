@@ -1,10 +1,13 @@
 import { CanDeactivate, RouterModule, Routes} from "@angular/router";
 import { ModuleWithProviders, NgModule} from "@angular/core";
 
-import { HomeComponent } from "./route/home/home.component";
+import { HomeComponent } from "./route/public/home/home.component";
 import { PrivateComponent } from "./route/private/private.component";
 import { AdminComponent } from "./route/private/admin/admin.component";
 import { AuthGuardService } from "./services/auth-guard.service";
+import { AboutComponent } from "./route/public/about/about.component";
+import { ContactComponent } from "./route/public/contact/contact.component";
+import {WorkComponent} from "./route/public/work/work.component";
 
 const APP_ROUTES: Routes = [
     {
@@ -24,10 +27,36 @@ const APP_ROUTES: Routes = [
                 component: AdminComponent,
                 canActivate: [],
                 children: [
-
+                    // {
+                    //     path: 'image_mgmt'
+                    // },
+                    // {
+                    //     path: 'user_mgmt'
+                    // }
                 ]
-            }
+            },
+            // {
+            //     path: 'images'
+            // },
+            // {
+            //     path: 'events'
+            // },
+            // {
+            //     path: 'latest'
+            // }
         ]
+    },
+    {
+        path: 'about',
+        component: AboutComponent
+    },
+    {
+        path: 'work',
+        component: WorkComponent
+    },
+    {
+        path: 'contact',
+        component: ContactComponent
     },
     {
         path: '**',
