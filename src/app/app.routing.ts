@@ -7,19 +7,21 @@ import { AdminComponent } from "./route/private/admin/admin.component";
 import { AuthGuardService } from "./services/auth-guard.service";
 import { AboutComponent } from "./route/public/about/about.component";
 import { ContactComponent } from "./route/public/contact/contact.component";
-import {WorkComponent} from "./route/public/work/work.component";
+import { WorkComponent } from "./route/public/work/work.component";
+
+import { LINKS } from "./constants/links";
 
 const APP_ROUTES: Routes = [
     {
         path: "",
         component: HomeComponent,
-        data: ['home', 'about', 'work', 'contact']
+        data: LINKS.public
     },
     {
         path: "private",
         component: PrivateComponent,
         canActivate: [AuthGuardService],
-        data: ['images', "events", "latest"],
+        data: LINKS.private,
         canLoad: [],
         children: [
             {
