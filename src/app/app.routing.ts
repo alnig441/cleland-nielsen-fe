@@ -14,8 +14,8 @@ import { LINKS } from "./constants/links";
 const APP_ROUTES: Routes = [
     {
         path: "",
-        component: HomeComponent,
-        data: LINKS.public
+        redirectTo: "/home",
+        pathMatch: 'full'
     },
     {
         path: "private",
@@ -47,22 +47,6 @@ const APP_ROUTES: Routes = [
             //     path: 'latest'
             // }
         ]
-    },
-    {
-        path: 'about',
-        component: AboutComponent
-    },
-    {
-        path: 'work',
-        component: WorkComponent
-    },
-    {
-        path: 'contact',
-        component: ContactComponent
-    },
-    {
-        path: '**',
-        component: HomeComponent
     }
 ];
 

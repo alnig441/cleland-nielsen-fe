@@ -1,5 +1,5 @@
-import { NgModule} from "@angular/core";
-import { RouterModule, Routes} from "@angular/router";
+import { NgModule } from "@angular/core";
+import { RouterModule, Routes } from "@angular/router";
 import { PrivateComponent } from "./private.component";
 import { AdminComponent } from "./admin/admin.component";
 

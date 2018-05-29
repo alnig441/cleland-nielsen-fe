@@ -19,18 +19,23 @@ export class AppComponent implements OnInit {
 
     public ngOnInit(): void {
 
+        console.log('app comp init');
+
         this.router.events.filter((event)=> event instanceof NavigationEnd)
             .map(() => this.router.routerState.snapshot.root.children[0].data)
             .subscribe((links) => {
 
                 let route = this.router.routerState.snapshot.url;
+                let arr = [];
 
                 route === '/private' ? this.public = false : this.public = true ;
 
-                if(route === '/' || route === '/private') {
+                if(route === '/home' || route === '/private') {
                     for(var link in links) {
-                        this.navbarLinks.push(links[link]);
+                        arr.push(links[link]);
                     };
+
+                    this.navbarLinks = arr;
                 }
 
             })
