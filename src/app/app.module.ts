@@ -12,7 +12,7 @@ import { LoginRoutingModule } from "./route/login/login-routing.module";
 import { LoginComponent } from "./route/login/login.component";
 import { PrivateComponent } from "./route/private/private.component";
 import { AdminComponent } from "./route/private/admin/admin.component";
-import {PublicModule} from "./route/public/public.module";
+import { PublicModule } from "./route/public/public.module";
 
 
 @NgModule({
@@ -22,9 +22,9 @@ import {PublicModule} from "./route/public/public.module";
         FormsModule,
         HttpModule,
         CommonModule,
+        PublicModule,
         LoginRoutingModule,
-        AppRouting,
-        PublicModule
+        AppRouting
     ],
     declarations: [
         AppComponent,

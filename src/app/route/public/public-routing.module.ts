@@ -10,7 +10,7 @@ import { LINKS } from "../../constants/links";
 const PUBLIC_ROUTES: Routes = [
     {
         path: 'about',
-        component: AboutComponent,
+        component: AboutComponent
     },
     {
         path: 'home',

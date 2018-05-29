@@ -2,7 +2,8 @@ import { Component, OnInit, ViewEncapsulation } from "@angular/core";
 
 @Component({
     selector: 'app-about',
-    template: require('./about.component.pug')
+    template: require('./about.component.pug'),
+    encapsulation: ViewEncapsulation.None
 
 })
 
