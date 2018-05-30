@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewEncapsulation, ElementRef, ViewChild } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { Router, NavigationStart, ActivatedRoute, NavigationEnd } from "@angular/router";
+import {AuthService} from "./services/auth.service";
 const SiteCopy = require("../../api/site_copy.json");
 
 @Component({
@@ -15,7 +16,7 @@ export class AppComponent implements OnInit {
 
     navbarLinks = new Array();
 
-    constructor(private http: HttpClient, private router: Router, private activatedRoute: ActivatedRoute) {}
+    constructor(private http: HttpClient, private router: Router, private activatedRoute: ActivatedRoute, private authService: AuthService) {}
 
     public ngOnInit(): void {
 
@@ -42,6 +43,7 @@ export class AppComponent implements OnInit {
     }
 
     logout() : void {
+        this.authService.logout();
         this.router.navigateByUrl('/');
     }
 

@@ -24,12 +24,6 @@ export class LoginComponent implements OnInit {
     onSubmit(): void {
         console.log('login form submitted: ', this.loginModel);
 
-        // this.router.events.filter((event)=> event instanceof NavigationStart)
-        //     // .map(() => this.activatedRoute)
-        //     .subscribe((event) => {
-        //         console.log('navigation started: ', event);
-        //     })
-
         this.authService.login().subscribe(() => {
             console.log("am I logged in? ", this.authService.isLoggedIn);
 
@@ -46,6 +40,7 @@ export class LoginComponent implements OnInit {
     }
 
     onCancel(): void {
-        this.router.navigateByUrl('/');
+        this.authService.logout();
+        this.router.navigateByUrl('/home');
     }
 }
