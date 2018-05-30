@@ -1,8 +1,10 @@
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
-import { PrivateComponent } from "./private.component";
 import { AdminComponent } from "./admin/admin.component";
 import { PrivateRoutingModule } from "./private-routing.module";
+import { UsersComponent } from "./users/users.component";
+import { EventsComponent } from "./events/events.component";
+import { ImagesComponent } from "./images/images.component";
 
 @NgModule({
     imports: [
@@ -10,8 +12,12 @@ import { PrivateRoutingModule } from "./private-routing.module";
         PrivateRoutingModule
     ],
     declarations: [
-        PrivateComponent,
-        AdminComponent
+        AdminComponent,
+        UsersComponent,
+        EventsComponent,
+        ImagesComponent
+    ],
+    exports: [
     ]
 })
 

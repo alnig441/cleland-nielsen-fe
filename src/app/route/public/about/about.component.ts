@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewEncapsulation } from "@angular/core";
+import {AuthService} from "../../../services/auth.service";
 
 @Component({
     selector: 'app-about',
@@ -8,9 +9,11 @@ import { Component, OnInit, ViewEncapsulation } from "@angular/core";
 })
 
 export class AboutComponent implements OnInit {
-    constructor(){}
+
+    constructor(private authService: AuthService){}
 
     ngOnInit(): void {
-        console.log('about component initialised');
+        console.log('about component initialised', this.authService.isLoggedIn);
+
     }
 }

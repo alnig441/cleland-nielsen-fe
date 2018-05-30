@@ -1,12 +1,14 @@
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
-import { PrivateComponent } from "./private.component";
 import { AdminComponent } from "./admin/admin.component";
+import { EventsComponent } from "./events/events.component";
+import { UsersComponent } from "./users/users.component";
+import { ImagesComponent } from "./images/images.component";
 
 const privateRoutes: Routes = [
     {
         path: "",
-        component: PrivateComponent,
+        component: EventsComponent,
         canActivate: [],
         children: [
             {
@@ -17,6 +19,21 @@ const privateRoutes: Routes = [
                 ]
             }
         ]
+    },
+    {
+        path: 'users',
+        component: UsersComponent,
+        canActivate: []
+    },
+    {
+        path: 'images',
+        component: ImagesComponent,
+        canActivate: []
+    },
+    {
+        path: 'events',
+        component: EventsComponent,
+        canActivate: []
     }
 ];
 
