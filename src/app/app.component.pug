@@ -1,26 +1,4 @@
-div
+app-globalnav
 
-    // BOOTSTRAP 3 NAVBAR
-    nav(class="navbar navbar-default")
-        div(class="container-fluid")
-            // BRANDING
-            div(class="navbar-header")
-                button(type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false")
-                    span(class="sr-only") Toggle navigation
-                    span(class="icon-bar")
-                    span(class="icon-bar")
-                    span(class="icon-bar")
-                a(class="navbar-brand" href="#") Brand &#8200;
-
-            div(class="collapse navbar-collapse" id="bs-example-navbar-collapse-1")
-                ul(*ngFor="let link of navbarLinks, let i = index" class="nav navbar-nav")
-                    li(class="")
-                        a(routerLink="{{link}}" routerLinkActive="active") {{link}}
-                            span(class="sr-only" current)
-                ul(class="nav navbar-nav navbar-right")
-                    li
-                        a(*ngIf='!this.authService.isLoggedIn' routerLink="/login" routerLinkActive='active') Login
-                        a(*ngIf='this.authService.isLoggedIn', (click)='logout()' routerLink='' routerLinkActive='') Logout
-    main
-        router-outlet
+router-outlet
 
