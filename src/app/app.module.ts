@@ -10,9 +10,8 @@ import { AppRouting } from "./app.routing";
 
 import { LoginRoutingModule } from "./route/login/login-routing.module";
 import { LoginComponent } from "./route/login/login.component";
-import { PrivateComponent } from "./route/private/private.component";
-import { AdminComponent } from "./route/private/admin/admin.component";
 import { PublicModule } from "./route/public/public.module";
+import { PrivateModule } from "./route/private/private.module";
 
 
 @NgModule({
@@ -23,14 +22,13 @@ import { PublicModule } from "./route/public/public.module";
         HttpModule,
         CommonModule,
         PublicModule,
+        PrivateModule,
         LoginRoutingModule,
         AppRouting
     ],
     declarations: [
         AppComponent,
         LoginComponent,
-        PrivateComponent,
-        AdminComponent,
     ],
     bootstrap: [
         AppComponent

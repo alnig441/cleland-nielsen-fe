@@ -4,22 +4,9 @@ import { AdminComponent } from "./admin/admin.component";
 import { EventsComponent } from "./events/events.component";
 import { UsersComponent } from "./users/users.component";
 import { ImagesComponent } from "./images/images.component";
+import { LINKS } from "../../constants/links";
 
 const privateRoutes: Routes = [
-    {
-        path: "",
-        component: EventsComponent,
-        canActivate: [],
-        children: [
-            {
-                path: "admin",
-                component: AdminComponent,
-                children: [
-
-                ]
-            }
-        ]
-    },
     {
         path: 'users',
         component: UsersComponent,
@@ -28,6 +15,7 @@ const privateRoutes: Routes = [
     {
         path: 'images',
         component: ImagesComponent,
+        data: [LINKS.private],
         canActivate: []
     },
     {

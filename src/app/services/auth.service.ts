@@ -11,11 +11,13 @@ export class AuthService {
     redirectUrl: string;
 
     login(): Observable<boolean> {
-
+        this.redirectUrl = '/private';
         return of(true).delay(1000).do(val => this.isLoggedIn = true);
     }
 
     logout(): void {
         this.isLoggedIn = false;
+        this.redirectUrl = '/home';
     }
+
 }

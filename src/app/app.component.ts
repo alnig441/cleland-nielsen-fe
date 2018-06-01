@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewEncapsulation, ElementRef, ViewChild } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { Router, NavigationStart, ActivatedRoute, NavigationEnd } from "@angular/router";
-import {AuthService} from "./services/auth.service";
+import { AuthService } from "./services/auth.service";
 const SiteCopy = require("../../api/site_copy.json");
 
 @Component({
@@ -11,8 +11,6 @@ const SiteCopy = require("../../api/site_copy.json");
     encapsulation: ViewEncapsulation.None
 })
 export class AppComponent implements OnInit {
-
-    public: boolean = true;
 
     navbarLinks = new Array();
 
@@ -29,9 +27,11 @@ export class AppComponent implements OnInit {
                 let route = this.router.routerState.snapshot.url;
                 let arr = [];
 
-                route === '/private' ? this.public = false : this.public = true ;
+                Object.keys(links).length == 1 ? links = links[0] : links = links ;
 
-                if(route === '/home' || route === '/private') {
+                // this.authService.isLoggedIn ? this.public = false : this.public = true ;
+
+                if(route === '/home' || route === '/images') {
                     for(var link in links) {
                         arr.push(links[link]);
                     };
@@ -44,7 +44,7 @@ export class AppComponent implements OnInit {
 
     logout() : void {
         this.authService.logout();
-        this.router.navigateByUrl('/');
+        this.router.navigate([this.authService.redirectUrl]);
     }
 
 }
