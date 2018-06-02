@@ -5,6 +5,7 @@ import { PrivateRoutingModule } from "./private-routing.module";
 import { UsersComponent } from "./users/users.component";
 import { EventsComponent } from "./events/events.component";
 import { ImagesComponent } from "./images/images.component";
+import { SidebarComponent } from "../../components/sidebar/sidebar.component";
 
 @NgModule({
     imports: [
@@ -15,7 +16,8 @@ import { ImagesComponent } from "./images/images.component";
         AdminComponent,
         UsersComponent,
         EventsComponent,
-        ImagesComponent
+        ImagesComponent,
+        SidebarComponent
     ],
     exports: [
     ]
