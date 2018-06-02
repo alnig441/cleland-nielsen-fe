@@ -1,27 +1,25 @@
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
-import { AdminComponent } from "./admin/admin.component";
 import { EventsComponent } from "./events/events.component";
 import { UsersComponent } from "./users/users.component";
 import { ImagesComponent } from "./images/images.component";
-import { LINKS } from "../../constants/links";
+import { AuthGuardService } from "../../services/auth-guard.service";
 
 const privateRoutes: Routes = [
     {
         path: 'users',
         component: UsersComponent,
-        canActivate: []
+        canActivate: [AuthGuardService]
     },
     {
         path: 'images',
         component: ImagesComponent,
-        data: [LINKS.private],
-        canActivate: []
+        canActivate: [AuthGuardService]
     },
     {
         path: 'events',
         component: EventsComponent,
-        canActivate: []
+        canActivate: [AuthGuardService]
     }
 ];
 

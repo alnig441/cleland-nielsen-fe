@@ -24,7 +24,7 @@ export class LoginComponent implements OnInit {
     onSubmit(): void {
         console.log('login form submitted: ', this.loginModel);
 
-        this.authService.login().subscribe(() => {
+        this.authService.login(this.loginModel).subscribe(() => {
             console.log("am I logged in? ", this.authService.isLoggedIn);
 
             if(this.authService.isLoggedIn) {

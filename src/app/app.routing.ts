@@ -3,8 +3,6 @@ import { ModuleWithProviders, NgModule } from "@angular/core";
 
 import { AuthGuardService } from "./services/auth-guard.service";
 
-import { LINKS } from "./constants/links";
-
 const APP_ROUTES: Routes = [
     {
         path: "",
@@ -15,18 +13,8 @@ const APP_ROUTES: Routes = [
         path: "private",
         redirectTo: "/images",
         pathMatch: "full",
-        // data: [LINKS.private],
         canActivate: [AuthGuardService]
     },
-    // {
-    //     path: "private",
-    //     component: ImagesComponent,
-    //     canActivate: [AuthGuardService],
-    //     data: LINKS.private,
-    //     canLoad: [],
-    //     children: [
-    //     ]
-    // },
     {
         path: '**',
         redirectTo: '/home',

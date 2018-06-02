@@ -1,7 +1,8 @@
 import { Component, OnInit, ViewEncapsulation } from "@angular/core";
 import { AuthService } from "../../services/auth.service";
-import {ActivatedRoute, NavigationEnd, Router} from "@angular/router";
+import { ActivatedRoute, NavigationEnd, Router } from "@angular/router";
 import { HttpClient } from "@angular/common/http";
+import { LINKS } from "../../constants/links";
 
 @Component({
     selector: 'app-globalnav',
@@ -19,20 +20,16 @@ export class GlobalnavComponent implements OnInit {
         console.log('globalnav comp init');
 
         this.router.events.filter((event)=> event instanceof NavigationEnd)
-            .map(() => this.router.routerState.snapshot.root.children[0].data)
+            .map(() => LINKS)
             .subscribe((links) => {
 
-                let route = this.router.routerState.snapshot.url;
-                let arr = [];
-
-                Object.keys(links).length == 1 ? links = links[0] : links = links ;
-
-                if(route === '/home' || route === '/images') {
-                    for(var link in links) {
-                        arr.push(links[link]);
-                    };
-
-                    this.navbarLinks = arr;
+                if(this.authService.isLoggedIn){
+                    this.navbarLinks = links.private;
+                    if(this.authService.isAdmin){
+                        this.navbarLinks = links.private.concat(links.admin);
+                    }
+                } else {
+                    this.navbarLinks = links.public;
                 }
 
             })

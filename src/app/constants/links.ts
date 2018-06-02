@@ -8,6 +8,8 @@ export const LINKS = {
     private: [
         'images',
         'events',
+    ],
+    admin: [
         'users'
     ]
 }

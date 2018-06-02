@@ -5,8 +5,6 @@ import { HomeComponent } from "./home/home.component";
 import { WorkComponent } from "./work/work.component";
 import { ContactComponent } from "./contact/contact.component";
 
-import { LINKS } from "../../constants/links";
-
 const PUBLIC_ROUTES: Routes = [
     {
         path: 'about',
@@ -14,7 +12,6 @@ const PUBLIC_ROUTES: Routes = [
     },
     {
         path: 'home',
-        data: LINKS.public,
         component: HomeComponent
     },
     {
