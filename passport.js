@@ -7,38 +7,50 @@ const passport = require('passport'),
 const pg = require('pg');
 
 passport.use(new localStrategy({
-    usernameField: 'userId',
+    usernameField: 'username',
     passwordField: 'password'
-}, (userId, password, cb) => {
+}, (username, password, cb) => {
 
-    console.log('in local strategy');
+    console.log('in local strategy', username, password);
     //insert db call
 
+    /* MOCK DB CALL */
     let UserModel = [
         {
             id: 1,
-            userId: 'user',
+            username: 'user',
             password: 'user'
         },
         {
             id: 2,
-            userId: 'admin',
+            username: 'admin',
             password: 'admin'
         }
     ]
 
+    return cb(null, UserModel[UserModel.findIndex((user) => {
+            return (user.username === username && user.password === password)})]);
 
+    // return (UserModel[UserModel.findIndex((user) => {
+    //     if(user.username === username && user.password === password){
+    //         return cb(null, user.username === username && user.password === password);
+    //     } else {
+    //         return cb({err: 'user not found'})
+    //     }
+    //
+    // })]);
+    /* MOCK DB CALL - END */
 
-    return UserModel.findOne({ userId, password})
-        .then((user) => {
-            if (!user){
-                return cb(null, false, {message: 'incorrect credentials!'})
-            }
-            else {
-                return cb(null, user, {message: 'login success!'})
-            }
-        })
-        .catch(err => cb(err));
+    // return UserModel.findOne({ userId, password})
+    //     .then((user) => {
+    //         if (!user){
+    //             return cb(null, false, {message: 'incorrect credentials!'})
+    //         }
+    //         else {
+    //             return cb(null, user, {message: 'login success!'})
+    //         }
+    //     })
+    //     .catch(err => cb(err));
 }));
 
 passport.use(new JWTStrategy({

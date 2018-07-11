@@ -26,6 +26,7 @@ router.post('/', (req, res, next) => {
             /* generate signed web token */
             const token = jwt.sign(user, 'your_jwt_secret');
             return res.json({user, token});
+
         });
 
     })(req, res);
