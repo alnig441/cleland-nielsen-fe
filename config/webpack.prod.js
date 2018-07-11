@@ -19,14 +19,14 @@ module.exports = webpackMerge(commonConfig, {
 
     plugins: [
         new webpack.NoEmitOnErrorsPlugin(),
-        new webpack.optimize.UglifyJsPlugin({ // https://github.com/angular/angular/issues/10618
-            beautify: false,
-            mangle: {
-                keep_fnames: true,
-                screw_ie8: true
-            },
-            comments: false
-        }),
+        // new webpack.optimize.UglifyJsPlugin({ // https://github.com/angular/angular/issues/10618
+        //     beautify: false,
+        //     mangle: {
+        //         keep_fnames: true,
+        //         screw_ie8: true
+        //     },
+        //     comments: false
+        // }),
         new ExtractTextPlugin("[name].[hash].css"),
         new webpack.DefinePlugin({
             "process.env": {

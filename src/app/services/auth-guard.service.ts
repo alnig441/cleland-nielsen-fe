@@ -21,8 +21,6 @@ export class AuthGuardService implements CanActivate, CanActivateChild, CanLoad 
         if(this.authenticate.isLoggedIn){
             console.log('authguard - checking login status: ', url)
             return true;
-        } else {
-            console.log('user not logged in');
         }
 
         this.authenticate.redirectUrl = url;
@@ -33,6 +31,7 @@ export class AuthGuardService implements CanActivate, CanActivateChild, CanLoad 
         }
 
         this.router.navigate(['/login'], navigationExtras);
+        console.log('user not logged in: ', navigationExtras);
         return false;
     }
 

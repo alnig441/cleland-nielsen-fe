@@ -5,3 +5,8 @@ export class LoginModel {
         public accountType? : string
     ){}
 }
+
+// export interface LoginModel{
+//     userId: string,
+//     password: string
+// }
