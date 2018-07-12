@@ -7,13 +7,16 @@ const passport = require('passport');
 
 router.post('/', (req, res, next) => {
 
+    let call = 0;
+
     passport.authenticate('local', {session: false}, (err, user, info) => {
 
-        console.log('from authenticate: ', err, user, info);
+        call ++;
 
         if (err || !user) {
             return res.status(400).json({
-                message: info ? info.message : 'something went wrong',
+                message: err.message,
+                // message: info ? info.message : 'something went wrong',
                 user: user
             })
         }

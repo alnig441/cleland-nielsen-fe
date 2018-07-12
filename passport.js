@@ -1,10 +1,29 @@
 const passport = require('passport'),
     localStrategy = require('passport-local').Strategy,
-    passportJWT = require('passport-jwt'),
-    JWTStrategy = passportJWT.Strategy;
-    ExtractJWT = passportJWT.ExtractJwt;
+    // passportJWT = require('passport-jwt'),
+    // JWTStrategy = passportJWT.Strategy;
+    // ExtractJWT = passportJWT.ExtractJwt;
+    JWTStrategy = require('passport-jwt').Strategy,
+    ExtractJWT = require('passport-jwt').ExtractJwt;
 
 const pg = require('pg');
+
+
+/* MOCK USER DATA */
+const UserModel = [
+    {
+        id: 1,
+        username: 'user',
+        password: 'user',
+        accountype: 'regular'
+    },
+    {
+        id: 2,
+        username: 'admin',
+        password: 'admin',
+        accountype: 'administrator'
+    }
+]
 
 passport.use(new localStrategy({
     usernameField: 'username',
@@ -15,32 +34,19 @@ passport.use(new localStrategy({
     //insert db call
 
     /* MOCK DB CALL */
-    let UserModel = [
-        {
-            id: 1,
-            username: 'user',
-            password: 'user'
-        },
-        {
-            id: 2,
-            username: 'admin',
-            password: 'admin'
-        }
-    ]
 
-    return cb(null, UserModel[UserModel.findIndex((user) => {
-            return (user.username === username && user.password === password)})]);
+    let user = UserModel.find(user => {
+        return user = user.username === username && user.password === password;
+    })
 
-    // return (UserModel[UserModel.findIndex((user) => {
-    //     if(user.username === username && user.password === password){
-    //         return cb(null, user.username === username && user.password === password);
-    //     } else {
-    //         return cb({err: 'user not found'})
-    //     }
-    //
-    // })]);
+    if(user) {
+        return cb(null, user);
+    } else{
+        return cb({message: 'no user found'})
+    }
     /* MOCK DB CALL - END */
 
+    /* INSERT DB CALL HERE */
     // return UserModel.findOne({ userId, password})
     //     .then((user) => {
     //         if (!user){
@@ -57,16 +63,26 @@ passport.use(new JWTStrategy({
     jwtFromRequest: ExtractJWT.fromAuthHeaderAsBearerToken(),
     secretOrKey: 'your_jwt_secret'
     }, (jwtPayload, cb) => {
-    /* call db if neeed */
+    /* call db if needed */
 
-        console.log('in JWT strategy: ');
-        return UserModel.findByOneId(jwtPayload.id)
-            .then((user) => {
-                return cb(null, user);
-            })
-            .catch(err => {
-                return cb(err);
-            });
+        let user = UserModel.find(user => {
+            return user = user.username === jwtPayload.username && user.password === jwtPayload.password;
+        })
+
+        if(user) {
+            return cb(null, user);
+        } else{
+            return cb({message: 'no user found'})
+        }
+
+        /* INSERT DB CALL HERE */
+        // return UserModel.findByOneId(jwtPayload.id)
+        //     .then((user) => {
+        //         return cb(null, user);
+        //     })
+        //     .catch(err => {
+        //         return cb(err);
+        //     });
+
     }
-
 ));
