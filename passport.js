@@ -12,16 +12,16 @@ const pg = require('pg');
 /* MOCK USER DATA */
 const UserModel = [
     {
-        id: 1,
+        userId: 1,
         username: 'user',
         password: 'user',
-        accountype: 'regular'
+        accounttype: 'regular'
     },
     {
-        id: 2,
+        userId: 2,
         username: 'admin',
         password: 'admin',
-        accountype: 'administrator'
+        accounttype: 'administrator'
     }
 ]
 

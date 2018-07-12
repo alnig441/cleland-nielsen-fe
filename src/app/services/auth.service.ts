@@ -17,13 +17,21 @@ export class AuthService {
         this.redirectUrl = '/private';
         return of(true).delay(1000).do(val => {
             this.isLoggedIn = true;
-            if(form.userId === 'admin') {
-                this.isAdmin = true
+
+            /* add jwt token AND accounttype to local storage */
+            localStorage.setItem('token', 'bogus_jwt');
+            localStorage.setItem('accounttype', 'admin');
+
+            if(form.username === 'admin' || localStorage.getItem('accounttype') == 'administrator') {
+                // ADD DB CALL HERE TO DETERMINE ACCT_TYPE
+                this.isAdmin = true;
+
             }
         });
     }
 
     logout(): void {
+        localStorage.clear();
         this.isLoggedIn = false;
         this.isAdmin = false;
         this.redirectUrl = '/home';

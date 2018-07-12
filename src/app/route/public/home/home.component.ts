@@ -14,7 +14,7 @@ export class HomeComponent implements OnInit {
     private home: string[] = SiteCopy.Home;
 
     public ngOnInit(): void {
-        console.log('home component initialised');
+        console.log('home component initialised\nLocalStorage: ', localStorage);
     }
 }
 

@@ -7,15 +7,15 @@ const passport = require('passport');
 
 router.post('/', (req, res, next) => {
 
-    let call = 0;
+    console.log('authentication: ', req.body)
 
     passport.authenticate('local', {session: false}, (err, user, info) => {
 
-        call ++;
+        console.log('returned from passport: ', err, user, info);
 
         if (err || !user) {
             return res.status(400).json({
-                message: err.message,
+                message: err ? err.message: 'nothing',
                 // message: info ? info.message : 'something went wrong',
                 user: user
             })
@@ -28,7 +28,9 @@ router.post('/', (req, res, next) => {
             }
             /* generate signed web token */
             const token = jwt.sign(user, 'your_jwt_secret');
-            return res.json({user, token});
+            user.token = token;
+            // return res.json({user, token});
+            return res.json(user);
 
         });
 

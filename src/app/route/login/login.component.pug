@@ -4,13 +4,13 @@ div(class="" tabindex="-1" role="dialog")
             form((ngSubmit)="onSubmit()", #loginForm="ngForm")
                 div(class="modal-body")
                     div(class="form-group")
-                        label(for="userId") User ID
-                        input(type="email" class="form-control" id="userId" aria-describedby="emailHelp" placeholder="Enter User ID"
+                        label(for="userName") User Name
+                        input(type="email" class="form-control" id="userName" aria-describedby="emailHelp" placeholder="Enter User Name"
                         required,
-                        [(ngModel)]="loginModel.userId" name="userId",
-                        #userId="ngModel")
+                        [(ngModel)]="loginModel.username" name="username",
+                        #username="ngModel")
 
-                    div(class="alert alert-danger",[hidden]="userId.valid || userId.pristine") User ID Required
+                    div(class="alert alert-danger",[hidden]="username.valid || username.pristine") User ID Required
                     div(class="form-group")
                         label(for="password" required) Password
                         input(type="password" class="form-control" id="password" placeholder="Password"

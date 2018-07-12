@@ -1,12 +1,7 @@
 export class LoginModel {
     constructor(
-        public userId: string,
+        public username: string,
         public password: string,
-        public accountType? : string
+        public accounttype? : string
     ){}
 }
-
-// export interface LoginModel{
-//     userId: string,
-//     password: string
-// }

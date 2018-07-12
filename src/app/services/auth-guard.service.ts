@@ -19,7 +19,7 @@ export class AuthGuardService implements CanActivate, CanActivateChild, CanLoad 
 
     checkLogin(url: string): boolean {
         if(this.authenticate.isLoggedIn){
-            console.log('authguard - checking login status: ', url)
+            console.log('authguard - checking login status: ', url);
             return true;
         }
 
@@ -36,6 +36,8 @@ export class AuthGuardService implements CanActivate, CanActivateChild, CanLoad 
     }
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
+        console.log('canActivate', localStorage);
+
         let url: string = state.url;
         return this.checkLogin(url);
     }
