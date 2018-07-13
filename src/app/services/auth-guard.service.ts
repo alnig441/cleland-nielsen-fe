@@ -10,28 +10,37 @@ import {
     Route
 } from "@angular/router";
 import { AuthService } from "./auth.service";
+import { HttpAuthService } from "./httpAuth.service";
 
 @Injectable()
 
 export class AuthGuardService implements CanActivate, CanActivateChild, CanLoad {
 
-    constructor(private authenticate: AuthService, private router: Router) {}
+    constructor(private  httpAuth: HttpAuthService, private authenticate: AuthService, private router: Router) {}
 
     checkLogin(url: string): boolean {
-        if(this.authenticate.isLoggedIn){
-            console.log('authguard - checking login status: ', url);
+
+        if(this.httpAuth.isLoggedIn) {
             return true;
         }
 
-        this.authenticate.redirectUrl = url;
-        let sessionId = 123456789;
-        let navigationExtras: NavigationExtras = {
-            queryParams: { 'session_id': sessionId},
-            fragment: 'anchor'
-        }
+        this.httpAuth.redirectUrl = url;
 
-        this.router.navigate(['/login'], navigationExtras);
-        console.log('user not logged in: ', navigationExtras);
+        this.router.navigate(['/login']);
+        // if(this.authenticate.isLoggedIn || localStorage.getItem('token')){
+        //     console.log('authguard - checking login status: ', url);
+        //     return true;
+        // }
+
+        // this.authenticate.redirectUrl = url;
+        // let sessionId = 123456789;
+        // let navigationExtras: NavigationExtras = {
+        //     queryParams: { 'session_id': sessionId},
+        //     fragment: 'anchor'
+        // }
+
+        // this.router.navigate(['/login'], navigationExtras);
+        // console.log('user not logged in: ', navigationExtras);
         return false;
     }
 

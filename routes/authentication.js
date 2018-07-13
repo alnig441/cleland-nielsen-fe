@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const jwt = require('jsonwebtoken');
 const passport = require('passport');
+const jwtSecret = process.env.JWT_SECRET || 'some_secret_word';
 
 /* LOGIN ROUTE */
 
@@ -22,15 +23,27 @@ router.post('/', (req, res, next) => {
         }
 
         req.login(user, {session: false}, (err) => {
+
             if (err) {
                 console.log('show me error: ', err);
                 res.send(err);
             }
+
+            console.log('what user: ', user);
+
+            let userParameters = {
+                userId: user.userId,
+                language: user.language ? user.language : 'english',
+                administrator: user.accounttype === 'administrator' ? true : false
+            }
+
             /* generate signed web token */
-            const token = jwt.sign(user, 'your_jwt_secret');
-            user.token = token;
-            // return res.json({user, token});
-            return res.json(user);
+            const token = jwt.sign({
+                administrator: user.accounttype === 'administrator' ? true: false,
+                language: user.language ? user.language: 'english',
+                userId: user.userId
+            }, jwtSecret);
+            return res.json({token, userParameters});
 
         });
 

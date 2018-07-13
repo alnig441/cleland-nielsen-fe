@@ -20,22 +20,25 @@ export class LoginComponent implements OnInit {
     constructor(private http: HttpClient, private router: Router, private authService: AuthService, private httpAuth: HttpAuthService){}
 
     public ngOnInit():void {
-        console.log('login component initialised');
+        // console.log('login component initialised');
     }
 
     onSubmit(): void {
-        console.log('login form submitted: ', this.loginModel);
+        // console.log('login form submitted: ', this.loginModel);
 
-        this.httpAuth.login(this.loginModel).subscribe((data) => {
-            console.log('from httpAuthService: ', data, localStorage);
+        this.httpAuth.login(this.loginModel).subscribe((user) => {
+            console.log('from httpAuthService: ', user);
 
             if(this.httpAuth.isLoggedIn) {
-                console.log('checking login status');
+                // console.log('checking login status', this.httpAuth.isLoggedIn);
                 let redirect = this.httpAuth.redirectUrl ? this.httpAuth.redirectUrl : '/private';
                 let navigationExtras : NavigationExtras = {
                     queryParamsHandling: 'preserve',
                     preserveFragment: true
                 };
+
+                // console.log('this router: ', this.router);
+
                 this.router.navigate([redirect],navigationExtras);
             }
 
@@ -57,7 +60,8 @@ export class LoginComponent implements OnInit {
     }
 
     onCancel(): void {
-        this.authService.logout();
-        this.router.navigate([this.authService.redirectUrl]);
+        this.httpAuth.logout();
+        // this.authService.logout();
+        this.router.navigate([this.httpAuth.redirectUrl]);
     }
 }

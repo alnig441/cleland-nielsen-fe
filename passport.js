@@ -7,7 +7,7 @@ const passport = require('passport'),
     ExtractJWT = require('passport-jwt').ExtractJwt;
 
 const pg = require('pg');
-
+const jwtSecret = process.env.JWT_SECRET || 'some_secret_word';
 
 /* MOCK USER DATA */
 const UserModel = [
@@ -61,12 +61,14 @@ passport.use(new localStrategy({
 
 passport.use(new JWTStrategy({
     jwtFromRequest: ExtractJWT.fromAuthHeaderAsBearerToken(),
-    secretOrKey: 'your_jwt_secret'
+    secretOrKey: jwtSecret
     }, (jwtPayload, cb) => {
     /* call db if needed */
 
+        console.log('show me jwt_payload: ', jwtPayload);
+
         let user = UserModel.find(user => {
-            return user = user.username === jwtPayload.username && user.password === jwtPayload.password;
+            return user = user.userId === jwtPayload.userId;
         })
 
         if(user) {

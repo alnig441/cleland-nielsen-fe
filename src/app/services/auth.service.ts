@@ -19,8 +19,8 @@ export class AuthService {
             this.isLoggedIn = true;
 
             /* add jwt token AND accounttype to local storage */
-            localStorage.setItem('token', 'bogus_jwt');
-            localStorage.setItem('accounttype', 'admin');
+            // localStorage.setItem('token', 'bogus_jwt');
+            // localStorage.setItem('accounttype', 'admin');
 
             if(form.username === 'admin' || localStorage.getItem('accounttype') == 'administrator') {
                 // ADD DB CALL HERE TO DETERMINE ACCT_TYPE

@@ -17,5 +17,5 @@ div
                             span(class="sr-only" current)
                 ul(class="nav navbar-nav navbar-right")
                     li
-                        a(*ngIf='!this.authService.isLoggedIn' routerLink="/login" routerLinkActive='active') Login
-                        a(*ngIf='this.authService.isLoggedIn', (click)='logout()' routerLink='' routerLinkActive='') Logout
+                        a(*ngIf='!this.httpAuth.isLoggedIn' routerLink="/login" routerLinkActive='active') Login
+                        a(*ngIf='this.httpAuth.isLoggedIn', (click)='logout()' routerLink='' routerLinkActive='') Logout

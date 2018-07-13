@@ -19,18 +19,18 @@ export class HttpAuthService {
         this.redirectUrl = "/private";
 
         return this.http.post<any>('/login', form)
-            .map(user => {
-                if(user && user.token){
-                    localStorage.setItem('accounttype', user.accounttype);
-                    localStorage.setItem('token', user.token);
+            .map(activeUser => {
+                if(activeUser && activeUser.token){
+                    localStorage.setItem('token', activeUser.token);
                     this.isLoggedIn = true;
+                    this.isAdmin = activeUser.userParameters.administrator ? true : false;
                 }
-                return user;
+                return activeUser;
             })
     }
 
     logout(): void {
-        localStorage.removeItem('user');
+        localStorage.removeItem('token');
         this.isAdmin = false;
         this.isLoggedIn = false;
         this.redirectUrl = "/home";
