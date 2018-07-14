@@ -10,11 +10,14 @@ const passport = require('passport');
 const bcrypt = require('bcrypt');
 const pg = require('pg');
 
-require('./passport');
+require('./routes/authenticate/passport');
 
-/* pull in all app routes */
-const authenticate = require('./routes/authentication'),
-    images = require('./routes/restricted/images');
+/* pull in all app server routes */
+const authenticate = require('./routes/authenticate/authentication'),
+    images = require('./routes/restricted/images'),
+    accounts = require('./routes/restricted/accounts'),
+    users = require('./routes/restricted/users'),
+    events = require('./routes/restricted/events');
 
 const cron = require('node-cron');
 
@@ -25,12 +28,10 @@ app.use(express.static(__dirname + '/dist'));
 
 /* routes setup */
 app.use('/login', authenticate);
-app.use('/images', passport.authenticate('jwt', {session: false}), images);
-
-app.post('/test', (req, res, next) => {
-    console.log('test route');
-    res.send({message: 'test route'});
-})
+app.use('/imagesDb', passport.authenticate('jwt', {session: false}), images);
+app.use('/accountsDb', passport.authenticate('jwt', {session: false}), accounts);
+app.use('/usersDb', passport.authenticate('jwt', {session: false}),users);
+app.use('/eventsDb', passport.authenticate('jwt', {session: false}), events);
 
 app.get('*', function response(req, res) {
     res.sendFile(path.join(__dirname, 'dist/index.html'));
