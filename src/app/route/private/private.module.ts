@@ -6,6 +6,7 @@ import { UsersComponent } from "./users/users.component";
 import { EventsComponent } from "./events/events.component";
 import { ImagesComponent } from "./images/images.component";
 import { SidebarComponent } from "../../components/sidebar/sidebar.component";
+import { ImageServices } from "../../services/image.services";
 
 @NgModule({
     imports: [
@@ -20,6 +21,9 @@ import { SidebarComponent } from "../../components/sidebar/sidebar.component";
         SidebarComponent
     ],
     exports: [
+    ],
+    providers: [
+        ImageServices
     ]
 })
 
