@@ -1,5 +1,5 @@
 import { NgModule } from "@angular/core";
-import { HttpClientModule } from "@angular/common/http";
+import { HttpClientModule} from "@angular/common/http";
 import { AppComponent } from "./app.component";
 import { BrowserModule } from "@angular/platform-browser";
 import { FormsModule } from "@angular/forms";
@@ -14,6 +14,7 @@ import { PrivateModule } from "./route/private/private.module";
 
 import { LoginComponent } from "./route/login/login.component";
 import { GlobalnavComponent } from "./components/globalnav/globalnav.component";
+
 
 
 @NgModule({
@@ -32,6 +33,8 @@ import { GlobalnavComponent } from "./components/globalnav/globalnav.component";
         AppComponent,
         GlobalnavComponent,
         LoginComponent,
+    ],
+    providers: [
     ],
     bootstrap: [
         AppComponent

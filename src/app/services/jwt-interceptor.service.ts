@@ -6,14 +6,17 @@ Injectable()
 export class JwtInterceptorService implements HttpInterceptor {
 
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-        let currentUser = JSON.parse(localStorage.getItem('token'));
-        if(currentUser && currentUser.token){
+
+        let currentUserToken = localStorage.getItem('token');
+
+        if(currentUserToken){
             request = request.clone({
                 setHeaders: {
-                    Authorization: `Bearer ${currentUser.token}`
+                    Authorization: `Bearer ${currentUserToken}`
                 }
             });
         }
+        console.log('show me interecepted request: ', request.headers);
         return next.handle(request);
     }
 

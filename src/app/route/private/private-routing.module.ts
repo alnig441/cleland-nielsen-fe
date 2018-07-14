@@ -5,6 +5,7 @@ import { UsersComponent } from "./users/users.component";
 import { ImagesComponent } from "./images/images.component";
 import { AuthGuardService } from "../../services/auth-guard.service";
 
+
 const privateRoutes: Routes = [
     {
         path: 'users',
@@ -31,7 +32,6 @@ const privateRoutes: Routes = [
         RouterModule
     ],
     providers: [
-
     ]
 })
 

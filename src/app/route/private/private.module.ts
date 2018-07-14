@@ -7,6 +7,8 @@ import { EventsComponent } from "./events/events.component";
 import { ImagesComponent } from "./images/images.component";
 import { SidebarComponent } from "../../components/sidebar/sidebar.component";
 import { ImageServices } from "../../services/image.services";
+import {HTTP_INTERCEPTORS} from "@angular/common/http";
+import {JwtInterceptorService} from "../../services/jwt-interceptor.service";
 
 @NgModule({
     imports: [
@@ -23,7 +25,12 @@ import { ImageServices } from "../../services/image.services";
     exports: [
     ],
     providers: [
-        ImageServices
+        ImageServices,
+        {
+            provide: HTTP_INTERCEPTORS,
+            useClass: JwtInterceptorService,
+            multi: true
+        }
     ]
 })
 
