@@ -1,5 +1,18 @@
 .col-sm-2
     app-sidebar
 .col-sm-8
-    p images comp
+    div(class="row")
+        div(class="col-sm-6 col-md-4")
+        div(class="col-sm-6 col-md-4")
+            div(class="thumbnail")
+                img(src="..." alt="...")
+                div(class="caption")
+                    h4 image description/date/item number
+                    p  detailed description - if any
+                    p
+                        a(class="btn btn-primary", role="button") Enlarge
+                        a(class="btn btn-primary", role="button") Print
+                        a(class="btn btn-primary", role="button") Close
+        div(class="col-sm-6 col-md-4")
 .col-sm-2
+    app-infobar

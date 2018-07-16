@@ -25,6 +25,8 @@ const UserModel = [
     }
 ]
 
+
+
 passport.use(new localStrategy({
     usernameField: 'username',
     passwordField: 'password'

@@ -8,6 +8,7 @@ import { ImageServices } from "../../../services/image.services";
 })
 
 export class ImagesComponent implements OnInit {
+
     constructor(private imageService: ImageServices){}
 
     ngOnInit(): void {
