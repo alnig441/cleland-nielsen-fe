@@ -3,12 +3,12 @@
 .col-sm-8
     div(class="row")
         div(class="col-sm-6 col-md-4")
-        div(class="col-sm-6 col-md-4")
-            div(class="thumbnail box-shadow")
-                img(src="..." alt="...")
+        div(*ngFor="let image of images; index as i" class="col-sm-6 col-md-4")
+            div(id="{{images[i].id}}" class="thumbnail box-shadow")
+                img(src="{{images[i].url}}" alt="...")
                 div(class="caption")
-                    h4 image description/date/item number
-                    p  detailed description - if any
+                    h4 {{images[i].date}}
+                    p  {{images[i].caption}}
                     p
                         a(class="btn btn-primary", role="button") Enlarge
                         a(class="btn btn-primary", role="button") Print

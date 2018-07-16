@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewEncapsulation} from "@angular/core";
 import { ImageServices } from "../../../services/image.services";
+import { ImageModel } from "../../../models/image.model";
 
 @Component({
     selector: 'app-images',
@@ -9,6 +10,8 @@ import { ImageServices } from "../../../services/image.services";
 })
 
 export class ImagesComponent implements OnInit {
+
+    images: ImageModel[] = new Array();
 
     constructor(private imageService: ImageServices){}
 
@@ -22,7 +25,11 @@ export class ImagesComponent implements OnInit {
     getAllImages() {
         this.imageService.getAll()
             .subscribe(images => {
-                console.log('image comp getting all images from image services: ', images)
+                console.log('image comp getting all images from image services: ', images);
+
+                this.images.push(images);
+
+                console.log('iamges: ', typeof this.images, this.images)
             })
     }
 

@@ -381,13 +381,14 @@ let ImageServices = class ImageServices {
         this.http = http;
     }
     getAll() {
+        /* MOCK ASYNC OPERATION */
         // return of(true).delay(1000).do(val => {
         //     console.log('image services getAll() ', val)
         // })
-        return this.http.get('/images')
-            .map(image => {
-            console.log('returned from image route: ', image);
-        });
+        return this.http.get('/imagesDb');
+        // .map(image => {
+        //     console.log('returned from image route: ', image);
+        // })
     }
 };
 ImageServices = __decorate([
@@ -871,6 +872,7 @@ const image_services_1 = __webpack_require__(130);
 let ImagesComponent = class ImagesComponent {
     constructor(imageService) {
         this.imageService = imageService;
+        this.images = new Array();
     }
     ngOnInit() {
         console.log('images comp init');
@@ -880,6 +882,8 @@ let ImagesComponent = class ImagesComponent {
         this.imageService.getAll()
             .subscribe(images => {
             console.log('image comp getting all images from image services: ', images);
+            this.images.push(images);
+            console.log('iamges: ', typeof this.images, this.images);
         });
     }
 };
@@ -22888,7 +22892,7 @@ module.exports = "<div class=\"col-sm-2\"><app-sidebar></app-sidebar></div><div 
 /***/ 687:
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"col-sm-2\"><app-sidebar></app-sidebar></div><div class=\"col-sm-8\"><div class=\"row\"><div class=\"col-sm-6 col-md-4\"></div><div class=\"col-sm-6 col-md-4\"><div class=\"thumbnail box-shadow\"><img src=\"...\" alt=\"...\"><div class=\"caption\"><h4>image description/date/item number</h4><p> detailed description - if any</p><p><a class=\"btn btn-primary\" role=\"button\">Enlarge</a><a class=\"btn btn-primary\" role=\"button\">Print</a><a class=\"btn btn-primary\" role=\"button\">Close</a></p></div></div></div><div class=\"col-sm-6 col-md-4\"></div></div></div><div class=\"col-sm-2\"><app-infobar></app-infobar></div>"
+module.exports = "<div class=\"col-sm-2\"><app-sidebar></app-sidebar></div><div class=\"col-sm-8\"><div class=\"row\"><div class=\"col-sm-6 col-md-4\"></div><div class=\"col-sm-6 col-md-4\" *ngFor=\"let image of images; index as i\"><div class=\"thumbnail box-shadow\" id=\"{{images[i].id}}\"><img src=\"{{images[i].url}}\" alt=\"...\"><div class=\"caption\"><h4>{{images[i].date}}</h4><p> {{images[i].caption}}</p><p><a class=\"btn btn-primary\" role=\"button\">Enlarge</a><a class=\"btn btn-primary\" role=\"button\">Print</a><a class=\"btn btn-primary\" role=\"button\">Close</a></p></div></div></div><div class=\"col-sm-6 col-md-4\"></div></div></div><div class=\"col-sm-2\"><app-infobar></app-infobar></div>"
 
 /***/ }),
 
@@ -23291,4 +23295,4 @@ exports.HttpAuthService = HttpAuthService;
 /***/ })
 
 },[639]);
-//# sourceMappingURL=app.90a8d3a291daee5d70b6.js.map
+//# sourceMappingURL=app.20e6cc63238e72371bb6.js.map

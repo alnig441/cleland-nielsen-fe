@@ -10,14 +10,15 @@ export class ImageServices {
     constructor(private http: HttpClient) {}
 
     getAll(): Observable<any> {
+        /* MOCK ASYNC OPERATION */
         // return of(true).delay(1000).do(val => {
         //     console.log('image services getAll() ', val)
         // })
 
-        return this.http.get<any>('/images')
-            .map(image => {
-                console.log('returned from image route: ', image);
-            })
+        return this.http.get<any>('/imagesDb')
+            // .map(image => {
+            //     console.log('returned from image route: ', image);
+            // })
 
     }
 
