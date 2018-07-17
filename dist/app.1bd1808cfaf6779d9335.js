@@ -502,7 +502,7 @@ let AuthGuardService = class AuthGuardService {
         return false;
     }
     canActivate(route, state) {
-        console.log('canActivate', localStorage);
+        // console.log('canActivate', localStorage);
         let url = state.url;
         return this.checkLogin(url);
     }
@@ -557,7 +557,7 @@ let LoginComponent = class LoginComponent {
     onSubmit() {
         // console.log('login form submitted: ', this.loginModel);
         this.httpAuth.login(this.loginModel).subscribe((user) => {
-            console.log('from httpAuthService: ', user);
+            // console.log('from httpAuthService: ', user);
             if (this.httpAuth.isLoggedIn) {
                 // console.log('checking login status', this.httpAuth.isLoggedIn);
                 let redirect = this.httpAuth.redirectUrl ? this.httpAuth.redirectUrl : '/private';
@@ -835,15 +835,10 @@ let ImagesComponent = class ImagesComponent {
         this.images = new Array();
     }
     ngOnInit() {
-        console.log('images comp init');
-        this.getAllImages();
-    }
-    getAllImages() {
-        this.imageService.getAll()
-            .subscribe(images => {
-            console.log('image comp getting all images from image services: ', images);
-            this.images.push(images);
-            console.log('iamges: ', typeof this.images, this.images);
+        console.log('images comp init', this.imageService);
+        this.imageService.getLatest()
+            .subscribe(data => {
+            console.log('return from img serv in img comp: ', data);
         });
     }
 };
@@ -22802,7 +22797,7 @@ module.exports = "<div class=\"col-sm-2\"><app-sidebar></app-sidebar></div><div 
 /***/ 686:
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"col-sm-2\"><app-sidebar></app-sidebar></div><div class=\"col-sm-8\"><div class=\"row\"><div class=\"col-sm-6 col-md-4\"></div><div class=\"col-sm-6 col-md-4\" *ngFor=\"let image of images; index as i\"><div class=\"thumbnail box-shadow\" id=\"{{images[i].id}}\"><img src=\"{{images[i].url}}\" alt=\"...\"><div class=\"caption\"><h4>{{images[i].date}}</h4><p> {{images[i].caption}}</p><p><a class=\"btn btn-primary\" role=\"button\">Enlarge</a><a class=\"btn btn-primary\" role=\"button\">Print</a><a class=\"btn btn-primary\" role=\"button\">Close</a></p></div></div></div><app-thumbnail></app-thumbnail><!--div(class=\"col-sm-6 col-md-4\")--></div></div><div class=\"col-sm-2\"><app-infobar></app-infobar></div>"
+module.exports = "<div class=\"col-sm-2\"><app-sidebar></app-sidebar></div><div class=\"col-sm-8\"><div class=\"row\"><div class=\"col-sm-6 col-md-4\" *ngIf=\"this.imageService.images.length == 1\"></div><app-thumbnail></app-thumbnail><div class=\"col-sm-6 col-md-4\" *ngIf=\"this.imageService.images.length == 1\"></div></div></div><div class=\"col-sm-2\"><app-infobar></app-infobar></div>"
 
 /***/ }),
 
@@ -22873,7 +22868,7 @@ exports.SidebarComponent = SidebarComponent;
 /***/ 689:
 /***/ (function(module, exports) {
 
-module.exports = "<ul class=\"list-group box-shadow\" style=\"border: 1px, solid, black;\"><span *ngIf=\"this.activeService != &quot;users&quot;\"><li class=\"list-group-item\"><a (click)=\"getLatest()\">get latest</a></li><li class=\"list-group-item\"><a (click)=\"getList()\">filter</a></li></span><span *ngIf=\"this.httpAuth.isAdmin\"><li class=\"list-group-item\"><a (click)=\"getOne()\">get one</a></li><li class=\"list-group-item\"><a (click)=\"getAll()\">get all</a></li></span><!--li(*ngFor='let link of sidebarLinks, let i = index' class='list-group-item')--><!--    a((click)='{{link.cta}}') {{link.name}} {{link.cta}}--></ul>"
+module.exports = "<ul class=\"list-group box-shadow\" style=\"border: 1px, solid, black;\"><span *ngIf=\"this.activeService != &quot;users&quot;\"><li class=\"list-group-item\"><a (click)=\"getLatest()\">get latest</a></li><li class=\"list-group-item\"><a (click)=\"getList()\">filter</a></li></span><span *ngIf=\"this.httpAuth.isAdmin\"><li class=\"list-group-item\"><a (click)=\"getOne()\">get one</a></li><li class=\"list-group-item\"><a (click)=\"getAll()\">get all</a></li></span></ul>"
 
 /***/ }),
 
@@ -22894,7 +22889,7 @@ class JwtInterceptorService {
                 }
             });
         }
-        console.log('show me interecepted request: ', request.headers);
+        // console.log('show me interecepted request: ', request.headers);
         return next.handle(request);
     }
 }
@@ -22963,10 +22958,13 @@ const image_services_1 = __webpack_require__(96);
 let ThumbnailComponent = class ThumbnailComponent {
     constructor(imageService) {
         this.imageService = imageService;
-        this.images = this.imageService.images;
+        this.images = new Array();
     }
-    ngOnInit() {
-        console.log('thumbnail component init');
+    ngOnInit() { }
+    ngDoCheck() {
+        if (this.imageService.images) {
+            this.images = this.imageService.images;
+        }
     }
 };
 ThumbnailComponent = __decorate([
@@ -23023,7 +23021,7 @@ let GlobalnavComponent = class GlobalnavComponent {
         this.router.events.filter((event) => event instanceof router_1.NavigationEnd)
             .map(() => links_1.LINKS)
             .subscribe((links) => {
-            console.log('hello from filter\nis logged in: ', this.httpAuth.isLoggedIn, '\n isadmin', this.httpAuth.isAdmin);
+            // console.log('hello from filter\nis logged in: ', this.httpAuth.isLoggedIn, '\n isadmin', this.httpAuth.isAdmin);
             if (this.httpAuth.isLoggedIn) {
                 this.navbarLinks = links.private;
                 if (this.httpAuth.isAdmin) {
@@ -23317,8 +23315,10 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 const core_1 = __webpack_require__(5);
 const http_1 = __webpack_require__(42);
 let ImageServices = class ImageServices {
+    // images: Observable<any>;
     constructor(http) {
         this.http = http;
+        this.images = new Array();
     }
     getAll() {
         /* MOCK ASYNC OPERATION */
@@ -23331,7 +23331,11 @@ let ImageServices = class ImageServices {
         // })
     }
     getLatest() {
-        return this.http.get('/imagesDb/latest');
+        console.log('getting latest in imageServices');
+        return this.http.get('/imagesDb/latest')
+            .do((x) => {
+            this.images = x;
+        });
     }
 };
 ImageServices = __decorate([
@@ -23344,4 +23348,4 @@ exports.ImageServices = ImageServices;
 /***/ })
 
 },[638]);
-//# sourceMappingURL=app.ed9cde7073ed481ba867.js.map
+//# sourceMappingURL=app.1bd1808cfaf6779d9335.js.map

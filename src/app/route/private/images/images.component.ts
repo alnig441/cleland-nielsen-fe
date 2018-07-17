@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation} from "@angular/core";
+import { Component, DoCheck, OnInit, ViewEncapsulation } from "@angular/core";
 import { ImageServices } from "../../../services/image.services";
 import { ImageModel } from "../../../models/image.model";
 
@@ -16,21 +16,13 @@ export class ImagesComponent implements OnInit {
     constructor(private imageService: ImageServices){}
 
     ngOnInit(): void {
-        console.log('images comp init');
+        console.log('images comp init', this.imageService);
 
-        this.getAllImages();
+        this.imageService.getLatest()
+             .subscribe(data => {
+                 console.log('return from img serv in img comp: ', data)
+             });
 
-    }
-
-    getAllImages() {
-        this.imageService.getAll()
-            .subscribe(images => {
-                console.log('image comp getting all images from image services: ', images);
-
-                this.images.push(images);
-
-                console.log('iamges: ', typeof this.images, this.images)
-            })
     }
 
 }

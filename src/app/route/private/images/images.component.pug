@@ -2,18 +2,8 @@
     app-sidebar
 .col-sm-8
     div(class="row")
-        div(class="col-sm-6 col-md-4")
-        div(*ngFor="let image of images; index as i" class="col-sm-6 col-md-4")
-            div(id="{{images[i].id}}" class="thumbnail box-shadow")
-                img(src="{{images[i].url}}" alt="...")
-                div(class="caption")
-                    h4 {{images[i].date}}
-                    p  {{images[i].caption}}
-                    p
-                        a(class="btn btn-primary", role="button") Enlarge
-                        a(class="btn btn-primary", role="button") Print
-                        a(class="btn btn-primary", role="button") Close
+        div(*ngIf='this.imageService.images.length == 1', class="col-sm-6 col-md-4")
         app-thumbnail
-        //div(class="col-sm-6 col-md-4")
+        div(*ngIf='this.imageService.images.length == 1', class="col-sm-6 col-md-4")
 .col-sm-2
     app-infobar

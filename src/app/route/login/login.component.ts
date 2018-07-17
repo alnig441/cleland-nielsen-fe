@@ -27,7 +27,7 @@ export class LoginComponent implements OnInit {
         // console.log('login form submitted: ', this.loginModel);
 
         this.httpAuth.login(this.loginModel).subscribe((user) => {
-            console.log('from httpAuthService: ', user);
+            // console.log('from httpAuthService: ', user);
 
             if(this.httpAuth.isLoggedIn) {
                 // console.log('checking login status', this.httpAuth.isLoggedIn);

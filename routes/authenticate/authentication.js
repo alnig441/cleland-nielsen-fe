@@ -8,11 +8,11 @@ const jwtSecret = process.env.JWT_SECRET || 'some_secret_word';
 
 router.post('/', (req, res, next) => {
 
-    console.log('authentication: ', req.body)
+    // console.log('authentication: ', req.body)
 
     passport.authenticate('local', {session: false}, (err, user, info) => {
 
-        console.log('returned from passport: ', err, user, info);
+        // console.log('returned from passport: ', err, user, info);
 
         if (err || !user) {
             return res.status(400).json({
@@ -29,7 +29,7 @@ router.post('/', (req, res, next) => {
                 res.send(err);
             }
 
-            console.log('what user: ', user);
+            // console.log('what user: ', user);
 
             let userParameters = {
                 userId: user.userId,

@@ -8,7 +8,8 @@ import { ImageModel } from "../models/image.model";
 
 export class ImageServices {
 
-    images: ImageModel[];
+    images: ImageModel[] = new Array();
+    // images: Observable<any>;
 
     constructor(private http: HttpClient) {}
 
@@ -26,6 +27,11 @@ export class ImageServices {
     }
 
     getLatest(): Observable<any> {
+        console.log('getting latest in imageServices');
         return this.http.get<any>('/imagesDb/latest')
+            .do((x) => {
+                this.images = x;
+            });
+
     }
 }

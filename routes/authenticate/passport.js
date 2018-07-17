@@ -32,7 +32,7 @@ passport.use(new localStrategy({
     passwordField: 'password'
 }, (username, password, cb) => {
 
-    console.log('in local strategy', username, password);
+    // console.log('in local strategy', username, password);
     //insert db call
 
     /* MOCK DB CALL */
@@ -67,7 +67,7 @@ passport.use(new JWTStrategy({
     }, (jwtPayload, cb) => {
     /* call db if needed */
 
-        console.log('show me jwt_payload: ', jwtPayload);
+        // console.log('show me jwt_payload: ', jwtPayload);
 
         let user = UserModel.find(user => {
             return user = user.userId === jwtPayload.userId;

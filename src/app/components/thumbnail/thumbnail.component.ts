@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation } from "@angular/core";
+import { Component, DoCheck, OnInit, ViewEncapsulation } from "@angular/core";
 import { ImageServices } from "../../services/image.services";
 import { ImageModel } from "../../models/image.model";
 
@@ -8,16 +8,18 @@ import { ImageModel } from "../../models/image.model";
     encapsulation: ViewEncapsulation.None
 })
 
-export class ThumbnailComponent implements OnInit {
+export class ThumbnailComponent implements OnInit, DoCheck {
 
-    private images: ImageModel[];
+    images: ImageModel[] = new Array();
 
-    constructor(private imageService: ImageServices){
-        this.images = this.imageService.images;
-    }
+    constructor(private imageService: ImageServices){}
 
-    ngOnInit(): void {
-        console.log('thumbnail component init');
+    ngOnInit(): void {}
+
+    ngDoCheck(): void {
+        if(this.imageService.images){
+            this.images = this.imageService.images;
+        }
     }
 
 }
