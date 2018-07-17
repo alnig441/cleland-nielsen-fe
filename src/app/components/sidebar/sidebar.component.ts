@@ -32,6 +32,7 @@ export class SidebarComponent implements OnInit {
         this[this.serviceDirectory].getAll()
             .subscribe((images : any) => {
                 console.log('calling imageServices from sidebar', images);
+                this[this.serviceDirectory].images = images;
             })
    }
 

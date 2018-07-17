@@ -10,6 +10,7 @@ import { ImageServices } from "../../services/image.services";
 import { HTTP_INTERCEPTORS } from "@angular/common/http";
 import { JwtInterceptorService } from "../../services/jwt-interceptor.service";
 import { InfobarComponent } from "../../components/infobar/infobar.component";
+import { ThumbnailComponent } from "../../components/thumbnail/thumbnail.component";
 
 @NgModule({
     imports: [
@@ -22,7 +23,8 @@ import { InfobarComponent } from "../../components/infobar/infobar.component";
         EventsComponent,
         ImagesComponent,
         SidebarComponent,
-        InfobarComponent
+        InfobarComponent,
+        ThumbnailComponent
     ],
     exports: [
     ],

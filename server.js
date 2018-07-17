@@ -29,6 +29,7 @@ app.use(express.static(__dirname + '/dist'));
 /* routes setup */
 app.use('/login', authenticate);
 app.use('/imagesDb', passport.authenticate('jwt', {session: false}), images);
+app.use('/imagesDb/latest', passport.authenticate('jwt', {session: false}), images);
 app.use('/accountsDb', passport.authenticate('jwt', {session: false}), accounts);
 app.use('/usersDb', passport.authenticate('jwt', {session: false}),users);
 app.use('/eventsDb', passport.authenticate('jwt', {session: false}), events);
