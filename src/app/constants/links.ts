@@ -15,8 +15,8 @@ export const LINKS = {
     sidebar: {
         images: {
             general: [
-                'img link 1',
-                'img link 2'
+                'Get Latest Image',
+                'Fiter Images'
             ],
             admin: [
                 'img adm link 1',
@@ -25,8 +25,8 @@ export const LINKS = {
         },
         events: {
             general: [
-                'evnt link 1',
-                'evnt link 2'
+                'Get Latest Event',
+                'Filter Events'
             ],
             admin: [
                 'evnt adm link 1',

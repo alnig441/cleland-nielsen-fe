@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewEncapsulation } from "@angular/core";
-import {ImageServices} from "../../services/image.services";
-import {ImageModel} from "../../models/image.model";
+import { ImageServices } from "../../services/image.services";
+import { ImageModel } from "../../models/image.model";
 
 @Component({
     selector: 'app-thumbnail',

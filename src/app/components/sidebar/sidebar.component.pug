@@ -1,3 +1,11 @@
 ul(class='list-group box-shadow' style='border: 1px, solid, black')
-    li(*ngFor='let link of sidebarLinks, let i = index' class='list-group-item')
-        a((click)="getAll()") {{link}}
+    span(*ngIf='this.activeService != "users"')
+        li(class='list-group-item')
+            a((click)='getLatest()') get latest
+        li(class='list-group-item')
+            a((click)='getList()') filter
+    span(*ngIf='this.httpAuth.isAdmin')
+        li(class='list-group-item')
+            a((click)='getOne()') get one
+        li(class='list-group-item')
+            a((click)='getAll()') get all

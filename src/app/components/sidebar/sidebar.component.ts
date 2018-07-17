@@ -1,7 +1,6 @@
 import { Component, Input, OnInit, ViewEncapsulation } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { HttpAuthService } from "../../services/httpAuth.service";
-import { LINKS } from "../../constants/links";
 import { ImageServices } from "../../services/image.services";
 
 
@@ -13,39 +12,32 @@ import { ImageServices } from "../../services/image.services";
 
 export class SidebarComponent implements OnInit {
 
-    sidebarLinks = new Array();
-
-    serviceDirectory: string;
+    activeService: string;
 
     constructor( private httpAuth: HttpAuthService, private activatedRoute: ActivatedRoute, private images: ImageServices){}
 
     ngOnInit(): void {
-        let path = this.activatedRoute.snapshot.url[0].path;
-        this.httpAuth.isAdmin ? this.sidebarLinks = LINKS.sidebar[path].admin : null;
-        path === 'users' ? this.sidebarLinks = LINKS.sidebar[path].admin: this.sidebarLinks = LINKS.sidebar[path].general.concat(this.sidebarLinks);
-
-        this.serviceDirectory = path;
-
+        this.activeService = this.activatedRoute.snapshot.url[0].path;
     }
 
    getAll() {
-        this[this.serviceDirectory].getAll()
+        this[this.activeService].getAll()
             .subscribe((images : any) => {
                 console.log('calling imageServices from sidebar', images);
-                this[this.serviceDirectory].images = images;
+                this[this.activeService].images = images;
             })
    }
 
    getOne() {
-
+        console.log(`getting ONE of ${this.activeService}`);
    }
 
    getLatest() {
-
+        console.log(`getting LATEST of ${this.activeService}`);
    }
 
-   combinedSearch() {
-
+   getList() {
+        console.log(`getting LIST of ${this.activeService}`);
    }
 
 }

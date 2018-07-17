@@ -25,4 +25,7 @@ export class ImageServices {
 
     }
 
+    getLatest(): Observable<any> {
+        return this.http.get<any>('/imagesDb/latest')
+    }
 }
