@@ -24,7 +24,6 @@ export class SidebarComponent implements OnInit {
         this[this.activeService].getAll()
             .subscribe((images : any) => {
                 console.log('calling imageServices from sidebar', images);
-                this[this.activeService].images = images;
             })
    }
 
@@ -33,7 +32,10 @@ export class SidebarComponent implements OnInit {
    }
 
    getLatest() {
-        console.log(`getting LATEST of ${this.activeService}`);
+        this[this.activeService].getLatest()
+            .subscribe((image:any) => {
+                console.log(`getting LATEST of ${this.activeService}`, image);
+            })
    }
 
    getList() {

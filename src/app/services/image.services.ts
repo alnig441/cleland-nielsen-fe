@@ -20,17 +20,15 @@ export class ImageServices {
         // })
 
         return this.http.get<any>('/imagesDb')
-            // .map(image => {
-            //     console.log('returned from image route: ', image);
-            // })
-
+            .do( result => {
+                this.images = result;
+            })
     }
 
     getLatest(): Observable<any> {
-        console.log('getting latest in imageServices');
         return this.http.get<any>('/imagesDb/latest')
-            .do((x) => {
-                this.images = x;
+            .do((result) => {
+                this.images = result;
             });
 
     }

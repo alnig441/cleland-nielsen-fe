@@ -22839,14 +22839,16 @@ let SidebarComponent = class SidebarComponent {
         this[this.activeService].getAll()
             .subscribe((images) => {
             console.log('calling imageServices from sidebar', images);
-            this[this.activeService].images = images;
         });
     }
     getOne() {
         console.log(`getting ONE of ${this.activeService}`);
     }
     getLatest() {
-        console.log(`getting LATEST of ${this.activeService}`);
+        this[this.activeService].getLatest()
+            .subscribe((image) => {
+            console.log(`getting LATEST of ${this.activeService}`, image);
+        });
     }
     getList() {
         console.log(`getting LIST of ${this.activeService}`);
@@ -23325,16 +23327,15 @@ let ImageServices = class ImageServices {
         // return of(true).delay(1000).do(val => {
         //     console.log('image services getAll() ', val)
         // })
-        return this.http.get('/imagesDb');
-        // .map(image => {
-        //     console.log('returned from image route: ', image);
-        // })
+        return this.http.get('/imagesDb')
+            .do(result => {
+            this.images = result;
+        });
     }
     getLatest() {
-        console.log('getting latest in imageServices');
         return this.http.get('/imagesDb/latest')
-            .do((x) => {
-            this.images = x;
+            .do((result) => {
+            this.images = result;
         });
     }
 };
@@ -23348,4 +23349,4 @@ exports.ImageServices = ImageServices;
 /***/ })
 
 },[638]);
-//# sourceMappingURL=app.1bd1808cfaf6779d9335.js.map
+//# sourceMappingURL=app.5f253d3fdf3bbce731e7.js.map
