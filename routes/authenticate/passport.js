@@ -9,23 +9,35 @@ const connectionString = process.env.MYDB || 'postgresql://allannielsen:11097214
 
 const jwt = require('jsonwebtoken');
 
+const bcrypt = require('bcrypt'),
+    saltRounds = 10;
+
 passport.use(new localStrategy({
     usernameField: 'username',
     passwordField: 'password'
 }, (username, password, cb) => {
+
 
     const client = new Client({
         connectionString: connectionString,
     })
     client.connect()
 
-    return client.query(`SELECT * FROM users as a INNER JOIN accounts as b ON a.account_type::uuid = b.account_id where a.password ='${password}' and a.user_name='${username}'`)
+    return client.query(`SELECT * FROM users as a INNER JOIN accounts as b ON a.account_type::uuid = b.account_id where a.user_name='${username}'`)
         .then(result => {
-            let user = result.rows[0];
-            return cb(null, user, {message: 'login success'})
+            let user = result.rows[0]
+            bcrypt.compare(password, user.password)
+                .then(match => {
+                    if(match) {
+                        return cb(null, user, {message: 'login success!'})
+                    }
+                    else {
+                        return cb({message: 'invalid password'})
+                    }
+                })
         })
         .catch(err => {
-            console.error('error: ', err.stack);
+            return cb({message: 'user name does not exist'})
         })
 
 }));
@@ -34,8 +46,6 @@ passport.use(new JWTStrategy({
     jwtFromRequest: ExtractJWT.fromAuthHeaderAsBearerToken(),
     secretOrKey: jwtSecret
     }, (jwtPayload, cb) => {
-
-        console.log('jwtstrategy: ', JWTStrategy)
 
         const client = new Client({
             connectionString: connectionString

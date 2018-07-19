@@ -7,10 +7,14 @@ const port = process.env.NODE_ENV === "production" ? process.env.PORT: "3000";
 const app = express();
 const bodyParser = require('body-parser');
 const passport = require('passport');
-const bcrypt = require('bcrypt');
-const pg = require('pg');
+const dbInit = process.env.DB_INIT ? process.evn.DB_INIT : false;
 
 require('./routes/authenticate/passport');
+
+if(dbInit){
+    require('./dbInit');
+}
+
 
 /* pull in all app server routes */
 const authenticate = require('./routes/authenticate/authentication'),

@@ -9,14 +9,9 @@ const uuidv4 = require('uuid/v4')
 
 router.post('/', (req, res, next) => {
 
-    // console.log('authentication: ', req.body)
-
     passport.authenticate('local', {session: false}, (err, user, info) => {
 
-        console.log('returned from passport: ', err, user, info);
-
         if (err || !user) {
-            console.log('anything from passport? ', err);
             return res.status(400).json({
                 message: err ? err.message : 'no error message returned',
                 user: user
