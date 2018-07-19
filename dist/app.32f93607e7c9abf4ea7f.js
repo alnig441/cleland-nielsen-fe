@@ -23317,16 +23317,12 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 const core_1 = __webpack_require__(5);
 const http_1 = __webpack_require__(42);
 let ImageServices = class ImageServices {
-    // images: Observable<any>;
     constructor(http) {
         this.http = http;
         this.images = new Array();
+        this.imagesUpdated = false;
     }
     getAll() {
-        /* MOCK ASYNC OPERATION */
-        // return of(true).delay(1000).do(val => {
-        //     console.log('image services getAll() ', val)
-        // })
         return this.http.get('/imagesDb')
             .do(result => {
             this.images = result;
@@ -23335,6 +23331,7 @@ let ImageServices = class ImageServices {
     getLatest() {
         return this.http.get('/imagesDb/latest')
             .do((result) => {
+            console.log('result: ', result);
             this.images = result;
         });
     }
@@ -23349,4 +23346,4 @@ exports.ImageServices = ImageServices;
 /***/ })
 
 },[638]);
-//# sourceMappingURL=app.5f253d3fdf3bbce731e7.js.map
+//# sourceMappingURL=app.32f93607e7c9abf4ea7f.js.map

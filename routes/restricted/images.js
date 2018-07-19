@@ -2,7 +2,7 @@ const express = require('express'),
     router = express.Router();
 const passport = require('passport');
 
-const mockUsers = [
+const mockImages = [
     {
         id: 1,
         caption: 'this would be the associated event, if any..',
@@ -21,15 +21,11 @@ const mockUsers = [
 
 
 router.get('/', (req, res, next) => {
-    console.log('getting all images');
-    // Insert db call here
-
-    /* MOCK DATA - to be replaced with db call result */
-    res.send(mockUsers);
+    res.send(mockImages);
 })
 
 router.get('/latest', (req, res, next) => {
-    res.send([mockUsers[1]]);
+    res.send([mockImages[1]]);
 })
 
 module.exports = router;

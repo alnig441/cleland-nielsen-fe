@@ -3,6 +3,7 @@ const router = express.Router();
 const jwt = require('jsonwebtoken');
 const passport = require('passport');
 const jwtSecret = process.env.JWT_SECRET || 'some_secret_word';
+const uuidv4 = require('uuid/v4')
 
 /* LOGIN ROUTE */
 
@@ -12,12 +13,12 @@ router.post('/', (req, res, next) => {
 
     passport.authenticate('local', {session: false}, (err, user, info) => {
 
-        // console.log('returned from passport: ', err, user, info);
+        console.log('returned from passport: ', err, user, info);
 
         if (err || !user) {
+            console.log('anything from passport? ', err);
             return res.status(400).json({
-                message: err ? err.message: 'nothing',
-                // message: info ? info.message : 'something went wrong',
+                message: err ? err.message : 'no error message returned',
                 user: user
             })
         }
@@ -29,25 +30,24 @@ router.post('/', (req, res, next) => {
                 res.send(err);
             }
 
-            // console.log('what user: ', user);
-
             let userParameters = {
-                userId: user.userId,
-                language: user.language ? user.language : 'english',
-                administrator: user.accounttype === 'administrator' ? true : false
+                user: user.user_id,
+                language: user.language,
+                administrator: user.account_type === 'administrator' ? true : false
             }
 
             /* generate signed web token */
             const token = jwt.sign({
-                administrator: user.accounttype === 'administrator' ? true: false,
-                language: user.language ? user.language: 'english',
-                userId: user.userId
+                sub: user.user_id,
+                language: user.language,
+                admin: user.account_type === 'administrator' ? true : false
             }, jwtSecret);
             return res.json({token, userParameters});
 
         });
 
     })(req, res);
+
 })
 
 module.exports = router;

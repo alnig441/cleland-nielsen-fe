@@ -9,16 +9,11 @@ import { ImageModel } from "../models/image.model";
 export class ImageServices {
 
     images: ImageModel[] = new Array();
-    // images: Observable<any>;
+    imagesUpdated: boolean = false;
 
     constructor(private http: HttpClient) {}
 
     getAll(): Observable<any> {
-        /* MOCK ASYNC OPERATION */
-        // return of(true).delay(1000).do(val => {
-        //     console.log('image services getAll() ', val)
-        // })
-
         return this.http.get<any>('/imagesDb')
             .do( result => {
                 this.images = result;
@@ -28,6 +23,7 @@ export class ImageServices {
     getLatest(): Observable<any> {
         return this.http.get<any>('/imagesDb/latest')
             .do((result) => {
+                console.log('result: ', result);
                 this.images = result;
             });
 

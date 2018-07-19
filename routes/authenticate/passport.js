@@ -1,92 +1,58 @@
 const passport = require('passport'),
     localStrategy = require('passport-local').Strategy,
-    // passportJWT = require('passport-jwt'),
-    // JWTStrategy = passportJWT.Strategy;
-    // ExtractJWT = passportJWT.ExtractJwt;
     JWTStrategy = require('passport-jwt').Strategy,
     ExtractJWT = require('passport-jwt').ExtractJwt;
 
-const pg = require('pg');
 const jwtSecret = process.env.JWT_SECRET || 'some_secret_word';
+const { Client } = require('pg');
+const connectionString = process.env.MYDB || 'postgresql://allannielsen:1109721405@localhost:5432/jacn2014_ng4';
 
-/* MOCK USER DATA */
-const UserModel = [
-    {
-        userId: 1,
-        username: 'user',
-        password: 'user',
-        accounttype: 'regular'
-    },
-    {
-        userId: 2,
-        username: 'admin',
-        password: 'admin',
-        accounttype: 'administrator'
-    }
-]
-
-
+const jwt = require('jsonwebtoken');
 
 passport.use(new localStrategy({
     usernameField: 'username',
     passwordField: 'password'
 }, (username, password, cb) => {
 
-    // console.log('in local strategy', username, password);
-    //insert db call
-
-    /* MOCK DB CALL */
-
-    let user = UserModel.find(user => {
-        return user = user.username === username && user.password === password;
+    const client = new Client({
+        connectionString: connectionString,
     })
+    client.connect()
 
-    if(user) {
-        return cb(null, user);
-    } else{
-        return cb({message: 'no user found'})
-    }
-    /* MOCK DB CALL - END */
+    return client.query(`SELECT * FROM users as a INNER JOIN accounts as b ON a.account_type::uuid = b.account_id where a.password ='${password}' and a.user_name='${username}'`)
+        .then(result => {
+            let user = result.rows[0];
+            return cb(null, user, {message: 'login success'})
+        })
+        .catch(err => {
+            console.error('error: ', err.stack);
+        })
 
-    /* INSERT DB CALL HERE */
-    // return UserModel.findOne({ userId, password})
-    //     .then((user) => {
-    //         if (!user){
-    //             return cb(null, false, {message: 'incorrect credentials!'})
-    //         }
-    //         else {
-    //             return cb(null, user, {message: 'login success!'})
-    //         }
-    //     })
-    //     .catch(err => cb(err));
 }));
 
 passport.use(new JWTStrategy({
     jwtFromRequest: ExtractJWT.fromAuthHeaderAsBearerToken(),
     secretOrKey: jwtSecret
     }, (jwtPayload, cb) => {
-    /* call db if needed */
 
-        // console.log('show me jwt_payload: ', jwtPayload);
+        console.log('jwtstrategy: ', JWTStrategy)
 
-        let user = UserModel.find(user => {
-            return user = user.userId === jwtPayload.userId;
-        })
+        const client = new Client({
+            connectionString: connectionString
+        });
 
-        if(user) {
-            return cb(null, user);
-        } else{
-            return cb({message: 'no user found'})
-        }
+        client.connect();
 
-        /* INSERT DB CALL HERE */
-        // return UserModel.findByOneId(jwtPayload.id)
-        //     .then((user) => {
-        //         return cb(null, user);
-        //     })
-        //     .catch(err => {
-        //         return cb(err);
-        //     });
+        return client.query(`SELECT * FROM users where user_id='${jwtPayload.sub}'`)
+            .then(result => {
+                let user = result.rows;
+                return cb(null, user)
+            })
+            .catch(err => {
+                return cb (err);
+            })
 
+
+        client.end();
     }
 ));

@@ -14,6 +14,7 @@ require('./routes/authenticate/passport');
 
 /* pull in all app server routes */
 const authenticate = require('./routes/authenticate/authentication'),
+    logout = require('./routes/logout'),
     images = require('./routes/restricted/images'),
     accounts = require('./routes/restricted/accounts'),
     users = require('./routes/restricted/users'),
@@ -28,6 +29,7 @@ app.use(express.static(__dirname + '/dist'));
 
 /* routes setup */
 app.use('/login', authenticate);
+app.use('/logout', logout);
 app.use('/imagesDb', passport.authenticate('jwt', {session: false}), images);
 app.use('/imagesDb/latest', passport.authenticate('jwt', {session: false}), images);
 app.use('/accountsDb', passport.authenticate('jwt', {session: false}), accounts);
@@ -40,7 +42,7 @@ app.get('*', function response(req, res) {
 
 app.listen(port, hostName, function onStart(err) {
     if (err) {
-        console.log(err);
+        console.log('show me error', err);
     }
     console.info('==> 🌎 Listening on port %s. Open up http://'+hostName+':%s/ in your browser.', port, port);
 });
