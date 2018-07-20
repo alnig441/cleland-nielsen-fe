@@ -22636,8 +22636,6 @@ const events_component_1 = __webpack_require__(210);
 const images_component_1 = __webpack_require__(212);
 const sidebar_component_1 = __webpack_require__(688);
 const image_services_1 = __webpack_require__(96);
-// import { HTTP_INTERCEPTORS } from "@angular/common/http";
-// import { JwtInterceptorService } from "../../services/interceptors/jwt-interceptor.service";
 const infobar_component_1 = __webpack_require__(690);
 const thumbnail_component_1 = __webpack_require__(692);
 const http_interceptors_1 = __webpack_require__(694);
@@ -22830,20 +22828,28 @@ let SidebarComponent = class SidebarComponent {
         this.activeService = this.activatedRoute.snapshot.url[0].path;
     }
     getAll() {
+        console.log(`getting ALL of ${this.activeService}`);
         this[this.activeService].getAll()
-            .subscribe((images) => {
-            console.log('calling imageServices from sidebar', images);
+            .catch((error) => {
+            console.log(error);
         });
     }
     getOne() {
         console.log(`getting ONE of ${this.activeService}`);
     }
     getLatest() {
-        this[this.activeService].getLatest();
+        console.log(`getting LATEST of ${this.activeService}`);
+        this[this.activeService].getLatest()
+            .catch((error) => {
+            console.log(error);
+        });
     }
     getList() {
         console.log(`getting LIST of ${this.activeService}`);
-        this[this.activeService].getList();
+        this[this.activeService].getList()
+            .catch((error) => {
+            console.log(error);
+        });
     }
 };
 SidebarComponent = __decorate([
@@ -23029,7 +23035,6 @@ let GlobalnavComponent = class GlobalnavComponent {
         this.router.events.filter((event) => event instanceof router_1.NavigationEnd)
             .map(() => links_1.LINKS)
             .subscribe((links) => {
-            // console.log('hello from filter\nis logged in: ', this.httpAuth.isLoggedIn, '\n isadmin', this.httpAuth.isAdmin);
             if (this.httpAuth.isLoggedIn) {
                 this.navbarLinks = links.private;
                 if (this.httpAuth.isAdmin) {
@@ -23044,8 +23049,6 @@ let GlobalnavComponent = class GlobalnavComponent {
     }
     logout() {
         this.httpAuth.logout();
-        // this.authService.logout();
-        // this.router.navigate([this.authService.redirectUrl]);
         this.router.navigate([this.httpAuth.redirectUrl]);
     }
 };
@@ -23331,52 +23334,40 @@ let ImageServices = class ImageServices {
         this.baseUrl = '/imagesDb';
     }
     getAll() {
-        return this.http.get('/imagesDb')
-            .do(result => {
-            this.images = result;
-        });
+        return this.http.get(this.baseUrl, { observe: "response" })
+            .toPromise()
+            .then(res => {
+            this.images = res.body;
+        })
+            .catch(this.handleError);
     }
     getLatest() {
-        console.log('get latest called');
         return this.http.get(this.baseUrl + '/latest', { observe: "response" })
             .toPromise()
             .then(res => {
-            console.log('result: ', res);
             this.images = res.body;
         })
-            .catch(error => {
-            console.log('am I calling error handler?', error);
-            this.handleError;
-        });
+            .catch(this.handleError);
     }
-    // getLatest(): Observable<ImageModel[]> {
-    //     return this.http.get<ImageModel[]>('/imagesDb/latest')
-    //         .do((result) => {
-    //             console.log('result: ', result);
-    //             this.images = result;
-    //         });
-    // }
-    // getList(): Observable<HttpResponse<ImageModel[]>> {
-    //     return this.http.get('/imagesDb', { observe: "response"})
-    //         .subscribe(res => {
-    //             console.log('response; ', res);
-    //         })
-    // }
     getList() {
         return this.http.get('/imagesDb', { observe: "response" })
             .toPromise()
             .then(response => {
-            console.log('show me response: ', response);
             this.images = response.body;
         })
-            .catch(error => {
-            console.log('calling error handler: ', error, typeof error);
-            this.handleError;
-        });
+            .catch(this.handleError);
     }
     handleError(error) {
-        console.log('an error occurred: ', error);
-        return Promise.reject(error.message || error);
+        let err;
+        if (error.status === 401) {
+            err = {
+                status: error.status,
+                message: 'unauthorized/token expired - please login again',
+            };
+        }
+        // add handlers
+        throw err || error;
+        // return Promise.reject( err || error)
     }
 };
 ImageServices = __decorate([
@@ -23389,4 +23380,4 @@ exports.ImageServices = ImageServices;
 /***/ })
 
 },[638]);
-//# sourceMappingURL=app.e08046225f847a1e8f49.js.map
+//# sourceMappingURL=app.3a2623a635274729be85.js.map

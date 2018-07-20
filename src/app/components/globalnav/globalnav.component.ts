@@ -23,7 +23,6 @@ export class GlobalnavComponent implements OnInit {
         this.router.events.filter((event)=> event instanceof NavigationEnd)
             .map(() => LINKS)
             .subscribe((links) => {
-                // console.log('hello from filter\nis logged in: ', this.httpAuth.isLoggedIn, '\n isadmin', this.httpAuth.isAdmin);
                 if(this.httpAuth.isLoggedIn){
                     this.navbarLinks = links.private;
                     if(this.httpAuth.isAdmin){
@@ -40,8 +39,6 @@ export class GlobalnavComponent implements OnInit {
 
     logout() : void {
         this.httpAuth.logout();
-        // this.authService.logout();
-        // this.router.navigate([this.authService.redirectUrl]);
         this.router.navigate([this.httpAuth.redirectUrl]);
     }
 }
