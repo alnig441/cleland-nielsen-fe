@@ -1,5 +1,5 @@
 import { Component, Input, OnInit, ViewEncapsulation } from "@angular/core";
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { HttpAuthService } from "../../services/httpAuth.service";
 import { ImageServices } from "../../services/image.services";
 
@@ -13,7 +13,7 @@ export class SidebarComponent implements OnInit {
 
     activeService: string;
 
-    constructor( private httpAuth: HttpAuthService, private activatedRoute: ActivatedRoute, private images: ImageServices){}
+    constructor( private httpAuth: HttpAuthService, private activatedRoute: ActivatedRoute, private images: ImageServices, private router: Router){}
 
     ngOnInit(): void {
         this.activeService = this.activatedRoute.snapshot.url[0].path;
@@ -44,6 +44,11 @@ export class SidebarComponent implements OnInit {
         this[this.activeService].getList()
             .catch((error: any) => {
                 console.log(error);
+                if(error.status === 401){
+                    console.log('logging out');
+                    this.httpAuth.logout();
+                    this.router.navigate(["/login"]);
+                }
             })
    }
 

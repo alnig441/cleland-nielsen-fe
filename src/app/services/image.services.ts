@@ -44,7 +44,7 @@ export class ImageServices {
 
     private handleError(error: any): Promise<any> {
 
-        let err;
+        let err = {};
 
         if(error.status === 401){
             err = {
@@ -52,9 +52,7 @@ export class ImageServices {
                 message: 'unauthorized/token expired - please login again',
             };
         }
-
         // add handlers
         throw err || error;
-        // return Promise.reject( err || error)
     }
 }

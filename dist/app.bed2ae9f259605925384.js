@@ -22819,10 +22819,11 @@ const router_1 = __webpack_require__(33);
 const httpAuth_service_1 = __webpack_require__(76);
 const image_services_1 = __webpack_require__(96);
 let SidebarComponent = class SidebarComponent {
-    constructor(httpAuth, activatedRoute, images) {
+    constructor(httpAuth, activatedRoute, images, router) {
         this.httpAuth = httpAuth;
         this.activatedRoute = activatedRoute;
         this.images = images;
+        this.router = router;
     }
     ngOnInit() {
         this.activeService = this.activatedRoute.snapshot.url[0].path;
@@ -22849,6 +22850,11 @@ let SidebarComponent = class SidebarComponent {
         this[this.activeService].getList()
             .catch((error) => {
             console.log(error);
+            if (error.status === 401) {
+                console.log('logging out');
+                this.httpAuth.logout();
+                this.router.navigate(["/login"]);
+            }
         });
     }
 };
@@ -22858,7 +22864,7 @@ SidebarComponent = __decorate([
         template: __webpack_require__(689),
         encapsulation: core_1.ViewEncapsulation.None
     }),
-    __metadata("design:paramtypes", [httpAuth_service_1.HttpAuthService, router_1.ActivatedRoute, image_services_1.ImageServices])
+    __metadata("design:paramtypes", [httpAuth_service_1.HttpAuthService, router_1.ActivatedRoute, image_services_1.ImageServices, router_1.Router])
 ], SidebarComponent);
 exports.SidebarComponent = SidebarComponent;
 
@@ -23380,4 +23386,4 @@ exports.ImageServices = ImageServices;
 /***/ })
 
 },[638]);
-//# sourceMappingURL=app.3a2623a635274729be85.js.map
+//# sourceMappingURL=app.bed2ae9f259605925384.js.map
