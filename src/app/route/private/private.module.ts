@@ -7,10 +7,11 @@ import { EventsComponent } from "./events/events.component";
 import { ImagesComponent } from "./images/images.component";
 import { SidebarComponent } from "../../components/sidebar/sidebar.component";
 import { ImageServices } from "../../services/image.services";
-import { HTTP_INTERCEPTORS } from "@angular/common/http";
-import { JwtInterceptorService } from "../../services/jwt-interceptor.service";
+// import { HTTP_INTERCEPTORS } from "@angular/common/http";
+// import { JwtInterceptorService } from "../../services/interceptors/jwt-interceptor.service";
 import { InfobarComponent } from "../../components/infobar/infobar.component";
 import { ThumbnailComponent } from "../../components/thumbnail/thumbnail.component";
+import { httpInterceptorProviders } from "../../services/interceptors/http-interceptors";
 
 @NgModule({
     imports: [
@@ -30,11 +31,12 @@ import { ThumbnailComponent } from "../../components/thumbnail/thumbnail.compone
     ],
     providers: [
         ImageServices,
-        {
-            provide: HTTP_INTERCEPTORS,
-            useClass: JwtInterceptorService,
-            multi: true
-        }
+        httpInterceptorProviders,
+        // {
+        //     provide: HTTP_INTERCEPTORS,
+        //     useClass: JwtInterceptorService,
+        //     multi: true
+        // }
     ]
 })
 

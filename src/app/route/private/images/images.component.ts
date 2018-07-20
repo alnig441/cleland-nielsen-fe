@@ -19,10 +19,6 @@ export class ImagesComponent implements OnInit {
         console.log('images comp init', this.imageService);
 
         this.imageService.getLatest()
-             .subscribe(data => {
-                 console.log('return from img serv in img comp: ', data)
-             });
-
     }
 
 }
