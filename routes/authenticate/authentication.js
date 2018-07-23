@@ -36,7 +36,7 @@ router.post('/', (req, res, next) => {
                 sub: user.user_id,
                 language: user.language,
                 admin: user.account_type === 'administrator' ? true : false
-            }, jwtSecret, { expiresIn: 5});
+            }, jwtSecret, { expiresIn: 3600});
             return res.json({token, userParameters});
 
         });

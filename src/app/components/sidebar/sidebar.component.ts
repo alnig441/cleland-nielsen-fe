@@ -44,10 +44,14 @@ export class SidebarComponent implements OnInit {
         this[this.activeService].getList()
             .catch((error: any) => {
                 console.log(error);
+                this[this.activeService].error = error;
                 if(error.status === 401){
                     console.log('logging out');
-                    this.httpAuth.logout();
-                    this.router.navigate(["/login"]);
+                    setTimeout(() => {
+                        this.httpAuth.logout();
+                        this.router.navigate(["/login"]);
+                        this[this.activeService].error = null;
+                    },3000)
                 }
             })
    }

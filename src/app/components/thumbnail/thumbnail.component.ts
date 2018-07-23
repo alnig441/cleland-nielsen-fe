@@ -14,11 +14,13 @@ export class ThumbnailComponent implements OnInit, DoCheck {
 
     constructor(private imageService: ImageServices){}
 
-    ngOnInit(): void {}
+    ngOnInit(): void {
+    }
 
     ngDoCheck(): void {
-        if(this.imageService.images){
+        if(this.imageService.imagesUpdated){
             this.images = this.imageService.images;
+            this.imageService.imagesUpdated = false;
         }
     }
 
