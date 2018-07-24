@@ -1,5 +1,18 @@
 .col-sm-2
     app-sidebar
 .col-sm-8
-    p users component
+    app-messagebar
+    div(*ngFor="let user of this.users.users as users; index as i")
+        div(class="col-sm-6 col-md-4")
+            div(id="{{user.user_id}}" class="box-shadow panel panel-info")
+                div(class="panel-heading")
+                    h3(class="panel-title") {{user.user_name}}
+                div(class="panel-body")
+                    p  Account Type: {{user.account_type}}
+                    p  Language: {{user.language}}
+                    p
+                        a(class="btn btn-info", role="button") Edit
+                        a(class="btn btn-info", role="button") Delete
+                        a(class="btn btn-info", role="button") Close
 .col-sm-2
+    app-infobar

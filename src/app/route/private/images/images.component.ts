@@ -1,6 +1,5 @@
-import { Component, DoCheck, OnInit, ViewEncapsulation } from "@angular/core";
+import { Component, OnInit, ViewEncapsulation } from "@angular/core";
 import { ImageServices } from "../../../services/image.services";
-import { ImageModel } from "../../../models/image.model";
 
 @Component({
     selector: 'app-images',
@@ -11,14 +10,9 @@ import { ImageModel } from "../../../models/image.model";
 
 export class ImagesComponent implements OnInit {
 
-    images: ImageModel[] = new Array();
-
     constructor(private imageService: ImageServices){}
 
     ngOnInit(): void {
-        console.log('images comp init', this.imageService);
-
-        this.imageService.getLatest()
     }
 
 }

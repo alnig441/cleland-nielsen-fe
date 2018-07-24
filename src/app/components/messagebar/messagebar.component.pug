@@ -1,3 +1,3 @@
-div(*ngIf="this.images.error" class="panel panel-warning")
-    div(class="panel-heading") status: {{this.images.error.status}}
-    div(class="panel-body") message: {{this.images.error.message}}
+div(*ngIf="this[this.route].error" class="panel panel-warning")
+    div(class="panel-heading") status: {{ this[this.route].error.status }}
+    div(class="panel-body") message: {{ this[this.route].error.message }}

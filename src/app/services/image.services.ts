@@ -1,20 +1,27 @@
 import { Injectable } from "@angular/core";
-import { HttpClient, HttpResponse } from "@angular/common/http";
+import { HttpClient } from "@angular/common/http";
 import { ImageModel } from "../models/image.model";
 import 'rxjs/add/operator/toPromise';
-import { Observable } from "rxjs";
+import { ErrorParser } from "./errorParser";
 
+'./errorParser';
 
 @Injectable()
 
 export class ImageServices {
 
+    errorParser = new ErrorParser();
     images: ImageModel[] = new Array();
     imagesUpdated: boolean = false;
     baseUrl = '/imagesDb';
     error: any;
 
     constructor(private http: HttpClient) {}
+
+    getOne(): Promise<any> {
+        return this.http.get(this.baseUrl, { observe: "response"})
+            .toPromise()
+    }
 
     getAll(): Promise<any> {
         return this.http.get(this.baseUrl, { observe: "response"})
@@ -23,7 +30,7 @@ export class ImageServices {
                 this.images = res.body as ImageModel[];
                 this.imagesUpdated = true;
             })
-            .catch(this.handleError);
+            .catch(this.errorParser.handleError);
     }
 
     getLatest(): Promise<any> {
@@ -33,7 +40,7 @@ export class ImageServices {
                 this.images = res.body as ImageModel[];
                 this.imagesUpdated = true;
             })
-            .catch(this.handleError)
+            .catch(this.errorParser.handleError)
     }
 
     getList(): Promise<any> {
@@ -44,22 +51,6 @@ export class ImageServices {
                 this.images = res.body as ImageModel[];
                 this.imagesUpdated = true;
             })
-            .catch(this.handleError)
+            .catch(this.errorParser.handleError)
     }
-
-
-    private handleError(error: any): Promise<any> {
-
-        let err = {};
-
-        if(error.status === 401){
-            err = {
-                status: error.status,
-                message: 'unauthorized/token expired - please login again',
-            };
-        }
-        // add handlers
-        throw err || error;
-    }
-
 }

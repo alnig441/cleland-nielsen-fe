@@ -29,7 +29,7 @@ export class HttpAuthService {
             })
     }
 
-    logout(): void {
+    public logout(): void {
         localStorage.removeItem('token');
         this.isAdmin = false;
         this.isLoggedIn = false;
