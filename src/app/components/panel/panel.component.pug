@@ -1,0 +1,10 @@
+div(*ngFor="let user of this.users.users as users; index as i")
+    div(class="col-sm-6 col-md-4")
+        div(id="{{user.user_id}}" class="box-shadow panel panel-info")
+            div(class="panel-heading")
+                h3(class="panel-title") {{user.user_name}}
+            div(class="panel-body")
+                p  Account Type: {{user.account_type}}
+                p  Language: {{user.language}}
+            div((click)="edit(this.user)", class="panel-footer") edit
+            div((click)="delete(this.user)", class="panel-footer") delete

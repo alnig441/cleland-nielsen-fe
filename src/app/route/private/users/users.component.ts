@@ -1,5 +1,4 @@
 import { Component, OnInit, ViewEncapsulation } from "@angular/core";
-import {UsersServices} from "../../../services/users.services";
 
 @Component({
     selector: 'app-users',
@@ -9,7 +8,7 @@ import {UsersServices} from "../../../services/users.services";
 
 export class UsersComponent implements OnInit {
 
-    constructor(private users: UsersServices) {}
+    constructor() {}
 
     ngOnInit(): void {
         console.log('user comp init');

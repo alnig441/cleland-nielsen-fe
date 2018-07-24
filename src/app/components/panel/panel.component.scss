@@ -1,0 +1,26 @@
+p {
+  display: flex;
+  justify-content: space-around;
+}
+
+.panel-footer {
+  display: inline-block;
+  width: 50%;
+  text-align: center;
+}
+
+.panel-footer:first-of-type {
+  border-right: 1px solid #ddd;
+  border-bottom-right-radius: 0px;
+}
+
+.panel-footer:last-of-type {
+  border-left: 1px solid #ddd;
+  border-bottom-left-radius: 0px;
+}
+
+.panel-footer:hover {
+  background-color: #d9edf7;
+  color: #31708f;
+  cursor: pointer;
+}

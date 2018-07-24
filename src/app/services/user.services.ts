@@ -6,7 +6,7 @@ import { UserModel } from "../models/user.model";
 
 @Injectable()
 
-export class UsersServices {
+export class UserServices {
 
     errorParser = new ErrorParser();
     users: UserModel[] = new Array();

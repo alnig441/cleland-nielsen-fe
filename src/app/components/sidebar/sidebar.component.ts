@@ -2,7 +2,7 @@ import { Component, Input, OnInit, ViewEncapsulation } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { HttpAuthService } from "../../services/httpAuth.service";
 import { ImageServices } from "../../services/image.services";
-import { UsersServices } from "../../services/users.services";
+import { UserServices } from "../../services/user.services";
 
 @Component({
     selector: 'app-sidebar',
@@ -14,7 +14,7 @@ export class SidebarComponent implements OnInit {
 
     activeService: string;
 
-    constructor( private httpAuth: HttpAuthService, private activatedRoute: ActivatedRoute, private images: ImageServices, private router: Router, private users: UsersServices){}
+    constructor( private httpAuth: HttpAuthService, private activatedRoute: ActivatedRoute, private images: ImageServices, private router: Router, private users: UserServices){}
 
     ngOnInit(): void {
         this.activeService = this.activatedRoute.snapshot.url[0].path;

@@ -11,7 +11,8 @@ import { InfobarComponent } from "../../components/infobar/infobar.component";
 import { ThumbnailComponent } from "../../components/thumbnail/thumbnail.component";
 import { httpInterceptorProviders } from "../../services/interceptors/http-interceptors";
 import { MessagebarComponent } from "../../components/messagebar/messagebar.component";
-import {UsersServices} from "../../services/users.services";
+import { UserServices } from "../../services/user.services";
+import { PanelComponent } from "../../components/panel/panel.component";
 
 @NgModule({
     imports: [
@@ -26,13 +27,14 @@ import {UsersServices} from "../../services/users.services";
         SidebarComponent,
         InfobarComponent,
         ThumbnailComponent,
-        MessagebarComponent
+        MessagebarComponent,
+        PanelComponent
     ],
     exports: [
     ],
     providers: [
         ImageServices,
-        UsersServices,
+        UserServices,
         httpInterceptorProviders,
     ]
 })
