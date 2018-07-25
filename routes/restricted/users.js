@@ -14,7 +14,6 @@ router.get('/', (req, res, next) => {
 
     return client.query('SELECT * FROM users as a INNER JOIN accounts as b ON a.account_type::uuid = b.account_id')
         .then(result => {
-            console.log('result from users: ', result.rows);
             res.send(result.rows);
             client.end();
         })

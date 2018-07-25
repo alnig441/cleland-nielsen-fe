@@ -12,7 +12,6 @@ import { UserModel } from "../../models/user.model";
 export class PanelComponent implements OnInit {
 
     doEdit = {};
-    userModel = new UserModel('','');
     accountTypes = [
         {
             account_id: 1,
@@ -39,33 +38,30 @@ export class PanelComponent implements OnInit {
     ]
 
 
-    constructor(private users: UserServices) {}
+    constructor(private userService: UserServices) {}
 
     ngOnInit(): void {
-        console.log('panel comp init', this.userModel);
+        console.log('panel comp init');
     }
 
     edit(user: UserModel): void {
         console.log('editing user: ', user.user_name);
         this.doEdit[user.user_name] = true;
-        this.userModel = user;
-
     }
 
     done(user: UserModel): void {
-        console.log('done editing user: ', this.userModel, user);
+        console.log('done editing user: ', user);
         this.doEdit = {};
-        this.userModel =  new UserModel('','');
     }
 
-    addInput(type: any): void {
-        console.log('inputting this account: ', type);
-        for(var prop in type){
+    addInput(input: any, i: any): void {
+        console.log('inputting this account: ', input);
+        for(var prop in input){
             if(prop != 'account_id') {
-                if(prop == 'account_type'){
-                    this.userModel[prop] = type.account_id;
+                if(prop == 'account_name'){
+                    this.userService.users[i][prop] = input.account_id;
                 }
-                this.userModel[prop] = type[prop];
+                this.userService.users[i][prop] = input[prop];
             }
         }
     }

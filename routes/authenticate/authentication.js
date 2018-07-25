@@ -28,14 +28,14 @@ router.post('/', (req, res, next) => {
             let userParameters = {
                 user: user.user_id,
                 language: user.language,
-                administrator: user.account_type === 'administrator' ? true : false
+                administrator: user.account_name === 'administrator' ? true : false
             }
 
             /* generate signed web token */
             const token = jwt.sign({
                 sub: user.user_id,
                 language: user.language,
-                admin: user.account_type === 'administrator' ? true : false
+                admin: user.account_name === 'administrator' ? true : false
             }, jwtSecret, { expiresIn: 3600});
             return res.json({token, userParameters});
 
