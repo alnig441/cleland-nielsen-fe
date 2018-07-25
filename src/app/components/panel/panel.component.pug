@@ -1,18 +1,28 @@
 div(*ngFor="let user of this.users.users as users; index as i")
     div(class="col-sm-6 col-md-4")
-        div(id="{{user.user_id}}" class="box-shadow panel panel-info")
+        form(#editUserForm="ngForm", id="{{user.user_id}}" class="box-shadow panel panel-info")
             div(class="panel-heading")
                 h3(class="panel-title") {{user.user_name}}
             div(class="panel-body")
                 div(class="input-group input-group-sm")
-                    span(class="input-group-addon") Type
-                    input([attr.disabled]="this.doEdit[user.user_name] == true ? null : true", class="form-control" type="text" placeholder="{{user.account_type}}")
+                    div(class="input-group-btn" style="")
+                        button(type="button" class="btn btn-info dropdown-toggle", data-toggle="dropdown" aria-haspopup="true", aria-expanded="false", [attr.disabled]="this.doEdit[user.user_name] == true ? null : true") Type
+                            span(class="caret")
+                        ul(class="dropdown-menu")
+                            li(*ngFor="let account of this.accountTypes as types; index as j")
+                                a((click)="addInput(this.account)") {{account.account_type}}
+                    input([attr.disabled]="this.doEdit[user.user_name] == true ? null : true", class="form-control" type="text" placeholder="{{user.account_type}}",[(ngModel)]="userModel.account_type", name="account_type", #account_type="ngModel")
                 div(class="input-group input-group-sm")
-                    span(class='input-group-addon') Language
-                    input([attr.disabled]="this.doEdit[user.user_name] == true ? null : true", class="form-control" type="text" placeholder="{{user.language}}")
+                    div(class="input-group-btn" style="")
+                        button(type="button" class="btn btn-info dropdown-toggle", data-toggle="dropdown" aria-haspopup="true", aria-expanded="false", [attr.disabled]="this.doEdit[user.user_name] == true ? null : true") Language
+                            span(class="caret")
+                        ul(class="dropdown-menu")
+                            li(*ngFor="let language of this.languages")
+                                a((click)="addInput(this.language)") {{language.language}}
+                    input([attr.disabled]="this.doEdit[user.user_name] == true ? null : true", class="form-control" type="text" placeholder="{{user.language}}", [(ngModel)]="userModel.language", name="language",#user_name="ngModel")
                 div(class="input-group input-group-sm")
-                    span(class="input-group-addon") Password
-                    input([attr.disabled]="this.doEdit[user.user_name] == true ? null : true", class="form-control" type="password", placeholder="****")
+                    span(class="input-group-addon", [attr.disabled]="this.doEdit[user.user_name] == true ? null : true") Password
+                    input([attr.disabled]="this.doEdit[user.user_name] == true ? null : true", class="form-control" type="password", placeholder="****", [(ngModel)]="userModel.password", name="password", #password="ngModel")
             div(*ngIf="this.doEdit[user.user_name]", (click)="done(this.user)", class="panel-footer", id="done_edit") done
             div(*ngIf="!this.doEdit[user.user_name]", (click)="edit(this.user)", class="panel-footer") edit
             div(*ngIf="!this.doEdit[user.user_name]", (click)="delete(this.user)", class="panel-footer") delete

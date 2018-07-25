@@ -13,10 +13,12 @@ import { httpInterceptorProviders } from "../../services/interceptors/http-inter
 import { MessagebarComponent } from "../../components/messagebar/messagebar.component";
 import { UserServices } from "../../services/user.services";
 import { PanelComponent } from "../../components/panel/panel.component";
+import { FormsModule } from "@angular/forms";
 
 @NgModule({
     imports: [
         CommonModule,
+        FormsModule,
         PrivateRoutingModule
     ],
     declarations: [
