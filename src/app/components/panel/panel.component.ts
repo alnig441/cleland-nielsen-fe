@@ -11,6 +11,9 @@ import { UserModel } from "../../models/user.model";
 
 export class PanelComponent implements OnInit {
 
+    doEdit = {};
+    disabled: boolean;
+
     constructor(private users: UserServices) {}
 
     ngOnInit(): void {
@@ -19,6 +22,8 @@ export class PanelComponent implements OnInit {
 
     edit(user: UserModel): void {
         console.log('editing user: ', user.user_name);
+        this.doEdit[user.user_name] = true;
+
     }
 
     delete(user: UserModel): void {

@@ -2,7 +2,6 @@ import { Component, OnInit, ViewEncapsulation, ElementRef, ViewChild } from "@an
 import { HttpClient } from "@angular/common/http";
 import { Router, NavigationStart, ActivatedRoute, NavigationEnd } from "@angular/router";
 import { AuthService } from "./services/auth.service";
-const SiteCopy = require("../../api/site_copy.json");
 
 @Component({
     selector: "app-root",
