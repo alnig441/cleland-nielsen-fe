@@ -23134,6 +23134,10 @@ let PanelComponent = class PanelComponent {
         console.log('editing user: ', user.user_name);
         this.doEdit[user.user_name] = true;
     }
+    done(user) {
+        console.log('done editing user: ', user);
+        this.doEdit = {};
+    }
     delete(user) {
         console.log('deleting user: ', user.user_name);
     }
@@ -23155,14 +23159,14 @@ exports.PanelComponent = PanelComponent;
 /***/ 701:
 /***/ (function(module, exports) {
 
-module.exports = "<div *ngFor=\"let user of this.users.users as users; index as i\"><div class=\"col-sm-6 col-md-4\"><div class=\"box-shadow panel panel-info\" id=\"{{user.user_id}}\"><div class=\"panel-heading\"><h3 class=\"panel-title\">{{user.user_name}}</h3></div><div class=\"panel-body\"><div class=\"input-group input-group-sm\"><span class=\"input-group-addon\">Type</span><input class=\"form-control\" [attr.disabled]=\"this.doEdit[user.user_name] == true ? null : true\" type=\"text\" placeholder=\"{{user.account_type}}\"></div><div class=\"input-group input-group-sm\"><span class=\"input-group-addon\">Language</span><input class=\"form-control\" [attr.disabled]=\"this.doEdit[user.user_name] == true ? null : true\" type=\"text\" placeholder=\"{{user.language}}\"></div><div class=\"input-group input-group-sm\" *ngIf=\"this.doEdit[user.user_name]\"><span class=\"input-group-addon\">Password</span><input class=\"form-control\" type=\"password\" placeholder=\"password\"></div></div><div class=\"panel-footer\" (click)=\"edit(this.user)\">edit</div><div class=\"panel-footer\" (click)=\"delete(this.user)\">delete</div></div></div></div>"
+module.exports = "<div *ngFor=\"let user of this.users.users as users; index as i\"><div class=\"col-sm-6 col-md-4\"><div class=\"box-shadow panel panel-info\" id=\"{{user.user_id}}\"><div class=\"panel-heading\"><h3 class=\"panel-title\">{{user.user_name}}</h3></div><div class=\"panel-body\"><div class=\"input-group input-group-sm\"><span class=\"input-group-addon\">Type</span><input class=\"form-control\" [attr.disabled]=\"this.doEdit[user.user_name] == true ? null : true\" type=\"text\" placeholder=\"{{user.account_type}}\"></div><div class=\"input-group input-group-sm\"><span class=\"input-group-addon\">Language</span><input class=\"form-control\" [attr.disabled]=\"this.doEdit[user.user_name] == true ? null : true\" type=\"text\" placeholder=\"{{user.language}}\"></div><div class=\"input-group input-group-sm\"><span class=\"input-group-addon\">Password</span><input class=\"form-control\" [attr.disabled]=\"this.doEdit[user.user_name] == true ? null : true\" type=\"password\" placeholder=\"****\"></div></div><div class=\"panel-footer\" *ngIf=\"this.doEdit[user.user_name]\" (click)=\"done(this.user)\" id=\"done_edit\">done</div><div class=\"panel-footer\" *ngIf=\"!this.doEdit[user.user_name]\" (click)=\"edit(this.user)\">edit</div><div class=\"panel-footer\" *ngIf=\"!this.doEdit[user.user_name]\" (click)=\"delete(this.user)\">delete</div></div></div></div>"
 
 /***/ }),
 
 /***/ 702:
 /***/ (function(module, exports) {
 
-module.exports = "p {\n  display: flex;\n  justify-content: space-around; }\n\n.panel-footer {\n  display: inline-block;\n  width: 50%;\n  text-align: center; }\n\n.panel-footer:first-of-type {\n  border-right: 1px solid #ddd;\n  border-bottom-right-radius: 0px; }\n\n.panel-footer:last-of-type {\n  border-left: 1px solid #ddd;\n  border-bottom-left-radius: 0px; }\n\n.panel-footer:hover {\n  background-color: #d9edf7;\n  color: #31708f;\n  cursor: pointer; }\n"
+module.exports = "p {\n  display: flex;\n  justify-content: space-around; }\n\n.panel-footer {\n  display: inline-block;\n  width: 50%;\n  text-align: center; }\n\n.panel-footer:first-of-type {\n  border-right: 1px solid #ddd;\n  border-bottom-right-radius: 0px; }\n\n.panel-footer:last-of-type {\n  border-left: 1px solid #ddd;\n  border-bottom-left-radius: 0px; }\n\n.panel-footer:hover {\n  background-color: #d9edf7;\n  color: #31708f;\n  cursor: pointer; }\n\n.input-group-addon {\n  width: 73px; }\n\ninput {\n  width: 159px; }\n\n#done_edit {\n  width: 100%;\n  border-bottom-left-radius: 3px;\n  border-bottom-right-radius: 3px; }\n"
 
 /***/ }),
 
@@ -23598,4 +23602,4 @@ exports.UserServices = UserServices;
 /***/ })
 
 },[639]);
-//# sourceMappingURL=app.5b8edbb28ebe14e88d0a.js.map
+//# sourceMappingURL=app.7c628e4d379cdcc33033.js.map

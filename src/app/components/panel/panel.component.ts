@@ -26,6 +26,11 @@ export class PanelComponent implements OnInit {
 
     }
 
+    done(user: UserModel): void {
+        console.log('done editing user: ', user);
+        this.doEdit = {};
+    }
+
     delete(user: UserModel): void {
         console.log('deleting user: ', user.user_name);
     }
