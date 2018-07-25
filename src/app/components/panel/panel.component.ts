@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewEncapsulation } from "@angular/core";
 import { UserServices } from "../../services/user.services";
 import { UserModel } from "../../models/user.model";
+import { AccountServices } from "../../services/account.services";
 
 @Component({
     selector: 'app-panel',
@@ -12,22 +13,6 @@ import { UserModel } from "../../models/user.model";
 export class PanelComponent implements OnInit {
 
     doEdit = {};
-    accountTypes = [
-        {
-            account_id: 1,
-            account_type: 'standard_user'
-        },
-        {
-            account_id: 2,
-            account_type: 'super_user'
-
-        },
-        {
-            account_id: 3,
-            account_type: 'administrator'
-        }
-    ]
-
     languages = [
         {
             language: 'english'
@@ -38,10 +23,11 @@ export class PanelComponent implements OnInit {
     ]
 
 
-    constructor(private userService: UserServices) {}
+    constructor(private userService: UserServices, private accountService: AccountServices) {}
 
     ngOnInit(): void {
         console.log('panel comp init');
+        this.accountService.getAll();
     }
 
     edit(user: UserModel): void {
@@ -55,11 +41,11 @@ export class PanelComponent implements OnInit {
     }
 
     addInput(input: any, i: any): void {
-        console.log('inputting this account: ', input);
+        console.log('inputting this key/value: ', input);
         for(var prop in input){
             if(prop != 'account_id') {
                 if(prop == 'account_name'){
-                    this.userService.users[i][prop] = input.account_id;
+                    this.userService.users[i].account_type = input.account_id;
                 }
                 this.userService.users[i][prop] = input[prop];
             }

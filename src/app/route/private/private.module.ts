@@ -14,6 +14,7 @@ import { MessagebarComponent } from "../../components/messagebar/messagebar.comp
 import { UserServices } from "../../services/user.services";
 import { PanelComponent } from "../../components/panel/panel.component";
 import { FormsModule } from "@angular/forms";
+import {AccountServices} from "../../services/account.services";
 
 @NgModule({
     imports: [
@@ -37,6 +38,7 @@ import { FormsModule } from "@angular/forms";
     providers: [
         ImageServices,
         UserServices,
+        AccountServices,
         httpInterceptorProviders,
     ]
 })

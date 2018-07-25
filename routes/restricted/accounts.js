@@ -3,9 +3,25 @@ const express = require('express'),
 
 const passport = require('passport');
 
+const { Client } = require('pg'),
+    connectionString = process.env.MYDB || 'postgresql://allannielsen:1109721405@localhost:5432/jacn2014_ng4';
+
 router.get('/', (req, res, next) => {
-    console.log('getting all accounts from db');
-    res.send('respond with resource');
+    const client = new Client({
+        connectionString: connectionString
+    })
+
+    client.connect();
+
+    return client.query('SELECT * FROM accounts')
+        .then(result => {
+            res.send(result.rows);
+            client.end();
+        })
+        .catch(error => {
+            console.log('error from query: ', error);
+            client.end();
+        })
 })
 
 module.exports = router;

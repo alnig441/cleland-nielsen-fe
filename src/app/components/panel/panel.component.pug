@@ -9,8 +9,8 @@ div(*ngFor="let user of this.userService.users as users; index as i")
                         button(type="button" class="btn btn-info dropdown-toggle", data-toggle="dropdown" aria-haspopup="true", aria-expanded="false", [attr.disabled]="this.doEdit[user.user_name] == true ? null : true") Type
                             span(class="caret")
                         ul(class="dropdown-menu")
-                            li(*ngFor="let account of this.accountTypes as types; index as j")
-                                a((click)="addInput(this.account, i)") {{account.account_type}}
+                            li(*ngFor="let account of this.accountService.accounts")
+                                a((click)="addInput(this.account, i)") {{account.account_name}}
                     input([attr.disabled]="this.doEdit[user.user_name] == true ? null : true", class="form-control" type="text" placeholder="{{user.account_type}}",[(ngModel)]="users[i].account_type", name="account_type", #account_type="ngModel")
                 div(class="input-group input-group-sm")
                     div(class="input-group-btn" style="")
