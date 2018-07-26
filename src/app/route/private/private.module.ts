@@ -18,6 +18,7 @@ import { AccountServices } from "../../services/account.services";
 import { AccountsComponent } from "./accounts/accounts.component";
 import {PermissionsComponent} from "./permissions/permissions.component";
 import {PermissionServices} from "../../services/permission.services";
+import {PermissionsPanelComponent} from "../../components/permissionsPanel/permissionsPanel.component";
 
 @NgModule({
     imports: [
@@ -36,7 +37,8 @@ import {PermissionServices} from "../../services/permission.services";
         MessagebarComponent,
         PanelComponent,
         AccountsComponent,
-        PermissionsComponent
+        PermissionsComponent,
+        PermissionsPanelComponent,
     ],
     exports: [
     ],
