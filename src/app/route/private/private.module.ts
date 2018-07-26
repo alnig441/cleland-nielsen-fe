@@ -16,9 +16,10 @@ import { PanelComponent } from "../../components/panel/panel.component";
 import { FormsModule } from "@angular/forms";
 import { AccountServices } from "../../services/account.services";
 import { AccountsComponent } from "./accounts/accounts.component";
-import {PermissionsComponent} from "./permissions/permissions.component";
-import {PermissionServices} from "../../services/permission.services";
-import {PermissionsPanelComponent} from "../../components/permissionsPanel/permissionsPanel.component";
+import { PermissionsComponent } from "./permissions/permissions.component";
+import { PermissionServices } from "../../services/permission.services";
+import { PermissionsPanelComponent } from "../../components/permissionsPanel/permissionsPanel.component";
+import { AccountsPanelComponent } from "../../components/accountsPanel/accountsPanel.component";
 
 @NgModule({
     imports: [
@@ -39,6 +40,7 @@ import {PermissionsPanelComponent} from "../../components/permissionsPanel/permi
         AccountsComponent,
         PermissionsComponent,
         PermissionsPanelComponent,
+        AccountsPanelComponent
     ],
     exports: [
     ],

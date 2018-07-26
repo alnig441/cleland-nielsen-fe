@@ -1,0 +1,14 @@
+div(*ngFor="let account of this.accountService.accounts as accounts; index as i")
+    div(class="col-sm-6 col-md-4")
+        form(#editUserForm="ngForm", id="{{account.account_id}}" class="box-shadow panel panel-info")
+            div(class="panel-heading")
+                h3(class="panel-title") {{account.account_name}}
+            div(class="panel-body")
+                div(class="input-group input-group-sm")
+                    span(class="input-group-addon") Id
+                    input(class="form-control" type="text", placeholder="{{account.account_id}}", disabled)
+                div(*ngFor="let permission of account.account_permissions; index as j", class="input-group input-group-sm")
+                    span(class="input-group-addon") Revoke
+                    input(class="form-control" type="text", placeholder="{{permission}}", disabled)
+            div(class="panel-footer") edit
+            div(class="panel-footer") delete

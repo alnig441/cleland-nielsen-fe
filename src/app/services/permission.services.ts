@@ -19,8 +19,6 @@ export class PermissionServices {
         return this.http.get(this.baseUrl, { observe: "response"})
             .toPromise()
             .then(res => {
-                // let error = { message: 'function yet to be defined'}
-                // throw error;
                 this.permissions = res.body as PermissionModel[];
             })
             .catch(this.errorParser.handleError)
