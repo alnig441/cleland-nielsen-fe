@@ -2,15 +2,15 @@ import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import 'rxjs/add/operator/toPromise';
 import { ErrorParser } from './errorParser';
-import { AccountModel } from "../models/account.model";
+import { PermissionModel } from "../models/permission.model";
 
 @Injectable()
 
-export class AccountServices {
+export class PermissionServices {
 
     errorParser = new ErrorParser();
-    accounts: AccountModel[] = new Array();
-    baseUrl = '/accountsDb';
+    permissions: PermissionModel[] = new Array();
+    baseUrl = '/permissionsDb';
     error: any;
 
     constructor(private http: HttpClient) {}
@@ -18,12 +18,9 @@ export class AccountServices {
     getAll(): Promise<any> {
         return this.http.get(this.baseUrl, { observe: "response"})
             .toPromise()
-            .then( (result : any) => {
-                this.accounts = result.body as AccountModel[];
-            })
-            .catch(this.errorParser.handleError)
-            .catch( (error : any) => {
-                this.error = error;
+            .then(res => {
+                let error = { message: 'function yet to be defined'}
+                throw error;
             })
     }
 

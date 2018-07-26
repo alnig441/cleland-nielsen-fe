@@ -4,6 +4,8 @@ import { EventsComponent } from "./events/events.component";
 import { UsersComponent } from "./users/users.component";
 import { ImagesComponent } from "./images/images.component";
 import { AuthGuardService } from "../../services/auth-guard.service";
+import { AccountsComponent } from "./accounts/accounts.component";
+import { PermissionsComponent } from "./permissions/permissions.component";
 
 
 const privateRoutes: Routes = [
@@ -20,6 +22,16 @@ const privateRoutes: Routes = [
     {
         path: 'events',
         component: EventsComponent,
+        canActivate: [AuthGuardService]
+    },
+    {
+        path: 'accounts',
+        component: AccountsComponent,
+        canActivate: [AuthGuardService]
+    },
+    {
+        path: 'permissions',
+        component: PermissionsComponent,
         canActivate: [AuthGuardService]
     }
 ];

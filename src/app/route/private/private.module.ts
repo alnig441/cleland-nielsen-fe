@@ -14,7 +14,10 @@ import { MessagebarComponent } from "../../components/messagebar/messagebar.comp
 import { UserServices } from "../../services/user.services";
 import { PanelComponent } from "../../components/panel/panel.component";
 import { FormsModule } from "@angular/forms";
-import {AccountServices} from "../../services/account.services";
+import { AccountServices } from "../../services/account.services";
+import { AccountsComponent } from "./accounts/accounts.component";
+import {PermissionsComponent} from "./permissions/permissions.component";
+import {PermissionServices} from "../../services/permission.services";
 
 @NgModule({
     imports: [
@@ -31,7 +34,9 @@ import {AccountServices} from "../../services/account.services";
         InfobarComponent,
         ThumbnailComponent,
         MessagebarComponent,
-        PanelComponent
+        PanelComponent,
+        AccountsComponent,
+        PermissionsComponent
     ],
     exports: [
     ],
@@ -39,6 +44,7 @@ import {AccountServices} from "../../services/account.services";
         ImageServices,
         UserServices,
         AccountServices,
+        PermissionServices,
         httpInterceptorProviders,
     ]
 })

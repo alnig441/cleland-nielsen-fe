@@ -10,7 +10,9 @@ export const LINKS = {
         'events',
     ],
     admin: [
-        'users'
+        'users',
+        'accounts',
+        'permissions'
     ],
     sidebar: {
         images: {

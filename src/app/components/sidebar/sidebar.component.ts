@@ -3,6 +3,8 @@ import { ActivatedRoute, Router } from "@angular/router";
 import { HttpAuthService } from "../../services/httpAuth.service";
 import { ImageServices } from "../../services/image.services";
 import { UserServices } from "../../services/user.services";
+import { AccountServices } from "../../services/account.services";
+import { PermissionServices } from "../../services/permission.services";
 
 @Component({
     selector: 'app-sidebar',
@@ -14,14 +16,16 @@ export class SidebarComponent implements OnInit {
 
     activeService: string;
 
-    constructor( private httpAuth: HttpAuthService, private activatedRoute: ActivatedRoute, private images: ImageServices, private router: Router, private users: UserServices){}
+    constructor(private permissions: PermissionServices, private accounts: AccountServices, private httpAuth: HttpAuthService, private activatedRoute: ActivatedRoute, private images: ImageServices, private router: Router, private users: UserServices){}
 
     ngOnInit(): void {
         this.activeService = this.activatedRoute.snapshot.url[0].path;
+        this[this.activeService].error = null;
     }
 
    getAll() {
        console.log(`getting ALL of ${this.activeService}`);
+       this[this.activeService].error = null;
        this[this.activeService].getAll()
            .catch((error: any) => {
                 console.log('error: ', error);
@@ -38,6 +42,7 @@ export class SidebarComponent implements OnInit {
 
    getOne() {
        console.log(`getting ONE of ${this.activeService}`);
+       this[this.activeService].error = null;
        this[this.activeService].getLatest()
            .catch((error: any) => {
                this[this.activeService].error = error;
@@ -54,6 +59,7 @@ export class SidebarComponent implements OnInit {
 
    getLatest() {
        console.log(`getting LATEST of ${this.activeService}`);
+       this[this.activeService].error = null;
        this[this.activeService].getLatest()
            .catch((error: any) => {
                this[this.activeService].error = error;
@@ -69,6 +75,7 @@ export class SidebarComponent implements OnInit {
 
    getList() {
         console.log(`getting LIST of ${this.activeService}`);
+        this[this.activeService].error = null;
         this[this.activeService].getList()
             .catch((error: any) => {
                 this[this.activeService].error = error;
