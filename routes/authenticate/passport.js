@@ -25,6 +25,7 @@ passport.use(new localStrategy({
 
     return client.query(`SELECT * FROM users as a INNER JOIN accounts as b ON a.account_type::uuid = b.account_id where a.user_name='${username}'`)
         .then(result => {
+            // console.log('result from user query in passport: ', result.rows)
             let user = result.rows[0]
             bcrypt.compare(password, user.password)
                 .then(match => {
@@ -46,6 +47,8 @@ passport.use(new JWTStrategy({
     jwtFromRequest: ExtractJWT.fromAuthHeaderAsBearerToken(),
     secretOrKey: jwtSecret
     }, (jwtPayload, cb) => {
+
+        // console.log('in jwt strategy: ', jwtPayload)
 
         const client = new Client({
             connectionString: connectionString

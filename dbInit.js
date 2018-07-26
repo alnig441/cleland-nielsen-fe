@@ -11,7 +11,7 @@ let client = new Client({ connectionString: connectionString });
 client.connect()
 
 client.query(`INSERT INTO accounts VALUES 
-    (uuid_generate_v4(), 'administrator'),
+    (uuid_generate_v4(), 'administrator', (select array(select permission_id::uuid from permissions)),
     (uuid_generate_v4(), 'standard_user'),
     (uuid_generate_v4(), 'super_user')`)
     .then(res => {

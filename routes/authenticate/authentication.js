@@ -11,6 +11,8 @@ router.post('/', (req, res, next) => {
 
     passport.authenticate('local', {session: false}, (err, user, info) => {
 
+        // console.log('returned from passport: ', user);
+
         if (err || !user) {
             return res.status(400).json({
                 message: err ? err.message : 'no error message returned',
@@ -30,6 +32,10 @@ router.post('/', (req, res, next) => {
                 language: user.language,
                 administrator: user.account_name === 'administrator' ? true : false
             }
+
+            userParameters.administrator === false ? userParameters.permissions = user.account_permissions : null;
+
+            console.log('userparameters: ', userParameters)
 
             /* generate signed web token */
             const token = jwt.sign({

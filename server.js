@@ -22,7 +22,8 @@ const authenticate = require('./routes/authenticate/authentication'),
     images = require('./routes/restricted/images'),
     accounts = require('./routes/restricted/accounts'),
     users = require('./routes/restricted/users'),
-    events = require('./routes/restricted/events');
+    events = require('./routes/restricted/events'),
+    permissions = require('./routes/restricted/permissions');
 
 const cron = require('node-cron');
 
@@ -39,6 +40,7 @@ app.use('/imagesDb/latest', passport.authenticate('jwt', {session: false}), imag
 app.use('/accountsDb', passport.authenticate('jwt', {session: false}), accounts);
 app.use('/usersDb', passport.authenticate('jwt', {session: false}),users);
 app.use('/eventsDb', passport.authenticate('jwt', {session: false}), events);
+app.use('/permissionsDb',permissions);
 
 app.get('*', function response(req, res) {
     res.sendFile(path.join(__dirname, 'dist/index.html'));

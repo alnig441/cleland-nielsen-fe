@@ -6668,8 +6668,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 const core_1 = __webpack_require__(3);
 const router_1 = __webpack_require__(28);
-const auth_service_1 = __webpack_require__(75);
-const httpAuth_service_1 = __webpack_require__(76);
+const auth_service_1 = __webpack_require__(76);
+const httpAuth_service_1 = __webpack_require__(77);
 let AuthGuardService = class AuthGuardService {
     constructor(httpAuth, authenticate, router) {
         this.httpAuth = httpAuth;
@@ -6736,7 +6736,7 @@ const core_1 = __webpack_require__(3);
 const router_1 = __webpack_require__(28);
 const http_1 = __webpack_require__(29);
 const login_model_1 = __webpack_require__(671);
-const httpAuth_service_1 = __webpack_require__(76);
+const httpAuth_service_1 = __webpack_require__(77);
 let LoginComponent = class LoginComponent {
     constructor(http, router, httpAuth) {
         this.http = http;
@@ -6793,7 +6793,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 const core_1 = __webpack_require__(3);
-const auth_service_1 = __webpack_require__(75);
+const auth_service_1 = __webpack_require__(76);
 let AboutComponent = class AboutComponent {
     constructor(authService) {
         this.authService = authService;
@@ -7003,7 +7003,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 const core_1 = __webpack_require__(3);
-const image_services_1 = __webpack_require__(77);
+const image_services_1 = __webpack_require__(78);
 let ImagesComponent = class ImagesComponent {
     constructor(imageService) {
         this.imageService = imageService;
@@ -7041,7 +7041,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 const core_1 = __webpack_require__(3);
 const http_1 = __webpack_require__(29);
-__webpack_require__(97);
+__webpack_require__(75);
 const errorParser_1 = __webpack_require__(133);
 let AccountServices = class AccountServices {
     constructor(http) {
@@ -17369,11 +17369,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵf", function() { return XSRF_HEADER_NAME; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_tslib__ = __webpack_require__(41);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(3);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_observable_of__ = __webpack_require__(91);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_observable_of__ = __webpack_require__(92);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_observable_of___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs_observable_of__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_operator_concatMap__ = __webpack_require__(124);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_operator_concatMap___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_rxjs_operator_concatMap__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_operator_filter__ = __webpack_require__(93);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_operator_filter__ = __webpack_require__(94);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_operator_filter___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_rxjs_operator_filter__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_rxjs_operator_map__ = __webpack_require__(64);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_rxjs_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_rxjs_operator_map__);
@@ -22311,7 +22311,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 const core_1 = __webpack_require__(3);
 const http_1 = __webpack_require__(29);
 const router_1 = __webpack_require__(28);
-const auth_service_1 = __webpack_require__(75);
+const auth_service_1 = __webpack_require__(76);
 let AppComponent = class AppComponent {
     constructor(http, router, activatedRoute, authService) {
         this.http = http;
@@ -22419,8 +22419,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 const core_1 = __webpack_require__(3);
 const router_1 = __webpack_require__(28);
 const login_component_1 = __webpack_require__(207);
-const auth_service_1 = __webpack_require__(75);
-const httpAuth_service_1 = __webpack_require__(76);
+const auth_service_1 = __webpack_require__(76);
+const httpAuth_service_1 = __webpack_require__(77);
 const LoginRoutes = [
     {
         path: 'login',
@@ -22633,7 +22633,7 @@ const users_component_1 = __webpack_require__(213);
 const events_component_1 = __webpack_require__(212);
 const images_component_1 = __webpack_require__(214);
 const sidebar_component_1 = __webpack_require__(691);
-const image_services_1 = __webpack_require__(77);
+const image_services_1 = __webpack_require__(78);
 const infobar_component_1 = __webpack_require__(693);
 const thumbnail_component_1 = __webpack_require__(695);
 const http_interceptors_1 = __webpack_require__(697);
@@ -22824,8 +22824,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 const core_1 = __webpack_require__(3);
 const router_1 = __webpack_require__(28);
-const httpAuth_service_1 = __webpack_require__(76);
-const image_services_1 = __webpack_require__(77);
+const httpAuth_service_1 = __webpack_require__(77);
+const image_services_1 = __webpack_require__(78);
 const user_services_1 = __webpack_require__(98);
 let SidebarComponent = class SidebarComponent {
     constructor(httpAuth, activatedRoute, images, router, users) {
@@ -22972,7 +22972,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 const core_1 = __webpack_require__(3);
-const image_services_1 = __webpack_require__(77);
+const image_services_1 = __webpack_require__(78);
 let ThumbnailComponent = class ThumbnailComponent {
     constructor(imageService) {
         this.imageService = imageService;
@@ -23056,7 +23056,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 const core_1 = __webpack_require__(3);
-const image_services_1 = __webpack_require__(77);
+const image_services_1 = __webpack_require__(78);
 const user_services_1 = __webpack_require__(98);
 const router_1 = __webpack_require__(28);
 let MessagebarComponent = class MessagebarComponent {
@@ -23191,11 +23191,11 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 const core_1 = __webpack_require__(3);
-const auth_service_1 = __webpack_require__(75);
+const auth_service_1 = __webpack_require__(76);
 const router_1 = __webpack_require__(28);
 const http_1 = __webpack_require__(29);
 const links_1 = __webpack_require__(705);
-const httpAuth_service_1 = __webpack_require__(76);
+const httpAuth_service_1 = __webpack_require__(77);
 let GlobalnavComponent = class GlobalnavComponent {
     constructor(http, router, activatedRoute, authService, httpAuth) {
         this.http = http;
@@ -23434,7 +23434,7 @@ module.exports = "data:application/font-woff;base64,bW9kdWxlLmV4cG9ydHMgPSBfX3dl
 
 /***/ }),
 
-/***/ 75:
+/***/ 76:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -23446,7 +23446,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 const core_1 = __webpack_require__(3);
-const of_1 = __webpack_require__(91);
+const of_1 = __webpack_require__(92);
 let AuthService = class AuthService {
     constructor() {
         this.isLoggedIn = false;
@@ -23480,7 +23480,7 @@ exports.AuthService = AuthService;
 
 /***/ }),
 
-/***/ 76:
+/***/ 77:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -23496,14 +23496,17 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 const core_1 = __webpack_require__(3);
 const http_1 = __webpack_require__(29);
+__webpack_require__(75);
 let HttpAuthService = class HttpAuthService {
     constructor(http) {
         this.http = http;
         this.isLoggedIn = false;
         this.isAdmin = false;
+        this.isPermitted = {};
     }
     login(form) {
         this.redirectUrl = "/private";
+        this.getPermissions();
         return this.http.post('/login', form)
             .map(activeUser => {
             if (activeUser && activeUser.token) {
@@ -23511,7 +23514,24 @@ let HttpAuthService = class HttpAuthService {
                 this.isLoggedIn = true;
                 this.isAdmin = activeUser.userParameters.administrator ? true : false;
             }
+            if (activeUser.userParameters.permissions && this.permissions) {
+                activeUser.userParameters.permissions.forEach((uuid) => {
+                    // console.log('elem: ', uuid)
+                    this.permissions.find(permit => {
+                        // console.log('elem == permission_id: ', uuid, permit.permission_id);
+                        return permit.permission_id === uuid ? this.isPermitted[permit.permission_name] = true : null;
+                    });
+                });
+            }
+            console.log('user permissions: ', this.isPermitted);
             return activeUser;
+        });
+    }
+    getPermissions() {
+        return this.http.get('/permissionsDb', { observe: "response" })
+            .toPromise()
+            .then(result => {
+            this.permissions = result.body;
         });
     }
     logout() {
@@ -23530,7 +23550,7 @@ exports.HttpAuthService = HttpAuthService;
 
 /***/ }),
 
-/***/ 77:
+/***/ 78:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -23546,7 +23566,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 const core_1 = __webpack_require__(3);
 const http_1 = __webpack_require__(29);
-__webpack_require__(97);
+__webpack_require__(75);
 const errorParser_1 = __webpack_require__(133);
 './errorParser';
 let ImageServices = class ImageServices {
@@ -23614,7 +23634,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 const core_1 = __webpack_require__(3);
 const http_1 = __webpack_require__(29);
-__webpack_require__(97);
+__webpack_require__(75);
 const errorParser_1 = __webpack_require__(133);
 let UserServices = class UserServices {
     constructor(http) {
@@ -23654,4 +23674,4 @@ exports.UserServices = UserServices;
 /***/ })
 
 },[641]);
-//# sourceMappingURL=app.fa0d6209cdce22cf1376.js.map
+//# sourceMappingURL=app.3e589558d070f321f5c3.js.map
