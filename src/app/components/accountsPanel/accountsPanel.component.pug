@@ -16,7 +16,8 @@ div(*ngFor="let account of this.accountService.accounts as accounts; index as i"
                             span(class="caret")
                         ul(class="dropdown-menu")
                             li(*ngFor="let permission of this.permissionService.permissions as permissions; index as j", id="{{permission.permission_id}}")
-                                a(*ngIf="validateList(permission.permission_id, i)") {{permission.permission_name}}
+                                a(*ngIf="validator.validateList(this.accountService.accounts[i].account_permissions, permission.permission_id, i)") {{permission.permission_name}}
+
                     input( class="form-control" type="text" placeholder="add permission")
 
             div(class="panel-footer", [attr.disabled]="account.account_name == 'administrator'") edit
