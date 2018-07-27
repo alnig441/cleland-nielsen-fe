@@ -23508,7 +23508,7 @@ exports.AccountsPanelComponent = AccountsPanelComponent;
 /***/ 712:
 /***/ (function(module, exports) {
 
-module.exports = "<div *ngFor=\"let account of this.accountService.accounts as accounts; index as i\"><div class=\"col-sm-6 col-md-4\"><form class=\"box-shadow panel panel-info\" #editUserForm=\"ngForm\" id=\"{{account.account_id}}\"><div class=\"panel-heading\"><h3 class=\"panel-title\">{{account.account_name}}</h3></div><div class=\"panel-body\"><div class=\"input-group input-group-sm\"><span class=\"input-group-addon\">Id</span><input class=\"form-control\" type=\"text\" placeholder=\"{{account.account_id}}\" disabled></div><div class=\"input-group input-group-sm\" *ngFor=\"let permission of account.account_permissions; index as j\"><span class=\"input-group-addon\">Revoke</span><input class=\"form-control\" type=\"text\" placeholder=\"{{permission}}\" disabled></div></div><div class=\"panel-footer\">edit</div><div class=\"panel-footer\">delete</div></form></div></div>"
+module.exports = "<div *ngFor=\"let account of this.accountService.accounts as accounts; index as i\"><div class=\"col-sm-6 col-md-4\"><form class=\"box-shadow panel panel-info\" #editUserForm=\"ngForm\" id=\"{{account.account_id}}\"><div class=\"panel-heading\"><h3 class=\"panel-title\">{{account.account_name}}</h3></div><div class=\"panel-body\"><div class=\"input-group input-group-sm\"><span class=\"input-group-addon\">Id</span><input class=\"form-control\" type=\"text\" placeholder=\"{{account.account_id}}\" disabled></div><div class=\"input-group input-group-sm\" *ngFor=\"let permission of account.account_permissions; index as j\"><span class=\"input-group-addon\">Revoke</span><input class=\"form-control\" type=\"text\" placeholder=\"{{permission}}\" disabled></div><div class=\"input-group input-group-sm\"><div class=\"input-group-btn\" disabled><button class=\"btn btn-info dropdown-toggle\" type=\"button\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">Add<span class=\"caret\"></span></button><ul class=\"dropdown-menu\"><li><a>List of permissions to add</a></li></ul></div><input class=\"form-control\" type=\"text\" placeholder=\"\"></div></div><div class=\"panel-footer\">edit</div><div class=\"panel-footer\">delete</div></form></div></div>"
 
 /***/ }),
 
@@ -23977,4 +23977,4 @@ exports.ErrorParser = ErrorParser;
 /***/ })
 
 },[644]);
-//# sourceMappingURL=app.22a811fb6204fb9c4877.js.map
+//# sourceMappingURL=app.dd1521664240fb51d443.js.map
