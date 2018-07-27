@@ -25,28 +25,12 @@ export class AuthGuardService implements CanActivate, CanActivateChild, CanLoad 
         }
 
         this.httpAuth.redirectUrl = url;
-
         this.router.navigate(['/login']);
-        // if(this.authenticate.isLoggedIn || localStorage.getItem('token')){
-        //     console.log('authguard - checking login status: ', url);
-        //     return true;
-        // }
 
-        // this.authenticate.redirectUrl = url;
-        // let sessionId = 123456789;
-        // let navigationExtras: NavigationExtras = {
-        //     queryParams: { 'session_id': sessionId},
-        //     fragment: 'anchor'
-        // }
-
-        // this.router.navigate(['/login'], navigationExtras);
-        // console.log('user not logged in: ', navigationExtras);
         return false;
     }
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
-        // console.log('canActivate', localStorage);
-
         let url: string = state.url;
         return this.checkLogin(url);
     }

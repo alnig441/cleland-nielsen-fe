@@ -10,14 +10,14 @@ div(*ngFor="let account of this.accountService.accounts as accounts; index as i"
                 div(*ngFor="let permission of account.account_permissions; index as j", class="input-group input-group-sm")
                     span(class="input-group-addon") Revoke
                     input(class="form-control" type="text", placeholder="{{permission}}", disabled)
-                div(class="input-group input-group-sm")
+                div(*ngIf="account.account_name != 'administrator'", class="input-group input-group-sm")
                     div(class="input-group-btn" style="" disabled)
                         button(type="button" class="btn btn-info dropdown-toggle", data-toggle="dropdown" aria-haspopup="true", aria-expanded="false", ) Add
                             span(class="caret")
                         ul(class="dropdown-menu")
-                            li()
-                                a() List of permissions to add
-                    input( class="form-control" type="text" placeholder="")
+                            li(*ngFor="let permission of this.permissionService.permissions as permissions; index as j", id="{{permission.permission_id}}")
+                                a(*ngIf="validateList(permission.permission_id, i)") {{permission.permission_name}}
+                    input( class="form-control" type="text" placeholder="add permission")
 
-            div(class="panel-footer") edit
+            div(class="panel-footer", [attr.disabled]="account.account_name == 'administrator'") edit
             div(class="panel-footer") delete

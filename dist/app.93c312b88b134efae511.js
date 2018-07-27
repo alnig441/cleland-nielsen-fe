@@ -5,6 +5,28 @@ webpackJsonp([1],{
 
 "use strict";
 
+class ErrorParser {
+    handleError(error) {
+        let err = {};
+        if (error.status === 401) {
+            err = {
+                status: error.status,
+                message: 'unauthorized/expired token - please login again'
+            };
+        }
+        throw err || error;
+    }
+}
+exports.ErrorParser = ErrorParser;
+
+
+/***/ }),
+
+/***/ 101:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -17,7 +39,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 const core_1 = __webpack_require__(3);
 const http_1 = __webpack_require__(25);
 __webpack_require__(65);
-const errorParser_1 = __webpack_require__(99);
+const errorParser_1 = __webpack_require__(100);
 let UserServices = class UserServices {
     constructor(http) {
         this.http = http;
@@ -51,73 +73,6 @@ UserServices = __decorate([
     __metadata("design:paramtypes", [http_1.HttpClient])
 ], UserServices);
 exports.UserServices = UserServices;
-
-
-/***/ }),
-
-/***/ 101:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-const core_1 = __webpack_require__(3);
-const http_1 = __webpack_require__(25);
-__webpack_require__(65);
-const errorParser_1 = __webpack_require__(99);
-let PermissionServices = class PermissionServices {
-    constructor(http) {
-        this.http = http;
-        this.errorParser = new errorParser_1.ErrorParser();
-        this.permissions = new Array();
-        this.baseUrl = '/permissionsDb';
-    }
-    getAll() {
-        return this.http.get(this.baseUrl, { observe: "response" })
-            .toPromise()
-            .then(res => {
-            this.permissions = res.body;
-        })
-            .catch(this.errorParser.handleError);
-    }
-    getLatest() {
-        return this.http.get(this.baseUrl, { observe: "response" })
-            .toPromise()
-            .then(res => {
-            let error = { message: 'function yet to be defined' };
-            throw error;
-        });
-    }
-    getList() {
-        return this.http.get(this.baseUrl, { observe: "response" })
-            .toPromise()
-            .then(res => {
-            let error = { message: 'function yet to be defined' };
-            throw error;
-        });
-    }
-    getOne() {
-        return this.http.get(this.baseUrl, { observe: "response" })
-            .toPromise()
-            .then(res => {
-            let error = { message: 'function yet to be defined' };
-            throw error;
-        });
-    }
-};
-PermissionServices = __decorate([
-    core_1.Injectable(),
-    __metadata("design:paramtypes", [http_1.HttpClient])
-], PermissionServices);
-exports.PermissionServices = PermissionServices;
 
 
 /***/ }),
@@ -6768,8 +6723,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 const core_1 = __webpack_require__(3);
 const router_1 = __webpack_require__(29);
-const auth_service_1 = __webpack_require__(77);
-const httpAuth_service_1 = __webpack_require__(78);
+const auth_service_1 = __webpack_require__(78);
+const httpAuth_service_1 = __webpack_require__(66);
 let AuthGuardService = class AuthGuardService {
     constructor(httpAuth, authenticate, router) {
         this.httpAuth = httpAuth;
@@ -6782,22 +6737,9 @@ let AuthGuardService = class AuthGuardService {
         }
         this.httpAuth.redirectUrl = url;
         this.router.navigate(['/login']);
-        // if(this.authenticate.isLoggedIn || localStorage.getItem('token')){
-        //     console.log('authguard - checking login status: ', url);
-        //     return true;
-        // }
-        // this.authenticate.redirectUrl = url;
-        // let sessionId = 123456789;
-        // let navigationExtras: NavigationExtras = {
-        //     queryParams: { 'session_id': sessionId},
-        //     fragment: 'anchor'
-        // }
-        // this.router.navigate(['/login'], navigationExtras);
-        // console.log('user not logged in: ', navigationExtras);
         return false;
     }
     canActivate(route, state) {
-        // console.log('canActivate', localStorage);
         let url = state.url;
         return this.checkLogin(url);
     }
@@ -6836,7 +6778,7 @@ const core_1 = __webpack_require__(3);
 const router_1 = __webpack_require__(29);
 const http_1 = __webpack_require__(25);
 const login_model_1 = __webpack_require__(674);
-const httpAuth_service_1 = __webpack_require__(78);
+const httpAuth_service_1 = __webpack_require__(66);
 let LoginComponent = class LoginComponent {
     constructor(http, router, httpAuth) {
         this.http = http;
@@ -6893,7 +6835,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 const core_1 = __webpack_require__(3);
-const auth_service_1 = __webpack_require__(77);
+const auth_service_1 = __webpack_require__(78);
 let AboutComponent = class AboutComponent {
     constructor(authService) {
         this.authService = authService;
@@ -7140,7 +7082,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 const core_1 = __webpack_require__(3);
-const account_services_1 = __webpack_require__(66);
+const account_services_1 = __webpack_require__(67);
 let AccountsComponent = class AccountsComponent {
     constructor(accountService) {
         this.accountService = accountService;
@@ -17496,11 +17438,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵf", function() { return XSRF_HEADER_NAME; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_tslib__ = __webpack_require__(41);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(3);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_observable_of__ = __webpack_require__(93);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_observable_of__ = __webpack_require__(94);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_observable_of___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs_observable_of__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_operator_concatMap__ = __webpack_require__(127);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_operator_concatMap___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_rxjs_operator_concatMap__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_operator_filter__ = __webpack_require__(95);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_operator_filter__ = __webpack_require__(96);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_operator_filter___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_rxjs_operator_filter__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_rxjs_operator_map__ = __webpack_require__(64);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_rxjs_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_rxjs_operator_map__);
@@ -20667,55 +20609,53 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 const core_1 = __webpack_require__(3);
 const http_1 = __webpack_require__(25);
 __webpack_require__(65);
-const errorParser_1 = __webpack_require__(99);
-let AccountServices = class AccountServices {
+let HttpAuthService = class HttpAuthService {
     constructor(http) {
         this.http = http;
-        this.errorParser = new errorParser_1.ErrorParser();
-        this.accounts = new Array();
-        this.baseUrl = '/accountsDb';
+        this.isLoggedIn = false;
+        this.isAdmin = false;
+        this.isPermitted = {};
     }
-    getAll() {
-        return this.http.get(this.baseUrl, { observe: "response" })
-            .toPromise()
-            .then((result) => {
-            this.accounts = result.body;
-        })
-            .catch(this.errorParser.handleError)
-            .catch((error) => {
-            this.error = error;
+    login(form) {
+        this.redirectUrl = "/private";
+        this.getPermissions();
+        return this.http.post('/login', form)
+            .map(activeUser => {
+            console.log('asfdadfadsf;', activeUser);
+            if (activeUser && activeUser.token) {
+                localStorage.setItem('token', activeUser.token);
+                this.isLoggedIn = true;
+                this.isAdmin = activeUser.userParameters.administrator ? true : false;
+            }
+            if (activeUser.userParameters.permissions && this.permissions) {
+                activeUser.userParameters.permissions.forEach((uuid) => {
+                    this.permissions.find(permit => {
+                        return permit.permission_id === uuid ? this.isPermitted[permit.permission_name] = true : null;
+                    });
+                });
+            }
+            return activeUser;
         });
     }
-    getLatest() {
-        return this.http.get(this.baseUrl, { observe: "response" })
+    getPermissions() {
+        return this.http.get('/permissionsDb', { observe: "response" })
             .toPromise()
-            .then(res => {
-            let error = { message: 'function yet to be defined' };
-            throw error;
+            .then(result => {
+            this.permissions = result.body;
         });
     }
-    getList() {
-        return this.http.get(this.baseUrl, { observe: "response" })
-            .toPromise()
-            .then(res => {
-            let error = { message: 'function yet to be defined' };
-            throw error;
-        });
-    }
-    getOne() {
-        return this.http.get(this.baseUrl, { observe: "response" })
-            .toPromise()
-            .then(res => {
-            let error = { message: 'function yet to be defined' };
-            throw error;
-        });
+    logout() {
+        localStorage.removeItem('token');
+        this.isAdmin = false;
+        this.isLoggedIn = false;
+        this.redirectUrl = "/home";
     }
 };
-AccountServices = __decorate([
+HttpAuthService = __decorate([
     core_1.Injectable(),
     __metadata("design:paramtypes", [http_1.HttpClient])
-], AccountServices);
-exports.AccountServices = AccountServices;
+], HttpAuthService);
+exports.HttpAuthService = HttpAuthService;
 
 
 /***/ }),
@@ -22508,7 +22448,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 const core_1 = __webpack_require__(3);
 const http_1 = __webpack_require__(25);
 const router_1 = __webpack_require__(29);
-const auth_service_1 = __webpack_require__(77);
+const auth_service_1 = __webpack_require__(78);
 let AppComponent = class AppComponent {
     constructor(http, router, activatedRoute, authService) {
         this.http = http;
@@ -22530,6 +22470,76 @@ AppComponent = __decorate([
     __metadata("design:paramtypes", [http_1.HttpClient, router_1.Router, router_1.ActivatedRoute, auth_service_1.AuthService])
 ], AppComponent);
 exports.AppComponent = AppComponent;
+
+
+/***/ }),
+
+/***/ 67:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+const core_1 = __webpack_require__(3);
+const http_1 = __webpack_require__(25);
+__webpack_require__(65);
+const errorParser_1 = __webpack_require__(100);
+let AccountServices = class AccountServices {
+    constructor(http) {
+        this.http = http;
+        this.errorParser = new errorParser_1.ErrorParser();
+        this.accounts = new Array();
+        this.baseUrl = '/accountsDb';
+    }
+    getAll() {
+        return this.http.get(this.baseUrl, { observe: "response" })
+            .toPromise()
+            .then((result) => {
+            this.accounts = result.body;
+        })
+            .catch(this.errorParser.handleError)
+            .catch((error) => {
+            this.error = error;
+        });
+    }
+    getLatest() {
+        return this.http.get(this.baseUrl, { observe: "response" })
+            .toPromise()
+            .then(res => {
+            let error = { message: 'function yet to be defined' };
+            throw error;
+        });
+    }
+    getList() {
+        return this.http.get(this.baseUrl, { observe: "response" })
+            .toPromise()
+            .then(res => {
+            let error = { message: 'function yet to be defined' };
+            throw error;
+        });
+    }
+    getOne() {
+        return this.http.get(this.baseUrl, { observe: "response" })
+            .toPromise()
+            .then(res => {
+            let error = { message: 'function yet to be defined' };
+            throw error;
+        });
+    }
+};
+AccountServices = __decorate([
+    core_1.Injectable(),
+    __metadata("design:paramtypes", [http_1.HttpClient])
+], AccountServices);
+exports.AccountServices = AccountServices;
 
 
 /***/ }),
@@ -22616,8 +22626,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 const core_1 = __webpack_require__(3);
 const router_1 = __webpack_require__(29);
 const login_component_1 = __webpack_require__(209);
-const auth_service_1 = __webpack_require__(77);
-const httpAuth_service_1 = __webpack_require__(78);
+const auth_service_1 = __webpack_require__(78);
+const httpAuth_service_1 = __webpack_require__(66);
 const LoginRoutes = [
     {
         path: 'login',
@@ -22835,13 +22845,13 @@ const infobar_component_1 = __webpack_require__(698);
 const thumbnail_component_1 = __webpack_require__(700);
 const http_interceptors_1 = __webpack_require__(702);
 const messagebar_component_1 = __webpack_require__(704);
-const user_services_1 = __webpack_require__(100);
+const user_services_1 = __webpack_require__(101);
 const panel_component_1 = __webpack_require__(706);
 const forms_1 = __webpack_require__(207);
-const account_services_1 = __webpack_require__(66);
+const account_services_1 = __webpack_require__(67);
 const accounts_component_1 = __webpack_require__(217);
 const permissions_component_1 = __webpack_require__(218);
-const permission_services_1 = __webpack_require__(101);
+const permission_services_1 = __webpack_require__(80);
 const permissionsPanel_component_1 = __webpack_require__(709);
 const accountsPanel_component_1 = __webpack_require__(711);
 let PrivateModule = class PrivateModule {
@@ -23057,11 +23067,11 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 const core_1 = __webpack_require__(3);
 const router_1 = __webpack_require__(29);
-const httpAuth_service_1 = __webpack_require__(78);
+const httpAuth_service_1 = __webpack_require__(66);
 const image_services_1 = __webpack_require__(79);
-const user_services_1 = __webpack_require__(100);
-const account_services_1 = __webpack_require__(66);
-const permission_services_1 = __webpack_require__(101);
+const user_services_1 = __webpack_require__(101);
+const account_services_1 = __webpack_require__(67);
+const permission_services_1 = __webpack_require__(80);
 let SidebarComponent = class SidebarComponent {
     constructor(permissions, accounts, httpAuth, activatedRoute, images, router, users) {
         this.permissions = permissions;
@@ -23299,10 +23309,10 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 const core_1 = __webpack_require__(3);
 const image_services_1 = __webpack_require__(79);
-const user_services_1 = __webpack_require__(100);
+const user_services_1 = __webpack_require__(101);
 const router_1 = __webpack_require__(29);
-const account_services_1 = __webpack_require__(66);
-const permission_services_1 = __webpack_require__(101);
+const account_services_1 = __webpack_require__(67);
+const permission_services_1 = __webpack_require__(80);
 let MessagebarComponent = class MessagebarComponent {
     constructor(permissions, accounts, images, users, activatedRoute) {
         this.permissions = permissions;
@@ -23351,8 +23361,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 const core_1 = __webpack_require__(3);
-const user_services_1 = __webpack_require__(100);
-const account_services_1 = __webpack_require__(66);
+const user_services_1 = __webpack_require__(101);
+const account_services_1 = __webpack_require__(67);
 let PanelComponent = class PanelComponent {
     constructor(userService, accountService) {
         this.userService = userService;
@@ -23437,7 +23447,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 const core_1 = __webpack_require__(3);
-const permission_services_1 = __webpack_require__(101);
+const permission_services_1 = __webpack_require__(80);
 let PermissionsPanelComponent = class PermissionsPanelComponent {
     constructor(permissionService) {
         this.permissionService = permissionService;
@@ -23482,14 +23492,27 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 const core_1 = __webpack_require__(3);
-const account_services_1 = __webpack_require__(66);
+const account_services_1 = __webpack_require__(67);
+const permission_services_1 = __webpack_require__(80);
+const httpAuth_service_1 = __webpack_require__(66);
 let AccountsPanelComponent = class AccountsPanelComponent {
-    constructor(accountService) {
+    constructor(activeUser, accountService, permissionService) {
+        this.activeUser = activeUser;
         this.accountService = accountService;
+        this.permissionService = permissionService;
     }
     ngOnInit() {
         this.accountService.getAll();
-        console.log('acctPanel comp init');
+        this.permissionService.getAll();
+        console.log('acctPanel comp init', this.activeUser.isPermitted);
+    }
+    validateList(permission, i) {
+        return this.accountService.accounts[i].account_permissions.find((uuid) => {
+            return uuid == permission;
+        }) ? false : true;
+        // console.log('show me result ', this.accountService.accounts[i].account_name, permission, result)
+        //
+        // return result ? false : true;
     }
 };
 AccountsPanelComponent = __decorate([
@@ -23498,7 +23521,7 @@ AccountsPanelComponent = __decorate([
         template: __webpack_require__(712),
         encapsulation: core_1.ViewEncapsulation.None
     }),
-    __metadata("design:paramtypes", [account_services_1.AccountServices])
+    __metadata("design:paramtypes", [httpAuth_service_1.HttpAuthService, account_services_1.AccountServices, permission_services_1.PermissionServices])
 ], AccountsPanelComponent);
 exports.AccountsPanelComponent = AccountsPanelComponent;
 
@@ -23508,7 +23531,7 @@ exports.AccountsPanelComponent = AccountsPanelComponent;
 /***/ 712:
 /***/ (function(module, exports) {
 
-module.exports = "<div *ngFor=\"let account of this.accountService.accounts as accounts; index as i\"><div class=\"col-sm-6 col-md-4\"><form class=\"box-shadow panel panel-info\" #editUserForm=\"ngForm\" id=\"{{account.account_id}}\"><div class=\"panel-heading\"><h3 class=\"panel-title\">{{account.account_name}}</h3></div><div class=\"panel-body\"><div class=\"input-group input-group-sm\"><span class=\"input-group-addon\">Id</span><input class=\"form-control\" type=\"text\" placeholder=\"{{account.account_id}}\" disabled></div><div class=\"input-group input-group-sm\" *ngFor=\"let permission of account.account_permissions; index as j\"><span class=\"input-group-addon\">Revoke</span><input class=\"form-control\" type=\"text\" placeholder=\"{{permission}}\" disabled></div><div class=\"input-group input-group-sm\"><div class=\"input-group-btn\" disabled><button class=\"btn btn-info dropdown-toggle\" type=\"button\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">Add<span class=\"caret\"></span></button><ul class=\"dropdown-menu\"><li><a>List of permissions to add</a></li></ul></div><input class=\"form-control\" type=\"text\" placeholder=\"\"></div></div><div class=\"panel-footer\">edit</div><div class=\"panel-footer\">delete</div></form></div></div>"
+module.exports = "<div *ngFor=\"let account of this.accountService.accounts as accounts; index as i\"><div class=\"col-sm-6 col-md-4\"><form class=\"box-shadow panel panel-info\" #editUserForm=\"ngForm\" id=\"{{account.account_id}}\"><div class=\"panel-heading\"><h3 class=\"panel-title\">{{account.account_name}}</h3></div><div class=\"panel-body\"><div class=\"input-group input-group-sm\"><span class=\"input-group-addon\">Id</span><input class=\"form-control\" type=\"text\" placeholder=\"{{account.account_id}}\" disabled></div><div class=\"input-group input-group-sm\" *ngFor=\"let permission of account.account_permissions; index as j\"><span class=\"input-group-addon\">Revoke</span><input class=\"form-control\" type=\"text\" placeholder=\"{{permission}}\" disabled></div><div class=\"input-group input-group-sm\" *ngIf=\"account.account_name != 'administrator'\"><div class=\"input-group-btn\" disabled><button class=\"btn btn-info dropdown-toggle\" type=\"button\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">Add<span class=\"caret\"></span></button><ul class=\"dropdown-menu\"><li *ngFor=\"let permission of this.permissionService.permissions as permissions; index as j\" id=\"{{permission.permission_id}}\"><a *ngIf=\"validateList(permission.permission_id, i)\">{{permission.permission_name}}</a></li></ul></div><input class=\"form-control\" type=\"text\" placeholder=\"add permission\"></div></div><div class=\"panel-footer\" [attr.disabled]=\"account.account_name == 'administrator'\">edit</div><div class=\"panel-footer\">delete</div></form></div></div>"
 
 /***/ }),
 
@@ -23527,11 +23550,11 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 const core_1 = __webpack_require__(3);
-const auth_service_1 = __webpack_require__(77);
+const auth_service_1 = __webpack_require__(78);
 const router_1 = __webpack_require__(29);
 const http_1 = __webpack_require__(25);
 const links_1 = __webpack_require__(714);
-const httpAuth_service_1 = __webpack_require__(78);
+const httpAuth_service_1 = __webpack_require__(66);
 let GlobalnavComponent = class GlobalnavComponent {
     constructor(http, router, activatedRoute, authService, httpAuth) {
         this.http = http;
@@ -23772,7 +23795,7 @@ module.exports = "data:application/font-woff;base64,bW9kdWxlLmV4cG9ydHMgPSBfX3dl
 
 /***/ }),
 
-/***/ 77:
+/***/ 78:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -23784,7 +23807,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 const core_1 = __webpack_require__(3);
-const of_1 = __webpack_require__(93);
+const of_1 = __webpack_require__(94);
 let AuthService = class AuthService {
     constructor() {
         this.isLoggedIn = false;
@@ -23818,74 +23841,6 @@ exports.AuthService = AuthService;
 
 /***/ }),
 
-/***/ 78:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-const core_1 = __webpack_require__(3);
-const http_1 = __webpack_require__(25);
-__webpack_require__(65);
-let HttpAuthService = class HttpAuthService {
-    constructor(http) {
-        this.http = http;
-        this.isLoggedIn = false;
-        this.isAdmin = false;
-        this.isPermitted = {};
-    }
-    login(form) {
-        this.redirectUrl = "/private";
-        this.getPermissions();
-        return this.http.post('/login', form)
-            .map(activeUser => {
-            console.log('asfdadfadsf;', activeUser);
-            if (activeUser && activeUser.token) {
-                localStorage.setItem('token', activeUser.token);
-                this.isLoggedIn = true;
-                this.isAdmin = activeUser.userParameters.administrator ? true : false;
-            }
-            if (activeUser.userParameters.permissions && this.permissions) {
-                activeUser.userParameters.permissions.forEach((uuid) => {
-                    this.permissions.find(permit => {
-                        return permit.permission_id === uuid ? this.isPermitted[permit.permission_name] = true : null;
-                    });
-                });
-            }
-            return activeUser;
-        });
-    }
-    getPermissions() {
-        return this.http.get('/permissionsDb', { observe: "response" })
-            .toPromise()
-            .then(result => {
-            this.permissions = result.body;
-        });
-    }
-    logout() {
-        localStorage.removeItem('token');
-        this.isAdmin = false;
-        this.isLoggedIn = false;
-        this.redirectUrl = "/home";
-    }
-};
-HttpAuthService = __decorate([
-    core_1.Injectable(),
-    __metadata("design:paramtypes", [http_1.HttpClient])
-], HttpAuthService);
-exports.HttpAuthService = HttpAuthService;
-
-
-/***/ }),
-
 /***/ 79:
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -23903,7 +23858,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 const core_1 = __webpack_require__(3);
 const http_1 = __webpack_require__(25);
 __webpack_require__(65);
-const errorParser_1 = __webpack_require__(99);
+const errorParser_1 = __webpack_require__(100);
 './errorParser';
 let ImageServices = class ImageServices {
     constructor(http) {
@@ -23954,27 +23909,72 @@ exports.ImageServices = ImageServices;
 
 /***/ }),
 
-/***/ 99:
+/***/ 80:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
-class ErrorParser {
-    handleError(error) {
-        let err = {};
-        if (error.status === 401) {
-            err = {
-                status: error.status,
-                message: 'unauthorized/expired token - please login again'
-            };
-        }
-        throw err || error;
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+const core_1 = __webpack_require__(3);
+const http_1 = __webpack_require__(25);
+__webpack_require__(65);
+const errorParser_1 = __webpack_require__(100);
+let PermissionServices = class PermissionServices {
+    constructor(http) {
+        this.http = http;
+        this.errorParser = new errorParser_1.ErrorParser();
+        this.permissions = new Array();
+        this.baseUrl = '/permissionsDb';
     }
-}
-exports.ErrorParser = ErrorParser;
+    getAll() {
+        return this.http.get(this.baseUrl, { observe: "response" })
+            .toPromise()
+            .then(res => {
+            this.permissions = res.body;
+        })
+            .catch(this.errorParser.handleError);
+    }
+    getLatest() {
+        return this.http.get(this.baseUrl, { observe: "response" })
+            .toPromise()
+            .then(res => {
+            let error = { message: 'function yet to be defined' };
+            throw error;
+        });
+    }
+    getList() {
+        return this.http.get(this.baseUrl, { observe: "response" })
+            .toPromise()
+            .then(res => {
+            let error = { message: 'function yet to be defined' };
+            throw error;
+        });
+    }
+    getOne() {
+        return this.http.get(this.baseUrl, { observe: "response" })
+            .toPromise()
+            .then(res => {
+            let error = { message: 'function yet to be defined' };
+            throw error;
+        });
+    }
+};
+PermissionServices = __decorate([
+    core_1.Injectable(),
+    __metadata("design:paramtypes", [http_1.HttpClient])
+], PermissionServices);
+exports.PermissionServices = PermissionServices;
 
 
 /***/ })
 
 },[644]);
-//# sourceMappingURL=app.dd1521664240fb51d443.js.map
+//# sourceMappingURL=app.93c312b88b134efae511.js.map

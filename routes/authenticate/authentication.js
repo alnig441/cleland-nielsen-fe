@@ -30,10 +30,11 @@ router.post('/', (req, res, next) => {
             let userParameters = {
                 user: user.user_id,
                 language: user.language,
-                administrator: user.account_name === 'administrator' ? true : false
+                administrator: user.account_name === 'administrator' ? true : false,
+                permissions: user.account_permissions
             }
 
-            userParameters.administrator === false ? userParameters.permissions = user.account_permissions : null;
+            // userParameters.administrator === false ? userParameters.permissions = user.account_permissions : null;
 
             console.log('userparameters: ', userParameters)
 
