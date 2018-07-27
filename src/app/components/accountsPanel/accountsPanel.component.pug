@@ -9,7 +9,7 @@ div(*ngFor="let account of this.accountService.accounts as accounts; index as i"
                     input(class="form-control" type="text", placeholder="{{account.account_id}}", disabled)
                 div(*ngFor="let permission of account.account_permissions; index as j", class="input-group input-group-sm")
                     span(class="input-group-addon") Revoke
-                    input(class="form-control" type="text", placeholder="{{permission}}", disabled)
+                    input(class="form-control" type="text", placeholder="{{permission | uuidTransform: this.permissionService.permissions}}", disabled)
                 div(*ngIf="account.account_name != 'administrator'", class="input-group input-group-sm")
                     div(class="input-group-btn" style="" disabled)
                         button(type="button" class="btn btn-info dropdown-toggle", data-toggle="dropdown" aria-haspopup="true", aria-expanded="false", ) Add

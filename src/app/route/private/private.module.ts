@@ -20,6 +20,7 @@ import { PermissionsComponent } from "./permissions/permissions.component";
 import { PermissionServices } from "../../services/permission.services";
 import { PermissionsPanelComponent } from "../../components/permissionsPanel/permissionsPanel.component";
 import { AccountsPanelComponent } from "../../components/accountsPanel/accountsPanel.component";
+import {UuidTransformPipe} from "../../pipes/uuid.transform";
 
 @NgModule({
     imports: [
@@ -40,9 +41,11 @@ import { AccountsPanelComponent } from "../../components/accountsPanel/accountsP
         AccountsComponent,
         PermissionsComponent,
         PermissionsPanelComponent,
-        AccountsPanelComponent
+        AccountsPanelComponent,
+        UuidTransformPipe,
     ],
     exports: [
+        UuidTransformPipe
     ],
     providers: [
         ImageServices,
