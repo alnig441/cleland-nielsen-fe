@@ -13,6 +13,8 @@ import { ListValidator } from "../../classes/listValidator";
 export class AccountsPanelComponent implements OnInit {
 
     validator = new ListValidator();
+    deEdit = {};
+    tempPlaceholder: string ='add permission';
 
     constructor(private activeUser: HttpAuthService, private accountService: AccountServices, private permissionService: PermissionServices) {}
 
@@ -20,5 +22,26 @@ export class AccountsPanelComponent implements OnInit {
         this.accountService.getAll();
         this.permissionService.getAll();
         console.log('acctPanel comp init', this.activeUser.isPermitted);
+    }
+
+    addPermission(permission: string): void {
+        console.log('adding permission', permission);
+        this.tempPlaceholder = permission;
+    }
+
+    revokePermission(permission: string): void {
+        console.log('revoking permission', permission);
+    }
+
+    edit() :void {
+
+    }
+
+    delete(): void {
+
+    }
+
+    done(): void {
+
     }
 }

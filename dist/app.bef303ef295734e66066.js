@@ -23506,11 +23506,26 @@ let AccountsPanelComponent = class AccountsPanelComponent {
         this.accountService = accountService;
         this.permissionService = permissionService;
         this.validator = new listValidator_1.ListValidator();
+        this.deEdit = {};
+        this.tempPlaceholder = 'add permission';
     }
     ngOnInit() {
         this.accountService.getAll();
         this.permissionService.getAll();
         console.log('acctPanel comp init', this.activeUser.isPermitted);
+    }
+    addPermission(permission) {
+        console.log('adding permission', permission);
+        this.tempPlaceholder = permission;
+    }
+    revokePermission(permission) {
+        console.log('revoking permission', permission);
+    }
+    edit() {
+    }
+    delete() {
+    }
+    done() {
     }
 };
 AccountsPanelComponent = __decorate([
@@ -23546,7 +23561,7 @@ exports.ListValidator = ListValidator;
 /***/ 713:
 /***/ (function(module, exports) {
 
-module.exports = "<div *ngFor=\"let account of this.accountService.accounts as accounts; index as i\"><div class=\"col-sm-6 col-md-4\"><form class=\"box-shadow panel panel-info\" #editUserForm=\"ngForm\" id=\"{{account.account_id}}\"><div class=\"panel-heading\"><h3 class=\"panel-title\">{{account.account_name}}</h3></div><div class=\"panel-body\"><div class=\"input-group input-group-sm\"><span class=\"input-group-addon\">Id</span><input class=\"form-control\" type=\"text\" placeholder=\"{{account.account_id}}\" disabled></div><div class=\"input-group input-group-sm\" *ngFor=\"let permission of account.account_permissions; index as j\"><span class=\"input-group-addon\">Revoke</span><input class=\"form-control\" type=\"text\" placeholder=\"{{permission | uuidTransform: this.permissionService.permissions}}\" disabled></div><div class=\"input-group input-group-sm\" *ngIf=\"account.account_name != 'administrator'\"><div class=\"input-group-btn\" disabled><button class=\"btn btn-info dropdown-toggle\" type=\"button\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">Add<span class=\"caret\"></span></button><ul class=\"dropdown-menu\"><li *ngFor=\"let permission of this.permissionService.permissions as permissions; index as j\" id=\"{{permission.permission_id}}\"><a *ngIf=\"validator.validateList(this.accountService.accounts[i].account_permissions, permission.permission_id, i)\">{{permission.permission_name}}</a></li></ul></div><input class=\"form-control\" type=\"text\" placeholder=\"add permission\"></div></div><div class=\"panel-footer\" [attr.disabled]=\"account.account_name == 'administrator'\">edit</div><div class=\"panel-footer\">delete</div></form></div></div>"
+module.exports = "<div *ngFor=\"let account of this.accountService.accounts as accounts; index as i\"><div class=\"col-sm-6 col-md-4\"><form class=\"box-shadow panel panel-info\" #editAccountForm=\"ngForm\" id=\"{{account.account_id}}\"><div class=\"panel-heading\"><h3 class=\"panel-title\">{{account.account_name}}</h3></div><div class=\"panel-body\"><div class=\"input-group input-group-sm\"><span class=\"input-group-addon\">Id</span><input class=\"form-control\" type=\"text\" placeholder=\"{{account.account_id}}\" disabled></div><div class=\"input-group input-group-sm\" *ngFor=\"let permission of account.account_permissions; index as j\"><span class=\"input-group-btn\"><button class=\"btn btn-info\" (click)=\"revokePermission(permission)\" type=\"button\">Revoke</button></span><input class=\"form-control\" type=\"text\" placeholder=\"{{permission | uuidTransform: this.permissionService.permissions}}\" disabled></div><div class=\"input-group input-group-sm\" *ngIf=\"account.account_name != 'administrator'\"><div class=\"input-group-btn\" disabled><button class=\"btn btn-info dropdown-toggle\" type=\"button\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">Instate<span class=\"caret\"></span></button><ul class=\"dropdown-menu\"><li *ngFor=\"let permission of this.permissionService.permissions as permissions; index as j\" id=\"{{permission.permission_id}}\"><a *ngIf=\"validator.validateList(this.accountService.accounts[i].account_permissions, permission.permission_id, i)\" (click)=\"addPermission(permission.permission_id)\">{{permission.permission_name}}</a></li></ul></div><input class=\"form-control\" type=\"text\" placeholder=\"{{this.tempPlaceholder}}\"></div></div><div class=\"panel-footer\" [attr.disabled]=\"account.account_name == 'administrator'\">edit</div><div class=\"panel-footer\" [attr.disabled]=\"account.account_name == 'administrator'\">delete</div></form></div></div>"
 
 /***/ }),
 
@@ -24033,4 +24048,4 @@ exports.PermissionServices = PermissionServices;
 /***/ })
 
 },[644]);
-//# sourceMappingURL=app.62f32451eed996678c5d.js.map
+//# sourceMappingURL=app.bef303ef295734e66066.js.map
