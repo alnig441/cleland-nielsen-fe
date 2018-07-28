@@ -26,6 +26,8 @@ export class UuidTransformPipe implements PipeTransform {
             }
         })
 
+        console.log('transformed: ', transformed)
+
         return transformed;
 
     }
