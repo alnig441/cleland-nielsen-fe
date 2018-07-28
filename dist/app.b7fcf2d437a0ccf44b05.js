@@ -22554,7 +22554,7 @@ module.exports = "<app-globalnav></app-globalnav><div class=\"container-fluid\">
 /***/ 671:
 /***/ (function(module, exports) {
 
-module.exports = "html, body, h1 {\n  margin: 0;\n  padding: 0; }\n\nbody {\n  font-family: Tahoma, Arial, sans-serif;\n  font-size: 14px;\n  padding: 20px; }\n\n.box-shadow {\n  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); }\n"
+module.exports = "html, body, h1 {\n  margin: 0;\n  padding: 0; }\n\nbody {\n  font-family: Tahoma, Arial, sans-serif;\n  font-size: 14px;\n  padding: 20px; }\n\n.box-shadow {\n  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); }\n\n/* panels */\n.panel-footer {\n  display: inline-block;\n  width: 50%;\n  text-align: center; }\n\n.panel-footer:first-of-type {\n  border-right: 1px solid #ddd;\n  border-bottom-right-radius: 0px; }\n\n.panel-footer:last-of-type {\n  border-left: 1px solid #ddd;\n  border-bottom-left-radius: 0px; }\n\n.panel-footer:hover {\n  background-color: #d9edf7;\n  color: #31708f;\n  cursor: pointer; }\n\n.input-group {\n  width: 100%; }\n\n.input-group-addon,\n.input-group-btn {\n  width: 35%; }\n\n.input-group-btn button {\n  width: 100%; }\n\nspan.input-group-addon {\n  color: #ffffff;\n  background-color: #5bc0de;\n  border-color: #46b8da; }\n\nspan.input-group-addon[disabled=true] {\n  color: #ffffff;\n  background-color: #97D6E9;\n  border-color: #8BD1E6; }\n\n.done-edit {\n  width: 100%;\n  border-bottom-left-radius: 3px;\n  border-bottom-right-radius: 3px; }\n"
 
 /***/ }),
 
@@ -23425,14 +23425,14 @@ exports.PanelComponent = PanelComponent;
 /***/ 707:
 /***/ (function(module, exports) {
 
-module.exports = "<div *ngFor=\"let user of this.userService.users as users; index as i\"><div class=\"col-sm-6 col-md-4\"><form class=\"box-shadow panel panel-info\" #editUserForm=\"ngForm\" id=\"{{user.user_id}}\"><div class=\"panel-heading\"><h3 class=\"panel-title\">{{user.user_name}}</h3></div><div class=\"panel-body\"><div class=\"input-group input-group-sm\"><span class=\"input-group-addon\" disabled>Id</span><input class=\"form-control\" disabled type=\"text\" placeholder=\"{{user.user_id}}\"></div><div class=\"input-group input-group-sm\"><div class=\"input-group-btn\"><button class=\"btn btn-info dropdown-toggle\" type=\"button\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\" [attr.disabled]=\"this.doEdit[user.user_name] == true ? null : true\">Type<span class=\"caret\"></span></button><ul class=\"dropdown-menu\"><li *ngFor=\"let account of this.accountService.accounts as accounts; index as j\"><a (click)=\"addInput(this.account, i)\">{{account.account_name}}</a></li></ul></div><input class=\"form-control\" *ngIf=\"this.doEdit[user.user_name]\" [attr.disabled]=\"this.doEdit[user.user_name] == true ? null : true\" type=\"text\" placeholder=\"{{user.account_type}}\" [(ngModel)]=\"users[i].account_type\" name=\"account_type\" #account_type=\"ngModel\"><input class=\"form-control\" *ngIf=\"!this.doEdit[user.user_name]\" type=\"text\" placeholder=\"{{user.account_type | uuidTransform:this.accountService.accounts}}\" disabled></div><div class=\"input-group input-group-sm\"><div class=\"input-group-btn\"><button class=\"btn btn-info dropdown-toggle\" type=\"button\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\" [attr.disabled]=\"this.doEdit[user.user_name] == true ? null : true\">Language<span class=\"caret\"></span></button><ul class=\"dropdown-menu\"><li *ngFor=\"let language of this.languages\"><a (click)=\"addInput(this.language, i)\">{{language.language}}</a></li></ul></div><input class=\"form-control\" [attr.disabled]=\"this.doEdit[user.user_name] == true ? null : true\" type=\"text\" placeholder=\"{{user.language}}\" [(ngModel)]=\"users[i].language\" name=\"language\" #user_name=\"ngModel\"></div><div class=\"input-group input-group-sm\"><span class=\"input-group-addon\" [attr.disabled]=\"this.doEdit[user.user_name] == true ? null : true\">Password</span><input class=\"form-control\" [attr.disabled]=\"this.doEdit[user.user_name] == true ? null : true\" type=\"password\" placeholder=\"****\" [(ngModel)]=\"users[i].password\" name=\"password\" #password=\"ngModel\"></div></div><div class=\"panel-footer\" *ngIf=\"this.doEdit[user.user_name]\" (click)=\"done(this.user, i)\" id=\"done_edit\">done</div><div class=\"panel-footer\" *ngIf=\"!this.doEdit[user.user_name]\" (click)=\"edit(this.user, i)\">edit</div><div class=\"panel-footer\" *ngIf=\"!this.doEdit[user.user_name]\" (click)=\"delete(this.user, i)\">delete</div></form></div></div>"
+module.exports = "<div *ngFor=\"let user of this.userService.users as users; index as i\"><div class=\"col-sm-6 col-md-4\"><form class=\"box-shadow panel panel-info\" #editUserForm=\"ngForm\" id=\"{{user.user_id}}\"><div class=\"panel-heading\"><h3 class=\"panel-title\">{{user.user_name}}</h3></div><div class=\"panel-body\"><div class=\"input-group input-group-sm\"><span class=\"input-group-addon\" disabled>Id</span><input class=\"form-control\" disabled type=\"text\" placeholder=\"{{user.user_id}}\"></div><div class=\"input-group input-group-sm\"><div class=\"input-group-btn\"><button class=\"btn btn-info dropdown-toggle\" type=\"button\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\" [attr.disabled]=\"this.doEdit[user.user_name] == true ? null : true\">Type<span class=\"caret\"></span></button><ul class=\"dropdown-menu\"><li *ngFor=\"let account of this.accountService.accounts as accounts; index as j\"><a (click)=\"addInput(this.account, i)\">{{account.account_name}}</a></li></ul></div><input class=\"form-control\" *ngIf=\"this.doEdit[user.user_name]\" [attr.disabled]=\"this.doEdit[user.user_name] == true ? null : true\" type=\"text\" placeholder=\"{{user.account_type}}\" [(ngModel)]=\"users[i].account_type\" name=\"account_type\" #account_type=\"ngModel\"><input class=\"form-control\" *ngIf=\"!this.doEdit[user.user_name]\" type=\"text\" placeholder=\"{{user.account_type | uuidTransform:this.accountService.accounts}}\" disabled></div><div class=\"input-group input-group-sm\"><div class=\"input-group-btn\"><button class=\"btn btn-info dropdown-toggle\" type=\"button\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\" [attr.disabled]=\"this.doEdit[user.user_name] == true ? null : true\">Language<span class=\"caret\"></span></button><ul class=\"dropdown-menu\"><li *ngFor=\"let language of this.languages\"><a (click)=\"addInput(this.language, i)\">{{language.language}}</a></li></ul></div><input class=\"form-control\" [attr.disabled]=\"this.doEdit[user.user_name] == true ? null : true\" type=\"text\" placeholder=\"{{user.language}}\" [(ngModel)]=\"users[i].language\" name=\"language\" #user_name=\"ngModel\"></div><div class=\"input-group input-group-sm\"><span class=\"input-group-addon\" [attr.disabled]=\"this.doEdit[user.user_name] == true ? null : true\">Password</span><input class=\"form-control\" [attr.disabled]=\"this.doEdit[user.user_name] == true ? null : true\" type=\"password\" placeholder=\"****\" [(ngModel)]=\"users[i].password\" name=\"password\" #password=\"ngModel\"></div></div><div class=\"panel-footer done-edit\" *ngIf=\"this.doEdit[user.user_name]\" (click)=\"done(this.user, i)\">done</div><div class=\"panel-footer\" *ngIf=\"!this.doEdit[user.user_name]\" (click)=\"edit(this.user, i)\">edit</div><div class=\"panel-footer\" *ngIf=\"!this.doEdit[user.user_name]\" (click)=\"delete(this.user, i)\">delete</div></form></div></div>"
 
 /***/ }),
 
 /***/ 708:
 /***/ (function(module, exports) {
 
-module.exports = "p {\n  display: flex;\n  justify-content: space-around; }\n\n.panel-footer {\n  display: inline-block;\n  width: 50%;\n  text-align: center; }\n\n.panel-footer:first-of-type {\n  border-right: 1px solid #ddd;\n  border-bottom-right-radius: 0px; }\n\n.panel-footer:last-of-type {\n  border-left: 1px solid #ddd;\n  border-bottom-left-radius: 0px; }\n\n.panel-footer:hover {\n  background-color: #d9edf7;\n  color: #31708f;\n  cursor: pointer; }\n\n.input-group {\n  width: 100%; }\n\n.input-group-addon,\n.input-group-btn {\n  width: 35%; }\n\n.input-group-btn button {\n  width: 100%; }\n\nspan.input-group-addon {\n  color: #ffffff;\n  background-color: #5bc0de;\n  border-color: #46b8da; }\n\nspan.input-group-addon[disabled=true] {\n  color: #ffffff;\n  background-color: #97D6E9;\n  border-color: #8BD1E6; }\n\n#done_edit {\n  width: 100%;\n  border-bottom-left-radius: 3px;\n  border-bottom-right-radius: 3px; }\n"
+module.exports = "p {\n  display: flex;\n  justify-content: space-around; }\n"
 
 /***/ }),
 
@@ -23477,7 +23477,7 @@ exports.PermissionsPanelComponent = PermissionsPanelComponent;
 /***/ 710:
 /***/ (function(module, exports) {
 
-module.exports = "<div *ngFor=\"let permission of this.permissionService.permissions as permissions; index as i\"><div class=\"col-sm-6 col-md-4\"><form class=\"box-shadow panel panel-info\" #editUserForm=\"ngForm\" id=\"\"><div class=\"panel-heading\"><h3 class=\"panel-title\">{{permission.permission_name}}</h3></div><div class=\"panel-body\"><div class=\"input-group input-group-sm\"><span class=\"input-group-addon\">Id</span><input class=\"form-control\" type=\"text\" placeholder=\"{{permission.permission_id}}\" disabled></div></div><div class=\"panel-footer\">delete</div></form></div></div>"
+module.exports = "<div *ngFor=\"let permission of this.permissionService.permissions as permissions; index as i\"><div class=\"col-sm-6 col-md-4\"><form class=\"box-shadow panel panel-info\" #editUserForm=\"ngForm\" id=\"\"><div class=\"panel-heading\"><h3 class=\"panel-title\">{{permission.permission_name}}</h3></div><div class=\"panel-body\"><div class=\"input-group input-group-sm\"><span class=\"input-group-addon\">Id</span><input class=\"form-control\" type=\"text\" placeholder=\"{{permission.permission_id}}\" disabled></div></div><div class=\"panel-footer done-edit\">delete</div></form></div></div>"
 
 /***/ }),
 
@@ -23506,7 +23506,7 @@ let AccountsPanelComponent = class AccountsPanelComponent {
         this.accountService = accountService;
         this.permissionService = permissionService;
         this.validator = new listValidator_1.ListValidator();
-        this.deEdit = {};
+        this.doEdit = {};
         this.tempPlaceholder = 'add permission';
     }
     ngOnInit() {
@@ -23514,18 +23514,34 @@ let AccountsPanelComponent = class AccountsPanelComponent {
         this.permissionService.getAll();
         console.log('acctPanel comp init', this.activeUser.isPermitted);
     }
-    addPermission(permission) {
+    addPermission(permission, i) {
         console.log('adding permission', permission);
+        this.accountService.accounts[i].account_permissions.push(permission);
         this.tempPlaceholder = permission;
     }
-    revokePermission(permission) {
+    revokePermission(permission, i) {
         console.log('revoking permission', permission);
+        let revisedPermissions = this.accountService.accounts[i].account_permissions.filter((uuid) => {
+            return uuid !== permission;
+        });
+        this.accountService.accounts[i].account_permissions = revisedPermissions;
     }
-    edit() {
+    edit(account, i) {
+        console.log('permitted: ', this.activeUser.isPermitted['to_edit_accounts']);
+        if (this.activeUser.isPermitted['to_edit_accounts']) {
+            console.log('editing account: ', account);
+            this.doEdit[account.account_name] = true;
+        }
     }
-    delete() {
+    delete(account, i) {
+        if (this.activeUser.isPermitted['to_delete_accounts']) {
+            console.log('deleting account: ', account);
+        }
     }
-    done() {
+    done(account, i) {
+        console.log('done editing account: ', account);
+        this.doEdit = {};
+        this.tempPlaceholder = 'add permission';
     }
 };
 AccountsPanelComponent = __decorate([
@@ -23561,7 +23577,7 @@ exports.ListValidator = ListValidator;
 /***/ 713:
 /***/ (function(module, exports) {
 
-module.exports = "<div *ngFor=\"let account of this.accountService.accounts as accounts; index as i\"><div class=\"col-sm-6 col-md-4\"><form class=\"box-shadow panel panel-info\" #editAccountForm=\"ngForm\" id=\"{{account.account_id}}\"><div class=\"panel-heading\"><h3 class=\"panel-title\">{{account.account_name}}</h3></div><div class=\"panel-body\"><div class=\"input-group input-group-sm\"><span class=\"input-group-addon\">Id</span><input class=\"form-control\" type=\"text\" placeholder=\"{{account.account_id}}\" disabled></div><div class=\"input-group input-group-sm\" *ngFor=\"let permission of account.account_permissions; index as j\"><span class=\"input-group-btn\"><button class=\"btn btn-info\" (click)=\"revokePermission(permission)\" type=\"button\">Revoke</button></span><input class=\"form-control\" type=\"text\" placeholder=\"{{permission | uuidTransform: this.permissionService.permissions}}\" disabled></div><div class=\"input-group input-group-sm\" *ngIf=\"account.account_name != 'administrator'\"><div class=\"input-group-btn\" disabled><button class=\"btn btn-info dropdown-toggle\" type=\"button\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">Instate<span class=\"caret\"></span></button><ul class=\"dropdown-menu\"><li *ngFor=\"let permission of this.permissionService.permissions as permissions; index as j\" id=\"{{permission.permission_id}}\"><a *ngIf=\"validator.validateList(this.accountService.accounts[i].account_permissions, permission.permission_id, i)\" (click)=\"addPermission(permission.permission_id)\">{{permission.permission_name}}</a></li></ul></div><input class=\"form-control\" type=\"text\" placeholder=\"{{this.tempPlaceholder}}\"></div></div><div class=\"panel-footer\" [attr.disabled]=\"account.account_name == 'administrator'\">edit</div><div class=\"panel-footer\" [attr.disabled]=\"account.account_name == 'administrator'\">delete</div></form></div></div>"
+module.exports = "<div *ngFor=\"let account of this.accountService.accounts as accounts; index as i\"><div class=\"col-sm-6 col-md-4\"><form class=\"box-shadow panel panel-info\" #editAccountForm=\"ngForm\" id=\"{{account.account_id}}\"><div class=\"panel-heading\"><h3 class=\"panel-title\">{{account.account_name}}</h3></div><div class=\"panel-body\"><div class=\"input-group input-group-sm\"><span class=\"input-group-addon\">Id</span><input class=\"form-control\" type=\"text\" placeholder=\"{{account.account_id}}\" disabled></div><div class=\"input-group input-group-sm\" *ngFor=\"let permission of account.account_permissions; index as j\"><span class=\"input-group-btn\"><button class=\"btn btn-info\" (click)=\"revokePermission(permission, i)\" [(attr.disabled)]=\"!this.doEdit[account.account_name]\" type=\"button\">Revoke</button></span><input class=\"form-control\" type=\"text\" placeholder=\"{{permission | uuidTransform: this.permissionService.permissions}}\" disabled></div><div class=\"input-group input-group-sm\" *ngIf=\"account.account_name != 'administrator'\"><div class=\"input-group-btn\" disabled><button class=\"btn btn-info dropdown-toggle\" [(attr.disabled)]=\"!this.doEdit[account.account_name]\" type=\"button\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">Instate<span class=\"caret\"></span></button><ul class=\"dropdown-menu\"><li *ngFor=\"let permission of this.permissionService.permissions as permissions; index as j\" id=\"{{permission.permission_id}}\"><a *ngIf=\"validator.validateList(this.accountService.accounts[i].account_permissions, permission.permission_id, i)\" (click)=\"addPermission(permission.permission_id, i)\">{{permission.permission_name}}</a></li></ul></div><input class=\"form-control\" type=\"text\" placeholder=\"{{this.tempPlaceholder}}\"></div></div><div class=\"panel-footer\" *ngIf=\"!this.doEdit[account.account_name]\" (click)=\"this.edit(this.account, i)\" [attr.disabled]=\"this.doEdit[account.account_name] || this.account.account_name == 'administrator'\">edit</div><div class=\"panel-footer done-edit\" *ngIf=\"this.doEdit[account.account_name]\" (click)=\"this.done(this.account, i)\" [attr.disabled]=\"!this.doEdit[account.account_name]\">done</div><div class=\"panel-footer\" *ngIf=\"!this.doEdit[account.account_name]\" (click)=\"this.delete(this.account, i)\" [attr.disabled]=\"!this.doEdit[account.account_name] || this.account.account_name == 'administrator'\">delete</div></form></div></div>"
 
 /***/ }),
 
@@ -23594,7 +23610,6 @@ let UuidTransformPipe = class UuidTransformPipe {
                 transformed = elem[name];
             }
         });
-        console.log('transformed: ', transformed);
         return transformed;
     }
 };
@@ -24048,4 +24063,4 @@ exports.PermissionServices = PermissionServices;
 /***/ })
 
 },[644]);
-//# sourceMappingURL=app.bef303ef295734e66066.js.map
+//# sourceMappingURL=app.b7fcf2d437a0ccf44b05.js.map
