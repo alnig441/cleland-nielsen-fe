@@ -3,8 +3,7 @@ import { HttpClient } from "@angular/common/http";
 import { ImageModel } from "../models/image.model";
 import 'rxjs/add/operator/toPromise';
 import { ErrorParser } from "./errorParser";
-
-'./errorParser';
+import { HttpAuthService } from "./httpAuth.service";
 
 @Injectable()
 
@@ -16,41 +15,76 @@ export class ImageServices {
     baseUrl = '/imagesDb';
     error: any;
 
-    constructor(private http: HttpClient) {}
+    constructor( private http: HttpClient, private activeUser: HttpAuthService) {}
 
     getOne(): Promise<any> {
-        return this.http.get(this.baseUrl, { observe: "response"})
-            .toPromise()
+
+        if(!this.activeUser.isPermitted['to_view_images']){
+            return Promise.reject({ status: 405, message: 'insufficient monkey permissions'})
+                .catch(this.errorParser.handleError)
+        }
+
+        else {
+            return this.http.get(this.baseUrl, { observe: "response"})
+                .toPromise()
+        }
+
     }
 
     getAll(): Promise<any> {
-        return this.http.get(this.baseUrl, { observe: "response"})
-            .toPromise()
-            .then(res => {
-                this.images = res.body as ImageModel[];
-                this.imagesUpdated = true;
-            })
-            .catch(this.errorParser.handleError);
+        if(!this.activeUser.isPermitted['to_view_images']){
+            return Promise.reject({ status: 405, message: 'insufficient permissions'})
+                .catch(this.errorParser.handleError)
+                .then((x) => {
+                    console.log('what: ', x);
+                })
+        }
+
+        else{
+            return this.http.get(this.baseUrl, { observe: "response"})
+                .toPromise()
+                .then(res => {
+                    this.images = res.body as ImageModel[];
+                    this.imagesUpdated = true;
+                })
+                .catch(this.errorParser.handleError);
+        }
+
     }
 
     getLatest(): Promise<any> {
-        return this.http.get(this.baseUrl +'/latest', {observe: "response"})
-            .toPromise()
-            .then(res => {
-                this.images = res.body as ImageModel[];
-                this.imagesUpdated = true;
-            })
-            .catch(this.errorParser.handleError)
+        if(!this.activeUser.isPermitted['to_view_images']){
+            return Promise.reject({ status: 405, message: 'insufficient permissions'})
+                .catch(this.errorParser.handleError);
+        }
+
+        else {
+            return this.http.get(this.baseUrl +'/latest', {observe: "response"})
+                .toPromise()
+                .then(res => {
+                    this.images = res.body as ImageModel[];
+                    this.imagesUpdated = true;
+                })
+                .catch(this.errorParser.handleError)
+        }
+
     }
 
     getList(): Promise<any> {
+        if(!this.activeUser.isPermitted['to_view_images']){
+            return Promise.reject({ status: 405, message: 'insufficient permissions'})
+                .catch(this.errorParser.handleError);
+        }
 
-        return this.http.get('/imagesDb', { observe: "response"})
-            .toPromise()
-            .then(res => {
-                this.images = res.body as ImageModel[];
-                this.imagesUpdated = true;
-            })
-            .catch(this.errorParser.handleError)
+        else{
+            return this.http.get('/imagesDb', { observe: "response"})
+                .toPromise()
+                .then(res => {
+                    this.images = res.body as ImageModel[];
+                    this.imagesUpdated = true;
+                })
+                .catch(this.errorParser.handleError)
+        }
+
     }
 }

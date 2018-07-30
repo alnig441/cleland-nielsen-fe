@@ -9,14 +9,13 @@ import {
     CanLoad,
     Route
 } from "@angular/router";
-import { AuthService } from "./auth.service";
 import { HttpAuthService } from "./httpAuth.service";
 
 @Injectable()
 
 export class AuthGuardService implements CanActivate, CanActivateChild, CanLoad {
 
-    constructor(private  httpAuth: HttpAuthService, private authenticate: AuthService, private router: Router) {}
+    constructor(private  httpAuth: HttpAuthService, private router: Router) {}
 
     checkLogin(url: string): boolean {
 

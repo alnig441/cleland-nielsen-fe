@@ -1,6 +1,5 @@
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
-import { AdminComponent } from "./admin/admin.component";
 import { PrivateRoutingModule } from "./private-routing.module";
 import { UsersComponent } from "./users/users.component";
 import { EventsComponent } from "./events/events.component";
@@ -20,7 +19,8 @@ import { PermissionsComponent } from "./permissions/permissions.component";
 import { PermissionServices } from "../../services/permission.services";
 import { PermissionsPanelComponent } from "../../components/permissionsPanel/permissionsPanel.component";
 import { AccountsPanelComponent } from "../../components/accountsPanel/accountsPanel.component";
-import {UuidTransformPipe} from "../../pipes/uuid.transform";
+import { UuidTransformPipe } from "../../pipes/uuid.transform";
+import {ErrorParserService} from "../../services/error-parser.service";
 
 @NgModule({
     imports: [
@@ -29,7 +29,6 @@ import {UuidTransformPipe} from "../../pipes/uuid.transform";
         PrivateRoutingModule
     ],
     declarations: [
-        AdminComponent,
         UsersComponent,
         EventsComponent,
         ImagesComponent,
@@ -48,10 +47,11 @@ import {UuidTransformPipe} from "../../pipes/uuid.transform";
         UuidTransformPipe
     ],
     providers: [
-        ImageServices,
-        UserServices,
-        AccountServices,
+        ErrorParserService,
         PermissionServices,
+        AccountServices,
+        UserServices,
+        ImageServices,
         httpInterceptorProviders,
     ]
 })

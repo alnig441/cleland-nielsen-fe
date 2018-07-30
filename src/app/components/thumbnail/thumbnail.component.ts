@@ -12,7 +12,7 @@ export class ThumbnailComponent implements OnInit {
     constructor(private imageService: ImageServices){}
 
     ngOnInit(): void {
-        this.imageService.getLatest();
+        // this.imageService.getLatest();
     }
 
 }

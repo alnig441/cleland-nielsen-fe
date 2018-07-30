@@ -34,10 +34,6 @@ router.post('/', (req, res, next) => {
                 permissions: user.account_permissions
             }
 
-            // userParameters.administrator === false ? userParameters.permissions = user.account_permissions : null;
-
-            console.log('userparameters: ', userParameters)
-
             /* generate signed web token */
             const token = jwt.sign({
                 sub: user.user_id,

@@ -27,8 +27,6 @@ export class HttpAuthService {
         return this.http.post<any>('/login', form)
             .map(activeUser => {
 
-                console.log('asfdadfadsf;', activeUser)
-
                 if(activeUser && activeUser.token){
                     localStorage.setItem('token', activeUser.token);
                     this.isLoggedIn = true;

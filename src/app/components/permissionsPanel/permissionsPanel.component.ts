@@ -12,7 +12,7 @@ export class PermissionsPanelComponent implements OnInit {
     constructor(private permissionService: PermissionServices){}
 
     ngOnInit(): void {
-        this.permissionService.getAll();
+        // this.permissionService.getAll();
         console.log('permPanel comp init');
     }
 }

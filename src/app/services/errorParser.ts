@@ -1,6 +1,9 @@
 export class ErrorParser {
+
     handleError(error: any): Promise<any> {
         let err = {};
+
+        console.log('error in parser: ', error)
 
         if (error.status === 401) {
             err = {
@@ -9,6 +12,10 @@ export class ErrorParser {
             }
         }
 
-        throw err || error;
+        else {
+            err = error;
+        }
+
+        throw err;
     }
 }

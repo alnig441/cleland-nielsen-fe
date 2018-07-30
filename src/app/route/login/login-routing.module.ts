@@ -1,7 +1,6 @@
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
 import { LoginComponent } from "./login.component";
-import { AuthService } from "../../services/auth.service";
 import { HttpAuthService } from "../../services/httpAuth.service";
 
 const LoginRoutes: Routes = [
@@ -19,7 +18,6 @@ const LoginRoutes: Routes = [
         RouterModule
     ],
     providers: [
-        AuthService,
         HttpAuthService
     ]
 })

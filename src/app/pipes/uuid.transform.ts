@@ -3,7 +3,9 @@ import { Pipe, PipeTransform } from "@angular/core";
 @Pipe({ name: 'uuidTransform'})
 export class UuidTransformPipe implements PipeTransform {
 
-    transform(uuid: any, items: any): string {
+    transform(uuid: any, items: any, misc: string): string {
+
+        // console.log('uuid transform incoming: ', items, misc);
 
         let id: string,
             name: string,

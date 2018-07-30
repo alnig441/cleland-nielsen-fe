@@ -1,5 +1,7 @@
 import { Component, OnInit, ViewEncapsulation } from "@angular/core";
 import { AccountServices } from "../../../services/account.services";
+import { PermissionServices } from "../../../services/permission.services";
+import { HttpAuthService } from "../../../services/httpAuth.service";
 
 @Component({
     selector: 'app-accounts',
@@ -9,11 +11,12 @@ import { AccountServices } from "../../../services/account.services";
 
 export class AccountsComponent implements OnInit {
 
-    constructor(private accountService: AccountServices){}
+    constructor(private activeUser: HttpAuthService, private accountService: AccountServices, private permissionService: PermissionServices){}
 
     ngOnInit(): void {
-        console.log('accounts comp init');
-        // this.accountService.getAll();
-        this.accountService.error = null;
+        console.log('accounts comp init', this.activeUser.isPermitted);
+        this.accountService.getAll();
+        this.permissionService.getAll();
+        // this.accountService.error = null;
     }
 }

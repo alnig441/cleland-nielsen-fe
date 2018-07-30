@@ -4,6 +4,7 @@ import { UserServices } from "../../services/user.services";
 import { ActivatedRoute } from "@angular/router";
 import { AccountServices } from "../../services/account.services";
 import { PermissionServices } from "../../services/permission.services";
+import { SidebarComponent } from "../sidebar/sidebar.component";
 
 @Component({
     selector: "app-messagebar",

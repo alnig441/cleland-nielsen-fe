@@ -10,7 +10,7 @@ div(*ngFor="let account of this.accountService.accounts as accounts; index as i"
                 div(*ngFor="let permission of account.account_permissions; index as j", class="input-group input-group-sm")
                     span(class="input-group-btn")
                         button((click)="revokePermission(permission, i)", [attr.disabled]="this.doEdit[account.account_name] == true ? null : true" class="btn btn-info" type="button") Revoke
-                    input(class="form-control" type="text", placeholder="{{permission | uuidTransform: this.permissionService.permissions}}", disabled)
+                    input(class="form-control" type="text", placeholder="{{permission | uuidTransform: this.permissionService.permissions:'acctPanel'}}", disabled)
                 div(*ngIf="account.account_name != 'administrator'", class="input-group input-group-sm")
                     div(class="input-group-btn" style="" disabled)
                         button([attr.disabled]="this.doEdit[account.account_name] == true ? null : true", type="button" class="btn btn-info dropdown-toggle", data-toggle="dropdown" aria-haspopup="true", aria-expanded="false", ) Instate
@@ -20,6 +20,6 @@ div(*ngFor="let account of this.accountService.accounts as accounts; index as i"
                                 a(*ngIf="validator.validateList(this.accountService.accounts[i].account_permissions, permission.permission_id, i)", (click)="addPermission(permission.permission_id, i)") {{permission.permission_name}}
                     input(class="form-control" type="text" placeholder="{{this.tempPlaceholder}}")
 
-            div(*ngIf="!this.doEdit[account.account_name]", (click)="this.edit(this.account, i)", class="panel-footer", [attr.disabled]="this.doEdit[account.account_name] || this.account.account_name == 'administrator'") edit
-            div(*ngIf="this.doEdit[account.account_name]",(click)="this.done(this.account, i)", class="panel-footer done-edit", [attr.disabled]="!this.doEdit[account.account_name]") done
-            div(*ngIf="!this.doEdit[account.account_name]",(click)="this.delete(this.account, i)", class="panel-footer", [attr.disabled]="!this.doEdit[account.account_name] || this.account.account_name == 'administrator'") delete
+            div(*ngIf="!this.doEdit[account.account_name]", (click)="this.edit(this.account, i)", class="panel-footer", [attr.disabled]="this.doEdit[account.account_name] == true ? null : true || this.account.account_name == 'administrator' ? null: true ") edit
+            div(*ngIf="this.doEdit[account.account_name]",(click)="this.done(this.account, i)", class="panel-footer done-edit", [attr.disabled]="!this.doEdit[account.account_name] == true ? null : true") done
+            div(*ngIf="!this.doEdit[account.account_name]",(click)="this.delete(this.account, i)", class="panel-footer", [attr.disabled]="this.doEdit[account.account_name] == true ? null : true || this.account.account_name == 'administrator' ? null: true ") delete

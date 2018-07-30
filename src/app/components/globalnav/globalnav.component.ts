@@ -1,5 +1,4 @@
 import { Component, OnInit, ViewEncapsulation } from "@angular/core";
-import { AuthService } from "../../services/auth.service";
 import { ActivatedRoute, NavigationEnd, Router } from "@angular/router";
 import { HttpClient } from "@angular/common/http";
 import { LINKS } from "../../constants/links";
@@ -15,7 +14,7 @@ export class GlobalnavComponent implements OnInit {
 
     navbarLinks = new Array();
 
-    constructor(private http: HttpClient, private router: Router, private activatedRoute: ActivatedRoute, private authService: AuthService, private httpAuth: HttpAuthService) {}
+    constructor(private http: HttpClient, private router: Router, private activatedRoute: ActivatedRoute, private httpAuth: HttpAuthService) {}
 
     ngOnInit(): void {
         console.log('globalnav comp init');

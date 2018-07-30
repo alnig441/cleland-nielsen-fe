@@ -1,8 +1,11 @@
 import { Component, OnInit, ViewEncapsulation } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { NavigationStart, Router, NavigationEnd, ActivatedRoute} from "@angular/router";
-import { filter } from "rxjs/operator/filter";
-import { SubscribeOnObservable } from "rxjs/observable/SubscribeOnObservable";
+import { HttpAuthService } from "../../services/httpAuth.service";
+import { UserServices } from "../../services/user.services";
+import { AccountServices } from "../../services/account.services";
+import { PermissionServices } from "../../services/permission.services";
+import { ImageServices } from "../../services/image.services";
 
 @Component({
     selector: 'app-private',
@@ -13,22 +16,12 @@ import { SubscribeOnObservable } from "rxjs/observable/SubscribeOnObservable";
 
 export class PrivateComponent implements OnInit {
 
-    constructor(private http: HttpClient, private router: Router,
-                private activatedRoute: ActivatedRoute) { }
+    constructor(private activeUser: HttpAuthService, private http: HttpClient, private router: Router,
+                private activatedRoute: ActivatedRoute, private userService: UserServices, private accountService: AccountServices, private permissionService: PermissionServices, private imageService: ImageServices) { }
 
     ngOnInit(): void {
-        console.log('private component initiallised');
+        console.log('private component initiallised', this.activeUser.isPermitted);
 
-        // this.activatedRoute.data.subscribe((data:any) => {
-        //     console.log("route data: ", data);
-        // })
-
-
-        // this.router.events.filter((event)=> event instanceof NavigationEnd)
-        //     .map(() => this.activatedRoute)
-        //     .subscribe((event) => {
-        //         console.log('navigation started: ', event);
-        //     })
     }
 
 }

@@ -15,7 +15,7 @@ div(*ngFor="let user of this.userService.users as users; index as i")
                             li(*ngFor="let account of this.accountService.accounts as accounts; index as j")
                                 a((click)="addInput(this.account, i)") {{account.account_name}}
                     input(*ngIf="this.doEdit[user.user_name]", [attr.disabled]="this.doEdit[user.user_name] == true ? null : true", class="form-control" type="text" placeholder="{{user.account_type}}",[(ngModel)]="users[i].account_type", name="account_type", #account_type="ngModel")
-                    input(*ngIf="!this.doEdit[user.user_name]", class="form-control" type="text" placeholder="{{user.account_type | uuidTransform:this.accountService.accounts}}" disabled)
+                    input(*ngIf="!this.doEdit[user.user_name]", class="form-control" type="text" placeholder="{{user.account_type | uuidTransform:this.accountService.accounts:'userPanel'}}" disabled)
                 div(class="input-group input-group-sm")
                     div(class="input-group-btn" style="")
                         button(type="button" class="btn btn-info dropdown-toggle", data-toggle="dropdown" aria-haspopup="true", aria-expanded="false", [attr.disabled]="this.doEdit[user.user_name] == true ? null : true") Language

@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewEncapsulation } from "@angular/core";
+import {HttpAuthService} from "../../../services/httpAuth.service";
 
 @Component({
     selector: 'app-events',
@@ -8,9 +9,9 @@ import { Component, OnInit, ViewEncapsulation } from "@angular/core";
 
 export class EventsComponent implements OnInit {
 
-    constructor(){}
+    constructor(private activeUser: HttpAuthService){}
 
     ngOnInit(): void {
-        console.log('events comp init');
+        console.log('events comp init', this.activeUser.isPermitted);
     }
 }
