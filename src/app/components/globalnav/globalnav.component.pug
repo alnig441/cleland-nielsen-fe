@@ -11,10 +11,12 @@ div
                 a(class="navbar-brand" href="#") Brand &#8200;
             div(class="collapse navbar-collapse" id="bs-example-navbar-collapse-1")
                 ul(*ngFor="let link of navbarLinks, let i = index" class="nav navbar-nav")
-                    li(class="")
-                        a(routerLink="{{link}}" routerLinkActive="active") {{link}}
+                    li(*ngIf="this.activeUser.isLoggedIn", class="")
+                        a(*ngIf="this.activeUser.isPermitted[link.permission]", routerLink="{{link.name}}" routerLinkActive="active") {{link.name}}
                             span(class="sr-only" current)
+                    li(*ngIf="!this.activeUser.isLoggedIn" class="")
+                        a(*ngIf="!link.permission", routerLink="{{link.name}}" routerLinkActive="active") {{link.name}}
                 ul(class="nav navbar-nav navbar-right")
                     li
-                        a(*ngIf='!this.httpAuth.isLoggedIn' routerLink="/login" routerLinkActive='active') Login
-                        a(*ngIf='this.httpAuth.isLoggedIn', (click)='logout()' routerLink='' routerLinkActive='') Logout
+                        a(*ngIf='!this.activeUser.isLoggedIn' routerLink="/login" routerLinkActive='active') Login
+                        a(*ngIf='this.activeUser.isLoggedIn', (click)='logout()' routerLink='' routerLinkActive='') Logout

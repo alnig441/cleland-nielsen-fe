@@ -17,7 +17,13 @@ export class ImagesComponent implements OnInit {
     constructor(private activeUser: HttpAuthService, private permissionService: PermissionServices, private accountService: AccountServices, private userService: UserServices, private imageService: ImageServices){}
 
     ngOnInit(): void {
-        this.imageService.getLatest();
+        this.imageService.getLatest()
+            .catch((error: any ) => {
+                this.imageService.error = error;
+                setTimeout(() => {
+                    this.imageService.error = null;
+                }, 3000)
+            })
         console.log('image comp init: ', this.activeUser.isPermitted)
     }
 

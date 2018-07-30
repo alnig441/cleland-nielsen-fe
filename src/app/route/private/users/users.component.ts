@@ -13,8 +13,13 @@ export class UsersComponent implements OnInit {
     constructor(private activeUser: HttpAuthService, private accountService: AccountServices) {}
 
     ngOnInit(): void {
-        console.log('user comp init', this.activeUser.isPermitted);
-
-        // this.accountService.getAll();
+        this.accountService.getAll()
+            .catch((error: any ) => {
+                this.accountService.error = error;
+                setTimeout(() => {
+                    this.accountService.error = null;
+                }, 3000)
+            })
+        console.log('user comp init', this.activeUser.isPermitted, this.accountService.accounts);
     }
 }

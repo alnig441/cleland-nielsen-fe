@@ -14,9 +14,13 @@ export class AccountsComponent implements OnInit {
     constructor(private activeUser: HttpAuthService, private accountService: AccountServices, private permissionService: PermissionServices){}
 
     ngOnInit(): void {
-        console.log('accounts comp init', this.activeUser.isPermitted);
-        this.accountService.getAll();
-        this.permissionService.getAll();
-        // this.accountService.error = null;
+        this.permissionService.getAll()
+            .catch((error: any ) => {
+                this.permissionService.error = error;
+                setTimeout(() => {
+                    this.permissionService.error = null;
+                }, 3000)
+            })
+        console.log('accounts comp init', this.activeUser.isPermitted, this.permissionService.permissions);
     }
 }

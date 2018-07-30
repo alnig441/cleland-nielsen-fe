@@ -18,9 +18,6 @@ export class PermissionServices {
 
     getAll(): Promise<any> {
         if(!this.activeUser.isPermitted['to_view_permissions']){
-
-            console.log('permission serv - user not allowed')
-
             return Promise.reject({ status: 405, message: 'insufficient permissions'})
                 .catch(this.errorParser.handleError);
         }
@@ -29,26 +26,10 @@ export class PermissionServices {
             return this.http.get(this.baseUrl, { observe: "response"})
                 .toPromise()
                 .then(res => {
+                    console.log('show me permissions: ', res.body)
                     this.permissions = res.body as PermissionModel[];
                 })
                 .catch(this.errorParser.handleError)
-        }
-
-    }
-
-    getLatest(): Promise<any> {
-        if(!this.activeUser.isPermitted['to_view_permissions']){
-            return Promise.reject({ status: 405, message: 'insufficient permissions'})
-                .catch(this.errorParser.handleError);
-        }
-
-        else {
-            return this.http.get(this.baseUrl, {observe: "response"})
-                .toPromise()
-                .then(res => {
-                    let error = { message: 'function yet to be defined'}
-                    throw error;
-                })
         }
 
     }
@@ -60,12 +41,7 @@ export class PermissionServices {
         }
 
         else {
-            return this.http.get(this.baseUrl, { observe: "response"})
-                .toPromise()
-                .then(res => {
-                    let error = { message: 'function yet to be defined'}
-                    throw error;
-                })
+            return Promise.reject({ status: '', message: 'method not yet defined'})
         }
 
     }
@@ -77,13 +53,39 @@ export class PermissionServices {
         }
 
         else {
-            return this.http.get(this.baseUrl, { observe: "response"})
-                .toPromise()
-                .then(res => {
-                    let error = { message: 'function yet to be defined'}
-                    throw error;
-                })
+            return Promise.reject({ status: '', message: 'method not yet defined'})
         }
 
     }
+
+    addItem(): Promise<any> {
+        if(!this.activeUser.isPermitted['to_add_permissions']){
+            return Promise.reject({ status: 405, message: 'insufficient permissions'})
+                .catch(this.errorParser.handleError)
+        }
+        else {
+            return Promise.reject({ status: '', message: 'method not yet defined'})
+        }
+    }
+
+    deleteItem(): Promise<any> {
+        if(!this.activeUser.isPermitted['to_delete_permissions']){
+            return Promise.reject({ status: 405, message: 'insufficient permissions'})
+                .catch(this.errorParser.handleError)
+        }
+        else {
+            return Promise.reject({ status: '', message: 'method not yet defined'})
+        }
+    }
+
+    editItem(): Promise<any> {
+        if(!this.activeUser.isPermitted['to_edit_permissions']){
+            return Promise.reject({ status: 405, message: 'insufficient permissions'})
+                .catch(this.errorParser.handleError)
+        }
+        else {
+            return Promise.reject({ status: '', message: 'method not yet defined'})
+        }
+    }
+
 }

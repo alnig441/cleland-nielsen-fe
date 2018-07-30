@@ -1,11 +1,7 @@
 ul(class='list-group box-shadow' style='border: 1px, solid, black')
-    span(*ngIf='this.activeService != "users"')
-        li(class='list-group-item')
+        li(*ngIf="this.requestedService =='images'" class='list-group-item')
             a((click)='getLatest()') get latest
         li(class='list-group-item')
             a((click)='getList()') filter
-    span(*ngIf='this.activeUser.isAdmin')
-        li(class='list-group-item')
-            a((click)='getOne()') get one
-        li(class='list-group-item')
-            a((click)='getAll()') get all
+        li(*ngIf="this.activeUser.isAdmin" class='list-group-item')
+            a((click)='addItem()') add

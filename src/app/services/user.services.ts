@@ -17,51 +17,6 @@ export class UserServices {
 
     constructor(private http: HttpClient, private activeUser: HttpAuthService) {}
 
-    getOne(): Promise<any> {
-        if(!this.activeUser.isPermitted['to_view_users']){
-            return Promise.reject({ status: 405, message: 'insufficient permissions'})
-                .catch(this.errorParser.handleError);
-        }
-
-        else{
-            return this.http.get(this.baseUrl, { observe: "response"})
-                .toPromise()
-                .then()
-                .catch(this.errorParser.handleError)
-        }
-
-    }
-
-    getLatest(): Promise<any> {
-        if(!this.activeUser.isPermitted['to_view_users']){
-            return Promise.reject({ status: 405, message: 'insufficient permissions'})
-                .catch(this.errorParser.handleError);
-        }
-
-        else{
-            return this.http.get(this.baseUrl, { observe: "response"})
-                .toPromise()
-                .then()
-                .catch(this.errorParser.handleError)
-        }
-
-    }
-
-    getList(): Promise<any> {
-        if(!this.activeUser.isPermitted['to_view_users']){
-            return Promise.reject({ status: 405, message: 'insufficient permissions'})
-                .catch(this.errorParser.handleError);
-        }
-
-        else {
-            return this.http.get(this.baseUrl, { observe: "response" })
-                .toPromise()
-                .then()
-                .catch(this.errorParser.handleError)
-        }
-
-    }
-
     getAll(): Promise<any> {
         if(!this.activeUser.isPermitted['to_view_users']){
             return Promise.reject({ status: 405, message: 'insufficient permissions'})
@@ -78,4 +33,60 @@ export class UserServices {
         }
 
     }
+
+    getOne(): Promise<any> {
+        if(!this.activeUser.isPermitted['to_view_users']){
+            return Promise.reject({ status: 405, message: 'insufficient permissions'})
+                .catch(this.errorParser.handleError);
+        }
+
+        else {
+            return Promise.reject({ status: '', message: 'method not yet defined'})
+        }
+
+    }
+
+    getList(): Promise<any> {
+        if(!this.activeUser.isPermitted['to_view_users']){
+            return Promise.reject({ status: 405, message: 'insufficient permissions'})
+                .catch(this.errorParser.handleError);
+        }
+
+        else {
+            return Promise.reject({ status: '', message: 'method not yet defined'})
+        }
+
+    }
+
+
+    addItem(): Promise<any> {
+        if(!this.activeUser.isPermitted['to_add_users']){
+            return Promise.reject({ status: 405, message: 'insufficient permissions'})
+                .catch(this.errorParser.handleError)
+        }
+        else {
+            return Promise.reject({ status: '', message: 'method not yet defined'})
+        }
+    }
+
+    deleteItem(): Promise<any> {
+        if(!this.activeUser.isPermitted['to_delete_users']){
+            return Promise.reject({ status: 405, message: 'insufficient permissions'})
+                .catch(this.errorParser.handleError)
+        }
+        else {
+            return Promise.reject({ status: '', message: 'method not yet defined'})
+        }
+    }
+
+    editItem(): Promise<any> {
+        if(!this.activeUser.isPermitted['to_edit_users']){
+            return Promise.reject({ status: 405, message: 'insufficient permissions'})
+                .catch(this.errorParser.handleError)
+        }
+        else {
+            return Promise.reject({ status: '', message: 'method not yet defined'})
+        }
+    }
+
 }

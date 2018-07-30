@@ -7,6 +7,7 @@ export const LINKS = {
     ],
     private: [
         'images',
+        'videos',
         'events',
     ],
     admin: [

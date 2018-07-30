@@ -21,7 +21,6 @@ export class PrivateComponent implements OnInit {
 
     ngOnInit(): void {
         console.log('private component initiallised', this.activeUser.isPermitted);
-
     }
 
 }

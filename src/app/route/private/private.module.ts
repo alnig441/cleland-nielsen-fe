@@ -7,11 +7,9 @@ import { ImagesComponent } from "./images/images.component";
 import { SidebarComponent } from "../../components/sidebar/sidebar.component";
 import { ImageServices } from "../../services/image.services";
 import { InfobarComponent } from "../../components/infobar/infobar.component";
-import { ThumbnailComponent } from "../../components/thumbnail/thumbnail.component";
 import { httpInterceptorProviders } from "../../services/interceptors/http-interceptors";
 import { MessagebarComponent } from "../../components/messagebar/messagebar.component";
 import { UserServices } from "../../services/user.services";
-import { PanelComponent } from "../../components/panel/panel.component";
 import { FormsModule } from "@angular/forms";
 import { AccountServices } from "../../services/account.services";
 import { AccountsComponent } from "./accounts/accounts.component";
@@ -20,7 +18,8 @@ import { PermissionServices } from "../../services/permission.services";
 import { PermissionsPanelComponent } from "../../components/permissionsPanel/permissionsPanel.component";
 import { AccountsPanelComponent } from "../../components/accountsPanel/accountsPanel.component";
 import { UuidTransformPipe } from "../../pipes/uuid.transform";
-import {ErrorParserService} from "../../services/error-parser.service";
+import { UserPanelComponent } from "../../components/userPanel/user-panel.component";
+import { ImagesThumbnailComponent } from "../../components/imagesThumbnail/images-thumbnail.component";
 
 @NgModule({
     imports: [
@@ -32,22 +31,21 @@ import {ErrorParserService} from "../../services/error-parser.service";
         UsersComponent,
         EventsComponent,
         ImagesComponent,
-        SidebarComponent,
-        InfobarComponent,
-        ThumbnailComponent,
-        MessagebarComponent,
-        PanelComponent,
         AccountsComponent,
         PermissionsComponent,
-        PermissionsPanelComponent,
+        SidebarComponent,
+        InfobarComponent,
+        MessagebarComponent,
+        ImagesThumbnailComponent,
+        UserPanelComponent,
         AccountsPanelComponent,
+        PermissionsPanelComponent,
         UuidTransformPipe,
     ],
     exports: [
         UuidTransformPipe
     ],
     providers: [
-        ErrorParserService,
         PermissionServices,
         AccountServices,
         UserServices,

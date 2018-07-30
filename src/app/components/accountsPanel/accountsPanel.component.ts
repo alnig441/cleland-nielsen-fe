@@ -19,9 +19,14 @@ export class AccountsPanelComponent implements OnInit {
     constructor(private activeUser: HttpAuthService, private accountService: AccountServices, private permissionService: PermissionServices) {}
 
     ngOnInit(): void {
-        // this.accountService.getAll();
-        // this.permissionService.getAll();
         console.log('acctPanel comp init', this.activeUser.isPermitted, this.permissionService.permissions);
+        this.accountService.getAll()
+            .catch((error: any ) => {
+                this.accountService.error = error;
+                setTimeout(() => {
+                    this.accountService.error = null;
+                }, 3000)
+            })
     }
 
     addPermission(permission: string, i: number): void {
@@ -39,22 +44,50 @@ export class AccountsPanelComponent implements OnInit {
     }
 
     edit(account: any, i: any) :void {
-        console.log('permitted: ', this.activeUser.isPermitted['to_edit_accounts']);
-        if(this.activeUser.isPermitted['to_edit_accounts']){
+        if(!this.activeUser.isPermitted['to_edit_accounts']){
+            this.accountService.error = { status: 405, message: 'insufficient permissions' }
+            setTimeout(() => {
+                this.accountService.error = null;
+            },3000)
+        }
+        else{
             console.log('editing account: ', account);
             this.doEdit[account.account_name] = true;
         }
     }
 
+    add(): void {
+        this.accountService.addItem()
+            .catch((error) =>{
+                this.accountService.error = error;
+                setTimeout(()=>{
+                    this.accountService.error = null;
+                }, 3000)
+            })
+    }
+
     delete(account: any, i: any): void {
-        if(this.activeUser.isPermitted['to_delete_accounts']){
-            console.log('deleting account: ', account);
-        }
+        console.log('deleting account: ', account);
+        this.accountService.deleteItem()
+            .catch((error) =>{
+                this.accountService.error = error;
+                setTimeout(()=>{
+                    this.accountService.error = null;
+                }, 3000)
+            })
     }
 
     done(account: any, i: any): void {
         console.log('done editing account: ', account);
         this.doEdit = {};
         this.tempPlaceholder = 'add permission';
+
+        this.accountService.editItem()
+            .catch((error) =>{
+                this.accountService.error = error;
+                setTimeout(()=>{
+                    this.accountService.error = null;
+                }, 3000)
+            })
     }
 }

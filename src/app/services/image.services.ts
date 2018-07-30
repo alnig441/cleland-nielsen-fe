@@ -17,27 +17,10 @@ export class ImageServices {
 
     constructor( private http: HttpClient, private activeUser: HttpAuthService) {}
 
-    getOne(): Promise<any> {
-
-        if(!this.activeUser.isPermitted['to_view_images']){
-            return Promise.reject({ status: 405, message: 'insufficient monkey permissions'})
-                .catch(this.errorParser.handleError)
-        }
-
-        else {
-            return this.http.get(this.baseUrl, { observe: "response"})
-                .toPromise()
-        }
-
-    }
-
     getAll(): Promise<any> {
         if(!this.activeUser.isPermitted['to_view_images']){
             return Promise.reject({ status: 405, message: 'insufficient permissions'})
                 .catch(this.errorParser.handleError)
-                .then((x) => {
-                    console.log('what: ', x);
-                })
         }
 
         else{
@@ -48,6 +31,19 @@ export class ImageServices {
                     this.imagesUpdated = true;
                 })
                 .catch(this.errorParser.handleError);
+        }
+
+    }
+
+    getOne(): Promise<any> {
+
+        if(!this.activeUser.isPermitted['to_view_images']){
+            return Promise.reject({ status: 405, message: 'insufficient permissions'})
+                .catch(this.errorParser.handleError)
+        }
+
+        else {
+            return Promise.reject({ status: '', message: 'method not yet defined'})
         }
 
     }
@@ -59,13 +55,7 @@ export class ImageServices {
         }
 
         else {
-            return this.http.get(this.baseUrl +'/latest', {observe: "response"})
-                .toPromise()
-                .then(res => {
-                    this.images = res.body as ImageModel[];
-                    this.imagesUpdated = true;
-                })
-                .catch(this.errorParser.handleError)
+            return Promise.reject({ status: '', message: 'method not yet defined'})
         }
 
     }
@@ -76,15 +66,40 @@ export class ImageServices {
                 .catch(this.errorParser.handleError);
         }
 
-        else{
-            return this.http.get('/imagesDb', { observe: "response"})
-                .toPromise()
-                .then(res => {
-                    this.images = res.body as ImageModel[];
-                    this.imagesUpdated = true;
-                })
-                .catch(this.errorParser.handleError)
+        else {
+            return Promise.reject({ status: '', message: 'method not yet defined'})
         }
 
     }
+
+    addItem(): Promise<any> {
+        if(!this.activeUser.isPermitted['to_add_images']){
+            return Promise.reject({ status: 405, message: 'insufficient permissions'})
+                .catch(this.errorParser.handleError)
+        }
+        else {
+            return Promise.reject({ status: '', message: 'method not yet defined'})
+        }
+    }
+
+    deleteItem(): Promise<any> {
+        if(!this.activeUser.isPermitted['to_delete_images']){
+            return Promise.reject({ status: 405, message: 'insufficient permissions'})
+                .catch(this.errorParser.handleError)
+        }
+        else {
+            return Promise.reject({ status: '', message: 'method not yet defined'})
+        }
+    }
+
+    editItem(): Promise<any> {
+        if(!this.activeUser.isPermitted['to_edit_images']){
+            return Promise.reject({ status: 405, message: 'insufficient permissions'})
+                .catch(this.errorParser.handleError)
+        }
+        else {
+            return Promise.reject({ status: '', message: 'method not yet defined'})
+        }
+    }
+
 }

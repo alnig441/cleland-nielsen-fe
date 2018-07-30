@@ -1,7 +1,6 @@
 import { Component, OnInit, ViewEncapsulation } from "@angular/core";
 import { ActivatedRoute, NavigationEnd, Router } from "@angular/router";
 import { HttpClient } from "@angular/common/http";
-import { LINKS } from "../../constants/links";
 import { HttpAuthService } from "../../services/httpAuth.service";
 
 @Component({
@@ -12,32 +11,26 @@ import { HttpAuthService } from "../../services/httpAuth.service";
 
 export class GlobalnavComponent implements OnInit {
 
-    navbarLinks = new Array();
+    navbarLinks = [
+            { name: 'home'},
+            { name: 'about'},
+            { name: 'work'},
+            { name: 'contact'},
+            { name: 'images' ,      permission: 'to_view_images'},
+            { name: 'videos' ,      permission: 'to_view_videos'},
+            { name: 'users' ,       permission: 'to_view_users'},
+            { name: 'accounts' ,    permission: 'to_view_accounts'},
+            { name: 'permissions',  permission: 'to_view_permissions'}
+    ]
 
-    constructor(private http: HttpClient, private router: Router, private activatedRoute: ActivatedRoute, private httpAuth: HttpAuthService) {}
+    constructor(private http: HttpClient, private router: Router, private activatedRoute: ActivatedRoute, private activeUser: HttpAuthService) {}
 
     ngOnInit(): void {
         console.log('globalnav comp init');
-
-        this.router.events.filter((event)=> event instanceof NavigationEnd)
-            .map(() => LINKS)
-            .subscribe((links) => {
-                if(this.httpAuth.isLoggedIn){
-                    this.navbarLinks = links.private;
-                    if(this.httpAuth.isAdmin){
-                        this.navbarLinks = links.private.concat(links.admin);
-                        console.log('navbar links: ', this.navbarLinks);
-                    }
-                } else {
-                    this.navbarLinks = links.public;
-                }
-
-            })
-
     }
 
     logout() : void {
-        this.httpAuth.logout();
-        this.router.navigate([this.httpAuth.redirectUrl]);
+        this.activeUser.logout();
+        this.router.navigate([this.activeUser.redirectUrl]);
     }
 }

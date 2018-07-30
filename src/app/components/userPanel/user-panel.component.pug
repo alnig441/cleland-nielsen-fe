@@ -13,7 +13,7 @@ div(*ngFor="let user of this.userService.users as users; index as i")
                             span(class="caret")
                         ul(class="dropdown-menu")
                             li(*ngFor="let account of this.accountService.accounts as accounts; index as j")
-                                a((click)="addInput(this.account, i)") {{account.account_name}}
+                                a((click)="editInput(this.account, i)") {{account.account_name}}
                     input(*ngIf="this.doEdit[user.user_name]", [attr.disabled]="this.doEdit[user.user_name] == true ? null : true", class="form-control" type="text" placeholder="{{user.account_type}}",[(ngModel)]="users[i].account_type", name="account_type", #account_type="ngModel")
                     input(*ngIf="!this.doEdit[user.user_name]", class="form-control" type="text" placeholder="{{user.account_type | uuidTransform:this.accountService.accounts:'userPanel'}}" disabled)
                 div(class="input-group input-group-sm")
@@ -22,7 +22,7 @@ div(*ngFor="let user of this.userService.users as users; index as i")
                             span(class="caret")
                         ul(class="dropdown-menu")
                             li(*ngFor="let language of this.languages")
-                                a((click)="addInput(this.language, i)") {{language.language}}
+                                a((click)="editInput(this.language, i)") {{language.language}}
                     input([attr.disabled]="this.doEdit[user.user_name] == true ? null : true", class="form-control" type="text" placeholder="{{user.language}}", [(ngModel)]="users[i].language", name="language",#user_name="ngModel")
                 div(class="input-group input-group-sm")
                     span(class="input-group-addon", [attr.disabled]="this.doEdit[user.user_name] == true ? null : true") Password

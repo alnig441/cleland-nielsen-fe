@@ -60,6 +60,7 @@ export class HttpAuthService {
         localStorage.removeItem('token');
         this.isAdmin = false;
         this.isLoggedIn = false;
+        this.isPermitted = {};
         this.redirectUrl = "/home";
     }
 }
