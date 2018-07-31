@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewEncapsulation } from "@angular/core";
 import { PermissionServices } from "../../services/permission.services";
-import {HttpAuthService} from "../../services/httpAuth.service";
-import {PermissionModel} from "../../models/permission.model";
+import { HttpAuthService } from "../../services/httpAuth.service";
+import { PermissionModel } from "../../models/permission.model";
 
 @Component({
     selector: 'app-permissions-panel',
@@ -21,12 +21,12 @@ export class PermissionsPanelComponent implements OnInit {
                     this.permissionService.error = null;
                 }, 3000)
             })
-        console.log('permPanel comp init', this.activeUser.isPermitted);
+        // console.log('permPanel comp init', this.activeUser.isPermitted);
     }
 
-    delete(permission: any): void {
+    delete(permission: PermissionModel): void {
 
-        console.log(`deleting ${permission}`);
+        console.log(`deleting: `, permission);
         this.permissionService.deleteItem()
             .catch((error: any) => {
                 this.permissionService.error = error;

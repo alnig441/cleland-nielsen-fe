@@ -7,7 +7,6 @@ import { AuthGuardService } from "../../services/auth-guard.service";
 import { AccountsComponent } from "./accounts/accounts.component";
 import { PermissionsComponent } from "./permissions/permissions.component";
 
-
 const privateRoutes: Routes = [
     {
         path: 'users',

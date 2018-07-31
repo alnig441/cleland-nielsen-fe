@@ -28,7 +28,7 @@ export class UserPanelComponent implements OnInit {
     constructor(private activeUser: HttpAuthService, private userService: UserServices, private accountService: AccountServices) {}
 
     ngOnInit(): void {
-        console.log('panel comp init');
+        // console.log('panel comp init');
         this.userService.getAll()
             .catch((error: any ) => {
                 this.userService.error = error;

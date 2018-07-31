@@ -24,7 +24,7 @@ export class ImagesComponent implements OnInit {
                     this.imageService.error = null;
                 }, 3000)
             })
-        console.log('image comp init: ', this.activeUser.isPermitted)
+        // console.log('image comp init: ', this.activeUser.isPermitted)
     }
 
 }

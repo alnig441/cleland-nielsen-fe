@@ -1,7 +1,8 @@
-ul(class="list-group box-shadow" style="border: 1px, solid, black")
-    li(class="list-group-item")
-        p Occasion
-    li(class="list-group-item")
-        p Names
-    li(class="list-group-item")
-        p Location
+span(*ngIf="this.activeUser.isPermitted['to_add_'+ this.type + 's']")
+    form(#addItemForm="ngForm" class="panel panel-default box-shadow")
+        div(class="panel-heading")
+            h3(class="panel-title") add {{this.type}}
+        div(class="panel-body")
+            div(*ngFor="let property of this.formProperties; index as i", class="input-group input-group-sm")
+                input(*ngIf="property != this.type +'_id'" class="form-control" type="text", placeholder="{{property}}", [(ngModel)]="this.itemForm[property]" name="{{property}}")
+        div((click)="submit(this.itemForm)" class="panel-footer done-edit") submit

@@ -40,7 +40,7 @@ import { ImagesThumbnailComponent } from "../../components/imagesThumbnail/image
         UserPanelComponent,
         AccountsPanelComponent,
         PermissionsPanelComponent,
-        UuidTransformPipe,
+        UuidTransformPipe
     ],
     exports: [
         UuidTransformPipe

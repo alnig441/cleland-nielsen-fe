@@ -26,7 +26,7 @@ export class PermissionServices {
             return this.http.get(this.baseUrl, { observe: "response"})
                 .toPromise()
                 .then(res => {
-                    console.log('show me permissions: ', res.body)
+                    // console.log('show me permissions: ', res.body)
                     this.permissions = res.body as PermissionModel[];
                 })
                 .catch(this.errorParser.handleError)

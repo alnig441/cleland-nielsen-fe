@@ -19,7 +19,8 @@ export class AccountsPanelComponent implements OnInit {
     constructor(private activeUser: HttpAuthService, private accountService: AccountServices, private permissionService: PermissionServices) {}
 
     ngOnInit(): void {
-        console.log('acctPanel comp init', this.activeUser.isPermitted, this.permissionService.permissions);
+        // console.log('acctPanel comp init', this.activeUser.isPermitted, this.permissionService.permissions);
+
         this.accountService.getAll()
             .catch((error: any ) => {
                 this.accountService.error = error;

@@ -20,6 +20,6 @@ export class UsersComponent implements OnInit {
                     this.accountService.error = null;
                 }, 3000)
             })
-        console.log('user comp init', this.activeUser.isPermitted, this.accountService.accounts);
+        // console.log('user comp init', this.activeUser.isPermitted, this.accountService.accounts);
     }
 }

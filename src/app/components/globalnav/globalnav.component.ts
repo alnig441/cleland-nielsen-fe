@@ -26,7 +26,7 @@ export class GlobalnavComponent implements OnInit {
     constructor(private http: HttpClient, private router: Router, private activatedRoute: ActivatedRoute, private activeUser: HttpAuthService) {}
 
     ngOnInit(): void {
-        console.log('globalnav comp init');
+        // console.log('globalnav comp init');
     }
 
     logout() : void {

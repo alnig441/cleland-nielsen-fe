@@ -21,6 +21,6 @@ export class AccountsComponent implements OnInit {
                     this.permissionService.error = null;
                 }, 3000)
             })
-        console.log('accounts comp init', this.activeUser.isPermitted, this.permissionService.permissions);
+        // console.log('accounts comp init', this.activeUser.isPermitted, this.permissionService.permissions);
     }
 }

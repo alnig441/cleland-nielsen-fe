@@ -20,7 +20,7 @@ export class SidebarComponent implements OnInit {
     constructor(private permissions: PermissionServices, private accounts: AccountServices, private activeUser: HttpAuthService, private activatedRoute: ActivatedRoute, private images: ImageServices, private router: Router, private users: UserServices){}
 
     ngOnInit(): void {
-        console.log('sidebar comp init');
+        // console.log('sidebar comp init');
         this.requestedService = this.activatedRoute.snapshot.url[0].path;
         this[this.requestedService].error = null;
     }

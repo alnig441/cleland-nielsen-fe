@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewEncapsulation } from "@angular/core";
 import { HttpAuthService } from "../../../services/httpAuth.service";
+import { PermissionModel } from "../../../models/permission.model";
 
 @Component({
     selector: 'app-permissions',
@@ -9,9 +10,11 @@ import { HttpAuthService } from "../../../services/httpAuth.service";
 
 export class PermissionsComponent implements OnInit {
 
+    private permissionForm: PermissionModel = new PermissionModel('','')
+
     constructor(private activeUser: HttpAuthService){}
 
     ngOnInit(): void {
-        console.log('permissions comp init', this.activeUser.isPermitted);
+        // console.log('permissions comp init', this.activeUser.isPermitted);
     }
 }

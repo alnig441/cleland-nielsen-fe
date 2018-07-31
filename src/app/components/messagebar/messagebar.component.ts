@@ -20,7 +20,7 @@ export class MessagebarComponent implements OnInit {
     constructor(private permissions: PermissionServices, private accounts: AccountServices, private images: ImageServices, private users: UserServices, private activatedRoute: ActivatedRoute){}
 
     ngOnInit(): void {
-        console.log('messagebar comp init', this.activatedRoute.snapshot.url[0].path);
+        // console.log('messagebar comp init', this.activatedRoute.snapshot.url[0].path);
         this.route = this.activatedRoute.snapshot.url[0].path;
     }
 

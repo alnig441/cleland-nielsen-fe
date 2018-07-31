@@ -10,7 +10,7 @@ div(*ngFor="let account of this.accountService.accounts as accounts; index as i"
                 div(*ngFor="let permission of account.account_permissions; index as j", class="input-group input-group-sm")
                     span(class="input-group-btn")
                         button((click)="revokePermission(permission, i)", [attr.disabled]="this.doEdit[account.account_name] == true ? null : true" class="btn btn-info" type="button") Revoke
-                    input(class="form-control" type="text", placeholder="{{permission | uuidTransform: this.permissionService.permissions:'acctPanel'}}", disabled)
+                    input(class="form-control" type="text", placeholder="{{permission | uuidTransform: this.permissionService.permissions}}", disabled)
                 div(*ngIf="account.account_name != 'administrator'", class="input-group input-group-sm")
                     div(class="input-group-btn" style="" disabled)
                         button([attr.disabled]="this.doEdit[account.account_name] == true ? null : true", type="button" class="btn btn-info dropdown-toggle", data-toggle="dropdown" aria-haspopup="true", aria-expanded="false", ) Instate
