@@ -15,6 +15,7 @@ import { PrivateModule } from "./route/private/private.module";
 import { LoginComponent } from "./route/login/login.component";
 import { GlobalnavComponent } from "./components/globalnav/globalnav.component";
 import { ErrorMessageServices } from "./services/errorMessage.services";
+import { AppLoadModule } from "./load/app-load.module";
 
 
 
@@ -28,7 +29,8 @@ import { ErrorMessageServices } from "./services/errorMessage.services";
         PublicModule,
         PrivateModule,
         LoginRoutingModule,
-        AppRouting
+        AppRouting,
+        // AppLoadModule
     ],
     declarations: [
         AppComponent,

@@ -25,7 +25,7 @@ import { ImagesThumbnailComponent } from "../../components/imagesThumbnail/image
     imports: [
         CommonModule,
         FormsModule,
-        PrivateRoutingModule
+        PrivateRoutingModule,
     ],
     declarations: [
         UsersComponent,

@@ -1,5 +1,4 @@
 import { Injectable } from "@angular/core";
-import { Observable } from "rxjs";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { LoginModel } from "../models/login.model";
 import "rxjs/add/operator/toPromise";
@@ -20,9 +19,7 @@ export class HttpAuthService {
 
     login(form: LoginModel) {
 
-        this.redirectUrl = "/private";
-
-        this.getPermissions();
+        this.redirectUrl = "/private"
 
         return this.http.post<any>('/login', form)
             .map(activeUser => {
@@ -33,26 +30,9 @@ export class HttpAuthService {
                     this.isAdmin = activeUser.userParameters.administrator ? true : false;
                 }
 
-                if(activeUser.userParameters.permissions && this.permissions){
-                    activeUser.userParameters.permissions.forEach((uuid : string) => {
-                        this.permissions.find(permit => {
-                            return permit.permission_id === uuid ? this.isPermitted[permit.permission_name] = true : null;
-                            }
-                        )
-
-                    })
-                }
                 return activeUser;
             })
 
-    }
-
-    private getPermissions(): Promise<any> {
-        return this.http.get('/permissionsDb', { observe: "response"})
-            .toPromise()
-            .then(result => {
-                this.permissions = result.body as PermissionModel[];
-            })
     }
 
 

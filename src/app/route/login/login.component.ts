@@ -3,6 +3,8 @@ import { NavigationExtras, Router } from "@angular/router";
 import { HttpClient } from "@angular/common/http";
 import { LoginModel } from "../../models/login.model";
 import { HttpAuthService } from "../../services/httpAuth.service";
+import { PermissionServices } from "../../services/permission.services";
+import { ErrorParser } from "../../services/errorParser";
 
 @Component({
     selector: 'app-login',
@@ -13,10 +15,10 @@ import { HttpAuthService } from "../../services/httpAuth.service";
 
 export class LoginComponent implements OnInit {
 
-
+    errorParser = new ErrorParser();
     loginModel = new LoginModel('', '');
 
-    constructor(private http: HttpClient, private router: Router, private httpAuth: HttpAuthService){}
+    constructor(private http: HttpClient, private router: Router, private httpAuth: HttpAuthService, private permissionService: PermissionServices){}
 
     public ngOnInit():void {
         // console.log('login component initialised');
@@ -27,6 +29,20 @@ export class LoginComponent implements OnInit {
         this.httpAuth.login(this.loginModel).subscribe((user) => {
 
             if(this.httpAuth.isLoggedIn) {
+
+                this.http.get('/permissionsDb', {observe: "response"})
+                    .toPromise()
+                    .then((result: any) => {
+                        user.userParameters.permissions.forEach((uuid: string) => {
+                            result.body.find((permit: any) => {
+                                return permit.permission_id === uuid ? this.httpAuth.isPermitted[permit.permission_name] = true: null;
+                            })
+                        })
+                    })
+                    .catch(this.errorParser.handleError)
+                    .catch(error => console.log(error));
+
+
                 let redirect = this.httpAuth.redirectUrl ? this.httpAuth.redirectUrl : '/private';
                 let navigationExtras : NavigationExtras = {
                     queryParamsHandling: 'preserve',

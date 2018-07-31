@@ -386,7 +386,6 @@ let HttpAuthService = class HttpAuthService {
     }
     login(form) {
         this.redirectUrl = "/private";
-        this.getPermissions();
         return this.http.post('/login', form)
             .map(activeUser => {
             if (activeUser && activeUser.token) {
@@ -394,21 +393,7 @@ let HttpAuthService = class HttpAuthService {
                 this.isLoggedIn = true;
                 this.isAdmin = activeUser.userParameters.administrator ? true : false;
             }
-            if (activeUser.userParameters.permissions && this.permissions) {
-                activeUser.userParameters.permissions.forEach((uuid) => {
-                    this.permissions.find(permit => {
-                        return permit.permission_id === uuid ? this.isPermitted[permit.permission_name] = true : null;
-                    });
-                });
-            }
             return activeUser;
-        });
-    }
-    getPermissions() {
-        return this.http.get('/permissionsDb', { observe: "response" })
-            .toPromise()
-            .then(result => {
-            this.permissions = result.body;
         });
     }
     logout() {
@@ -6768,11 +6753,15 @@ const router_1 = __webpack_require__(29);
 const http_1 = __webpack_require__(30);
 const login_model_1 = __webpack_require__(673);
 const httpAuth_service_1 = __webpack_require__(14);
+const permission_services_1 = __webpack_require__(51);
+const errorParser_1 = __webpack_require__(79);
 let LoginComponent = class LoginComponent {
-    constructor(http, router, httpAuth) {
+    constructor(http, router, httpAuth, permissionService) {
         this.http = http;
         this.router = router;
         this.httpAuth = httpAuth;
+        this.permissionService = permissionService;
+        this.errorParser = new errorParser_1.ErrorParser();
         this.loginModel = new login_model_1.LoginModel('', '');
     }
     ngOnInit() {
@@ -6781,6 +6770,17 @@ let LoginComponent = class LoginComponent {
     onSubmit() {
         this.httpAuth.login(this.loginModel).subscribe((user) => {
             if (this.httpAuth.isLoggedIn) {
+                this.http.get('/permissionsDb', { observe: "response" })
+                    .toPromise()
+                    .then((result) => {
+                    user.userParameters.permissions.forEach((uuid) => {
+                        result.body.find((permit) => {
+                            return permit.permission_id === uuid ? this.httpAuth.isPermitted[permit.permission_name] = true : null;
+                        });
+                    });
+                })
+                    .catch(this.errorParser.handleError)
+                    .catch(error => console.log(error));
                 let redirect = this.httpAuth.redirectUrl ? this.httpAuth.redirectUrl : '/private';
                 let navigationExtras = {
                     queryParamsHandling: 'preserve',
@@ -6802,7 +6802,7 @@ LoginComponent = __decorate([
         styles: [__webpack_require__(675)],
         encapsulation: core_1.ViewEncapsulation.None
     }),
-    __metadata("design:paramtypes", [http_1.HttpClient, router_1.Router, httpAuth_service_1.HttpAuthService])
+    __metadata("design:paramtypes", [http_1.HttpClient, router_1.Router, httpAuth_service_1.HttpAuthService, permission_services_1.PermissionServices])
 ], LoginComponent);
 exports.LoginComponent = LoginComponent;
 
@@ -7000,7 +7000,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 const core_1 = __webpack_require__(3);
-const account_services_1 = __webpack_require__(51);
+const account_services_1 = __webpack_require__(52);
 const httpAuth_service_1 = __webpack_require__(14);
 let UsersComponent = class UsersComponent {
     constructor(activeUser, accountService) {
@@ -7046,10 +7046,10 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 const core_1 = __webpack_require__(3);
-const image_services_1 = __webpack_require__(79);
-const permission_services_1 = __webpack_require__(57);
-const account_services_1 = __webpack_require__(51);
-const user_services_1 = __webpack_require__(80);
+const image_services_1 = __webpack_require__(80);
+const permission_services_1 = __webpack_require__(51);
+const account_services_1 = __webpack_require__(52);
+const user_services_1 = __webpack_require__(81);
 const httpAuth_service_1 = __webpack_require__(14);
 let ImagesComponent = class ImagesComponent {
     constructor(activeUser, permissionService, accountService, userService, imageService) {
@@ -7099,8 +7099,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 const core_1 = __webpack_require__(3);
-const account_services_1 = __webpack_require__(51);
-const permission_services_1 = __webpack_require__(57);
+const account_services_1 = __webpack_require__(52);
+const permission_services_1 = __webpack_require__(51);
 const httpAuth_service_1 = __webpack_require__(14);
 let AccountsComponent = class AccountsComponent {
     constructor(activeUser, accountService, permissionService) {
@@ -17471,7 +17471,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_observable_of___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs_observable_of__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_operator_concatMap__ = __webpack_require__(126);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_operator_concatMap___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_rxjs_operator_concatMap__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_operator_filter__ = __webpack_require__(95);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_operator_filter__ = __webpack_require__(96);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_operator_filter___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_rxjs_operator_filter__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_rxjs_operator_map__ = __webpack_require__(67);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_rxjs_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_rxjs_operator_map__);
@@ -19639,7 +19639,104 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 const core_1 = __webpack_require__(3);
 const http_1 = __webpack_require__(30);
 __webpack_require__(68);
-const errorParser_1 = __webpack_require__(99);
+const errorParser_1 = __webpack_require__(79);
+const httpAuth_service_1 = __webpack_require__(14);
+let PermissionServices = class PermissionServices {
+    constructor(http, activeUser) {
+        this.http = http;
+        this.activeUser = activeUser;
+        this.errorParser = new errorParser_1.ErrorParser();
+        this.permissions = new Array();
+        this.baseUrl = '/permissionsDb';
+    }
+    getAll() {
+        if (!this.activeUser.isPermitted['to_view_permissions']) {
+            return Promise.reject({ status: 405, message: 'insufficient permissions' })
+                .catch(this.errorParser.handleError);
+        }
+        else {
+            return this.http.get(this.baseUrl, { observe: "response" })
+                .toPromise()
+                .then(res => {
+                console.log('show me permissions: ', res.body);
+                this.permissions = res.body;
+            })
+                .catch(this.errorParser.handleError);
+        }
+    }
+    getList() {
+        if (!this.activeUser.isPermitted['to_view_permissions']) {
+            return Promise.reject({ status: 405, message: 'insufficient permissions' })
+                .catch(this.errorParser.handleError);
+        }
+        else {
+            return Promise.reject({ status: '', message: 'method not yet defined' });
+        }
+    }
+    getOne() {
+        if (!this.activeUser.isPermitted['to_view_permissions']) {
+            return Promise.reject({ status: 405, message: 'insufficient permissions' })
+                .catch(this.errorParser.handleError);
+        }
+        else {
+            return Promise.reject({ status: '', message: 'method not yet defined' });
+        }
+    }
+    addItem() {
+        if (!this.activeUser.isPermitted['to_add_permissions']) {
+            return Promise.reject({ status: 405, message: 'insufficient permissions' })
+                .catch(this.errorParser.handleError);
+        }
+        else {
+            return Promise.reject({ status: '', message: 'method not yet defined' });
+        }
+    }
+    deleteItem() {
+        if (!this.activeUser.isPermitted['to_delete_permissions']) {
+            return Promise.reject({ status: 405, message: 'insufficient permissions' })
+                .catch(this.errorParser.handleError);
+        }
+        else {
+            return Promise.reject({ status: '', message: 'method not yet defined' });
+        }
+    }
+    editItem() {
+        if (!this.activeUser.isPermitted['to_edit_permissions']) {
+            return Promise.reject({ status: 405, message: 'insufficient permissions' })
+                .catch(this.errorParser.handleError);
+        }
+        else {
+            return Promise.reject({ status: '', message: 'method not yet defined' });
+        }
+    }
+};
+PermissionServices = __decorate([
+    core_1.Injectable(),
+    __metadata("design:paramtypes", [http_1.HttpClient, httpAuth_service_1.HttpAuthService])
+], PermissionServices);
+exports.PermissionServices = PermissionServices;
+
+
+/***/ }),
+
+/***/ 52:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+const core_1 = __webpack_require__(3);
+const http_1 = __webpack_require__(30);
+__webpack_require__(68);
+const errorParser_1 = __webpack_require__(79);
 const httpAuth_service_1 = __webpack_require__(14);
 let AccountServices = class AccountServices {
     constructor(http, activeUser) {
@@ -19717,103 +19814,6 @@ AccountServices = __decorate([
     __metadata("design:paramtypes", [http_1.HttpClient, httpAuth_service_1.HttpAuthService])
 ], AccountServices);
 exports.AccountServices = AccountServices;
-
-
-/***/ }),
-
-/***/ 57:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-const core_1 = __webpack_require__(3);
-const http_1 = __webpack_require__(30);
-__webpack_require__(68);
-const errorParser_1 = __webpack_require__(99);
-const httpAuth_service_1 = __webpack_require__(14);
-let PermissionServices = class PermissionServices {
-    constructor(http, activeUser) {
-        this.http = http;
-        this.activeUser = activeUser;
-        this.errorParser = new errorParser_1.ErrorParser();
-        this.permissions = new Array();
-        this.baseUrl = '/permissionsDb';
-    }
-    getAll() {
-        if (!this.activeUser.isPermitted['to_view_permissions']) {
-            return Promise.reject({ status: 405, message: 'insufficient permissions' })
-                .catch(this.errorParser.handleError);
-        }
-        else {
-            return this.http.get(this.baseUrl, { observe: "response" })
-                .toPromise()
-                .then(res => {
-                console.log('show me permissions: ', res.body);
-                this.permissions = res.body;
-            })
-                .catch(this.errorParser.handleError);
-        }
-    }
-    getList() {
-        if (!this.activeUser.isPermitted['to_view_permissions']) {
-            return Promise.reject({ status: 405, message: 'insufficient permissions' })
-                .catch(this.errorParser.handleError);
-        }
-        else {
-            return Promise.reject({ status: '', message: 'method not yet defined' });
-        }
-    }
-    getOne() {
-        if (!this.activeUser.isPermitted['to_view_permissions']) {
-            return Promise.reject({ status: 405, message: 'insufficient permissions' })
-                .catch(this.errorParser.handleError);
-        }
-        else {
-            return Promise.reject({ status: '', message: 'method not yet defined' });
-        }
-    }
-    addItem() {
-        if (!this.activeUser.isPermitted['to_add_permissions']) {
-            return Promise.reject({ status: 405, message: 'insufficient permissions' })
-                .catch(this.errorParser.handleError);
-        }
-        else {
-            return Promise.reject({ status: '', message: 'method not yet defined' });
-        }
-    }
-    deleteItem() {
-        if (!this.activeUser.isPermitted['to_delete_permissions']) {
-            return Promise.reject({ status: 405, message: 'insufficient permissions' })
-                .catch(this.errorParser.handleError);
-        }
-        else {
-            return Promise.reject({ status: '', message: 'method not yet defined' });
-        }
-    }
-    editItem() {
-        if (!this.activeUser.isPermitted['to_edit_permissions']) {
-            return Promise.reject({ status: 405, message: 'insufficient permissions' })
-                .catch(this.errorParser.handleError);
-        }
-        else {
-            return Promise.reject({ status: '', message: 'method not yet defined' });
-        }
-    }
-};
-PermissionServices = __decorate([
-    core_1.Injectable(),
-    __metadata("design:paramtypes", [http_1.HttpClient, httpAuth_service_1.HttpAuthService])
-], PermissionServices);
-exports.PermissionServices = PermissionServices;
 
 
 /***/ }),
@@ -22571,7 +22571,7 @@ AppModule = __decorate([
             public_module_1.PublicModule,
             private_module_1.PrivateModule,
             login_routing_module_1.LoginRoutingModule,
-            app_routing_1.AppRouting
+            app_routing_1.AppRouting,
         ],
         declarations: [
             app_component_1.AppComponent,
@@ -22927,16 +22927,16 @@ const users_component_1 = __webpack_require__(214);
 const events_component_1 = __webpack_require__(213);
 const images_component_1 = __webpack_require__(215);
 const sidebar_component_1 = __webpack_require__(692);
-const image_services_1 = __webpack_require__(79);
+const image_services_1 = __webpack_require__(80);
 const infobar_component_1 = __webpack_require__(694);
 const http_interceptors_1 = __webpack_require__(696);
 const messagebar_component_1 = __webpack_require__(698);
-const user_services_1 = __webpack_require__(80);
+const user_services_1 = __webpack_require__(81);
 const forms_1 = __webpack_require__(206);
-const account_services_1 = __webpack_require__(51);
+const account_services_1 = __webpack_require__(52);
 const accounts_component_1 = __webpack_require__(216);
 const permissions_component_1 = __webpack_require__(217);
-const permission_services_1 = __webpack_require__(57);
+const permission_services_1 = __webpack_require__(51);
 const permissionsPanel_component_1 = __webpack_require__(700);
 const accountsPanel_component_1 = __webpack_require__(702);
 const uuid_transform_1 = __webpack_require__(705);
@@ -22949,7 +22949,7 @@ PrivateModule = __decorate([
         imports: [
             common_1.CommonModule,
             forms_1.FormsModule,
-            private_routing_module_1.PrivateRoutingModule
+            private_routing_module_1.PrivateRoutingModule,
         ],
         declarations: [
             users_component_1.UsersComponent,
@@ -23106,10 +23106,10 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 const core_1 = __webpack_require__(3);
 const router_1 = __webpack_require__(29);
 const httpAuth_service_1 = __webpack_require__(14);
-const image_services_1 = __webpack_require__(79);
-const user_services_1 = __webpack_require__(80);
-const account_services_1 = __webpack_require__(51);
-const permission_services_1 = __webpack_require__(57);
+const image_services_1 = __webpack_require__(80);
+const user_services_1 = __webpack_require__(81);
+const account_services_1 = __webpack_require__(52);
+const permission_services_1 = __webpack_require__(51);
 let SidebarComponent = class SidebarComponent {
     constructor(permissions, accounts, activeUser, activatedRoute, images, router, users) {
         this.permissions = permissions;
@@ -23331,11 +23331,11 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 const core_1 = __webpack_require__(3);
-const image_services_1 = __webpack_require__(79);
-const user_services_1 = __webpack_require__(80);
+const image_services_1 = __webpack_require__(80);
+const user_services_1 = __webpack_require__(81);
 const router_1 = __webpack_require__(29);
-const account_services_1 = __webpack_require__(51);
-const permission_services_1 = __webpack_require__(57);
+const account_services_1 = __webpack_require__(52);
+const permission_services_1 = __webpack_require__(51);
 let MessagebarComponent = class MessagebarComponent {
     constructor(permissions, accounts, images, users, activatedRoute) {
         this.permissions = permissions;
@@ -23384,7 +23384,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 const core_1 = __webpack_require__(3);
-const permission_services_1 = __webpack_require__(57);
+const permission_services_1 = __webpack_require__(51);
 const httpAuth_service_1 = __webpack_require__(14);
 let PermissionsPanelComponent = class PermissionsPanelComponent {
     constructor(activeUser, permissionService) {
@@ -23447,8 +23447,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 const core_1 = __webpack_require__(3);
-const account_services_1 = __webpack_require__(51);
-const permission_services_1 = __webpack_require__(57);
+const account_services_1 = __webpack_require__(52);
+const permission_services_1 = __webpack_require__(51);
 const httpAuth_service_1 = __webpack_require__(14);
 const listValidator_1 = __webpack_require__(703);
 let AccountsPanelComponent = class AccountsPanelComponent {
@@ -23619,8 +23619,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 const core_1 = __webpack_require__(3);
-const user_services_1 = __webpack_require__(80);
-const account_services_1 = __webpack_require__(51);
+const user_services_1 = __webpack_require__(81);
+const account_services_1 = __webpack_require__(52);
 const httpAuth_service_1 = __webpack_require__(14);
 let UserPanelComponent = class UserPanelComponent {
     constructor(activeUser, userService, accountService) {
@@ -23753,7 +23753,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 const core_1 = __webpack_require__(3);
-const image_services_1 = __webpack_require__(79);
+const image_services_1 = __webpack_require__(80);
 let ImagesThumbnailComponent = class ImagesThumbnailComponent {
     constructor(imageService) {
         this.imageService = imageService;
@@ -23805,7 +23805,6 @@ let GlobalnavComponent = class GlobalnavComponent {
         this.router = router;
         this.activatedRoute = activatedRoute;
         this.activeUser = activeUser;
-        // navbarLinks = new Array();
         this.navbarLinks = [
             { name: 'home' },
             { name: 'about' },
@@ -23820,20 +23819,6 @@ let GlobalnavComponent = class GlobalnavComponent {
     }
     ngOnInit() {
         console.log('globalnav comp init');
-        // this.router.events.filter((event)=> event instanceof NavigationEnd)
-        //     .map(() => LINKS)
-        //     .subscribe((links) => {
-        //         if(this.httpAuth.isLoggedIn){
-        //             this.navbarLinks = links.private;
-        //             if(this.httpAuth.isAdmin){
-        //                 this.navbarLinks = links.private.concat(links.admin);
-        //                 console.log('navbar links: ', this.navbarLinks);
-        //             }
-        //         } else {
-        //             this.navbarLinks = links.public;
-        //         }
-        //
-        //     })
     }
     logout() {
         this.activeUser.logout();
@@ -24031,6 +24016,32 @@ module.exports = "data:application/font-woff;base64,bW9kdWxlLmV4cG9ydHMgPSBfX3dl
 
 "use strict";
 
+class ErrorParser {
+    handleError(error) {
+        let err = {};
+        console.log('error in parser: ', error);
+        if (error.status === 401) {
+            err = {
+                status: error.status,
+                message: 'unauthorized/expired token - please login again'
+            };
+        }
+        else {
+            err = error;
+        }
+        throw err;
+    }
+}
+exports.ErrorParser = ErrorParser;
+
+
+/***/ }),
+
+/***/ 80:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -24043,7 +24054,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 const core_1 = __webpack_require__(3);
 const http_1 = __webpack_require__(30);
 __webpack_require__(68);
-const errorParser_1 = __webpack_require__(99);
+const errorParser_1 = __webpack_require__(79);
 const httpAuth_service_1 = __webpack_require__(14);
 let ImageServices = class ImageServices {
     constructor(http, activeUser) {
@@ -24133,7 +24144,7 @@ exports.ImageServices = ImageServices;
 
 /***/ }),
 
-/***/ 80:
+/***/ 81:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -24150,7 +24161,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 const core_1 = __webpack_require__(3);
 const http_1 = __webpack_require__(30);
 __webpack_require__(68);
-const errorParser_1 = __webpack_require__(99);
+const errorParser_1 = __webpack_require__(79);
 const httpAuth_service_1 = __webpack_require__(14);
 let UserServices = class UserServices {
     constructor(http, activeUser) {
@@ -24227,33 +24238,7 @@ UserServices = __decorate([
 exports.UserServices = UserServices;
 
 
-/***/ }),
-
-/***/ 99:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-class ErrorParser {
-    handleError(error) {
-        let err = {};
-        console.log('error in parser: ', error);
-        if (error.status === 401) {
-            err = {
-                status: error.status,
-                message: 'unauthorized/expired token - please login again'
-            };
-        }
-        else {
-            err = error;
-        }
-        throw err;
-    }
-}
-exports.ErrorParser = ErrorParser;
-
-
 /***/ })
 
 },[643]);
-//# sourceMappingURL=app.bb088ee2b85d62e9ff76.js.map
+//# sourceMappingURL=app.827cf1c347ce5accef62.js.map

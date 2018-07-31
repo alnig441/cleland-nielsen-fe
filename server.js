@@ -40,7 +40,7 @@ app.use('/imagesDb/latest', passport.authenticate('jwt', {session: false}), imag
 app.use('/accountsDb', passport.authenticate('jwt', {session: false}), accounts);
 app.use('/usersDb', passport.authenticate('jwt', {session: false}),users);
 app.use('/eventsDb', passport.authenticate('jwt', {session: false}), events);
-app.use('/permissionsDb',permissions);
+app.use('/permissionsDb', passport.authenticate('jwt', {session: false}), permissions);
 
 app.get('*', function response(req, res) {
     res.sendFile(path.join(__dirname, 'dist/index.html'));
