@@ -1,10 +1,11 @@
-div(*ngFor="let permission of this.permissionService.permissions as permissions; index as i")
-    div(class="col-sm-6 col-md-4")
-        form(#editUserForm="ngForm", id="" class="box-shadow panel panel-info")
-            div(class="panel-heading")
-                h3(class="panel-title") {{permission.permission_name}}
-            div(class="panel-body")
-                div(class="input-group input-group-sm")
-                    span(class="input-group-addon") Id
-                    input(class="form-control" type="text", placeholder="{{permission.permission_id}}", disabled)
-            div((click)="this.delete(this.permission)" class="panel-footer done-edit") delete
+span(*ngIf="!this.permissionService.error")
+    div(*ngFor="let permission of this.permissionService.permissions as permissions; index as i")
+        div(class="col-sm-6 col-md-4")
+            form(#editUserForm="ngForm", id="" class="box-shadow panel panel-info")
+                div(class="panel-heading")
+                    h3(class="panel-title") {{permission.permission_name}}
+                div(class="panel-body")
+                    div(class="input-group input-group-sm")
+                        span(class="input-group-addon") Id
+                        input(class="form-control" type="text", placeholder="{{permission.permission_id}}", disabled)
+                div((click)="this.delete(this.permission)" class="panel-footer done-edit") delete
