@@ -10,7 +10,7 @@ import { PermissionModel } from "../../../models/permission.model";
 
 export class PermissionsComponent implements OnInit {
 
-    private permissionForm: PermissionModel = new PermissionModel('','')
+    private permissionForm: PermissionModel = new PermissionModel('uuid_generate_v4()');
 
     constructor(private activeUser: HttpAuthService){}
 

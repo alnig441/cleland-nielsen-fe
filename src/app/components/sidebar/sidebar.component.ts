@@ -26,6 +26,7 @@ export class SidebarComponent implements OnInit {
     }
 
    getAll() {
+       console.log(`getting ALL ${this.requestedService}`);
        this[this.requestedService].error = null;
        this[this.requestedService].getAll()
            .catch((error: any) => {

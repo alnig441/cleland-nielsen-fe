@@ -48,7 +48,7 @@ passport.use(new JWTStrategy({
     secretOrKey: jwtSecret
     }, (jwtPayload, cb) => {
 
-        console.log('in jwt strategy: ', jwtPayload)
+        // console.log('in jwt strategy: ', jwtPayload)
 
         const client = new Client({
             connectionString: connectionString

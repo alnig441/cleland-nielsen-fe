@@ -39,17 +39,17 @@ export class LoginComponent implements OnInit {
                             })
                         })
                     })
+                    .then(() => {
+                        let redirect = this.httpAuth.redirectUrl ? this.httpAuth.redirectUrl : '/private';
+                        let navigationExtras : NavigationExtras = {
+                            queryParamsHandling: 'preserve',
+                            preserveFragment: true
+                        };
+
+                        this.router.navigate([redirect],navigationExtras);
+                    })
                     .catch(this.errorParser.handleError)
                     .catch(error => console.log(error));
-
-
-                let redirect = this.httpAuth.redirectUrl ? this.httpAuth.redirectUrl : '/private';
-                let navigationExtras : NavigationExtras = {
-                    queryParamsHandling: 'preserve',
-                    preserveFragment: true
-                };
-
-                this.router.navigate([redirect],navigationExtras);
             }
 
         })

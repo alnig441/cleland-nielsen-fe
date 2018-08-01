@@ -1,4 +1,14 @@
-span(*ngIf="this.activeUser.isPermitted['to_add_'+ this.type + 's']")
+span(*ngIf="this.type =='image'")
+    div(class="panel panel-default box-shadow")
+        div(class="panel-heading")
+            h3(class="panel-title") image info
+        div(*ngFor="let property of this.formProperties as form;", class="panel-body")
+            p {{property}}
+            hr
+            p {{form[{property]}}
+        //div(class="panel-footer")
+
+span(*ngIf="this.activeUser.isPermitted['to_add_'+ this.type + 's'] && this.type !='image'")
     form(#addItemForm="ngForm" class="panel panel-default box-shadow")
         div(class="panel-heading")
             h3(class="panel-title") add {{this.type}}

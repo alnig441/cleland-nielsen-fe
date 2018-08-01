@@ -1,9 +1,9 @@
 div(*ngFor="let image of this.imageService.images as images; index as i" class="col-sm-6 col-md-4")
-    div(id="{{images[i].id}}" class="thumbnail box-shadow")
-        img(src="{{images[i].url}}" alt="...")
+    div(id="{{image.id}}" class="thumbnail box-shadow")
+        img(src="{{image.file}}" alt="...")
         div(class="caption")
-            h4 {{images[i].date}}
-            p  {{images[i].caption}}
+            h4 {{image.created}}
+            p  {{image.event_en}}
             p
                 a(class="btn btn-primary", role="button") Enlarge
                 a(class="btn btn-primary", role="button") Print

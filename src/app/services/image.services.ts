@@ -36,7 +36,6 @@ export class ImageServices {
     }
 
     getOne(): Promise<any> {
-
         if(!this.activeUser.isPermitted['to_view_images']){
             return Promise.reject({ status: 405, message: 'insufficient permissions'})
                 .catch(this.errorParser.handleError)

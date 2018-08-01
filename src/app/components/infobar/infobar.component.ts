@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation, Input } from "@angular/core";
+import { Component, OnInit, ViewEncapsulation, Input, DoCheck } from "@angular/core";
 import { HttpAuthService } from "../../services/httpAuth.service";
 import { UserServices } from "../../services/user.services";
 import { AccountServices } from "../../services/account.services";
@@ -10,7 +10,7 @@ import { PermissionServices } from "../../services/permission.services";
     encapsulation: ViewEncapsulation.None
 })
 
-export class InfobarComponent implements OnInit {
+export class InfobarComponent implements OnInit, DoCheck {
 
     @Input() itemForm: any;
     @Input() type: string;
@@ -20,8 +20,20 @@ export class InfobarComponent implements OnInit {
     constructor(private user: UserServices, private account: AccountServices, private permission: PermissionServices, private activeUser: HttpAuthService) {}
 
     ngOnInit(): void {
-        console.log('infobar comp init', this.itemForm);
-        this.formProperties = Object.keys(this.itemForm);
+        console.log('infobar comp init');
+
+        if(this.itemForm){
+            this.formProperties = Object.keys(this.itemForm);
+            console.log('form props: ', this.formProperties);
+        }
+    }
+
+    ngDoCheck(): void {
+        if(this.itemForm){
+            this.formProperties = Object.keys(this.itemForm);
+            console.log('form props: ', this.formProperties);
+        }
+
     }
 
     submit(form: any): void {

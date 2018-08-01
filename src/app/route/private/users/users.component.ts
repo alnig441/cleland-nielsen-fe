@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewEncapsulation } from "@angular/core";
 import { AccountServices } from "../../../services/account.services";
 import {HttpAuthService} from "../../../services/httpAuth.service";
+import {UserModel} from "../../../models/user.model";
 
 @Component({
     selector: 'app-users',
@@ -9,6 +10,8 @@ import {HttpAuthService} from "../../../services/httpAuth.service";
 })
 
 export class UsersComponent implements OnInit {
+
+    private userForm: UserModel = new UserModel('uuid_generate_v4()');
 
     constructor(private activeUser: HttpAuthService, private accountService: AccountServices) {}
 
