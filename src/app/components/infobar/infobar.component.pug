@@ -5,7 +5,7 @@ span(*ngIf="this.type =='image'")
         div(*ngFor="let property of this.formProperties as form;", class="panel-body")
             p {{property}}
             hr
-            p {{form[{property]}}
+            //p {{form[{property]}}
         //div(class="panel-footer")
 
 span(*ngIf="this.activeUser.isPermitted['to_add_'+ this.type + 's'] && this.type !='image'")

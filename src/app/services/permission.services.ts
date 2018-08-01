@@ -28,6 +28,8 @@ export class PermissionServices {
                 .then(res => {
                     // console.log('show me permissions: ', res.body)
                     this.permissions = res.body as PermissionModel[];
+
+                    return Promise.resolve('success');
                 })
                 .catch(this.errorParser.handleError)
         }

@@ -28,6 +28,8 @@ export class UserServices {
                 .toPromise()
                 .then( result => {
                     this.users = result.body as UserModel[];
+
+                    return Promise.resolve('success');
                 })
                 .catch(this.errorParser.handleError)
         }

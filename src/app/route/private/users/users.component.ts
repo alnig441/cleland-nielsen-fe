@@ -2,6 +2,7 @@ import { Component, OnInit, ViewEncapsulation } from "@angular/core";
 import { AccountServices } from "../../../services/account.services";
 import {HttpAuthService} from "../../../services/httpAuth.service";
 import {UserModel} from "../../../models/user.model";
+import {CompInitService} from "../../../services/comp-init.service";
 
 @Component({
     selector: 'app-users',
@@ -13,16 +14,14 @@ export class UsersComponent implements OnInit {
 
     private userForm: UserModel = new UserModel('uuid_generate_v4()');
 
-    constructor(private activeUser: HttpAuthService, private accountService: AccountServices) {}
+    constructor(private compInit: CompInitService, private activeUser: HttpAuthService, private accountService: AccountServices) {}
 
     ngOnInit(): void {
-        this.accountService.getAll()
-            .catch((error: any ) => {
-                this.accountService.error = error;
-                setTimeout(() => {
-                    this.accountService.error = null;
-                }, 3000)
-            })
-        // console.log('user comp init', this.activeUser.isPermitted, this.accountService.accounts);
+        if(this.activeUser.isPermitted['to_view_users']){
+            this.compInit.initialize('accounts')
+                .then((result: any) => {
+                    console.log('user comp init ', result);
+                })
+        }
     }
 }

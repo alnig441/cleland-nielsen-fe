@@ -3,6 +3,7 @@ import { UserServices } from "../../services/user.services";
 import { UserModel } from "../../models/user.model";
 import { AccountServices } from "../../services/account.services";
 import { HttpAuthService } from "../../services/httpAuth.service";
+import {CompInitService} from "../../services/comp-init.service";
 
 @Component({
     selector: 'app-user-panel',
@@ -25,17 +26,15 @@ export class UserPanelComponent implements OnInit {
     ]
 
 
-    constructor(private activeUser: HttpAuthService, private userService: UserServices, private accountService: AccountServices) {}
+    constructor(private compInit: CompInitService, private activeUser: HttpAuthService, private userService: UserServices, private accountService: AccountServices) {}
 
     ngOnInit(): void {
-        // console.log('panel comp init');
-        this.userService.getAll()
-            .catch((error: any ) => {
-                this.userService.error = error;
-                setTimeout(() => {
-                    this.userService.error = null;
-                }, 3000)
-            })
+        if(this.activeUser.isPermitted['to_view_users']){
+            this.compInit.initialize('users')
+                .then((result: any) => {
+                    console.log('userPanel comp init ', result);
+                })
+        }
     }
 
     edit(user: UserModel): void {

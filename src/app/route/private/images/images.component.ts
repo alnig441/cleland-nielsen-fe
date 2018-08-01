@@ -1,11 +1,9 @@
 import { Component, OnInit, ViewEncapsulation, DoCheck } from "@angular/core";
 import { ImageServices } from "../../../services/image.services";
-import { PermissionServices } from "../../../services/permission.services";
-import { AccountServices } from "../../../services/account.services";
-import { UserServices } from "../../../services/user.services";
 import { HttpAuthService } from "../../../services/httpAuth.service";
-import { HttpClient } from "@angular/common/http";
-import {ImageModel} from "../../../models/image.model";
+import { ImageModel } from "../../../models/image.model";
+import { ErrorParser } from "../../../services/errorParser";
+import { CompInitService } from "../../../services/comp-init.service";
 
 @Component({
     selector: 'app-images',
@@ -14,25 +12,19 @@ import {ImageModel} from "../../../models/image.model";
     encapsulation: ViewEncapsulation.None
 })
 
-export class ImagesComponent implements OnInit, DoCheck {
+export class ImagesComponent implements OnInit {
 
     private imageForm: ImageModel;
+    errorParser = new ErrorParser();
 
-    constructor(private http: HttpClient, private activeUser: HttpAuthService, private permissionService: PermissionServices, private accountService: AccountServices, private userService: UserServices, private imageService: ImageServices){}
+    constructor(private compInit: CompInitService, private activeUser: HttpAuthService, private imageService: ImageServices){}
 
     ngOnInit(): void {
         if(this.activeUser.isPermitted['to_view_images']){
-            this.imageService.getAll()
-                .catch((error: any ) => {
-                    this.imageService.error = error;
-                    setTimeout(() => {
-                        this.imageService.error = null;
-                    }, 3000)
+            this.compInit.initialize('images')
+                .then((result: any) => {
+                    console.log('image comp init ', result);
                 })
         }
-    }
-
-    ngDoCheck(): void {
-        this.imageForm = this.imageService.images[0];
     }
 }

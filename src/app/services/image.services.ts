@@ -29,6 +29,8 @@ export class ImageServices {
                 .then(res => {
                     this.images = res.body as ImageModel[];
                     this.imagesUpdated = true;
+
+                    return Promise.resolve('success');
                 })
                 .catch(this.errorParser.handleError);
         }

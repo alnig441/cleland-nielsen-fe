@@ -20,6 +20,7 @@ import { AccountsPanelComponent } from "../../components/accountsPanel/accountsP
 import { UuidTransformPipe } from "../../pipes/uuid.transform";
 import { UserPanelComponent } from "../../components/userPanel/user-panel.component";
 import { ImagesThumbnailComponent } from "../../components/imagesThumbnail/images-thumbnail.component";
+import {CompInitService} from "../../services/comp-init.service";
 
 @NgModule({
     imports: [
@@ -50,6 +51,7 @@ import { ImagesThumbnailComponent } from "../../components/imagesThumbnail/image
         AccountServices,
         UserServices,
         ImageServices,
+        CompInitService,
         httpInterceptorProviders,
     ]
 })

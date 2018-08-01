@@ -27,6 +27,8 @@ export class AccountServices {
                 .toPromise()
                 .then( (result : any) => {
                     this.accounts = result.body as AccountModel[];
+
+                    return Promise.resolve('success');
                 })
                 .catch(this.errorParser.handleError)
                 .catch( (error : any) => {

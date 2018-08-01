@@ -15,6 +15,5 @@ export class PermissionsComponent implements OnInit {
     constructor(private activeUser: HttpAuthService){}
 
     ngOnInit(): void {
-        // console.log('permissions comp init', this.activeUser.isPermitted);
     }
 }

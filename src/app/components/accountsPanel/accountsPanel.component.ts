@@ -3,6 +3,7 @@ import { AccountServices } from "../../services/account.services";
 import { PermissionServices } from "../../services/permission.services";
 import { HttpAuthService } from "../../services/httpAuth.service";
 import { ListValidator } from "../../classes/listValidator";
+import {CompInitService} from "../../services/comp-init.service";
 
 @Component({
     selector: 'app-accounts-panel',
@@ -16,18 +17,15 @@ export class AccountsPanelComponent implements OnInit {
     doEdit = {};
     tempPlaceholder: string ='add permission';
 
-    constructor(private activeUser: HttpAuthService, private accountService: AccountServices, private permissionService: PermissionServices) {}
+    constructor(private compInit: CompInitService, private activeUser: HttpAuthService, private accountService: AccountServices, private permissionService: PermissionServices) {}
 
     ngOnInit(): void {
-        // console.log('acctPanel comp init', this.activeUser.isPermitted, this.permissionService.permissions);
-
-        this.accountService.getAll()
-            .catch((error: any ) => {
-                this.accountService.error = error;
-                setTimeout(() => {
-                    this.accountService.error = null;
-                }, 3000)
-            })
+        if(this.activeUser.isPermitted['to_view_accounts']){
+            this.compInit.initialize('accounts')
+                .then((result: any) => {
+                    console.log('account panel comp init ', result);
+                })
+        }
     }
 
     addPermission(permission: string, i: number): void {
