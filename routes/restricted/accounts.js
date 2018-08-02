@@ -25,18 +25,31 @@ router.get('/', (req, res, next) => {
 })
 
 router.post('/', (req, res, next) => {
+    let permissions;
+
+    switch (req.body.account_permissions){
+        case 'admin':
+            permissions = '%';
+            break;
+        default:
+            permissions = 'to_view_images';
+            break;
+    };
+
+
     const client = new Client({
         connectionString: connectionString
     })
 
     client.connect();
 
-    return client.query(`INSERT INTO accounts VALUES(${req.body.account_id}, '${req.body.account_name}')`)
+    return client.query(`INSERT INTO accounts VALUES(${req.body.account_id}, '${req.body.account_name}', (select array(SELECT permission_id::uuid FROM permissions WHERE permission_name ILIKE '${permissions}')))`)
         .then((result) => {
             res.status(200).send({message: `${result.command} SUCCESS`});
             client.end();
         })
         .catch(error => {
+            console.log(error);
             res.status(400).send({message: error.detail});
             client.end();
         })})
