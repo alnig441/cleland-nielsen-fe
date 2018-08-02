@@ -86,25 +86,9 @@ export class UserPanelComponent implements OnInit {
             })
     }
 
-    delete(user: UserModel): void {
-        console.log('deleting user: ', user.user_name);
-        this.userService.deleteItem()
-            .catch((error) =>{
-                this.userService.error = error;
-                setTimeout(()=>{
-                    this.userService.error = null;
-                }, 3000)
-            })
-    }
+    delete(user_id: string): void {
+        console.log('deleting user: ', user_id);
+        this.userService.deleteItem(user_id)
 
-    add(user: UserModel): void {
-        console.log('adding user');
-        this.userService.addItem()
-            .catch((error) =>{
-                this.userService.error = error;
-                setTimeout(()=>{
-                    this.userService.error = null;
-                }, 3000)
-            })
     }
 }

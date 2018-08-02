@@ -23,4 +23,4 @@ span(*ngIf="!this.accountService.error")
 
                 div(*ngIf="!this.doEdit[account.account_name]", (click)="this.edit(this.account, i)", class="panel-footer", [attr.disabled]="this.doEdit[account.account_name] == true ? null : true || this.account.account_name == 'administrator' ? null: true ") edit
                 div(*ngIf="this.doEdit[account.account_name]",(click)="this.done(this.account, i)", class="panel-footer done-edit", [attr.disabled]="!this.doEdit[account.account_name] == true ? null : true") done
-                div(*ngIf="!this.doEdit[account.account_name]",(click)="this.delete(this.account, i)", class="panel-footer", [attr.disabled]="this.doEdit[account.account_name] == true ? null : true || this.account.account_name == 'administrator' ? null: true ") delete
+                div(*ngIf="!this.doEdit[account.account_name]",(click)="this.delete(this.account.account_id, i)", class="panel-footer", [attr.disabled]="this.doEdit[account.account_name] == true ? null : true || this.account.account_name == 'administrator' ? null: true ") delete

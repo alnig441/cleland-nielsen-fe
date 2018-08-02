@@ -55,25 +55,10 @@ export class AccountsPanelComponent implements OnInit {
         }
     }
 
-    add(): void {
-        this.accountService.addItem()
-            .catch((error) =>{
-                this.accountService.error = error;
-                setTimeout(()=>{
-                    this.accountService.error = null;
-                }, 3000)
-            })
-    }
+    delete(account_id: any, i?: any): void {
+        console.log('deleting account: ', account_id);
+        this.accountService.deleteItem(account_id)
 
-    delete(account: any, i: any): void {
-        console.log('deleting account: ', account);
-        this.accountService.deleteItem()
-            .catch((error) =>{
-                this.accountService.error = error;
-                setTimeout(()=>{
-                    this.accountService.error = null;
-                }, 3000)
-            })
     }
 
     done(account: any, i: any): void {

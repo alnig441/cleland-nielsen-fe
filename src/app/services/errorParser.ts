@@ -8,15 +8,23 @@ export class ErrorParser {
         if (error.status === 401) {
             err = {
                 status: error.status,
-                message: `${error.statusText}/expired token - please login again`
+                message: `${error.statusText}/expired token - please login again`,
+                forceLogout: true
             }
         }
 
-        else {
+        else if(error.statusText) {
             err = {
                 status: `${error.status} - ${error.statusText}`,
                 message: error.error.message,
             };
+        }
+
+        else {
+            err = {
+                status: error.status,
+                message: error.message
+            }
         }
 
         throw err;

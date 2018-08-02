@@ -5,6 +5,7 @@ import 'rxjs/add/operator/toPromise';
 import { ErrorParser } from './errorParser';
 import { UserModel } from "../models/user.model";
 import { HttpAuthService } from "./httpAuth.service";
+import { Router } from "@angular/router";
 
 @Injectable()
 
@@ -14,8 +15,9 @@ export class UserServices {
     users: UserModel[] = new Array();
     baseUrl = '/usersDb';
     error: any;
+    information: any;
 
-    constructor(private http: HttpClient, private activeUser: HttpAuthService) {}
+    constructor(private http: HttpClient, private activeUser: HttpAuthService, private router: Router) {}
 
     getAll(): Promise<any> {
         if(!this.activeUser.isPermitted['to_view_users']){
@@ -60,24 +62,67 @@ export class UserServices {
 
     }
 
-
-    addItem(): Promise<any> {
-        if(!this.activeUser.isPermitted['to_add_users']){
-            return Promise.reject({ status: 405, message: 'insufficient permissions'})
+    addItem(form: UserModel): Promise<any> {
+        if(!this.activeUser.isPermitted['to_add_users']) {
+            return Promise.reject({ status : 405 , message : 'insufficient permissions'})
                 .catch(this.errorParser.handleError)
+                .catch((error: any)=>{
+                    this.error = error;
+                    this.clearRegisters();
+                })
         }
-        else {
-            return Promise.reject({ status: '', message: 'method not yet defined'})
+
+        else{
+            return this.http.post(this.baseUrl, form, { observe : "response"})
+                .toPromise()
+                .then((result: any) => {
+                    this.information = { status: result.status , message : result.body.message }
+                    this.getAll();
+                    this.clearRegisters();
+                })
+                .catch(this.errorParser.handleError)
+                .catch((error: any) => {
+                    this.error = error;
+                    this.clearRegisters();
+                    if(error.forceLogout){
+                        setTimeout(() => {
+                            this.activeUser.logout();
+                            this.router.navigate(["/login"]);
+                        }, 3000)
+                    }
+                })
         }
     }
 
-    deleteItem(): Promise<any> {
+    deleteItem(user_id: string): Promise<any> {
+
         if(!this.activeUser.isPermitted['to_delete_users']){
             return Promise.reject({ status: 405, message: 'insufficient permissions'})
                 .catch(this.errorParser.handleError)
+                .catch((error: any) => {
+                    this.error = error;
+                    this.clearRegisters();
+                })
         }
         else {
-            return Promise.reject({ status: '', message: 'method not yet defined'})
+            return this.http.delete(`${this.baseUrl}/${user_id}`, {observe: "response"})
+                .toPromise()
+                .then((response: any) => {
+                    this.information = { status: response.status , message: response.body.message };
+                    this.getAll();
+                    this.clearRegisters();
+                })
+                .catch(this.errorParser.handleError)
+                .catch((error: any) => {
+                    this.error = error;
+                    this.clearRegisters();
+                    if(error.forceLogout){
+                        setTimeout(() => {
+                            this.activeUser.logout();
+                            this.router.navigate(["/login"]);
+                        }, 3000)
+                    }
+                })
         }
     }
 
@@ -90,5 +135,13 @@ export class UserServices {
             return Promise.reject({ status: '', message: 'method not yet defined'})
         }
     }
+
+    private clearRegisters(status?: any) {
+        setTimeout(() => {
+            this.information = null;
+            this.error = null;
+        },3000)
+    }
+
 
 }

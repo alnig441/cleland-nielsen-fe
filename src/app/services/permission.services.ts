@@ -65,6 +65,11 @@ export class PermissionServices {
     addItem(form: PermissionModel): Promise<any> {
         if(!this.activeUser.isPermitted['to_add_permissions']) {
             return Promise.reject({ status : 405 , message : 'insufficient permissions'})
+                .catch(this.errorParser.handleError)
+                .catch((error: any)=>{
+                    this.error = error;
+                    this.clearRegisters();
+                })
         }
 
         else{
@@ -79,7 +84,7 @@ export class PermissionServices {
                 .catch((error: any) => {
                     this.error = error;
                     this.clearRegisters();
-                    if(error.status == 401){
+                    if(error.forceLogout){
                         setTimeout(() => {
                             this.activeUser.logout();
                             this.router.navigate(["/login"]);
@@ -94,6 +99,10 @@ export class PermissionServices {
         if(!this.activeUser.isPermitted['to_delete_permissions']){
             return Promise.reject({ status: 405, message: 'insufficient permissions'})
                 .catch(this.errorParser.handleError)
+                .catch((error: any) => {
+                    this.error = error;
+                    this.clearRegisters();
+                })
         }
         else {
             return this.http.delete(`${this.baseUrl}/${permission_id}`, {observe: "response"})
@@ -107,7 +116,7 @@ export class PermissionServices {
                 .catch((error: any) => {
                     this.error = error;
                     this.clearRegisters();
-                    if(error.status == 401){
+                    if(error.forceLogout){
                         setTimeout(() => {
                             this.activeUser.logout();
                             this.router.navigate(["/login"]);
