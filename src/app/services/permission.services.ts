@@ -13,6 +13,7 @@ export class PermissionServices {
     permissions: PermissionModel[] = new Array();
     baseUrl = '/permissionsDb';
     error: any;
+    information: any;
 
     constructor(private http: HttpClient, private activeUser: HttpAuthService) {}
 
@@ -60,13 +61,19 @@ export class PermissionServices {
 
     }
 
-    addItem(): Promise<any> {
-        if(!this.activeUser.isPermitted['to_add_permissions']){
-            return Promise.reject({ status: 405, message: 'insufficient permissions'})
-                .catch(this.errorParser.handleError)
+    addItem(form: PermissionModel): Promise<any> {
+        if(!this.activeUser.isPermitted['to_add_permissions']) {
+            return Promise.reject({ status : 405 , message : 'insufficient permissions'})
         }
-        else {
-            return Promise.reject({ status: '', message: 'method not yet defined'})
+
+        else{
+            return this.http.post(this.baseUrl, form, { observe : "response"})
+                .toPromise()
+                .then((result: any) => {
+                    this.information = { status: result.status , message : result.body.message }
+                    this.getAll();
+                })
+                .catch(this.errorParser.handleError)
         }
     }
 

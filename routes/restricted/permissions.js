@@ -24,4 +24,23 @@ router.get('/', (req, res, next) => {
         })
 })
 
+router.post('/', (req, res, next) => {
+    const client = new Client({
+        connectionString: connectionString
+    })
+
+    client.connect();
+
+    return client.query(`INSERT INTO PERMISSIONS VALUES (${req.body.permission_id}, '${req.body.permission_name}')`)
+        .then(result => {
+            res.status(200).send({message: result.command + ' SUCCESS'});
+            client.end();
+        })
+        .catch(error => {
+            res.status(400).send({message: error.detail});
+            client.end();
+        })
+})
+
+
 module.exports = router;

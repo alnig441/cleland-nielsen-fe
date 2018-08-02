@@ -15,4 +15,4 @@ span(*ngIf="this.activeUser.isPermitted['to_add_'+ this.type + 's'] && this.type
         div(class="panel-body")
             div(*ngFor="let property of this.formProperties; index as i", class="input-group input-group-sm")
                 input(*ngIf="property != this.type +'_id'" class="form-control" type="text", placeholder="{{property}}", [(ngModel)]="this.itemForm[property]" name="{{property}}")
-        div((click)="submit(this.itemForm)" class="panel-footer done-edit") submit
+        div((click)="onSubmit()" class="panel-footer done-edit") submit
