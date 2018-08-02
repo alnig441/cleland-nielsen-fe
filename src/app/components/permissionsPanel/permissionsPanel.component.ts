@@ -23,16 +23,28 @@ export class PermissionsPanelComponent implements OnInit {
         };
     }
 
-    delete(permission: PermissionModel): void {
+    delete(permission_id: string): void {
 
-        console.log(`deleting: `, permission);
-        this.permissionService.deleteItem()
-            .catch((error: any) => {
-                this.permissionService.error = error;
-                setTimeout(() => {
-                    this.permissionService.error = null;
-                },3000)
-            })
+        console.log(`deleting: `, permission_id);
+        this.permissionService.deleteItem(permission_id)
+            // .then(() => {
+            //     setTimeout(() => {
+            //         this.permissionService.information = null;
+            //     },3000)
+            // })
+            // .catch((event: any) => {
+            //     if(event.ok){
+            //         this.permissionService.information = event;
+            //     }
+            //     else {
+            //         this.permissionService.error = event;
+            //     }
+            //     setTimeout(() => {
+            //         this.permissionService.information = null;
+            //         this.permissionService.error = null;
+            //     },3000)
+            //     this.permissionService.getAll();
+            // })
 
         }
 

@@ -8,4 +8,4 @@ span(*ngIf="!this.permissionService.error")
                     div(class="input-group input-group-sm")
                         span(class="input-group-addon") Id
                         input(class="form-control" type="text", placeholder="{{permission.permission_id}}", disabled)
-                div((click)="this.delete(this.permission)" class="panel-footer done-edit") delete
+                div((click)="this.delete(this.permission.permission_id)" class="panel-footer done-edit") delete

@@ -8,12 +8,15 @@ export class ErrorParser {
         if (error.status === 401) {
             err = {
                 status: error.status,
-                message: 'unauthorized/expired token - please login again'
+                message: `${error.statusText}/expired token - please login again`
             }
         }
 
         else {
-            err = error;
+            err = {
+                status: `${error.status} - ${error.statusText}`,
+                message: error.error.message,
+            };
         }
 
         throw err;

@@ -41,13 +41,8 @@ export class InfobarComponent implements OnInit, DoCheck {
         let _id = 'uuid_generate_v4()';
 
         console.log(`adding ${this.type}`, this.itemForm);
+
         this[this.type].addItem(this.itemForm)
-            .catch((error: any) => {
-                this[this.type].error = error;
-                setTimeout(() => {
-                    this[this.type].error = null;
-                }, 3000)
-            })
 
         switch (this.type) {
             case 'permission':

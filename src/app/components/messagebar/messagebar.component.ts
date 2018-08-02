@@ -4,7 +4,6 @@ import { UserServices } from "../../services/user.services";
 import { ActivatedRoute } from "@angular/router";
 import { AccountServices } from "../../services/account.services";
 import { PermissionServices } from "../../services/permission.services";
-import { SidebarComponent } from "../sidebar/sidebar.component";
 
 @Component({
     selector: "app-messagebar",
@@ -20,7 +19,6 @@ export class MessagebarComponent implements OnInit {
     constructor(private permissions: PermissionServices, private accounts: AccountServices, private images: ImageServices, private users: UserServices, private activatedRoute: ActivatedRoute){}
 
     ngOnInit(): void {
-        // console.log('messagebar comp init', this.activatedRoute.snapshot.url[0].path);
         this.route = this.activatedRoute.snapshot.url[0].path;
     }
 

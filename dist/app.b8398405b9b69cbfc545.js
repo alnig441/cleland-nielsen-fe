@@ -6698,7 +6698,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 const core_1 = __webpack_require__(3);
-const router_1 = __webpack_require__(25);
+const router_1 = __webpack_require__(23);
 const httpAuth_service_1 = __webpack_require__(11);
 let AuthGuardService = class AuthGuardService {
     constructor(httpAuth, router) {
@@ -6749,7 +6749,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 const core_1 = __webpack_require__(3);
-const router_1 = __webpack_require__(25);
+const router_1 = __webpack_require__(23);
 const http_1 = __webpack_require__(30);
 const login_model_1 = __webpack_require__(677);
 const httpAuth_service_1 = __webpack_require__(11);
@@ -19696,10 +19696,12 @@ const http_1 = __webpack_require__(30);
 __webpack_require__(70);
 const errorParser_1 = __webpack_require__(58);
 const httpAuth_service_1 = __webpack_require__(11);
+const router_1 = __webpack_require__(23);
 let PermissionServices = class PermissionServices {
-    constructor(http, activeUser) {
+    constructor(http, activeUser, router) {
         this.http = http;
         this.activeUser = activeUser;
+        this.router = router;
         this.errorParser = new errorParser_1.ErrorParser();
         this.permissions = new Array();
         this.baseUrl = '/permissionsDb';
@@ -19739,7 +19741,6 @@ let PermissionServices = class PermissionServices {
         }
     }
     addItem(form) {
-        console.log('incoming permission form: ', form);
         if (!this.activeUser.isPermitted['to_add_permissions']) {
             return Promise.reject({ status: 405, message: 'insufficient permissions' });
         }
@@ -19747,28 +19748,41 @@ let PermissionServices = class PermissionServices {
             return this.http.post(this.baseUrl, form, { observe: "response" })
                 .toPromise()
                 .then((result) => {
-                console.log('result in perm serv: ', result);
+                this.information = { status: result.status, message: result.body.message };
                 this.getAll();
+                this.clearRegisters();
             })
-                .catch(this.errorParser.handleError);
+                .catch(this.errorParser.handleError)
+                .catch((error) => {
+                this.error = error;
+                this.clearRegisters();
+            });
         }
     }
-    // addItem(): Promise<any> {
-    //     if(!this.activeUser.isPermitted['to_add_permissions']){
-    //         return Promise.reject({ status: 405, message: 'insufficient permissions'})
-    //             .catch(this.errorParser.handleError)
-    //     }
-    //     else {
-    //         return Promise.reject({ status: '', message: 'method not yet defined'})
-    //     }
-    // }
-    deleteItem() {
+    deleteItem(permission_id) {
         if (!this.activeUser.isPermitted['to_delete_permissions']) {
             return Promise.reject({ status: 405, message: 'insufficient permissions' })
                 .catch(this.errorParser.handleError);
         }
         else {
-            return Promise.reject({ status: '', message: 'method not yet defined' });
+            return this.http.delete(`${this.baseUrl}/${permission_id}`, { observe: "response" })
+                .toPromise()
+                .then((response) => {
+                this.information = { status: response.status, message: response.body.message };
+                this.getAll();
+                this.clearRegisters();
+            })
+                .catch(this.errorParser.handleError)
+                .catch((error) => {
+                this.error = error;
+                this.clearRegisters();
+                if (error.status == 401) {
+                    setTimeout(() => {
+                        this.activeUser.logout();
+                        this.router.navigate(["/login"]);
+                    }, 3000);
+                }
+            });
         }
     }
     editItem() {
@@ -19780,10 +19794,16 @@ let PermissionServices = class PermissionServices {
             return Promise.reject({ status: '', message: 'method not yet defined' });
         }
     }
+    clearRegisters(status) {
+        setTimeout(() => {
+            this.information = null;
+            this.error = null;
+        }, 3000);
+    }
 };
 PermissionServices = __decorate([
     core_1.Injectable(),
-    __metadata("design:paramtypes", [http_1.HttpClient, httpAuth_service_1.HttpAuthService])
+    __metadata("design:paramtypes", [http_1.HttpClient, httpAuth_service_1.HttpAuthService, router_1.Router])
 ], PermissionServices);
 exports.PermissionServices = PermissionServices;
 
@@ -19902,11 +19922,14 @@ class ErrorParser {
         if (error.status === 401) {
             err = {
                 status: error.status,
-                message: 'unauthorized/expired token - please login again'
+                message: `${error.statusText}/expired token - please login again`
             };
         }
         else {
-            err = error;
+            err = {
+                status: `${error.status} - ${error.statusText}`,
+                message: error.error.message,
+            };
         }
         throw err;
     }
@@ -19937,7 +19960,7 @@ const account_services_1 = __webpack_require__(45);
 const permission_services_1 = __webpack_require__(44);
 const errorParser_1 = __webpack_require__(58);
 const httpAuth_service_1 = __webpack_require__(11);
-const router_1 = __webpack_require__(25);
+const router_1 = __webpack_require__(23);
 let CompInitService = class CompInitService {
     constructor(router, activeUser, images, users, accounts, permissions) {
         this.router = router;
@@ -22765,7 +22788,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 const core_1 = __webpack_require__(3);
 const http_1 = __webpack_require__(30);
-const router_1 = __webpack_require__(25);
+const router_1 = __webpack_require__(23);
 const httpAuth_service_1 = __webpack_require__(11);
 let AppComponent = class AppComponent {
     constructor(http, router, activatedRoute, activeUser) {
@@ -22817,7 +22840,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
-const router_1 = __webpack_require__(25);
+const router_1 = __webpack_require__(23);
 const core_1 = __webpack_require__(3);
 const auth_guard_service_1 = __webpack_require__(208);
 const APP_ROUTES = [
@@ -22872,7 +22895,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 const core_1 = __webpack_require__(3);
-const router_1 = __webpack_require__(25);
+const router_1 = __webpack_require__(23);
 const login_component_1 = __webpack_require__(209);
 const httpAuth_service_1 = __webpack_require__(11);
 const LoginRoutes = [
@@ -23026,7 +23049,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
-const router_1 = __webpack_require__(25);
+const router_1 = __webpack_require__(23);
 const core_1 = __webpack_require__(3);
 const about_component_1 = __webpack_require__(210);
 const home_component_1 = __webpack_require__(213);
@@ -23155,7 +23178,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 const core_1 = __webpack_require__(3);
-const router_1 = __webpack_require__(25);
+const router_1 = __webpack_require__(23);
 const events_component_1 = __webpack_require__(214);
 const users_component_1 = __webpack_require__(215);
 const images_component_1 = __webpack_require__(217);
@@ -23264,7 +23287,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 const core_1 = __webpack_require__(3);
-const router_1 = __webpack_require__(25);
+const router_1 = __webpack_require__(23);
 const httpAuth_service_1 = __webpack_require__(11);
 const image_services_1 = __webpack_require__(71);
 const user_services_1 = __webpack_require__(72);
@@ -23440,13 +23463,7 @@ let InfobarComponent = class InfobarComponent {
     onSubmit() {
         let _id = 'uuid_generate_v4()';
         console.log(`adding ${this.type}`, this.itemForm);
-        this[this.type].addItem(this.itemForm)
-            .catch((error) => {
-            this[this.type].error = error;
-            setTimeout(() => {
-                this[this.type].error = null;
-            }, 3000);
-        });
+        this[this.type].addItem(this.itemForm);
         switch (this.type) {
             case 'permission':
                 this.itemForm = new permission_model_1.PermissionModel(_id);
@@ -23544,7 +23561,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 const core_1 = __webpack_require__(3);
 const image_services_1 = __webpack_require__(71);
 const user_services_1 = __webpack_require__(72);
-const router_1 = __webpack_require__(25);
+const router_1 = __webpack_require__(23);
 const account_services_1 = __webpack_require__(45);
 const permission_services_1 = __webpack_require__(44);
 let MessagebarComponent = class MessagebarComponent {
@@ -23556,7 +23573,6 @@ let MessagebarComponent = class MessagebarComponent {
         this.activatedRoute = activatedRoute;
     }
     ngOnInit() {
-        // console.log('messagebar comp init', this.activatedRoute.snapshot.url[0].path);
         this.route = this.activatedRoute.snapshot.url[0].path;
     }
 };
@@ -23576,7 +23592,7 @@ exports.MessagebarComponent = MessagebarComponent;
 /***/ 703:
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"panel panel-warning\" *ngIf=\"this[this.route].error\"><div class=\"panel-heading\">status: {{ this[this.route].error.status }}</div><div class=\"panel-body\">message: {{ this[this.route].error.message }}</div></div>"
+module.exports = "<div class=\"panel panel-warning\" *ngIf=\"this[this.route].error\"><div class=\"panel-heading\">status: {{ this[this.route].error.status }}</div><div class=\"panel-body\">message: {{ this[this.route].error.message }}</div></div><div class=\"panel panel-success\" *ngIf=\"this[this.route].information\"><div class=\"panel-heading\">status: {{ this[this.route].information.status }}</div><div class=\"panel-body\">message: {{ this[this.route].information.message }}</div></div>"
 
 /***/ }),
 
@@ -23613,15 +23629,27 @@ let PermissionsPanelComponent = class PermissionsPanelComponent {
         }
         ;
     }
-    delete(permission) {
-        console.log(`deleting: `, permission);
-        this.permissionService.deleteItem()
-            .catch((error) => {
-            this.permissionService.error = error;
-            setTimeout(() => {
-                this.permissionService.error = null;
-            }, 3000);
-        });
+    delete(permission_id) {
+        console.log(`deleting: `, permission_id);
+        this.permissionService.deleteItem(permission_id);
+        // .then(() => {
+        //     setTimeout(() => {
+        //         this.permissionService.information = null;
+        //     },3000)
+        // })
+        // .catch((event: any) => {
+        //     if(event.ok){
+        //         this.permissionService.information = event;
+        //     }
+        //     else {
+        //         this.permissionService.error = event;
+        //     }
+        //     setTimeout(() => {
+        //         this.permissionService.information = null;
+        //         this.permissionService.error = null;
+        //     },3000)
+        //     this.permissionService.getAll();
+        // })
     }
 };
 PermissionsPanelComponent = __decorate([
@@ -23640,7 +23668,7 @@ exports.PermissionsPanelComponent = PermissionsPanelComponent;
 /***/ 705:
 /***/ (function(module, exports) {
 
-module.exports = "<span *ngIf=\"!this.permissionService.error\"><div *ngFor=\"let permission of this.permissionService.permissions as permissions; index as i\"><div class=\"col-sm-6 col-md-4\"><form class=\"box-shadow panel panel-info\" #editUserForm=\"ngForm\" id=\"\"><div class=\"panel-heading\"><h3 class=\"panel-title\">{{permission.permission_name}}</h3></div><div class=\"panel-body\"><div class=\"input-group input-group-sm\"><span class=\"input-group-addon\">Id</span><input class=\"form-control\" type=\"text\" placeholder=\"{{permission.permission_id}}\" disabled></div></div><div class=\"panel-footer done-edit\" (click)=\"this.delete(this.permission)\">delete</div></form></div></div></span>"
+module.exports = "<span *ngIf=\"!this.permissionService.error\"><div *ngFor=\"let permission of this.permissionService.permissions as permissions; index as i\"><div class=\"col-sm-6 col-md-4\"><form class=\"box-shadow panel panel-info\" #editUserForm=\"ngForm\" id=\"\"><div class=\"panel-heading\"><h3 class=\"panel-title\">{{permission.permission_name}}</h3></div><div class=\"panel-body\"><div class=\"input-group input-group-sm\"><span class=\"input-group-addon\">Id</span><input class=\"form-control\" type=\"text\" placeholder=\"{{permission.permission_id}}\" disabled></div></div><div class=\"panel-footer done-edit\" (click)=\"this.delete(this.permission.permission_id)\">delete</div></form></div></div></span>"
 
 /***/ }),
 
@@ -24117,7 +24145,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 const core_1 = __webpack_require__(3);
-const router_1 = __webpack_require__(25);
+const router_1 = __webpack_require__(23);
 const http_1 = __webpack_require__(30);
 const httpAuth_service_1 = __webpack_require__(11);
 let GlobalnavComponent = class GlobalnavComponent {
@@ -24399,4 +24427,4 @@ module.exports = "data:application/font-woff;base64,bW9kdWxlLmV4cG9ydHMgPSBfX3dl
 /***/ })
 
 },[647]);
-//# sourceMappingURL=app.e631a29b9570465ec099.js.map
+//# sourceMappingURL=app.b8398405b9b69cbfc545.js.map

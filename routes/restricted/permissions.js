@@ -33,7 +33,7 @@ router.post('/', (req, res, next) => {
 
     return client.query(`INSERT INTO PERMISSIONS VALUES (${req.body.permission_id}, '${req.body.permission_name}')`)
         .then(result => {
-            res.status(200).send({message: result.command + ' SUCCESS'});
+            res.status(200).send({message: `${result.command} SUCCESS`});
             client.end();
         })
         .catch(error => {
@@ -41,6 +41,40 @@ router.post('/', (req, res, next) => {
             client.end();
         })
 })
+
+router.param('permission_id', (req, res, next, permission_id) => {
+    req.permission = permission_id;
+    next();
+})
+
+router.route('/:permission_id?')
+    .all((req, res, next) => {
+        next();
+    })
+    .get((req, res, next) => {
+        console.log('fetching permission: ', req.permission )
+    })
+    .put((req, res, next) =>{
+        console.log('modifying permission: ', req.permission )
+    })
+    .delete((req, res, next) => {
+        const client = new Client({
+            connectionString: connectionString
+        })
+
+        client.connect();
+
+        return client.query(`DELETE FROM PERMISSIONS WHERE permission_id = '${req.permission}'`)
+            .then((result) => {
+                res.status(200).send({message: `${result.command} SUCCESS`});
+                client.end();
+            })
+            .catch(error => {
+                res.status(400).send({message: error.detail});
+                client.end();
+            })
+    })
+
 
 
 module.exports = router;
