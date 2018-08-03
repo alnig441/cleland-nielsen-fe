@@ -19,6 +19,10 @@ export class InfobarComponent implements OnInit, DoCheck {
     @Input() type: string;
 
     private formProperties: string[];
+    private languages = [
+        { language: 'english'},
+        { language: 'danish'}
+    ]
 
     constructor(private user: UserServices, private account: AccountServices, private permission: PermissionServices, private activeUser: HttpAuthService) {}
 
@@ -27,6 +31,7 @@ export class InfobarComponent implements OnInit, DoCheck {
 
         if(this.itemForm){
             this.formProperties = Object.keys(this.itemForm);
+            this.itemForm.account_permissions = new Array();
         }
     }
 

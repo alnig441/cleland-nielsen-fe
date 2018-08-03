@@ -13,6 +13,26 @@ span(*ngIf="this.activeUser.isPermitted['to_add_'+ this.type + 's'] && this.type
         div(class="panel-heading")
             h3(class="panel-title") add {{this.type}}
         div(class="panel-body")
-            div(*ngFor="let property of this.formProperties; index as i", class="input-group input-group-sm")
+            div(*ngFor="let property of this.formProperties; index as i",class="input-group input-group-sm")
+                div(*ngIf="property !='language' && property != 'account_type' && property != 'account_permissions' && property != this.type +'_id'" class="input-group-btn" style="")
+                    span(class='input-group-addon btn-info', id='{{property}}') Enter
+                div(*ngIf="this.type == 'user' && property =='account_type'", class="input-group-btn" style="")
+                    button(type="button" class="btn btn-info dropdown-toggle", data-toggle="dropdown" aria-haspopup="true", aria-expanded="false") Select
+                        span(class="caret")
+                    ul(class="dropdown-menu")
+                        li(*ngFor="let account of this.account.accounts as accounts; index as j")
+                            a((click)="this.itemForm[property] = account.account_id") {{account.account_name}}
+                div(*ngIf="this.type =='user' && property =='language'", class="input-group-btn" style="")
+                    button(type="button" class="btn btn-info dropdown-toggle", data-toggle="dropdown" aria-haspopup="true", aria-expanded="false") Select
+                        span(class="caret")
+                    ul(class="dropdown-menu")
+                        li(*ngFor="let language of this.languages as languages; index as k")
+                            a((click)="this.itemForm[property] = language.language") {{language.language}}
+                div(*ngIf="this.type =='account' && property =='account_permissions'", class="input-group-btn" style="")
+                    button(type="button" class="btn btn-info dropdown-toggle", data-toggle="dropdown" aria-haspopup="true", aria-expanded="false") Select
+                        span(class="caret")
+                    ul(class="dropdown-menu")
+                        li(*ngFor="let permission of this.permission.permissions as permissions; index as l")
+                            a((click)="this.itemForm[property].push(permission.permission_id)") {{permission.permission_name}}
                 input(*ngIf="property != this.type +'_id'" class="form-control" type="text", placeholder="{{property}}", [(ngModel)]="this.itemForm[property]" name="{{property}}")
         div((click)="onSubmit()" class="panel-footer done-edit") submit
