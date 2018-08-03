@@ -14,7 +14,7 @@ span(*ngIf="this.activeUser.isPermitted['to_add_'+ this.type + 's'] && this.type
             h3(class="panel-title") add {{this.type}}
         div(class="panel-body")
             div(*ngFor="let property of this.formProperties; index as i",class="input-group input-group-sm")
-                div(*ngIf="property !='language' && property != 'account_type' && property != 'account_permissions' && property != this.type +'_id'" class="input-group-btn" style="")
+                div(*ngIf="property != 'account_permissions' && property !='language' && property != 'account_type' && property != this.type +'_id'" class="input-group-btn" style="")
                     span(class='input-group-addon btn-info', id='{{property}}') Enter
                 div(*ngIf="this.type == 'user' && property =='account_type'", class="input-group-btn" style="")
                     button(type="button" class="btn btn-info dropdown-toggle", data-toggle="dropdown" aria-haspopup="true", aria-expanded="false") Select

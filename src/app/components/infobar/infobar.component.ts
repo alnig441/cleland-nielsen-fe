@@ -31,7 +31,9 @@ export class InfobarComponent implements OnInit, DoCheck {
 
         if(this.itemForm){
             this.formProperties = Object.keys(this.itemForm);
-            this.itemForm.account_permissions = new Array();
+            if(this.type == 'account'){
+                this.itemForm.account_permissions = new Array();
+            }
         }
     }
 

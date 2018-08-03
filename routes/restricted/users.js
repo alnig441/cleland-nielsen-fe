@@ -40,12 +40,14 @@ router.post('/', (req, res, next) => {
                 return Promise.reject({ status: err.statusCode, message: err.message})
             }
             else {
-                return client.query(`INSERT INTO users VALUES( ${req.body.user_id},(SELECT account_id FROM accounts WHERE account_name='${req.body.account_type}'), '${req.body.user_name}', '${hash}')`)
+                // return client.query(`INSERT INTO users VALUES( ${req.body.user_id},(SELECT account_id FROM accounts WHERE account_name='${req.body.account_type}'), '${req.body.user_name}', '${hash}')`)
+                return client.query(`INSERT INTO users VALUES( ${req.body.user_id}, '${req.body.account_type}', '${req.body.user_name}', '${hash}')`)
                     .then((result) => {
                         res.status(200).send({message: `${result.command} SUCCESS`});
                         client.end();
                     })
                     .catch(error => {
+                        console.log(error);
                         res.status(400).send({message: error.detail});
                         client.end();
                     })
@@ -92,7 +94,7 @@ router.route('/:user_id?')
 
         client.connect();
 
-        return client.query(`DELETE FROM USERS WHERE user_id = '${req.user}'`)
+        return client.query(`DELETE FROM USERS WHERE user_id = '${req.user.id}'`)
             .then((result) => {
                 res.status(200).send({message: `${result.command} SUCCESS`});
                 client.end();
