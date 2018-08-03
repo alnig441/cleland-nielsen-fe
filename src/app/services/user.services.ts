@@ -113,12 +113,29 @@ export class UserServices {
         }
     }
 
-    editItem(): Promise<any> {
+    editItem(user: UserModel): Promise<any> {
         if(!this.activeUser.isPermitted['to_edit_users']){
             this.isNotPermitted()
         }
         else {
-            return Promise.reject({ status: '', message: 'method not yet defined'})
+            return this.http.put(`${this.baseUrl}/${user.user_id}`, user, { observe: "response"})
+                .toPromise()
+                .then((response: any) => {
+                    this.information = { status: response.status , message: response.body.message };
+                    this.getAll();
+                    this.clearRegisters();
+                })
+                .catch(this.errorParser.handleError)
+                .catch((error: any) => {
+                    this.error = error;
+                    this.clearRegisters();
+                    if(error.forceLogout){
+                        setTimeout(() => {
+                            this.activeUser.logout();
+                            this.router.navigate(["/login"]);
+                        }, 3000)
+                    }
+                })
         }
     }
 

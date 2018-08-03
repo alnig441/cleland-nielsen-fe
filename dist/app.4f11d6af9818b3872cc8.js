@@ -20194,12 +20194,30 @@ let UserServices = class UserServices {
             });
         }
     }
-    editItem() {
+    editItem(user) {
         if (!this.activeUser.isPermitted['to_edit_users']) {
             this.isNotPermitted();
         }
         else {
-            return Promise.reject({ status: '', message: 'method not yet defined' });
+            return this.http.put(`${this.baseUrl}/${user.user_id}`, user, { observe: "response" })
+                .toPromise()
+                .then((response) => {
+                console.log(response);
+                this.information = { status: response.status, message: response.body.message };
+                this.getAll();
+                this.clearRegisters();
+            })
+                .catch(this.errorParser.handleError)
+                .catch((error) => {
+                this.error = error;
+                this.clearRegisters();
+                if (error.forceLogout) {
+                    setTimeout(() => {
+                        this.activeUser.logout();
+                        this.router.navigate(["/login"]);
+                    }, 3000);
+                }
+            });
         }
     }
     clearRegisters(status) {
@@ -24065,6 +24083,7 @@ let UserPanelComponent = class UserPanelComponent {
         this.activeUser = activeUser;
         this.userService = userService;
         this.accountService = accountService;
+        this.userUpdated = false;
         this.doEdit = {};
         this.languages = [
             {
@@ -24103,7 +24122,6 @@ let UserPanelComponent = class UserPanelComponent {
             }, 3000);
         }
         else {
-            console.log('inputting this key/value: ', input);
             for (var prop in input) {
                 if (prop != 'account_id') {
                     if (prop == 'account_name') {
@@ -24112,21 +24130,17 @@ let UserPanelComponent = class UserPanelComponent {
                     this.userService.users[i][prop] = input[prop];
                 }
             }
+            this.userUpdated = true;
         }
     }
     done(user) {
-        console.log('done editing user: ', user);
         this.doEdit = {};
-        this.userService.editItem()
-            .catch((error) => {
-            this.userService.error = error;
-            setTimeout(() => {
-                this.userService.error = null;
-            }, 3000);
-        });
+        if (this.userUpdated) {
+            this.userService.editItem(user);
+        }
+        this.userUpdated = false;
     }
     delete(user_id) {
-        console.log('deleting user: ', user_id);
         this.userService.deleteItem(user_id);
     }
 };
@@ -24516,4 +24530,4 @@ module.exports = "data:application/font-woff;base64,bW9kdWxlLmV4cG9ydHMgPSBfX3dl
 /***/ })
 
 },[647]);
-//# sourceMappingURL=app.6ec1a7441a90d44b3820.js.map
+//# sourceMappingURL=app.4f11d6af9818b3872cc8.js.map

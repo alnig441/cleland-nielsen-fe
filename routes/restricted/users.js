@@ -54,7 +54,7 @@ router.post('/', (req, res, next) => {
 })
 
 router.param('user_id', (req, res, next, user_id) => {
-    req.user = user_id;
+    req.user = {id: user_id, language: req.body.language, type: req.body.account_type }
     next();
 })
 
@@ -66,7 +66,24 @@ router.route('/:user_id?')
         console.log('fetching user: ', req.user )
     })
     .put((req, res, next) =>{
-        console.log('modifying user: ', req.user )
+        console.log('modifying user: ')
+        const client = new Client({
+            connectionString: connectionString
+        })
+
+        client.connect();
+
+        return client.query(`UPDATE users SET (account_type, language) = ('${req.user.type}', '${req.user.language}') WHERE user_id = '${req.user.id}'`)
+            .then((result) => {
+                res.status(200).send({message: `${result.command} SUCCESS`});
+                client.end();
+            })
+            .catch(error => {
+                console.log(error);
+                res.status(400).send({message: error.detail});
+                client.end();
+            })
+
     })
     .delete((req, res, next) => {
         const client = new Client({

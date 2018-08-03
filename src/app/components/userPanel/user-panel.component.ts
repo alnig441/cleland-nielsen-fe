@@ -14,6 +14,7 @@ import {CompInitService} from "../../services/comp-init.service";
 
 export class UserPanelComponent implements OnInit {
 
+    userUpdated: boolean = false;
     doEdit = {};
 
     languages = [
@@ -29,6 +30,7 @@ export class UserPanelComponent implements OnInit {
     constructor(private compInit: CompInitService, private activeUser: HttpAuthService, private userService: UserServices, private accountService: AccountServices) {}
 
     ngOnInit(): void {
+
         if(this.activeUser.isPermitted['to_view_users']){
             this.compInit.initialize('users')
                 .then((result: any) => {
@@ -38,6 +40,7 @@ export class UserPanelComponent implements OnInit {
     }
 
     edit(user: UserModel): void {
+
         if(!this.activeUser.isPermitted['to_edit_users']){
             this.userService.error = { status: 405, message: 'insufficient permissions'}
             setTimeout(() => {
@@ -46,7 +49,6 @@ export class UserPanelComponent implements OnInit {
         }
 
         else {
-            console.log('editing user: ', user.user_name);
             this.doEdit[user.user_name] = true;
         }
 
@@ -62,7 +64,6 @@ export class UserPanelComponent implements OnInit {
         }
 
         else {
-            console.log('inputting this key/value: ', input);
             for(var prop in input){
                 if(prop != 'account_id') {
                     if(prop == 'account_name'){
@@ -71,23 +72,23 @@ export class UserPanelComponent implements OnInit {
                     this.userService.users[i][prop] = input[prop];
                 }
             }
+            this.userUpdated = true;
         }
     }
 
     done(user: UserModel): void {
-        console.log('done editing user: ', user);
+
         this.doEdit = {};
-        this.userService.editItem()
-            .catch((error) =>{
-                this.userService.error = error;
-                setTimeout(()=>{
-                    this.userService.error = null;
-                }, 3000)
-            })
+
+        if(this.userUpdated){
+            this.userService.editItem(user)
+        }
+
+        this.userUpdated = false;
     }
 
     delete(user_id: string): void {
-        console.log('deleting user: ', user_id);
+
         this.userService.deleteItem(user_id)
 
     }
