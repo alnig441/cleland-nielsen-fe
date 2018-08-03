@@ -14,13 +14,13 @@ export class ImageServices {
     imagesUpdated: boolean = false;
     baseUrl = '/imagesDb';
     error: any;
+    information: any;
 
     constructor( private http: HttpClient, private activeUser: HttpAuthService) {}
 
     getAll(): Promise<any> {
         if(!this.activeUser.isPermitted['to_view_images']){
-            return Promise.reject({ status: 405, message: 'insufficient permissions'})
-                .catch(this.errorParser.handleError)
+            this.isNotPermitted()
         }
 
         else{
@@ -39,8 +39,7 @@ export class ImageServices {
 
     getOne(): Promise<any> {
         if(!this.activeUser.isPermitted['to_view_images']){
-            return Promise.reject({ status: 405, message: 'insufficient permissions'})
-                .catch(this.errorParser.handleError)
+            this.isNotPermitted()
         }
 
         else {
@@ -51,8 +50,7 @@ export class ImageServices {
 
     getLatest(): Promise<any> {
         if(!this.activeUser.isPermitted['to_view_images']){
-            return Promise.reject({ status: 405, message: 'insufficient permissions'})
-                .catch(this.errorParser.handleError);
+            this.isNotPermitted()
         }
 
         else {
@@ -63,8 +61,7 @@ export class ImageServices {
 
     getList(): Promise<any> {
         if(!this.activeUser.isPermitted['to_view_images']){
-            return Promise.reject({ status: 405, message: 'insufficient permissions'})
-                .catch(this.errorParser.handleError);
+            this.isNotPermitted()
         }
 
         else {
@@ -75,8 +72,7 @@ export class ImageServices {
 
     addItem(): Promise<any> {
         if(!this.activeUser.isPermitted['to_add_images']){
-            return Promise.reject({ status: 405, message: 'insufficient permissions'})
-                .catch(this.errorParser.handleError)
+            this.isNotPermitted()
         }
         else {
             return Promise.reject({ status: '', message: 'method not yet defined'})
@@ -85,8 +81,7 @@ export class ImageServices {
 
     deleteItem(): Promise<any> {
         if(!this.activeUser.isPermitted['to_delete_images']){
-            return Promise.reject({ status: 405, message: 'insufficient permissions'})
-                .catch(this.errorParser.handleError)
+            this.isNotPermitted()
         }
         else {
             return Promise.reject({ status: '', message: 'method not yet defined'})
@@ -95,12 +90,26 @@ export class ImageServices {
 
     editItem(): Promise<any> {
         if(!this.activeUser.isPermitted['to_edit_images']){
-            return Promise.reject({ status: 405, message: 'insufficient permissions'})
-                .catch(this.errorParser.handleError)
+            this.isNotPermitted()
         }
         else {
             return Promise.reject({ status: '', message: 'method not yet defined'})
         }
     }
 
+    private clearRegisters(status?: any) {
+        setTimeout(() => {
+            this.information = null;
+            this.error = null;
+        },3000)
+    }
+
+    private isNotPermitted(): Promise<any> {
+        return Promise.reject({ status: 405, message: 'insufficient permissions'})
+            .catch(this.errorParser.handleError)
+            .catch((error: any) => {
+                this.error = error;
+                this.clearRegisters();
+            })
+    }
 }

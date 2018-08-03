@@ -20,8 +20,7 @@ export class AccountServices {
 
     getAll(): Promise<any> {
         if(!this.activeUser.isPermitted['to_view_accounts']){
-            return Promise.reject({ status: 405, message: 'insufficient permissions'})
-                .catch(this.errorParser.handleError);
+            this.isNotPermitted()
         }
 
         else{
@@ -42,8 +41,7 @@ export class AccountServices {
 
     getList(): Promise<any> {
         if(!this.activeUser.isPermitted['to_view_accounts']){
-            return Promise.reject({ status: 405, message: 'insufficient permissions'})
-                .catch(this.errorParser.handleError);
+            this.isNotPermitted()
         }
 
         else {
@@ -54,8 +52,7 @@ export class AccountServices {
 
     getOne(): Promise<any> {
         if(!this.activeUser.isPermitted['to_view_accounts']){
-            return Promise.reject({ status: 405, message: 'insufficient permissions'})
-                .catch(this.errorParser.handleError);
+            this.isNotPermitted()
         }
 
         else {
@@ -66,12 +63,7 @@ export class AccountServices {
 
     addItem(form: AccountModel): Promise<any> {
         if(!this.activeUser.isPermitted['to_add_accounts']) {
-            return Promise.reject({ status : 405 , message : 'insufficient permissions'})
-                .catch(this.errorParser.handleError)
-                .catch((error: any)=>{
-                    this.error = error;
-                    this.clearRegisters();
-                })
+            this.isNotPermitted()
         }
 
         else{
@@ -99,12 +91,7 @@ export class AccountServices {
     deleteItem(account_id: string): Promise<any> {
 
         if(!this.activeUser.isPermitted['to_delete_accounts']){
-            return Promise.reject({ status: 405, message: 'insufficient permissions'})
-                .catch(this.errorParser.handleError)
-                .catch((error: any) => {
-                    this.error = error;
-                    this.clearRegisters();
-                })
+            this.isNotPermitted()
         }
         else {
             return this.http.delete(`${this.baseUrl}/${account_id}`, {observe: "response"})
@@ -128,13 +115,29 @@ export class AccountServices {
         }
     }
 
-    editItem(): Promise<any> {
+    editItem(account: AccountModel): Promise<any> {
         if(!this.activeUser.isPermitted['to_edit_accounts']){
-            return Promise.reject({ status: 405, message: 'insufficient permissions'})
-                .catch(this.errorParser.handleError)
+            this.isNotPermitted()
         }
         else {
-            return Promise.reject({ status: '', message: 'method not yet defined'})
+            return this.http.put(`${this.baseUrl}/${account.account_id}`, account.account_permissions, {observe: "response"})
+                .toPromise()
+                .then((response: any) => {
+                    this.information = { status: response.status, message: response.body.message };
+                    this.getAll();
+                    this.clearRegisters();
+                })
+                .catch(this.errorParser.handleError)
+                .catch((error: any) => {
+                    this.error = error;
+                    this.clearRegisters();
+                    if(error.forceLogout){
+                        setTimeout(() => {
+                            this.activeUser.logout();
+                            this.router.navigate(["/login"]);
+                        }, 3000)
+                    }
+                })
         }
     }
 
@@ -145,5 +148,13 @@ export class AccountServices {
         },3000)
     }
 
+    private isNotPermitted(): Promise<any> {
+        return Promise.reject({ status: 405, message: 'insufficient permissions'})
+            .catch(this.errorParser.handleError)
+            .catch((error: any) => {
+                this.error = error;
+                this.clearRegisters();
+            })
+    }
 
 }

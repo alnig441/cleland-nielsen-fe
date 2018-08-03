@@ -21,8 +21,7 @@ export class UserServices {
 
     getAll(): Promise<any> {
         if(!this.activeUser.isPermitted['to_view_users']){
-            return Promise.reject({ status: 405, message: 'insufficient permissions'})
-                .catch(this.errorParser.handleError);
+            this.isNotPermitted()
         }
 
         else {
@@ -40,8 +39,7 @@ export class UserServices {
 
     getOne(): Promise<any> {
         if(!this.activeUser.isPermitted['to_view_users']){
-            return Promise.reject({ status: 405, message: 'insufficient permissions'})
-                .catch(this.errorParser.handleError);
+            this.isNotPermitted()
         }
 
         else {
@@ -52,8 +50,7 @@ export class UserServices {
 
     getList(): Promise<any> {
         if(!this.activeUser.isPermitted['to_view_users']){
-            return Promise.reject({ status: 405, message: 'insufficient permissions'})
-                .catch(this.errorParser.handleError);
+            this.isNotPermitted()
         }
 
         else {
@@ -64,12 +61,7 @@ export class UserServices {
 
     addItem(form: UserModel): Promise<any> {
         if(!this.activeUser.isPermitted['to_add_users']) {
-            return Promise.reject({ status : 405 , message : 'insufficient permissions'})
-                .catch(this.errorParser.handleError)
-                .catch((error: any)=>{
-                    this.error = error;
-                    this.clearRegisters();
-                })
+            this.isNotPermitted()
         }
 
         else{
@@ -94,18 +86,13 @@ export class UserServices {
         }
     }
 
-    deleteItem(user_id: string): Promise<any> {
+    deleteItem(permission_id: string): Promise<any> {
 
-        if(!this.activeUser.isPermitted['to_delete_users']){
-            return Promise.reject({ status: 405, message: 'insufficient permissions'})
-                .catch(this.errorParser.handleError)
-                .catch((error: any) => {
-                    this.error = error;
-                    this.clearRegisters();
-                })
+        if(!this.activeUser.isPermitted['to_delete_permissions']){
+            this.isNotPermitted()
         }
         else {
-            return this.http.delete(`${this.baseUrl}/${user_id}`, {observe: "response"})
+            return this.http.delete(`${this.baseUrl}/${permission_id}`, {observe: "response"})
                 .toPromise()
                 .then((response: any) => {
                     this.information = { status: response.status , message: response.body.message };
@@ -128,8 +115,7 @@ export class UserServices {
 
     editItem(): Promise<any> {
         if(!this.activeUser.isPermitted['to_edit_users']){
-            return Promise.reject({ status: 405, message: 'insufficient permissions'})
-                .catch(this.errorParser.handleError)
+            this.isNotPermitted()
         }
         else {
             return Promise.reject({ status: '', message: 'method not yet defined'})
@@ -143,5 +129,12 @@ export class UserServices {
         },3000)
     }
 
-
+    private isNotPermitted(): Promise<any> {
+        return Promise.reject({ status: 405, message: 'insufficient permissions'})
+            .catch(this.errorParser.handleError)
+            .catch((error: any) => {
+                this.error = error;
+                this.clearRegisters();
+            })
+    }
 }

@@ -67,7 +67,24 @@ router.route('/:account_id?')
         console.log('fetching account: ', req.account )
     })
     .put((req, res, next) =>{
-        console.log('modifying account: ', req.account )
+        const client = new Client({
+            connectionString: connectionString
+        })
+
+        client.connect();
+
+        return client.query(`UPDATE ACCOUNTS SET account_permissions = '{${req.body}}' WHERE account_id = '${req.account}'`)
+            .then((result) => {
+                console.log(result);
+                res.status(200).send({message: `${result.command} SUCCESS`});
+                client.end();
+            })
+            .catch(error => {
+                res.status(400).send({message: error.detail || error.error});
+                client.end();
+            })
+
+
     })
     .delete((req, res, next) => {
         const client = new Client({
@@ -86,6 +103,7 @@ router.route('/:account_id?')
                 client.end();
             })
     })
+
 
 
 module.exports = router;

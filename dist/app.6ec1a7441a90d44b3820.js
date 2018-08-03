@@ -19714,8 +19714,7 @@ let PermissionServices = class PermissionServices {
     }
     getAll() {
         if (!this.activeUser.isPermitted['to_view_permissions']) {
-            return Promise.reject({ status: 405, message: 'insufficient permissions' })
-                .catch(this.errorParser.handleError);
+            this.isNotPermitted();
         }
         else {
             return this.http.get(this.baseUrl, { observe: "response" })
@@ -19730,8 +19729,7 @@ let PermissionServices = class PermissionServices {
     }
     getList() {
         if (!this.activeUser.isPermitted['to_view_permissions']) {
-            return Promise.reject({ status: 405, message: 'insufficient permissions' })
-                .catch(this.errorParser.handleError);
+            this.isNotPermitted();
         }
         else {
             return Promise.reject({ status: '', message: 'method not yet defined' });
@@ -19739,8 +19737,7 @@ let PermissionServices = class PermissionServices {
     }
     getOne() {
         if (!this.activeUser.isPermitted['to_view_permissions']) {
-            return Promise.reject({ status: 405, message: 'insufficient permissions' })
-                .catch(this.errorParser.handleError);
+            this.isNotPermitted();
         }
         else {
             return Promise.reject({ status: '', message: 'method not yet defined' });
@@ -19748,12 +19745,7 @@ let PermissionServices = class PermissionServices {
     }
     addItem(form) {
         if (!this.activeUser.isPermitted['to_add_permissions']) {
-            return Promise.reject({ status: 405, message: 'insufficient permissions' })
-                .catch(this.errorParser.handleError)
-                .catch((error) => {
-                this.error = error;
-                this.clearRegisters();
-            });
+            this.isNotPermitted();
         }
         else {
             return this.http.post(this.baseUrl, form, { observe: "response" })
@@ -19778,12 +19770,7 @@ let PermissionServices = class PermissionServices {
     }
     deleteItem(permission_id) {
         if (!this.activeUser.isPermitted['to_delete_permissions']) {
-            return Promise.reject({ status: 405, message: 'insufficient permissions' })
-                .catch(this.errorParser.handleError)
-                .catch((error) => {
-                this.error = error;
-                this.clearRegisters();
-            });
+            this.isNotPermitted();
         }
         else {
             return this.http.delete(`${this.baseUrl}/${permission_id}`, { observe: "response" })
@@ -19808,8 +19795,7 @@ let PermissionServices = class PermissionServices {
     }
     editItem() {
         if (!this.activeUser.isPermitted['to_edit_permissions']) {
-            return Promise.reject({ status: 405, message: 'insufficient permissions' })
-                .catch(this.errorParser.handleError);
+            this.isNotPermitted();
         }
         else {
             return Promise.reject({ status: '', message: 'method not yet defined' });
@@ -19820,6 +19806,14 @@ let PermissionServices = class PermissionServices {
             this.information = null;
             this.error = null;
         }, 3000);
+    }
+    isNotPermitted() {
+        return Promise.reject({ status: 405, message: 'insufficient permissions' })
+            .catch(this.errorParser.handleError)
+            .catch((error) => {
+            this.error = error;
+            this.clearRegisters();
+        });
     }
 };
 PermissionServices = __decorate([
@@ -19862,8 +19856,7 @@ let AccountServices = class AccountServices {
     }
     getAll() {
         if (!this.activeUser.isPermitted['to_view_accounts']) {
-            return Promise.reject({ status: 405, message: 'insufficient permissions' })
-                .catch(this.errorParser.handleError);
+            this.isNotPermitted();
         }
         else {
             return this.http.get(this.baseUrl, { observe: "response" })
@@ -19880,8 +19873,7 @@ let AccountServices = class AccountServices {
     }
     getList() {
         if (!this.activeUser.isPermitted['to_view_accounts']) {
-            return Promise.reject({ status: 405, message: 'insufficient permissions' })
-                .catch(this.errorParser.handleError);
+            this.isNotPermitted();
         }
         else {
             return Promise.reject({ status: '', message: 'method not yet defined' });
@@ -19889,8 +19881,7 @@ let AccountServices = class AccountServices {
     }
     getOne() {
         if (!this.activeUser.isPermitted['to_view_accounts']) {
-            return Promise.reject({ status: 405, message: 'insufficient permissions' })
-                .catch(this.errorParser.handleError);
+            this.isNotPermitted();
         }
         else {
             return Promise.reject({ status: '', message: 'method not yet defined' });
@@ -19898,12 +19889,7 @@ let AccountServices = class AccountServices {
     }
     addItem(form) {
         if (!this.activeUser.isPermitted['to_add_accounts']) {
-            return Promise.reject({ status: 405, message: 'insufficient permissions' })
-                .catch(this.errorParser.handleError)
-                .catch((error) => {
-                this.error = error;
-                this.clearRegisters();
-            });
+            this.isNotPermitted();
         }
         else {
             return this.http.post(this.baseUrl, form, { observe: "response" })
@@ -19928,12 +19914,7 @@ let AccountServices = class AccountServices {
     }
     deleteItem(account_id) {
         if (!this.activeUser.isPermitted['to_delete_accounts']) {
-            return Promise.reject({ status: 405, message: 'insufficient permissions' })
-                .catch(this.errorParser.handleError)
-                .catch((error) => {
-                this.error = error;
-                this.clearRegisters();
-            });
+            this.isNotPermitted();
         }
         else {
             return this.http.delete(`${this.baseUrl}/${account_id}`, { observe: "response" })
@@ -19956,13 +19937,29 @@ let AccountServices = class AccountServices {
             });
         }
     }
-    editItem() {
+    editItem(account) {
         if (!this.activeUser.isPermitted['to_edit_accounts']) {
-            return Promise.reject({ status: 405, message: 'insufficient permissions' })
-                .catch(this.errorParser.handleError);
+            this.isNotPermitted();
         }
         else {
-            return Promise.reject({ status: '', message: 'method not yet defined' });
+            return this.http.put(`${this.baseUrl}/${account.account_id}`, account.account_permissions, { observe: "response" })
+                .toPromise()
+                .then((response) => {
+                this.information = { status: response.status, message: response.body.message };
+                this.getAll();
+                this.clearRegisters();
+            })
+                .catch(this.errorParser.handleError)
+                .catch((error) => {
+                this.error = error;
+                this.clearRegisters();
+                if (error.forceLogout) {
+                    setTimeout(() => {
+                        this.activeUser.logout();
+                        this.router.navigate(["/login"]);
+                    }, 3000);
+                }
+            });
         }
     }
     clearRegisters(status) {
@@ -19970,6 +19967,14 @@ let AccountServices = class AccountServices {
             this.information = null;
             this.error = null;
         }, 3000);
+    }
+    isNotPermitted() {
+        return Promise.reject({ status: 405, message: 'insufficient permissions' })
+            .catch(this.errorParser.handleError)
+            .catch((error) => {
+            this.error = error;
+            this.clearRegisters();
+        });
     }
 };
 AccountServices = __decorate([
@@ -20111,8 +20116,7 @@ let UserServices = class UserServices {
     }
     getAll() {
         if (!this.activeUser.isPermitted['to_view_users']) {
-            return Promise.reject({ status: 405, message: 'insufficient permissions' })
-                .catch(this.errorParser.handleError);
+            this.isNotPermitted();
         }
         else {
             return this.http.get(this.baseUrl, { observe: "response" })
@@ -20126,8 +20130,7 @@ let UserServices = class UserServices {
     }
     getOne() {
         if (!this.activeUser.isPermitted['to_view_users']) {
-            return Promise.reject({ status: 405, message: 'insufficient permissions' })
-                .catch(this.errorParser.handleError);
+            this.isNotPermitted();
         }
         else {
             return Promise.reject({ status: '', message: 'method not yet defined' });
@@ -20135,8 +20138,7 @@ let UserServices = class UserServices {
     }
     getList() {
         if (!this.activeUser.isPermitted['to_view_users']) {
-            return Promise.reject({ status: 405, message: 'insufficient permissions' })
-                .catch(this.errorParser.handleError);
+            this.isNotPermitted();
         }
         else {
             return Promise.reject({ status: '', message: 'method not yet defined' });
@@ -20144,12 +20146,7 @@ let UserServices = class UserServices {
     }
     addItem(form) {
         if (!this.activeUser.isPermitted['to_add_users']) {
-            return Promise.reject({ status: 405, message: 'insufficient permissions' })
-                .catch(this.errorParser.handleError)
-                .catch((error) => {
-                this.error = error;
-                this.clearRegisters();
-            });
+            this.isNotPermitted();
         }
         else {
             return this.http.post(this.baseUrl, form, { observe: "response" })
@@ -20172,17 +20169,12 @@ let UserServices = class UserServices {
             });
         }
     }
-    deleteItem(user_id) {
-        if (!this.activeUser.isPermitted['to_delete_users']) {
-            return Promise.reject({ status: 405, message: 'insufficient permissions' })
-                .catch(this.errorParser.handleError)
-                .catch((error) => {
-                this.error = error;
-                this.clearRegisters();
-            });
+    deleteItem(permission_id) {
+        if (!this.activeUser.isPermitted['to_delete_permissions']) {
+            this.isNotPermitted();
         }
         else {
-            return this.http.delete(`${this.baseUrl}/${user_id}`, { observe: "response" })
+            return this.http.delete(`${this.baseUrl}/${permission_id}`, { observe: "response" })
                 .toPromise()
                 .then((response) => {
                 this.information = { status: response.status, message: response.body.message };
@@ -20204,8 +20196,7 @@ let UserServices = class UserServices {
     }
     editItem() {
         if (!this.activeUser.isPermitted['to_edit_users']) {
-            return Promise.reject({ status: 405, message: 'insufficient permissions' })
-                .catch(this.errorParser.handleError);
+            this.isNotPermitted();
         }
         else {
             return Promise.reject({ status: '', message: 'method not yet defined' });
@@ -20216,6 +20207,14 @@ let UserServices = class UserServices {
             this.information = null;
             this.error = null;
         }, 3000);
+    }
+    isNotPermitted() {
+        return Promise.reject({ status: 405, message: 'insufficient permissions' })
+            .catch(this.errorParser.handleError)
+            .catch((error) => {
+            this.error = error;
+            this.clearRegisters();
+        });
     }
 };
 UserServices = __decorate([
@@ -23908,6 +23907,7 @@ let AccountsPanelComponent = class AccountsPanelComponent {
         this.validator = new listValidator_1.ListValidator();
         this.doEdit = {};
         this.tempPlaceholder = 'add permission';
+        this.accountUpdated = false;
     }
     ngOnInit() {
         if (this.activeUser.isPermitted['to_view_accounts']) {
@@ -23917,18 +23917,6 @@ let AccountsPanelComponent = class AccountsPanelComponent {
             });
         }
     }
-    addPermission(permission, i) {
-        console.log('adding permission', permission);
-        this.accountService.accounts[i].account_permissions.push(permission);
-        this.tempPlaceholder = permission;
-    }
-    revokePermission(permission, i) {
-        console.log('revoking permission', permission);
-        let revisedPermissions = this.accountService.accounts[i].account_permissions.filter((uuid) => {
-            return uuid !== permission;
-        });
-        this.accountService.accounts[i].account_permissions = revisedPermissions;
-    }
     edit(account, i) {
         if (!this.activeUser.isPermitted['to_edit_accounts']) {
             this.accountService.error = { status: 405, message: 'insufficient permissions' };
@@ -23937,25 +23925,40 @@ let AccountsPanelComponent = class AccountsPanelComponent {
             }, 3000);
         }
         else {
-            console.log('editing account: ', account);
             this.doEdit[account.account_name] = true;
         }
     }
-    delete(account_id, i) {
-        console.log('deleting account: ', account_id);
-        this.accountService.deleteItem(account_id);
+    grantPermission(permission, i) {
+        if (permission == 'all') {
+            let tempArr = new Array();
+            this.permissionService.permissions.forEach((permission) => {
+                tempArr.push(permission.permission_id);
+            });
+            this.accountService.accounts[i].account_permissions = tempArr;
+        }
+        else {
+            this.accountService.accounts[i].account_permissions.push(permission);
+            this.tempPlaceholder = permission;
+        }
+        this.accountUpdated = true;
+    }
+    revokePermission(permission, i) {
+        let revisedPermissions = this.accountService.accounts[i].account_permissions.filter((uuid) => {
+            return uuid !== permission;
+        });
+        this.accountService.accounts[i].account_permissions = revisedPermissions;
+        this.accountUpdated = true;
     }
     done(account, i) {
-        console.log('done editing account: ', account);
         this.doEdit = {};
         this.tempPlaceholder = 'add permission';
-        this.accountService.editItem()
-            .catch((error) => {
-            this.accountService.error = error;
-            setTimeout(() => {
-                this.accountService.error = null;
-            }, 3000);
-        });
+        if (this.accountUpdated) {
+            this.accountService.editItem(account);
+        }
+        this.accountUpdated = false;
+    }
+    delete(account_id, i) {
+        this.accountService.deleteItem(account_id);
     }
 };
 AccountsPanelComponent = __decorate([
@@ -23977,7 +23980,7 @@ exports.AccountsPanelComponent = AccountsPanelComponent;
 "use strict";
 
 class ListValidator {
-    validateList(table, permission, index) {
+    validateList(table, permission) {
         return table.find((uuid) => {
             return uuid == permission;
         }) ? false : true;
@@ -23991,7 +23994,7 @@ exports.ListValidator = ListValidator;
 /***/ 708:
 /***/ (function(module, exports) {
 
-module.exports = "<span *ngIf=\"!this.accountService.error\"><div *ngFor=\"let account of this.accountService.accounts as accounts; index as i\"><div class=\"col-sm-6 col-md-4\"><form class=\"box-shadow panel panel-info\" #editAccountForm=\"ngForm\" id=\"{{account.account_id}}\"><div class=\"panel-heading\"><h3 class=\"panel-title\">{{account.account_name}}</h3></div><div class=\"panel-body\"><div class=\"input-group input-group-sm\"><span class=\"input-group-addon\">Id</span><input class=\"form-control\" type=\"text\" placeholder=\"{{account.account_id}}\" disabled></div><div class=\"input-group input-group-sm\" *ngFor=\"let permission of account.account_permissions; index as j\"><span class=\"input-group-btn\"><button class=\"btn btn-info\" (click)=\"revokePermission(permission, i)\" [attr.disabled]=\"this.doEdit[account.account_name] == true ? null : true\" type=\"button\">Revoke</button></span><input class=\"form-control\" type=\"text\" placeholder=\"{{permission | uuidTransform: this.permissionService.permissions}}\" disabled></div><!--div(*ngIf=\"account.account_name != 'administrator'\", class=\"input-group input-group-sm\")--><div class=\"input-group input-group-sm\" *ngIf=\"account.account_permissions.length &lt; this.permissionService.permissions.length\"><div class=\"input-group-btn\" disabled><button class=\"btn btn-info dropdown-toggle\" [attr.disabled]=\"this.doEdit[account.account_name] == true ? null : true\" type=\"button\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">Instate<span class=\"caret\"></span></button><ul class=\"dropdown-menu\"><li *ngFor=\"let permission of this.permissionService.permissions as permissions; index as j\" id=\"{{permission.permission_id}}\"><a *ngIf=\"validator.validateList(this.accountService.accounts[i].account_permissions, permission.permission_id, i)\" (click)=\"addPermission(permission.permission_id, i)\">{{permission.permission_name}}</a></li></ul></div><input class=\"form-control\" type=\"text\" placeholder=\"{{this.tempPlaceholder}}\"></div></div><div class=\"panel-footer\" *ngIf=\"!this.doEdit[account.account_name]\" (click)=\"this.edit(this.account, i)\" [attr.disabled]=\"this.doEdit[account.account_name] == true ? null : true || this.account.account_name == 'administrator' ? null: true \">edit</div><div class=\"panel-footer done-edit\" *ngIf=\"this.doEdit[account.account_name]\" (click)=\"this.done(this.account, i)\" [attr.disabled]=\"!this.doEdit[account.account_name] == true ? null : true\">done</div><div class=\"panel-footer\" *ngIf=\"!this.doEdit[account.account_name]\" (click)=\"this.delete(this.account.account_id, i)\" [attr.disabled]=\"this.doEdit[account.account_name] == true ? null : true || this.account.account_name == 'administrator' ? null: true \">delete</div></form></div></div></span>"
+module.exports = "<span *ngIf=\"!this.accountService.error\"><div *ngFor=\"let account of this.accountService.accounts as accounts; index as i\"><div class=\"col-sm-6 col-md-4\"><form class=\"box-shadow panel panel-info\" #editAccountForm=\"ngForm\" id=\"{{account.account_id}}\"><div class=\"panel-heading\"><h3 class=\"panel-title\">{{account.account_name}}</h3></div><div class=\"panel-body\"><div class=\"input-group input-group-sm\"><span class=\"input-group-addon\">Id</span><input class=\"form-control\" type=\"text\" placeholder=\"{{account.account_id}}\" disabled></div><div class=\"input-group input-group-sm\" *ngFor=\"let permission of account.account_permissions; index as j\"><span class=\"input-group-btn\"><button class=\"btn btn-info\" (click)=\"revokePermission(permission, i)\" [attr.disabled]=\"this.doEdit[account.account_name] == true ? null : true\" type=\"button\">Revoke</button></span><input class=\"form-control\" type=\"text\" placeholder=\"{{permission | uuidTransform: this.permissionService.permissions}}\" disabled></div><div class=\"input-group input-group-sm\" *ngIf=\"account.account_permissions.length &lt; this.permissionService.permissions.length\"><div class=\"input-group-btn\" disabled><button class=\"btn btn-info dropdown-toggle\" [attr.disabled]=\"this.doEdit[account.account_name] == true ? null : true\" type=\"button\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">Grant<span class=\"caret\"></span></button><ul class=\"dropdown-menu\"><li *ngFor=\"let permission of this.permissionService.permissions as permissions; index as j\" id=\"{{permission.permission_id}}\"><a *ngIf=\"j == this.permissionService.permissions.length -1\" (click)=\"grantPermission('all', i)\">all permissions</a><a *ngIf=\"validator.validateList(this.accountService.accounts[i].account_permissions, permission.permission_id)\" (click)=\"grantPermission(permission.permission_id, i)\">{{permission.permission_name}}</a></li></ul></div><input class=\"form-control\" type=\"text\" placeholder=\"{{this.tempPlaceholder}}\"></div></div><div class=\"panel-footer\" *ngIf=\"!this.doEdit[account.account_name]\" (click)=\"this.edit(this.account, i)\" [attr.disabled]=\"this.doEdit[account.account_name] == true ? null : true || this.account.account_name == 'administrator' ? null: true \">edit</div><div class=\"panel-footer done-edit\" *ngIf=\"this.doEdit[account.account_name]\" (click)=\"this.done(this.account, i)\" [attr.disabled]=\"!this.doEdit[account.account_name] == true ? null : true\">done</div><div class=\"panel-footer\" *ngIf=\"!this.doEdit[account.account_name]\" (click)=\"this.delete(this.account.account_id, i)\" [attr.disabled]=\"this.doEdit[account.account_name] == true ? null : true || this.account.account_name == 'administrator' ? null: true \">delete</div></form></div></div></span>"
 
 /***/ }),
 
@@ -24338,8 +24341,7 @@ let ImageServices = class ImageServices {
     }
     getAll() {
         if (!this.activeUser.isPermitted['to_view_images']) {
-            return Promise.reject({ status: 405, message: 'insufficient permissions' })
-                .catch(this.errorParser.handleError);
+            this.isNotPermitted();
         }
         else {
             return this.http.get(this.baseUrl, { observe: "response" })
@@ -24354,8 +24356,7 @@ let ImageServices = class ImageServices {
     }
     getOne() {
         if (!this.activeUser.isPermitted['to_view_images']) {
-            return Promise.reject({ status: 405, message: 'insufficient permissions' })
-                .catch(this.errorParser.handleError);
+            this.isNotPermitted();
         }
         else {
             return Promise.reject({ status: '', message: 'method not yet defined' });
@@ -24363,8 +24364,7 @@ let ImageServices = class ImageServices {
     }
     getLatest() {
         if (!this.activeUser.isPermitted['to_view_images']) {
-            return Promise.reject({ status: 405, message: 'insufficient permissions' })
-                .catch(this.errorParser.handleError);
+            this.isNotPermitted();
         }
         else {
             return Promise.reject({ status: '', message: 'method not yet defined' });
@@ -24372,8 +24372,7 @@ let ImageServices = class ImageServices {
     }
     getList() {
         if (!this.activeUser.isPermitted['to_view_images']) {
-            return Promise.reject({ status: 405, message: 'insufficient permissions' })
-                .catch(this.errorParser.handleError);
+            this.isNotPermitted();
         }
         else {
             return Promise.reject({ status: '', message: 'method not yet defined' });
@@ -24381,8 +24380,7 @@ let ImageServices = class ImageServices {
     }
     addItem() {
         if (!this.activeUser.isPermitted['to_add_images']) {
-            return Promise.reject({ status: 405, message: 'insufficient permissions' })
-                .catch(this.errorParser.handleError);
+            this.isNotPermitted();
         }
         else {
             return Promise.reject({ status: '', message: 'method not yet defined' });
@@ -24390,8 +24388,7 @@ let ImageServices = class ImageServices {
     }
     deleteItem() {
         if (!this.activeUser.isPermitted['to_delete_images']) {
-            return Promise.reject({ status: 405, message: 'insufficient permissions' })
-                .catch(this.errorParser.handleError);
+            this.isNotPermitted();
         }
         else {
             return Promise.reject({ status: '', message: 'method not yet defined' });
@@ -24399,12 +24396,25 @@ let ImageServices = class ImageServices {
     }
     editItem() {
         if (!this.activeUser.isPermitted['to_edit_images']) {
-            return Promise.reject({ status: 405, message: 'insufficient permissions' })
-                .catch(this.errorParser.handleError);
+            this.isNotPermitted();
         }
         else {
             return Promise.reject({ status: '', message: 'method not yet defined' });
         }
+    }
+    clearRegisters(status) {
+        setTimeout(() => {
+            this.information = null;
+            this.error = null;
+        }, 3000);
+    }
+    isNotPermitted() {
+        return Promise.reject({ status: 405, message: 'insufficient permissions' })
+            .catch(this.errorParser.handleError)
+            .catch((error) => {
+            this.error = error;
+            this.clearRegisters();
+        });
     }
 };
 ImageServices = __decorate([
@@ -24506,4 +24516,4 @@ module.exports = "data:application/font-woff;base64,bW9kdWxlLmV4cG9ydHMgPSBfX3dl
 /***/ })
 
 },[647]);
-//# sourceMappingURL=app.ad5f4eec5936f4b2f9f3.js.map
+//# sourceMappingURL=app.6ec1a7441a90d44b3820.js.map
