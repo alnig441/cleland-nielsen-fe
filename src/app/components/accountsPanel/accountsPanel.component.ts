@@ -32,15 +32,7 @@ export class AccountsPanelComponent implements OnInit {
     }
 
     edit(account: any, i: any) :void {
-        if(!this.activeUser.isPermitted['to_edit_accounts']){
-            this.accountService.error = { status: 405, message: 'insufficient permissions' }
-            setTimeout(() => {
-                this.accountService.error = null;
-            },3000)
-        }
-        else{
-            this.doEdit[account.account_name] = true;
-        }
+        this.doEdit[account.account_name] = true;
     }
 
     grantPermission(permission: string, i: number): void {

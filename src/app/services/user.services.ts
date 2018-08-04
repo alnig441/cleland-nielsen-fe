@@ -14,14 +14,13 @@ export class UserServices {
     errorParser = new ErrorParser();
     users: UserModel[] = new Array();
     baseUrl = '/usersDb';
-    error: any;
-    information: any;
+    message: any = {};
 
     constructor(private http: HttpClient, private activeUser: HttpAuthService, private router: Router) {}
 
     getAll(): Promise<any> {
         if(!this.activeUser.isPermitted['to_view_users']){
-            this.isNotPermitted()
+            this.setMessage({ status: 405, message: 'insufficient permissions'});
         }
 
         else {
@@ -29,17 +28,19 @@ export class UserServices {
                 .toPromise()
                 .then( result => {
                     this.users = result.body as UserModel[];
-
                     return Promise.resolve('success');
                 })
                 .catch(this.errorParser.handleError)
+                .catch((error: any) => {
+                    this.setMessage(error);
+                })
         }
 
     }
 
     getOne(): Promise<any> {
         if(!this.activeUser.isPermitted['to_view_users']){
-            this.isNotPermitted()
+            this.setMessage({ status: 405, message: 'insufficient permissions'});
         }
 
         else {
@@ -50,7 +51,7 @@ export class UserServices {
 
     getList(): Promise<any> {
         if(!this.activeUser.isPermitted['to_view_users']){
-            this.isNotPermitted()
+            this.setMessage({ status: 405, message: 'insufficient permissions'});
         }
 
         else {
@@ -61,97 +62,73 @@ export class UserServices {
 
     addItem(form: UserModel): Promise<any> {
         if(!this.activeUser.isPermitted['to_add_users']) {
-            this.isNotPermitted()
+            this.setMessage({ status: 405, message: 'insufficient permissions'});
         }
 
         else{
             return this.http.post(this.baseUrl, form, { observe : "response"})
                 .toPromise()
                 .then((result: any) => {
-                    this.information = { status: result.status , message : result.body.message }
+                    this.setMessage({ status: result.status , message : result.body.message });
                     this.getAll();
-                    this.clearRegisters();
                 })
                 .catch(this.errorParser.handleError)
                 .catch((error: any) => {
-                    this.error = error;
-                    this.clearRegisters();
-                    if(error.forceLogout){
-                        setTimeout(() => {
-                            this.activeUser.logout();
-                            this.router.navigate(["/login"]);
-                        }, 3000)
-                    }
+                    this.setMessage(error);
                 })
         }
     }
 
     deleteItem(permission_id: string): Promise<any> {
 
+
+
         if(!this.activeUser.isPermitted['to_delete_permissions']){
-            this.isNotPermitted()
+            this.setMessage({ status: 405, message: 'insufficient permissions'});
         }
         else {
             return this.http.delete(`${this.baseUrl}/${permission_id}`, {observe: "response"})
                 .toPromise()
                 .then((response: any) => {
-                    this.information = { status: response.status , message: response.body.message };
+                    this.setMessage({ status: response.status , message: response.body.message });
                     this.getAll();
-                    this.clearRegisters();
                 })
                 .catch(this.errorParser.handleError)
                 .catch((error: any) => {
-                    this.error = error;
-                    this.clearRegisters();
-                    if(error.forceLogout){
-                        setTimeout(() => {
-                            this.activeUser.logout();
-                            this.router.navigate(["/login"]);
-                        }, 3000)
-                    }
+                    this.setMessage(error);
                 })
         }
     }
 
     editItem(user: UserModel): Promise<any> {
         if(!this.activeUser.isPermitted['to_edit_users']){
-            this.isNotPermitted()
+            this.setMessage({ status: 405, message: 'insufficient permissions'});
         }
         else {
             return this.http.put(`${this.baseUrl}/${user.user_id}`, user, { observe: "response"})
                 .toPromise()
                 .then((response: any) => {
-                    this.information = { status: response.status , message: response.body.message };
+                    this.setMessage({status: response.status, message: response.body.message});
                     this.getAll();
-                    this.clearRegisters();
                 })
                 .catch(this.errorParser.handleError)
                 .catch((error: any) => {
-                    this.error = error;
-                    this.clearRegisters();
-                    if(error.forceLogout){
-                        setTimeout(() => {
-                            this.activeUser.logout();
-                            this.router.navigate(["/login"]);
-                        }, 3000)
-                    }
+                    this.setMessage(error);
                 })
         }
     }
 
-    private clearRegisters(status?: any) {
+    private setMessage(message ?: any) {
+        message.status != 200 ? this.message.failure = message : this.message.success = message;
+
         setTimeout(() => {
-            this.information = null;
-            this.error = null;
+            this.message.success = null;
+            this.message.failure = null;
+            if(message.forceLogout){
+                this.activeUser.logout();
+                this.router.navigate(['/login']);
+            }
         },3000)
     }
 
-    private isNotPermitted(): Promise<any> {
-        return Promise.reject({ status: 405, message: 'insufficient permissions'})
-            .catch(this.errorParser.handleError)
-            .catch((error: any) => {
-                this.error = error;
-                this.clearRegisters();
-            })
-    }
 }

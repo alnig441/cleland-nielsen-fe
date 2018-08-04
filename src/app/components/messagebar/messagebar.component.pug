@@ -1,6 +1,6 @@
-div(*ngIf="this[this.route].error" class="panel panel-warning")
-    div(class="panel-heading") status: {{ this[this.route].error.status }}
-    div(class="panel-body") message: {{ this[this.route].error.message }}
-div(*ngIf="this[this.route].information" class="panel panel-success")
-    div(class="panel-heading") status: {{ this[this.route].information.status }}
-    div(class="panel-body") message: {{ this[this.route].information.message }}
+div(*ngIf="this[this.route].message.failure" class="panel panel-warning")
+    div(class="panel-heading") status: {{ this[this.route].message.failure.status }}
+    div(class="panel-body") message: {{ this[this.route].message.failure.message }}
+div(*ngIf="this[this.route].message.success" class="panel panel-success")
+    div(class="panel-heading") status: {{ this[this.route].message.success.status }}
+    div(class="panel-body") message: {{ this[this.route].message.success.message }}

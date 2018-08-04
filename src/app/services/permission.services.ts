@@ -14,21 +14,19 @@ export class PermissionServices {
     errorParser = new ErrorParser();
     permissions: PermissionModel[] = new Array();
     baseUrl = '/permissionsDb';
-    error: any;
-    information: any;
-
+    message: any = {};
+    
     constructor(private http: HttpClient, private activeUser: HttpAuthService, private router: Router) {}
 
     getAll(): Promise<any> {
         if(!this.activeUser.isPermitted['to_view_permissions']){
-            this.isNotPermitted();
+            this.setMessage({ status: 405, message: 'insufficient permissions'});
         }
 
         else {
             return this.http.get(this.baseUrl, { observe: "response"})
                 .toPromise()
                 .then(res => {
-                    // console.log('show me permissions: ', res.body)
                     this.permissions = res.body as PermissionModel[];
 
                     return Promise.resolve('success');
@@ -40,7 +38,7 @@ export class PermissionServices {
 
     getList(): Promise<any> {
         if(!this.activeUser.isPermitted['to_view_permissions']){
-            this.isNotPermitted()
+            this.setMessage({ status: 405, message: 'insufficient permissions'});
         }
 
         else {
@@ -51,7 +49,7 @@ export class PermissionServices {
 
     getOne(): Promise<any> {
         if(!this.activeUser.isPermitted['to_view_permissions']){
-            this.isNotPermitted()
+            this.setMessage({ status: 405, message: 'insufficient permissions'});
         }
 
         else {
@@ -62,27 +60,19 @@ export class PermissionServices {
 
     addItem(form: PermissionModel): Promise<any> {
         if(!this.activeUser.isPermitted['to_add_permissions']) {
-            this.isNotPermitted();
+            this.setMessage({ status: 405, message: 'insufficient permissions'});
         }
 
         else{
             return this.http.post(this.baseUrl, form, { observe : "response"})
                 .toPromise()
-                .then((result: any) => {
-                    this.information = { status: result.status , message : result.body.message }
+                .then((response: any) => {
+                    this.setMessage({status: response.status, message: response.body.message});
                     this.getAll();
-                    this.clearRegisters();
                 })
                 .catch(this.errorParser.handleError)
                 .catch((error: any) => {
-                    this.error = error;
-                    this.clearRegisters();
-                    if(error.forceLogout){
-                        setTimeout(() => {
-                            this.activeUser.logout();
-                            this.router.navigate(["/login"]);
-                        }, 3000)
-                    }
+                    this.setMessage(error);
                 })
         }
     }
@@ -90,53 +80,42 @@ export class PermissionServices {
     deleteItem(permission_id: string): Promise<any> {
 
         if(!this.activeUser.isPermitted['to_delete_permissions']){
-            this.isNotPermitted();
+            this.setMessage({ status: 405, message: 'insufficient permissions'});
         }
         else {
             return this.http.delete(`${this.baseUrl}/${permission_id}`, {observe: "response"})
                 .toPromise()
                 .then((response: any) => {
-                    this.information = { status: response.status , message: response.body.message };
+                    this.setMessage({status: response.status, message: response.body.message});
                     this.getAll();
-                    this.clearRegisters();
                 })
                 .catch(this.errorParser.handleError)
                 .catch((error: any) => {
-                    this.error = error;
-                    this.clearRegisters();
-                    if(error.forceLogout){
-                        setTimeout(() => {
-                            this.activeUser.logout();
-                            this.router.navigate(["/login"]);
-                        }, 3000)
-                    }
+                    this.setMessage(error);
                 })
         }
     }
 
     editItem(): Promise<any> {
         if(!this.activeUser.isPermitted['to_edit_permissions']){
-            this.isNotPermitted()
+            this.setMessage({ status: 405, message: 'insufficient permissions'});
         }
         else {
             return Promise.reject({ status: '', message: 'method not yet defined'})
         }
     }
 
-    private clearRegisters(status?: any) {
+    private setMessage(message ?: any) {
+        message.status != 200 ? this.message.failure = message : this.message.success = message;
+
         setTimeout(() => {
-            this.information = null;
-            this.error = null;
+            this.message.success = null;
+            this.message.failure = null;
+            if(message.forceLogout){
+                this.activeUser.logout();
+                this.router.navigate(['/login']);
+            }
         },3000)
     }
-
-    private isNotPermitted(): Promise<any> {
-        return Promise.reject({ status: 405, message: 'insufficient permissions'})
-            .catch(this.errorParser.handleError)
-            .catch((error: any) => {
-                this.error = error;
-                this.clearRegisters();
-            })
-    }
-
+    
 }

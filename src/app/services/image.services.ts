@@ -4,6 +4,7 @@ import { ImageModel } from "../models/image.model";
 import 'rxjs/add/operator/toPromise';
 import { ErrorParser } from "./errorParser";
 import { HttpAuthService } from "./httpAuth.service";
+import { Router } from "@angular/router";
 
 @Injectable()
 
@@ -13,16 +14,13 @@ export class ImageServices {
     images: ImageModel[] = new Array();
     imagesUpdated: boolean = false;
     baseUrl = '/imagesDb';
-    error: any;
-    information: any;
+    message: any = {};
 
-    constructor( private http: HttpClient, private activeUser: HttpAuthService) {}
+    constructor(private router: Router, private http: HttpClient, private activeUser: HttpAuthService) {}
 
     getAll(): Promise<any> {
         if(!this.activeUser.isPermitted['to_view_images']){
-            this.isNotPermitted()
-        }
-
+            this.setMessage({ status: 405, message: 'insufficient permissions'});        }
         else{
             return this.http.get(this.baseUrl, { observe: "response"})
                 .toPromise()
@@ -39,7 +37,7 @@ export class ImageServices {
 
     getOne(): Promise<any> {
         if(!this.activeUser.isPermitted['to_view_images']){
-            this.isNotPermitted()
+            this.setMessage({ status: 405, message: 'insufficient permissions'});
         }
 
         else {
@@ -50,7 +48,7 @@ export class ImageServices {
 
     getLatest(): Promise<any> {
         if(!this.activeUser.isPermitted['to_view_images']){
-            this.isNotPermitted()
+            this.setMessage({ status: 405, message: 'insufficient permissions'});
         }
 
         else {
@@ -61,7 +59,7 @@ export class ImageServices {
 
     getList(): Promise<any> {
         if(!this.activeUser.isPermitted['to_view_images']){
-            this.isNotPermitted()
+            this.setMessage({ status: 405, message: 'insufficient permissions'});
         }
 
         else {
@@ -72,7 +70,7 @@ export class ImageServices {
 
     addItem(): Promise<any> {
         if(!this.activeUser.isPermitted['to_add_images']){
-            this.isNotPermitted()
+            this.setMessage({ status: 405, message: 'insufficient permissions'});
         }
         else {
             return Promise.reject({ status: '', message: 'method not yet defined'})
@@ -81,7 +79,7 @@ export class ImageServices {
 
     deleteItem(): Promise<any> {
         if(!this.activeUser.isPermitted['to_delete_images']){
-            this.isNotPermitted()
+            this.setMessage({ status: 405, message: 'insufficient permissions'});
         }
         else {
             return Promise.reject({ status: '', message: 'method not yet defined'})
@@ -90,26 +88,23 @@ export class ImageServices {
 
     editItem(): Promise<any> {
         if(!this.activeUser.isPermitted['to_edit_images']){
-            this.isNotPermitted()
+            this.setMessage({ status: 405, message: 'insufficient permissions'});
         }
         else {
             return Promise.reject({ status: '', message: 'method not yet defined'})
         }
     }
 
-    private clearRegisters(status?: any) {
-        setTimeout(() => {
-            this.information = null;
-            this.error = null;
-        },3000)
-    }
+    private setMessage(message ?: any) {
+        message.status != 200 ? this.message.failure = message : this.message.success = message;
 
-    private isNotPermitted(): Promise<any> {
-        return Promise.reject({ status: 405, message: 'insufficient permissions'})
-            .catch(this.errorParser.handleError)
-            .catch((error: any) => {
-                this.error = error;
-                this.clearRegisters();
-            })
+        setTimeout(() => {
+            this.message.success = null;
+            this.message.failure = null;
+            if(message.forceLogout){
+                this.activeUser.logout();
+                this.router.navigate(['/login']);
+            }
+        },3000)
     }
 }

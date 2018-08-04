@@ -41,8 +41,6 @@ export class SidebarComponent implements OnInit {
                setTimeout(()=> {
                     this[this.requestedService].error = null;
                },3000)
-
-               return Promise.resolve('ok');
            })
    }
 

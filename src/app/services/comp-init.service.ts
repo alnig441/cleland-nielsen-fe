@@ -25,7 +25,7 @@ export class CompInitService {
             .catch(this.errorParser.handleError)
             .catch((error: any) => {
                 this[service].error = error;
-                if(error.status === 401) {
+                if(error.forceLogout) {
                     setTimeout(() => {
                         this.activeUser.logout();
                         this.router.navigate(["/login"]);
