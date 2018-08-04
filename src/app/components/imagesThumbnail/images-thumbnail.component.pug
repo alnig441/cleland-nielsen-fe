@@ -1,4 +1,4 @@
-span(*ngIf="!this.imageService.error")
+span(*ngIf="!this.imageService.message.failure")
     div(*ngFor="let image of this.imageService.images as images; index as i" class="col-sm-6 col-md-4")
         div(id="{{image.id}}" class="thumbnail box-shadow")
             img(src="{{image.file}}" alt="...")

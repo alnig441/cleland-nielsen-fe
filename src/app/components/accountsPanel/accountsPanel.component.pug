@@ -1,4 +1,4 @@
-span(*ngIf="!this.accountService.error")
+span(*ngIf="!this.accountService.message.failure")
     div(*ngFor="let account of this.accountService.accounts as accounts; index as i")
         div(class="col-sm-6 col-md-4")
             form(#editAccountForm="ngForm", id="{{account.account_id}}" class="box-shadow panel panel-info")

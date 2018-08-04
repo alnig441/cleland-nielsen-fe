@@ -4,6 +4,7 @@ import { UserServices } from "../../services/user.services";
 import { ActivatedRoute } from "@angular/router";
 import { AccountServices } from "../../services/account.services";
 import { PermissionServices } from "../../services/permission.services";
+import {SetMessageService} from "../../services/setMessage.service";
 
 @Component({
     selector: "app-messagebar",
@@ -13,10 +14,9 @@ import { PermissionServices } from "../../services/permission.services";
 
 export class MessagebarComponent implements OnInit {
 
-    error: any;
     private route: string;
 
-    constructor(private permissions: PermissionServices, private accounts: AccountServices, private images: ImageServices, private users: UserServices, private activatedRoute: ActivatedRoute){}
+    constructor(private setMessage: SetMessageService, private permissions: PermissionServices, private accounts: AccountServices, private images: ImageServices, private users: UserServices, private activatedRoute: ActivatedRoute){}
 
     ngOnInit(): void {
         this.route = this.activatedRoute.snapshot.url[0].path;

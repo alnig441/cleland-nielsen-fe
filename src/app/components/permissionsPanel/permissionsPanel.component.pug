@@ -1,4 +1,4 @@
-span(*ngIf="!this.permissionService.error")
+span(*ngIf="!this.permissionService.message.failure")
     div(*ngFor="let permission of this.permissionService.permissions as permissions; index as i")
         div(class="col-sm-6 col-md-4")
             form(#editUserForm="ngForm", id="" class="box-shadow panel panel-info")

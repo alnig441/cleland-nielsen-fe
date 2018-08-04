@@ -1,4 +1,4 @@
-span(*ngIf="!this.userService.error")
+span(*ngIf="!this.userService.message.failure")
     div(*ngFor="let user of this.userService.users as users; index as i")
         div(class="col-sm-6 col-md-4")
             form(#editUserForm="ngForm", id="{{user.user_id}}" class="box-shadow panel panel-info")

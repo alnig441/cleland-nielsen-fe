@@ -21,6 +21,7 @@ import { UuidTransformPipe } from "../../pipes/uuid.transform";
 import { UserPanelComponent } from "../../components/userPanel/user-panel.component";
 import { ImagesThumbnailComponent } from "../../components/imagesThumbnail/images-thumbnail.component";
 import {CompInitService} from "../../services/comp-init.service";
+import {SetMessageService} from "../../services/setMessage.service";
 
 @NgModule({
     imports: [
@@ -52,6 +53,7 @@ import {CompInitService} from "../../services/comp-init.service";
         UserServices,
         ImageServices,
         CompInitService,
+        SetMessageService,
         httpInterceptorProviders,
     ]
 })
