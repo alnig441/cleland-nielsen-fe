@@ -40,7 +40,9 @@ export class LoginComponent implements OnInit {
                         })
                     })
                     .then(() => {
-                        let redirect = this.httpAuth.redirectUrl ? this.httpAuth.redirectUrl : '/private';
+                        console.log('what user: ', user);
+                        let redirect =  user.userParameters.type != 'standard_user' ? '/private/admin-domain': '/private/user-domain';
+                        // let redirect = this.httpAuth.redirectUrl ? this.httpAuth.redirectUrl : '/private';
                         let navigationExtras : NavigationExtras = {
                             queryParamsHandling: 'preserve',
                             preserveFragment: true

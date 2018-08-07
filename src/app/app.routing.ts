@@ -10,10 +10,16 @@ const APP_ROUTES: Routes = [
         pathMatch: 'full'
     },
     {
-        path: "private",
-        redirectTo: "/images",
-        pathMatch: "full",
-        canActivate: [AuthGuardService]
+        path: 'private/user-domain',
+        redirectTo: '/images',
+        pathMatch: 'full',
+        canLoad: [AuthGuardService]
+    },
+    {
+        path: 'private/admin-domain',
+        redirectTo: '/users',
+        pathMatch: 'full',
+        canLoad: [AuthGuardService]
     },
     {
         path: '**',

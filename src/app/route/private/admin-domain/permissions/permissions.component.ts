@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewEncapsulation } from "@angular/core";
-import { HttpAuthService } from "../../../services/httpAuth.service";
-import { PermissionModel } from "../../../models/permission.model";
+import { HttpAuthService } from "../../../../services/httpAuth.service";
+import { PermissionModel } from "../../../../models/permission.model";
 
 @Component({
     selector: 'app-permissions',

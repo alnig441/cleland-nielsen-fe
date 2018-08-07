@@ -1,13 +1,13 @@
 import { Component, OnInit, ViewEncapsulation } from "@angular/core";
-import {HttpAuthService} from "../../../services/httpAuth.service";
+import { HttpAuthService } from "../../../../services/httpAuth.service";
 
 @Component({
     selector: 'app-events',
-    template: require('./events.component.pug'),
+    template: require('./videos.component.pug'),
     encapsulation: ViewEncapsulation.None
 })
 
-export class EventsComponent implements OnInit {
+export class VideosComponent implements OnInit {
 
     constructor(private activeUser: HttpAuthService){}
 

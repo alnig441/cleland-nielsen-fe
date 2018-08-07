@@ -1,9 +1,9 @@
 import { Component, OnInit, ViewEncapsulation } from "@angular/core";
-import { AccountServices } from "../../../services/account.services";
-import { HttpAuthService } from "../../../services/httpAuth.service";
-import { UserModel } from "../../../models/user.model";
-import { CompInitService } from "../../../services/comp-init.service";
-import {UserServices} from "../../../services/user.services";
+import { AccountServices } from "../../../../services/account.services";
+import { HttpAuthService } from "../../../../services/httpAuth.service";
+import { UserModel } from "../../../../models/user.model";
+import { CompInitService } from "../../../../services/comp-init.service";
+import {UserServices} from "../../../../services/user.services";
 
 @Component({
     selector: 'app-users',

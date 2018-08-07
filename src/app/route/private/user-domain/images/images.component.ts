@@ -1,9 +1,9 @@
 import { Component, OnInit, ViewEncapsulation, DoCheck } from "@angular/core";
-import { ImageServices } from "../../../services/image.services";
-import { HttpAuthService } from "../../../services/httpAuth.service";
-import { ImageModel } from "../../../models/image.model";
-import { ErrorParser } from "../../../services/errorParser";
-import { CompInitService } from "../../../services/comp-init.service";
+import { ImageServices } from "../../../../services/image.services";
+import { HttpAuthService } from "../../../../services/httpAuth.service";
+import { ImageModel } from "../../../../models/image.model";
+import { ErrorParser } from "../../../../services/errorParser";
+import { CompInitService } from "../../../../services/comp-init.service";
 
 @Component({
     selector: 'app-images',

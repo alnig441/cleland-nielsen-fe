@@ -3,8 +3,8 @@ import { HttpClient } from "@angular/common/http";
 
 @Component({
     selector: 'app-admin',
-    template: require('./admin.component.pug'),
-    styleUrls: ['./admin.component.scss'],
+    template: require('./admin-domain.component.pug'),
+    styleUrls: ['./admin-domain.component.scss'],
     encapsulation: ViewEncapsulation.None
 })
 
