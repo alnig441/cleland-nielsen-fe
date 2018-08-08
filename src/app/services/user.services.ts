@@ -48,12 +48,17 @@ export class UserServices {
     }
 
     getList(): Promise<any> {
+        console.log('hello from users list');
         if(!this.activeUser.isPermitted['to_view_users']){
             this.message.set({ status: 405, message: 'insufficient permissions'});
         }
 
         else {
             return Promise.reject({ status: '', message: 'method not yet defined'})
+                .catch((result: any) => {
+                    this.message.set(result);
+                })
+
         }
 
     }

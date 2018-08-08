@@ -4,7 +4,8 @@ import { UserServices } from "../../services/user.services";
 import { ActivatedRoute } from "@angular/router";
 import { AccountServices } from "../../services/account.services";
 import { PermissionServices } from "../../services/permission.services";
-import {SetMessageService} from "../../services/setMessage.service";
+import { SetMessageService } from "../../services/setMessage.service";
+import { ServiceFormManagerService} from "../../services/service-form-manager.service";
 
 @Component({
     selector: "app-messagebar",
@@ -16,10 +17,10 @@ export class MessagebarComponent implements OnInit {
 
     private route: string;
 
-    constructor(private setMessage: SetMessageService, private permissions: PermissionServices, private accounts: AccountServices, private images: ImageServices, private users: UserServices, private activatedRoute: ActivatedRoute){}
+    constructor(private formManager: ServiceFormManagerService, private setMessage: SetMessageService, private permissions: PermissionServices, private accounts: AccountServices, private images: ImageServices, private users: UserServices, private activatedRoute: ActivatedRoute){}
 
     ngOnInit(): void {
-        this.route = this.activatedRoute.snapshot.url[0].path;
+        this.route = this.formManager.getService();
     }
 
 }

@@ -2,7 +2,7 @@ import { Component, OnInit, ViewEncapsulation } from "@angular/core";
 import { PermissionServices } from "../../services/permission.services";
 import { HttpAuthService } from "../../services/httpAuth.service";
 import { PermissionModel } from "../../models/permission.model";
-import {CompInitService} from "../../services/comp-init.service";
+import { CompInitService } from "../../services/comp-init.service";
 
 @Component({
     selector: 'app-permissions-panel',

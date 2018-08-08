@@ -26,6 +26,7 @@ import { AdminDomainModule } from "./admin-domain/admin-domain.module";
 import { AdminDomainRoutingModule } from "./admin-domain/admin-domain-routing.module";
 import { PrivateComponent } from "./private.component";
 import { UserDomainModule } from "./user-domain/user-domain.module";
+import { ServiceFormManagerService } from "../../services/service-form-manager.service";
 
 @NgModule({
     imports: [
@@ -49,10 +50,10 @@ import { UserDomainModule } from "./user-domain/user-domain.module";
         // UserPanelComponent,
         // AccountsPanelComponent,
         // PermissionsPanelComponent,
-        UuidTransformPipe
+        // UuidTransformPipe
     ],
     exports: [
-        UuidTransformPipe
+        // UuidTransformPipe
     ],
     providers: [
         PermissionServices,
@@ -61,6 +62,7 @@ import { UserDomainModule } from "./user-domain/user-domain.module";
         ImageServices,
         CompInitService,
         SetMessageService,
+        ServiceFormManagerService,
         httpInterceptorProviders,
     ]
 })
