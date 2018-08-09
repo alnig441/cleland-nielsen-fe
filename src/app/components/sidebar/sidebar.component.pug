@@ -1,5 +1,5 @@
 ul(class='list-group box-shadow' style='border: 1px, solid, black')
-        li(*ngIf="this.requestedService =='images'" class='list-group-item')
+        li(*ngIf="this.formManager.getSe =='images'" class='list-group-item')
             a((click)='getLatest()') get latest
         li(class='list-group-item')
             a((click)='getList()') filter

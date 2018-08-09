@@ -1,11 +1,4 @@
-| hello from images
-//.col-sm-2
-//    app-sidebar
-//.col-sm-8
-//    app-messagebar
-//    div(class="row")
-//        div(*ngIf='this.imageService.images.length == 1', class="col-sm-6 col-md-4")
-//        app-images-thumbnail
-//        div(*ngIf='this.imageService.images.length == 1', class="col-sm-6 col-md-4")
-//.col-sm-2
-//    app-infobar([itemForm]="this.imageForm", [type]="'image'")
+div(class="row")
+    div(*ngIf='this.imageService.images.length == 1', class="col-sm-6 col-md-4")
+    app-images-thumbnail
+    div(*ngIf='this.imageService.images.length == 1', class="col-sm-6 col-md-4")

@@ -5,8 +5,6 @@ span(*ngIf="this.formManager.getService() =='images'")
         div(*ngFor="let property of this.formManager.getProperties() as form;", class="panel-body")
             p {{property}}
             hr
-            //p {{form[{property]}}
-        //div(class="panel-footer")
 
 span(*ngIf="this.activeUser.isPermitted['to_add_'+ this.formManager.getService()] && this.formManager.getService() !='images'")
     form(#addItemForm="ngForm" class="panel panel-default box-shadow")

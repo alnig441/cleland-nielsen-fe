@@ -5,7 +5,7 @@ import { ActivatedRoute } from "@angular/router";
 import { AccountServices } from "../../services/account.services";
 import { PermissionServices } from "../../services/permission.services";
 import { SetMessageService } from "../../services/setMessage.service";
-import { ServiceFormManagerService} from "../../services/service-form-manager.service";
+import { ServiceFormManagerService } from "../../services/service-form-manager.service";
 
 @Component({
     selector: "app-messagebar",

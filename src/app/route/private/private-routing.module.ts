@@ -6,12 +6,10 @@ const privateRoutes: Routes = [
     {
         path: 'user-domain',
         loadChildren: "route/private/user-domain/user-domain-module#UserDomainModule",
-        canLoad: [AuthGuardService]
     },
     {
         path: 'admin-domain',
         loadChildren: "route/private/admin-domain/admin-domain.module#AdminDomainModule",
-        canLoad: [AuthGuardService]
     }
 ];
 
@@ -23,6 +21,7 @@ const privateRoutes: Routes = [
         RouterModule
     ],
     providers: [
+        AuthGuardService
     ]
 })
 

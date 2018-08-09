@@ -2,6 +2,7 @@ import { Injectable } from "@angular/core";
 import { UserModel } from "../models/user.model";
 import { AccountModel } from "../models/account.model";
 import { PermissionModel } from "../models/permission.model";
+import {ImageModel} from "../models/image.model";
 
 @Injectable()
 
@@ -36,6 +37,9 @@ export class ServiceFormManagerService {
                 break;
             case 'permissions':
                 this.itemForm = new PermissionModel('uuid_generate_v4()');
+                break;
+            case 'images':
+                this.itemForm = new ImageModel();
                 break;
         }
 

@@ -42,9 +42,10 @@ export class AccountServices {
             this.message.set({ status: 405, message: 'insufficient permissions'});
         }
 
-        else {
-            return Promise.reject({ status: '', message: 'method not yet defined'})
-        }
+        return Promise.reject({ status: '', message: 'method not yet defined'})
+            .catch((result: any) => {
+                this.message.set(result);
+            })
 
     }
 

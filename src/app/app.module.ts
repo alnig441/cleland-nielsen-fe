@@ -18,6 +18,7 @@ import { AppLoadModule } from "./load/app-load.module";
 
 
 
+
 @NgModule({
     imports: [
         BrowserModule,
@@ -25,9 +26,9 @@ import { AppLoadModule } from "./load/app-load.module";
         FormsModule,
         HttpModule,
         CommonModule,
+        LoginRoutingModule,
         PublicModule,
         PrivateModule,
-        LoginRoutingModule,
         AppRouting,
         // AppLoadModule
     ],

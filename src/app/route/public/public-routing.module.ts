@@ -7,6 +7,11 @@ import { ContactComponent } from "./contact/contact.component";
 
 const PUBLIC_ROUTES: Routes = [
     {
+        path: '',
+        redirectTo: '/home',
+        pathMatch: 'full'
+    },
+    {
         path: 'about',
         component: AboutComponent
     },
@@ -21,7 +26,7 @@ const PUBLIC_ROUTES: Routes = [
     {
         path: 'contact',
         component: ContactComponent
-    }
+    },
 ]
 
 @NgModule({

@@ -1,6 +1,5 @@
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
-import { PrivateComponent } from "../private.component";
 import { AuthGuardService } from "../../../services/auth-guard.service";
 import { ImagesComponent } from "./images/images.component";
 import { VideosComponent } from "./videos/videos.component";

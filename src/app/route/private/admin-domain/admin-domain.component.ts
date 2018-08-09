@@ -6,6 +6,9 @@ import { PermissionServices } from "../../../services/permission.services";
 import { UserModel } from "../../../models/user.model";
 import { AccountModel } from "../../../models/account.model";
 import { PermissionModel } from "../../../models/permission.model";
+import { ServiceFormManagerService } from "../../../services/service-form-manager.service";
+import { SetMessageService } from "../../../services/setMessage.service";
+import { HttpAuthService } from "../../../services/httpAuth.service";
 
 @Component({
     selector: 'app-admin',
@@ -18,9 +21,9 @@ export class AdminDomainComponent implements OnInit {
 
     private itemForm: any;
 
-    constructor( private users: UserServices, private accounts: AccountServices, private permissions: PermissionServices, private http: HttpClient) {}
+    constructor( private formManager: ServiceFormManagerService, private setMessage: SetMessageService, private activeUser: HttpAuthService, private users: UserServices, private accounts: AccountServices, private permissions: PermissionServices, private http: HttpClient) {}
 
     ngOnInit(): void {
-        console.log('admin component initialised');
+        console.log('admin-domain component initialised');
     }
 }
