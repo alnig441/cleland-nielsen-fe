@@ -9,7 +9,7 @@ import {ImageModel} from "../models/image.model";
 export class ServiceFormManagerService {
 
     private service: string;
-    private itemForm: any;
+    private recordModel: any;
     private formProperties: any;
     private languages =[
         {
@@ -29,22 +29,22 @@ export class ServiceFormManagerService {
 
         switch (service) {
             case 'users':
-                this.itemForm = new UserModel('uuid_generate_v4()');
+                this.recordModel = new UserModel('uuid_generate_v4()');
                 break;
             case 'accounts':
-                this.itemForm = new AccountModel('uuid_generate_v4()');
-                this.itemForm['account_permissions'] = new Array();
+                this.recordModel = new AccountModel('uuid_generate_v4()');
+                this.recordModel['account_permissions'] = new Array();
                 break;
             case 'permissions':
-                this.itemForm = new PermissionModel('uuid_generate_v4()');
+                this.recordModel = new PermissionModel('uuid_generate_v4()');
                 break;
             case 'images':
-                this.itemForm = new ImageModel();
+                this.recordModel = new ImageModel();
                 break;
         }
 
-        if(this.itemForm){
-            this.formProperties = Object.keys(this.itemForm);
+        if(this.recordModel){
+            this.formProperties = Object.keys(this.recordModel);
         }
     }
 
@@ -60,20 +60,20 @@ export class ServiceFormManagerService {
         return this.formProperties;
     }
 
-    getItemForm(): any {
-        return this.itemForm;
+    getRecordModel(): any {
+        return this.recordModel; 
     }
 
-    setItemFormProperty(property: string, value: any) {
+    setRecordModelProperty(property: string, value: any) {
         if(property == 'account_permissions'){
-            this.itemForm[property].push(value);
+            this.recordModel[property].push(value);
         }
         else{
-            this.itemForm[property] = value;
+            this.recordModel[property] = value;
         }
     }
 
-    getItemFormProperty(property: string): any{
-        return this.itemForm[property];
+    getRecordModelProperty(property: string): any{
+        return this.recordModel[property];
     }
 }

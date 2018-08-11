@@ -16,7 +16,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 const core_1 = __webpack_require__(3);
 const http_1 = __webpack_require__(27);
-__webpack_require__(74);
+__webpack_require__(72);
 let HttpAuthService = class HttpAuthService {
     constructor(http) {
         this.http = http;
@@ -49,6 +49,69 @@ HttpAuthService = __decorate([
     __metadata("design:paramtypes", [http_1.HttpClient])
 ], HttpAuthService);
 exports.HttpAuthService = HttpAuthService;
+
+
+/***/ }),
+
+/***/ 103:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+const core_1 = __webpack_require__(3);
+const image_services_1 = __webpack_require__(61);
+const user_services_1 = __webpack_require__(55);
+const account_services_1 = __webpack_require__(38);
+const permission_services_1 = __webpack_require__(31);
+const errorParser_1 = __webpack_require__(73);
+const httpAuth_service_1 = __webpack_require__(10);
+const router_1 = __webpack_require__(12);
+let CompInitService = class CompInitService {
+    constructor(router, activeUser, images, users, accounts, permissions) {
+        this.router = router;
+        this.activeUser = activeUser;
+        this.images = images;
+        this.users = users;
+        this.accounts = accounts;
+        this.permissions = permissions;
+        this.errorParser = new errorParser_1.ErrorParser();
+    }
+    initialize(service) {
+        return this[service].getAll()
+            .then((result) => {
+            console.log(result);
+            return Promise.resolve(result);
+        })
+            .catch(this.errorParser.handleError)
+            .catch((error) => {
+            this[service].error = error;
+            if (error.forceLogout) {
+                setTimeout(() => {
+                    this.activeUser.logout();
+                    this.router.navigate(["/login"]);
+                    this[service].error = null;
+                }, 3000);
+            }
+            setTimeout(() => {
+                this[service].error = null;
+            }, 3000);
+        });
+    }
+};
+CompInitService = __decorate([
+    core_1.Injectable(),
+    __metadata("design:paramtypes", [router_1.Router, httpAuth_service_1.HttpAuthService, image_services_1.ImageServices, user_services_1.UserServices, account_services_1.AccountServices, permission_services_1.PermissionServices])
+], CompInitService);
+exports.CompInitService = CompInitService;
 
 
 /***/ }),
@@ -495,9 +558,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_observable_forkJoin___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs_observable_forkJoin__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_observable_fromPromise__ = __webpack_require__(132);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_observable_fromPromise___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_rxjs_observable_fromPromise__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_operator_map__ = __webpack_require__(73);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_operator_map__ = __webpack_require__(71);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_rxjs_operator_map__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__angular_platform_browser__ = __webpack_require__(71);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__angular_platform_browser__ = __webpack_require__(69);
 
 /**
  * @license Angular v4.3.6
@@ -6703,7 +6766,7 @@ const http_1 = __webpack_require__(27);
 const login_model_1 = __webpack_require__(680);
 const httpAuth_service_1 = __webpack_require__(10);
 const permission_services_1 = __webpack_require__(31);
-const errorParser_1 = __webpack_require__(62);
+const errorParser_1 = __webpack_require__(73);
 let LoginComponent = class LoginComponent {
     constructor(http, router, httpAuth, permissionService) {
         this.http = http;
@@ -6918,15 +6981,13 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 const core_1 = __webpack_require__(3);
 const account_services_1 = __webpack_require__(38);
 const httpAuth_service_1 = __webpack_require__(10);
-const comp_init_service_1 = __webpack_require__(56);
 const user_services_1 = __webpack_require__(55);
 const router_1 = __webpack_require__(12);
 const service_form_manager_service_1 = __webpack_require__(39);
 let UsersComponent = class UsersComponent {
-    constructor(formManager, activatedRoute, compInit, activeUser, accountService, userService) {
+    constructor(formManager, activatedRoute, activeUser, accountService, userService) {
         this.formManager = formManager;
         this.activatedRoute = activatedRoute;
-        this.compInit = compInit;
         this.activeUser = activeUser;
         this.accountService = accountService;
         this.userService = userService;
@@ -6934,32 +6995,21 @@ let UsersComponent = class UsersComponent {
         this.doEdit = {};
     }
     ngOnInit() {
-        console.log('user comp initialization ... ');
         this.formManager.setService(this.activatedRoute.snapshot.url[0].path);
-        if (this.activeUser.isPermitted['to_view_users']) {
-            this.compInit.initialize('accounts')
-                .then((result) => {
-                console.log('... accounts loaded: ' + result + ': ', this.activatedRoute.snapshot.url[0].path);
-            });
-            this.compInit.initialize('users')
-                .then((result) => {
-                console.log('... users loaded: ', result);
-            });
-        }
     }
     edit(user) {
         this.doEdit[user.user_name] = true;
     }
     done(user) {
         if (this.userUpdated) {
-            this.userService.editItem(user);
+            this.userService.editRecord(user);
         }
         this.doEdit = {};
         this.userUpdated = false;
     }
     delete(user_id) {
         console.log(`deleting user ${user_id}`);
-        this.userService.deleteItem(user_id);
+        this.userService.deleteRecord(user_id);
     }
 };
 UsersComponent = __decorate([
@@ -6968,7 +7018,7 @@ UsersComponent = __decorate([
         template: __webpack_require__(700),
         encapsulation: core_1.ViewEncapsulation.None
     }),
-    __metadata("design:paramtypes", [service_form_manager_service_1.ServiceFormManagerService, router_1.ActivatedRoute, comp_init_service_1.CompInitService, httpAuth_service_1.HttpAuthService, account_services_1.AccountServices, user_services_1.UserServices])
+    __metadata("design:paramtypes", [service_form_manager_service_1.ServiceFormManagerService, router_1.ActivatedRoute, httpAuth_service_1.HttpAuthService, account_services_1.AccountServices, user_services_1.UserServices])
 ], UsersComponent);
 exports.UsersComponent = UsersComponent;
 
@@ -7024,10 +7074,22 @@ let AdminDomainComponent = class AdminDomainComponent {
         this.http = http;
     }
     ngOnInit() {
-        console.log('admin-domain component initialised');
+        this.permissions.getAll();
+        this.accounts.getAll();
+        this.users.getAll();
+    }
+    ngDoCheck() {
+        if (this.formManager.getService()) {
+            this.recordModel = this.formManager.getRecordModel();
+        }
     }
     filter() {
         console.log(`getting list for ${this.formManager.getService()}`);
+    }
+    onSubmit() {
+        console.log(`adding ${this.formManager.getService()} record `, this.recordModel);
+        this[this.formManager.getService()].addRecord(this.recordModel);
+        this.recordModel = this.formManager.getRecordModel();
     }
 };
 AdminDomainComponent = __decorate([
@@ -7062,15 +7124,13 @@ const core_1 = __webpack_require__(3);
 const account_services_1 = __webpack_require__(38);
 const permission_services_1 = __webpack_require__(31);
 const httpAuth_service_1 = __webpack_require__(10);
-const comp_init_service_1 = __webpack_require__(56);
 const router_1 = __webpack_require__(12);
 const service_form_manager_service_1 = __webpack_require__(39);
 const listValidator_1 = __webpack_require__(220);
 let AccountsComponent = class AccountsComponent {
-    constructor(formManager, activatedRoute, compInit, activeUser, accountService, permissionService) {
+    constructor(formManager, activatedRoute, activeUser, accountService, permissionService) {
         this.formManager = formManager;
         this.activatedRoute = activatedRoute;
-        this.compInit = compInit;
         this.activeUser = activeUser;
         this.accountService = accountService;
         this.permissionService = permissionService;
@@ -7081,19 +7141,7 @@ let AccountsComponent = class AccountsComponent {
         this.accountUpdated = false;
     }
     ngOnInit() {
-        console.log('account comp initialization...');
         this.formManager.setService(this.activatedRoute.snapshot.url[0].path);
-        if (this.activeUser.isPermitted['to_view_accounts']) {
-            this.compInit.initialize('permissions')
-                .then((result) => {
-                console.log('... permissions loaded ' + result + ': ', this.activatedRoute.snapshot.url[0].path);
-                // this.formManager.setService(this.activatedRoute.snapshot.url[0].path);
-            });
-            this.compInit.initialize('accounts')
-                .then((result) => {
-                console.log('... accounts loaded: ', result);
-            });
-        }
     }
     edit(account, i) {
         this.doEdit[account.account_name] = true;
@@ -7123,12 +7171,12 @@ let AccountsComponent = class AccountsComponent {
         this.doEdit = {};
         this.tempPlaceholder = 'add permission';
         if (this.accountUpdated) {
-            this.accountService.editItem(account);
+            this.accountService.editRecord(account);
         }
         this.accountUpdated = false;
     }
     delete(account_id, i) {
-        this.accountService.deleteItem(account_id);
+        this.accountService.deleteRecord(account_id);
     }
 };
 AccountsComponent = __decorate([
@@ -7137,7 +7185,7 @@ AccountsComponent = __decorate([
         template: __webpack_require__(703),
         encapsulation: core_1.ViewEncapsulation.None
     }),
-    __metadata("design:paramtypes", [service_form_manager_service_1.ServiceFormManagerService, router_1.ActivatedRoute, comp_init_service_1.CompInitService, httpAuth_service_1.HttpAuthService, account_services_1.AccountServices, permission_services_1.PermissionServices])
+    __metadata("design:paramtypes", [service_form_manager_service_1.ServiceFormManagerService, router_1.ActivatedRoute, httpAuth_service_1.HttpAuthService, account_services_1.AccountServices, permission_services_1.PermissionServices])
 ], AccountsComponent);
 exports.AccountsComponent = AccountsComponent;
 
@@ -7181,10 +7229,8 @@ const permission_model_1 = __webpack_require__(217);
 const router_1 = __webpack_require__(12);
 const service_form_manager_service_1 = __webpack_require__(39);
 const permission_services_1 = __webpack_require__(31);
-const comp_init_service_1 = __webpack_require__(56);
 let PermissionsComponent = class PermissionsComponent {
-    constructor(compInit, permissionService, formManager, activatedRoute, activeUser) {
-        this.compInit = compInit;
+    constructor(permissionService, formManager, activatedRoute, activeUser) {
         this.permissionService = permissionService;
         this.formManager = formManager;
         this.activatedRoute = activatedRoute;
@@ -7192,18 +7238,11 @@ let PermissionsComponent = class PermissionsComponent {
         this.permissionForm = new permission_model_1.PermissionModel('uuid_generate_v4()');
     }
     ngOnInit() {
-        // console.log('permisson comp init: ', this.activatedRoute.snapshot.url[0].path);
         this.formManager.setService(this.activatedRoute.snapshot.url[0].path);
-        if (this.activeUser.isPermitted['to_view_permissions']) {
-            this.compInit.initialize('permissions')
-                .then((result) => {
-                console.log('permissions comp init: ', result);
-            });
-        }
     }
     delete(permission_id) {
         console.log('deleting permission: ', permission_id);
-        this.permissionService.deleteItem(permission_id);
+        this.permissionService.deleteRecord(permission_id);
     }
 };
 PermissionsComponent = __decorate([
@@ -7212,7 +7251,7 @@ PermissionsComponent = __decorate([
         template: __webpack_require__(704),
         encapsulation: core_1.ViewEncapsulation.None
     }),
-    __metadata("design:paramtypes", [comp_init_service_1.CompInitService, permission_services_1.PermissionServices, service_form_manager_service_1.ServiceFormManagerService, router_1.ActivatedRoute, httpAuth_service_1.HttpAuthService])
+    __metadata("design:paramtypes", [permission_services_1.PermissionServices, service_form_manager_service_1.ServiceFormManagerService, router_1.ActivatedRoute, httpAuth_service_1.HttpAuthService])
 ], PermissionsComponent);
 exports.PermissionsComponent = PermissionsComponent;
 
@@ -7234,29 +7273,19 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 const core_1 = __webpack_require__(3);
-const image_services_1 = __webpack_require__(63);
+const image_services_1 = __webpack_require__(61);
 const httpAuth_service_1 = __webpack_require__(10);
-const errorParser_1 = __webpack_require__(62);
-const comp_init_service_1 = __webpack_require__(56);
 const service_form_manager_service_1 = __webpack_require__(39);
 const router_1 = __webpack_require__(12);
 let ImagesComponent = class ImagesComponent {
-    constructor(formManager, activatedRoute, compInit, activeUser, imageService) {
+    constructor(formManager, activatedRoute, activeUser, imageService) {
         this.formManager = formManager;
         this.activatedRoute = activatedRoute;
-        this.compInit = compInit;
         this.activeUser = activeUser;
         this.imageService = imageService;
-        this.errorParser = new errorParser_1.ErrorParser();
     }
     ngOnInit() {
-        if (this.activeUser.isPermitted['to_view_images']) {
-            this.compInit.initialize('images')
-                .then((result) => {
-                console.log('image comp init ', result);
-                this.formManager.setService(this.activatedRoute.snapshot.url[0].path);
-            });
-        }
+        this.formManager.setService(this.activatedRoute.snapshot.url[0].path);
     }
 };
 ImagesComponent = __decorate([
@@ -7266,7 +7295,7 @@ ImagesComponent = __decorate([
         styles: [__webpack_require__(722)],
         encapsulation: core_1.ViewEncapsulation.None
     }),
-    __metadata("design:paramtypes", [service_form_manager_service_1.ServiceFormManagerService, router_1.ActivatedRoute, comp_init_service_1.CompInitService, httpAuth_service_1.HttpAuthService, image_services_1.ImageServices])
+    __metadata("design:paramtypes", [service_form_manager_service_1.ServiceFormManagerService, router_1.ActivatedRoute, httpAuth_service_1.HttpAuthService, image_services_1.ImageServices])
 ], ImagesComponent);
 exports.ImagesComponent = ImagesComponent;
 
@@ -7328,7 +7357,7 @@ const core_1 = __webpack_require__(3);
 const httpAuth_service_1 = __webpack_require__(10);
 const setMessage_service_1 = __webpack_require__(54);
 const service_form_manager_service_1 = __webpack_require__(39);
-const image_services_1 = __webpack_require__(63);
+const image_services_1 = __webpack_require__(61);
 let UserDomainComponent = class UserDomainComponent {
     constructor(activeUser, setMessage, formManager, images) {
         this.activeUser = activeUser;
@@ -7337,8 +7366,12 @@ let UserDomainComponent = class UserDomainComponent {
         this.images = images;
     }
     ngOnInit() {
-        console.log('user-domain comp initialized');
-        this.itemForm = {};
+        this.images.getAll();
+    }
+    ngDoCheck() {
+        if (this.formManager.getService()) {
+            this.recordModel = this.formManager.getRecordModel();
+        }
     }
     getLatest() {
         console.log('get latest');
@@ -17662,9 +17695,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_observable_of___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs_observable_of__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_operator_concatMap__ = __webpack_require__(130);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_operator_concatMap___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_rxjs_operator_concatMap__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_operator_filter__ = __webpack_require__(100);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_operator_filter__ = __webpack_require__(99);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_operator_filter___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_rxjs_operator_filter__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_rxjs_operator_map__ = __webpack_require__(73);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_rxjs_operator_map__ = __webpack_require__(71);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_rxjs_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_rxjs_operator_map__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__angular_common__ = __webpack_require__(36);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_rxjs_Observable__ = __webpack_require__(0);
@@ -19829,8 +19862,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 const core_1 = __webpack_require__(3);
 const http_1 = __webpack_require__(27);
-__webpack_require__(74);
-const errorParser_1 = __webpack_require__(62);
+__webpack_require__(72);
+const errorParser_1 = __webpack_require__(73);
 const httpAuth_service_1 = __webpack_require__(10);
 const setMessage_service_1 = __webpack_require__(54);
 let PermissionServices = class PermissionServices {
@@ -19873,7 +19906,7 @@ let PermissionServices = class PermissionServices {
             return Promise.reject({ status: '', message: 'method not yet defined' });
         }
     }
-    addItem(form) {
+    addRecord(form) {
         if (!this.activeUser.isPermitted['to_add_permissions']) {
             this.message.set({ status: 405, message: 'insufficient permissions' });
         }
@@ -19890,7 +19923,7 @@ let PermissionServices = class PermissionServices {
             });
         }
     }
-    deleteItem(permission_id) {
+    deleteRecord(permission_id) {
         if (!this.activeUser.isPermitted['to_delete_permissions']) {
             this.message.set({ status: 405, message: 'insufficient permissions' });
         }
@@ -19907,7 +19940,7 @@ let PermissionServices = class PermissionServices {
             });
         }
     }
-    editItem() {
+    editRecord() {
         if (!this.activeUser.isPermitted['to_edit_permissions']) {
             this.message.set({ status: 405, message: 'insufficient permissions' });
         }
@@ -19941,8 +19974,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 const core_1 = __webpack_require__(3);
 const http_1 = __webpack_require__(27);
-__webpack_require__(74);
-const errorParser_1 = __webpack_require__(62);
+__webpack_require__(72);
+const errorParser_1 = __webpack_require__(73);
 const httpAuth_service_1 = __webpack_require__(10);
 const setMessage_service_1 = __webpack_require__(54);
 let AccountServices = class AccountServices {
@@ -19988,7 +20021,7 @@ let AccountServices = class AccountServices {
             return Promise.reject({ status: '', message: 'method not yet defined' });
         }
     }
-    addItem(form) {
+    addRecord(form) {
         if (!this.activeUser.isPermitted['to_add_accounts']) {
             this.message.set({ status: 405, message: 'insufficient permissions' });
         }
@@ -20005,7 +20038,7 @@ let AccountServices = class AccountServices {
             });
         }
     }
-    deleteItem(account_id) {
+    deleteRecord(account_id) {
         if (!this.activeUser.isPermitted['to_delete_accounts']) {
             this.message.set({ status: 405, message: 'insufficient permissions' });
         }
@@ -20022,7 +20055,7 @@ let AccountServices = class AccountServices {
             });
         }
     }
-    editItem(account) {
+    editRecord(account) {
         if (!this.activeUser.isPermitted['to_edit_accounts']) {
             this.message.set({ status: 405, message: 'insufficient permissions' });
         }
@@ -20083,21 +20116,21 @@ let ServiceFormManagerService = class ServiceFormManagerService {
         this.service = service;
         switch (service) {
             case 'users':
-                this.itemForm = new user_model_1.UserModel('uuid_generate_v4()');
+                this.recordModel = new user_model_1.UserModel('uuid_generate_v4()');
                 break;
             case 'accounts':
-                this.itemForm = new account_model_1.AccountModel('uuid_generate_v4()');
-                this.itemForm['account_permissions'] = new Array();
+                this.recordModel = new account_model_1.AccountModel('uuid_generate_v4()');
+                this.recordModel['account_permissions'] = new Array();
                 break;
             case 'permissions':
-                this.itemForm = new permission_model_1.PermissionModel('uuid_generate_v4()');
+                this.recordModel = new permission_model_1.PermissionModel('uuid_generate_v4()');
                 break;
             case 'images':
-                this.itemForm = new image_model_1.ImageModel();
+                this.recordModel = new image_model_1.ImageModel();
                 break;
         }
-        if (this.itemForm) {
-            this.formProperties = Object.keys(this.itemForm);
+        if (this.recordModel) {
+            this.formProperties = Object.keys(this.recordModel);
         }
     }
     getService() {
@@ -20109,19 +20142,19 @@ let ServiceFormManagerService = class ServiceFormManagerService {
     getProperties() {
         return this.formProperties;
     }
-    getItemForm() {
-        return this.itemForm;
+    getRecordModel() {
+        return this.recordModel;
     }
-    setItemFormProperty(property, value) {
+    setRecordModelProperty(property, value) {
         if (property == 'account_permissions') {
-            this.itemForm[property].push(value);
+            this.recordModel[property].push(value);
         }
         else {
-            this.itemForm[property] = value;
+            this.recordModel[property] = value;
         }
     }
-    getItemFormProperty(property) {
-        return this.itemForm[property];
+    getRecordModelProperty(property) {
+        return this.recordModel[property];
     }
 };
 ServiceFormManagerService = __decorate([
@@ -20194,8 +20227,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 const core_1 = __webpack_require__(3);
 const http_1 = __webpack_require__(27);
-__webpack_require__(74);
-const errorParser_1 = __webpack_require__(62);
+__webpack_require__(72);
+const errorParser_1 = __webpack_require__(73);
 const httpAuth_service_1 = __webpack_require__(10);
 const setMessage_service_1 = __webpack_require__(54);
 let UserServices = class UserServices {
@@ -20244,7 +20277,7 @@ let UserServices = class UserServices {
             });
         }
     }
-    addItem(form) {
+    addRecord(form) {
         if (!this.activeUser.isPermitted['to_add_users']) {
             this.message.set({ status: 405, message: 'insufficient permissions' });
         }
@@ -20261,7 +20294,7 @@ let UserServices = class UserServices {
             });
         }
     }
-    deleteItem(permission_id) {
+    deleteRecord(permission_id) {
         if (!this.activeUser.isPermitted['to_delete_permissions']) {
             this.message.set({ status: 405, message: 'insufficient permissions' });
         }
@@ -20278,7 +20311,7 @@ let UserServices = class UserServices {
             });
         }
     }
-    editItem(user) {
+    editRecord(user) {
         if (!this.activeUser.isPermitted['to_edit_users']) {
             this.message.set({ status: 405, message: 'insufficient permissions' });
         }
@@ -20305,106 +20338,7 @@ exports.UserServices = UserServices;
 
 /***/ }),
 
-/***/ 56:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-const core_1 = __webpack_require__(3);
-const image_services_1 = __webpack_require__(63);
-const user_services_1 = __webpack_require__(55);
-const account_services_1 = __webpack_require__(38);
-const permission_services_1 = __webpack_require__(31);
-const errorParser_1 = __webpack_require__(62);
-const httpAuth_service_1 = __webpack_require__(10);
-const router_1 = __webpack_require__(12);
-let CompInitService = class CompInitService {
-    constructor(router, activeUser, images, users, accounts, permissions) {
-        this.router = router;
-        this.activeUser = activeUser;
-        this.images = images;
-        this.users = users;
-        this.accounts = accounts;
-        this.permissions = permissions;
-        this.errorParser = new errorParser_1.ErrorParser();
-    }
-    initialize(service) {
-        return this[service].getAll()
-            .then((result) => {
-            console.log(result);
-            return Promise.resolve(result);
-        })
-            .catch(this.errorParser.handleError)
-            .catch((error) => {
-            this[service].error = error;
-            if (error.forceLogout) {
-                setTimeout(() => {
-                    this.activeUser.logout();
-                    this.router.navigate(["/login"]);
-                    this[service].error = null;
-                }, 3000);
-            }
-            setTimeout(() => {
-                this[service].error = null;
-            }, 3000);
-        });
-    }
-};
-CompInitService = __decorate([
-    core_1.Injectable(),
-    __metadata("design:paramtypes", [router_1.Router, httpAuth_service_1.HttpAuthService, image_services_1.ImageServices, user_services_1.UserServices, account_services_1.AccountServices, permission_services_1.PermissionServices])
-], CompInitService);
-exports.CompInitService = CompInitService;
-
-
-/***/ }),
-
-/***/ 62:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-class ErrorParser {
-    handleError(error) {
-        let err = {};
-        console.log('error in parser: ', error);
-        if (error.status === 401) {
-            err = {
-                status: error.status,
-                message: `${error.statusText}/expired token - please login again`,
-                forceLogout: true
-            };
-        }
-        else if (error.statusText) {
-            err = {
-                status: `${error.status} - ${error.statusText}`,
-                message: error.error.message,
-            };
-        }
-        else {
-            err = {
-                status: error.status,
-                message: error.message
-            };
-        }
-        throw err;
-    }
-}
-exports.ErrorParser = ErrorParser;
-
-
-/***/ }),
-
-/***/ 63:
+/***/ 61:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -20420,8 +20354,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 const core_1 = __webpack_require__(3);
 const http_1 = __webpack_require__(27);
-__webpack_require__(74);
-const errorParser_1 = __webpack_require__(62);
+__webpack_require__(72);
+const errorParser_1 = __webpack_require__(73);
 const httpAuth_service_1 = __webpack_require__(10);
 const setMessage_service_1 = __webpack_require__(54);
 let ImageServices = class ImageServices {
@@ -20474,7 +20408,7 @@ let ImageServices = class ImageServices {
             this.message.set(result);
         });
     }
-    addItem() {
+    addRecord() {
         if (!this.activeUser.isPermitted['to_add_images']) {
             this.message.set({ status: 405, message: 'insufficient permissions' });
         }
@@ -20482,7 +20416,7 @@ let ImageServices = class ImageServices {
             return Promise.reject({ status: '', message: 'method not yet defined' });
         }
     }
-    deleteItem() {
+    deleteRecord() {
         if (!this.activeUser.isPermitted['to_delete_images']) {
             this.message.set({ status: 405, message: 'insufficient permissions' });
         }
@@ -20490,7 +20424,7 @@ let ImageServices = class ImageServices {
             return Promise.reject({ status: '', message: 'method not yet defined' });
         }
     }
-    editItem() {
+    editRecord() {
         if (!this.activeUser.isPermitted['to_edit_images']) {
             this.message.set({ status: 405, message: 'insufficient permissions' });
         }
@@ -23237,7 +23171,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 const core_1 = __webpack_require__(3);
 const http_1 = __webpack_require__(27);
 const app_component_1 = __webpack_require__(675);
-const platform_browser_1 = __webpack_require__(71);
+const platform_browser_1 = __webpack_require__(69);
 const forms_1 = __webpack_require__(139);
 const http_2 = __webpack_require__(182);
 const common_1 = __webpack_require__(36);
@@ -23348,7 +23282,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 const router_1 = __webpack_require__(12);
 const core_1 = __webpack_require__(3);
-const auth_guard_service_1 = __webpack_require__(85);
+const auth_guard_service_1 = __webpack_require__(84);
 const APP_ROUTES = [
     {
         path: 'private/user-domain',
@@ -23614,13 +23548,13 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 const core_1 = __webpack_require__(3);
 const common_1 = __webpack_require__(36);
 const private_routing_module_1 = __webpack_require__(692);
-const image_services_1 = __webpack_require__(63);
+const image_services_1 = __webpack_require__(61);
 const http_interceptors_1 = __webpack_require__(693);
 const user_services_1 = __webpack_require__(55);
 const forms_1 = __webpack_require__(139);
 const account_services_1 = __webpack_require__(38);
 const permission_services_1 = __webpack_require__(31);
-const comp_init_service_1 = __webpack_require__(56);
+const comp_init_service_1 = __webpack_require__(103);
 const setMessage_service_1 = __webpack_require__(54);
 const admin_domain_module_1 = __webpack_require__(695);
 const user_domain_module_1 = __webpack_require__(719);
@@ -23668,7 +23602,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 const core_1 = __webpack_require__(3);
 const router_1 = __webpack_require__(12);
-const auth_guard_service_1 = __webpack_require__(85);
+const auth_guard_service_1 = __webpack_require__(84);
 const privateRoutes = [
     {
         path: 'user-domain',
@@ -23810,7 +23744,7 @@ const core_1 = __webpack_require__(3);
 const router_1 = __webpack_require__(12);
 const users_component_1 = __webpack_require__(216);
 const admin_domain_component_1 = __webpack_require__(218);
-const auth_guard_service_1 = __webpack_require__(85);
+const auth_guard_service_1 = __webpack_require__(84);
 const accounts_component_1 = __webpack_require__(219);
 const permissions_component_1 = __webpack_require__(221);
 const ADMIN_ROUTES = [
@@ -23927,7 +23861,7 @@ module.exports = "<span *ngIf=\"!this.userService.message.failure\"><div *ngFor=
 /***/ 701:
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"col-sm-2\"><ul class=\"list-group box-shadow\" style=\"border: 1px, solid, black;\"><li class=\"list-group-item\"><a (click)=\"this.filter()\">filter</a></li></ul><!--app-sidebar--></div><div class=\"col-sm-8\"><app-messagebar></app-messagebar><router-outlet></router-outlet><!--app-permissions-panel--></div><div class=\"col-sm-2\"><app-infobar></app-infobar></div>"
+module.exports = "<div class=\"col-sm-2\"><ul class=\"list-group box-shadow\" style=\"border: 1px, solid, black;\"><li class=\"list-group-item\"><a (click)=\"this.filter()\">filter</a></li></ul></div><div class=\"col-sm-8\"><div class=\"panel panel-warning\" *ngIf=\"this.setMessage.response.failure\"><div class=\"panel-heading\">status: {{ this.setMessage.response.failure.status }}</div><div class=\"panel-body\">message: {{ this.setMessage.response.failure.message }}</div></div><div class=\"panel panel-success\" *ngIf=\"this.setMessage.response.success\"><div class=\"panel-heading\">status: {{ this.setMessage.response.success.status }}</div><div class=\"panel-body\">message: {{ this.setMessage.response.success.message }}</div></div><router-outlet></router-outlet></div><div class=\"col-sm-2\"><span *ngIf=\"this.activeUser.isPermitted['to_add_'+ this.formManager.getService()] &amp;&amp; this.formManager.getService() !='images'\"><form class=\"panel panel-default box-shadow\" #addrecordModel=\"ngForm\"><div class=\"panel-heading\"><h3 class=\"panel-title\">add {{this.formManager.getService()}}</h3></div><div class=\"panel-body\"><div class=\"input-group input-group-sm\" *ngFor=\"let property of this.formManager.getProperties(); index as i\"><div class=\"input-group-btn\" *ngIf=\"property != 'account_permissions' &amp;&amp; property !='language' &amp;&amp; property != 'account_type' &amp;&amp; property.slice(-3) != '_id'\"><span class=\"input-group-addon btn-info\" id=\"{{property}}\">Enter</span></div><div class=\"input-group-btn\" *ngIf=\"this.formManager.getService() == 'users' &amp;&amp; property =='account_type'\"><button class=\"btn btn-info dropdown-toggle\" type=\"button\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">Select<span class=\"caret\"></span></button><ul class=\"dropdown-menu\"><li *ngFor=\"let account of this.accounts.accounts as accounts; index as j\"><a (click)=\"this.recordModel[property] = account.account_id\">{{account.account_name}}</a></li></ul></div><div class=\"input-group-btn\" *ngIf=\"this.formManager.getService() =='users' &amp;&amp; property =='language'\"><button class=\"btn btn-info dropdown-toggle\" type=\"button\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">Select<span class=\"caret\"></span></button><ul class=\"dropdown-menu\"><li *ngFor=\"let language of this.formManager.getLanguages() as languages; index as k\"><a (click)=\"this.recordModel[property] = language.language\">{{language.language}}</a></li></ul></div><div class=\"input-group-btn\" *ngIf=\"this.formManager.getService() =='accounts' &amp;&amp; property =='account_permissions'\"><button class=\"btn btn-info dropdown-toggle\" type=\"button\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">Select<span class=\"caret\"></span></button><ul class=\"dropdown-menu\"><li *ngFor=\"let permission of this.permissions.permissions as permissions; index as l\"><a (click)=\"this.recordModel[property].push(permission.permission_id)\">{{permission.permission_name}}</a></li></ul></div><input class=\"form-control\" *ngIf=\"property.slice(-3) != '_id'\" type=\"text\" placeholder=\"{{property}}\" [(ngModel)]=\"this.recordModel[property]\" name=\"{{property}}\"></div></div><div class=\"panel-footer done-edit\" (click)=\"onSubmit()\">submit</div></form></span><!--app-infobar--></div>"
 
 /***/ }),
 
@@ -23970,7 +23904,7 @@ const core_1 = __webpack_require__(3);
 const user_services_1 = __webpack_require__(55);
 const account_services_1 = __webpack_require__(38);
 const httpAuth_service_1 = __webpack_require__(10);
-const comp_init_service_1 = __webpack_require__(56);
+const comp_init_service_1 = __webpack_require__(103);
 let UserPanelComponent = class UserPanelComponent {
     constructor(compInit, activeUser, userService, accountService) {
         this.compInit = compInit;
@@ -24001,13 +23935,13 @@ let UserPanelComponent = class UserPanelComponent {
     }
     done(user) {
         if (this.userUpdated) {
-            this.userService.editItem(user);
+            this.userService.editRecord(user);
         }
         this.doEdit = {};
         this.userUpdated = false;
     }
     delete(user_id) {
-        this.userService.deleteItem(user_id);
+        this.userService.deleteRecord(user_id);
     }
 };
 UserPanelComponent = __decorate([
@@ -24099,7 +24033,7 @@ const account_services_1 = __webpack_require__(38);
 const permission_services_1 = __webpack_require__(31);
 const httpAuth_service_1 = __webpack_require__(10);
 const listValidator_1 = __webpack_require__(220);
-const comp_init_service_1 = __webpack_require__(56);
+const comp_init_service_1 = __webpack_require__(103);
 let AccountsPanelComponent = class AccountsPanelComponent {
     constructor(compInit, activeUser, accountService, permissionService) {
         this.compInit = compInit;
@@ -24112,12 +24046,12 @@ let AccountsPanelComponent = class AccountsPanelComponent {
         this.accountUpdated = false;
     }
     ngOnInit() {
-        if (this.activeUser.isPermitted['to_view_accounts']) {
-            this.compInit.initialize('accounts')
-                .then((result) => {
-                console.log('account panel comp init ', result);
-            });
-        }
+        // if(this.activeUser.isPermitted['to_view_accounts']){
+        //     this.compInit.initialize('accounts')
+        //         .then((result: any) => {
+        //             console.log('account panel comp init ', result);
+        //         })
+        // }
     }
     edit(account, i) {
         this.doEdit[account.account_name] = true;
@@ -24147,12 +24081,12 @@ let AccountsPanelComponent = class AccountsPanelComponent {
         this.doEdit = {};
         this.tempPlaceholder = 'add permission';
         if (this.accountUpdated) {
-            this.accountService.editItem(account);
+            this.accountService.editRecord(account);
         }
         this.accountUpdated = false;
     }
     delete(account_id, i) {
-        this.accountService.deleteItem(account_id);
+        this.accountService.deleteRecord(account_id);
     }
 };
 AccountsPanelComponent = __decorate([
@@ -24192,7 +24126,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 const core_1 = __webpack_require__(3);
 const permission_services_1 = __webpack_require__(31);
 const httpAuth_service_1 = __webpack_require__(10);
-const comp_init_service_1 = __webpack_require__(56);
+const comp_init_service_1 = __webpack_require__(103);
 let PermissionsPanelComponent = class PermissionsPanelComponent {
     constructor(compInit, activeUser, permissionService) {
         this.compInit = compInit;
@@ -24210,7 +24144,7 @@ let PermissionsPanelComponent = class PermissionsPanelComponent {
     }
     delete(permission_id) {
         console.log(`deleting: `, permission_id);
-        this.permissionService.deleteItem(permission_id);
+        this.permissionService.deleteRecord(permission_id);
     }
 };
 PermissionsPanelComponent = __decorate([
@@ -24250,7 +24184,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 const core_1 = __webpack_require__(3);
 const router_1 = __webpack_require__(12);
 const httpAuth_service_1 = __webpack_require__(10);
-const image_services_1 = __webpack_require__(63);
+const image_services_1 = __webpack_require__(61);
 const user_services_1 = __webpack_require__(55);
 const account_services_1 = __webpack_require__(38);
 const permission_services_1 = __webpack_require__(31);
@@ -24325,7 +24259,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 const core_1 = __webpack_require__(3);
-const image_services_1 = __webpack_require__(63);
+const image_services_1 = __webpack_require__(61);
 const user_services_1 = __webpack_require__(55);
 const router_1 = __webpack_require__(12);
 const account_services_1 = __webpack_require__(38);
@@ -24395,15 +24329,18 @@ let InfobarComponent = class InfobarComponent {
         this.activeUser = activeUser;
     }
     ngOnInit() {
-        this.itemForm = {};
+        this.recordModel = {};
+        console.log('');
     }
     ngDoCheck() {
         if (this.formManager.getService()) {
-            this.itemForm = this.formManager.getItemForm();
+            this.recordModel = this.formManager.getRecordModel();
         }
     }
     onSubmit() {
-        this[this.formManager.getService()].addItem(this.itemForm);
+        console.log(`adding ${this.formManager.getService()} record `, this.recordModel);
+        this[this.formManager.getService()].addRecord(this.recordModel);
+        this.recordModel = this.formManager.getRecordModel();
     }
 };
 InfobarComponent = __decorate([
@@ -24422,7 +24359,7 @@ exports.InfobarComponent = InfobarComponent;
 /***/ 718:
 /***/ (function(module, exports) {
 
-module.exports = "<span *ngIf=\"this.formManager.getService() =='images'\"><div class=\"panel panel-default box-shadow\"><div class=\"panel-heading\"><h3 class=\"panel-title\">image info</h3></div><div class=\"panel-body\" *ngFor=\"let property of this.formManager.getProperties() as form;\"><p>{{property}}</p><hr></div></div></span><span *ngIf=\"this.activeUser.isPermitted['to_add_'+ this.formManager.getService()] &amp;&amp; this.formManager.getService() !='images'\"><form class=\"panel panel-default box-shadow\" #addItemForm=\"ngForm\"><div class=\"panel-heading\"><h3 class=\"panel-title\">add {{this.formManager.getService()}}</h3></div><div class=\"panel-body\"><div class=\"input-group input-group-sm\" *ngFor=\"let property of this.formManager.getProperties(); index as i\"><div class=\"input-group-btn\" *ngIf=\"property != 'account_permissions' &amp;&amp; property !='language' &amp;&amp; property != 'account_type' &amp;&amp; property.slice(-3) != '_id'\"><span class=\"input-group-addon btn-info\" id=\"{{property}}\">Enter</span></div><div class=\"input-group-btn\" *ngIf=\"this.formManager.getService() == 'users' &amp;&amp; property =='account_type'\"><button class=\"btn btn-info dropdown-toggle\" type=\"button\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">Select<span class=\"caret\"></span></button><ul class=\"dropdown-menu\"><li *ngFor=\"let account of this.accounts.accounts as accounts; index as j\"><a (click)=\"this.itemForm[property] = account.account_id\">{{account.account_name}}</a></li></ul></div><div class=\"input-group-btn\" *ngIf=\"this.formManager.getService() =='users' &amp;&amp; property =='language'\"><button class=\"btn btn-info dropdown-toggle\" type=\"button\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">Select<span class=\"caret\"></span></button><ul class=\"dropdown-menu\"><li *ngFor=\"let language of this.formManager.getLanguages() as languages; index as k\"><a (click)=\"this.itemForm[property] = language.language\">{{language.language}}</a></li></ul></div><div class=\"input-group-btn\" *ngIf=\"this.formManager.getService() =='accounts' &amp;&amp; property =='account_permissions'\"><button class=\"btn btn-info dropdown-toggle\" type=\"button\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">Select<span class=\"caret\"></span></button><ul class=\"dropdown-menu\"><li *ngFor=\"let permission of this.permissions.permissions as permissions; index as l\"><a (click)=\"this.itemForm[property].push(permission.permission_id)\">{{permission.permission_name}}</a></li></ul></div><input class=\"form-control\" *ngIf=\"property.slice(-3) != '_id'\" type=\"text\" placeholder=\"{{property}}\" [(ngModel)]=\"this.itemForm[property]\" name=\"{{property}}\"></div></div><div class=\"panel-footer done-edit\" (click)=\"onSubmit()\">submit</div></form></span>"
+module.exports = "<span *ngIf=\"this.activeUser.isPermitted['to_add_'+ this.formManager.getService()] &amp;&amp; this.formManager.getService() !='images'\"><form class=\"panel panel-default box-shadow\" #addrecordModel=\"ngForm\"><div class=\"panel-heading\"><h3 class=\"panel-title\">add {{this.formManager.getService()}}</h3></div><div class=\"panel-body\"><div class=\"input-group input-group-sm\" *ngFor=\"let property of this.formManager.getProperties(); index as i\"><div class=\"input-group-btn\" *ngIf=\"property != 'account_permissions' &amp;&amp; property !='language' &amp;&amp; property != 'account_type' &amp;&amp; property.slice(-3) != '_id'\"><span class=\"input-group-addon btn-info\" id=\"{{property}}\">Enter</span></div><div class=\"input-group-btn\" *ngIf=\"this.formManager.getService() == 'users' &amp;&amp; property =='account_type'\"><button class=\"btn btn-info dropdown-toggle\" type=\"button\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">Select<span class=\"caret\"></span></button><ul class=\"dropdown-menu\"><li *ngFor=\"let account of this.accounts.accounts as accounts; index as j\"><a (click)=\"this.recordModel[property] = account.account_id\">{{account.account_name}}</a></li></ul></div><div class=\"input-group-btn\" *ngIf=\"this.formManager.getService() =='users' &amp;&amp; property =='language'\"><button class=\"btn btn-info dropdown-toggle\" type=\"button\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">Select<span class=\"caret\"></span></button><ul class=\"dropdown-menu\"><li *ngFor=\"let language of this.formManager.getLanguages() as languages; index as k\"><a (click)=\"this.recordModel[property] = language.language\">{{language.language}}</a></li></ul></div><div class=\"input-group-btn\" *ngIf=\"this.formManager.getService() =='accounts' &amp;&amp; property =='account_permissions'\"><button class=\"btn btn-info dropdown-toggle\" type=\"button\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">Select<span class=\"caret\"></span></button><ul class=\"dropdown-menu\"><li *ngFor=\"let permission of this.permissions.permissions as permissions; index as l\"><a (click)=\"this.recordModel[property].push(permission.permission_id)\">{{permission.permission_name}}</a></li></ul></div><input class=\"form-control\" *ngIf=\"property.slice(-3) != '_id'\" type=\"text\" placeholder=\"{{property}}\" [(ngModel)]=\"this.recordModel[property]\" name=\"{{property}}\"></div></div><div class=\"panel-footer done-edit\" (click)=\"onSubmit()\">submit</div></form></span>"
 
 /***/ }),
 
@@ -24442,7 +24379,7 @@ const common_1 = __webpack_require__(36);
 const user_domain_routing_module_1 = __webpack_require__(720);
 const videos_component_1 = __webpack_require__(223);
 const router_1 = __webpack_require__(12);
-const auth_guard_service_1 = __webpack_require__(85);
+const auth_guard_service_1 = __webpack_require__(84);
 const images_component_1 = __webpack_require__(222);
 const user_domain_component_1 = __webpack_require__(224);
 const images_thumbnail_component_1 = __webpack_require__(725);
@@ -24482,7 +24419,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 const core_1 = __webpack_require__(3);
 const router_1 = __webpack_require__(12);
-const auth_guard_service_1 = __webpack_require__(85);
+const auth_guard_service_1 = __webpack_require__(84);
 const images_component_1 = __webpack_require__(222);
 const videos_component_1 = __webpack_require__(223);
 const user_domain_component_1 = __webpack_require__(224);
@@ -24524,7 +24461,7 @@ exports.UserDomainRoutingModule = UserDomainRoutingModule;
 /***/ 721:
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"row\"><div class=\"col-sm-6 col-md-4\" *ngIf=\"this.imageService.images.length == 1\"></div><app-images-thumbnail></app-images-thumbnail><div class=\"col-sm-6 col-md-4\" *ngIf=\"this.imageService.images.length == 1\"></div></div>"
+module.exports = "<span *ngIf=\"!this.imageService.message.failure\"><div class=\"col-sm-6 col-md-4\" *ngFor=\"let image of this.imageService.images as images; index as i\"><div class=\"thumbnail box-shadow\" id=\"{{image.id}}\"><img src=\"{{image.file}}\" alt=\"...\"><div class=\"caption\"><h4>{{image.created}}</h4><p> {{image.event_en}}</p><p><a class=\"btn btn-primary\" role=\"button\">Enlarge</a><a class=\"btn btn-primary\" role=\"button\">Print</a><a class=\"btn btn-primary\" role=\"button\">Close</a></p></div></div></div></span>"
 
 /***/ }),
 
@@ -24564,7 +24501,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 const core_1 = __webpack_require__(3);
-const image_services_1 = __webpack_require__(63);
+const image_services_1 = __webpack_require__(61);
 let ImagesThumbnailComponent = class ImagesThumbnailComponent {
     constructor(imageService) {
         this.imageService = imageService;
@@ -24660,6 +24597,42 @@ module.exports = "<div><nav class=\"navbar navbar-default\"><div class=\"contain
 /***/ (function(module, exports) {
 
 module.exports = "@charset \"UTF-8\";\n/*!\n *  Font Awesome 4.7.0 by @davegandy - http://fontawesome.io - @fontawesome\n *  License - http://fontawesome.io/license (Font: SIL OFL 1.1, CSS: MIT License)\n */\n/* FONT PATH\n * -------------------------- */\n@font-face {\n  font-family: 'FontAwesome';\n  src: url(\"../fonts/fontawesome-webfont.eot?v=4.7.0\");\n  src: url(\"../fonts/fontawesome-webfont.eot?#iefix&v=4.7.0\") format(\"embedded-opentype\"), url(\"../fonts/fontawesome-webfont.woff2?v=4.7.0\") format(\"woff2\"), url(\"../fonts/fontawesome-webfont.woff?v=4.7.0\") format(\"woff\"), url(\"../fonts/fontawesome-webfont.ttf?v=4.7.0\") format(\"truetype\"), url(\"../fonts/fontawesome-webfont.svg?v=4.7.0#fontawesomeregular\") format(\"svg\");\n  font-weight: normal;\n  font-style: normal; }\n\n.fa {\n  display: inline-block;\n  font: normal normal normal 14px/1 FontAwesome;\n  font-size: inherit;\n  text-rendering: auto;\n  -webkit-font-smoothing: antialiased;\n  -moz-osx-font-smoothing: grayscale; }\n\n/* makes the font 33% larger relative to the icon container */\n.fa-lg {\n  font-size: 1.33333em;\n  line-height: 0.75em;\n  vertical-align: -15%; }\n\n.fa-2x {\n  font-size: 2em; }\n\n.fa-3x {\n  font-size: 3em; }\n\n.fa-4x {\n  font-size: 4em; }\n\n.fa-5x {\n  font-size: 5em; }\n\n.fa-fw {\n  width: 1.28571em;\n  text-align: center; }\n\n.fa-ul {\n  padding-left: 0;\n  margin-left: 2.14286em;\n  list-style-type: none; }\n  .fa-ul > li {\n    position: relative; }\n\n.fa-li {\n  position: absolute;\n  left: -2.14286em;\n  width: 2.14286em;\n  top: 0.14286em;\n  text-align: center; }\n  .fa-li.fa-lg {\n    left: -1.85714em; }\n\n.fa-border {\n  padding: .2em .25em .15em;\n  border: solid 0.08em #eee;\n  border-radius: .1em; }\n\n.fa-pull-left {\n  float: left; }\n\n.fa-pull-right {\n  float: right; }\n\n.fa.fa-pull-left {\n  margin-right: .3em; }\n\n.fa.fa-pull-right {\n  margin-left: .3em; }\n\n/* Deprecated as of 4.4.0 */\n.pull-right {\n  float: right; }\n\n.pull-left {\n  float: left; }\n\n.fa.pull-left {\n  margin-right: .3em; }\n\n.fa.pull-right {\n  margin-left: .3em; }\n\n.fa-spin {\n  -webkit-animation: fa-spin 2s infinite linear;\n  animation: fa-spin 2s infinite linear; }\n\n.fa-pulse {\n  -webkit-animation: fa-spin 1s infinite steps(8);\n  animation: fa-spin 1s infinite steps(8); }\n\n@-webkit-keyframes fa-spin {\n  0% {\n    -webkit-transform: rotate(0deg);\n    transform: rotate(0deg); }\n  100% {\n    -webkit-transform: rotate(359deg);\n    transform: rotate(359deg); } }\n\n@keyframes fa-spin {\n  0% {\n    -webkit-transform: rotate(0deg);\n    transform: rotate(0deg); }\n  100% {\n    -webkit-transform: rotate(359deg);\n    transform: rotate(359deg); } }\n\n.fa-rotate-90 {\n  -ms-filter: \"progid:DXImageTransform.Microsoft.BasicImage(rotation=1)\";\n  -webkit-transform: rotate(90deg);\n  -ms-transform: rotate(90deg);\n  transform: rotate(90deg); }\n\n.fa-rotate-180 {\n  -ms-filter: \"progid:DXImageTransform.Microsoft.BasicImage(rotation=2)\";\n  -webkit-transform: rotate(180deg);\n  -ms-transform: rotate(180deg);\n  transform: rotate(180deg); }\n\n.fa-rotate-270 {\n  -ms-filter: \"progid:DXImageTransform.Microsoft.BasicImage(rotation=3)\";\n  -webkit-transform: rotate(270deg);\n  -ms-transform: rotate(270deg);\n  transform: rotate(270deg); }\n\n.fa-flip-horizontal {\n  -ms-filter: \"progid:DXImageTransform.Microsoft.BasicImage(rotation=0, mirror=1)\";\n  -webkit-transform: scale(-1, 1);\n  -ms-transform: scale(-1, 1);\n  transform: scale(-1, 1); }\n\n.fa-flip-vertical {\n  -ms-filter: \"progid:DXImageTransform.Microsoft.BasicImage(rotation=2, mirror=1)\";\n  -webkit-transform: scale(1, -1);\n  -ms-transform: scale(1, -1);\n  transform: scale(1, -1); }\n\n:root .fa-rotate-90,\n:root .fa-rotate-180,\n:root .fa-rotate-270,\n:root .fa-flip-horizontal,\n:root .fa-flip-vertical {\n  filter: none; }\n\n.fa-stack {\n  position: relative;\n  display: inline-block;\n  width: 2em;\n  height: 2em;\n  line-height: 2em;\n  vertical-align: middle; }\n\n.fa-stack-1x, .fa-stack-2x {\n  position: absolute;\n  left: 0;\n  width: 100%;\n  text-align: center; }\n\n.fa-stack-1x {\n  line-height: inherit; }\n\n.fa-stack-2x {\n  font-size: 2em; }\n\n.fa-inverse {\n  color: #fff; }\n\n/* Font Awesome uses the Unicode Private Use Area (PUA) to ensure screen\n   readers do not read off random characters that represent icons */\n.fa-glass:before {\n  content: \"\"; }\n\n.fa-music:before {\n  content: \"\"; }\n\n.fa-search:before {\n  content: \"\"; }\n\n.fa-envelope-o:before {\n  content: \"\"; }\n\n.fa-heart:before {\n  content: \"\"; }\n\n.fa-star:before {\n  content: \"\"; }\n\n.fa-star-o:before {\n  content: \"\"; }\n\n.fa-user:before {\n  content: \"\"; }\n\n.fa-film:before {\n  content: \"\"; }\n\n.fa-th-large:before {\n  content: \"\"; }\n\n.fa-th:before {\n  content: \"\"; }\n\n.fa-th-list:before {\n  content: \"\"; }\n\n.fa-check:before {\n  content: \"\"; }\n\n.fa-remove:before,\n.fa-close:before,\n.fa-times:before {\n  content: \"\"; }\n\n.fa-search-plus:before {\n  content: \"\"; }\n\n.fa-search-minus:before {\n  content: \"\"; }\n\n.fa-power-off:before {\n  content: \"\"; }\n\n.fa-signal:before {\n  content: \"\"; }\n\n.fa-gear:before,\n.fa-cog:before {\n  content: \"\"; }\n\n.fa-trash-o:before {\n  content: \"\"; }\n\n.fa-home:before {\n  content: \"\"; }\n\n.fa-file-o:before {\n  content: \"\"; }\n\n.fa-clock-o:before {\n  content: \"\"; }\n\n.fa-road:before {\n  content: \"\"; }\n\n.fa-download:before {\n  content: \"\"; }\n\n.fa-arrow-circle-o-down:before {\n  content: \"\"; }\n\n.fa-arrow-circle-o-up:before {\n  content: \"\"; }\n\n.fa-inbox:before {\n  content: \"\"; }\n\n.fa-play-circle-o:before {\n  content: \"\"; }\n\n.fa-rotate-right:before,\n.fa-repeat:before {\n  content: \"\"; }\n\n.fa-refresh:before {\n  content: \"\"; }\n\n.fa-list-alt:before {\n  content: \"\"; }\n\n.fa-lock:before {\n  content: \"\"; }\n\n.fa-flag:before {\n  content: \"\"; }\n\n.fa-headphones:before {\n  content: \"\"; }\n\n.fa-volume-off:before {\n  content: \"\"; }\n\n.fa-volume-down:before {\n  content: \"\"; }\n\n.fa-volume-up:before {\n  content: \"\"; }\n\n.fa-qrcode:before {\n  content: \"\"; }\n\n.fa-barcode:before {\n  content: \"\"; }\n\n.fa-tag:before {\n  content: \"\"; }\n\n.fa-tags:before {\n  content: \"\"; }\n\n.fa-book:before {\n  content: \"\"; }\n\n.fa-bookmark:before {\n  content: \"\"; }\n\n.fa-print:before {\n  content: \"\"; }\n\n.fa-camera:before {\n  content: \"\"; }\n\n.fa-font:before {\n  content: \"\"; }\n\n.fa-bold:before {\n  content: \"\"; }\n\n.fa-italic:before {\n  content: \"\"; }\n\n.fa-text-height:before {\n  content: \"\"; }\n\n.fa-text-width:before {\n  content: \"\"; }\n\n.fa-align-left:before {\n  content: \"\"; }\n\n.fa-align-center:before {\n  content: \"\"; }\n\n.fa-align-right:before {\n  content: \"\"; }\n\n.fa-align-justify:before {\n  content: \"\"; }\n\n.fa-list:before {\n  content: \"\"; }\n\n.fa-dedent:before,\n.fa-outdent:before {\n  content: \"\"; }\n\n.fa-indent:before {\n  content: \"\"; }\n\n.fa-video-camera:before {\n  content: \"\"; }\n\n.fa-photo:before,\n.fa-image:before,\n.fa-picture-o:before {\n  content: \"\"; }\n\n.fa-pencil:before {\n  content: \"\"; }\n\n.fa-map-marker:before {\n  content: \"\"; }\n\n.fa-adjust:before {\n  content: \"\"; }\n\n.fa-tint:before {\n  content: \"\"; }\n\n.fa-edit:before,\n.fa-pencil-square-o:before {\n  content: \"\"; }\n\n.fa-share-square-o:before {\n  content: \"\"; }\n\n.fa-check-square-o:before {\n  content: \"\"; }\n\n.fa-arrows:before {\n  content: \"\"; }\n\n.fa-step-backward:before {\n  content: \"\"; }\n\n.fa-fast-backward:before {\n  content: \"\"; }\n\n.fa-backward:before {\n  content: \"\"; }\n\n.fa-play:before {\n  content: \"\"; }\n\n.fa-pause:before {\n  content: \"\"; }\n\n.fa-stop:before {\n  content: \"\"; }\n\n.fa-forward:before {\n  content: \"\"; }\n\n.fa-fast-forward:before {\n  content: \"\"; }\n\n.fa-step-forward:before {\n  content: \"\"; }\n\n.fa-eject:before {\n  content: \"\"; }\n\n.fa-chevron-left:before {\n  content: \"\"; }\n\n.fa-chevron-right:before {\n  content: \"\"; }\n\n.fa-plus-circle:before {\n  content: \"\"; }\n\n.fa-minus-circle:before {\n  content: \"\"; }\n\n.fa-times-circle:before {\n  content: \"\"; }\n\n.fa-check-circle:before {\n  content: \"\"; }\n\n.fa-question-circle:before {\n  content: \"\"; }\n\n.fa-info-circle:before {\n  content: \"\"; }\n\n.fa-crosshairs:before {\n  content: \"\"; }\n\n.fa-times-circle-o:before {\n  content: \"\"; }\n\n.fa-check-circle-o:before {\n  content: \"\"; }\n\n.fa-ban:before {\n  content: \"\"; }\n\n.fa-arrow-left:before {\n  content: \"\"; }\n\n.fa-arrow-right:before {\n  content: \"\"; }\n\n.fa-arrow-up:before {\n  content: \"\"; }\n\n.fa-arrow-down:before {\n  content: \"\"; }\n\n.fa-mail-forward:before,\n.fa-share:before {\n  content: \"\"; }\n\n.fa-expand:before {\n  content: \"\"; }\n\n.fa-compress:before {\n  content: \"\"; }\n\n.fa-plus:before {\n  content: \"\"; }\n\n.fa-minus:before {\n  content: \"\"; }\n\n.fa-asterisk:before {\n  content: \"\"; }\n\n.fa-exclamation-circle:before {\n  content: \"\"; }\n\n.fa-gift:before {\n  content: \"\"; }\n\n.fa-leaf:before {\n  content: \"\"; }\n\n.fa-fire:before {\n  content: \"\"; }\n\n.fa-eye:before {\n  content: \"\"; }\n\n.fa-eye-slash:before {\n  content: \"\"; }\n\n.fa-warning:before,\n.fa-exclamation-triangle:before {\n  content: \"\"; }\n\n.fa-plane:before {\n  content: \"\"; }\n\n.fa-calendar:before {\n  content: \"\"; }\n\n.fa-random:before {\n  content: \"\"; }\n\n.fa-comment:before {\n  content: \"\"; }\n\n.fa-magnet:before {\n  content: \"\"; }\n\n.fa-chevron-up:before {\n  content: \"\"; }\n\n.fa-chevron-down:before {\n  content: \"\"; }\n\n.fa-retweet:before {\n  content: \"\"; }\n\n.fa-shopping-cart:before {\n  content: \"\"; }\n\n.fa-folder:before {\n  content: \"\"; }\n\n.fa-folder-open:before {\n  content: \"\"; }\n\n.fa-arrows-v:before {\n  content: \"\"; }\n\n.fa-arrows-h:before {\n  content: \"\"; }\n\n.fa-bar-chart-o:before,\n.fa-bar-chart:before {\n  content: \"\"; }\n\n.fa-twitter-square:before {\n  content: \"\"; }\n\n.fa-facebook-square:before {\n  content: \"\"; }\n\n.fa-camera-retro:before {\n  content: \"\"; }\n\n.fa-key:before {\n  content: \"\"; }\n\n.fa-gears:before,\n.fa-cogs:before {\n  content: \"\"; }\n\n.fa-comments:before {\n  content: \"\"; }\n\n.fa-thumbs-o-up:before {\n  content: \"\"; }\n\n.fa-thumbs-o-down:before {\n  content: \"\"; }\n\n.fa-star-half:before {\n  content: \"\"; }\n\n.fa-heart-o:before {\n  content: \"\"; }\n\n.fa-sign-out:before {\n  content: \"\"; }\n\n.fa-linkedin-square:before {\n  content: \"\"; }\n\n.fa-thumb-tack:before {\n  content: \"\"; }\n\n.fa-external-link:before {\n  content: \"\"; }\n\n.fa-sign-in:before {\n  content: \"\"; }\n\n.fa-trophy:before {\n  content: \"\"; }\n\n.fa-github-square:before {\n  content: \"\"; }\n\n.fa-upload:before {\n  content: \"\"; }\n\n.fa-lemon-o:before {\n  content: \"\"; }\n\n.fa-phone:before {\n  content: \"\"; }\n\n.fa-square-o:before {\n  content: \"\"; }\n\n.fa-bookmark-o:before {\n  content: \"\"; }\n\n.fa-phone-square:before {\n  content: \"\"; }\n\n.fa-twitter:before {\n  content: \"\"; }\n\n.fa-facebook-f:before,\n.fa-facebook:before {\n  content: \"\"; }\n\n.fa-github:before {\n  content: \"\"; }\n\n.fa-unlock:before {\n  content: \"\"; }\n\n.fa-credit-card:before {\n  content: \"\"; }\n\n.fa-feed:before,\n.fa-rss:before {\n  content: \"\"; }\n\n.fa-hdd-o:before {\n  content: \"\"; }\n\n.fa-bullhorn:before {\n  content: \"\"; }\n\n.fa-bell:before {\n  content: \"\"; }\n\n.fa-certificate:before {\n  content: \"\"; }\n\n.fa-hand-o-right:before {\n  content: \"\"; }\n\n.fa-hand-o-left:before {\n  content: \"\"; }\n\n.fa-hand-o-up:before {\n  content: \"\"; }\n\n.fa-hand-o-down:before {\n  content: \"\"; }\n\n.fa-arrow-circle-left:before {\n  content: \"\"; }\n\n.fa-arrow-circle-right:before {\n  content: \"\"; }\n\n.fa-arrow-circle-up:before {\n  content: \"\"; }\n\n.fa-arrow-circle-down:before {\n  content: \"\"; }\n\n.fa-globe:before {\n  content: \"\"; }\n\n.fa-wrench:before {\n  content: \"\"; }\n\n.fa-tasks:before {\n  content: \"\"; }\n\n.fa-filter:before {\n  content: \"\"; }\n\n.fa-briefcase:before {\n  content: \"\"; }\n\n.fa-arrows-alt:before {\n  content: \"\"; }\n\n.fa-group:before,\n.fa-users:before {\n  content: \"\"; }\n\n.fa-chain:before,\n.fa-link:before {\n  content: \"\"; }\n\n.fa-cloud:before {\n  content: \"\"; }\n\n.fa-flask:before {\n  content: \"\"; }\n\n.fa-cut:before,\n.fa-scissors:before {\n  content: \"\"; }\n\n.fa-copy:before,\n.fa-files-o:before {\n  content: \"\"; }\n\n.fa-paperclip:before {\n  content: \"\"; }\n\n.fa-save:before,\n.fa-floppy-o:before {\n  content: \"\"; }\n\n.fa-square:before {\n  content: \"\"; }\n\n.fa-navicon:before,\n.fa-reorder:before,\n.fa-bars:before {\n  content: \"\"; }\n\n.fa-list-ul:before {\n  content: \"\"; }\n\n.fa-list-ol:before {\n  content: \"\"; }\n\n.fa-strikethrough:before {\n  content: \"\"; }\n\n.fa-underline:before {\n  content: \"\"; }\n\n.fa-table:before {\n  content: \"\"; }\n\n.fa-magic:before {\n  content: \"\"; }\n\n.fa-truck:before {\n  content: \"\"; }\n\n.fa-pinterest:before {\n  content: \"\"; }\n\n.fa-pinterest-square:before {\n  content: \"\"; }\n\n.fa-google-plus-square:before {\n  content: \"\"; }\n\n.fa-google-plus:before {\n  content: \"\"; }\n\n.fa-money:before {\n  content: \"\"; }\n\n.fa-caret-down:before {\n  content: \"\"; }\n\n.fa-caret-up:before {\n  content: \"\"; }\n\n.fa-caret-left:before {\n  content: \"\"; }\n\n.fa-caret-right:before {\n  content: \"\"; }\n\n.fa-columns:before {\n  content: \"\"; }\n\n.fa-unsorted:before,\n.fa-sort:before {\n  content: \"\"; }\n\n.fa-sort-down:before,\n.fa-sort-desc:before {\n  content: \"\"; }\n\n.fa-sort-up:before,\n.fa-sort-asc:before {\n  content: \"\"; }\n\n.fa-envelope:before {\n  content: \"\"; }\n\n.fa-linkedin:before {\n  content: \"\"; }\n\n.fa-rotate-left:before,\n.fa-undo:before {\n  content: \"\"; }\n\n.fa-legal:before,\n.fa-gavel:before {\n  content: \"\"; }\n\n.fa-dashboard:before,\n.fa-tachometer:before {\n  content: \"\"; }\n\n.fa-comment-o:before {\n  content: \"\"; }\n\n.fa-comments-o:before {\n  content: \"\"; }\n\n.fa-flash:before,\n.fa-bolt:before {\n  content: \"\"; }\n\n.fa-sitemap:before {\n  content: \"\"; }\n\n.fa-umbrella:before {\n  content: \"\"; }\n\n.fa-paste:before,\n.fa-clipboard:before {\n  content: \"\"; }\n\n.fa-lightbulb-o:before {\n  content: \"\"; }\n\n.fa-exchange:before {\n  content: \"\"; }\n\n.fa-cloud-download:before {\n  content: \"\"; }\n\n.fa-cloud-upload:before {\n  content: \"\"; }\n\n.fa-user-md:before {\n  content: \"\"; }\n\n.fa-stethoscope:before {\n  content: \"\"; }\n\n.fa-suitcase:before {\n  content: \"\"; }\n\n.fa-bell-o:before {\n  content: \"\"; }\n\n.fa-coffee:before {\n  content: \"\"; }\n\n.fa-cutlery:before {\n  content: \"\"; }\n\n.fa-file-text-o:before {\n  content: \"\"; }\n\n.fa-building-o:before {\n  content: \"\"; }\n\n.fa-hospital-o:before {\n  content: \"\"; }\n\n.fa-ambulance:before {\n  content: \"\"; }\n\n.fa-medkit:before {\n  content: \"\"; }\n\n.fa-fighter-jet:before {\n  content: \"\"; }\n\n.fa-beer:before {\n  content: \"\"; }\n\n.fa-h-square:before {\n  content: \"\"; }\n\n.fa-plus-square:before {\n  content: \"\"; }\n\n.fa-angle-double-left:before {\n  content: \"\"; }\n\n.fa-angle-double-right:before {\n  content: \"\"; }\n\n.fa-angle-double-up:before {\n  content: \"\"; }\n\n.fa-angle-double-down:before {\n  content: \"\"; }\n\n.fa-angle-left:before {\n  content: \"\"; }\n\n.fa-angle-right:before {\n  content: \"\"; }\n\n.fa-angle-up:before {\n  content: \"\"; }\n\n.fa-angle-down:before {\n  content: \"\"; }\n\n.fa-desktop:before {\n  content: \"\"; }\n\n.fa-laptop:before {\n  content: \"\"; }\n\n.fa-tablet:before {\n  content: \"\"; }\n\n.fa-mobile-phone:before,\n.fa-mobile:before {\n  content: \"\"; }\n\n.fa-circle-o:before {\n  content: \"\"; }\n\n.fa-quote-left:before {\n  content: \"\"; }\n\n.fa-quote-right:before {\n  content: \"\"; }\n\n.fa-spinner:before {\n  content: \"\"; }\n\n.fa-circle:before {\n  content: \"\"; }\n\n.fa-mail-reply:before,\n.fa-reply:before {\n  content: \"\"; }\n\n.fa-github-alt:before {\n  content: \"\"; }\n\n.fa-folder-o:before {\n  content: \"\"; }\n\n.fa-folder-open-o:before {\n  content: \"\"; }\n\n.fa-smile-o:before {\n  content: \"\"; }\n\n.fa-frown-o:before {\n  content: \"\"; }\n\n.fa-meh-o:before {\n  content: \"\"; }\n\n.fa-gamepad:before {\n  content: \"\"; }\n\n.fa-keyboard-o:before {\n  content: \"\"; }\n\n.fa-flag-o:before {\n  content: \"\"; }\n\n.fa-flag-checkered:before {\n  content: \"\"; }\n\n.fa-terminal:before {\n  content: \"\"; }\n\n.fa-code:before {\n  content: \"\"; }\n\n.fa-mail-reply-all:before,\n.fa-reply-all:before {\n  content: \"\"; }\n\n.fa-star-half-empty:before,\n.fa-star-half-full:before,\n.fa-star-half-o:before {\n  content: \"\"; }\n\n.fa-location-arrow:before {\n  content: \"\"; }\n\n.fa-crop:before {\n  content: \"\"; }\n\n.fa-code-fork:before {\n  content: \"\"; }\n\n.fa-unlink:before,\n.fa-chain-broken:before {\n  content: \"\"; }\n\n.fa-question:before {\n  content: \"\"; }\n\n.fa-info:before {\n  content: \"\"; }\n\n.fa-exclamation:before {\n  content: \"\"; }\n\n.fa-superscript:before {\n  content: \"\"; }\n\n.fa-subscript:before {\n  content: \"\"; }\n\n.fa-eraser:before {\n  content: \"\"; }\n\n.fa-puzzle-piece:before {\n  content: \"\"; }\n\n.fa-microphone:before {\n  content: \"\"; }\n\n.fa-microphone-slash:before {\n  content: \"\"; }\n\n.fa-shield:before {\n  content: \"\"; }\n\n.fa-calendar-o:before {\n  content: \"\"; }\n\n.fa-fire-extinguisher:before {\n  content: \"\"; }\n\n.fa-rocket:before {\n  content: \"\"; }\n\n.fa-maxcdn:before {\n  content: \"\"; }\n\n.fa-chevron-circle-left:before {\n  content: \"\"; }\n\n.fa-chevron-circle-right:before {\n  content: \"\"; }\n\n.fa-chevron-circle-up:before {\n  content: \"\"; }\n\n.fa-chevron-circle-down:before {\n  content: \"\"; }\n\n.fa-html5:before {\n  content: \"\"; }\n\n.fa-css3:before {\n  content: \"\"; }\n\n.fa-anchor:before {\n  content: \"\"; }\n\n.fa-unlock-alt:before {\n  content: \"\"; }\n\n.fa-bullseye:before {\n  content: \"\"; }\n\n.fa-ellipsis-h:before {\n  content: \"\"; }\n\n.fa-ellipsis-v:before {\n  content: \"\"; }\n\n.fa-rss-square:before {\n  content: \"\"; }\n\n.fa-play-circle:before {\n  content: \"\"; }\n\n.fa-ticket:before {\n  content: \"\"; }\n\n.fa-minus-square:before {\n  content: \"\"; }\n\n.fa-minus-square-o:before {\n  content: \"\"; }\n\n.fa-level-up:before {\n  content: \"\"; }\n\n.fa-level-down:before {\n  content: \"\"; }\n\n.fa-check-square:before {\n  content: \"\"; }\n\n.fa-pencil-square:before {\n  content: \"\"; }\n\n.fa-external-link-square:before {\n  content: \"\"; }\n\n.fa-share-square:before {\n  content: \"\"; }\n\n.fa-compass:before {\n  content: \"\"; }\n\n.fa-toggle-down:before,\n.fa-caret-square-o-down:before {\n  content: \"\"; }\n\n.fa-toggle-up:before,\n.fa-caret-square-o-up:before {\n  content: \"\"; }\n\n.fa-toggle-right:before,\n.fa-caret-square-o-right:before {\n  content: \"\"; }\n\n.fa-euro:before,\n.fa-eur:before {\n  content: \"\"; }\n\n.fa-gbp:before {\n  content: \"\"; }\n\n.fa-dollar:before,\n.fa-usd:before {\n  content: \"\"; }\n\n.fa-rupee:before,\n.fa-inr:before {\n  content: \"\"; }\n\n.fa-cny:before,\n.fa-rmb:before,\n.fa-yen:before,\n.fa-jpy:before {\n  content: \"\"; }\n\n.fa-ruble:before,\n.fa-rouble:before,\n.fa-rub:before {\n  content: \"\"; }\n\n.fa-won:before,\n.fa-krw:before {\n  content: \"\"; }\n\n.fa-bitcoin:before,\n.fa-btc:before {\n  content: \"\"; }\n\n.fa-file:before {\n  content: \"\"; }\n\n.fa-file-text:before {\n  content: \"\"; }\n\n.fa-sort-alpha-asc:before {\n  content: \"\"; }\n\n.fa-sort-alpha-desc:before {\n  content: \"\"; }\n\n.fa-sort-amount-asc:before {\n  content: \"\"; }\n\n.fa-sort-amount-desc:before {\n  content: \"\"; }\n\n.fa-sort-numeric-asc:before {\n  content: \"\"; }\n\n.fa-sort-numeric-desc:before {\n  content: \"\"; }\n\n.fa-thumbs-up:before {\n  content: \"\"; }\n\n.fa-thumbs-down:before {\n  content: \"\"; }\n\n.fa-youtube-square:before {\n  content: \"\"; }\n\n.fa-youtube:before {\n  content: \"\"; }\n\n.fa-xing:before {\n  content: \"\"; }\n\n.fa-xing-square:before {\n  content: \"\"; }\n\n.fa-youtube-play:before {\n  content: \"\"; }\n\n.fa-dropbox:before {\n  content: \"\"; }\n\n.fa-stack-overflow:before {\n  content: \"\"; }\n\n.fa-instagram:before {\n  content: \"\"; }\n\n.fa-flickr:before {\n  content: \"\"; }\n\n.fa-adn:before {\n  content: \"\"; }\n\n.fa-bitbucket:before {\n  content: \"\"; }\n\n.fa-bitbucket-square:before {\n  content: \"\"; }\n\n.fa-tumblr:before {\n  content: \"\"; }\n\n.fa-tumblr-square:before {\n  content: \"\"; }\n\n.fa-long-arrow-down:before {\n  content: \"\"; }\n\n.fa-long-arrow-up:before {\n  content: \"\"; }\n\n.fa-long-arrow-left:before {\n  content: \"\"; }\n\n.fa-long-arrow-right:before {\n  content: \"\"; }\n\n.fa-apple:before {\n  content: \"\"; }\n\n.fa-windows:before {\n  content: \"\"; }\n\n.fa-android:before {\n  content: \"\"; }\n\n.fa-linux:before {\n  content: \"\"; }\n\n.fa-dribbble:before {\n  content: \"\"; }\n\n.fa-skype:before {\n  content: \"\"; }\n\n.fa-foursquare:before {\n  content: \"\"; }\n\n.fa-trello:before {\n  content: \"\"; }\n\n.fa-female:before {\n  content: \"\"; }\n\n.fa-male:before {\n  content: \"\"; }\n\n.fa-gittip:before,\n.fa-gratipay:before {\n  content: \"\"; }\n\n.fa-sun-o:before {\n  content: \"\"; }\n\n.fa-moon-o:before {\n  content: \"\"; }\n\n.fa-archive:before {\n  content: \"\"; }\n\n.fa-bug:before {\n  content: \"\"; }\n\n.fa-vk:before {\n  content: \"\"; }\n\n.fa-weibo:before {\n  content: \"\"; }\n\n.fa-renren:before {\n  content: \"\"; }\n\n.fa-pagelines:before {\n  content: \"\"; }\n\n.fa-stack-exchange:before {\n  content: \"\"; }\n\n.fa-arrow-circle-o-right:before {\n  content: \"\"; }\n\n.fa-arrow-circle-o-left:before {\n  content: \"\"; }\n\n.fa-toggle-left:before,\n.fa-caret-square-o-left:before {\n  content: \"\"; }\n\n.fa-dot-circle-o:before {\n  content: \"\"; }\n\n.fa-wheelchair:before {\n  content: \"\"; }\n\n.fa-vimeo-square:before {\n  content: \"\"; }\n\n.fa-turkish-lira:before,\n.fa-try:before {\n  content: \"\"; }\n\n.fa-plus-square-o:before {\n  content: \"\"; }\n\n.fa-space-shuttle:before {\n  content: \"\"; }\n\n.fa-slack:before {\n  content: \"\"; }\n\n.fa-envelope-square:before {\n  content: \"\"; }\n\n.fa-wordpress:before {\n  content: \"\"; }\n\n.fa-openid:before {\n  content: \"\"; }\n\n.fa-institution:before,\n.fa-bank:before,\n.fa-university:before {\n  content: \"\"; }\n\n.fa-mortar-board:before,\n.fa-graduation-cap:before {\n  content: \"\"; }\n\n.fa-yahoo:before {\n  content: \"\"; }\n\n.fa-google:before {\n  content: \"\"; }\n\n.fa-reddit:before {\n  content: \"\"; }\n\n.fa-reddit-square:before {\n  content: \"\"; }\n\n.fa-stumbleupon-circle:before {\n  content: \"\"; }\n\n.fa-stumbleupon:before {\n  content: \"\"; }\n\n.fa-delicious:before {\n  content: \"\"; }\n\n.fa-digg:before {\n  content: \"\"; }\n\n.fa-pied-piper-pp:before {\n  content: \"\"; }\n\n.fa-pied-piper-alt:before {\n  content: \"\"; }\n\n.fa-drupal:before {\n  content: \"\"; }\n\n.fa-joomla:before {\n  content: \"\"; }\n\n.fa-language:before {\n  content: \"\"; }\n\n.fa-fax:before {\n  content: \"\"; }\n\n.fa-building:before {\n  content: \"\"; }\n\n.fa-child:before {\n  content: \"\"; }\n\n.fa-paw:before {\n  content: \"\"; }\n\n.fa-spoon:before {\n  content: \"\"; }\n\n.fa-cube:before {\n  content: \"\"; }\n\n.fa-cubes:before {\n  content: \"\"; }\n\n.fa-behance:before {\n  content: \"\"; }\n\n.fa-behance-square:before {\n  content: \"\"; }\n\n.fa-steam:before {\n  content: \"\"; }\n\n.fa-steam-square:before {\n  content: \"\"; }\n\n.fa-recycle:before {\n  content: \"\"; }\n\n.fa-automobile:before,\n.fa-car:before {\n  content: \"\"; }\n\n.fa-cab:before,\n.fa-taxi:before {\n  content: \"\"; }\n\n.fa-tree:before {\n  content: \"\"; }\n\n.fa-spotify:before {\n  content: \"\"; }\n\n.fa-deviantart:before {\n  content: \"\"; }\n\n.fa-soundcloud:before {\n  content: \"\"; }\n\n.fa-database:before {\n  content: \"\"; }\n\n.fa-file-pdf-o:before {\n  content: \"\"; }\n\n.fa-file-word-o:before {\n  content: \"\"; }\n\n.fa-file-excel-o:before {\n  content: \"\"; }\n\n.fa-file-powerpoint-o:before {\n  content: \"\"; }\n\n.fa-file-photo-o:before,\n.fa-file-picture-o:before,\n.fa-file-image-o:before {\n  content: \"\"; }\n\n.fa-file-zip-o:before,\n.fa-file-archive-o:before {\n  content: \"\"; }\n\n.fa-file-sound-o:before,\n.fa-file-audio-o:before {\n  content: \"\"; }\n\n.fa-file-movie-o:before,\n.fa-file-video-o:before {\n  content: \"\"; }\n\n.fa-file-code-o:before {\n  content: \"\"; }\n\n.fa-vine:before {\n  content: \"\"; }\n\n.fa-codepen:before {\n  content: \"\"; }\n\n.fa-jsfiddle:before {\n  content: \"\"; }\n\n.fa-life-bouy:before,\n.fa-life-buoy:before,\n.fa-life-saver:before,\n.fa-support:before,\n.fa-life-ring:before {\n  content: \"\"; }\n\n.fa-circle-o-notch:before {\n  content: \"\"; }\n\n.fa-ra:before,\n.fa-resistance:before,\n.fa-rebel:before {\n  content: \"\"; }\n\n.fa-ge:before,\n.fa-empire:before {\n  content: \"\"; }\n\n.fa-git-square:before {\n  content: \"\"; }\n\n.fa-git:before {\n  content: \"\"; }\n\n.fa-y-combinator-square:before,\n.fa-yc-square:before,\n.fa-hacker-news:before {\n  content: \"\"; }\n\n.fa-tencent-weibo:before {\n  content: \"\"; }\n\n.fa-qq:before {\n  content: \"\"; }\n\n.fa-wechat:before,\n.fa-weixin:before {\n  content: \"\"; }\n\n.fa-send:before,\n.fa-paper-plane:before {\n  content: \"\"; }\n\n.fa-send-o:before,\n.fa-paper-plane-o:before {\n  content: \"\"; }\n\n.fa-history:before {\n  content: \"\"; }\n\n.fa-circle-thin:before {\n  content: \"\"; }\n\n.fa-header:before {\n  content: \"\"; }\n\n.fa-paragraph:before {\n  content: \"\"; }\n\n.fa-sliders:before {\n  content: \"\"; }\n\n.fa-share-alt:before {\n  content: \"\"; }\n\n.fa-share-alt-square:before {\n  content: \"\"; }\n\n.fa-bomb:before {\n  content: \"\"; }\n\n.fa-soccer-ball-o:before,\n.fa-futbol-o:before {\n  content: \"\"; }\n\n.fa-tty:before {\n  content: \"\"; }\n\n.fa-binoculars:before {\n  content: \"\"; }\n\n.fa-plug:before {\n  content: \"\"; }\n\n.fa-slideshare:before {\n  content: \"\"; }\n\n.fa-twitch:before {\n  content: \"\"; }\n\n.fa-yelp:before {\n  content: \"\"; }\n\n.fa-newspaper-o:before {\n  content: \"\"; }\n\n.fa-wifi:before {\n  content: \"\"; }\n\n.fa-calculator:before {\n  content: \"\"; }\n\n.fa-paypal:before {\n  content: \"\"; }\n\n.fa-google-wallet:before {\n  content: \"\"; }\n\n.fa-cc-visa:before {\n  content: \"\"; }\n\n.fa-cc-mastercard:before {\n  content: \"\"; }\n\n.fa-cc-discover:before {\n  content: \"\"; }\n\n.fa-cc-amex:before {\n  content: \"\"; }\n\n.fa-cc-paypal:before {\n  content: \"\"; }\n\n.fa-cc-stripe:before {\n  content: \"\"; }\n\n.fa-bell-slash:before {\n  content: \"\"; }\n\n.fa-bell-slash-o:before {\n  content: \"\"; }\n\n.fa-trash:before {\n  content: \"\"; }\n\n.fa-copyright:before {\n  content: \"\"; }\n\n.fa-at:before {\n  content: \"\"; }\n\n.fa-eyedropper:before {\n  content: \"\"; }\n\n.fa-paint-brush:before {\n  content: \"\"; }\n\n.fa-birthday-cake:before {\n  content: \"\"; }\n\n.fa-area-chart:before {\n  content: \"\"; }\n\n.fa-pie-chart:before {\n  content: \"\"; }\n\n.fa-line-chart:before {\n  content: \"\"; }\n\n.fa-lastfm:before {\n  content: \"\"; }\n\n.fa-lastfm-square:before {\n  content: \"\"; }\n\n.fa-toggle-off:before {\n  content: \"\"; }\n\n.fa-toggle-on:before {\n  content: \"\"; }\n\n.fa-bicycle:before {\n  content: \"\"; }\n\n.fa-bus:before {\n  content: \"\"; }\n\n.fa-ioxhost:before {\n  content: \"\"; }\n\n.fa-angellist:before {\n  content: \"\"; }\n\n.fa-cc:before {\n  content: \"\"; }\n\n.fa-shekel:before,\n.fa-sheqel:before,\n.fa-ils:before {\n  content: \"\"; }\n\n.fa-meanpath:before {\n  content: \"\"; }\n\n.fa-buysellads:before {\n  content: \"\"; }\n\n.fa-connectdevelop:before {\n  content: \"\"; }\n\n.fa-dashcube:before {\n  content: \"\"; }\n\n.fa-forumbee:before {\n  content: \"\"; }\n\n.fa-leanpub:before {\n  content: \"\"; }\n\n.fa-sellsy:before {\n  content: \"\"; }\n\n.fa-shirtsinbulk:before {\n  content: \"\"; }\n\n.fa-simplybuilt:before {\n  content: \"\"; }\n\n.fa-skyatlas:before {\n  content: \"\"; }\n\n.fa-cart-plus:before {\n  content: \"\"; }\n\n.fa-cart-arrow-down:before {\n  content: \"\"; }\n\n.fa-diamond:before {\n  content: \"\"; }\n\n.fa-ship:before {\n  content: \"\"; }\n\n.fa-user-secret:before {\n  content: \"\"; }\n\n.fa-motorcycle:before {\n  content: \"\"; }\n\n.fa-street-view:before {\n  content: \"\"; }\n\n.fa-heartbeat:before {\n  content: \"\"; }\n\n.fa-venus:before {\n  content: \"\"; }\n\n.fa-mars:before {\n  content: \"\"; }\n\n.fa-mercury:before {\n  content: \"\"; }\n\n.fa-intersex:before,\n.fa-transgender:before {\n  content: \"\"; }\n\n.fa-transgender-alt:before {\n  content: \"\"; }\n\n.fa-venus-double:before {\n  content: \"\"; }\n\n.fa-mars-double:before {\n  content: \"\"; }\n\n.fa-venus-mars:before {\n  content: \"\"; }\n\n.fa-mars-stroke:before {\n  content: \"\"; }\n\n.fa-mars-stroke-v:before {\n  content: \"\"; }\n\n.fa-mars-stroke-h:before {\n  content: \"\"; }\n\n.fa-neuter:before {\n  content: \"\"; }\n\n.fa-genderless:before {\n  content: \"\"; }\n\n.fa-facebook-official:before {\n  content: \"\"; }\n\n.fa-pinterest-p:before {\n  content: \"\"; }\n\n.fa-whatsapp:before {\n  content: \"\"; }\n\n.fa-server:before {\n  content: \"\"; }\n\n.fa-user-plus:before {\n  content: \"\"; }\n\n.fa-user-times:before {\n  content: \"\"; }\n\n.fa-hotel:before,\n.fa-bed:before {\n  content: \"\"; }\n\n.fa-viacoin:before {\n  content: \"\"; }\n\n.fa-train:before {\n  content: \"\"; }\n\n.fa-subway:before {\n  content: \"\"; }\n\n.fa-medium:before {\n  content: \"\"; }\n\n.fa-yc:before,\n.fa-y-combinator:before {\n  content: \"\"; }\n\n.fa-optin-monster:before {\n  content: \"\"; }\n\n.fa-opencart:before {\n  content: \"\"; }\n\n.fa-expeditedssl:before {\n  content: \"\"; }\n\n.fa-battery-4:before,\n.fa-battery:before,\n.fa-battery-full:before {\n  content: \"\"; }\n\n.fa-battery-3:before,\n.fa-battery-three-quarters:before {\n  content: \"\"; }\n\n.fa-battery-2:before,\n.fa-battery-half:before {\n  content: \"\"; }\n\n.fa-battery-1:before,\n.fa-battery-quarter:before {\n  content: \"\"; }\n\n.fa-battery-0:before,\n.fa-battery-empty:before {\n  content: \"\"; }\n\n.fa-mouse-pointer:before {\n  content: \"\"; }\n\n.fa-i-cursor:before {\n  content: \"\"; }\n\n.fa-object-group:before {\n  content: \"\"; }\n\n.fa-object-ungroup:before {\n  content: \"\"; }\n\n.fa-sticky-note:before {\n  content: \"\"; }\n\n.fa-sticky-note-o:before {\n  content: \"\"; }\n\n.fa-cc-jcb:before {\n  content: \"\"; }\n\n.fa-cc-diners-club:before {\n  content: \"\"; }\n\n.fa-clone:before {\n  content: \"\"; }\n\n.fa-balance-scale:before {\n  content: \"\"; }\n\n.fa-hourglass-o:before {\n  content: \"\"; }\n\n.fa-hourglass-1:before,\n.fa-hourglass-start:before {\n  content: \"\"; }\n\n.fa-hourglass-2:before,\n.fa-hourglass-half:before {\n  content: \"\"; }\n\n.fa-hourglass-3:before,\n.fa-hourglass-end:before {\n  content: \"\"; }\n\n.fa-hourglass:before {\n  content: \"\"; }\n\n.fa-hand-grab-o:before,\n.fa-hand-rock-o:before {\n  content: \"\"; }\n\n.fa-hand-stop-o:before,\n.fa-hand-paper-o:before {\n  content: \"\"; }\n\n.fa-hand-scissors-o:before {\n  content: \"\"; }\n\n.fa-hand-lizard-o:before {\n  content: \"\"; }\n\n.fa-hand-spock-o:before {\n  content: \"\"; }\n\n.fa-hand-pointer-o:before {\n  content: \"\"; }\n\n.fa-hand-peace-o:before {\n  content: \"\"; }\n\n.fa-trademark:before {\n  content: \"\"; }\n\n.fa-registered:before {\n  content: \"\"; }\n\n.fa-creative-commons:before {\n  content: \"\"; }\n\n.fa-gg:before {\n  content: \"\"; }\n\n.fa-gg-circle:before {\n  content: \"\"; }\n\n.fa-tripadvisor:before {\n  content: \"\"; }\n\n.fa-odnoklassniki:before {\n  content: \"\"; }\n\n.fa-odnoklassniki-square:before {\n  content: \"\"; }\n\n.fa-get-pocket:before {\n  content: \"\"; }\n\n.fa-wikipedia-w:before {\n  content: \"\"; }\n\n.fa-safari:before {\n  content: \"\"; }\n\n.fa-chrome:before {\n  content: \"\"; }\n\n.fa-firefox:before {\n  content: \"\"; }\n\n.fa-opera:before {\n  content: \"\"; }\n\n.fa-internet-explorer:before {\n  content: \"\"; }\n\n.fa-tv:before,\n.fa-television:before {\n  content: \"\"; }\n\n.fa-contao:before {\n  content: \"\"; }\n\n.fa-500px:before {\n  content: \"\"; }\n\n.fa-amazon:before {\n  content: \"\"; }\n\n.fa-calendar-plus-o:before {\n  content: \"\"; }\n\n.fa-calendar-minus-o:before {\n  content: \"\"; }\n\n.fa-calendar-times-o:before {\n  content: \"\"; }\n\n.fa-calendar-check-o:before {\n  content: \"\"; }\n\n.fa-industry:before {\n  content: \"\"; }\n\n.fa-map-pin:before {\n  content: \"\"; }\n\n.fa-map-signs:before {\n  content: \"\"; }\n\n.fa-map-o:before {\n  content: \"\"; }\n\n.fa-map:before {\n  content: \"\"; }\n\n.fa-commenting:before {\n  content: \"\"; }\n\n.fa-commenting-o:before {\n  content: \"\"; }\n\n.fa-houzz:before {\n  content: \"\"; }\n\n.fa-vimeo:before {\n  content: \"\"; }\n\n.fa-black-tie:before {\n  content: \"\"; }\n\n.fa-fonticons:before {\n  content: \"\"; }\n\n.fa-reddit-alien:before {\n  content: \"\"; }\n\n.fa-edge:before {\n  content: \"\"; }\n\n.fa-credit-card-alt:before {\n  content: \"\"; }\n\n.fa-codiepie:before {\n  content: \"\"; }\n\n.fa-modx:before {\n  content: \"\"; }\n\n.fa-fort-awesome:before {\n  content: \"\"; }\n\n.fa-usb:before {\n  content: \"\"; }\n\n.fa-product-hunt:before {\n  content: \"\"; }\n\n.fa-mixcloud:before {\n  content: \"\"; }\n\n.fa-scribd:before {\n  content: \"\"; }\n\n.fa-pause-circle:before {\n  content: \"\"; }\n\n.fa-pause-circle-o:before {\n  content: \"\"; }\n\n.fa-stop-circle:before {\n  content: \"\"; }\n\n.fa-stop-circle-o:before {\n  content: \"\"; }\n\n.fa-shopping-bag:before {\n  content: \"\"; }\n\n.fa-shopping-basket:before {\n  content: \"\"; }\n\n.fa-hashtag:before {\n  content: \"\"; }\n\n.fa-bluetooth:before {\n  content: \"\"; }\n\n.fa-bluetooth-b:before {\n  content: \"\"; }\n\n.fa-percent:before {\n  content: \"\"; }\n\n.fa-gitlab:before {\n  content: \"\"; }\n\n.fa-wpbeginner:before {\n  content: \"\"; }\n\n.fa-wpforms:before {\n  content: \"\"; }\n\n.fa-envira:before {\n  content: \"\"; }\n\n.fa-universal-access:before {\n  content: \"\"; }\n\n.fa-wheelchair-alt:before {\n  content: \"\"; }\n\n.fa-question-circle-o:before {\n  content: \"\"; }\n\n.fa-blind:before {\n  content: \"\"; }\n\n.fa-audio-description:before {\n  content: \"\"; }\n\n.fa-volume-control-phone:before {\n  content: \"\"; }\n\n.fa-braille:before {\n  content: \"\"; }\n\n.fa-assistive-listening-systems:before {\n  content: \"\"; }\n\n.fa-asl-interpreting:before,\n.fa-american-sign-language-interpreting:before {\n  content: \"\"; }\n\n.fa-deafness:before,\n.fa-hard-of-hearing:before,\n.fa-deaf:before {\n  content: \"\"; }\n\n.fa-glide:before {\n  content: \"\"; }\n\n.fa-glide-g:before {\n  content: \"\"; }\n\n.fa-signing:before,\n.fa-sign-language:before {\n  content: \"\"; }\n\n.fa-low-vision:before {\n  content: \"\"; }\n\n.fa-viadeo:before {\n  content: \"\"; }\n\n.fa-viadeo-square:before {\n  content: \"\"; }\n\n.fa-snapchat:before {\n  content: \"\"; }\n\n.fa-snapchat-ghost:before {\n  content: \"\"; }\n\n.fa-snapchat-square:before {\n  content: \"\"; }\n\n.fa-pied-piper:before {\n  content: \"\"; }\n\n.fa-first-order:before {\n  content: \"\"; }\n\n.fa-yoast:before {\n  content: \"\"; }\n\n.fa-themeisle:before {\n  content: \"\"; }\n\n.fa-google-plus-circle:before,\n.fa-google-plus-official:before {\n  content: \"\"; }\n\n.fa-fa:before,\n.fa-font-awesome:before {\n  content: \"\"; }\n\n.fa-handshake-o:before {\n  content: \"\"; }\n\n.fa-envelope-open:before {\n  content: \"\"; }\n\n.fa-envelope-open-o:before {\n  content: \"\"; }\n\n.fa-linode:before {\n  content: \"\"; }\n\n.fa-address-book:before {\n  content: \"\"; }\n\n.fa-address-book-o:before {\n  content: \"\"; }\n\n.fa-vcard:before,\n.fa-address-card:before {\n  content: \"\"; }\n\n.fa-vcard-o:before,\n.fa-address-card-o:before {\n  content: \"\"; }\n\n.fa-user-circle:before {\n  content: \"\"; }\n\n.fa-user-circle-o:before {\n  content: \"\"; }\n\n.fa-user-o:before {\n  content: \"\"; }\n\n.fa-id-badge:before {\n  content: \"\"; }\n\n.fa-drivers-license:before,\n.fa-id-card:before {\n  content: \"\"; }\n\n.fa-drivers-license-o:before,\n.fa-id-card-o:before {\n  content: \"\"; }\n\n.fa-quora:before {\n  content: \"\"; }\n\n.fa-free-code-camp:before {\n  content: \"\"; }\n\n.fa-telegram:before {\n  content: \"\"; }\n\n.fa-thermometer-4:before,\n.fa-thermometer:before,\n.fa-thermometer-full:before {\n  content: \"\"; }\n\n.fa-thermometer-3:before,\n.fa-thermometer-three-quarters:before {\n  content: \"\"; }\n\n.fa-thermometer-2:before,\n.fa-thermometer-half:before {\n  content: \"\"; }\n\n.fa-thermometer-1:before,\n.fa-thermometer-quarter:before {\n  content: \"\"; }\n\n.fa-thermometer-0:before,\n.fa-thermometer-empty:before {\n  content: \"\"; }\n\n.fa-shower:before {\n  content: \"\"; }\n\n.fa-bathtub:before,\n.fa-s15:before,\n.fa-bath:before {\n  content: \"\"; }\n\n.fa-podcast:before {\n  content: \"\"; }\n\n.fa-window-maximize:before {\n  content: \"\"; }\n\n.fa-window-minimize:before {\n  content: \"\"; }\n\n.fa-window-restore:before {\n  content: \"\"; }\n\n.fa-times-rectangle:before,\n.fa-window-close:before {\n  content: \"\"; }\n\n.fa-times-rectangle-o:before,\n.fa-window-close-o:before {\n  content: \"\"; }\n\n.fa-bandcamp:before {\n  content: \"\"; }\n\n.fa-grav:before {\n  content: \"\"; }\n\n.fa-etsy:before {\n  content: \"\"; }\n\n.fa-imdb:before {\n  content: \"\"; }\n\n.fa-ravelry:before {\n  content: \"\"; }\n\n.fa-eercast:before {\n  content: \"\"; }\n\n.fa-microchip:before {\n  content: \"\"; }\n\n.fa-snowflake-o:before {\n  content: \"\"; }\n\n.fa-superpowers:before {\n  content: \"\"; }\n\n.fa-wpexplorer:before {\n  content: \"\"; }\n\n.fa-meetup:before {\n  content: \"\"; }\n\n.sr-only {\n  position: absolute;\n  width: 1px;\n  height: 1px;\n  padding: 0;\n  margin: -1px;\n  overflow: hidden;\n  clip: rect(0, 0, 0, 0);\n  border: 0; }\n\n.sr-only-focusable:active, .sr-only-focusable:focus {\n  position: static;\n  width: auto;\n  height: auto;\n  margin: 0;\n  overflow: visible;\n  clip: auto; }\n"
+
+/***/ }),
+
+/***/ 73:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+class ErrorParser {
+    handleError(error) {
+        let err = {};
+        console.log('error in parser: ', error);
+        if (error.status === 401) {
+            err = {
+                status: error.status,
+                message: `${error.statusText}/expired token - please login again`,
+                forceLogout: true
+            };
+        }
+        else if (error.statusText) {
+            err = {
+                status: `${error.status} - ${error.statusText}`,
+                message: error.error.message,
+            };
+        }
+        else {
+            err = {
+                status: error.status,
+                message: error.message
+            };
+        }
+        throw err;
+    }
+}
+exports.ErrorParser = ErrorParser;
+
 
 /***/ }),
 
@@ -24791,7 +24764,7 @@ module.exports = "data:application/font-woff;base64,bW9kdWxlLmV4cG9ydHMgPSBfX3dl
 
 /***/ }),
 
-/***/ 85:
+/***/ 84:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -24846,4 +24819,4 @@ exports.AuthGuardService = AuthGuardService;
 /***/ })
 
 },[650]);
-//# sourceMappingURL=app.196fc61dc51061308752.js.map
+//# sourceMappingURL=app.57fec992a9e336d570ba.js.map

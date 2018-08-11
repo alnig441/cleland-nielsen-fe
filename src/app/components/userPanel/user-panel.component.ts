@@ -48,7 +48,7 @@ export class UserPanelComponent implements OnInit {
     done(user: UserModel): void {
 
         if(this.userUpdated){
-            this.userService.editItem(user)
+            this.userService.editRecord(user)
         }
 
         this.doEdit = {};
@@ -57,7 +57,7 @@ export class UserPanelComponent implements OnInit {
 
     delete(user_id: string): void {
 
-        this.userService.deleteItem(user_id)
+        this.userService.deleteRecord(user_id)
 
     }
 

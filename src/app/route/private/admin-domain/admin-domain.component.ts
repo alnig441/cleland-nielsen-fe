@@ -1,11 +1,8 @@
-import { Component, OnInit, ViewEncapsulation } from "@angular/core";
+import { Component, DoCheck, OnInit, ViewEncapsulation } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { UserServices } from "../../../services/user.services";
 import { AccountServices } from "../../../services/account.services";
 import { PermissionServices } from "../../../services/permission.services";
-import { UserModel } from "../../../models/user.model";
-import { AccountModel } from "../../../models/account.model";
-import { PermissionModel } from "../../../models/permission.model";
 import { ServiceFormManagerService } from "../../../services/service-form-manager.service";
 import { SetMessageService } from "../../../services/setMessage.service";
 import { HttpAuthService } from "../../../services/httpAuth.service";
@@ -17,17 +14,31 @@ import { HttpAuthService } from "../../../services/httpAuth.service";
     encapsulation: ViewEncapsulation.None
 })
 
-export class AdminDomainComponent implements OnInit {
+export class AdminDomainComponent implements OnInit, DoCheck {
 
-    private itemForm: any;
+    private recordModel: any;
 
     constructor( private formManager: ServiceFormManagerService, private setMessage: SetMessageService, private activeUser: HttpAuthService, private users: UserServices, private accounts: AccountServices, private permissions: PermissionServices, private http: HttpClient) {}
 
     ngOnInit(): void {
-        console.log('admin-domain component initialised');
+        this.permissions.getAll()
+        this.accounts.getAll()
+        this.users.getAll()
+    }
+
+    ngDoCheck(): void {
+        if(this.formManager.getService()){
+            this.recordModel = this.formManager.getRecordModel();
+        }
     }
 
     filter(): void{
         console.log(`getting list for ${this.formManager.getService()}`);
+    }
+
+    onSubmit(): void {
+        console.log(`adding ${this.formManager.getService()} record `, this.recordModel);
+        this[this.formManager.getService()].addRecord(this.recordModel);
+        this.recordModel = this.formManager.getRecordModel();
     }
 }

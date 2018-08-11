@@ -58,7 +58,7 @@ export class PermissionServices {
 
     }
 
-    addItem(form: PermissionModel): Promise<any> {
+    addRecord(form: PermissionModel): Promise<any> {
         if(!this.activeUser.isPermitted['to_add_permissions']) {
             this.message.set({ status: 405, message: 'insufficient permissions'});
         }
@@ -77,7 +77,7 @@ export class PermissionServices {
         }
     }
 
-    deleteItem(permission_id: string): Promise<any> {
+    deleteRecord(permission_id: string): Promise<any> {
 
         if(!this.activeUser.isPermitted['to_delete_permissions']){
             this.message.set({ status: 405, message: 'insufficient permissions'});
@@ -96,7 +96,7 @@ export class PermissionServices {
         }
     }
 
-    editItem(): Promise<any> {
+    editRecord(): Promise<any> {
         if(!this.activeUser.isPermitted['to_edit_permissions']){
             this.message.set({ status: 405, message: 'insufficient permissions'});
         }

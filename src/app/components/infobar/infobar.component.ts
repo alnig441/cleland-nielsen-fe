@@ -16,23 +16,25 @@ import { ServiceFormManagerService } from "../../services/service-form-manager.s
 
 export class InfobarComponent implements OnInit, DoCheck {
 
-    itemForm: any;
+    recordModel: any;
 
     constructor(private formManager: ServiceFormManagerService, private users: UserServices, private accounts: AccountServices, private permissions: PermissionServices, private activeUser: HttpAuthService) {}
 
     ngOnInit(): void {
-        this.itemForm = {};
+        this.recordModel = {};
+        console.log('')
     }
 
     ngDoCheck(): void {
         if(this.formManager.getService()){
-            this.itemForm = this.formManager.getItemForm();
+            this.recordModel = this.formManager.getRecordModel();
         }
     }
 
     onSubmit(): void {
-        this[this.formManager.getService()].addItem(this.itemForm)
-
+        console.log(`adding ${this.formManager.getService()} record `, this.recordModel);
+        this[this.formManager.getService()].addRecord(this.recordModel);
+        this.recordModel = this.formManager.getRecordModel();
     }
 
 

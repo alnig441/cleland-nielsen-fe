@@ -23,12 +23,12 @@ export class AccountsPanelComponent implements OnInit {
     constructor(private compInit: CompInitService, private activeUser: HttpAuthService, private accountService: AccountServices, private permissionService: PermissionServices) {}
 
     ngOnInit(): void {
-        if(this.activeUser.isPermitted['to_view_accounts']){
-            this.compInit.initialize('accounts')
-                .then((result: any) => {
-                    console.log('account panel comp init ', result);
-                })
-        }
+        // if(this.activeUser.isPermitted['to_view_accounts']){
+        //     this.compInit.initialize('accounts')
+        //         .then((result: any) => {
+        //             console.log('account panel comp init ', result);
+        //         })
+        // }
     }
 
     edit(account: any, i: any) :void {
@@ -64,13 +64,13 @@ export class AccountsPanelComponent implements OnInit {
         this.tempPlaceholder = 'add permission';
 
         if(this.accountUpdated){
-            this.accountService.editItem(account)
+            this.accountService.editRecord(account)
         }
 
         this.accountUpdated = false;
     }
 
     delete(account_id: any, i?: any): void {
-        this.accountService.deleteItem(account_id)
+        this.accountService.deleteRecord(account_id)
     }
 }

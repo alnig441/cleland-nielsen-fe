@@ -25,7 +25,7 @@ export class PermissionsPanelComponent implements OnInit {
 
     delete(permission_id: string): void {
         console.log(`deleting: `, permission_id);
-        this.permissionService.deleteItem(permission_id)
+        this.permissionService.deleteRecord(permission_id)
         }
 
 }

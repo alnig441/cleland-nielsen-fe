@@ -2,10 +2,41 @@
     ul(class='list-group box-shadow' style='border: 1px, solid, black')
         li(class='list-group-item')
             a((click)='this.filter()') filter
-    //app-sidebar
 .col-sm-8
-    app-messagebar
+    div(*ngIf="this.setMessage.response.failure" class="panel panel-warning")
+        div(class="panel-heading") status: {{ this.setMessage.response.failure.status }}
+        div(class="panel-body") message: {{ this.setMessage.response.failure.message }}
+    div(*ngIf="this.setMessage.response.success" class="panel panel-success")
+        div(class="panel-heading") status: {{ this.setMessage.response.success.status }}
+        div(class="panel-body") message: {{ this.setMessage.response.success.message }}
     router-outlet
-    //app-permissions-panel
 .col-sm-2
-    app-infobar
+    span(*ngIf="this.activeUser.isPermitted['to_add_'+ this.formManager.getService()] && this.formManager.getService() !='images'")
+        form(#addrecordModel="ngForm" class="panel panel-default box-shadow")
+            div(class="panel-heading")
+                h3(class="panel-title") add {{this.formManager.getService()}}
+            div(class="panel-body")
+                div(*ngFor="let property of this.formManager.getProperties(); index as i",class="input-group input-group-sm")
+                    div(*ngIf="property != 'account_permissions' && property !='language' && property != 'account_type' && property.slice(-3) != '_id'" class="input-group-btn" style="")
+                        span(class='input-group-addon btn-info', id='{{property}}') Enter
+                    div(*ngIf="this.formManager.getService() == 'users' && property =='account_type'", class="input-group-btn" style="")
+                        button(type="button" class="btn btn-info dropdown-toggle", data-toggle="dropdown" aria-haspopup="true", aria-expanded="false") Select
+                            span(class="caret")
+                        ul(class="dropdown-menu")
+                            li(*ngFor="let account of this.accounts.accounts as accounts; index as j")
+                                a((click)="this.recordModel[property] = account.account_id") {{account.account_name}}
+                    div(*ngIf="this.formManager.getService() =='users' && property =='language'", class="input-group-btn" style="")
+                        button(type="button" class="btn btn-info dropdown-toggle", data-toggle="dropdown" aria-haspopup="true", aria-expanded="false") Select
+                            span(class="caret")
+                        ul(class="dropdown-menu")
+                            li(*ngFor="let language of this.formManager.getLanguages() as languages; index as k")
+                                a((click)="this.recordModel[property] = language.language") {{language.language}}
+                    div(*ngIf="this.formManager.getService() =='accounts' && property =='account_permissions'", class="input-group-btn" style="")
+                        button(type="button" class="btn btn-info dropdown-toggle", data-toggle="dropdown" aria-haspopup="true", aria-expanded="false") Select
+                            span(class="caret")
+                        ul(class="dropdown-menu")
+                            li(*ngFor="let permission of this.permissions.permissions as permissions; index as l")
+                                a((click)="this.recordModel[property].push(permission.permission_id)") {{permission.permission_name}}
+                    input(*ngIf="property.slice(-3) != '_id'" class="form-control" type="text", placeholder="{{property}}", [(ngModel)]="this.recordModel[property]" name="{{property}}")
+            div((click)="onSubmit()" class="panel-footer done-edit") submit
+    //app-infobar

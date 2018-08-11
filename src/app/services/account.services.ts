@@ -60,7 +60,7 @@ export class AccountServices {
 
     }
 
-    addItem(form: AccountModel): Promise<any> {
+    addRecord(form: AccountModel): Promise<any> {
         if(!this.activeUser.isPermitted['to_add_accounts']) {
             this.message.set({ status: 405, message: 'insufficient permissions'});
         }
@@ -79,7 +79,7 @@ export class AccountServices {
         }
     }
 
-    deleteItem(account_id: string): Promise<any> {
+    deleteRecord(account_id: string): Promise<any> {
 
         if(!this.activeUser.isPermitted['to_delete_accounts']){
             this.message.set({ status: 405, message: 'insufficient permissions'});
@@ -98,7 +98,7 @@ export class AccountServices {
         }
     }
 
-    editItem(account: AccountModel): Promise<any> {
+    editRecord(account: AccountModel): Promise<any> {
         if(!this.activeUser.isPermitted['to_edit_accounts']){
             this.message.set({ status: 405, message: 'insufficient permissions'});
         }

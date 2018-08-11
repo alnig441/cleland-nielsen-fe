@@ -69,7 +69,7 @@ export class ImageServices {
 
     }
 
-    addItem(): Promise<any> {
+    addRecord(): Promise<any> {
         if(!this.activeUser.isPermitted['to_add_images']){
             this.message.set({ status: 405, message: 'insufficient permissions'});
         }
@@ -78,7 +78,7 @@ export class ImageServices {
         }
     }
 
-    deleteItem(): Promise<any> {
+    deleteRecord(): Promise<any> {
         if(!this.activeUser.isPermitted['to_delete_images']){
             this.message.set({ status: 405, message: 'insufficient permissions'});
         }
@@ -87,7 +87,7 @@ export class ImageServices {
         }
     }
 
-    editItem(): Promise<any> {
+    editRecord(): Promise<any> {
         if(!this.activeUser.isPermitted['to_edit_images']){
             this.message.set({ status: 405, message: 'insufficient permissions'});
         }

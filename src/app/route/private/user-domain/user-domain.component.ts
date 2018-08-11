@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation } from "@angular/core";
+import { Component, DoCheck, OnInit, ViewEncapsulation } from "@angular/core";
 import { HttpAuthService } from "../../../services/httpAuth.service";
 import { SetMessageService } from "../../../services/setMessage.service";
 import { ServiceFormManagerService } from "../../../services/service-form-manager.service";
@@ -10,15 +10,20 @@ import { ImageServices } from "../../../services/image.services";
     encapsulation: ViewEncapsulation.None
 })
 
-export class UserDomainComponent implements OnInit {
+export class UserDomainComponent implements OnInit, DoCheck {
 
-    private itemForm: any;
+    private recordModel: any;
 
     constructor(private activeUser: HttpAuthService, private setMessage: SetMessageService, private formManager: ServiceFormManagerService, private images: ImageServices){}
 
     ngOnInit(): void {
-        console.log('user-domain comp initialized');
-        this.itemForm = {};
+        this.images.getAll();
+    }
+
+    ngDoCheck(): void {
+        if(this.formManager.getService()){
+            this.recordModel = this.formManager.getRecordModel();
+        }
     }
 
     getLatest() {
