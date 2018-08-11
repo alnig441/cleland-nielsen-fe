@@ -1,3 +1,31 @@
-app-accounts-panel
+//app-accounts-panel
+span(*ngIf="!this.accountService.message.failure")
+    div(*ngFor="let account of this.accountService.accounts as accounts; index as i")
+        div(class="col-sm-6 col-md-4")
+            form(#editAccountForm="ngForm", id="{{account.account_id}}" class="box-shadow panel panel-info")
+                div(class="panel-heading")
+                    h3(class="panel-title") {{account.account_name}}
+                div(class="panel-body")
+                    div(class="input-group input-group-sm")
+                        span(class="input-group-addon") Id
+                        input(class="form-control" type="text", placeholder="{{account.account_id}}", disabled)
+                    div(*ngFor="let permission of account.account_permissions; index as j", class="input-group input-group-sm")
+                        span(class="input-group-btn")
+                            button((click)="revokePermission(permission, i)", [attr.disabled]="this.doEdit[account.account_name] == true ? null : true" class="btn btn-info" type="button") Revoke
+                        input(class="form-control" type="text", placeholder="{{permission | uuidTransform: this.permissionService.permissions}}", disabled)
+                    div(*ngIf="account.account_permissions.length < this.permissionService.permissions.length", class="input-group input-group-sm")
+                        div(class="input-group-btn" style="" disabled)
+                            button([attr.disabled]="this.doEdit[account.account_name] == true ? null : true", type="button" class="btn btn-info dropdown-toggle", data-toggle="dropdown" aria-haspopup="true", aria-expanded="false", ) Grant
+                                span(class="caret")
+                            ul(class="dropdown-menu")
+                                li(*ngFor="let permission of this.permissionService.permissions as permissions; index as j", id="{{permission.permission_id}}")
+                                    a(*ngIf="j == this.permissionService.permissions.length -1", (click)="grantPermission('all', i)") all permissions
+                                    a(*ngIf="validator.validateList(this.accountService.accounts[i].account_permissions, permission.permission_id)", (click)="grantPermission(permission.permission_id, i)") {{permission.permission_name}}
+
+                        input(class="form-control" type="text" placeholder="{{this.tempPlaceholder}}")
+
+                div(*ngIf="!this.doEdit[account.account_name]", (click)="this.edit(this.account, i)", class="panel-footer", [attr.disabled]="this.doEdit[account.account_name] == true ? null : true || this.account.account_name == 'administrator' ? null: true ") edit
+                div(*ngIf="this.doEdit[account.account_name]",(click)="this.done(this.account, i)", class="panel-footer done-edit", [attr.disabled]="!this.doEdit[account.account_name] == true ? null : true") done
+                div(*ngIf="!this.doEdit[account.account_name]",(click)="this.delete(this.account.account_id, i)", class="panel-footer", [attr.disabled]="this.doEdit[account.account_name] == true ? null : true || this.account.account_name == 'administrator' ? null: true ") delete
 
 

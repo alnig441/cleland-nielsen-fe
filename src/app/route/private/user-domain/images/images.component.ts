@@ -4,8 +4,8 @@ import { HttpAuthService } from "../../../../services/httpAuth.service";
 import { ImageModel } from "../../../../models/image.model";
 import { ErrorParser } from "../../../../services/errorParser";
 import { CompInitService } from "../../../../services/comp-init.service";
-import {ServiceFormManagerService} from "../../../../services/service-form-manager.service";
-import {ActivatedRoute} from "@angular/router";
+import { ServiceFormManagerService } from "../../../../services/service-form-manager.service";
+import { ActivatedRoute } from "@angular/router";
 
 @Component({
     selector: 'app-images',

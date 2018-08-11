@@ -26,4 +26,8 @@ export class AdminDomainComponent implements OnInit {
     ngOnInit(): void {
         console.log('admin-domain component initialised');
     }
+
+    filter(): void{
+        console.log(`getting list for ${this.formManager.getService()}`);
+    }
 }

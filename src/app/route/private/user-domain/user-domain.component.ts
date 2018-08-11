@@ -19,8 +19,6 @@ export class UserDomainComponent implements OnInit {
     ngOnInit(): void {
         console.log('user-domain comp initialized');
         this.itemForm = {};
-        // this.formManager.setService('images');
-        // this.itemForm = this.formManager.getItemForm();
     }
 
     getLatest() {

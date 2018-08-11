@@ -15,20 +15,43 @@ import { ServiceFormManagerService } from "../../../../services/service-form-man
 
 export class UsersComponent implements OnInit {
 
-    private userForm: UserModel = new UserModel('uuid_generate_v4()');
+    userUpdated: boolean = false;
+    doEdit = {};
 
-    constructor(private urlSnapshot: ServiceFormManagerService, private activatedRoute: ActivatedRoute, private compInit: CompInitService, private activeUser: HttpAuthService, private accountService: AccountServices, private userService: UserServices) {}
+    constructor(private formManager: ServiceFormManagerService, private activatedRoute: ActivatedRoute, private compInit: CompInitService, private activeUser: HttpAuthService, private accountService: AccountServices, private userService: UserServices) {}
 
     ngOnInit(): void {
-        this.urlSnapshot.setService(this.activatedRoute.snapshot.url[0].path);
+        console.log('user comp initialization ... ');
+
+        this.formManager.setService(this.activatedRoute.snapshot.url[0].path);
 
         if(this.activeUser.isPermitted['to_view_users']){
             this.compInit.initialize('accounts')
                 .then((result: any) => {
-                    console.log('user comp init ' + result + ': ', this.activatedRoute.snapshot.url[0].path);
+                    console.log('... accounts loaded: ' + result + ': ', this.activatedRoute.snapshot.url[0].path);
 
                 })
+            this.compInit.initialize('users')
+                .then((result: any) => {
+                    console.log('... users loaded: ', result);
+                })
         }
+    }
+
+    edit(user: UserModel): void {
+
+        this.doEdit[user.user_name] = true;
+
+    }
+
+    done(user: UserModel): void {
+
+        if(this.userUpdated){
+            this.userService.editItem(user)
+        }
+
+        this.doEdit = {};
+        this.userUpdated = false;
     }
 
     delete(user_id: string): void {

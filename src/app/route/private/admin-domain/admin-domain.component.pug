@@ -1,5 +1,8 @@
 .col-sm-2
-    app-sidebar
+    ul(class='list-group box-shadow' style='border: 1px, solid, black')
+        li(class='list-group-item')
+            a((click)='this.filter()') filter
+    //app-sidebar
 .col-sm-8
     app-messagebar
     router-outlet
