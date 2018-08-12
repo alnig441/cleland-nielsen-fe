@@ -6,7 +6,7 @@ import {ImageModel} from "../models/image.model";
 
 @Injectable()
 
-export class ServiceFormManagerService {
+export class ServiceModelManagerService {
 
     private service: string;
     private recordModel: any;
@@ -65,7 +65,7 @@ export class ServiceFormManagerService {
     }
 
     setRecordModelProperty(property: string, value: any) {
-        if(property == 'account_permissions'){
+        if(Array.isArray(this.recordModel[property])){
             this.recordModel[property].push(value);
         }
         else{

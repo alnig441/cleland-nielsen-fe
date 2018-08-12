@@ -5,7 +5,7 @@ import { ImageServices } from "../../services/image.services";
 import { UserServices } from "../../services/user.services";
 import { AccountServices } from "../../services/account.services";
 import { PermissionServices } from "../../services/permission.services";
-import { ServiceFormManagerService } from "../../services/service-form-manager.service";
+import { ServiceModelManagerService } from "../../services/service-model-manager.service";
 
 @Component({
     selector: 'app-sidebar',
@@ -15,7 +15,7 @@ import { ServiceFormManagerService } from "../../services/service-form-manager.s
 
 export class SidebarComponent implements OnInit {
 
-    constructor(private formManager: ServiceFormManagerService, private permissions: PermissionServices, private accounts: AccountServices, private activeUser: HttpAuthService, private activatedRoute: ActivatedRoute, private images: ImageServices, private router: Router, private users: UserServices){}
+    constructor(private formManager: ServiceModelManagerService, private permissions: PermissionServices, private accounts: AccountServices, private activeUser: HttpAuthService, private activatedRoute: ActivatedRoute, private images: ImageServices, private router: Router, private users: UserServices){}
 
     ngOnInit(): void {
         console.log(`sidebar comp init`);

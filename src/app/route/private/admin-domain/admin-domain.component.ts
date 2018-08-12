@@ -3,8 +3,7 @@ import { HttpClient } from "@angular/common/http";
 import { UserServices } from "../../../services/user.services";
 import { AccountServices } from "../../../services/account.services";
 import { PermissionServices } from "../../../services/permission.services";
-import { ServiceFormManagerService } from "../../../services/service-form-manager.service";
-import { SetMessageService } from "../../../services/setMessage.service";
+import { ServiceModelManagerService } from "../../../services/service-model-manager.service";
 import { HttpAuthService } from "../../../services/httpAuth.service";
 
 @Component({
@@ -18,7 +17,7 @@ export class AdminDomainComponent implements OnInit, DoCheck {
 
     private recordModel: any;
 
-    constructor( private formManager: ServiceFormManagerService, private setMessage: SetMessageService, private activeUser: HttpAuthService, private users: UserServices, private accounts: AccountServices, private permissions: PermissionServices, private http: HttpClient) {}
+    constructor( private formManager: ServiceModelManagerService, private activeUser: HttpAuthService, private users: UserServices, private accounts: AccountServices, private permissions: PermissionServices, private http: HttpClient) {}
 
     ngOnInit(): void {
         this.permissions.getAll()

@@ -4,7 +4,7 @@ import { PermissionServices } from "../../../../services/permission.services";
 import { HttpAuthService } from "../../../../services/httpAuth.service";
 import { AccountModel } from "../../../../models/account.model";
 import { ActivatedRoute } from "@angular/router";
-import { ServiceFormManagerService } from "../../../../services/service-form-manager.service";
+import { ServiceModelManagerService } from "../../../../services/service-model-manager.service";
 import { ListValidator } from "../../../../classes/listValidator";
 import { PermissionModel } from "../../../../models/permission.model";
 
@@ -16,13 +16,12 @@ import { PermissionModel } from "../../../../models/permission.model";
 
 export class AccountsComponent implements OnInit {
 
-    // private accountForm: AccountModel = new AccountModel('uuid_generate_v4()');
     validator = new ListValidator();
     doEdit = {};
     tempPlaceholder: string = 'add permission';
     accountUpdated: boolean = false;
 
-    constructor(private formManager: ServiceFormManagerService, private activatedRoute: ActivatedRoute, private activeUser: HttpAuthService, private accountService: AccountServices, private permissionService: PermissionServices){}
+    constructor(private formManager: ServiceModelManagerService, private activatedRoute: ActivatedRoute, private activeUser: HttpAuthService, private accountService: AccountServices, private permissionService: PermissionServices){}
 
     ngOnInit(): void {
         this.formManager.setService(this.activatedRoute.snapshot.url[0].path);

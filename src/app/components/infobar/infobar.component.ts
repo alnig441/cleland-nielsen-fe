@@ -5,7 +5,7 @@ import { HttpAuthService } from "../../services/httpAuth.service";
 import { UserServices } from "../../services/user.services";
 import { AccountServices } from "../../services/account.services";
 import { PermissionServices } from "../../services/permission.services";
-import { ServiceFormManagerService } from "../../services/service-form-manager.service";
+import { ServiceModelManagerService } from "../../services/service-model-manager.service";
 
 
 @Component({
@@ -18,7 +18,7 @@ export class InfobarComponent implements OnInit, DoCheck {
 
     recordModel: any;
 
-    constructor(private formManager: ServiceFormManagerService, private users: UserServices, private accounts: AccountServices, private permissions: PermissionServices, private activeUser: HttpAuthService) {}
+    constructor(private formManager: ServiceModelManagerService, private users: UserServices, private accounts: AccountServices, private permissions: PermissionServices, private activeUser: HttpAuthService) {}
 
     ngOnInit(): void {
         this.recordModel = {};

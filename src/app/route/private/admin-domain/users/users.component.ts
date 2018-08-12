@@ -4,7 +4,7 @@ import { HttpAuthService } from "../../../../services/httpAuth.service";
 import { UserModel } from "../../../../models/user.model";
 import { UserServices } from "../../../../services/user.services";
 import { ActivatedRoute } from "@angular/router";
-import { ServiceFormManagerService } from "../../../../services/service-form-manager.service";
+import {ServiceModelManagerService} from "../../../../services/service-model-manager.service";
 
 @Component({
     selector: 'app-users',
@@ -17,7 +17,7 @@ export class UsersComponent implements OnInit {
     userUpdated: boolean = false;
     doEdit = {};
 
-    constructor(private formManager: ServiceFormManagerService, private activatedRoute: ActivatedRoute, private activeUser: HttpAuthService, private accountService: AccountServices, private userService: UserServices) {}
+    constructor(private formManager: ServiceModelManagerService, private activatedRoute: ActivatedRoute, private activeUser: HttpAuthService, private accountService: AccountServices, private userService: UserServices) {}
 
     ngOnInit(): void {
         this.formManager.setService(this.activatedRoute.snapshot.url[0].path);

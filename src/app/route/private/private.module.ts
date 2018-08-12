@@ -7,11 +7,10 @@ import { UserServices } from "../../services/user.services";
 import { FormsModule } from "@angular/forms";
 import { AccountServices } from "../../services/account.services";
 import { PermissionServices } from "../../services/permission.services";
-import { CompInitService } from "../../services/comp-init.service";
 import { SetMessageService } from "../../services/setMessage.service";
 import { AdminDomainModule } from "./admin-domain/admin-domain.module";
 import { UserDomainModule } from "./user-domain/user-domain.module";
-import { ServiceFormManagerService } from "../../services/service-form-manager.service";
+import { ServiceModelManagerService } from "../../services/service-model-manager.service";
 
 @NgModule({
     imports: [
@@ -19,7 +18,7 @@ import { ServiceFormManagerService } from "../../services/service-form-manager.s
         FormsModule,
         PrivateRoutingModule,
         AdminDomainModule,
-        UserDomainModule
+        UserDomainModule,
     ],
     declarations: [
     ],
@@ -30,9 +29,8 @@ import { ServiceFormManagerService } from "../../services/service-form-manager.s
         AccountServices,
         UserServices,
         ImageServices,
-        CompInitService,
         SetMessageService,
-        ServiceFormManagerService,
+        ServiceModelManagerService,
         httpInterceptorProviders,
     ]
 })
