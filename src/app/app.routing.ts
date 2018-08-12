@@ -1,6 +1,6 @@
 import { CanDeactivate, RouterModule, Routes } from "@angular/router";
 import { ModuleWithProviders, NgModule } from "@angular/core";
-import { AuthGuardService } from "./services/authentication-guard.service";
+import { AuthenticationGuardService } from "./services/authentication-guard.service";
 
 const APP_ROUTES: Routes = [
     {
@@ -33,7 +33,7 @@ const APP_ROUTES: Routes = [
         RouterModule
     ],
     providers: [
-        AuthGuardService
+        AuthenticationGuardService
     ]
 })
 export class AppRouting {

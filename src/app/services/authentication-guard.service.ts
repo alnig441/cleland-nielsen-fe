@@ -9,21 +9,21 @@ import {
     CanLoad,
     Route
 } from "@angular/router";
-import { HttpAuthService } from "./http-authentication.service";
+import { AuthenticationService } from "./authentication.service";
 
 @Injectable()
 
-export class AuthGuardService implements CanActivate, CanActivateChild, CanLoad {
+export class AuthenticationGuardService implements CanActivate, CanActivateChild, CanLoad {
 
-    constructor(private  httpAuth: HttpAuthService, private router: Router) {}
+    constructor(private  authenticator: AuthenticationService, private router: Router) {}
 
     checkLogin(url: string): boolean {
 
-        if(this.httpAuth.isLoggedIn) {
+        if(this.authenticator.isLoggedIn) {
             return true;
         }
 
-        this.httpAuth.redirectUrl = url;
+        this.authenticator.redirectUrl = url;
         this.router.navigate(['/login']);
 
         return false;

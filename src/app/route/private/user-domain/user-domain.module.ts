@@ -3,7 +3,7 @@ import { CommonModule } from "@angular/common";
 import { UserDomainRoutingModule } from "./user-domain-routing.module";
 import { VideosComponent } from "./videos/videos.component";
 import { RouterModule } from "@angular/router";
-import { AuthGuardService } from "../../../services/authentication-guard.service";
+import { AuthenticationGuardService } from "../../../services/authentication-guard.service";
 import { ImagesComponent } from "./images/images.component";
 import { UserDomainComponent } from "./user-domain.component";
 import { MessageBarModule } from "../../../modules/message-bar/message-bar.module";
@@ -24,7 +24,7 @@ import { FormSubmissionModule } from "../../../modules/form-submission/form-subm
         VideosComponent,
     ],
     exports: [ RouterModule ],
-    providers: [ AuthGuardService ]
+    providers: [ AuthenticationGuardService ]
 })
 
 export class UserDomainModule {}

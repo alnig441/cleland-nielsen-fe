@@ -4,7 +4,7 @@ import { UserServices } from "../../../services/user.services";
 import { AccountServices } from "../../../services/account.services";
 import { PermissionServices } from "../../../services/permission.services";
 import { ServiceModelManagerService } from "../../../services/service-model-manager.service";
-import { HttpAuthService } from "../../../services/http-authentication.service";
+import { AuthenticationService } from "../../../services/authentication.service";
 
 @Component({
     selector: 'app-admin',
@@ -17,7 +17,7 @@ export class AdminDomainComponent implements OnInit, DoCheck {
 
     private recordModel: any;
 
-    constructor( private formManager: ServiceModelManagerService, private activeUser: HttpAuthService, private users: UserServices, private accounts: AccountServices, private permissions: PermissionServices, private http: HttpClient) {}
+    constructor( private formManager: ServiceModelManagerService, private activeUser: AuthenticationService, private users: UserServices, private accounts: AccountServices, private permissions: PermissionServices, private http: HttpClient) {}
 
     ngOnInit(): void {
         this.permissions.getAll()

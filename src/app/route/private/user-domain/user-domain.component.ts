@@ -1,5 +1,5 @@
 import { Component, DoCheck, OnInit, ViewEncapsulation } from "@angular/core";
-import { HttpAuthService } from "../../../services/http-authentication.service";
+import { AuthenticationService } from "../../../services/authentication.service";
 import { SetMessageService } from "../../../services/set-message.service";
 import { ServiceModelManagerService } from "../../../services/service-model-manager.service";
 import { ImageServices } from "../../../services/image.services";
@@ -14,7 +14,7 @@ export class UserDomainComponent implements OnInit, DoCheck {
 
     private recordModel: any;
 
-    constructor(private activeUser: HttpAuthService, private setMessage: SetMessageService, private formManager: ServiceModelManagerService, private images: ImageServices){}
+    constructor(private activeUser: AuthenticationService, private setMessage: SetMessageService, private formManager: ServiceModelManagerService, private images: ImageServices){}
 
     ngOnInit(): void {
         this.images.getAll();

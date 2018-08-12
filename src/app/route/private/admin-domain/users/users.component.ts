@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewEncapsulation } from "@angular/core";
 import { AccountServices } from "../../../../services/account.services";
-import { HttpAuthService } from "../../../../services/http-authentication.service";
+import { AuthenticationService } from "../../../../services/authentication.service";
 import { UserModel } from "../../../../models/user.model";
 import { UserServices } from "../../../../services/user.services";
 import { ActivatedRoute } from "@angular/router";
@@ -17,7 +17,7 @@ export class UsersComponent implements OnInit {
     userUpdated: boolean = false;
     doEdit = {};
 
-    constructor(private formManager: ServiceModelManagerService, private activatedRoute: ActivatedRoute, private activeUser: HttpAuthService, private accountService: AccountServices, private userService: UserServices) {}
+    constructor(private formManager: ServiceModelManagerService, private activatedRoute: ActivatedRoute, private activeUser: AuthenticationService, private accountService: AccountServices, private userService: UserServices) {}
 
     ngOnInit(): void {
         this.formManager.setService(this.activatedRoute.snapshot.url[0].path);

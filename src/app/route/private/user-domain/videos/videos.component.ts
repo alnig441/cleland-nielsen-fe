@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewEncapsulation } from "@angular/core";
-import { HttpAuthService } from "../../../../services/http-authentication.service";
+import { AuthenticationService } from "../../../../services/authentication.service";
 
 @Component({
     selector: 'app-events',
@@ -9,7 +9,7 @@ import { HttpAuthService } from "../../../../services/http-authentication.servic
 
 export class VideosComponent implements OnInit {
 
-    constructor(private activeUser: HttpAuthService){}
+    constructor(private activeUser: AuthenticationService){}
 
     ngOnInit(): void {
         console.log('events comp init', this.activeUser.isPermitted);

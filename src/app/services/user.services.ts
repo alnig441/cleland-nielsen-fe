@@ -3,7 +3,7 @@ import { HttpClient } from "@angular/common/http";
 import 'rxjs/add/operator/toPromise';
 import { ErrorParser } from './error-parser';
 import { UserModel } from "../models/user.model";
-import { HttpAuthService } from "./http-authentication.service";
+import { AuthenticationService } from "./authentication.service";
 import { SetMessageService } from "./set-message.service";
 
 @Injectable()
@@ -14,7 +14,7 @@ export class UserServices {
     users: UserModel[] = new Array();
     baseUrl = '/usersDb';
 
-    constructor(private message: SetMessageService, private http: HttpClient, private activeUser: HttpAuthService) {}
+    constructor(private message: SetMessageService, private http: HttpClient, private activeUser: AuthenticationService) {}
 
     getAll(): Promise<any> {
         if(!this.activeUser.isPermitted['to_view_users']){

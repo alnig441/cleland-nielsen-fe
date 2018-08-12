@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewEncapsulation, ElementRef, ViewChild } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
-import { Router, NavigationStart, ActivatedRoute, NavigationEnd } from "@angular/router";
-import { HttpAuthService } from "./services/http-authentication.service";
+import { Router, ActivatedRoute } from "@angular/router";
+import { AuthenticationService } from "./services/authentication.service";
 
 @Component({
     selector: "app-root",
@@ -11,7 +11,7 @@ import { HttpAuthService } from "./services/http-authentication.service";
 })
 export class AppComponent implements OnInit {
 
-    constructor(private http: HttpClient, private router: Router, private activatedRoute: ActivatedRoute, private activeUser: HttpAuthService) {}
+    constructor(private http: HttpClient, private router: Router, private activatedRoute: ActivatedRoute, private activeUser: AuthenticationService) {}
 
     public ngOnInit(): void {
         console.log('app comp init');

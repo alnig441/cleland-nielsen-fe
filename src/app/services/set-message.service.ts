@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { Router } from "@angular/router";
-import { HttpAuthService } from "./http-authentication.service";
+import { AuthenticationService } from "./authentication.service";
 
 @Injectable()
 
@@ -10,7 +10,7 @@ export class SetMessageService {
     
     constructor(
         private router: Router,
-        private activeUser: HttpAuthService) {}
+        private activeUser: AuthenticationService) {}
 
     set(error?: any): any {
         error.status != 200 ? this.response.failure = error : this.response.success = error;

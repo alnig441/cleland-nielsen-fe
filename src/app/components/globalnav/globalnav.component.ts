@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewEncapsulation } from "@angular/core";
 import { ActivatedRoute, NavigationEnd, Router } from "@angular/router";
 import { HttpClient } from "@angular/common/http";
-import { HttpAuthService } from "../../services/http-authentication.service";
+import { AuthenticationService } from "../../services/authentication.service";
 
 @Component({
     selector: 'app-globalnav',
@@ -23,7 +23,7 @@ export class GlobalnavComponent implements OnInit {
             { name: 'permissions',  permission: 'to_view_permissions'}
     ]
 
-    constructor(private http: HttpClient, private router: Router, private activatedRoute: ActivatedRoute, private activeUser: HttpAuthService) {}
+    constructor(private http: HttpClient, private router: Router, private activatedRoute: ActivatedRoute, private activeUser: AuthenticationService) {}
 
     ngOnInit(): void {
         // console.log('globalnav comp init');

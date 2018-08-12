@@ -2,7 +2,7 @@ import { Component, OnInit, ViewEncapsulation } from "@angular/core";
 import { NavigationExtras, Router } from "@angular/router";
 import { HttpClient } from "@angular/common/http";
 import { LoginModel } from "../../models/login.model";
-import { HttpAuthService } from "../../services/http-authentication.service";
+import { AuthenticationService } from "../../services/authentication.service";
 import { PermissionServices } from "../../services/permission.services";
 import { ErrorParser } from "../../services/error-parser";
 
@@ -18,7 +18,7 @@ export class LoginComponent implements OnInit {
     errorParser = new ErrorParser();
     loginModel = new LoginModel('', '');
 
-    constructor(private http: HttpClient, private router: Router, private httpAuth: HttpAuthService, private permissionService: PermissionServices){}
+    constructor(private http: HttpClient, private router: Router, private authenticator: AuthenticationService, private permissionService: PermissionServices){}
 
     public ngOnInit():void {
         // console.log('login component initialised');
@@ -26,23 +26,23 @@ export class LoginComponent implements OnInit {
 
     onSubmit(): void {
 
-        this.httpAuth.login(this.loginModel).subscribe((user) => {
+        this.authenticator.login(this.loginModel).subscribe((user : any) => {
 
-            if(this.httpAuth.isLoggedIn) {
+            if(this.authenticator.isLoggedIn) {
 
                 this.http.get('/permissionsDb', {observe: "response"})
                     .toPromise()
                     .then((result: any) => {
                         user.userParameters.permissions.forEach((uuid: string) => {
                             result.body.find((permit: any) => {
-                                return permit.permission_id === uuid ? this.httpAuth.isPermitted[permit.permission_name] = true: null;
+                                return permit.permission_id === uuid ? this.authenticator.isPermitted[permit.permission_name] = true: null;
                             })
                         })
                     })
                     .then(() => {
                         console.log('what user: ', user);
                         let redirect =  user.userParameters.type != 'standard_user' ? '/private/admin-domain': '/private/user-domain';
-                        // let redirect = this.httpAuth.redirectUrl ? this.httpAuth.redirectUrl : '/private';
+                        // let redirect = this.authenticator.redirectUrl ? this.authenticator.redirectUrl : '/private';
                         let navigationExtras : NavigationExtras = {
                             queryParamsHandling: 'preserve',
                             preserveFragment: true
@@ -59,7 +59,7 @@ export class LoginComponent implements OnInit {
     }
 
     onCancel(): void {
-        this.httpAuth.logout();
-        this.router.navigate([this.httpAuth.redirectUrl]);
+        this.authenticator.logout();
+        this.router.navigate([this.authenticator.redirectUrl]);
     }
 }

@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { UserModel } from "../models/user.model";
 import { AccountModel } from "../models/account.model";
 import { PermissionModel } from "../models/permission.model";
-import {ImageModel} from "../models/image.model";
+import { ImageModel } from "../models/image.model";
 
 @Injectable()
 

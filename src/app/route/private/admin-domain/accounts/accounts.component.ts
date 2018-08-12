@@ -1,8 +1,7 @@
 import { Component, OnInit, ViewEncapsulation } from "@angular/core";
 import { AccountServices } from "../../../../services/account.services";
 import { PermissionServices } from "../../../../services/permission.services";
-import { HttpAuthService } from "../../../../services/http-authentication.service";
-import { AccountModel } from "../../../../models/account.model";
+import { AuthenticationService } from "../../../../services/authentication.service";
 import { ActivatedRoute } from "@angular/router";
 import { ServiceModelManagerService } from "../../../../services/service-model-manager.service";
 import { ListValidator } from "../../../../classes/listValidator";
@@ -21,7 +20,7 @@ export class AccountsComponent implements OnInit {
     tempPlaceholder: string = 'add permission';
     accountUpdated: boolean = false;
 
-    constructor(private formManager: ServiceModelManagerService, private activatedRoute: ActivatedRoute, private activeUser: HttpAuthService, private accountService: AccountServices, private permissionService: PermissionServices){}
+    constructor(private formManager: ServiceModelManagerService, private activatedRoute: ActivatedRoute, private activeUser: AuthenticationService, private accountService: AccountServices, private permissionService: PermissionServices){}
 
     ngOnInit(): void {
         this.formManager.setService(this.activatedRoute.snapshot.url[0].path);

@@ -3,7 +3,7 @@ import { HttpClient } from "@angular/common/http";
 import { ImageModel } from "../models/image.model";
 import 'rxjs/add/operator/toPromise';
 import { ErrorParser } from "./error-parser";
-import { HttpAuthService } from "./http-authentication.service";
+import { AuthenticationService } from "./authentication.service";
 import { SetMessageService } from "./set-message.service";
 
 @Injectable()
@@ -15,7 +15,7 @@ export class ImageServices {
     imagesUpdated: boolean = false;
     baseUrl = '/imagesDb';
     
-    constructor(private message: SetMessageService, private http: HttpClient, private activeUser: HttpAuthService) {}
+    constructor(private message: SetMessageService, private http: HttpClient, private activeUser: AuthenticationService) {}
 
     getAll(): Promise<any> {
         if(!this.activeUser.isPermitted['to_view_images']){

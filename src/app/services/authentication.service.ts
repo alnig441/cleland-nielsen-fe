@@ -5,7 +5,7 @@ import "rxjs/add/operator/toPromise";
 
 @Injectable()
 
-export class HttpAuthService {
+export class AuthenticationService {
 
     isLoggedIn = false;
     isAdmin = false;

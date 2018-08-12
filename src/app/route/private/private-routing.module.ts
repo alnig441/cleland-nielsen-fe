@@ -1,6 +1,6 @@
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
-import { AuthGuardService } from "../../services/authentication-guard.service";
+import { AuthenticationGuardService } from "../../services/authentication-guard.service";
 
 const privateRoutes: Routes = [
     {
@@ -21,7 +21,7 @@ const privateRoutes: Routes = [
         RouterModule
     ],
     providers: [
-        AuthGuardService
+        AuthenticationGuardService
     ]
 })
 

@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewEncapsulation } from "@angular/core";
-import { HttpAuthService } from "../../../../services/http-authentication.service";
+import { AuthenticationService } from "../../../../services/authentication.service";
 import { PermissionModel } from "../../../../models/permission.model";
 import { ActivatedRoute } from "@angular/router";
 import { ServiceModelManagerService } from "../../../../services/service-model-manager.service";
@@ -15,7 +15,7 @@ export class PermissionsComponent implements OnInit {
 
     private permissionForm: PermissionModel = new PermissionModel('uuid_generate_v4()');
 
-    constructor( private permissionService: PermissionServices, private formManager: ServiceModelManagerService, private activatedRoute: ActivatedRoute, private activeUser: HttpAuthService){}
+    constructor( private permissionService: PermissionServices, private formManager: ServiceModelManagerService, private activatedRoute: ActivatedRoute, private activeUser: AuthenticationService){}
 
     ngOnInit(): void {
         this.formManager.setService(this.activatedRoute.snapshot.url[0].path);
