@@ -15,7 +15,7 @@ import { ServiceModelManagerService } from "../../services/service-model-manager
 
 export class SidebarComponent implements OnInit {
 
-    constructor(private formManager: ServiceModelManagerService, private permissions: PermissionServices, private accounts: AccountServices, private activeUser: HttpAuthService, private activatedRoute: ActivatedRoute, private images: ImageServices, private router: Router, private users: UserServices){}
+    constructor(private formManager: ServiceModelManagerService, private permissions: PermissionServices, private accounts: AccountServices, private images: ImageServices, private users: UserServices){}
 
     ngOnInit(): void {
         console.log(`sidebar comp init`);

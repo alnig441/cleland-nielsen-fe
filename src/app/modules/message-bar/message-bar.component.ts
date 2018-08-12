@@ -3,7 +3,7 @@ import { SetMessageService } from "../../services/setMessage.service";
 
 @Component({
     selector: "app-messagebar",
-    template: require('./messagebar.component.pug'),
+    template: require('./message-bar.component.pug'),
     encapsulation: ViewEncapsulation.None
 })
 

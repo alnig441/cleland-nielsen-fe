@@ -1,16 +1,8 @@
 .col-sm-2
-    ul(class='list-group box-shadow' style='border: 1px, solid, black')
-        li(class='list-group-item')
-            a((click)='this.filter()') filter
+    app-sidebar
+
 .col-sm-8
     app-messagebar
-    //div(*ngIf="this.setMessage.response.failure" class="panel panel-warning")
-    //    div(class="panel-heading") status: {{ this.setMessage.response.failure.status }}
-    //    div(class="panel-body") message: {{ this.setMessage.response.failure.message }}
-    //div(*ngIf="this.setMessage.response.success" class="panel panel-success")
-    //    div(class="panel-heading") status: {{ this.setMessage.response.success.status }}
-    //    div(class="panel-body") message: {{ this.setMessage.response.success.message }}
-
 
     router-outlet
 

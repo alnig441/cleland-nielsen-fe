@@ -7,19 +7,19 @@ import { AccountsComponent } from "./accounts/accounts.component";
 import { PermissionsComponent } from "./permissions/permissions.component";
 import { FormsModule } from "@angular/forms";
 import { UuidTransformPipe } from "../../../pipes/uuid.transform";
-import { SidebarComponent } from "../../../components/sidebar/sidebar.component";
 import { InfobarComponent } from "../../../components/infobar/infobar.component";
 import { MessageBarModule } from "../../../modules/message-bar/message-bar.module";
+import { SidebarModule } from "../../../modules/sidebar/sidebar.module";
 
 @NgModule({
     imports: [
         CommonModule,
         FormsModule,
         AdminDomainRoutingModule,
-        MessageBarModule
+        MessageBarModule,
+        SidebarModule
     ],
     declarations: [
-        SidebarComponent,
         InfobarComponent,
         AdminDomainComponent,
         UsersComponent,

@@ -1,6 +1,6 @@
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
-import { MessagebarComponent } from "../../components/messagebar/messagebar.component";
+import { MessagebarComponent } from "./message-bar.component";
 import { SetMessageService } from "../../services/setMessage.service";
 import { ServiceModelManagerService } from "../../services/service-model-manager.service";
 
@@ -16,7 +16,6 @@ import { ServiceModelManagerService } from "../../services/service-model-manager
     ],
     providers: [
         SetMessageService,
-        ServiceModelManagerService
     ]
 })
 
