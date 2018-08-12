@@ -2,9 +2,9 @@ import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { ImageModel } from "../models/image.model";
 import 'rxjs/add/operator/toPromise';
-import { ErrorParser } from "./errorParser";
-import { HttpAuthService } from "./httpAuth.service";
-import { SetMessageService } from "./setMessage.service";
+import { ErrorParser } from "./error-parser";
+import { HttpAuthService } from "./http-authentication.service";
+import { SetMessageService } from "./set-message.service";
 
 @Injectable()
 

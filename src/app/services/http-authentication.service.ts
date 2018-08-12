@@ -1,8 +1,7 @@
 import { Injectable } from "@angular/core";
-import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { HttpClient } from "@angular/common/http";
 import { LoginModel } from "../models/login.model";
 import "rxjs/add/operator/toPromise";
-import { PermissionModel } from "../models/permission.model";
 
 @Injectable()
 
@@ -11,7 +10,6 @@ export class HttpAuthService {
     isLoggedIn = false;
     isAdmin = false;
     isPermitted = {};
-    private permissions: PermissionModel[];
 
     redirectUrl: string;
 

@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewEncapsulation } from "@angular/core";
-import { SetMessageService } from "../../services/setMessage.service";
+import { SetMessageService } from "../../services/set-message.service";
 
 @Component({
     selector: "app-messagebar",

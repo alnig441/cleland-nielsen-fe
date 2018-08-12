@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { Router } from "@angular/router";
-import { HttpAuthService } from "./httpAuth.service";
+import { HttpAuthService } from "./http-authentication.service";
 
 @Injectable()
 

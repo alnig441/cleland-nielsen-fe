@@ -4,7 +4,7 @@ import { UserServices } from "../../../services/user.services";
 import { AccountServices } from "../../../services/account.services";
 import { PermissionServices } from "../../../services/permission.services";
 import { ServiceModelManagerService } from "../../../services/service-model-manager.service";
-import { HttpAuthService } from "../../../services/httpAuth.service";
+import { HttpAuthService } from "../../../services/http-authentication.service";
 
 @Component({
     selector: 'app-admin',

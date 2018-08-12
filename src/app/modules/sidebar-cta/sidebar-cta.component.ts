@@ -1,6 +1,6 @@
 import { Component, Input, OnInit, ViewEncapsulation } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
-import { HttpAuthService } from "../../services/httpAuth.service";
+import { HttpAuthService } from "../../services/http-authentication.service";
 import { ImageServices } from "../../services/image.services";
 import { UserServices } from "../../services/user.services";
 import { AccountServices } from "../../services/account.services";
@@ -8,12 +8,12 @@ import { PermissionServices } from "../../services/permission.services";
 import { ServiceModelManagerService } from "../../services/service-model-manager.service";
 
 @Component({
-    selector: 'app-sidebar',
-    template: require('./sidebar.component.pug'),
+    selector: 'app-sidebar-cta',
+    template: require('./sidebar-cta.component.pug'),
     encapsulation: ViewEncapsulation.None
 })
 
-export class SidebarComponent implements OnInit {
+export class SidebarCtaComponent implements OnInit {
 
     constructor(private formManager: ServiceModelManagerService, private permissions: PermissionServices, private accounts: AccountServices, private images: ImageServices, private users: UserServices){}
 

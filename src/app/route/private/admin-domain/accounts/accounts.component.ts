@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewEncapsulation } from "@angular/core";
 import { AccountServices } from "../../../../services/account.services";
 import { PermissionServices } from "../../../../services/permission.services";
-import { HttpAuthService } from "../../../../services/httpAuth.service";
+import { HttpAuthService } from "../../../../services/http-authentication.service";
 import { AccountModel } from "../../../../models/account.model";
 import { ActivatedRoute } from "@angular/router";
 import { ServiceModelManagerService } from "../../../../services/service-model-manager.service";

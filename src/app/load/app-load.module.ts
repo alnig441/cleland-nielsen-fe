@@ -1,6 +1,6 @@
 import { NgModule, APP_INITIALIZER } from "@angular/core";
 import { HttpClientModule } from "@angular/common/http";
-import { AppLoadService } from "../services/app-load.service";
+import { AppLoadService } from "../services/application-load.service";
 
 export function init_app(appLoad: AppLoadService) {
     return () => appLoad.initializeApp();

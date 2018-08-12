@@ -2,9 +2,9 @@ import { Component, OnInit, ViewEncapsulation } from "@angular/core";
 import { NavigationExtras, Router } from "@angular/router";
 import { HttpClient } from "@angular/common/http";
 import { LoginModel } from "../../models/login.model";
-import { HttpAuthService } from "../../services/httpAuth.service";
+import { HttpAuthService } from "../../services/http-authentication.service";
 import { PermissionServices } from "../../services/permission.services";
-import { ErrorParser } from "../../services/errorParser";
+import { ErrorParser } from "../../services/error-parser";
 
 @Component({
     selector: 'app-login',

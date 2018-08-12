@@ -7,7 +7,7 @@ import { UserServices } from "../../services/user.services";
 import { FormsModule } from "@angular/forms";
 import { AccountServices } from "../../services/account.services";
 import { PermissionServices } from "../../services/permission.services";
-import { SetMessageService } from "../../services/setMessage.service";
+import { SetMessageService } from "../../services/set-message.service";
 import { AdminDomainModule } from "./admin-domain/admin-domain.module";
 import { UserDomainModule } from "./user-domain/user-domain.module";
 import { ServiceModelManagerService } from "../../services/service-model-manager.service";

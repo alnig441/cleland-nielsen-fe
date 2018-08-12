@@ -9,7 +9,7 @@ import {
     CanLoad,
     Route
 } from "@angular/router";
-import { HttpAuthService } from "./httpAuth.service";
+import { HttpAuthService } from "./http-authentication.service";
 
 @Injectable()
 

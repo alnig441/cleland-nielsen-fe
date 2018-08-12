@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewEncapsulation } from "@angular/core";
-import { HttpAuthService } from "../../../../services/httpAuth.service";
+import { HttpAuthService } from "../../../../services/http-authentication.service";
 
 @Component({
     selector: 'app-events',

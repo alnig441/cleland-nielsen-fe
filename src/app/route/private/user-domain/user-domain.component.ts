@@ -1,6 +1,6 @@
 import { Component, DoCheck, OnInit, ViewEncapsulation } from "@angular/core";
-import { HttpAuthService } from "../../../services/httpAuth.service";
-import { SetMessageService } from "../../../services/setMessage.service";
+import { HttpAuthService } from "../../../services/http-authentication.service";
+import { SetMessageService } from "../../../services/set-message.service";
 import { ServiceModelManagerService } from "../../../services/service-model-manager.service";
 import { ImageServices } from "../../../services/image.services";
 

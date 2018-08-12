@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewEncapsulation } from "@angular/core";
 import { ActivatedRoute, NavigationEnd, Router } from "@angular/router";
 import { HttpClient } from "@angular/common/http";
-import { HttpAuthService } from "../../services/httpAuth.service";
+import { HttpAuthService } from "../../services/http-authentication.service";
 
 @Component({
     selector: 'app-globalnav',

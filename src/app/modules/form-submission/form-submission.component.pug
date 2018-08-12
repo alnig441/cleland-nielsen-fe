@@ -1,3 +1,12 @@
+span(*ngIf="this.formManager.getService() == 'images'")
+    div(class="panel panel-default box-shadow")
+        div(class="panel-heading")
+            h3(class="panel-title") image info
+        div(*ngFor="let property of this.formManager.getProperties() as form;", class="panel-body")
+            p {{property}}
+            hr
+
+
 span(*ngIf="this.activeUser.isPermitted['to_add_'+ this.formManager.getService()] && this.formManager.getService() !='images'")
     form(#addrecordModel="ngForm" class="panel panel-default box-shadow")
         div(class="panel-heading")

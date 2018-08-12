@@ -1,7 +1,7 @@
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
 import { LoginComponent } from "./login.component";
-import { HttpAuthService } from "../../services/httpAuth.service";
+import { HttpAuthService } from "../../services/http-authentication.service";
 
 const LoginRoutes: Routes = [
     {

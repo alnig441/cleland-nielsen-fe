@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewEncapsulation, ElementRef, ViewChild } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { Router, NavigationStart, ActivatedRoute, NavigationEnd } from "@angular/router";
-import { HttpAuthService } from "./services/httpAuth.service";
+import { HttpAuthService } from "./services/http-authentication.service";
 
 @Component({
     selector: "app-root",

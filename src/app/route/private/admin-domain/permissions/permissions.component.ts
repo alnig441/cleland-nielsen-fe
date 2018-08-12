@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewEncapsulation } from "@angular/core";
-import { HttpAuthService } from "../../../../services/httpAuth.service";
+import { HttpAuthService } from "../../../../services/http-authentication.service";
 import { PermissionModel } from "../../../../models/permission.model";
 import { ActivatedRoute } from "@angular/router";
 import { ServiceModelManagerService } from "../../../../services/service-model-manager.service";

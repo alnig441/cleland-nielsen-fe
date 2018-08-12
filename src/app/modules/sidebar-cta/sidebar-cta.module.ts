@@ -1,6 +1,6 @@
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
-import { SidebarComponent } from "./sidebar.component";
+import { SidebarCtaComponent } from "./sidebar-cta.component";
 import { ServiceModelManagerService } from "../../services/service-model-manager.service";
 import { PermissionServices } from "../../services/permission.services";
 import { AccountServices } from "../../services/account.services";
@@ -12,10 +12,10 @@ import { ImageServices } from "../../services/image.services";
         CommonModule
     ],
     declarations: [
-        SidebarComponent
+        SidebarCtaComponent
     ],
     exports: [
-        SidebarComponent
+        SidebarCtaComponent
     ],
     providers: [
         ServiceModelManagerService,
@@ -26,4 +26,4 @@ import { ImageServices } from "../../services/image.services";
     ]
 })
 
-export class SidebarModule {}
+export class SidebarCtaModule {}

@@ -7,9 +7,9 @@ import { AccountsComponent } from "./accounts/accounts.component";
 import { PermissionsComponent } from "./permissions/permissions.component";
 import { FormsModule } from "@angular/forms";
 import { UuidTransformPipe } from "../../../pipes/uuid.transform";
-import { InfobarComponent } from "../../../components/infobar/infobar.component";
 import { MessageBarModule } from "../../../modules/message-bar/message-bar.module";
-import { SidebarModule } from "../../../modules/sidebar/sidebar.module";
+import { SidebarCtaModule } from "../../../modules/sidebar-cta/sidebar-cta.module";
+import { FormSubmissionModule } from "../../../modules/form-submission/form-submission.module";
 
 @NgModule({
     imports: [
@@ -17,10 +17,10 @@ import { SidebarModule } from "../../../modules/sidebar/sidebar.module";
         FormsModule,
         AdminDomainRoutingModule,
         MessageBarModule,
-        SidebarModule
+        SidebarCtaModule,
+        FormSubmissionModule
     ],
     declarations: [
-        InfobarComponent,
         AdminDomainComponent,
         UsersComponent,
         AccountsComponent,
