@@ -6540,7 +6540,7 @@ function updateLink (link, options, obj) {
 
 /***/ }),
 
-/***/ 14:
+/***/ 16:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6555,7 +6555,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 const core_1 = __webpack_require__(3);
-const http_1 = __webpack_require__(28);
+const http_1 = __webpack_require__(31);
 __webpack_require__(71);
 let AuthenticationService = class AuthenticationService {
     constructor(http) {
@@ -6698,10 +6698,10 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 const core_1 = __webpack_require__(3);
-const router_1 = __webpack_require__(17);
-const http_1 = __webpack_require__(28);
+const router_1 = __webpack_require__(20);
+const http_1 = __webpack_require__(31);
 const login_model_1 = __webpack_require__(681);
-const authentication_service_1 = __webpack_require__(14);
+const authentication_service_1 = __webpack_require__(16);
 const permission_services_1 = __webpack_require__(46);
 const error_parser_1 = __webpack_require__(84);
 let LoginComponent = class LoginComponent {
@@ -6877,7 +6877,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 const core_1 = __webpack_require__(3);
-const http_1 = __webpack_require__(28);
+const http_1 = __webpack_require__(31);
 const SiteCopy = __webpack_require__(688);
 let HomeComponent = class HomeComponent {
     constructor(http) {
@@ -6917,9 +6917,9 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 const core_1 = __webpack_require__(3);
 const account_services_1 = __webpack_require__(54);
-const authentication_service_1 = __webpack_require__(14);
+const authentication_service_1 = __webpack_require__(16);
 const user_services_1 = __webpack_require__(60);
-const router_1 = __webpack_require__(17);
+const router_1 = __webpack_require__(20);
 const service_model_manager_service_1 = __webpack_require__(32);
 let UsersComponent = class UsersComponent {
     constructor(formManager, activatedRoute, activeUser, accountService, userService) {
@@ -6993,12 +6993,12 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 const core_1 = __webpack_require__(3);
-const http_1 = __webpack_require__(28);
+const http_1 = __webpack_require__(31);
 const user_services_1 = __webpack_require__(60);
 const account_services_1 = __webpack_require__(54);
 const permission_services_1 = __webpack_require__(46);
 const service_model_manager_service_1 = __webpack_require__(32);
-const authentication_service_1 = __webpack_require__(14);
+const authentication_service_1 = __webpack_require__(16);
 let AdminDomainComponent = class AdminDomainComponent {
     constructor(formManager, activeUser, users, accounts, permissions, http) {
         this.formManager = formManager;
@@ -7058,8 +7058,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 const core_1 = __webpack_require__(3);
 const account_services_1 = __webpack_require__(54);
 const permission_services_1 = __webpack_require__(46);
-const authentication_service_1 = __webpack_require__(14);
-const router_1 = __webpack_require__(17);
+const authentication_service_1 = __webpack_require__(16);
+const router_1 = __webpack_require__(20);
 const service_model_manager_service_1 = __webpack_require__(32);
 const listValidator_1 = __webpack_require__(704);
 let AccountsComponent = class AccountsComponent {
@@ -7141,9 +7141,9 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 const core_1 = __webpack_require__(3);
-const authentication_service_1 = __webpack_require__(14);
+const authentication_service_1 = __webpack_require__(16);
 const permission_model_1 = __webpack_require__(216);
-const router_1 = __webpack_require__(17);
+const router_1 = __webpack_require__(20);
 const service_model_manager_service_1 = __webpack_require__(32);
 const permission_services_1 = __webpack_require__(46);
 let PermissionsComponent = class PermissionsComponent {
@@ -7323,9 +7323,9 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 const core_1 = __webpack_require__(3);
 const image_services_1 = __webpack_require__(72);
-const authentication_service_1 = __webpack_require__(14);
+const authentication_service_1 = __webpack_require__(16);
 const service_model_manager_service_1 = __webpack_require__(32);
-const router_1 = __webpack_require__(17);
+const router_1 = __webpack_require__(20);
 let ImagesComponent = class ImagesComponent {
     constructor(formManager, activatedRoute, activeUser, imageService) {
         this.formManager = formManager;
@@ -7366,7 +7366,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 const core_1 = __webpack_require__(3);
-const authentication_service_1 = __webpack_require__(14);
+const authentication_service_1 = __webpack_require__(16);
 let VideosComponent = class VideosComponent {
     constructor(activeUser) {
         this.activeUser = activeUser;
@@ -7403,7 +7403,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 const core_1 = __webpack_require__(3);
-const authentication_service_1 = __webpack_require__(14);
+const authentication_service_1 = __webpack_require__(16);
 const set_message_service_1 = __webpack_require__(53);
 const service_model_manager_service_1 = __webpack_require__(32);
 const image_services_1 = __webpack_require__(72);
@@ -17703,7 +17703,7 @@ return jQuery;
 
 /***/ }),
 
-/***/ 28:
+/***/ 31:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -19994,10 +19994,10 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 const core_1 = __webpack_require__(3);
-const http_1 = __webpack_require__(28);
+const http_1 = __webpack_require__(31);
 __webpack_require__(71);
 const error_parser_1 = __webpack_require__(84);
-const authentication_service_1 = __webpack_require__(14);
+const authentication_service_1 = __webpack_require__(16);
 const set_message_service_1 = __webpack_require__(53);
 let PermissionServices = class PermissionServices {
     constructor(message, http, activeUser) {
@@ -20106,8 +20106,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 const core_1 = __webpack_require__(3);
-const router_1 = __webpack_require__(17);
-const authentication_service_1 = __webpack_require__(14);
+const router_1 = __webpack_require__(20);
+const authentication_service_1 = __webpack_require__(16);
 let SetMessageService = class SetMessageService {
     constructor(router, activeUser) {
         this.router = router;
@@ -20151,10 +20151,10 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 const core_1 = __webpack_require__(3);
-const http_1 = __webpack_require__(28);
+const http_1 = __webpack_require__(31);
 __webpack_require__(71);
 const error_parser_1 = __webpack_require__(84);
-const authentication_service_1 = __webpack_require__(14);
+const authentication_service_1 = __webpack_require__(16);
 const set_message_service_1 = __webpack_require__(53);
 let AccountServices = class AccountServices {
     constructor(message, http, activeUser) {
@@ -20275,10 +20275,10 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 const core_1 = __webpack_require__(3);
-const http_1 = __webpack_require__(28);
+const http_1 = __webpack_require__(31);
 __webpack_require__(71);
 const error_parser_1 = __webpack_require__(84);
-const authentication_service_1 = __webpack_require__(14);
+const authentication_service_1 = __webpack_require__(16);
 const set_message_service_1 = __webpack_require__(53);
 let UserServices = class UserServices {
     constructor(message, http, activeUser) {
@@ -23114,7 +23114,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 const core_1 = __webpack_require__(3);
-const http_1 = __webpack_require__(28);
+const http_1 = __webpack_require__(31);
 const app_component_1 = __webpack_require__(676);
 const platform_browser_1 = __webpack_require__(68);
 const forms_1 = __webpack_require__(103);
@@ -23172,16 +23172,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 const core_1 = __webpack_require__(3);
-const http_1 = __webpack_require__(28);
-const router_1 = __webpack_require__(17);
-const authentication_service_1 = __webpack_require__(14);
 let AppComponent = class AppComponent {
-    constructor(http, router, activatedRoute, activeUser) {
-        this.http = http;
-        this.router = router;
-        this.activatedRoute = activatedRoute;
-        this.activeUser = activeUser;
-    }
+    constructor() { }
     ngOnInit() {
         console.log('app comp init');
     }
@@ -23193,7 +23185,7 @@ AppComponent = __decorate([
         styles: [__webpack_require__(678)],
         encapsulation: core_1.ViewEncapsulation.None
     }),
-    __metadata("design:paramtypes", [http_1.HttpClient, router_1.Router, router_1.ActivatedRoute, authentication_service_1.AuthenticationService])
+    __metadata("design:paramtypes", [])
 ], AppComponent);
 exports.AppComponent = AppComponent;
 
@@ -23225,7 +23217,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
-const router_1 = __webpack_require__(17);
+const router_1 = __webpack_require__(20);
 const core_1 = __webpack_require__(3);
 const authentication_guard_service_1 = __webpack_require__(83);
 const APP_ROUTES = [
@@ -23279,9 +23271,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 const core_1 = __webpack_require__(3);
-const router_1 = __webpack_require__(17);
+const router_1 = __webpack_require__(20);
 const login_component_1 = __webpack_require__(210);
-const authentication_service_1 = __webpack_require__(14);
+const authentication_service_1 = __webpack_require__(16);
 const LoginRoutes = [
     {
         path: 'login',
@@ -23433,7 +23425,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
-const router_1 = __webpack_require__(17);
+const router_1 = __webpack_require__(20);
 const core_1 = __webpack_require__(3);
 const about_component_1 = __webpack_require__(211);
 const home_component_1 = __webpack_require__(214);
@@ -23544,7 +23536,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 const core_1 = __webpack_require__(3);
-const router_1 = __webpack_require__(17);
+const router_1 = __webpack_require__(20);
 const authentication_guard_service_1 = __webpack_require__(83);
 const privateRoutes = [
     {
@@ -23581,7 +23573,7 @@ exports.PrivateRoutingModule = PrivateRoutingModule;
 
 "use strict";
 
-const http_1 = __webpack_require__(28);
+const http_1 = __webpack_require__(31);
 const jwt_interceptor_service_1 = __webpack_require__(695);
 exports.httpInterceptorProviders = [
     { provide: http_1.HTTP_INTERCEPTORS, useClass: jwt_interceptor_service_1.JwtInterceptorService, multi: true }
@@ -23678,7 +23670,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 const core_1 = __webpack_require__(3);
-const router_1 = __webpack_require__(17);
+const router_1 = __webpack_require__(20);
 const users_component_1 = __webpack_require__(215);
 const admin_domain_component_1 = __webpack_require__(217);
 const authentication_guard_service_1 = __webpack_require__(83);
@@ -24012,7 +24004,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 const core_1 = __webpack_require__(3);
-const authentication_service_1 = __webpack_require__(14);
+const authentication_service_1 = __webpack_require__(16);
 const user_services_1 = __webpack_require__(60);
 const account_services_1 = __webpack_require__(54);
 const permission_services_1 = __webpack_require__(46);
@@ -24075,7 +24067,7 @@ const core_1 = __webpack_require__(3);
 const common_1 = __webpack_require__(24);
 const user_domain_routing_module_1 = __webpack_require__(715);
 const videos_component_1 = __webpack_require__(224);
-const router_1 = __webpack_require__(17);
+const router_1 = __webpack_require__(20);
 const authentication_guard_service_1 = __webpack_require__(83);
 const images_component_1 = __webpack_require__(223);
 const user_domain_component_1 = __webpack_require__(225);
@@ -24119,7 +24111,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 const core_1 = __webpack_require__(3);
-const router_1 = __webpack_require__(17);
+const router_1 = __webpack_require__(20);
 const authentication_guard_service_1 = __webpack_require__(83);
 const images_component_1 = __webpack_require__(223);
 const videos_component_1 = __webpack_require__(224);
@@ -24202,10 +24194,10 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 const core_1 = __webpack_require__(3);
-const http_1 = __webpack_require__(28);
+const http_1 = __webpack_require__(31);
 __webpack_require__(71);
 const error_parser_1 = __webpack_require__(84);
-const authentication_service_1 = __webpack_require__(14);
+const authentication_service_1 = __webpack_require__(16);
 const set_message_service_1 = __webpack_require__(53);
 let ImageServices = class ImageServices {
     constructor(message, http, activeUser) {
@@ -24308,9 +24300,9 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 const core_1 = __webpack_require__(3);
-const router_1 = __webpack_require__(17);
-const http_1 = __webpack_require__(28);
-const authentication_service_1 = __webpack_require__(14);
+const router_1 = __webpack_require__(20);
+const http_1 = __webpack_require__(31);
+const authentication_service_1 = __webpack_require__(16);
 let GlobalnavComponent = class GlobalnavComponent {
     constructor(http, router, activatedRoute, activeUser) {
         this.http = http;
@@ -24330,7 +24322,6 @@ let GlobalnavComponent = class GlobalnavComponent {
         ];
     }
     ngOnInit() {
-        // console.log('globalnav comp init');
     }
     logout() {
         this.activeUser.logout();
@@ -24507,8 +24498,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 const core_1 = __webpack_require__(3);
-const router_1 = __webpack_require__(17);
-const authentication_service_1 = __webpack_require__(14);
+const router_1 = __webpack_require__(20);
+const authentication_service_1 = __webpack_require__(16);
 let AuthenticationGuardService = class AuthenticationGuardService {
     constructor(authenticator, router) {
         this.authenticator = authenticator;
@@ -24583,4 +24574,4 @@ exports.ErrorParser = ErrorParser;
 /***/ })
 
 },[651]);
-//# sourceMappingURL=app.af79ae3cf1a255872955.js.map
+//# sourceMappingURL=app.ed3c727354f52e80c07b.js.map

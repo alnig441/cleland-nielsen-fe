@@ -1,7 +1,4 @@
-import { Component, OnInit, ViewEncapsulation, ElementRef, ViewChild } from "@angular/core";
-import { HttpClient } from "@angular/common/http";
-import { Router, ActivatedRoute } from "@angular/router";
-import { AuthenticationService } from "./services/authentication.service";
+import { Component, OnInit, ViewEncapsulation } from "@angular/core";
 
 @Component({
     selector: "app-root",
@@ -11,7 +8,7 @@ import { AuthenticationService } from "./services/authentication.service";
 })
 export class AppComponent implements OnInit {
 
-    constructor(private http: HttpClient, private router: Router, private activatedRoute: ActivatedRoute, private activeUser: AuthenticationService) {}
+    constructor() {}
 
     public ngOnInit(): void {
         console.log('app comp init');

@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewEncapsulation } from "@angular/core";
-import { ActivatedRoute, NavigationEnd, Router } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { HttpClient } from "@angular/common/http";
 import { AuthenticationService } from "../../services/authentication.service";
 
@@ -26,7 +26,6 @@ export class GlobalnavComponent implements OnInit {
     constructor(private http: HttpClient, private router: Router, private activatedRoute: ActivatedRoute, private activeUser: AuthenticationService) {}
 
     ngOnInit(): void {
-        // console.log('globalnav comp init');
     }
 
     logout() : void {
