@@ -26,6 +26,28 @@ export class ServiceModelManagerService {
 
     setService(service: string) {
         this.service = service;
+        this.initializeRecordModel(service);
+    }
+
+    getService(): string {
+        return this.service;
+    }
+
+    getLanguages(): any {
+        return this.languages;
+    }
+
+    getProperties(): string[] {
+        return this.formProperties;
+    }
+
+    getRecordModel(): any {
+        return this.recordModel; 
+    }
+
+    initializeRecordModel(service?: string) {
+
+        service ? service = service : service = this.getService();
 
         switch (service) {
             case 'users':
@@ -46,22 +68,6 @@ export class ServiceModelManagerService {
         if(this.recordModel){
             this.formProperties = Object.keys(this.recordModel);
         }
-    }
-
-    getService(): string {
-        return this.service;
-    }
-
-    getLanguages(): any {
-        return this.languages;
-    }
-
-    getProperties(): string[] {
-        return this.formProperties;
-    }
-
-    getRecordModel(): any {
-        return this.recordModel; 
     }
 
     setRecordModelProperty(property: string, value: any) {

@@ -22,7 +22,6 @@ export class FormSubmissionComponent implements OnInit, DoCheck {
 
     ngOnInit(): void {
         this.recordModel = {};
-        console.log('')
     }
 
     ngDoCheck(): void {
@@ -33,8 +32,10 @@ export class FormSubmissionComponent implements OnInit, DoCheck {
 
     onSubmit(): void {
         console.log(`adding ${this.formManager.getService()} record `, this.recordModel);
-        this[this.formManager.getService()].addRecord(this.recordModel);
-        this.recordModel = this.formManager.getRecordModel();
+        this[this.formManager.getService()].addRecord(this.recordModel)
+            .then(()=> {
+                this.formManager.initializeRecordModel();
+            })
     }
 
 

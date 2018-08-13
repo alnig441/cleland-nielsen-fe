@@ -19927,6 +19927,22 @@ let ServiceModelManagerService = class ServiceModelManagerService {
     }
     setService(service) {
         this.service = service;
+        this.initializeRecordModel(service);
+    }
+    getService() {
+        return this.service;
+    }
+    getLanguages() {
+        return this.languages;
+    }
+    getProperties() {
+        return this.formProperties;
+    }
+    getRecordModel() {
+        return this.recordModel;
+    }
+    initializeRecordModel(service) {
+        service ? service = service : service = this.getService();
         switch (service) {
             case 'users':
                 this.recordModel = new user_model_1.UserModel('uuid_generate_v4()');
@@ -19945,18 +19961,6 @@ let ServiceModelManagerService = class ServiceModelManagerService {
         if (this.recordModel) {
             this.formProperties = Object.keys(this.recordModel);
         }
-    }
-    getService() {
-        return this.service;
-    }
-    getLanguages() {
-        return this.languages;
-    }
-    getProperties() {
-        return this.formProperties;
-    }
-    getRecordModel() {
-        return this.recordModel;
     }
     setRecordModelProperty(property, value) {
         if (Array.isArray(this.recordModel[property])) {
@@ -24019,7 +24023,6 @@ let FormSubmissionComponent = class FormSubmissionComponent {
     }
     ngOnInit() {
         this.recordModel = {};
-        console.log('');
     }
     ngDoCheck() {
         if (this.formManager.getService()) {
@@ -24028,8 +24031,11 @@ let FormSubmissionComponent = class FormSubmissionComponent {
     }
     onSubmit() {
         console.log(`adding ${this.formManager.getService()} record `, this.recordModel);
-        this[this.formManager.getService()].addRecord(this.recordModel);
-        this.recordModel = this.formManager.getRecordModel();
+        this[this.formManager.getService()].addRecord(this.recordModel)
+            .then(() => {
+            this.formManager.initializeRecordModel();
+            console.log('this is now: ', this.recordModel);
+        });
     }
 };
 FormSubmissionComponent = __decorate([
@@ -24574,4 +24580,4 @@ exports.ErrorParser = ErrorParser;
 /***/ })
 
 },[651]);
-//# sourceMappingURL=app.ed3c727354f52e80c07b.js.map
+//# sourceMappingURL=app.1ab48bee7b6fe3702ab1.js.map
