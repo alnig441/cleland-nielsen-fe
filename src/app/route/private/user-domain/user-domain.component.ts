@@ -7,6 +7,7 @@ import { ImageServices } from "../../../services/image.services";
 @Component({
     selector: 'app-user-domain',
     template: require('./user-domain.component.pug'),
+    styleUrls: ['./user-domain.component.scss'],
     encapsulation: ViewEncapsulation.None
 })
 

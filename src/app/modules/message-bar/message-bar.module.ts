@@ -2,11 +2,12 @@ import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { MessagebarComponent } from "./message-bar.component";
 import { SetMessageService } from "../../services/set-message.service";
-import { ServiceModelManagerService } from "../../services/service-model-manager.service";
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 
 @NgModule({
     imports: [
-        CommonModule
+        CommonModule,
+        BrowserAnimationsModule
     ],
     declarations: [
         MessagebarComponent

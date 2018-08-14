@@ -76,15 +76,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵu", function() { return MIN_LENGTH_VALIDATOR; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵw", function() { return PATTERN_VALIDATOR; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵr", function() { return REQUIRED_VALIDATOR; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_tslib__ = __webpack_require__(44);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_tslib__ = __webpack_require__(31);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(3);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_observable_forkJoin__ = __webpack_require__(190);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_observable_forkJoin__ = __webpack_require__(191);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_observable_forkJoin___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs_observable_forkJoin__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_observable_fromPromise__ = __webpack_require__(132);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_observable_fromPromise___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_rxjs_observable_fromPromise__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_operator_map__ = __webpack_require__(70);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_rxjs_operator_map__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__angular_platform_browser__ = __webpack_require__(68);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__angular_platform_browser__ = __webpack_require__(60);
 
 /**
  * @license Angular v4.3.6
@@ -6226,7 +6226,7 @@ var singleton = null;
 var	singletonCounter = 0;
 var	stylesInsertedAtTop = [];
 
-var	fixUrls = __webpack_require__(660);
+var	fixUrls = __webpack_require__(661);
 
 module.exports = function(list, options) {
 	if (typeof DEBUG !== "undefined" && DEBUG) {
@@ -6540,6 +6540,1330 @@ function updateLink (link, options, obj) {
 
 /***/ }),
 
+/***/ 139:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AnimationBuilder", function() { return AnimationBuilder; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AnimationFactory", function() { return AnimationFactory; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AUTO_STYLE", function() { return AUTO_STYLE; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "animate", function() { return animate; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "animateChild", function() { return animateChild; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "animation", function() { return animation; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "group", function() { return group; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "keyframes", function() { return keyframes; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "query", function() { return query; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "sequence", function() { return sequence; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "stagger", function() { return stagger; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "state", function() { return state; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "style", function() { return style; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "transition", function() { return transition; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "trigger", function() { return trigger; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "useAnimation", function() { return useAnimation; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "NoopAnimationPlayer", function() { return NoopAnimationPlayer; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵAnimationGroupPlayer", function() { return AnimationGroupPlayer; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵPRE_STYLE", function() { return ɵPRE_STYLE; });
+/**
+ * @license Angular v4.3.6
+ * (c) 2010-2017 Google, Inc. https://angular.io/
+ * License: MIT
+ */
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
+/**
+ * AnimationBuilder is an injectable service that is available when the {\@link
+ * BrowserAnimationsModule BrowserAnimationsModule} or {\@link NoopAnimationsModule
+ * NoopAnimationsModule} modules are used within an application.
+ *
+ * The purpose if this service is to produce an animation sequence programmatically within an
+ * angular component or directive.
+ *
+ * Programmatic animations are first built and then a player is created when the build animation is
+ * attached to an element.
+ *
+ * ```ts
+ * // remember to include the BrowserAnimationsModule module for this to work...
+ * import {AnimationBuilder} from '\@angular/animations';
+ *
+ * class MyCmp {
+ *   constructor(private _builder: AnimationBuilder) {}
+ *
+ *   makeAnimation(element: any) {
+ *     // first build the animation
+ *     const myAnimation = this._builder.build([
+ *       style({ width: 0 }),
+ *       animate(1000, style({ width: '100px' }))
+ *     ]);
+ *
+ *     // then create a player from it
+ *     const player = myAnimation.create(element);
+ *
+ *     player.play();
+ *   }
+ * }
+ * ```
+ *
+ * When an animation is built an instance of {\@link AnimationFactory AnimationFactory} will be
+ * returned. Using that an {\@link AnimationPlayer AnimationPlayer} can be created which can then be
+ * used to start the animation.
+ *
+ * \@experimental Animation support is experimental.
+ * @abstract
+ */
+var AnimationBuilder = (function () {
+    function AnimationBuilder() {
+    }
+    /**
+     * @abstract
+     * @param {?} animation
+     * @return {?}
+     */
+    AnimationBuilder.prototype.build = function (animation) { };
+    return AnimationBuilder;
+}());
+/**
+ * An instance of `AnimationFactory` is returned from {\@link AnimationBuilder#build
+ * AnimationBuilder.build}.
+ *
+ * \@experimental Animation support is experimental.
+ * @abstract
+ */
+var AnimationFactory = (function () {
+    function AnimationFactory() {
+    }
+    /**
+     * @abstract
+     * @param {?} element
+     * @param {?=} options
+     * @return {?}
+     */
+    AnimationFactory.prototype.create = function (element, options) { };
+    return AnimationFactory;
+}());
+/**
+ * \@experimental Animation support is experimental.
+ */
+var AUTO_STYLE = '*';
+/**
+ * `trigger` is an animation-specific function that is designed to be used inside of Angular's
+ * animation DSL language. If this information is new, please navigate to the
+ * {\@link Component#animations component animations metadata page} to gain a better
+ * understanding of how animations in Angular are used.
+ *
+ * `trigger` Creates an animation trigger which will a list of {\@link state state} and
+ * {\@link transition transition} entries that will be evaluated when the expression
+ * bound to the trigger changes.
+ *
+ * Triggers are registered within the component annotation data under the
+ * {\@link Component#animations animations section}. An animation trigger can be placed on an element
+ * within a template by referencing the name of the trigger followed by the expression value that
+ * the
+ * trigger is bound to (in the form of `[\@triggerName]="expression"`.
+ *
+ * ### Usage
+ *
+ * `trigger` will create an animation trigger reference based on the provided `name` value. The
+ * provided `animation` value is expected to be an array consisting of {\@link state state} and
+ * {\@link transition transition} declarations.
+ *
+ * ```typescript
+ * \@Component({
+ *   selector: 'my-component',
+ *   templateUrl: 'my-component-tpl.html',
+ *   animations: [
+ *     trigger("myAnimationTrigger", [
+ *       state(...),
+ *       state(...),
+ *       transition(...),
+ *       transition(...)
+ *     ])
+ *   ]
+ * })
+ * class MyComponent {
+ *   myStatusExp = "something";
+ * }
+ * ```
+ *
+ * The template associated with this component will make use of the `myAnimationTrigger` animation
+ * trigger by binding to an element within its template code.
+ *
+ * ```html
+ * <!-- somewhere inside of my-component-tpl.html -->
+ * <div [\@myAnimationTrigger]="myStatusExp">...</div>
+ * ```
+ *
+ * ## Disable Animations
+ * A special animation control binding called `\@.disabled` can be placed on an element which will
+ * then disable animations for any inner animation triggers situated within the element as well as
+ * any animations on the element itself.
+ *
+ * When true, the `\@.disabled` binding will prevent all animations from rendering. The example
+ * below shows how to use this feature:
+ *
+ * ```ts
+ * \@Component({
+ *   selector: 'my-component',
+ *   template: `
+ *     <div [\@.disabled]="isDisabled">
+ *       <div [\@childAnimation]="exp"></div>
+ *     </div>
+ *   `,
+ *   animations: [
+ *     trigger("childAnimation", [
+ *       // ...
+ *     ])
+ *   ]
+ * })
+ * class MyComponent {
+ *   isDisabled = true;
+ *   exp = '...';
+ * }
+ * ```
+ *
+ * The `\@childAnimation` trigger will not animate because `\@.disabled` prevents it from happening
+ * (when true).
+ *
+ * Note that `\@.disbled` will only disable all animations (this means any animations running on
+ * the same element will also be disabled).
+ *
+ * ### Disabling Animations Application-wide
+ * When an area of the template is set to have animations disabled, **all** inner components will
+ * also have their animations disabled as well. This means that all animations for an angular
+ * application can be disabled by placing a host binding set on `\@.disabled` on the topmost Angular
+ * component.
+ *
+ * ```ts
+ * import {Component, HostBinding} from '\@angular/core';
+ *
+ * \@Component({
+ *   selector: 'app-component',
+ *   templateUrl: 'app.component.html',
+ * })
+ * class AppComponent {
+ *   \@HostBinding('\@.disabled')
+ *   public animationsDisabled = true;
+ * }
+ * ```
+ *
+ * ### What about animations that us `query()` and `animateChild()`?
+ * Despite inner animations being disabled, a parent animation can {\@link query query} for inner
+ * elements located in disabled areas of the template and still animate them as it sees fit. This is
+ * also the case for when a sub animation is queried by a parent and then later animated using {\@link
+ * animateChild animateChild}.
+ *
+ * \@experimental Animation support is experimental.
+ * @param {?} name
+ * @param {?} definitions
+ * @return {?}
+ */
+function trigger(name, definitions) {
+    return { type: 7 /* Trigger */, name: name, definitions: definitions, options: {} };
+}
+/**
+ * `animate` is an animation-specific function that is designed to be used inside of Angular's
+ * animation DSL language. If this information is new, please navigate to the {\@link
+ * Component#animations component animations metadata page} to gain a better understanding of
+ * how animations in Angular are used.
+ *
+ * `animate` specifies an animation step that will apply the provided `styles` data for a given
+ * amount of time based on the provided `timing` expression value. Calls to `animate` are expected
+ * to be used within {\@link sequence an animation sequence}, {\@link group group}, or {\@link
+ * transition transition}.
+ *
+ * ### Usage
+ *
+ * The `animate` function accepts two input parameters: `timing` and `styles`:
+ *
+ * - `timing` is a string based value that can be a combination of a duration with optional delay
+ * and easing values. The format for the expression breaks down to `duration delay easing`
+ * (therefore a value such as `1s 100ms ease-out` will be parse itself into `duration=1000,
+ * delay=100, easing=ease-out`. If a numeric value is provided then that will be used as the
+ * `duration` value in millisecond form.
+ * - `styles` is the style input data which can either be a call to {\@link style style} or {\@link
+ * keyframes keyframes}. If left empty then the styles from the destination state will be collected
+ * and used (this is useful when describing an animation step that will complete an animation by
+ * {\@link transition#the-final-animate-call animating to the final state}).
+ *
+ * ```typescript
+ * // various functions for specifying timing data
+ * animate(500, style(...))
+ * animate("1s", style(...))
+ * animate("100ms 0.5s", style(...))
+ * animate("5s ease", style(...))
+ * animate("5s 10ms cubic-bezier(.17,.67,.88,.1)", style(...))
+ *
+ * // either style() of keyframes() can be used
+ * animate(500, style({ background: "red" }))
+ * animate(500, keyframes([
+ *   style({ background: "blue" })),
+ *   style({ background: "red" }))
+ * ])
+ * ```
+ *
+ * {\@example core/animation/ts/dsl/animation_example.ts region='Component'}
+ *
+ * \@experimental Animation support is experimental.
+ * @param {?} timings
+ * @param {?=} styles
+ * @return {?}
+ */
+function animate(timings, styles) {
+    if (styles === void 0) { styles = null; }
+    return { type: 4 /* Animate */, styles: styles, timings: timings };
+}
+/**
+ * `group` is an animation-specific function that is designed to be used inside of Angular's
+ * animation DSL language. If this information is new, please navigate to the {\@link
+ * Component#animations component animations metadata page} to gain a better understanding of
+ * how animations in Angular are used.
+ *
+ * `group` specifies a list of animation steps that are all run in parallel. Grouped animations are
+ * useful when a series of styles must be animated/closed off at different starting/ending times.
+ *
+ * The `group` function can either be used within a {\@link sequence sequence} or a {\@link transition
+ * transition} and it will only continue to the next instruction once all of the inner animation
+ * steps have completed.
+ *
+ * ### Usage
+ *
+ * The `steps` data that is passed into the `group` animation function can either consist of {\@link
+ * style style} or {\@link animate animate} function calls. Each call to `style()` or `animate()`
+ * within a group will be executed instantly (use {\@link keyframes keyframes} or a {\@link
+ * animate#usage animate() with a delay value} to offset styles to be applied at a later time).
+ *
+ * ```typescript
+ * group([
+ *   animate("1s", { background: "black" }))
+ *   animate("2s", { color: "white" }))
+ * ])
+ * ```
+ *
+ * {\@example core/animation/ts/dsl/animation_example.ts region='Component'}
+ *
+ * \@experimental Animation support is experimental.
+ * @param {?} steps
+ * @param {?=} options
+ * @return {?}
+ */
+function group(steps, options) {
+    if (options === void 0) { options = null; }
+    return { type: 3 /* Group */, steps: steps, options: options };
+}
+/**
+ * `sequence` is an animation-specific function that is designed to be used inside of Angular's
+ * animation DSL language. If this information is new, please navigate to the {\@link
+ * Component#animations component animations metadata page} to gain a better understanding of
+ * how animations in Angular are used.
+ *
+ * `sequence` Specifies a list of animation steps that are run one by one. (`sequence` is used by
+ * default when an array is passed as animation data into {\@link transition transition}.)
+ *
+ * The `sequence` function can either be used within a {\@link group group} or a {\@link transition
+ * transition} and it will only continue to the next instruction once each of the inner animation
+ * steps have completed.
+ *
+ * To perform animation styling in parallel with other animation steps then have a look at the
+ * {\@link group group} animation function.
+ *
+ * ### Usage
+ *
+ * The `steps` data that is passed into the `sequence` animation function can either consist of
+ * {\@link style style} or {\@link animate animate} function calls. A call to `style()` will apply the
+ * provided styling data immediately while a call to `animate()` will apply its styling data over a
+ * given time depending on its timing data.
+ *
+ * ```typescript
+ * sequence([
+ *   style({ opacity: 0 })),
+ *   animate("1s", { opacity: 1 }))
+ * ])
+ * ```
+ *
+ * {\@example core/animation/ts/dsl/animation_example.ts region='Component'}
+ *
+ * \@experimental Animation support is experimental.
+ * @param {?} steps
+ * @param {?=} options
+ * @return {?}
+ */
+function sequence(steps, options) {
+    if (options === void 0) { options = null; }
+    return { type: 2 /* Sequence */, steps: steps, options: options };
+}
+/**
+ * `style` is an animation-specific function that is designed to be used inside of Angular's
+ * animation DSL language. If this information is new, please navigate to the {\@link
+ * Component#animations component animations metadata page} to gain a better understanding of
+ * how animations in Angular are used.
+ *
+ * `style` declares a key/value object containing CSS properties/styles that can then be used for
+ * {\@link state animation states}, within an {\@link sequence animation sequence}, or as styling data
+ * for both {\@link animate animate} and {\@link keyframes keyframes}.
+ *
+ * ### Usage
+ *
+ * `style` takes in a key/value string map as data and expects one or more CSS property/value pairs
+ * to be defined.
+ *
+ * ```typescript
+ * // string values are used for css properties
+ * style({ background: "red", color: "blue" })
+ *
+ * // numerical (pixel) values are also supported
+ * style({ width: 100, height: 0 })
+ * ```
+ *
+ * #### Auto-styles (using `*`)
+ *
+ * When an asterix (`*`) character is used as a value then it will be detected from the element
+ * being animated and applied as animation data when the animation starts.
+ *
+ * This feature proves useful for a state depending on layout and/or environment factors; in such
+ * cases the styles are calculated just before the animation starts.
+ *
+ * ```typescript
+ * // the steps below will animate from 0 to the
+ * // actual height of the element
+ * style({ height: 0 }),
+ * animate("1s", style({ height: "*" }))
+ * ```
+ *
+ * {\@example core/animation/ts/dsl/animation_example.ts region='Component'}
+ *
+ * \@experimental Animation support is experimental.
+ * @param {?} tokens
+ * @return {?}
+ */
+function style(tokens) {
+    return { type: 6 /* Style */, styles: tokens, offset: null };
+}
+/**
+ * `state` is an animation-specific function that is designed to be used inside of Angular's
+ * animation DSL language. If this information is new, please navigate to the {\@link
+ * Component#animations component animations metadata page} to gain a better understanding of
+ * how animations in Angular are used.
+ *
+ * `state` declares an animation state within the given trigger. When a state is active within a
+ * component then its associated styles will persist on the element that the trigger is attached to
+ * (even when the animation ends).
+ *
+ * To animate between states, have a look at the animation {\@link transition transition} DSL
+ * function. To register states to an animation trigger please have a look at the {\@link trigger
+ * trigger} function.
+ *
+ * #### The `void` state
+ *
+ * The `void` state value is a reserved word that angular uses to determine when the element is not
+ * apart of the application anymore (e.g. when an `ngIf` evaluates to false then the state of the
+ * associated element is void).
+ *
+ * #### The `*` (default) state
+ *
+ * The `*` state (when styled) is a fallback state that will be used if the state that is being
+ * animated is not declared within the trigger.
+ *
+ * ### Usage
+ *
+ * `state` will declare an animation state with its associated styles
+ * within the given trigger.
+ *
+ * - `stateNameExpr` can be one or more state names separated by commas.
+ * - `styles` refers to the {\@link style styling data} that will be persisted on the element once
+ * the state has been reached.
+ *
+ * ```typescript
+ * // "void" is a reserved name for a state and is used to represent
+ * // the state in which an element is detached from from the application.
+ * state("void", style({ height: 0 }))
+ *
+ * // user-defined states
+ * state("closed", style({ height: 0 }))
+ * state("open, visible", style({ height: "*" }))
+ * ```
+ *
+ * {\@example core/animation/ts/dsl/animation_example.ts region='Component'}
+ *
+ * \@experimental Animation support is experimental.
+ * @param {?} name
+ * @param {?} styles
+ * @param {?=} options
+ * @return {?}
+ */
+function state(name, styles, options) {
+    return { type: 0 /* State */, name: name, styles: styles, options: options };
+}
+/**
+ * `keyframes` is an animation-specific function that is designed to be used inside of Angular's
+ * animation DSL language. If this information is new, please navigate to the {\@link
+ * Component#animations component animations metadata page} to gain a better understanding of
+ * how animations in Angular are used.
+ *
+ * `keyframes` specifies a collection of {\@link style style} entries each optionally characterized
+ * by an `offset` value.
+ *
+ * ### Usage
+ *
+ * The `keyframes` animation function is designed to be used alongside the {\@link animate animate}
+ * animation function. Instead of applying animations from where they are currently to their
+ * destination, keyframes can describe how each style entry is applied and at what point within the
+ * animation arc (much like CSS Keyframe Animations do).
+ *
+ * For each `style()` entry an `offset` value can be set. Doing so allows to specifiy at what
+ * percentage of the animate time the styles will be applied.
+ *
+ * ```typescript
+ * // the provided offset values describe when each backgroundColor value is applied.
+ * animate("5s", keyframes([
+ *   style({ backgroundColor: "red", offset: 0 }),
+ *   style({ backgroundColor: "blue", offset: 0.2 }),
+ *   style({ backgroundColor: "orange", offset: 0.3 }),
+ *   style({ backgroundColor: "black", offset: 1 })
+ * ]))
+ * ```
+ *
+ * Alternatively, if there are no `offset` values used within the style entries then the offsets
+ * will be calculated automatically.
+ *
+ * ```typescript
+ * animate("5s", keyframes([
+ *   style({ backgroundColor: "red" }) // offset = 0
+ *   style({ backgroundColor: "blue" }) // offset = 0.33
+ *   style({ backgroundColor: "orange" }) // offset = 0.66
+ *   style({ backgroundColor: "black" }) // offset = 1
+ * ]))
+ * ```
+ *
+ * {\@example core/animation/ts/dsl/animation_example.ts region='Component'}
+ *
+ * \@experimental Animation support is experimental.
+ * @param {?} steps
+ * @return {?}
+ */
+function keyframes(steps) {
+    return { type: 5 /* Keyframes */, steps: steps };
+}
+/**
+ * `transition` is an animation-specific function that is designed to be used inside of Angular's
+ * animation DSL language. If this information is new, please navigate to the {\@link
+ * Component#animations component animations metadata page} to gain a better understanding of
+ * how animations in Angular are used.
+ *
+ * `transition` declares the {\@link sequence sequence of animation steps} that will be run when the
+ * provided `stateChangeExpr` value is satisfied. The `stateChangeExpr` consists of a `state1 =>
+ * state2` which consists of two known states (use an asterix (`*`) to refer to a dynamic starting
+ * and/or ending state).
+ *
+ * A function can also be provided as the `stateChangeExpr` argument for a transition and this
+ * function will be executed each time a state change occurs. If the value returned within the
+ * function is true then the associated animation will be run.
+ *
+ * Animation transitions are placed within an {\@link trigger animation trigger}. For an transition
+ * to animate to a state value and persist its styles then one or more {\@link state animation
+ * states} is expected to be defined.
+ *
+ * ### Usage
+ *
+ * An animation transition is kicked off the `stateChangeExpr` predicate evaluates to true based on
+ * what the previous state is and what the current state has become. In other words, if a transition
+ * is defined that matches the old/current state criteria then the associated animation will be
+ * triggered.
+ *
+ * ```typescript
+ * // all transition/state changes are defined within an animation trigger
+ * trigger("myAnimationTrigger", [
+ *   // if a state is defined then its styles will be persisted when the
+ *   // animation has fully completed itself
+ *   state("on", style({ background: "green" })),
+ *   state("off", style({ background: "grey" })),
+ *
+ *   // a transition animation that will be kicked off when the state value
+ *   // bound to "myAnimationTrigger" changes from "on" to "off"
+ *   transition("on => off", animate(500)),
+ *
+ *   // it is also possible to do run the same animation for both directions
+ *   transition("on <=> off", animate(500)),
+ *
+ *   // or to define multiple states pairs separated by commas
+ *   transition("on => off, off => void", animate(500)),
+ *
+ *   // this is a catch-all state change for when an element is inserted into
+ *   // the page and the destination state is unknown
+ *   transition("void => *", [
+ *     style({ opacity: 0 }),
+ *     animate(500)
+ *   ]),
+ *
+ *   // this will capture a state change between any states
+ *   transition("* => *", animate("1s 0s")),
+ *
+ *   // you can also go full out and include a function
+ *   transition((fromState, toState) => {
+ *     // when `true` then it will allow the animation below to be invoked
+ *     return fromState == "off" && toState == "on";
+ *   }, animate("1s 0s"))
+ * ])
+ * ```
+ *
+ * The template associated with this component will make use of the `myAnimationTrigger` animation
+ * trigger by binding to an element within its template code.
+ *
+ * ```html
+ * <!-- somewhere inside of my-component-tpl.html -->
+ * <div [\@myAnimationTrigger]="myStatusExp">...</div>
+ * ```
+ *
+ * #### The final `animate` call
+ *
+ * If the final step within the transition steps is a call to `animate()` that **only** uses a
+ * timing value with **no style data** then it will be automatically used as the final animation arc
+ * for the element to animate itself to the final state. This involves an automatic mix of
+ * adding/removing CSS styles so that the element will be in the exact state it should be for the
+ * applied state to be presented correctly.
+ *
+ * ```
+ * // start off by hiding the element, but make sure that it animates properly to whatever state
+ * // is currently active for "myAnimationTrigger"
+ * transition("void => *", [
+ *   style({ opacity: 0 }),
+ *   animate(500)
+ * ])
+ * ```
+ *
+ * ### Transition Aliases (`:enter` and `:leave`)
+ *
+ * Given that enter (insertion) and leave (removal) animations are so common, the `transition`
+ * function accepts both `:enter` and `:leave` values which are aliases for the `void => *` and `*
+ * => void` state changes.
+ *
+ * ```
+ * transition(":enter", [
+ *   style({ opacity: 0 }),
+ *   animate(500, style({ opacity: 1 }))
+ * ])
+ * transition(":leave", [
+ *   animate(500, style({ opacity: 0 }))
+ * ])
+ * ```
+ *
+ * {\@example core/animation/ts/dsl/animation_example.ts region='Component'}
+ *
+ * \@experimental Animation support is experimental.
+ * @param {?} stateChangeExpr
+ * @param {?} steps
+ * @param {?=} options
+ * @return {?}
+ */
+function transition(stateChangeExpr, steps, options) {
+    if (options === void 0) { options = null; }
+    return { type: 1 /* Transition */, expr: stateChangeExpr, animation: steps, options: options };
+}
+/**
+ * `animation` is an animation-specific function that is designed to be used inside of Angular's
+ * animation DSL language.
+ *
+ * `var myAnimation = animation(...)` is designed to produce a reusable animation that can be later
+ * invoked in another animation or sequence. Reusable animations are designed to make use of
+ * animation parameters and the produced animation can be used via the `useAnimation` method.
+ *
+ * ```
+ * var fadeAnimation = animation([
+ *   style({ opacity: '{{ start }}' }),
+ *   animate('{{ time }}',
+ *     style({ opacity: '{{ end }}'))
+ * ], { params: { time: '1000ms', start: 0, end: 1 }});
+ * ```
+ *
+ * If parameters are attached to an animation then they act as **default parameter values**. When an
+ * animation is invoked via `useAnimation` then parameter values are allowed to be passed in
+ * directly. If any of the passed in parameter values are missing then the default values will be
+ * used.
+ *
+ * ```
+ * useAnimation(fadeAnimation, {
+ *   params: {
+ *     time: '2s',
+ *     start: 1,
+ *     end: 0
+ *   }
+ * })
+ * ```
+ *
+ * If one or more parameter values are missing before animated then an error will be thrown.
+ *
+ * \@experimental Animation support is experimental.
+ * @param {?} steps
+ * @param {?=} options
+ * @return {?}
+ */
+function animation(steps, options) {
+    if (options === void 0) { options = null; }
+    return { type: 8 /* Reference */, animation: steps, options: options };
+}
+/**
+ * `animateChild` is an animation-specific function that is designed to be used inside of Angular's
+ * animation DSL language. It works by allowing a queried element to execute its own
+ * animation within the animation sequence.
+ *
+ * Each time an animation is triggered in angular, the parent animation
+ * will always get priority and any child animations will be blocked. In order
+ * for a child animation to run, the parent animation must query each of the elements
+ * containing child animations and then allow the animations to run using `animateChild`.
+ *
+ * The example HTML code below shows both parent and child elements that have animation
+ * triggers that will execute at the same time.
+ *
+ * ```html
+ * <!-- parent-child.component.html -->
+ * <button (click)="exp =! exp">Toggle</button>
+ * <hr>
+ *
+ * <div [\@parentAnimation]="exp">
+ *   <header>Hello</header>
+ *   <div [\@childAnimation]="exp">
+ *       one
+ *   </div>
+ *   <div [\@childAnimation]="exp">
+ *       two
+ *   </div>
+ *   <div [\@childAnimation]="exp">
+ *       three
+ *   </div>
+ * </div>
+ * ```
+ *
+ * Now when the `exp` value changes to true, only the `parentAnimation` animation will animate
+ * because it has priority. However, using `query` and `animateChild` each of the inner animations
+ * can also fire:
+ *
+ * ```ts
+ * // parent-child.component.ts
+ * import {trigger, transition, animate, style, query, animateChild} from '\@angular/animations';
+ * \@Component({
+ *   selector: 'parent-child-component',
+ *   animations: [
+ *     trigger('parentAnimation', [
+ *       transition('false => true', [
+ *         query('header', [
+ *           style({ opacity: 0 }),
+ *           animate(500, style({ opacity: 1 }))
+ *         ]),
+ *         query('\@childAnimation', [
+ *           animateChild()
+ *         ])
+ *       ])
+ *     ]),
+ *     trigger('childAnimation', [
+ *       transition('false => true', [
+ *         style({ opacity: 0 }),
+ *         animate(500, style({ opacity: 1 }))
+ *       ])
+ *     ])
+ *   ]
+ * })
+ * class ParentChildCmp {
+ *   exp: boolean = false;
+ * }
+ * ```
+ *
+ * In the animation code above, when the `parentAnimation` transition kicks off it first queries to
+ * find the header element and fades it in. It then finds each of the sub elements that contain the
+ * `\@childAnimation` trigger and then allows for their animations to fire.
+ *
+ * This example can be further extended by using stagger:
+ *
+ * ```ts
+ * query('\@childAnimation', stagger(100, [
+ *   animateChild()
+ * ]))
+ * ```
+ *
+ * Now each of the sub animations start off with respect to the `100ms` staggering step.
+ *
+ * ## The first frame of child animations
+ * When sub animations are executed using `animateChild` the animation engine will always apply the
+ * first frame of every sub animation immediately at the start of the animation sequence. This way
+ * the parent animation does not need to set any initial styling data on the sub elements before the
+ * sub animations kick off.
+ *
+ * In the example above the first frame of the `childAnimation`'s `false => true` transition
+ * consists of a style of `opacity: 0`. This is applied immediately when the `parentAnimation`
+ * animation transition sequence starts. Only then when the `\@childAnimation` is queried and called
+ * with `animateChild` will it then animate to its destination of `opacity: 1`.
+ *
+ * Note that this feature designed to be used alongside {\@link query query()} and it will only work
+ * with animations that are assigned using the Angular animation DSL (this means that CSS keyframes
+ * and transitions are not handled by this API).
+ *
+ * \@experimental Animation support is experimental.
+ * @param {?=} options
+ * @return {?}
+ */
+function animateChild(options) {
+    if (options === void 0) { options = null; }
+    return { type: 9 /* AnimateChild */, options: options };
+}
+/**
+ * `useAnimation` is an animation-specific function that is designed to be used inside of Angular's
+ * animation DSL language. It is used to kick off a reusable animation that is created using {\@link
+ * animation animation()}.
+ *
+ * \@experimental Animation support is experimental.
+ * @param {?} animation
+ * @param {?=} options
+ * @return {?}
+ */
+function useAnimation(animation, options) {
+    if (options === void 0) { options = null; }
+    return { type: 10 /* AnimateRef */, animation: animation, options: options };
+}
+/**
+ * `query` is an animation-specific function that is designed to be used inside of Angular's
+ * animation DSL language.
+ *
+ * query() is used to find one or more inner elements within the current element that is
+ * being animated within the sequence. The provided animation steps are applied
+ * to the queried element (by default, an array is provided, then this will be
+ * treated as an animation sequence).
+ *
+ * ### Usage
+ *
+ * query() is designed to collect mutiple elements and works internally by using
+ * `element.querySelectorAll`. An additional options object can be provided which
+ * can be used to limit the total amount of items to be collected.
+ *
+ * ```js
+ * query('div', [
+ *   animate(...),
+ *   animate(...)
+ * ], { limit: 1 })
+ * ```
+ *
+ * query(), by default, will throw an error when zero items are found. If a query
+ * has the `optional` flag set to true then this error will be ignored.
+ *
+ * ```js
+ * query('.some-element-that-may-not-be-there', [
+ *   animate(...),
+ *   animate(...)
+ * ], { optional: true })
+ * ```
+ *
+ * ### Special Selector Values
+ *
+ * The selector value within a query can collect elements that contain angular-specific
+ * characteristics
+ * using special pseudo-selectors tokens.
+ *
+ * These include:
+ *
+ *  - Querying for newly inserted/removed elements using `query(":enter")`/`query(":leave")`
+ *  - Querying all currently animating elements using `query(":animating")`
+ *  - Querying elements that contain an animation trigger using `query("\@triggerName")`
+ *  - Querying all elements that contain an animation triggers using `query("\@*")`
+ *  - Including the current element into the animation sequence using `query(":self")`
+ *
+ *
+ *  Each of these pseudo-selector tokens can be merged together into a combined query selector
+ * string:
+ *
+ *  ```
+ *  query(':self, .record:enter, .record:leave, \@subTrigger', [...])
+ *  ```
+ *
+ * ### Demo
+ *
+ * ```
+ * \@Component({
+ *   selector: 'inner',
+ *   template: `
+ *     <div [\@queryAnimation]="exp">
+ *       <h1>Title</h1>
+ *       <div class="content">
+ *         Blah blah blah
+ *       </div>
+ *     </div>
+ *   `,
+ *   animations: [
+ *    trigger('queryAnimation', [
+ *      transition('* => goAnimate', [
+ *        // hide the inner elements
+ *        query('h1', style({ opacity: 0 })),
+ *        query('.content', style({ opacity: 0 })),
+ *
+ *        // animate the inner elements in, one by one
+ *        query('h1', animate(1000, style({ opacity: 1 })),
+ *        query('.content', animate(1000, style({ opacity: 1 })),
+ *      ])
+ *    ])
+ *  ]
+ * })
+ * class Cmp {
+ *   exp = '';
+ *
+ *   goAnimate() {
+ *     this.exp = 'goAnimate';
+ *   }
+ * }
+ * ```
+ *
+ * \@experimental Animation support is experimental.
+ * @param {?} selector
+ * @param {?} animation
+ * @param {?=} options
+ * @return {?}
+ */
+function query(selector, animation, options) {
+    if (options === void 0) { options = null; }
+    return { type: 11 /* Query */, selector: selector, animation: animation, options: options };
+}
+/**
+ * `stagger` is an animation-specific function that is designed to be used inside of Angular's
+ * animation DSL language. It is designed to be used inside of an animation {\@link query query()}
+ * and works by issuing a timing gap between after each queried item is animated.
+ *
+ * ### Usage
+ *
+ * In the example below there is a container element that wraps a list of items stamped out
+ * by an ngFor. The container element contains an animation trigger that will later be set
+ * to query for each of the inner items.
+ *
+ * ```html
+ * <!-- list.component.html -->
+ * <button (click)="toggle()">Show / Hide Items</button>
+ * <hr />
+ * <div [\@listAnimation]="items.length">
+ *   <div *ngFor="let item of items">
+ *     {{ item }}
+ *   </div>
+ * </div>
+ * ```
+ *
+ * The component code for this looks as such:
+ *
+ * ```ts
+ * import {trigger, transition, style, animate, query, stagger} from '\@angular/animations';
+ * \@Component({
+ *   templateUrl: 'list.component.html',
+ *   animations: [
+ *     trigger('listAnimation', [
+ *        //...
+ *     ])
+ *   ]
+ * })
+ * class ListComponent {
+ *   items = [];
+ *
+ *   showItems() {
+ *     this.items = [0,1,2,3,4];
+ *   }
+ *
+ *   hideItems() {
+ *     this.items = [];
+ *   }
+ *
+ *   toggle() {
+ *     this.items.length ? this.hideItems() : this.showItems();
+ *   }
+ * }
+ * ```
+ *
+ * And now for the animation trigger code:
+ *
+ * ```ts
+ * trigger('listAnimation', [
+ *   transition('* => *', [ // each time the binding value changes
+ *     query(':leave', [
+ *       stagger(100, [
+ *         animate('0.5s', style({ opacity: 0 }))
+ *       ])
+ *     ]),
+ *     query(':enter', [
+ *       style({ opacity: 0 }),
+ *       stagger(100, [
+ *         animate('0.5s', style({ opacity: 1 }))
+ *       ])
+ *     ])
+ *   ])
+ * ])
+ * ```
+ *
+ * Now each time the items are added/removed then either the opacity
+ * fade-in animation will run or each removed item will be faded out.
+ * When either of these animations occur then a stagger effect will be
+ * applied after each item's animation is started.
+ *
+ * \@experimental Animation support is experimental.
+ * @param {?} timings
+ * @param {?} animation
+ * @return {?}
+ */
+function stagger(timings, animation) {
+    return { type: 12 /* Stagger */, timings: timings, animation: animation };
+}
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ * @param {?} cb
+ * @return {?}
+ */
+function scheduleMicroTask(cb) {
+    Promise.resolve(null).then(cb);
+}
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
+/**
+ * \@experimental Animation support is experimental.
+ */
+var NoopAnimationPlayer = (function () {
+    function NoopAnimationPlayer() {
+        this._onDoneFns = [];
+        this._onStartFns = [];
+        this._onDestroyFns = [];
+        this._started = false;
+        this._destroyed = false;
+        this._finished = false;
+        this.parentPlayer = null;
+        this.totalTime = 0;
+    }
+    /**
+     * @return {?}
+     */
+    NoopAnimationPlayer.prototype._onFinish = function () {
+        if (!this._finished) {
+            this._finished = true;
+            this._onDoneFns.forEach(function (fn) { return fn(); });
+            this._onDoneFns = [];
+        }
+    };
+    /**
+     * @param {?} fn
+     * @return {?}
+     */
+    NoopAnimationPlayer.prototype.onStart = function (fn) { this._onStartFns.push(fn); };
+    /**
+     * @param {?} fn
+     * @return {?}
+     */
+    NoopAnimationPlayer.prototype.onDone = function (fn) { this._onDoneFns.push(fn); };
+    /**
+     * @param {?} fn
+     * @return {?}
+     */
+    NoopAnimationPlayer.prototype.onDestroy = function (fn) { this._onDestroyFns.push(fn); };
+    /**
+     * @return {?}
+     */
+    NoopAnimationPlayer.prototype.hasStarted = function () { return this._started; };
+    /**
+     * @return {?}
+     */
+    NoopAnimationPlayer.prototype.init = function () { };
+    /**
+     * @return {?}
+     */
+    NoopAnimationPlayer.prototype.play = function () {
+        if (!this.hasStarted()) {
+            this.triggerMicrotask();
+            this._onStart();
+        }
+        this._started = true;
+    };
+    /**
+     * @return {?}
+     */
+    NoopAnimationPlayer.prototype.triggerMicrotask = function () {
+        var _this = this;
+        scheduleMicroTask(function () { return _this._onFinish(); });
+    };
+    /**
+     * @return {?}
+     */
+    NoopAnimationPlayer.prototype._onStart = function () {
+        this._onStartFns.forEach(function (fn) { return fn(); });
+        this._onStartFns = [];
+    };
+    /**
+     * @return {?}
+     */
+    NoopAnimationPlayer.prototype.pause = function () { };
+    /**
+     * @return {?}
+     */
+    NoopAnimationPlayer.prototype.restart = function () { };
+    /**
+     * @return {?}
+     */
+    NoopAnimationPlayer.prototype.finish = function () { this._onFinish(); };
+    /**
+     * @return {?}
+     */
+    NoopAnimationPlayer.prototype.destroy = function () {
+        if (!this._destroyed) {
+            this._destroyed = true;
+            if (!this.hasStarted()) {
+                this._onStart();
+            }
+            this.finish();
+            this._onDestroyFns.forEach(function (fn) { return fn(); });
+            this._onDestroyFns = [];
+        }
+    };
+    /**
+     * @return {?}
+     */
+    NoopAnimationPlayer.prototype.reset = function () { };
+    /**
+     * @param {?} p
+     * @return {?}
+     */
+    NoopAnimationPlayer.prototype.setPosition = function (p) { };
+    /**
+     * @return {?}
+     */
+    NoopAnimationPlayer.prototype.getPosition = function () { return 0; };
+    return NoopAnimationPlayer;
+}());
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
+var AnimationGroupPlayer = (function () {
+    /**
+     * @param {?} _players
+     */
+    function AnimationGroupPlayer(_players) {
+        var _this = this;
+        this._players = _players;
+        this._onDoneFns = [];
+        this._onStartFns = [];
+        this._finished = false;
+        this._started = false;
+        this._destroyed = false;
+        this._onDestroyFns = [];
+        this.parentPlayer = null;
+        this.totalTime = 0;
+        var doneCount = 0;
+        var destroyCount = 0;
+        var startCount = 0;
+        var total = this._players.length;
+        if (total == 0) {
+            scheduleMicroTask(function () { return _this._onFinish(); });
+        }
+        else {
+            this._players.forEach(function (player) {
+                player.parentPlayer = _this;
+                player.onDone(function () {
+                    if (++doneCount >= total) {
+                        _this._onFinish();
+                    }
+                });
+                player.onDestroy(function () {
+                    if (++destroyCount >= total) {
+                        _this._onDestroy();
+                    }
+                });
+                player.onStart(function () {
+                    if (++startCount >= total) {
+                        _this._onStart();
+                    }
+                });
+            });
+        }
+        this.totalTime = this._players.reduce(function (time, player) { return Math.max(time, player.totalTime); }, 0);
+    }
+    /**
+     * @return {?}
+     */
+    AnimationGroupPlayer.prototype._onFinish = function () {
+        if (!this._finished) {
+            this._finished = true;
+            this._onDoneFns.forEach(function (fn) { return fn(); });
+            this._onDoneFns = [];
+        }
+    };
+    /**
+     * @return {?}
+     */
+    AnimationGroupPlayer.prototype.init = function () { this._players.forEach(function (player) { return player.init(); }); };
+    /**
+     * @param {?} fn
+     * @return {?}
+     */
+    AnimationGroupPlayer.prototype.onStart = function (fn) { this._onStartFns.push(fn); };
+    /**
+     * @return {?}
+     */
+    AnimationGroupPlayer.prototype._onStart = function () {
+        if (!this.hasStarted()) {
+            this._onStartFns.forEach(function (fn) { return fn(); });
+            this._onStartFns = [];
+            this._started = true;
+        }
+    };
+    /**
+     * @param {?} fn
+     * @return {?}
+     */
+    AnimationGroupPlayer.prototype.onDone = function (fn) { this._onDoneFns.push(fn); };
+    /**
+     * @param {?} fn
+     * @return {?}
+     */
+    AnimationGroupPlayer.prototype.onDestroy = function (fn) { this._onDestroyFns.push(fn); };
+    /**
+     * @return {?}
+     */
+    AnimationGroupPlayer.prototype.hasStarted = function () { return this._started; };
+    /**
+     * @return {?}
+     */
+    AnimationGroupPlayer.prototype.play = function () {
+        if (!this.parentPlayer) {
+            this.init();
+        }
+        this._onStart();
+        this._players.forEach(function (player) { return player.play(); });
+    };
+    /**
+     * @return {?}
+     */
+    AnimationGroupPlayer.prototype.pause = function () { this._players.forEach(function (player) { return player.pause(); }); };
+    /**
+     * @return {?}
+     */
+    AnimationGroupPlayer.prototype.restart = function () { this._players.forEach(function (player) { return player.restart(); }); };
+    /**
+     * @return {?}
+     */
+    AnimationGroupPlayer.prototype.finish = function () {
+        this._onFinish();
+        this._players.forEach(function (player) { return player.finish(); });
+    };
+    /**
+     * @return {?}
+     */
+    AnimationGroupPlayer.prototype.destroy = function () { this._onDestroy(); };
+    /**
+     * @return {?}
+     */
+    AnimationGroupPlayer.prototype._onDestroy = function () {
+        if (!this._destroyed) {
+            this._destroyed = true;
+            this._onFinish();
+            this._players.forEach(function (player) { return player.destroy(); });
+            this._onDestroyFns.forEach(function (fn) { return fn(); });
+            this._onDestroyFns = [];
+        }
+    };
+    /**
+     * @return {?}
+     */
+    AnimationGroupPlayer.prototype.reset = function () {
+        this._players.forEach(function (player) { return player.reset(); });
+        this._destroyed = false;
+        this._finished = false;
+        this._started = false;
+    };
+    /**
+     * @param {?} p
+     * @return {?}
+     */
+    AnimationGroupPlayer.prototype.setPosition = function (p) {
+        var /** @type {?} */ timeAtPosition = p * this.totalTime;
+        this._players.forEach(function (player) {
+            var /** @type {?} */ position = player.totalTime ? Math.min(1, timeAtPosition / player.totalTime) : 1;
+            player.setPosition(position);
+        });
+    };
+    /**
+     * @return {?}
+     */
+    AnimationGroupPlayer.prototype.getPosition = function () {
+        var /** @type {?} */ min = 0;
+        this._players.forEach(function (player) {
+            var /** @type {?} */ p = player.getPosition();
+            min = Math.min(p, min);
+        });
+        return min;
+    };
+    Object.defineProperty(AnimationGroupPlayer.prototype, "players", {
+        /**
+         * @return {?}
+         */
+        get: function () { return this._players; },
+        enumerable: true,
+        configurable: true
+    });
+    /**
+     * @return {?}
+     */
+    AnimationGroupPlayer.prototype.beforeDestroy = function () {
+        this.players.forEach(function (player) {
+            if (player.beforeDestroy) {
+                player.beforeDestroy();
+            }
+        });
+    };
+    return AnimationGroupPlayer;
+}());
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
+var ɵPRE_STYLE = '!';
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
+/**
+ * @module
+ * @description
+ * Entry point for all animation APIs of the animation package.
+ */
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
+/**
+ * @module
+ * @description
+ * Entry point for all public APIs of the animation package.
+ */
+/**
+ * Generated bundle index. Do not edit.
+ */
+
+//# sourceMappingURL=animations.es5.js.map
+
+
+/***/ }),
+
 /***/ 16:
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -6555,7 +7879,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 const core_1 = __webpack_require__(3);
-const http_1 = __webpack_require__(31);
+const http_1 = __webpack_require__(32);
 __webpack_require__(71);
 let AuthenticationService = class AuthenticationService {
     constructor(http) {
@@ -6593,7 +7917,7 @@ exports.AuthenticationService = AuthenticationService;
 
 /***/ }),
 
-/***/ 208:
+/***/ 209:
 /***/ (function(module, exports) {
 
 /*
@@ -6676,14 +8000,14 @@ function toComment(sourceMap) {
 
 /***/ }),
 
-/***/ 209:
+/***/ 210:
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__.p + "daadf7633574bf7e3bdb92bc6a7fc082.eot";
 
 /***/ }),
 
-/***/ 210:
+/***/ 211:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6699,8 +8023,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 const core_1 = __webpack_require__(3);
 const router_1 = __webpack_require__(20);
-const http_1 = __webpack_require__(31);
-const login_model_1 = __webpack_require__(681);
+const http_1 = __webpack_require__(32);
+const login_model_1 = __webpack_require__(682);
 const authentication_service_1 = __webpack_require__(16);
 const permission_services_1 = __webpack_require__(46);
 const error_parser_1 = __webpack_require__(84);
@@ -6729,7 +8053,6 @@ let LoginComponent = class LoginComponent {
                     });
                 })
                     .then(() => {
-                    console.log('what user: ', user);
                     let redirect = user.userParameters.type != 'standard_user' ? '/private/admin-domain' : '/private/user-domain';
                     // let redirect = this.authenticator.redirectUrl ? this.authenticator.redirectUrl : '/private';
                     let navigationExtras = {
@@ -6751,8 +8074,8 @@ let LoginComponent = class LoginComponent {
 LoginComponent = __decorate([
     core_1.Component({
         selector: 'app-login',
-        template: __webpack_require__(682),
-        styles: [__webpack_require__(683)],
+        template: __webpack_require__(683),
+        styles: [__webpack_require__(684)],
         encapsulation: core_1.ViewEncapsulation.None
     }),
     __metadata("design:paramtypes", [http_1.HttpClient, router_1.Router, authentication_service_1.AuthenticationService, permission_services_1.PermissionServices])
@@ -6762,7 +8085,7 @@ exports.LoginComponent = LoginComponent;
 
 /***/ }),
 
-/***/ 211:
+/***/ 212:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6786,7 +8109,7 @@ let AboutComponent = class AboutComponent {
 AboutComponent = __decorate([
     core_1.Component({
         selector: 'app-about',
-        template: __webpack_require__(685),
+        template: __webpack_require__(686),
         encapsulation: core_1.ViewEncapsulation.None
     }),
     __metadata("design:paramtypes", [])
@@ -6796,7 +8119,7 @@ exports.AboutComponent = AboutComponent;
 
 /***/ }),
 
-/***/ 212:
+/***/ 213:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6820,7 +8143,7 @@ let ContactComponent = class ContactComponent {
 ContactComponent = __decorate([
     core_1.Component({
         selector: 'app-contact',
-        template: __webpack_require__(686)
+        template: __webpack_require__(687)
     }),
     __metadata("design:paramtypes", [])
 ], ContactComponent);
@@ -6829,7 +8152,7 @@ exports.ContactComponent = ContactComponent;
 
 /***/ }),
 
-/***/ 213:
+/***/ 214:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6853,50 +8176,11 @@ let WorkComponent = class WorkComponent {
 WorkComponent = __decorate([
     core_1.Component({
         selector: 'app-work',
-        template: __webpack_require__(687)
+        template: __webpack_require__(688)
     }),
     __metadata("design:paramtypes", [])
 ], WorkComponent);
 exports.WorkComponent = WorkComponent;
-
-
-/***/ }),
-
-/***/ 214:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-const core_1 = __webpack_require__(3);
-const http_1 = __webpack_require__(31);
-const SiteCopy = __webpack_require__(688);
-let HomeComponent = class HomeComponent {
-    constructor(http) {
-        this.http = http;
-        this.home = SiteCopy.Home;
-    }
-    ngOnInit() {
-        // console.log('home component initialised\nLocalStorage: ', localStorage);
-    }
-};
-HomeComponent = __decorate([
-    core_1.Component({
-        selector: "app-home",
-        template: __webpack_require__(689),
-        styles: [__webpack_require__(690)]
-    }),
-    __metadata("design:paramtypes", [http_1.HttpClient])
-], HomeComponent);
-exports.HomeComponent = HomeComponent;
 
 
 /***/ }),
@@ -6916,11 +8200,50 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 const core_1 = __webpack_require__(3);
+const http_1 = __webpack_require__(32);
+const SiteCopy = __webpack_require__(689);
+let HomeComponent = class HomeComponent {
+    constructor(http) {
+        this.http = http;
+        this.home = SiteCopy.Home;
+    }
+    ngOnInit() {
+        // console.log('home component initialised\nLocalStorage: ', localStorage);
+    }
+};
+HomeComponent = __decorate([
+    core_1.Component({
+        selector: "app-home",
+        template: __webpack_require__(690),
+        styles: [__webpack_require__(691)]
+    }),
+    __metadata("design:paramtypes", [http_1.HttpClient])
+], HomeComponent);
+exports.HomeComponent = HomeComponent;
+
+
+/***/ }),
+
+/***/ 216:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+const core_1 = __webpack_require__(3);
 const account_services_1 = __webpack_require__(54);
 const authentication_service_1 = __webpack_require__(16);
-const user_services_1 = __webpack_require__(60);
+const user_services_1 = __webpack_require__(61);
 const router_1 = __webpack_require__(20);
-const service_model_manager_service_1 = __webpack_require__(32);
+const service_model_manager_service_1 = __webpack_require__(33);
 let UsersComponent = class UsersComponent {
     constructor(formManager, activatedRoute, activeUser, accountService, userService) {
         this.formManager = formManager;
@@ -6952,7 +8275,7 @@ let UsersComponent = class UsersComponent {
 UsersComponent = __decorate([
     core_1.Component({
         selector: 'app-users',
-        template: __webpack_require__(701),
+        template: __webpack_require__(702),
         encapsulation: core_1.ViewEncapsulation.None
     }),
     __metadata("design:paramtypes", [service_model_manager_service_1.ServiceModelManagerService, router_1.ActivatedRoute, authentication_service_1.AuthenticationService, account_services_1.AccountServices, user_services_1.UserServices])
@@ -6962,7 +8285,7 @@ exports.UsersComponent = UsersComponent;
 
 /***/ }),
 
-/***/ 216:
+/***/ 217:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6978,7 +8301,7 @@ exports.PermissionModel = PermissionModel;
 
 /***/ }),
 
-/***/ 217:
+/***/ 218:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6993,11 +8316,11 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 const core_1 = __webpack_require__(3);
-const http_1 = __webpack_require__(31);
-const user_services_1 = __webpack_require__(60);
+const http_1 = __webpack_require__(32);
+const user_services_1 = __webpack_require__(61);
 const account_services_1 = __webpack_require__(54);
 const permission_services_1 = __webpack_require__(46);
-const service_model_manager_service_1 = __webpack_require__(32);
+const service_model_manager_service_1 = __webpack_require__(33);
 const authentication_service_1 = __webpack_require__(16);
 let AdminDomainComponent = class AdminDomainComponent {
     constructor(formManager, activeUser, users, accounts, permissions, http) {
@@ -7030,8 +8353,8 @@ let AdminDomainComponent = class AdminDomainComponent {
 AdminDomainComponent = __decorate([
     core_1.Component({
         selector: 'app-admin',
-        template: __webpack_require__(702),
-        styles: [__webpack_require__(703)],
+        template: __webpack_require__(703),
+        styles: [__webpack_require__(704)],
         encapsulation: core_1.ViewEncapsulation.None
     }),
     __metadata("design:paramtypes", [service_model_manager_service_1.ServiceModelManagerService, authentication_service_1.AuthenticationService, user_services_1.UserServices, account_services_1.AccountServices, permission_services_1.PermissionServices, http_1.HttpClient])
@@ -7041,7 +8364,7 @@ exports.AdminDomainComponent = AdminDomainComponent;
 
 /***/ }),
 
-/***/ 218:
+/***/ 219:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7060,8 +8383,8 @@ const account_services_1 = __webpack_require__(54);
 const permission_services_1 = __webpack_require__(46);
 const authentication_service_1 = __webpack_require__(16);
 const router_1 = __webpack_require__(20);
-const service_model_manager_service_1 = __webpack_require__(32);
-const listValidator_1 = __webpack_require__(704);
+const service_model_manager_service_1 = __webpack_require__(33);
+const listValidator_1 = __webpack_require__(705);
 let AccountsComponent = class AccountsComponent {
     constructor(formManager, activatedRoute, activeUser, accountService, permissionService) {
         this.formManager = formManager;
@@ -7116,7 +8439,7 @@ let AccountsComponent = class AccountsComponent {
 AccountsComponent = __decorate([
     core_1.Component({
         selector: 'app-accounts',
-        template: __webpack_require__(705),
+        template: __webpack_require__(706),
         encapsulation: core_1.ViewEncapsulation.None
     }),
     __metadata("design:paramtypes", [service_model_manager_service_1.ServiceModelManagerService, router_1.ActivatedRoute, authentication_service_1.AuthenticationService, account_services_1.AccountServices, permission_services_1.PermissionServices])
@@ -7126,7 +8449,7 @@ exports.AccountsComponent = AccountsComponent;
 
 /***/ }),
 
-/***/ 219:
+/***/ 220:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7142,9 +8465,9 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 const core_1 = __webpack_require__(3);
 const authentication_service_1 = __webpack_require__(16);
-const permission_model_1 = __webpack_require__(216);
+const permission_model_1 = __webpack_require__(217);
 const router_1 = __webpack_require__(20);
-const service_model_manager_service_1 = __webpack_require__(32);
+const service_model_manager_service_1 = __webpack_require__(33);
 const permission_services_1 = __webpack_require__(46);
 let PermissionsComponent = class PermissionsComponent {
     constructor(permissionService, formManager, activatedRoute, activeUser) {
@@ -7165,50 +8488,12 @@ let PermissionsComponent = class PermissionsComponent {
 PermissionsComponent = __decorate([
     core_1.Component({
         selector: 'app-permissions',
-        template: __webpack_require__(706),
+        template: __webpack_require__(707),
         encapsulation: core_1.ViewEncapsulation.None
     }),
     __metadata("design:paramtypes", [permission_services_1.PermissionServices, service_model_manager_service_1.ServiceModelManagerService, router_1.ActivatedRoute, authentication_service_1.AuthenticationService])
 ], PermissionsComponent);
 exports.PermissionsComponent = PermissionsComponent;
-
-
-/***/ }),
-
-/***/ 220:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-const core_1 = __webpack_require__(3);
-const common_1 = __webpack_require__(24);
-const message_bar_component_1 = __webpack_require__(708);
-const set_message_service_1 = __webpack_require__(53);
-let MessageBarModule = class MessageBarModule {
-};
-MessageBarModule = __decorate([
-    core_1.NgModule({
-        imports: [
-            common_1.CommonModule
-        ],
-        declarations: [
-            message_bar_component_1.MessagebarComponent
-        ],
-        exports: [
-            message_bar_component_1.MessagebarComponent
-        ],
-        providers: [
-            set_message_service_1.SetMessageService,
-        ]
-    })
-], MessageBarModule);
-exports.MessageBarModule = MessageBarModule;
 
 
 /***/ }),
@@ -7226,11 +8511,51 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 const core_1 = __webpack_require__(3);
 const common_1 = __webpack_require__(24);
-const sidebar_cta_component_1 = __webpack_require__(710);
-const service_model_manager_service_1 = __webpack_require__(32);
+const message_bar_component_1 = __webpack_require__(709);
+const set_message_service_1 = __webpack_require__(53);
+const animations_1 = __webpack_require__(712);
+let MessageBarModule = class MessageBarModule {
+};
+MessageBarModule = __decorate([
+    core_1.NgModule({
+        imports: [
+            common_1.CommonModule,
+            animations_1.BrowserAnimationsModule
+        ],
+        declarations: [
+            message_bar_component_1.MessagebarComponent
+        ],
+        exports: [
+            message_bar_component_1.MessagebarComponent
+        ],
+        providers: [
+            set_message_service_1.SetMessageService,
+        ]
+    })
+], MessageBarModule);
+exports.MessageBarModule = MessageBarModule;
+
+
+/***/ }),
+
+/***/ 222:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+const core_1 = __webpack_require__(3);
+const common_1 = __webpack_require__(24);
+const sidebar_cta_component_1 = __webpack_require__(714);
+const service_model_manager_service_1 = __webpack_require__(33);
 const permission_services_1 = __webpack_require__(46);
 const account_services_1 = __webpack_require__(54);
-const user_services_1 = __webpack_require__(60);
+const user_services_1 = __webpack_require__(61);
 const image_services_1 = __webpack_require__(72);
 let SidebarCtaModule = class SidebarCtaModule {
 };
@@ -7259,7 +8584,7 @@ exports.SidebarCtaModule = SidebarCtaModule;
 
 /***/ }),
 
-/***/ 222:
+/***/ 223:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7272,10 +8597,10 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 const core_1 = __webpack_require__(3);
 const common_1 = __webpack_require__(24);
-const form_submission_component_1 = __webpack_require__(712);
-const service_model_manager_service_1 = __webpack_require__(32);
+const form_submission_component_1 = __webpack_require__(717);
+const service_model_manager_service_1 = __webpack_require__(33);
 const image_services_1 = __webpack_require__(72);
-const user_services_1 = __webpack_require__(60);
+const user_services_1 = __webpack_require__(61);
 const account_services_1 = __webpack_require__(54);
 const permission_services_1 = __webpack_require__(46);
 const forms_1 = __webpack_require__(103);
@@ -7307,7 +8632,7 @@ exports.FormSubmissionModule = FormSubmissionModule;
 
 /***/ }),
 
-/***/ 223:
+/***/ 224:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7324,7 +8649,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 const core_1 = __webpack_require__(3);
 const image_services_1 = __webpack_require__(72);
 const authentication_service_1 = __webpack_require__(16);
-const service_model_manager_service_1 = __webpack_require__(32);
+const service_model_manager_service_1 = __webpack_require__(33);
 const router_1 = __webpack_require__(20);
 let ImagesComponent = class ImagesComponent {
     constructor(formManager, activatedRoute, activeUser, imageService) {
@@ -7340,8 +8665,8 @@ let ImagesComponent = class ImagesComponent {
 ImagesComponent = __decorate([
     core_1.Component({
         selector: 'app-images',
-        template: __webpack_require__(716),
-        styles: [__webpack_require__(717)],
+        template: __webpack_require__(721),
+        styles: [__webpack_require__(722)],
         encapsulation: core_1.ViewEncapsulation.None
     }),
     __metadata("design:paramtypes", [service_model_manager_service_1.ServiceModelManagerService, router_1.ActivatedRoute, authentication_service_1.AuthenticationService, image_services_1.ImageServices])
@@ -7351,7 +8676,7 @@ exports.ImagesComponent = ImagesComponent;
 
 /***/ }),
 
-/***/ 224:
+/***/ 225:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7378,7 +8703,7 @@ let VideosComponent = class VideosComponent {
 VideosComponent = __decorate([
     core_1.Component({
         selector: 'app-events',
-        template: __webpack_require__(718),
+        template: __webpack_require__(723),
         encapsulation: core_1.ViewEncapsulation.None
     }),
     __metadata("design:paramtypes", [authentication_service_1.AuthenticationService])
@@ -7388,7 +8713,7 @@ exports.VideosComponent = VideosComponent;
 
 /***/ }),
 
-/***/ 225:
+/***/ 226:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7405,7 +8730,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 const core_1 = __webpack_require__(3);
 const authentication_service_1 = __webpack_require__(16);
 const set_message_service_1 = __webpack_require__(53);
-const service_model_manager_service_1 = __webpack_require__(32);
+const service_model_manager_service_1 = __webpack_require__(33);
 const image_services_1 = __webpack_require__(72);
 let UserDomainComponent = class UserDomainComponent {
     constructor(activeUser, setMessage, formManager, images) {
@@ -7432,7 +8757,8 @@ let UserDomainComponent = class UserDomainComponent {
 UserDomainComponent = __decorate([
     core_1.Component({
         selector: 'app-user-domain',
-        template: __webpack_require__(719),
+        template: __webpack_require__(724),
+        styles: [__webpack_require__(725)],
         encapsulation: core_1.ViewEncapsulation.None
     }),
     __metadata("design:paramtypes", [authentication_service_1.AuthenticationService, set_message_service_1.SetMessageService, service_model_manager_service_1.ServiceModelManagerService, image_services_1.ImageServices])
@@ -17703,7 +19029,7 @@ return jQuery;
 
 /***/ }),
 
-/***/ 31:
+/***/ 32:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -17738,7 +19064,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵh", function() { return HttpXsrfInterceptor; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵe", function() { return XSRF_COOKIE_NAME; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵf", function() { return XSRF_HEADER_NAME; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_tslib__ = __webpack_require__(44);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_tslib__ = __webpack_require__(31);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_observable_of__ = __webpack_require__(129);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_observable_of___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs_observable_of__);
@@ -19895,7 +21221,7 @@ HttpClientJsonpModule.ctorParameters = function () { return []; };
 
 /***/ }),
 
-/***/ 32:
+/***/ 33:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -19910,10 +21236,10 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 const core_1 = __webpack_require__(3);
-const user_model_1 = __webpack_require__(698);
-const account_model_1 = __webpack_require__(699);
-const permission_model_1 = __webpack_require__(216);
-const image_model_1 = __webpack_require__(700);
+const user_model_1 = __webpack_require__(699);
+const account_model_1 = __webpack_require__(700);
+const permission_model_1 = __webpack_require__(217);
+const image_model_1 = __webpack_require__(701);
 let ServiceModelManagerService = class ServiceModelManagerService {
     constructor() {
         this.languages = [
@@ -19998,7 +21324,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 const core_1 = __webpack_require__(3);
-const http_1 = __webpack_require__(31);
+const http_1 = __webpack_require__(32);
 __webpack_require__(71);
 const error_parser_1 = __webpack_require__(84);
 const authentication_service_1 = __webpack_require__(16);
@@ -20117,17 +21443,22 @@ let SetMessageService = class SetMessageService {
         this.router = router;
         this.activeUser = activeUser;
         this.response = {};
+        this.responseState = 'hidden';
     }
     set(error) {
+        this.response = {};
         error.status != 200 ? this.response.failure = error : this.response.success = error;
+        this.responseState = 'visible';
         setTimeout(() => {
-            this.response.failure = null;
-            this.response.success = null;
+            this.responseState = 'hidden';
             if (error.forceLogout) {
                 this.activeUser.logout();
                 this.router.navigate(['/login']);
             }
         }, 3000);
+    }
+    getResponseState() {
+        return this.responseState;
     }
 };
 SetMessageService = __decorate([
@@ -20155,7 +21486,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 const core_1 = __webpack_require__(3);
-const http_1 = __webpack_require__(31);
+const http_1 = __webpack_require__(32);
 __webpack_require__(71);
 const error_parser_1 = __webpack_require__(84);
 const authentication_service_1 = __webpack_require__(16);
@@ -20264,7 +21595,7 @@ exports.AccountServices = AccountServices;
 
 /***/ }),
 
-/***/ 60:
+/***/ 61:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -20279,7 +21610,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 const core_1 = __webpack_require__(3);
-const http_1 = __webpack_require__(31);
+const http_1 = __webpack_require__(32);
 __webpack_require__(71);
 const error_parser_1 = __webpack_require__(84);
 const authentication_service_1 = __webpack_require__(16);
@@ -20391,20 +21722,11 @@ exports.UserServices = UserServices;
 
 /***/ }),
 
-/***/ 651:
-/***/ (function(module, exports, __webpack_require__) {
-
-__webpack_require__(652);
-module.exports = __webpack_require__(674);
-
-
-/***/ }),
-
 /***/ 652:
 /***/ (function(module, exports, __webpack_require__) {
 
-// eslint-disable-next-line import/no-webpack-loader-syntax
-module.exports = __webpack_require__(653);
+__webpack_require__(653);
+module.exports = __webpack_require__(675);
 
 
 /***/ }),
@@ -20412,8 +21734,8 @@ module.exports = __webpack_require__(653);
 /***/ 653:
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports.css = __webpack_require__ (654);
-module.exports.js = __webpack_require__ (661);
+// eslint-disable-next-line import/no-webpack-loader-syntax
+module.exports = __webpack_require__(654);
 
 
 /***/ }),
@@ -20421,10 +21743,19 @@ module.exports.js = __webpack_require__ (661);
 /***/ 654:
 /***/ (function(module, exports, __webpack_require__) {
 
+module.exports.css = __webpack_require__ (655);
+module.exports.js = __webpack_require__ (662);
+
+
+/***/ }),
+
+/***/ 655:
+/***/ (function(module, exports, __webpack_require__) {
+
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(655);
+var content = __webpack_require__(656);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // Prepare cssTransformation
 var transform;
@@ -20450,50 +21781,50 @@ if(false) {
 
 /***/ }),
 
-/***/ 655:
+/***/ 656:
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(208)(undefined);
+exports = module.exports = __webpack_require__(209)(undefined);
 // imports
 
 
 // module
-exports.push([module.i, "@charset \"UTF-8\";\n\n/*! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */\n\nhtml {\n  font-family: sans-serif;\n  -ms-text-size-adjust: 100%;\n  -webkit-text-size-adjust: 100%;\n}\n\nbody {\n  margin: 0;\n}\n\narticle,\naside,\ndetails,\nfigcaption,\nfigure,\nfooter,\nheader,\nhgroup,\nmain,\nmenu,\nnav,\nsection,\nsummary {\n  display: block;\n}\n\naudio,\ncanvas,\nprogress,\nvideo {\n  display: inline-block;\n  vertical-align: baseline;\n}\n\naudio:not([controls]) {\n  display: none;\n  height: 0;\n}\n\n[hidden],\ntemplate {\n  display: none;\n}\n\na {\n  background-color: transparent;\n}\n\na:active,\na:hover {\n  outline: 0;\n}\n\nabbr[title] {\n  border-bottom: 1px dotted;\n}\n\nb,\nstrong {\n  font-weight: bold;\n}\n\ndfn {\n  font-style: italic;\n}\n\nh1 {\n  font-size: 2em;\n  margin: 0.67em 0;\n}\n\nmark {\n  background: #ff0;\n  color: #000;\n}\n\nsmall {\n  font-size: 80%;\n}\n\nsub,\nsup {\n  font-size: 75%;\n  line-height: 0;\n  position: relative;\n  vertical-align: baseline;\n}\n\nsup {\n  top: -0.5em;\n}\n\nsub {\n  bottom: -0.25em;\n}\n\nimg {\n  border: 0;\n}\n\nsvg:not(:root) {\n  overflow: hidden;\n}\n\nfigure {\n  margin: 1em 40px;\n}\n\nhr {\n  box-sizing: content-box;\n  height: 0;\n}\n\npre {\n  overflow: auto;\n}\n\ncode,\nkbd,\npre,\nsamp {\n  font-family: monospace, monospace;\n  font-size: 1em;\n}\n\nbutton,\ninput,\noptgroup,\nselect,\ntextarea {\n  color: inherit;\n  font: inherit;\n  margin: 0;\n}\n\nbutton {\n  overflow: visible;\n}\n\nbutton,\nselect {\n  text-transform: none;\n}\n\nbutton,\nhtml input[type=\"button\"],\ninput[type=\"reset\"],\ninput[type=\"submit\"] {\n  -webkit-appearance: button;\n  cursor: pointer;\n}\n\nbutton[disabled],\nhtml input[disabled] {\n  cursor: default;\n}\n\nbutton::-moz-focus-inner,\ninput::-moz-focus-inner {\n  border: 0;\n  padding: 0;\n}\n\ninput {\n  line-height: normal;\n}\n\ninput[type=\"checkbox\"],\ninput[type=\"radio\"] {\n  box-sizing: border-box;\n  padding: 0;\n}\n\ninput[type=\"number\"]::-webkit-inner-spin-button,\ninput[type=\"number\"]::-webkit-outer-spin-button {\n  height: auto;\n}\n\ninput[type=\"search\"] {\n  -webkit-appearance: textfield;\n  box-sizing: content-box;\n}\n\ninput[type=\"search\"]::-webkit-search-cancel-button,\ninput[type=\"search\"]::-webkit-search-decoration {\n  -webkit-appearance: none;\n}\n\nfieldset {\n  border: 1px solid #c0c0c0;\n  margin: 0 2px;\n  padding: 0.35em 0.625em 0.75em;\n}\n\nlegend {\n  border: 0;\n  padding: 0;\n}\n\ntextarea {\n  overflow: auto;\n}\n\noptgroup {\n  font-weight: bold;\n}\n\ntable {\n  border-collapse: collapse;\n  border-spacing: 0;\n}\n\ntd,\nth {\n  padding: 0;\n}\n\n/*! Source: https://github.com/h5bp/html5-boilerplate/blob/master/src/css/main.css */\n\n@media print {\n  *,\n  *:before,\n  *:after {\n    background: transparent !important;\n    color: #000 !important;\n    box-shadow: none !important;\n    text-shadow: none !important;\n  }\n\n  a,\n  a:visited {\n    text-decoration: underline;\n  }\n\n  a[href]:after {\n    content: \" (\" attr(href) \")\";\n  }\n\n  abbr[title]:after {\n    content: \" (\" attr(title) \")\";\n  }\n\n  a[href^=\"#\"]:after,\n  a[href^=\"javascript:\"]:after {\n    content: \"\";\n  }\n\n  pre,\n  blockquote {\n    border: 1px solid #999;\n    page-break-inside: avoid;\n  }\n\n  thead {\n    display: table-header-group;\n  }\n\n  tr,\n  img {\n    page-break-inside: avoid;\n  }\n\n  img {\n    max-width: 100% !important;\n  }\n\n  p,\n  h2,\n  h3 {\n    orphans: 3;\n    widows: 3;\n  }\n\n  h2,\n  h3 {\n    page-break-after: avoid;\n  }\n\n  .navbar {\n    display: none;\n  }\n\n  .btn > .caret,\n  .dropup > .btn > .caret {\n    border-top-color: #000 !important;\n  }\n\n  .label {\n    border: 1px solid #000;\n  }\n\n  .table {\n    border-collapse: collapse !important;\n  }\n\n  .table td,\n  .table th {\n    background-color: #fff !important;\n  }\n\n  .table-bordered th,\n  .table-bordered td {\n    border: 1px solid #ddd !important;\n  }\n}\n\n@font-face {\n  font-family: 'Glyphicons Halflings';\n  src: url(" + __webpack_require__(209) + ");\n  src: url(" + __webpack_require__(209) + ") format(\"embedded-opentype\"), url(" + __webpack_require__(656) + ") format(\"woff2\"), url(" + __webpack_require__(657) + ") format(\"woff\"), url(" + __webpack_require__(658) + ") format(\"truetype\"), url(" + __webpack_require__(659) + ") format(\"svg\");\n}\n\n.glyphicon {\n  position: relative;\n  top: 1px;\n  display: inline-block;\n  font-family: 'Glyphicons Halflings';\n  font-style: normal;\n  font-weight: normal;\n  line-height: 1;\n  -webkit-font-smoothing: antialiased;\n  -moz-osx-font-smoothing: grayscale;\n}\n\n.glyphicon-asterisk:before {\n  content: \"*\";\n}\n\n.glyphicon-plus:before {\n  content: \"+\";\n}\n\n.glyphicon-euro:before,\n.glyphicon-eur:before {\n  content: \"\\20AC\";\n}\n\n.glyphicon-minus:before {\n  content: \"\\2212\";\n}\n\n.glyphicon-cloud:before {\n  content: \"\\2601\";\n}\n\n.glyphicon-envelope:before {\n  content: \"\\2709\";\n}\n\n.glyphicon-pencil:before {\n  content: \"\\270F\";\n}\n\n.glyphicon-glass:before {\n  content: \"\\E001\";\n}\n\n.glyphicon-music:before {\n  content: \"\\E002\";\n}\n\n.glyphicon-search:before {\n  content: \"\\E003\";\n}\n\n.glyphicon-heart:before {\n  content: \"\\E005\";\n}\n\n.glyphicon-star:before {\n  content: \"\\E006\";\n}\n\n.glyphicon-star-empty:before {\n  content: \"\\E007\";\n}\n\n.glyphicon-user:before {\n  content: \"\\E008\";\n}\n\n.glyphicon-film:before {\n  content: \"\\E009\";\n}\n\n.glyphicon-th-large:before {\n  content: \"\\E010\";\n}\n\n.glyphicon-th:before {\n  content: \"\\E011\";\n}\n\n.glyphicon-th-list:before {\n  content: \"\\E012\";\n}\n\n.glyphicon-ok:before {\n  content: \"\\E013\";\n}\n\n.glyphicon-remove:before {\n  content: \"\\E014\";\n}\n\n.glyphicon-zoom-in:before {\n  content: \"\\E015\";\n}\n\n.glyphicon-zoom-out:before {\n  content: \"\\E016\";\n}\n\n.glyphicon-off:before {\n  content: \"\\E017\";\n}\n\n.glyphicon-signal:before {\n  content: \"\\E018\";\n}\n\n.glyphicon-cog:before {\n  content: \"\\E019\";\n}\n\n.glyphicon-trash:before {\n  content: \"\\E020\";\n}\n\n.glyphicon-home:before {\n  content: \"\\E021\";\n}\n\n.glyphicon-file:before {\n  content: \"\\E022\";\n}\n\n.glyphicon-time:before {\n  content: \"\\E023\";\n}\n\n.glyphicon-road:before {\n  content: \"\\E024\";\n}\n\n.glyphicon-download-alt:before {\n  content: \"\\E025\";\n}\n\n.glyphicon-download:before {\n  content: \"\\E026\";\n}\n\n.glyphicon-upload:before {\n  content: \"\\E027\";\n}\n\n.glyphicon-inbox:before {\n  content: \"\\E028\";\n}\n\n.glyphicon-play-circle:before {\n  content: \"\\E029\";\n}\n\n.glyphicon-repeat:before {\n  content: \"\\E030\";\n}\n\n.glyphicon-refresh:before {\n  content: \"\\E031\";\n}\n\n.glyphicon-list-alt:before {\n  content: \"\\E032\";\n}\n\n.glyphicon-lock:before {\n  content: \"\\E033\";\n}\n\n.glyphicon-flag:before {\n  content: \"\\E034\";\n}\n\n.glyphicon-headphones:before {\n  content: \"\\E035\";\n}\n\n.glyphicon-volume-off:before {\n  content: \"\\E036\";\n}\n\n.glyphicon-volume-down:before {\n  content: \"\\E037\";\n}\n\n.glyphicon-volume-up:before {\n  content: \"\\E038\";\n}\n\n.glyphicon-qrcode:before {\n  content: \"\\E039\";\n}\n\n.glyphicon-barcode:before {\n  content: \"\\E040\";\n}\n\n.glyphicon-tag:before {\n  content: \"\\E041\";\n}\n\n.glyphicon-tags:before {\n  content: \"\\E042\";\n}\n\n.glyphicon-book:before {\n  content: \"\\E043\";\n}\n\n.glyphicon-bookmark:before {\n  content: \"\\E044\";\n}\n\n.glyphicon-print:before {\n  content: \"\\E045\";\n}\n\n.glyphicon-camera:before {\n  content: \"\\E046\";\n}\n\n.glyphicon-font:before {\n  content: \"\\E047\";\n}\n\n.glyphicon-bold:before {\n  content: \"\\E048\";\n}\n\n.glyphicon-italic:before {\n  content: \"\\E049\";\n}\n\n.glyphicon-text-height:before {\n  content: \"\\E050\";\n}\n\n.glyphicon-text-width:before {\n  content: \"\\E051\";\n}\n\n.glyphicon-align-left:before {\n  content: \"\\E052\";\n}\n\n.glyphicon-align-center:before {\n  content: \"\\E053\";\n}\n\n.glyphicon-align-right:before {\n  content: \"\\E054\";\n}\n\n.glyphicon-align-justify:before {\n  content: \"\\E055\";\n}\n\n.glyphicon-list:before {\n  content: \"\\E056\";\n}\n\n.glyphicon-indent-left:before {\n  content: \"\\E057\";\n}\n\n.glyphicon-indent-right:before {\n  content: \"\\E058\";\n}\n\n.glyphicon-facetime-video:before {\n  content: \"\\E059\";\n}\n\n.glyphicon-picture:before {\n  content: \"\\E060\";\n}\n\n.glyphicon-map-marker:before {\n  content: \"\\E062\";\n}\n\n.glyphicon-adjust:before {\n  content: \"\\E063\";\n}\n\n.glyphicon-tint:before {\n  content: \"\\E064\";\n}\n\n.glyphicon-edit:before {\n  content: \"\\E065\";\n}\n\n.glyphicon-share:before {\n  content: \"\\E066\";\n}\n\n.glyphicon-check:before {\n  content: \"\\E067\";\n}\n\n.glyphicon-move:before {\n  content: \"\\E068\";\n}\n\n.glyphicon-step-backward:before {\n  content: \"\\E069\";\n}\n\n.glyphicon-fast-backward:before {\n  content: \"\\E070\";\n}\n\n.glyphicon-backward:before {\n  content: \"\\E071\";\n}\n\n.glyphicon-play:before {\n  content: \"\\E072\";\n}\n\n.glyphicon-pause:before {\n  content: \"\\E073\";\n}\n\n.glyphicon-stop:before {\n  content: \"\\E074\";\n}\n\n.glyphicon-forward:before {\n  content: \"\\E075\";\n}\n\n.glyphicon-fast-forward:before {\n  content: \"\\E076\";\n}\n\n.glyphicon-step-forward:before {\n  content: \"\\E077\";\n}\n\n.glyphicon-eject:before {\n  content: \"\\E078\";\n}\n\n.glyphicon-chevron-left:before {\n  content: \"\\E079\";\n}\n\n.glyphicon-chevron-right:before {\n  content: \"\\E080\";\n}\n\n.glyphicon-plus-sign:before {\n  content: \"\\E081\";\n}\n\n.glyphicon-minus-sign:before {\n  content: \"\\E082\";\n}\n\n.glyphicon-remove-sign:before {\n  content: \"\\E083\";\n}\n\n.glyphicon-ok-sign:before {\n  content: \"\\E084\";\n}\n\n.glyphicon-question-sign:before {\n  content: \"\\E085\";\n}\n\n.glyphicon-info-sign:before {\n  content: \"\\E086\";\n}\n\n.glyphicon-screenshot:before {\n  content: \"\\E087\";\n}\n\n.glyphicon-remove-circle:before {\n  content: \"\\E088\";\n}\n\n.glyphicon-ok-circle:before {\n  content: \"\\E089\";\n}\n\n.glyphicon-ban-circle:before {\n  content: \"\\E090\";\n}\n\n.glyphicon-arrow-left:before {\n  content: \"\\E091\";\n}\n\n.glyphicon-arrow-right:before {\n  content: \"\\E092\";\n}\n\n.glyphicon-arrow-up:before {\n  content: \"\\E093\";\n}\n\n.glyphicon-arrow-down:before {\n  content: \"\\E094\";\n}\n\n.glyphicon-share-alt:before {\n  content: \"\\E095\";\n}\n\n.glyphicon-resize-full:before {\n  content: \"\\E096\";\n}\n\n.glyphicon-resize-small:before {\n  content: \"\\E097\";\n}\n\n.glyphicon-exclamation-sign:before {\n  content: \"\\E101\";\n}\n\n.glyphicon-gift:before {\n  content: \"\\E102\";\n}\n\n.glyphicon-leaf:before {\n  content: \"\\E103\";\n}\n\n.glyphicon-fire:before {\n  content: \"\\E104\";\n}\n\n.glyphicon-eye-open:before {\n  content: \"\\E105\";\n}\n\n.glyphicon-eye-close:before {\n  content: \"\\E106\";\n}\n\n.glyphicon-warning-sign:before {\n  content: \"\\E107\";\n}\n\n.glyphicon-plane:before {\n  content: \"\\E108\";\n}\n\n.glyphicon-calendar:before {\n  content: \"\\E109\";\n}\n\n.glyphicon-random:before {\n  content: \"\\E110\";\n}\n\n.glyphicon-comment:before {\n  content: \"\\E111\";\n}\n\n.glyphicon-magnet:before {\n  content: \"\\E112\";\n}\n\n.glyphicon-chevron-up:before {\n  content: \"\\E113\";\n}\n\n.glyphicon-chevron-down:before {\n  content: \"\\E114\";\n}\n\n.glyphicon-retweet:before {\n  content: \"\\E115\";\n}\n\n.glyphicon-shopping-cart:before {\n  content: \"\\E116\";\n}\n\n.glyphicon-folder-close:before {\n  content: \"\\E117\";\n}\n\n.glyphicon-folder-open:before {\n  content: \"\\E118\";\n}\n\n.glyphicon-resize-vertical:before {\n  content: \"\\E119\";\n}\n\n.glyphicon-resize-horizontal:before {\n  content: \"\\E120\";\n}\n\n.glyphicon-hdd:before {\n  content: \"\\E121\";\n}\n\n.glyphicon-bullhorn:before {\n  content: \"\\E122\";\n}\n\n.glyphicon-bell:before {\n  content: \"\\E123\";\n}\n\n.glyphicon-certificate:before {\n  content: \"\\E124\";\n}\n\n.glyphicon-thumbs-up:before {\n  content: \"\\E125\";\n}\n\n.glyphicon-thumbs-down:before {\n  content: \"\\E126\";\n}\n\n.glyphicon-hand-right:before {\n  content: \"\\E127\";\n}\n\n.glyphicon-hand-left:before {\n  content: \"\\E128\";\n}\n\n.glyphicon-hand-up:before {\n  content: \"\\E129\";\n}\n\n.glyphicon-hand-down:before {\n  content: \"\\E130\";\n}\n\n.glyphicon-circle-arrow-right:before {\n  content: \"\\E131\";\n}\n\n.glyphicon-circle-arrow-left:before {\n  content: \"\\E132\";\n}\n\n.glyphicon-circle-arrow-up:before {\n  content: \"\\E133\";\n}\n\n.glyphicon-circle-arrow-down:before {\n  content: \"\\E134\";\n}\n\n.glyphicon-globe:before {\n  content: \"\\E135\";\n}\n\n.glyphicon-wrench:before {\n  content: \"\\E136\";\n}\n\n.glyphicon-tasks:before {\n  content: \"\\E137\";\n}\n\n.glyphicon-filter:before {\n  content: \"\\E138\";\n}\n\n.glyphicon-briefcase:before {\n  content: \"\\E139\";\n}\n\n.glyphicon-fullscreen:before {\n  content: \"\\E140\";\n}\n\n.glyphicon-dashboard:before {\n  content: \"\\E141\";\n}\n\n.glyphicon-paperclip:before {\n  content: \"\\E142\";\n}\n\n.glyphicon-heart-empty:before {\n  content: \"\\E143\";\n}\n\n.glyphicon-link:before {\n  content: \"\\E144\";\n}\n\n.glyphicon-phone:before {\n  content: \"\\E145\";\n}\n\n.glyphicon-pushpin:before {\n  content: \"\\E146\";\n}\n\n.glyphicon-usd:before {\n  content: \"\\E148\";\n}\n\n.glyphicon-gbp:before {\n  content: \"\\E149\";\n}\n\n.glyphicon-sort:before {\n  content: \"\\E150\";\n}\n\n.glyphicon-sort-by-alphabet:before {\n  content: \"\\E151\";\n}\n\n.glyphicon-sort-by-alphabet-alt:before {\n  content: \"\\E152\";\n}\n\n.glyphicon-sort-by-order:before {\n  content: \"\\E153\";\n}\n\n.glyphicon-sort-by-order-alt:before {\n  content: \"\\E154\";\n}\n\n.glyphicon-sort-by-attributes:before {\n  content: \"\\E155\";\n}\n\n.glyphicon-sort-by-attributes-alt:before {\n  content: \"\\E156\";\n}\n\n.glyphicon-unchecked:before {\n  content: \"\\E157\";\n}\n\n.glyphicon-expand:before {\n  content: \"\\E158\";\n}\n\n.glyphicon-collapse-down:before {\n  content: \"\\E159\";\n}\n\n.glyphicon-collapse-up:before {\n  content: \"\\E160\";\n}\n\n.glyphicon-log-in:before {\n  content: \"\\E161\";\n}\n\n.glyphicon-flash:before {\n  content: \"\\E162\";\n}\n\n.glyphicon-log-out:before {\n  content: \"\\E163\";\n}\n\n.glyphicon-new-window:before {\n  content: \"\\E164\";\n}\n\n.glyphicon-record:before {\n  content: \"\\E165\";\n}\n\n.glyphicon-save:before {\n  content: \"\\E166\";\n}\n\n.glyphicon-open:before {\n  content: \"\\E167\";\n}\n\n.glyphicon-saved:before {\n  content: \"\\E168\";\n}\n\n.glyphicon-import:before {\n  content: \"\\E169\";\n}\n\n.glyphicon-export:before {\n  content: \"\\E170\";\n}\n\n.glyphicon-send:before {\n  content: \"\\E171\";\n}\n\n.glyphicon-floppy-disk:before {\n  content: \"\\E172\";\n}\n\n.glyphicon-floppy-saved:before {\n  content: \"\\E173\";\n}\n\n.glyphicon-floppy-remove:before {\n  content: \"\\E174\";\n}\n\n.glyphicon-floppy-save:before {\n  content: \"\\E175\";\n}\n\n.glyphicon-floppy-open:before {\n  content: \"\\E176\";\n}\n\n.glyphicon-credit-card:before {\n  content: \"\\E177\";\n}\n\n.glyphicon-transfer:before {\n  content: \"\\E178\";\n}\n\n.glyphicon-cutlery:before {\n  content: \"\\E179\";\n}\n\n.glyphicon-header:before {\n  content: \"\\E180\";\n}\n\n.glyphicon-compressed:before {\n  content: \"\\E181\";\n}\n\n.glyphicon-earphone:before {\n  content: \"\\E182\";\n}\n\n.glyphicon-phone-alt:before {\n  content: \"\\E183\";\n}\n\n.glyphicon-tower:before {\n  content: \"\\E184\";\n}\n\n.glyphicon-stats:before {\n  content: \"\\E185\";\n}\n\n.glyphicon-sd-video:before {\n  content: \"\\E186\";\n}\n\n.glyphicon-hd-video:before {\n  content: \"\\E187\";\n}\n\n.glyphicon-subtitles:before {\n  content: \"\\E188\";\n}\n\n.glyphicon-sound-stereo:before {\n  content: \"\\E189\";\n}\n\n.glyphicon-sound-dolby:before {\n  content: \"\\E190\";\n}\n\n.glyphicon-sound-5-1:before {\n  content: \"\\E191\";\n}\n\n.glyphicon-sound-6-1:before {\n  content: \"\\E192\";\n}\n\n.glyphicon-sound-7-1:before {\n  content: \"\\E193\";\n}\n\n.glyphicon-copyright-mark:before {\n  content: \"\\E194\";\n}\n\n.glyphicon-registration-mark:before {\n  content: \"\\E195\";\n}\n\n.glyphicon-cloud-download:before {\n  content: \"\\E197\";\n}\n\n.glyphicon-cloud-upload:before {\n  content: \"\\E198\";\n}\n\n.glyphicon-tree-conifer:before {\n  content: \"\\E199\";\n}\n\n.glyphicon-tree-deciduous:before {\n  content: \"\\E200\";\n}\n\n.glyphicon-cd:before {\n  content: \"\\E201\";\n}\n\n.glyphicon-save-file:before {\n  content: \"\\E202\";\n}\n\n.glyphicon-open-file:before {\n  content: \"\\E203\";\n}\n\n.glyphicon-level-up:before {\n  content: \"\\E204\";\n}\n\n.glyphicon-copy:before {\n  content: \"\\E205\";\n}\n\n.glyphicon-paste:before {\n  content: \"\\E206\";\n}\n\n.glyphicon-alert:before {\n  content: \"\\E209\";\n}\n\n.glyphicon-equalizer:before {\n  content: \"\\E210\";\n}\n\n.glyphicon-king:before {\n  content: \"\\E211\";\n}\n\n.glyphicon-queen:before {\n  content: \"\\E212\";\n}\n\n.glyphicon-pawn:before {\n  content: \"\\E213\";\n}\n\n.glyphicon-bishop:before {\n  content: \"\\E214\";\n}\n\n.glyphicon-knight:before {\n  content: \"\\E215\";\n}\n\n.glyphicon-baby-formula:before {\n  content: \"\\E216\";\n}\n\n.glyphicon-tent:before {\n  content: \"\\26FA\";\n}\n\n.glyphicon-blackboard:before {\n  content: \"\\E218\";\n}\n\n.glyphicon-bed:before {\n  content: \"\\E219\";\n}\n\n.glyphicon-apple:before {\n  content: \"\\F8FF\";\n}\n\n.glyphicon-erase:before {\n  content: \"\\E221\";\n}\n\n.glyphicon-hourglass:before {\n  content: \"\\231B\";\n}\n\n.glyphicon-lamp:before {\n  content: \"\\E223\";\n}\n\n.glyphicon-duplicate:before {\n  content: \"\\E224\";\n}\n\n.glyphicon-piggy-bank:before {\n  content: \"\\E225\";\n}\n\n.glyphicon-scissors:before {\n  content: \"\\E226\";\n}\n\n.glyphicon-bitcoin:before {\n  content: \"\\E227\";\n}\n\n.glyphicon-btc:before {\n  content: \"\\E227\";\n}\n\n.glyphicon-xbt:before {\n  content: \"\\E227\";\n}\n\n.glyphicon-yen:before {\n  content: \"\\A5\";\n}\n\n.glyphicon-jpy:before {\n  content: \"\\A5\";\n}\n\n.glyphicon-ruble:before {\n  content: \"\\20BD\";\n}\n\n.glyphicon-rub:before {\n  content: \"\\20BD\";\n}\n\n.glyphicon-scale:before {\n  content: \"\\E230\";\n}\n\n.glyphicon-ice-lolly:before {\n  content: \"\\E231\";\n}\n\n.glyphicon-ice-lolly-tasted:before {\n  content: \"\\E232\";\n}\n\n.glyphicon-education:before {\n  content: \"\\E233\";\n}\n\n.glyphicon-option-horizontal:before {\n  content: \"\\E234\";\n}\n\n.glyphicon-option-vertical:before {\n  content: \"\\E235\";\n}\n\n.glyphicon-menu-hamburger:before {\n  content: \"\\E236\";\n}\n\n.glyphicon-modal-window:before {\n  content: \"\\E237\";\n}\n\n.glyphicon-oil:before {\n  content: \"\\E238\";\n}\n\n.glyphicon-grain:before {\n  content: \"\\E239\";\n}\n\n.glyphicon-sunglasses:before {\n  content: \"\\E240\";\n}\n\n.glyphicon-text-size:before {\n  content: \"\\E241\";\n}\n\n.glyphicon-text-color:before {\n  content: \"\\E242\";\n}\n\n.glyphicon-text-background:before {\n  content: \"\\E243\";\n}\n\n.glyphicon-object-align-top:before {\n  content: \"\\E244\";\n}\n\n.glyphicon-object-align-bottom:before {\n  content: \"\\E245\";\n}\n\n.glyphicon-object-align-horizontal:before {\n  content: \"\\E246\";\n}\n\n.glyphicon-object-align-left:before {\n  content: \"\\E247\";\n}\n\n.glyphicon-object-align-vertical:before {\n  content: \"\\E248\";\n}\n\n.glyphicon-object-align-right:before {\n  content: \"\\E249\";\n}\n\n.glyphicon-triangle-right:before {\n  content: \"\\E250\";\n}\n\n.glyphicon-triangle-left:before {\n  content: \"\\E251\";\n}\n\n.glyphicon-triangle-bottom:before {\n  content: \"\\E252\";\n}\n\n.glyphicon-triangle-top:before {\n  content: \"\\E253\";\n}\n\n.glyphicon-console:before {\n  content: \"\\E254\";\n}\n\n.glyphicon-superscript:before {\n  content: \"\\E255\";\n}\n\n.glyphicon-subscript:before {\n  content: \"\\E256\";\n}\n\n.glyphicon-menu-left:before {\n  content: \"\\E257\";\n}\n\n.glyphicon-menu-right:before {\n  content: \"\\E258\";\n}\n\n.glyphicon-menu-down:before {\n  content: \"\\E259\";\n}\n\n.glyphicon-menu-up:before {\n  content: \"\\E260\";\n}\n\n* {\n  -webkit-box-sizing: border-box;\n  -moz-box-sizing: border-box;\n  box-sizing: border-box;\n}\n\n*:before,\n*:after {\n  -webkit-box-sizing: border-box;\n  -moz-box-sizing: border-box;\n  box-sizing: border-box;\n}\n\nhtml {\n  font-size: 10px;\n  -webkit-tap-highlight-color: transparent;\n}\n\nbody {\n  font-family: \"Helvetica Neue\", Helvetica, Arial, sans-serif;\n  font-size: 14px;\n  line-height: 1.42857;\n  color: #333333;\n  background-color: #fff;\n}\n\ninput,\nbutton,\nselect,\ntextarea {\n  font-family: inherit;\n  font-size: inherit;\n  line-height: inherit;\n}\n\na {\n  color: #337ab7;\n  text-decoration: none;\n}\n\na:hover,\na:focus {\n  color: #23527c;\n  text-decoration: underline;\n}\n\na:focus {\n  outline: 5px auto -webkit-focus-ring-color;\n  outline-offset: -2px;\n}\n\nfigure {\n  margin: 0;\n}\n\nimg {\n  vertical-align: middle;\n}\n\n.img-responsive {\n  display: block;\n  max-width: 100%;\n  height: auto;\n}\n\n.img-rounded {\n  border-radius: 6px;\n}\n\n.img-thumbnail {\n  padding: 4px;\n  line-height: 1.42857;\n  background-color: #fff;\n  border: 1px solid #ddd;\n  border-radius: 4px;\n  -webkit-transition: all 0.2s ease-in-out;\n  -o-transition: all 0.2s ease-in-out;\n  transition: all 0.2s ease-in-out;\n  display: inline-block;\n  max-width: 100%;\n  height: auto;\n}\n\n.img-circle {\n  border-radius: 50%;\n}\n\nhr {\n  margin-top: 20px;\n  margin-bottom: 20px;\n  border: 0;\n  border-top: 1px solid #eeeeee;\n}\n\n.sr-only {\n  position: absolute;\n  width: 1px;\n  height: 1px;\n  margin: -1px;\n  padding: 0;\n  overflow: hidden;\n  clip: rect(0, 0, 0, 0);\n  border: 0;\n}\n\n.sr-only-focusable:active,\n.sr-only-focusable:focus {\n  position: static;\n  width: auto;\n  height: auto;\n  margin: 0;\n  overflow: visible;\n  clip: auto;\n}\n\n[role=\"button\"] {\n  cursor: pointer;\n}\n\nh1,\nh2,\nh3,\nh4,\nh5,\nh6,\n.h1,\n.h2,\n.h3,\n.h4,\n.h5,\n.h6 {\n  font-family: inherit;\n  font-weight: 500;\n  line-height: 1.1;\n  color: inherit;\n}\n\nh1 small,\nh1 .small,\nh2 small,\nh2 .small,\nh3 small,\nh3 .small,\nh4 small,\nh4 .small,\nh5 small,\nh5 .small,\nh6 small,\nh6 .small,\n.h1 small,\n.h1 .small,\n.h2 small,\n.h2 .small,\n.h3 small,\n.h3 .small,\n.h4 small,\n.h4 .small,\n.h5 small,\n.h5 .small,\n.h6 small,\n.h6 .small {\n  font-weight: normal;\n  line-height: 1;\n  color: #777777;\n}\n\nh1,\n.h1,\nh2,\n.h2,\nh3,\n.h3 {\n  margin-top: 20px;\n  margin-bottom: 10px;\n}\n\nh1 small,\nh1 .small,\n.h1 small,\n.h1 .small,\nh2 small,\nh2 .small,\n.h2 small,\n.h2 .small,\nh3 small,\nh3 .small,\n.h3 small,\n.h3 .small {\n  font-size: 65%;\n}\n\nh4,\n.h4,\nh5,\n.h5,\nh6,\n.h6 {\n  margin-top: 10px;\n  margin-bottom: 10px;\n}\n\nh4 small,\nh4 .small,\n.h4 small,\n.h4 .small,\nh5 small,\nh5 .small,\n.h5 small,\n.h5 .small,\nh6 small,\nh6 .small,\n.h6 small,\n.h6 .small {\n  font-size: 75%;\n}\n\nh1,\n.h1 {\n  font-size: 36px;\n}\n\nh2,\n.h2 {\n  font-size: 30px;\n}\n\nh3,\n.h3 {\n  font-size: 24px;\n}\n\nh4,\n.h4 {\n  font-size: 18px;\n}\n\nh5,\n.h5 {\n  font-size: 14px;\n}\n\nh6,\n.h6 {\n  font-size: 12px;\n}\n\np {\n  margin: 0 0 10px;\n}\n\n.lead {\n  margin-bottom: 20px;\n  font-size: 16px;\n  font-weight: 300;\n  line-height: 1.4;\n}\n\n@media (min-width: 768px) {\n  .lead {\n    font-size: 21px;\n  }\n}\n\nsmall,\n.small {\n  font-size: 85%;\n}\n\nmark,\n.mark {\n  background-color: #fcf8e3;\n  padding: .2em;\n}\n\n.text-left {\n  text-align: left;\n}\n\n.text-right {\n  text-align: right;\n}\n\n.text-center {\n  text-align: center;\n}\n\n.text-justify {\n  text-align: justify;\n}\n\n.text-nowrap {\n  white-space: nowrap;\n}\n\n.text-lowercase {\n  text-transform: lowercase;\n}\n\n.text-uppercase,\n.initialism {\n  text-transform: uppercase;\n}\n\n.text-capitalize {\n  text-transform: capitalize;\n}\n\n.text-muted {\n  color: #777777;\n}\n\n.text-primary {\n  color: #337ab7;\n}\n\na.text-primary:hover,\na.text-primary:focus {\n  color: #286090;\n}\n\n.text-success {\n  color: #3c763d;\n}\n\na.text-success:hover,\na.text-success:focus {\n  color: #2b542c;\n}\n\n.text-info {\n  color: #31708f;\n}\n\na.text-info:hover,\na.text-info:focus {\n  color: #245269;\n}\n\n.text-warning {\n  color: #8a6d3b;\n}\n\na.text-warning:hover,\na.text-warning:focus {\n  color: #66512c;\n}\n\n.text-danger {\n  color: #a94442;\n}\n\na.text-danger:hover,\na.text-danger:focus {\n  color: #843534;\n}\n\n.bg-primary {\n  color: #fff;\n}\n\n.bg-primary {\n  background-color: #337ab7;\n}\n\na.bg-primary:hover,\na.bg-primary:focus {\n  background-color: #286090;\n}\n\n.bg-success {\n  background-color: #dff0d8;\n}\n\na.bg-success:hover,\na.bg-success:focus {\n  background-color: #c1e2b3;\n}\n\n.bg-info {\n  background-color: #d9edf7;\n}\n\na.bg-info:hover,\na.bg-info:focus {\n  background-color: #afd9ee;\n}\n\n.bg-warning {\n  background-color: #fcf8e3;\n}\n\na.bg-warning:hover,\na.bg-warning:focus {\n  background-color: #f7ecb5;\n}\n\n.bg-danger {\n  background-color: #f2dede;\n}\n\na.bg-danger:hover,\na.bg-danger:focus {\n  background-color: #e4b9b9;\n}\n\n.page-header {\n  padding-bottom: 9px;\n  margin: 40px 0 20px;\n  border-bottom: 1px solid #eeeeee;\n}\n\nul,\nol {\n  margin-top: 0;\n  margin-bottom: 10px;\n}\n\nul ul,\nul ol,\nol ul,\nol ol {\n  margin-bottom: 0;\n}\n\n.list-unstyled {\n  padding-left: 0;\n  list-style: none;\n}\n\n.list-inline {\n  padding-left: 0;\n  list-style: none;\n  margin-left: -5px;\n}\n\n.list-inline > li {\n  display: inline-block;\n  padding-left: 5px;\n  padding-right: 5px;\n}\n\ndl {\n  margin-top: 0;\n  margin-bottom: 20px;\n}\n\ndt,\ndd {\n  line-height: 1.42857;\n}\n\ndt {\n  font-weight: bold;\n}\n\ndd {\n  margin-left: 0;\n}\n\n.dl-horizontal dd:before,\n.dl-horizontal dd:after {\n  content: \" \";\n  display: table;\n}\n\n.dl-horizontal dd:after {\n  clear: both;\n}\n\n@media (min-width: 768px) {\n  .dl-horizontal dt {\n    float: left;\n    width: 160px;\n    clear: left;\n    text-align: right;\n    overflow: hidden;\n    text-overflow: ellipsis;\n    white-space: nowrap;\n  }\n\n  .dl-horizontal dd {\n    margin-left: 180px;\n  }\n}\n\nabbr[title],\nabbr[data-original-title] {\n  cursor: help;\n  border-bottom: 1px dotted #777777;\n}\n\n.initialism {\n  font-size: 90%;\n}\n\nblockquote {\n  padding: 10px 20px;\n  margin: 0 0 20px;\n  font-size: 17.5px;\n  border-left: 5px solid #eeeeee;\n}\n\nblockquote p:last-child,\nblockquote ul:last-child,\nblockquote ol:last-child {\n  margin-bottom: 0;\n}\n\nblockquote footer,\nblockquote small,\nblockquote .small {\n  display: block;\n  font-size: 80%;\n  line-height: 1.42857;\n  color: #777777;\n}\n\nblockquote footer:before,\nblockquote small:before,\nblockquote .small:before {\n  content: '\\2014   \\A0';\n}\n\n.blockquote-reverse,\nblockquote.pull-right {\n  padding-right: 15px;\n  padding-left: 0;\n  border-right: 5px solid #eeeeee;\n  border-left: 0;\n  text-align: right;\n}\n\n.blockquote-reverse footer:before,\n.blockquote-reverse small:before,\n.blockquote-reverse .small:before,\nblockquote.pull-right footer:before,\nblockquote.pull-right small:before,\nblockquote.pull-right .small:before {\n  content: '';\n}\n\n.blockquote-reverse footer:after,\n.blockquote-reverse small:after,\n.blockquote-reverse .small:after,\nblockquote.pull-right footer:after,\nblockquote.pull-right small:after,\nblockquote.pull-right .small:after {\n  content: '\\A0   \\2014';\n}\n\naddress {\n  margin-bottom: 20px;\n  font-style: normal;\n  line-height: 1.42857;\n}\n\ncode,\nkbd,\npre,\nsamp {\n  font-family: Menlo, Monaco, Consolas, \"Courier New\", monospace;\n}\n\ncode {\n  padding: 2px 4px;\n  font-size: 90%;\n  color: #c7254e;\n  background-color: #f9f2f4;\n  border-radius: 4px;\n}\n\nkbd {\n  padding: 2px 4px;\n  font-size: 90%;\n  color: #fff;\n  background-color: #333;\n  border-radius: 3px;\n  box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.25);\n}\n\nkbd kbd {\n  padding: 0;\n  font-size: 100%;\n  font-weight: bold;\n  box-shadow: none;\n}\n\npre {\n  display: block;\n  padding: 9.5px;\n  margin: 0 0 10px;\n  font-size: 13px;\n  line-height: 1.42857;\n  word-break: break-all;\n  word-wrap: break-word;\n  color: #333333;\n  background-color: #f5f5f5;\n  border: 1px solid #ccc;\n  border-radius: 4px;\n}\n\npre code {\n  padding: 0;\n  font-size: inherit;\n  color: inherit;\n  white-space: pre-wrap;\n  background-color: transparent;\n  border-radius: 0;\n}\n\n.pre-scrollable {\n  max-height: 340px;\n  overflow-y: scroll;\n}\n\n.container {\n  margin-right: auto;\n  margin-left: auto;\n  padding-left: 15px;\n  padding-right: 15px;\n}\n\n.container:before,\n.container:after {\n  content: \" \";\n  display: table;\n}\n\n.container:after {\n  clear: both;\n}\n\n@media (min-width: 768px) {\n  .container {\n    width: 750px;\n  }\n}\n\n@media (min-width: 992px) {\n  .container {\n    width: 970px;\n  }\n}\n\n@media (min-width: 1200px) {\n  .container {\n    width: 1170px;\n  }\n}\n\n.container-fluid {\n  margin-right: auto;\n  margin-left: auto;\n  padding-left: 15px;\n  padding-right: 15px;\n}\n\n.container-fluid:before,\n.container-fluid:after {\n  content: \" \";\n  display: table;\n}\n\n.container-fluid:after {\n  clear: both;\n}\n\n.row {\n  margin-left: -15px;\n  margin-right: -15px;\n}\n\n.row:before,\n.row:after {\n  content: \" \";\n  display: table;\n}\n\n.row:after {\n  clear: both;\n}\n\n.col-xs-1,\n.col-sm-1,\n.col-md-1,\n.col-lg-1,\n.col-xs-2,\n.col-sm-2,\n.col-md-2,\n.col-lg-2,\n.col-xs-3,\n.col-sm-3,\n.col-md-3,\n.col-lg-3,\n.col-xs-4,\n.col-sm-4,\n.col-md-4,\n.col-lg-4,\n.col-xs-5,\n.col-sm-5,\n.col-md-5,\n.col-lg-5,\n.col-xs-6,\n.col-sm-6,\n.col-md-6,\n.col-lg-6,\n.col-xs-7,\n.col-sm-7,\n.col-md-7,\n.col-lg-7,\n.col-xs-8,\n.col-sm-8,\n.col-md-8,\n.col-lg-8,\n.col-xs-9,\n.col-sm-9,\n.col-md-9,\n.col-lg-9,\n.col-xs-10,\n.col-sm-10,\n.col-md-10,\n.col-lg-10,\n.col-xs-11,\n.col-sm-11,\n.col-md-11,\n.col-lg-11,\n.col-xs-12,\n.col-sm-12,\n.col-md-12,\n.col-lg-12 {\n  position: relative;\n  min-height: 1px;\n  padding-left: 15px;\n  padding-right: 15px;\n}\n\n.col-xs-1,\n.col-xs-2,\n.col-xs-3,\n.col-xs-4,\n.col-xs-5,\n.col-xs-6,\n.col-xs-7,\n.col-xs-8,\n.col-xs-9,\n.col-xs-10,\n.col-xs-11,\n.col-xs-12 {\n  float: left;\n}\n\n.col-xs-1 {\n  width: 8.33333%;\n}\n\n.col-xs-2 {\n  width: 16.66667%;\n}\n\n.col-xs-3 {\n  width: 25%;\n}\n\n.col-xs-4 {\n  width: 33.33333%;\n}\n\n.col-xs-5 {\n  width: 41.66667%;\n}\n\n.col-xs-6 {\n  width: 50%;\n}\n\n.col-xs-7 {\n  width: 58.33333%;\n}\n\n.col-xs-8 {\n  width: 66.66667%;\n}\n\n.col-xs-9 {\n  width: 75%;\n}\n\n.col-xs-10 {\n  width: 83.33333%;\n}\n\n.col-xs-11 {\n  width: 91.66667%;\n}\n\n.col-xs-12 {\n  width: 100%;\n}\n\n.col-xs-pull-0 {\n  right: auto;\n}\n\n.col-xs-pull-1 {\n  right: 8.33333%;\n}\n\n.col-xs-pull-2 {\n  right: 16.66667%;\n}\n\n.col-xs-pull-3 {\n  right: 25%;\n}\n\n.col-xs-pull-4 {\n  right: 33.33333%;\n}\n\n.col-xs-pull-5 {\n  right: 41.66667%;\n}\n\n.col-xs-pull-6 {\n  right: 50%;\n}\n\n.col-xs-pull-7 {\n  right: 58.33333%;\n}\n\n.col-xs-pull-8 {\n  right: 66.66667%;\n}\n\n.col-xs-pull-9 {\n  right: 75%;\n}\n\n.col-xs-pull-10 {\n  right: 83.33333%;\n}\n\n.col-xs-pull-11 {\n  right: 91.66667%;\n}\n\n.col-xs-pull-12 {\n  right: 100%;\n}\n\n.col-xs-push-0 {\n  left: auto;\n}\n\n.col-xs-push-1 {\n  left: 8.33333%;\n}\n\n.col-xs-push-2 {\n  left: 16.66667%;\n}\n\n.col-xs-push-3 {\n  left: 25%;\n}\n\n.col-xs-push-4 {\n  left: 33.33333%;\n}\n\n.col-xs-push-5 {\n  left: 41.66667%;\n}\n\n.col-xs-push-6 {\n  left: 50%;\n}\n\n.col-xs-push-7 {\n  left: 58.33333%;\n}\n\n.col-xs-push-8 {\n  left: 66.66667%;\n}\n\n.col-xs-push-9 {\n  left: 75%;\n}\n\n.col-xs-push-10 {\n  left: 83.33333%;\n}\n\n.col-xs-push-11 {\n  left: 91.66667%;\n}\n\n.col-xs-push-12 {\n  left: 100%;\n}\n\n.col-xs-offset-0 {\n  margin-left: 0%;\n}\n\n.col-xs-offset-1 {\n  margin-left: 8.33333%;\n}\n\n.col-xs-offset-2 {\n  margin-left: 16.66667%;\n}\n\n.col-xs-offset-3 {\n  margin-left: 25%;\n}\n\n.col-xs-offset-4 {\n  margin-left: 33.33333%;\n}\n\n.col-xs-offset-5 {\n  margin-left: 41.66667%;\n}\n\n.col-xs-offset-6 {\n  margin-left: 50%;\n}\n\n.col-xs-offset-7 {\n  margin-left: 58.33333%;\n}\n\n.col-xs-offset-8 {\n  margin-left: 66.66667%;\n}\n\n.col-xs-offset-9 {\n  margin-left: 75%;\n}\n\n.col-xs-offset-10 {\n  margin-left: 83.33333%;\n}\n\n.col-xs-offset-11 {\n  margin-left: 91.66667%;\n}\n\n.col-xs-offset-12 {\n  margin-left: 100%;\n}\n\n@media (min-width: 768px) {\n  .col-sm-1,\n  .col-sm-2,\n  .col-sm-3,\n  .col-sm-4,\n  .col-sm-5,\n  .col-sm-6,\n  .col-sm-7,\n  .col-sm-8,\n  .col-sm-9,\n  .col-sm-10,\n  .col-sm-11,\n  .col-sm-12 {\n    float: left;\n  }\n\n  .col-sm-1 {\n    width: 8.33333%;\n  }\n\n  .col-sm-2 {\n    width: 16.66667%;\n  }\n\n  .col-sm-3 {\n    width: 25%;\n  }\n\n  .col-sm-4 {\n    width: 33.33333%;\n  }\n\n  .col-sm-5 {\n    width: 41.66667%;\n  }\n\n  .col-sm-6 {\n    width: 50%;\n  }\n\n  .col-sm-7 {\n    width: 58.33333%;\n  }\n\n  .col-sm-8 {\n    width: 66.66667%;\n  }\n\n  .col-sm-9 {\n    width: 75%;\n  }\n\n  .col-sm-10 {\n    width: 83.33333%;\n  }\n\n  .col-sm-11 {\n    width: 91.66667%;\n  }\n\n  .col-sm-12 {\n    width: 100%;\n  }\n\n  .col-sm-pull-0 {\n    right: auto;\n  }\n\n  .col-sm-pull-1 {\n    right: 8.33333%;\n  }\n\n  .col-sm-pull-2 {\n    right: 16.66667%;\n  }\n\n  .col-sm-pull-3 {\n    right: 25%;\n  }\n\n  .col-sm-pull-4 {\n    right: 33.33333%;\n  }\n\n  .col-sm-pull-5 {\n    right: 41.66667%;\n  }\n\n  .col-sm-pull-6 {\n    right: 50%;\n  }\n\n  .col-sm-pull-7 {\n    right: 58.33333%;\n  }\n\n  .col-sm-pull-8 {\n    right: 66.66667%;\n  }\n\n  .col-sm-pull-9 {\n    right: 75%;\n  }\n\n  .col-sm-pull-10 {\n    right: 83.33333%;\n  }\n\n  .col-sm-pull-11 {\n    right: 91.66667%;\n  }\n\n  .col-sm-pull-12 {\n    right: 100%;\n  }\n\n  .col-sm-push-0 {\n    left: auto;\n  }\n\n  .col-sm-push-1 {\n    left: 8.33333%;\n  }\n\n  .col-sm-push-2 {\n    left: 16.66667%;\n  }\n\n  .col-sm-push-3 {\n    left: 25%;\n  }\n\n  .col-sm-push-4 {\n    left: 33.33333%;\n  }\n\n  .col-sm-push-5 {\n    left: 41.66667%;\n  }\n\n  .col-sm-push-6 {\n    left: 50%;\n  }\n\n  .col-sm-push-7 {\n    left: 58.33333%;\n  }\n\n  .col-sm-push-8 {\n    left: 66.66667%;\n  }\n\n  .col-sm-push-9 {\n    left: 75%;\n  }\n\n  .col-sm-push-10 {\n    left: 83.33333%;\n  }\n\n  .col-sm-push-11 {\n    left: 91.66667%;\n  }\n\n  .col-sm-push-12 {\n    left: 100%;\n  }\n\n  .col-sm-offset-0 {\n    margin-left: 0%;\n  }\n\n  .col-sm-offset-1 {\n    margin-left: 8.33333%;\n  }\n\n  .col-sm-offset-2 {\n    margin-left: 16.66667%;\n  }\n\n  .col-sm-offset-3 {\n    margin-left: 25%;\n  }\n\n  .col-sm-offset-4 {\n    margin-left: 33.33333%;\n  }\n\n  .col-sm-offset-5 {\n    margin-left: 41.66667%;\n  }\n\n  .col-sm-offset-6 {\n    margin-left: 50%;\n  }\n\n  .col-sm-offset-7 {\n    margin-left: 58.33333%;\n  }\n\n  .col-sm-offset-8 {\n    margin-left: 66.66667%;\n  }\n\n  .col-sm-offset-9 {\n    margin-left: 75%;\n  }\n\n  .col-sm-offset-10 {\n    margin-left: 83.33333%;\n  }\n\n  .col-sm-offset-11 {\n    margin-left: 91.66667%;\n  }\n\n  .col-sm-offset-12 {\n    margin-left: 100%;\n  }\n}\n\n@media (min-width: 992px) {\n  .col-md-1,\n  .col-md-2,\n  .col-md-3,\n  .col-md-4,\n  .col-md-5,\n  .col-md-6,\n  .col-md-7,\n  .col-md-8,\n  .col-md-9,\n  .col-md-10,\n  .col-md-11,\n  .col-md-12 {\n    float: left;\n  }\n\n  .col-md-1 {\n    width: 8.33333%;\n  }\n\n  .col-md-2 {\n    width: 16.66667%;\n  }\n\n  .col-md-3 {\n    width: 25%;\n  }\n\n  .col-md-4 {\n    width: 33.33333%;\n  }\n\n  .col-md-5 {\n    width: 41.66667%;\n  }\n\n  .col-md-6 {\n    width: 50%;\n  }\n\n  .col-md-7 {\n    width: 58.33333%;\n  }\n\n  .col-md-8 {\n    width: 66.66667%;\n  }\n\n  .col-md-9 {\n    width: 75%;\n  }\n\n  .col-md-10 {\n    width: 83.33333%;\n  }\n\n  .col-md-11 {\n    width: 91.66667%;\n  }\n\n  .col-md-12 {\n    width: 100%;\n  }\n\n  .col-md-pull-0 {\n    right: auto;\n  }\n\n  .col-md-pull-1 {\n    right: 8.33333%;\n  }\n\n  .col-md-pull-2 {\n    right: 16.66667%;\n  }\n\n  .col-md-pull-3 {\n    right: 25%;\n  }\n\n  .col-md-pull-4 {\n    right: 33.33333%;\n  }\n\n  .col-md-pull-5 {\n    right: 41.66667%;\n  }\n\n  .col-md-pull-6 {\n    right: 50%;\n  }\n\n  .col-md-pull-7 {\n    right: 58.33333%;\n  }\n\n  .col-md-pull-8 {\n    right: 66.66667%;\n  }\n\n  .col-md-pull-9 {\n    right: 75%;\n  }\n\n  .col-md-pull-10 {\n    right: 83.33333%;\n  }\n\n  .col-md-pull-11 {\n    right: 91.66667%;\n  }\n\n  .col-md-pull-12 {\n    right: 100%;\n  }\n\n  .col-md-push-0 {\n    left: auto;\n  }\n\n  .col-md-push-1 {\n    left: 8.33333%;\n  }\n\n  .col-md-push-2 {\n    left: 16.66667%;\n  }\n\n  .col-md-push-3 {\n    left: 25%;\n  }\n\n  .col-md-push-4 {\n    left: 33.33333%;\n  }\n\n  .col-md-push-5 {\n    left: 41.66667%;\n  }\n\n  .col-md-push-6 {\n    left: 50%;\n  }\n\n  .col-md-push-7 {\n    left: 58.33333%;\n  }\n\n  .col-md-push-8 {\n    left: 66.66667%;\n  }\n\n  .col-md-push-9 {\n    left: 75%;\n  }\n\n  .col-md-push-10 {\n    left: 83.33333%;\n  }\n\n  .col-md-push-11 {\n    left: 91.66667%;\n  }\n\n  .col-md-push-12 {\n    left: 100%;\n  }\n\n  .col-md-offset-0 {\n    margin-left: 0%;\n  }\n\n  .col-md-offset-1 {\n    margin-left: 8.33333%;\n  }\n\n  .col-md-offset-2 {\n    margin-left: 16.66667%;\n  }\n\n  .col-md-offset-3 {\n    margin-left: 25%;\n  }\n\n  .col-md-offset-4 {\n    margin-left: 33.33333%;\n  }\n\n  .col-md-offset-5 {\n    margin-left: 41.66667%;\n  }\n\n  .col-md-offset-6 {\n    margin-left: 50%;\n  }\n\n  .col-md-offset-7 {\n    margin-left: 58.33333%;\n  }\n\n  .col-md-offset-8 {\n    margin-left: 66.66667%;\n  }\n\n  .col-md-offset-9 {\n    margin-left: 75%;\n  }\n\n  .col-md-offset-10 {\n    margin-left: 83.33333%;\n  }\n\n  .col-md-offset-11 {\n    margin-left: 91.66667%;\n  }\n\n  .col-md-offset-12 {\n    margin-left: 100%;\n  }\n}\n\n@media (min-width: 1200px) {\n  .col-lg-1,\n  .col-lg-2,\n  .col-lg-3,\n  .col-lg-4,\n  .col-lg-5,\n  .col-lg-6,\n  .col-lg-7,\n  .col-lg-8,\n  .col-lg-9,\n  .col-lg-10,\n  .col-lg-11,\n  .col-lg-12 {\n    float: left;\n  }\n\n  .col-lg-1 {\n    width: 8.33333%;\n  }\n\n  .col-lg-2 {\n    width: 16.66667%;\n  }\n\n  .col-lg-3 {\n    width: 25%;\n  }\n\n  .col-lg-4 {\n    width: 33.33333%;\n  }\n\n  .col-lg-5 {\n    width: 41.66667%;\n  }\n\n  .col-lg-6 {\n    width: 50%;\n  }\n\n  .col-lg-7 {\n    width: 58.33333%;\n  }\n\n  .col-lg-8 {\n    width: 66.66667%;\n  }\n\n  .col-lg-9 {\n    width: 75%;\n  }\n\n  .col-lg-10 {\n    width: 83.33333%;\n  }\n\n  .col-lg-11 {\n    width: 91.66667%;\n  }\n\n  .col-lg-12 {\n    width: 100%;\n  }\n\n  .col-lg-pull-0 {\n    right: auto;\n  }\n\n  .col-lg-pull-1 {\n    right: 8.33333%;\n  }\n\n  .col-lg-pull-2 {\n    right: 16.66667%;\n  }\n\n  .col-lg-pull-3 {\n    right: 25%;\n  }\n\n  .col-lg-pull-4 {\n    right: 33.33333%;\n  }\n\n  .col-lg-pull-5 {\n    right: 41.66667%;\n  }\n\n  .col-lg-pull-6 {\n    right: 50%;\n  }\n\n  .col-lg-pull-7 {\n    right: 58.33333%;\n  }\n\n  .col-lg-pull-8 {\n    right: 66.66667%;\n  }\n\n  .col-lg-pull-9 {\n    right: 75%;\n  }\n\n  .col-lg-pull-10 {\n    right: 83.33333%;\n  }\n\n  .col-lg-pull-11 {\n    right: 91.66667%;\n  }\n\n  .col-lg-pull-12 {\n    right: 100%;\n  }\n\n  .col-lg-push-0 {\n    left: auto;\n  }\n\n  .col-lg-push-1 {\n    left: 8.33333%;\n  }\n\n  .col-lg-push-2 {\n    left: 16.66667%;\n  }\n\n  .col-lg-push-3 {\n    left: 25%;\n  }\n\n  .col-lg-push-4 {\n    left: 33.33333%;\n  }\n\n  .col-lg-push-5 {\n    left: 41.66667%;\n  }\n\n  .col-lg-push-6 {\n    left: 50%;\n  }\n\n  .col-lg-push-7 {\n    left: 58.33333%;\n  }\n\n  .col-lg-push-8 {\n    left: 66.66667%;\n  }\n\n  .col-lg-push-9 {\n    left: 75%;\n  }\n\n  .col-lg-push-10 {\n    left: 83.33333%;\n  }\n\n  .col-lg-push-11 {\n    left: 91.66667%;\n  }\n\n  .col-lg-push-12 {\n    left: 100%;\n  }\n\n  .col-lg-offset-0 {\n    margin-left: 0%;\n  }\n\n  .col-lg-offset-1 {\n    margin-left: 8.33333%;\n  }\n\n  .col-lg-offset-2 {\n    margin-left: 16.66667%;\n  }\n\n  .col-lg-offset-3 {\n    margin-left: 25%;\n  }\n\n  .col-lg-offset-4 {\n    margin-left: 33.33333%;\n  }\n\n  .col-lg-offset-5 {\n    margin-left: 41.66667%;\n  }\n\n  .col-lg-offset-6 {\n    margin-left: 50%;\n  }\n\n  .col-lg-offset-7 {\n    margin-left: 58.33333%;\n  }\n\n  .col-lg-offset-8 {\n    margin-left: 66.66667%;\n  }\n\n  .col-lg-offset-9 {\n    margin-left: 75%;\n  }\n\n  .col-lg-offset-10 {\n    margin-left: 83.33333%;\n  }\n\n  .col-lg-offset-11 {\n    margin-left: 91.66667%;\n  }\n\n  .col-lg-offset-12 {\n    margin-left: 100%;\n  }\n}\n\ntable {\n  background-color: transparent;\n}\n\ncaption {\n  padding-top: 8px;\n  padding-bottom: 8px;\n  color: #777777;\n  text-align: left;\n}\n\nth {\n  text-align: left;\n}\n\n.table {\n  width: 100%;\n  max-width: 100%;\n  margin-bottom: 20px;\n}\n\n.table > thead > tr > th,\n.table > thead > tr > td,\n.table > tbody > tr > th,\n.table > tbody > tr > td,\n.table > tfoot > tr > th,\n.table > tfoot > tr > td {\n  padding: 8px;\n  line-height: 1.42857;\n  vertical-align: top;\n  border-top: 1px solid #ddd;\n}\n\n.table > thead > tr > th {\n  vertical-align: bottom;\n  border-bottom: 2px solid #ddd;\n}\n\n.table > caption + thead > tr:first-child > th,\n.table > caption + thead > tr:first-child > td,\n.table > colgroup + thead > tr:first-child > th,\n.table > colgroup + thead > tr:first-child > td,\n.table > thead:first-child > tr:first-child > th,\n.table > thead:first-child > tr:first-child > td {\n  border-top: 0;\n}\n\n.table > tbody + tbody {\n  border-top: 2px solid #ddd;\n}\n\n.table .table {\n  background-color: #fff;\n}\n\n.table-condensed > thead > tr > th,\n.table-condensed > thead > tr > td,\n.table-condensed > tbody > tr > th,\n.table-condensed > tbody > tr > td,\n.table-condensed > tfoot > tr > th,\n.table-condensed > tfoot > tr > td {\n  padding: 5px;\n}\n\n.table-bordered {\n  border: 1px solid #ddd;\n}\n\n.table-bordered > thead > tr > th,\n.table-bordered > thead > tr > td,\n.table-bordered > tbody > tr > th,\n.table-bordered > tbody > tr > td,\n.table-bordered > tfoot > tr > th,\n.table-bordered > tfoot > tr > td {\n  border: 1px solid #ddd;\n}\n\n.table-bordered > thead > tr > th,\n.table-bordered > thead > tr > td {\n  border-bottom-width: 2px;\n}\n\n.table-striped > tbody > tr:nth-of-type(odd) {\n  background-color: #f9f9f9;\n}\n\n.table-hover > tbody > tr:hover {\n  background-color: #f5f5f5;\n}\n\ntable col[class*=\"col-\"] {\n  position: static;\n  float: none;\n  display: table-column;\n}\n\ntable td[class*=\"col-\"],\ntable th[class*=\"col-\"] {\n  position: static;\n  float: none;\n  display: table-cell;\n}\n\n.table > thead > tr > td.active,\n.table > thead > tr > th.active,\n.table > thead > tr.active > td,\n.table > thead > tr.active > th,\n.table > tbody > tr > td.active,\n.table > tbody > tr > th.active,\n.table > tbody > tr.active > td,\n.table > tbody > tr.active > th,\n.table > tfoot > tr > td.active,\n.table > tfoot > tr > th.active,\n.table > tfoot > tr.active > td,\n.table > tfoot > tr.active > th {\n  background-color: #f5f5f5;\n}\n\n.table-hover > tbody > tr > td.active:hover,\n.table-hover > tbody > tr > th.active:hover,\n.table-hover > tbody > tr.active:hover > td,\n.table-hover > tbody > tr:hover > .active,\n.table-hover > tbody > tr.active:hover > th {\n  background-color: #e8e8e8;\n}\n\n.table > thead > tr > td.success,\n.table > thead > tr > th.success,\n.table > thead > tr.success > td,\n.table > thead > tr.success > th,\n.table > tbody > tr > td.success,\n.table > tbody > tr > th.success,\n.table > tbody > tr.success > td,\n.table > tbody > tr.success > th,\n.table > tfoot > tr > td.success,\n.table > tfoot > tr > th.success,\n.table > tfoot > tr.success > td,\n.table > tfoot > tr.success > th {\n  background-color: #dff0d8;\n}\n\n.table-hover > tbody > tr > td.success:hover,\n.table-hover > tbody > tr > th.success:hover,\n.table-hover > tbody > tr.success:hover > td,\n.table-hover > tbody > tr:hover > .success,\n.table-hover > tbody > tr.success:hover > th {\n  background-color: #d0e9c6;\n}\n\n.table > thead > tr > td.info,\n.table > thead > tr > th.info,\n.table > thead > tr.info > td,\n.table > thead > tr.info > th,\n.table > tbody > tr > td.info,\n.table > tbody > tr > th.info,\n.table > tbody > tr.info > td,\n.table > tbody > tr.info > th,\n.table > tfoot > tr > td.info,\n.table > tfoot > tr > th.info,\n.table > tfoot > tr.info > td,\n.table > tfoot > tr.info > th {\n  background-color: #d9edf7;\n}\n\n.table-hover > tbody > tr > td.info:hover,\n.table-hover > tbody > tr > th.info:hover,\n.table-hover > tbody > tr.info:hover > td,\n.table-hover > tbody > tr:hover > .info,\n.table-hover > tbody > tr.info:hover > th {\n  background-color: #c4e3f3;\n}\n\n.table > thead > tr > td.warning,\n.table > thead > tr > th.warning,\n.table > thead > tr.warning > td,\n.table > thead > tr.warning > th,\n.table > tbody > tr > td.warning,\n.table > tbody > tr > th.warning,\n.table > tbody > tr.warning > td,\n.table > tbody > tr.warning > th,\n.table > tfoot > tr > td.warning,\n.table > tfoot > tr > th.warning,\n.table > tfoot > tr.warning > td,\n.table > tfoot > tr.warning > th {\n  background-color: #fcf8e3;\n}\n\n.table-hover > tbody > tr > td.warning:hover,\n.table-hover > tbody > tr > th.warning:hover,\n.table-hover > tbody > tr.warning:hover > td,\n.table-hover > tbody > tr:hover > .warning,\n.table-hover > tbody > tr.warning:hover > th {\n  background-color: #faf2cc;\n}\n\n.table > thead > tr > td.danger,\n.table > thead > tr > th.danger,\n.table > thead > tr.danger > td,\n.table > thead > tr.danger > th,\n.table > tbody > tr > td.danger,\n.table > tbody > tr > th.danger,\n.table > tbody > tr.danger > td,\n.table > tbody > tr.danger > th,\n.table > tfoot > tr > td.danger,\n.table > tfoot > tr > th.danger,\n.table > tfoot > tr.danger > td,\n.table > tfoot > tr.danger > th {\n  background-color: #f2dede;\n}\n\n.table-hover > tbody > tr > td.danger:hover,\n.table-hover > tbody > tr > th.danger:hover,\n.table-hover > tbody > tr.danger:hover > td,\n.table-hover > tbody > tr:hover > .danger,\n.table-hover > tbody > tr.danger:hover > th {\n  background-color: #ebcccc;\n}\n\n.table-responsive {\n  overflow-x: auto;\n  min-height: 0.01%;\n}\n\n@media screen and (max-width: 767px) {\n  .table-responsive {\n    width: 100%;\n    margin-bottom: 15px;\n    overflow-y: hidden;\n    -ms-overflow-style: -ms-autohiding-scrollbar;\n    border: 1px solid #ddd;\n  }\n\n  .table-responsive > .table {\n    margin-bottom: 0;\n  }\n\n  .table-responsive > .table > thead > tr > th,\n  .table-responsive > .table > thead > tr > td,\n  .table-responsive > .table > tbody > tr > th,\n  .table-responsive > .table > tbody > tr > td,\n  .table-responsive > .table > tfoot > tr > th,\n  .table-responsive > .table > tfoot > tr > td {\n    white-space: nowrap;\n  }\n\n  .table-responsive > .table-bordered {\n    border: 0;\n  }\n\n  .table-responsive > .table-bordered > thead > tr > th:first-child,\n  .table-responsive > .table-bordered > thead > tr > td:first-child,\n  .table-responsive > .table-bordered > tbody > tr > th:first-child,\n  .table-responsive > .table-bordered > tbody > tr > td:first-child,\n  .table-responsive > .table-bordered > tfoot > tr > th:first-child,\n  .table-responsive > .table-bordered > tfoot > tr > td:first-child {\n    border-left: 0;\n  }\n\n  .table-responsive > .table-bordered > thead > tr > th:last-child,\n  .table-responsive > .table-bordered > thead > tr > td:last-child,\n  .table-responsive > .table-bordered > tbody > tr > th:last-child,\n  .table-responsive > .table-bordered > tbody > tr > td:last-child,\n  .table-responsive > .table-bordered > tfoot > tr > th:last-child,\n  .table-responsive > .table-bordered > tfoot > tr > td:last-child {\n    border-right: 0;\n  }\n\n  .table-responsive > .table-bordered > tbody > tr:last-child > th,\n  .table-responsive > .table-bordered > tbody > tr:last-child > td,\n  .table-responsive > .table-bordered > tfoot > tr:last-child > th,\n  .table-responsive > .table-bordered > tfoot > tr:last-child > td {\n    border-bottom: 0;\n  }\n}\n\nfieldset {\n  padding: 0;\n  margin: 0;\n  border: 0;\n  min-width: 0;\n}\n\nlegend {\n  display: block;\n  width: 100%;\n  padding: 0;\n  margin-bottom: 20px;\n  font-size: 21px;\n  line-height: inherit;\n  color: #333333;\n  border: 0;\n  border-bottom: 1px solid #e5e5e5;\n}\n\nlabel {\n  display: inline-block;\n  max-width: 100%;\n  margin-bottom: 5px;\n  font-weight: bold;\n}\n\ninput[type=\"search\"] {\n  -webkit-box-sizing: border-box;\n  -moz-box-sizing: border-box;\n  box-sizing: border-box;\n}\n\ninput[type=\"radio\"],\ninput[type=\"checkbox\"] {\n  margin: 4px 0 0;\n  margin-top: 1px \\9;\n  line-height: normal;\n}\n\ninput[type=\"file\"] {\n  display: block;\n}\n\ninput[type=\"range\"] {\n  display: block;\n  width: 100%;\n}\n\nselect[multiple],\nselect[size] {\n  height: auto;\n}\n\ninput[type=\"file\"]:focus,\ninput[type=\"radio\"]:focus,\ninput[type=\"checkbox\"]:focus {\n  outline: 5px auto -webkit-focus-ring-color;\n  outline-offset: -2px;\n}\n\noutput {\n  display: block;\n  padding-top: 7px;\n  font-size: 14px;\n  line-height: 1.42857;\n  color: #555555;\n}\n\n.form-control {\n  display: block;\n  width: 100%;\n  height: 34px;\n  padding: 6px 12px;\n  font-size: 14px;\n  line-height: 1.42857;\n  color: #555555;\n  background-color: #fff;\n  background-image: none;\n  border: 1px solid #ccc;\n  border-radius: 4px;\n  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);\n  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);\n  -webkit-transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;\n  -o-transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;\n  transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;\n}\n\n.form-control:focus {\n  border-color: #66afe9;\n  outline: 0;\n  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(102, 175, 233, 0.6);\n  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(102, 175, 233, 0.6);\n}\n\n.form-control::-moz-placeholder {\n  color: #999;\n  opacity: 1;\n}\n\n.form-control:-ms-input-placeholder {\n  color: #999;\n}\n\n.form-control::-webkit-input-placeholder {\n  color: #999;\n}\n\n.form-control::-ms-expand {\n  border: 0;\n  background-color: transparent;\n}\n\n.form-control[disabled],\n.form-control[readonly],\nfieldset[disabled] .form-control {\n  background-color: #eeeeee;\n  opacity: 1;\n}\n\n.form-control[disabled],\nfieldset[disabled] .form-control {\n  cursor: not-allowed;\n}\n\ntextarea.form-control {\n  height: auto;\n}\n\ninput[type=\"search\"] {\n  -webkit-appearance: none;\n}\n\n@media screen and (-webkit-min-device-pixel-ratio: 0) {\n  input[type=\"date\"].form-control,\n  input[type=\"time\"].form-control,\n  input[type=\"datetime-local\"].form-control,\n  input[type=\"month\"].form-control {\n    line-height: 34px;\n  }\n\n  input[type=\"date\"].input-sm,\n  .input-group-sm > input[type=\"date\"].form-control,\n  .input-group-sm > input[type=\"date\"].input-group-addon,\n  .input-group-sm > .input-group-btn > input[type=\"date\"].btn,\n  .input-group-sm input[type=\"date\"],\n  input[type=\"time\"].input-sm,\n  .input-group-sm > input[type=\"time\"].form-control,\n  .input-group-sm > input[type=\"time\"].input-group-addon,\n  .input-group-sm > .input-group-btn > input[type=\"time\"].btn,\n  .input-group-sm\n  input[type=\"time\"],\n  input[type=\"datetime-local\"].input-sm,\n  .input-group-sm > input[type=\"datetime-local\"].form-control,\n  .input-group-sm > input[type=\"datetime-local\"].input-group-addon,\n  .input-group-sm > .input-group-btn > input[type=\"datetime-local\"].btn,\n  .input-group-sm\n  input[type=\"datetime-local\"],\n  input[type=\"month\"].input-sm,\n  .input-group-sm > input[type=\"month\"].form-control,\n  .input-group-sm > input[type=\"month\"].input-group-addon,\n  .input-group-sm > .input-group-btn > input[type=\"month\"].btn,\n  .input-group-sm\n  input[type=\"month\"] {\n    line-height: 30px;\n  }\n\n  input[type=\"date\"].input-lg,\n  .input-group-lg > input[type=\"date\"].form-control,\n  .input-group-lg > input[type=\"date\"].input-group-addon,\n  .input-group-lg > .input-group-btn > input[type=\"date\"].btn,\n  .input-group-lg input[type=\"date\"],\n  input[type=\"time\"].input-lg,\n  .input-group-lg > input[type=\"time\"].form-control,\n  .input-group-lg > input[type=\"time\"].input-group-addon,\n  .input-group-lg > .input-group-btn > input[type=\"time\"].btn,\n  .input-group-lg\n  input[type=\"time\"],\n  input[type=\"datetime-local\"].input-lg,\n  .input-group-lg > input[type=\"datetime-local\"].form-control,\n  .input-group-lg > input[type=\"datetime-local\"].input-group-addon,\n  .input-group-lg > .input-group-btn > input[type=\"datetime-local\"].btn,\n  .input-group-lg\n  input[type=\"datetime-local\"],\n  input[type=\"month\"].input-lg,\n  .input-group-lg > input[type=\"month\"].form-control,\n  .input-group-lg > input[type=\"month\"].input-group-addon,\n  .input-group-lg > .input-group-btn > input[type=\"month\"].btn,\n  .input-group-lg\n  input[type=\"month\"] {\n    line-height: 46px;\n  }\n}\n\n.form-group {\n  margin-bottom: 15px;\n}\n\n.radio,\n.checkbox {\n  position: relative;\n  display: block;\n  margin-top: 10px;\n  margin-bottom: 10px;\n}\n\n.radio label,\n.checkbox label {\n  min-height: 20px;\n  padding-left: 20px;\n  margin-bottom: 0;\n  font-weight: normal;\n  cursor: pointer;\n}\n\n.radio input[type=\"radio\"],\n.radio-inline input[type=\"radio\"],\n.checkbox input[type=\"checkbox\"],\n.checkbox-inline input[type=\"checkbox\"] {\n  position: absolute;\n  margin-left: -20px;\n  margin-top: 4px \\9;\n}\n\n.radio + .radio,\n.checkbox + .checkbox {\n  margin-top: -5px;\n}\n\n.radio-inline,\n.checkbox-inline {\n  position: relative;\n  display: inline-block;\n  padding-left: 20px;\n  margin-bottom: 0;\n  vertical-align: middle;\n  font-weight: normal;\n  cursor: pointer;\n}\n\n.radio-inline + .radio-inline,\n.checkbox-inline + .checkbox-inline {\n  margin-top: 0;\n  margin-left: 10px;\n}\n\ninput[type=\"radio\"][disabled],\ninput[type=\"radio\"].disabled,\nfieldset[disabled] input[type=\"radio\"],\ninput[type=\"checkbox\"][disabled],\ninput[type=\"checkbox\"].disabled,\nfieldset[disabled]\ninput[type=\"checkbox\"] {\n  cursor: not-allowed;\n}\n\n.radio-inline.disabled,\nfieldset[disabled] .radio-inline,\n.checkbox-inline.disabled,\nfieldset[disabled]\n.checkbox-inline {\n  cursor: not-allowed;\n}\n\n.radio.disabled label,\nfieldset[disabled] .radio label,\n.checkbox.disabled label,\nfieldset[disabled]\n.checkbox label {\n  cursor: not-allowed;\n}\n\n.form-control-static {\n  padding-top: 7px;\n  padding-bottom: 7px;\n  margin-bottom: 0;\n  min-height: 34px;\n}\n\n.form-control-static.input-lg,\n.input-group-lg > .form-control-static.form-control,\n.input-group-lg > .form-control-static.input-group-addon,\n.input-group-lg > .input-group-btn > .form-control-static.btn,\n.form-control-static.input-sm,\n.input-group-sm > .form-control-static.form-control,\n.input-group-sm > .form-control-static.input-group-addon,\n.input-group-sm > .input-group-btn > .form-control-static.btn {\n  padding-left: 0;\n  padding-right: 0;\n}\n\n.input-sm,\n.input-group-sm > .form-control,\n.input-group-sm > .input-group-addon,\n.input-group-sm > .input-group-btn > .btn {\n  height: 30px;\n  padding: 5px 10px;\n  font-size: 12px;\n  line-height: 1.5;\n  border-radius: 3px;\n}\n\nselect.input-sm,\n.input-group-sm > select.form-control,\n.input-group-sm > select.input-group-addon,\n.input-group-sm > .input-group-btn > select.btn {\n  height: 30px;\n  line-height: 30px;\n}\n\ntextarea.input-sm,\n.input-group-sm > textarea.form-control,\n.input-group-sm > textarea.input-group-addon,\n.input-group-sm > .input-group-btn > textarea.btn,\nselect[multiple].input-sm,\n.input-group-sm > select[multiple].form-control,\n.input-group-sm > select[multiple].input-group-addon,\n.input-group-sm > .input-group-btn > select[multiple].btn {\n  height: auto;\n}\n\n.form-group-sm .form-control {\n  height: 30px;\n  padding: 5px 10px;\n  font-size: 12px;\n  line-height: 1.5;\n  border-radius: 3px;\n}\n\n.form-group-sm select.form-control {\n  height: 30px;\n  line-height: 30px;\n}\n\n.form-group-sm textarea.form-control,\n.form-group-sm select[multiple].form-control {\n  height: auto;\n}\n\n.form-group-sm .form-control-static {\n  height: 30px;\n  min-height: 32px;\n  padding: 6px 10px;\n  font-size: 12px;\n  line-height: 1.5;\n}\n\n.input-lg,\n.input-group-lg > .form-control,\n.input-group-lg > .input-group-addon,\n.input-group-lg > .input-group-btn > .btn {\n  height: 46px;\n  padding: 10px 16px;\n  font-size: 18px;\n  line-height: 1.33333;\n  border-radius: 6px;\n}\n\nselect.input-lg,\n.input-group-lg > select.form-control,\n.input-group-lg > select.input-group-addon,\n.input-group-lg > .input-group-btn > select.btn {\n  height: 46px;\n  line-height: 46px;\n}\n\ntextarea.input-lg,\n.input-group-lg > textarea.form-control,\n.input-group-lg > textarea.input-group-addon,\n.input-group-lg > .input-group-btn > textarea.btn,\nselect[multiple].input-lg,\n.input-group-lg > select[multiple].form-control,\n.input-group-lg > select[multiple].input-group-addon,\n.input-group-lg > .input-group-btn > select[multiple].btn {\n  height: auto;\n}\n\n.form-group-lg .form-control {\n  height: 46px;\n  padding: 10px 16px;\n  font-size: 18px;\n  line-height: 1.33333;\n  border-radius: 6px;\n}\n\n.form-group-lg select.form-control {\n  height: 46px;\n  line-height: 46px;\n}\n\n.form-group-lg textarea.form-control,\n.form-group-lg select[multiple].form-control {\n  height: auto;\n}\n\n.form-group-lg .form-control-static {\n  height: 46px;\n  min-height: 38px;\n  padding: 11px 16px;\n  font-size: 18px;\n  line-height: 1.33333;\n}\n\n.has-feedback {\n  position: relative;\n}\n\n.has-feedback .form-control {\n  padding-right: 42.5px;\n}\n\n.form-control-feedback {\n  position: absolute;\n  top: 0;\n  right: 0;\n  z-index: 2;\n  display: block;\n  width: 34px;\n  height: 34px;\n  line-height: 34px;\n  text-align: center;\n  pointer-events: none;\n}\n\n.input-lg + .form-control-feedback,\n.input-group-lg > .form-control + .form-control-feedback,\n.input-group-lg > .input-group-addon + .form-control-feedback,\n.input-group-lg > .input-group-btn > .btn + .form-control-feedback,\n.input-group-lg + .form-control-feedback,\n.form-group-lg .form-control + .form-control-feedback {\n  width: 46px;\n  height: 46px;\n  line-height: 46px;\n}\n\n.input-sm + .form-control-feedback,\n.input-group-sm > .form-control + .form-control-feedback,\n.input-group-sm > .input-group-addon + .form-control-feedback,\n.input-group-sm > .input-group-btn > .btn + .form-control-feedback,\n.input-group-sm + .form-control-feedback,\n.form-group-sm .form-control + .form-control-feedback {\n  width: 30px;\n  height: 30px;\n  line-height: 30px;\n}\n\n.has-success .help-block,\n.has-success .control-label,\n.has-success .radio,\n.has-success .checkbox,\n.has-success .radio-inline,\n.has-success .checkbox-inline,\n.has-success.radio label,\n.has-success.checkbox label,\n.has-success.radio-inline label,\n.has-success.checkbox-inline label {\n  color: #3c763d;\n}\n\n.has-success .form-control {\n  border-color: #3c763d;\n  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);\n  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);\n}\n\n.has-success .form-control:focus {\n  border-color: #2b542c;\n  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #67b168;\n  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #67b168;\n}\n\n.has-success .input-group-addon {\n  color: #3c763d;\n  border-color: #3c763d;\n  background-color: #dff0d8;\n}\n\n.has-success .form-control-feedback {\n  color: #3c763d;\n}\n\n.has-warning .help-block,\n.has-warning .control-label,\n.has-warning .radio,\n.has-warning .checkbox,\n.has-warning .radio-inline,\n.has-warning .checkbox-inline,\n.has-warning.radio label,\n.has-warning.checkbox label,\n.has-warning.radio-inline label,\n.has-warning.checkbox-inline label {\n  color: #8a6d3b;\n}\n\n.has-warning .form-control {\n  border-color: #8a6d3b;\n  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);\n  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);\n}\n\n.has-warning .form-control:focus {\n  border-color: #66512c;\n  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #c0a16b;\n  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #c0a16b;\n}\n\n.has-warning .input-group-addon {\n  color: #8a6d3b;\n  border-color: #8a6d3b;\n  background-color: #fcf8e3;\n}\n\n.has-warning .form-control-feedback {\n  color: #8a6d3b;\n}\n\n.has-error .help-block,\n.has-error .control-label,\n.has-error .radio,\n.has-error .checkbox,\n.has-error .radio-inline,\n.has-error .checkbox-inline,\n.has-error.radio label,\n.has-error.checkbox label,\n.has-error.radio-inline label,\n.has-error.checkbox-inline label {\n  color: #a94442;\n}\n\n.has-error .form-control {\n  border-color: #a94442;\n  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);\n  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);\n}\n\n.has-error .form-control:focus {\n  border-color: #843534;\n  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #ce8483;\n  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #ce8483;\n}\n\n.has-error .input-group-addon {\n  color: #a94442;\n  border-color: #a94442;\n  background-color: #f2dede;\n}\n\n.has-error .form-control-feedback {\n  color: #a94442;\n}\n\n.has-feedback label ~ .form-control-feedback {\n  top: 25px;\n}\n\n.has-feedback label.sr-only ~ .form-control-feedback {\n  top: 0;\n}\n\n.help-block {\n  display: block;\n  margin-top: 5px;\n  margin-bottom: 10px;\n  color: #737373;\n}\n\n@media (min-width: 768px) {\n  .form-inline .form-group {\n    display: inline-block;\n    margin-bottom: 0;\n    vertical-align: middle;\n  }\n\n  .form-inline .form-control {\n    display: inline-block;\n    width: auto;\n    vertical-align: middle;\n  }\n\n  .form-inline .form-control-static {\n    display: inline-block;\n  }\n\n  .form-inline .input-group {\n    display: inline-table;\n    vertical-align: middle;\n  }\n\n  .form-inline .input-group .input-group-addon,\n  .form-inline .input-group .input-group-btn,\n  .form-inline .input-group .form-control {\n    width: auto;\n  }\n\n  .form-inline .input-group > .form-control {\n    width: 100%;\n  }\n\n  .form-inline .control-label {\n    margin-bottom: 0;\n    vertical-align: middle;\n  }\n\n  .form-inline .radio,\n  .form-inline .checkbox {\n    display: inline-block;\n    margin-top: 0;\n    margin-bottom: 0;\n    vertical-align: middle;\n  }\n\n  .form-inline .radio label,\n  .form-inline .checkbox label {\n    padding-left: 0;\n  }\n\n  .form-inline .radio input[type=\"radio\"],\n  .form-inline .checkbox input[type=\"checkbox\"] {\n    position: relative;\n    margin-left: 0;\n  }\n\n  .form-inline .has-feedback .form-control-feedback {\n    top: 0;\n  }\n}\n\n.form-horizontal .radio,\n.form-horizontal .checkbox,\n.form-horizontal .radio-inline,\n.form-horizontal .checkbox-inline {\n  margin-top: 0;\n  margin-bottom: 0;\n  padding-top: 7px;\n}\n\n.form-horizontal .radio,\n.form-horizontal .checkbox {\n  min-height: 27px;\n}\n\n.form-horizontal .form-group {\n  margin-left: -15px;\n  margin-right: -15px;\n}\n\n.form-horizontal .form-group:before,\n.form-horizontal .form-group:after {\n  content: \" \";\n  display: table;\n}\n\n.form-horizontal .form-group:after {\n  clear: both;\n}\n\n@media (min-width: 768px) {\n  .form-horizontal .control-label {\n    text-align: right;\n    margin-bottom: 0;\n    padding-top: 7px;\n  }\n}\n\n.form-horizontal .has-feedback .form-control-feedback {\n  right: 15px;\n}\n\n@media (min-width: 768px) {\n  .form-horizontal .form-group-lg .control-label {\n    padding-top: 11px;\n    font-size: 18px;\n  }\n}\n\n@media (min-width: 768px) {\n  .form-horizontal .form-group-sm .control-label {\n    padding-top: 6px;\n    font-size: 12px;\n  }\n}\n\n.btn {\n  display: inline-block;\n  margin-bottom: 0;\n  font-weight: normal;\n  text-align: center;\n  vertical-align: middle;\n  touch-action: manipulation;\n  cursor: pointer;\n  background-image: none;\n  border: 1px solid transparent;\n  white-space: nowrap;\n  padding: 6px 12px;\n  font-size: 14px;\n  line-height: 1.42857;\n  border-radius: 4px;\n  -webkit-user-select: none;\n  -moz-user-select: none;\n  -ms-user-select: none;\n  user-select: none;\n}\n\n.btn:focus,\n.btn.focus,\n.btn:active:focus,\n.btn:active.focus,\n.btn.active:focus,\n.btn.active.focus {\n  outline: 5px auto -webkit-focus-ring-color;\n  outline-offset: -2px;\n}\n\n.btn:hover,\n.btn:focus,\n.btn.focus {\n  color: #333;\n  text-decoration: none;\n}\n\n.btn:active,\n.btn.active {\n  outline: 0;\n  background-image: none;\n  -webkit-box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);\n  box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);\n}\n\n.btn.disabled,\n.btn[disabled],\nfieldset[disabled] .btn {\n  cursor: not-allowed;\n  opacity: 0.65;\n  filter: alpha(opacity=65);\n  -webkit-box-shadow: none;\n  box-shadow: none;\n}\n\na.btn.disabled,\nfieldset[disabled] a.btn {\n  pointer-events: none;\n}\n\n.btn-default {\n  color: #333;\n  background-color: #fff;\n  border-color: #ccc;\n}\n\n.btn-default:focus,\n.btn-default.focus {\n  color: #333;\n  background-color: #e6e6e6;\n  border-color: #8c8c8c;\n}\n\n.btn-default:hover {\n  color: #333;\n  background-color: #e6e6e6;\n  border-color: #adadad;\n}\n\n.btn-default:active,\n.btn-default.active,\n.open > .btn-default.dropdown-toggle {\n  color: #333;\n  background-color: #e6e6e6;\n  border-color: #adadad;\n}\n\n.btn-default:active:hover,\n.btn-default:active:focus,\n.btn-default:active.focus,\n.btn-default.active:hover,\n.btn-default.active:focus,\n.btn-default.active.focus,\n.open > .btn-default.dropdown-toggle:hover,\n.open > .btn-default.dropdown-toggle:focus,\n.open > .btn-default.dropdown-toggle.focus {\n  color: #333;\n  background-color: #d4d4d4;\n  border-color: #8c8c8c;\n}\n\n.btn-default:active,\n.btn-default.active,\n.open > .btn-default.dropdown-toggle {\n  background-image: none;\n}\n\n.btn-default.disabled:hover,\n.btn-default.disabled:focus,\n.btn-default.disabled.focus,\n.btn-default[disabled]:hover,\n.btn-default[disabled]:focus,\n.btn-default[disabled].focus,\nfieldset[disabled] .btn-default:hover,\nfieldset[disabled] .btn-default:focus,\nfieldset[disabled] .btn-default.focus {\n  background-color: #fff;\n  border-color: #ccc;\n}\n\n.btn-default .badge {\n  color: #fff;\n  background-color: #333;\n}\n\n.btn-primary {\n  color: #fff;\n  background-color: #337ab7;\n  border-color: #2e6da4;\n}\n\n.btn-primary:focus,\n.btn-primary.focus {\n  color: #fff;\n  background-color: #286090;\n  border-color: #122b40;\n}\n\n.btn-primary:hover {\n  color: #fff;\n  background-color: #286090;\n  border-color: #204d74;\n}\n\n.btn-primary:active,\n.btn-primary.active,\n.open > .btn-primary.dropdown-toggle {\n  color: #fff;\n  background-color: #286090;\n  border-color: #204d74;\n}\n\n.btn-primary:active:hover,\n.btn-primary:active:focus,\n.btn-primary:active.focus,\n.btn-primary.active:hover,\n.btn-primary.active:focus,\n.btn-primary.active.focus,\n.open > .btn-primary.dropdown-toggle:hover,\n.open > .btn-primary.dropdown-toggle:focus,\n.open > .btn-primary.dropdown-toggle.focus {\n  color: #fff;\n  background-color: #204d74;\n  border-color: #122b40;\n}\n\n.btn-primary:active,\n.btn-primary.active,\n.open > .btn-primary.dropdown-toggle {\n  background-image: none;\n}\n\n.btn-primary.disabled:hover,\n.btn-primary.disabled:focus,\n.btn-primary.disabled.focus,\n.btn-primary[disabled]:hover,\n.btn-primary[disabled]:focus,\n.btn-primary[disabled].focus,\nfieldset[disabled] .btn-primary:hover,\nfieldset[disabled] .btn-primary:focus,\nfieldset[disabled] .btn-primary.focus {\n  background-color: #337ab7;\n  border-color: #2e6da4;\n}\n\n.btn-primary .badge {\n  color: #337ab7;\n  background-color: #fff;\n}\n\n.btn-success {\n  color: #fff;\n  background-color: #5cb85c;\n  border-color: #4cae4c;\n}\n\n.btn-success:focus,\n.btn-success.focus {\n  color: #fff;\n  background-color: #449d44;\n  border-color: #255625;\n}\n\n.btn-success:hover {\n  color: #fff;\n  background-color: #449d44;\n  border-color: #398439;\n}\n\n.btn-success:active,\n.btn-success.active,\n.open > .btn-success.dropdown-toggle {\n  color: #fff;\n  background-color: #449d44;\n  border-color: #398439;\n}\n\n.btn-success:active:hover,\n.btn-success:active:focus,\n.btn-success:active.focus,\n.btn-success.active:hover,\n.btn-success.active:focus,\n.btn-success.active.focus,\n.open > .btn-success.dropdown-toggle:hover,\n.open > .btn-success.dropdown-toggle:focus,\n.open > .btn-success.dropdown-toggle.focus {\n  color: #fff;\n  background-color: #398439;\n  border-color: #255625;\n}\n\n.btn-success:active,\n.btn-success.active,\n.open > .btn-success.dropdown-toggle {\n  background-image: none;\n}\n\n.btn-success.disabled:hover,\n.btn-success.disabled:focus,\n.btn-success.disabled.focus,\n.btn-success[disabled]:hover,\n.btn-success[disabled]:focus,\n.btn-success[disabled].focus,\nfieldset[disabled] .btn-success:hover,\nfieldset[disabled] .btn-success:focus,\nfieldset[disabled] .btn-success.focus {\n  background-color: #5cb85c;\n  border-color: #4cae4c;\n}\n\n.btn-success .badge {\n  color: #5cb85c;\n  background-color: #fff;\n}\n\n.btn-info {\n  color: #fff;\n  background-color: #5bc0de;\n  border-color: #46b8da;\n}\n\n.btn-info:focus,\n.btn-info.focus {\n  color: #fff;\n  background-color: #31b0d5;\n  border-color: #1b6d85;\n}\n\n.btn-info:hover {\n  color: #fff;\n  background-color: #31b0d5;\n  border-color: #269abc;\n}\n\n.btn-info:active,\n.btn-info.active,\n.open > .btn-info.dropdown-toggle {\n  color: #fff;\n  background-color: #31b0d5;\n  border-color: #269abc;\n}\n\n.btn-info:active:hover,\n.btn-info:active:focus,\n.btn-info:active.focus,\n.btn-info.active:hover,\n.btn-info.active:focus,\n.btn-info.active.focus,\n.open > .btn-info.dropdown-toggle:hover,\n.open > .btn-info.dropdown-toggle:focus,\n.open > .btn-info.dropdown-toggle.focus {\n  color: #fff;\n  background-color: #269abc;\n  border-color: #1b6d85;\n}\n\n.btn-info:active,\n.btn-info.active,\n.open > .btn-info.dropdown-toggle {\n  background-image: none;\n}\n\n.btn-info.disabled:hover,\n.btn-info.disabled:focus,\n.btn-info.disabled.focus,\n.btn-info[disabled]:hover,\n.btn-info[disabled]:focus,\n.btn-info[disabled].focus,\nfieldset[disabled] .btn-info:hover,\nfieldset[disabled] .btn-info:focus,\nfieldset[disabled] .btn-info.focus {\n  background-color: #5bc0de;\n  border-color: #46b8da;\n}\n\n.btn-info .badge {\n  color: #5bc0de;\n  background-color: #fff;\n}\n\n.btn-warning {\n  color: #fff;\n  background-color: #f0ad4e;\n  border-color: #eea236;\n}\n\n.btn-warning:focus,\n.btn-warning.focus {\n  color: #fff;\n  background-color: #ec971f;\n  border-color: #985f0d;\n}\n\n.btn-warning:hover {\n  color: #fff;\n  background-color: #ec971f;\n  border-color: #d58512;\n}\n\n.btn-warning:active,\n.btn-warning.active,\n.open > .btn-warning.dropdown-toggle {\n  color: #fff;\n  background-color: #ec971f;\n  border-color: #d58512;\n}\n\n.btn-warning:active:hover,\n.btn-warning:active:focus,\n.btn-warning:active.focus,\n.btn-warning.active:hover,\n.btn-warning.active:focus,\n.btn-warning.active.focus,\n.open > .btn-warning.dropdown-toggle:hover,\n.open > .btn-warning.dropdown-toggle:focus,\n.open > .btn-warning.dropdown-toggle.focus {\n  color: #fff;\n  background-color: #d58512;\n  border-color: #985f0d;\n}\n\n.btn-warning:active,\n.btn-warning.active,\n.open > .btn-warning.dropdown-toggle {\n  background-image: none;\n}\n\n.btn-warning.disabled:hover,\n.btn-warning.disabled:focus,\n.btn-warning.disabled.focus,\n.btn-warning[disabled]:hover,\n.btn-warning[disabled]:focus,\n.btn-warning[disabled].focus,\nfieldset[disabled] .btn-warning:hover,\nfieldset[disabled] .btn-warning:focus,\nfieldset[disabled] .btn-warning.focus {\n  background-color: #f0ad4e;\n  border-color: #eea236;\n}\n\n.btn-warning .badge {\n  color: #f0ad4e;\n  background-color: #fff;\n}\n\n.btn-danger {\n  color: #fff;\n  background-color: #d9534f;\n  border-color: #d43f3a;\n}\n\n.btn-danger:focus,\n.btn-danger.focus {\n  color: #fff;\n  background-color: #c9302c;\n  border-color: #761c19;\n}\n\n.btn-danger:hover {\n  color: #fff;\n  background-color: #c9302c;\n  border-color: #ac2925;\n}\n\n.btn-danger:active,\n.btn-danger.active,\n.open > .btn-danger.dropdown-toggle {\n  color: #fff;\n  background-color: #c9302c;\n  border-color: #ac2925;\n}\n\n.btn-danger:active:hover,\n.btn-danger:active:focus,\n.btn-danger:active.focus,\n.btn-danger.active:hover,\n.btn-danger.active:focus,\n.btn-danger.active.focus,\n.open > .btn-danger.dropdown-toggle:hover,\n.open > .btn-danger.dropdown-toggle:focus,\n.open > .btn-danger.dropdown-toggle.focus {\n  color: #fff;\n  background-color: #ac2925;\n  border-color: #761c19;\n}\n\n.btn-danger:active,\n.btn-danger.active,\n.open > .btn-danger.dropdown-toggle {\n  background-image: none;\n}\n\n.btn-danger.disabled:hover,\n.btn-danger.disabled:focus,\n.btn-danger.disabled.focus,\n.btn-danger[disabled]:hover,\n.btn-danger[disabled]:focus,\n.btn-danger[disabled].focus,\nfieldset[disabled] .btn-danger:hover,\nfieldset[disabled] .btn-danger:focus,\nfieldset[disabled] .btn-danger.focus {\n  background-color: #d9534f;\n  border-color: #d43f3a;\n}\n\n.btn-danger .badge {\n  color: #d9534f;\n  background-color: #fff;\n}\n\n.btn-link {\n  color: #337ab7;\n  font-weight: normal;\n  border-radius: 0;\n}\n\n.btn-link,\n.btn-link:active,\n.btn-link.active,\n.btn-link[disabled],\nfieldset[disabled] .btn-link {\n  background-color: transparent;\n  -webkit-box-shadow: none;\n  box-shadow: none;\n}\n\n.btn-link,\n.btn-link:hover,\n.btn-link:focus,\n.btn-link:active {\n  border-color: transparent;\n}\n\n.btn-link:hover,\n.btn-link:focus {\n  color: #23527c;\n  text-decoration: underline;\n  background-color: transparent;\n}\n\n.btn-link[disabled]:hover,\n.btn-link[disabled]:focus,\nfieldset[disabled] .btn-link:hover,\nfieldset[disabled] .btn-link:focus {\n  color: #777777;\n  text-decoration: none;\n}\n\n.btn-lg,\n.btn-group-lg > .btn {\n  padding: 10px 16px;\n  font-size: 18px;\n  line-height: 1.33333;\n  border-radius: 6px;\n}\n\n.btn-sm,\n.btn-group-sm > .btn {\n  padding: 5px 10px;\n  font-size: 12px;\n  line-height: 1.5;\n  border-radius: 3px;\n}\n\n.btn-xs,\n.btn-group-xs > .btn {\n  padding: 1px 5px;\n  font-size: 12px;\n  line-height: 1.5;\n  border-radius: 3px;\n}\n\n.btn-block {\n  display: block;\n  width: 100%;\n}\n\n.btn-block + .btn-block {\n  margin-top: 5px;\n}\n\ninput[type=\"submit\"].btn-block,\ninput[type=\"reset\"].btn-block,\ninput[type=\"button\"].btn-block {\n  width: 100%;\n}\n\n.fade {\n  opacity: 0;\n  -webkit-transition: opacity 0.15s linear;\n  -o-transition: opacity 0.15s linear;\n  transition: opacity 0.15s linear;\n}\n\n.fade.in {\n  opacity: 1;\n}\n\n.collapse {\n  display: none;\n}\n\n.collapse.in {\n  display: block;\n}\n\ntr.collapse.in {\n  display: table-row;\n}\n\ntbody.collapse.in {\n  display: table-row-group;\n}\n\n.collapsing {\n  position: relative;\n  height: 0;\n  overflow: hidden;\n  -webkit-transition-property: height, visibility;\n  transition-property: height, visibility;\n  -webkit-transition-duration: 0.35s;\n  transition-duration: 0.35s;\n  -webkit-transition-timing-function: ease;\n  transition-timing-function: ease;\n}\n\n.caret {\n  display: inline-block;\n  width: 0;\n  height: 0;\n  margin-left: 2px;\n  vertical-align: middle;\n  border-top: 4px dashed;\n  border-top: 4px solid \\9;\n  border-right: 4px solid transparent;\n  border-left: 4px solid transparent;\n}\n\n.dropup,\n.dropdown {\n  position: relative;\n}\n\n.dropdown-toggle:focus {\n  outline: 0;\n}\n\n.dropdown-menu {\n  position: absolute;\n  top: 100%;\n  left: 0;\n  z-index: 1000;\n  display: none;\n  float: left;\n  min-width: 160px;\n  padding: 5px 0;\n  margin: 2px 0 0;\n  list-style: none;\n  font-size: 14px;\n  text-align: left;\n  background-color: #fff;\n  border: 1px solid #ccc;\n  border: 1px solid rgba(0, 0, 0, 0.15);\n  border-radius: 4px;\n  -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);\n  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);\n  background-clip: padding-box;\n}\n\n.dropdown-menu.pull-right {\n  right: 0;\n  left: auto;\n}\n\n.dropdown-menu .divider {\n  height: 1px;\n  margin: 9px 0;\n  overflow: hidden;\n  background-color: #e5e5e5;\n}\n\n.dropdown-menu > li > a {\n  display: block;\n  padding: 3px 20px;\n  clear: both;\n  font-weight: normal;\n  line-height: 1.42857;\n  color: #333333;\n  white-space: nowrap;\n}\n\n.dropdown-menu > li > a:hover,\n.dropdown-menu > li > a:focus {\n  text-decoration: none;\n  color: #262626;\n  background-color: #f5f5f5;\n}\n\n.dropdown-menu > .active > a,\n.dropdown-menu > .active > a:hover,\n.dropdown-menu > .active > a:focus {\n  color: #fff;\n  text-decoration: none;\n  outline: 0;\n  background-color: #337ab7;\n}\n\n.dropdown-menu > .disabled > a,\n.dropdown-menu > .disabled > a:hover,\n.dropdown-menu > .disabled > a:focus {\n  color: #777777;\n}\n\n.dropdown-menu > .disabled > a:hover,\n.dropdown-menu > .disabled > a:focus {\n  text-decoration: none;\n  background-color: transparent;\n  background-image: none;\n  filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);\n  cursor: not-allowed;\n}\n\n.open > .dropdown-menu {\n  display: block;\n}\n\n.open > a {\n  outline: 0;\n}\n\n.dropdown-menu-right {\n  left: auto;\n  right: 0;\n}\n\n.dropdown-menu-left {\n  left: 0;\n  right: auto;\n}\n\n.dropdown-header {\n  display: block;\n  padding: 3px 20px;\n  font-size: 12px;\n  line-height: 1.42857;\n  color: #777777;\n  white-space: nowrap;\n}\n\n.dropdown-backdrop {\n  position: fixed;\n  left: 0;\n  right: 0;\n  bottom: 0;\n  top: 0;\n  z-index: 990;\n}\n\n.pull-right > .dropdown-menu {\n  right: 0;\n  left: auto;\n}\n\n.dropup .caret,\n.navbar-fixed-bottom .dropdown .caret {\n  border-top: 0;\n  border-bottom: 4px dashed;\n  border-bottom: 4px solid \\9;\n  content: \"\";\n}\n\n.dropup .dropdown-menu,\n.navbar-fixed-bottom .dropdown .dropdown-menu {\n  top: auto;\n  bottom: 100%;\n  margin-bottom: 2px;\n}\n\n@media (min-width: 768px) {\n  .navbar-right .dropdown-menu {\n    right: 0;\n    left: auto;\n  }\n\n  .navbar-right .dropdown-menu-left {\n    left: 0;\n    right: auto;\n  }\n}\n\n.btn-group,\n.btn-group-vertical {\n  position: relative;\n  display: inline-block;\n  vertical-align: middle;\n}\n\n.btn-group > .btn,\n.btn-group-vertical > .btn {\n  position: relative;\n  float: left;\n}\n\n.btn-group > .btn:hover,\n.btn-group > .btn:focus,\n.btn-group > .btn:active,\n.btn-group > .btn.active,\n.btn-group-vertical > .btn:hover,\n.btn-group-vertical > .btn:focus,\n.btn-group-vertical > .btn:active,\n.btn-group-vertical > .btn.active {\n  z-index: 2;\n}\n\n.btn-group .btn + .btn,\n.btn-group .btn + .btn-group,\n.btn-group .btn-group + .btn,\n.btn-group .btn-group + .btn-group {\n  margin-left: -1px;\n}\n\n.btn-toolbar {\n  margin-left: -5px;\n}\n\n.btn-toolbar:before,\n.btn-toolbar:after {\n  content: \" \";\n  display: table;\n}\n\n.btn-toolbar:after {\n  clear: both;\n}\n\n.btn-toolbar .btn,\n.btn-toolbar .btn-group,\n.btn-toolbar .input-group {\n  float: left;\n}\n\n.btn-toolbar > .btn,\n.btn-toolbar > .btn-group,\n.btn-toolbar > .input-group {\n  margin-left: 5px;\n}\n\n.btn-group > .btn:not(:first-child):not(:last-child):not(.dropdown-toggle) {\n  border-radius: 0;\n}\n\n.btn-group > .btn:first-child {\n  margin-left: 0;\n}\n\n.btn-group > .btn:first-child:not(:last-child):not(.dropdown-toggle) {\n  border-bottom-right-radius: 0;\n  border-top-right-radius: 0;\n}\n\n.btn-group > .btn:last-child:not(:first-child),\n.btn-group > .dropdown-toggle:not(:first-child) {\n  border-bottom-left-radius: 0;\n  border-top-left-radius: 0;\n}\n\n.btn-group > .btn-group {\n  float: left;\n}\n\n.btn-group > .btn-group:not(:first-child):not(:last-child) > .btn {\n  border-radius: 0;\n}\n\n.btn-group > .btn-group:first-child:not(:last-child) > .btn:last-child,\n.btn-group > .btn-group:first-child:not(:last-child) > .dropdown-toggle {\n  border-bottom-right-radius: 0;\n  border-top-right-radius: 0;\n}\n\n.btn-group > .btn-group:last-child:not(:first-child) > .btn:first-child {\n  border-bottom-left-radius: 0;\n  border-top-left-radius: 0;\n}\n\n.btn-group .dropdown-toggle:active,\n.btn-group.open .dropdown-toggle {\n  outline: 0;\n}\n\n.btn-group > .btn + .dropdown-toggle {\n  padding-left: 8px;\n  padding-right: 8px;\n}\n\n.btn-group > .btn-lg + .dropdown-toggle,\n.btn-group-lg.btn-group > .btn + .dropdown-toggle {\n  padding-left: 12px;\n  padding-right: 12px;\n}\n\n.btn-group.open .dropdown-toggle {\n  -webkit-box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);\n  box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);\n}\n\n.btn-group.open .dropdown-toggle.btn-link {\n  -webkit-box-shadow: none;\n  box-shadow: none;\n}\n\n.btn .caret {\n  margin-left: 0;\n}\n\n.btn-lg .caret,\n.btn-group-lg > .btn .caret {\n  border-width: 5px 5px 0;\n  border-bottom-width: 0;\n}\n\n.dropup .btn-lg .caret,\n.dropup .btn-group-lg > .btn .caret {\n  border-width: 0 5px 5px;\n}\n\n.btn-group-vertical > .btn,\n.btn-group-vertical > .btn-group,\n.btn-group-vertical > .btn-group > .btn {\n  display: block;\n  float: none;\n  width: 100%;\n  max-width: 100%;\n}\n\n.btn-group-vertical > .btn-group:before,\n.btn-group-vertical > .btn-group:after {\n  content: \" \";\n  display: table;\n}\n\n.btn-group-vertical > .btn-group:after {\n  clear: both;\n}\n\n.btn-group-vertical > .btn-group > .btn {\n  float: none;\n}\n\n.btn-group-vertical > .btn + .btn,\n.btn-group-vertical > .btn + .btn-group,\n.btn-group-vertical > .btn-group + .btn,\n.btn-group-vertical > .btn-group + .btn-group {\n  margin-top: -1px;\n  margin-left: 0;\n}\n\n.btn-group-vertical > .btn:not(:first-child):not(:last-child) {\n  border-radius: 0;\n}\n\n.btn-group-vertical > .btn:first-child:not(:last-child) {\n  border-top-right-radius: 4px;\n  border-top-left-radius: 4px;\n  border-bottom-right-radius: 0;\n  border-bottom-left-radius: 0;\n}\n\n.btn-group-vertical > .btn:last-child:not(:first-child) {\n  border-top-right-radius: 0;\n  border-top-left-radius: 0;\n  border-bottom-right-radius: 4px;\n  border-bottom-left-radius: 4px;\n}\n\n.btn-group-vertical > .btn-group:not(:first-child):not(:last-child) > .btn {\n  border-radius: 0;\n}\n\n.btn-group-vertical > .btn-group:first-child:not(:last-child) > .btn:last-child,\n.btn-group-vertical > .btn-group:first-child:not(:last-child) > .dropdown-toggle {\n  border-bottom-right-radius: 0;\n  border-bottom-left-radius: 0;\n}\n\n.btn-group-vertical > .btn-group:last-child:not(:first-child) > .btn:first-child {\n  border-top-right-radius: 0;\n  border-top-left-radius: 0;\n}\n\n.btn-group-justified {\n  display: table;\n  width: 100%;\n  table-layout: fixed;\n  border-collapse: separate;\n}\n\n.btn-group-justified > .btn,\n.btn-group-justified > .btn-group {\n  float: none;\n  display: table-cell;\n  width: 1%;\n}\n\n.btn-group-justified > .btn-group .btn {\n  width: 100%;\n}\n\n.btn-group-justified > .btn-group .dropdown-menu {\n  left: auto;\n}\n\n[data-toggle=\"buttons\"] > .btn input[type=\"radio\"],\n[data-toggle=\"buttons\"] > .btn input[type=\"checkbox\"],\n[data-toggle=\"buttons\"] > .btn-group > .btn input[type=\"radio\"],\n[data-toggle=\"buttons\"] > .btn-group > .btn input[type=\"checkbox\"] {\n  position: absolute;\n  clip: rect(0, 0, 0, 0);\n  pointer-events: none;\n}\n\n.input-group {\n  position: relative;\n  display: table;\n  border-collapse: separate;\n}\n\n.input-group[class*=\"col-\"] {\n  float: none;\n  padding-left: 0;\n  padding-right: 0;\n}\n\n.input-group .form-control {\n  position: relative;\n  z-index: 2;\n  float: left;\n  width: 100%;\n  margin-bottom: 0;\n}\n\n.input-group .form-control:focus {\n  z-index: 3;\n}\n\n.input-group-addon,\n.input-group-btn,\n.input-group .form-control {\n  display: table-cell;\n}\n\n.input-group-addon:not(:first-child):not(:last-child),\n.input-group-btn:not(:first-child):not(:last-child),\n.input-group .form-control:not(:first-child):not(:last-child) {\n  border-radius: 0;\n}\n\n.input-group-addon,\n.input-group-btn {\n  width: 1%;\n  white-space: nowrap;\n  vertical-align: middle;\n}\n\n.input-group-addon {\n  padding: 6px 12px;\n  font-size: 14px;\n  font-weight: normal;\n  line-height: 1;\n  color: #555555;\n  text-align: center;\n  background-color: #eeeeee;\n  border: 1px solid #ccc;\n  border-radius: 4px;\n}\n\n.input-group-addon.input-sm,\n.input-group-sm > .input-group-addon,\n.input-group-sm > .input-group-btn > .input-group-addon.btn {\n  padding: 5px 10px;\n  font-size: 12px;\n  border-radius: 3px;\n}\n\n.input-group-addon.input-lg,\n.input-group-lg > .input-group-addon,\n.input-group-lg > .input-group-btn > .input-group-addon.btn {\n  padding: 10px 16px;\n  font-size: 18px;\n  border-radius: 6px;\n}\n\n.input-group-addon input[type=\"radio\"],\n.input-group-addon input[type=\"checkbox\"] {\n  margin-top: 0;\n}\n\n.input-group .form-control:first-child,\n.input-group-addon:first-child,\n.input-group-btn:first-child > .btn,\n.input-group-btn:first-child > .btn-group > .btn,\n.input-group-btn:first-child > .dropdown-toggle,\n.input-group-btn:last-child > .btn:not(:last-child):not(.dropdown-toggle),\n.input-group-btn:last-child > .btn-group:not(:last-child) > .btn {\n  border-bottom-right-radius: 0;\n  border-top-right-radius: 0;\n}\n\n.input-group-addon:first-child {\n  border-right: 0;\n}\n\n.input-group .form-control:last-child,\n.input-group-addon:last-child,\n.input-group-btn:last-child > .btn,\n.input-group-btn:last-child > .btn-group > .btn,\n.input-group-btn:last-child > .dropdown-toggle,\n.input-group-btn:first-child > .btn:not(:first-child),\n.input-group-btn:first-child > .btn-group:not(:first-child) > .btn {\n  border-bottom-left-radius: 0;\n  border-top-left-radius: 0;\n}\n\n.input-group-addon:last-child {\n  border-left: 0;\n}\n\n.input-group-btn {\n  position: relative;\n  font-size: 0;\n  white-space: nowrap;\n}\n\n.input-group-btn > .btn {\n  position: relative;\n}\n\n.input-group-btn > .btn + .btn {\n  margin-left: -1px;\n}\n\n.input-group-btn > .btn:hover,\n.input-group-btn > .btn:focus,\n.input-group-btn > .btn:active {\n  z-index: 2;\n}\n\n.input-group-btn:first-child > .btn,\n.input-group-btn:first-child > .btn-group {\n  margin-right: -1px;\n}\n\n.input-group-btn:last-child > .btn,\n.input-group-btn:last-child > .btn-group {\n  z-index: 2;\n  margin-left: -1px;\n}\n\n.nav {\n  margin-bottom: 0;\n  padding-left: 0;\n  list-style: none;\n}\n\n.nav:before,\n.nav:after {\n  content: \" \";\n  display: table;\n}\n\n.nav:after {\n  clear: both;\n}\n\n.nav > li {\n  position: relative;\n  display: block;\n}\n\n.nav > li > a {\n  position: relative;\n  display: block;\n  padding: 10px 15px;\n}\n\n.nav > li > a:hover,\n.nav > li > a:focus {\n  text-decoration: none;\n  background-color: #eeeeee;\n}\n\n.nav > li.disabled > a {\n  color: #777777;\n}\n\n.nav > li.disabled > a:hover,\n.nav > li.disabled > a:focus {\n  color: #777777;\n  text-decoration: none;\n  background-color: transparent;\n  cursor: not-allowed;\n}\n\n.nav .open > a,\n.nav .open > a:hover,\n.nav .open > a:focus {\n  background-color: #eeeeee;\n  border-color: #337ab7;\n}\n\n.nav .nav-divider {\n  height: 1px;\n  margin: 9px 0;\n  overflow: hidden;\n  background-color: #e5e5e5;\n}\n\n.nav > li > a > img {\n  max-width: none;\n}\n\n.nav-tabs {\n  border-bottom: 1px solid #ddd;\n}\n\n.nav-tabs > li {\n  float: left;\n  margin-bottom: -1px;\n}\n\n.nav-tabs > li > a {\n  margin-right: 2px;\n  line-height: 1.42857;\n  border: 1px solid transparent;\n  border-radius: 4px 4px 0 0;\n}\n\n.nav-tabs > li > a:hover {\n  border-color: #eeeeee #eeeeee #ddd;\n}\n\n.nav-tabs > li.active > a,\n.nav-tabs > li.active > a:hover,\n.nav-tabs > li.active > a:focus {\n  color: #555555;\n  background-color: #fff;\n  border: 1px solid #ddd;\n  border-bottom-color: transparent;\n  cursor: default;\n}\n\n.nav-pills > li {\n  float: left;\n}\n\n.nav-pills > li > a {\n  border-radius: 4px;\n}\n\n.nav-pills > li + li {\n  margin-left: 2px;\n}\n\n.nav-pills > li.active > a,\n.nav-pills > li.active > a:hover,\n.nav-pills > li.active > a:focus {\n  color: #fff;\n  background-color: #337ab7;\n}\n\n.nav-stacked > li {\n  float: none;\n}\n\n.nav-stacked > li + li {\n  margin-top: 2px;\n  margin-left: 0;\n}\n\n.nav-justified,\n.nav-tabs.nav-justified {\n  width: 100%;\n}\n\n.nav-justified > li,\n.nav-tabs.nav-justified > li {\n  float: none;\n}\n\n.nav-justified > li > a,\n.nav-tabs.nav-justified > li > a {\n  text-align: center;\n  margin-bottom: 5px;\n}\n\n.nav-justified > .dropdown .dropdown-menu {\n  top: auto;\n  left: auto;\n}\n\n@media (min-width: 768px) {\n  .nav-justified > li,\n  .nav-tabs.nav-justified > li {\n    display: table-cell;\n    width: 1%;\n  }\n\n  .nav-justified > li > a,\n  .nav-tabs.nav-justified > li > a {\n    margin-bottom: 0;\n  }\n}\n\n.nav-tabs-justified,\n.nav-tabs.nav-justified {\n  border-bottom: 0;\n}\n\n.nav-tabs-justified > li > a,\n.nav-tabs.nav-justified > li > a {\n  margin-right: 0;\n  border-radius: 4px;\n}\n\n.nav-tabs-justified > .active > a,\n.nav-tabs.nav-justified > .active > a,\n.nav-tabs-justified > .active > a:hover,\n.nav-tabs.nav-justified > .active > a:hover,\n.nav-tabs-justified > .active > a:focus,\n.nav-tabs.nav-justified > .active > a:focus {\n  border: 1px solid #ddd;\n}\n\n@media (min-width: 768px) {\n  .nav-tabs-justified > li > a,\n  .nav-tabs.nav-justified > li > a {\n    border-bottom: 1px solid #ddd;\n    border-radius: 4px 4px 0 0;\n  }\n\n  .nav-tabs-justified > .active > a,\n  .nav-tabs.nav-justified > .active > a,\n  .nav-tabs-justified > .active > a:hover,\n  .nav-tabs.nav-justified > .active > a:hover,\n  .nav-tabs-justified > .active > a:focus,\n  .nav-tabs.nav-justified > .active > a:focus {\n    border-bottom-color: #fff;\n  }\n}\n\n.tab-content > .tab-pane {\n  display: none;\n}\n\n.tab-content > .active {\n  display: block;\n}\n\n.nav-tabs .dropdown-menu {\n  margin-top: -1px;\n  border-top-right-radius: 0;\n  border-top-left-radius: 0;\n}\n\n.navbar {\n  position: relative;\n  min-height: 50px;\n  margin-bottom: 20px;\n  border: 1px solid transparent;\n}\n\n.navbar:before,\n.navbar:after {\n  content: \" \";\n  display: table;\n}\n\n.navbar:after {\n  clear: both;\n}\n\n@media (min-width: 768px) {\n  .navbar {\n    border-radius: 4px;\n  }\n}\n\n.navbar-header:before,\n.navbar-header:after {\n  content: \" \";\n  display: table;\n}\n\n.navbar-header:after {\n  clear: both;\n}\n\n@media (min-width: 768px) {\n  .navbar-header {\n    float: left;\n  }\n}\n\n.navbar-collapse {\n  overflow-x: visible;\n  padding-right: 15px;\n  padding-left: 15px;\n  border-top: 1px solid transparent;\n  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1);\n  -webkit-overflow-scrolling: touch;\n}\n\n.navbar-collapse:before,\n.navbar-collapse:after {\n  content: \" \";\n  display: table;\n}\n\n.navbar-collapse:after {\n  clear: both;\n}\n\n.navbar-collapse.in {\n  overflow-y: auto;\n}\n\n@media (min-width: 768px) {\n  .navbar-collapse {\n    width: auto;\n    border-top: 0;\n    box-shadow: none;\n  }\n\n  .navbar-collapse.collapse {\n    display: block !important;\n    height: auto !important;\n    padding-bottom: 0;\n    overflow: visible !important;\n  }\n\n  .navbar-collapse.in {\n    overflow-y: visible;\n  }\n\n  .navbar-fixed-top .navbar-collapse,\n  .navbar-static-top .navbar-collapse,\n  .navbar-fixed-bottom .navbar-collapse {\n    padding-left: 0;\n    padding-right: 0;\n  }\n}\n\n.navbar-fixed-top .navbar-collapse,\n.navbar-fixed-bottom .navbar-collapse {\n  max-height: 340px;\n}\n\n@media (max-device-width: 480px) and (orientation: landscape) {\n  .navbar-fixed-top .navbar-collapse,\n  .navbar-fixed-bottom .navbar-collapse {\n    max-height: 200px;\n  }\n}\n\n.container > .navbar-header,\n.container > .navbar-collapse,\n.container-fluid > .navbar-header,\n.container-fluid > .navbar-collapse {\n  margin-right: -15px;\n  margin-left: -15px;\n}\n\n@media (min-width: 768px) {\n  .container > .navbar-header,\n  .container > .navbar-collapse,\n  .container-fluid > .navbar-header,\n  .container-fluid > .navbar-collapse {\n    margin-right: 0;\n    margin-left: 0;\n  }\n}\n\n.navbar-static-top {\n  z-index: 1000;\n  border-width: 0 0 1px;\n}\n\n@media (min-width: 768px) {\n  .navbar-static-top {\n    border-radius: 0;\n  }\n}\n\n.navbar-fixed-top,\n.navbar-fixed-bottom {\n  position: fixed;\n  right: 0;\n  left: 0;\n  z-index: 1030;\n}\n\n@media (min-width: 768px) {\n  .navbar-fixed-top,\n  .navbar-fixed-bottom {\n    border-radius: 0;\n  }\n}\n\n.navbar-fixed-top {\n  top: 0;\n  border-width: 0 0 1px;\n}\n\n.navbar-fixed-bottom {\n  bottom: 0;\n  margin-bottom: 0;\n  border-width: 1px 0 0;\n}\n\n.navbar-brand {\n  float: left;\n  padding: 15px 15px;\n  font-size: 18px;\n  line-height: 20px;\n  height: 50px;\n}\n\n.navbar-brand:hover,\n.navbar-brand:focus {\n  text-decoration: none;\n}\n\n.navbar-brand > img {\n  display: block;\n}\n\n@media (min-width: 768px) {\n  .navbar > .container .navbar-brand,\n  .navbar > .container-fluid .navbar-brand {\n    margin-left: -15px;\n  }\n}\n\n.navbar-toggle {\n  position: relative;\n  float: right;\n  margin-right: 15px;\n  padding: 9px 10px;\n  margin-top: 8px;\n  margin-bottom: 8px;\n  background-color: transparent;\n  background-image: none;\n  border: 1px solid transparent;\n  border-radius: 4px;\n}\n\n.navbar-toggle:focus {\n  outline: 0;\n}\n\n.navbar-toggle .icon-bar {\n  display: block;\n  width: 22px;\n  height: 2px;\n  border-radius: 1px;\n}\n\n.navbar-toggle .icon-bar + .icon-bar {\n  margin-top: 4px;\n}\n\n@media (min-width: 768px) {\n  .navbar-toggle {\n    display: none;\n  }\n}\n\n.navbar-nav {\n  margin: 7.5px -15px;\n}\n\n.navbar-nav > li > a {\n  padding-top: 10px;\n  padding-bottom: 10px;\n  line-height: 20px;\n}\n\n@media (max-width: 767px) {\n  .navbar-nav .open .dropdown-menu {\n    position: static;\n    float: none;\n    width: auto;\n    margin-top: 0;\n    background-color: transparent;\n    border: 0;\n    box-shadow: none;\n  }\n\n  .navbar-nav .open .dropdown-menu > li > a,\n  .navbar-nav .open .dropdown-menu .dropdown-header {\n    padding: 5px 15px 5px 25px;\n  }\n\n  .navbar-nav .open .dropdown-menu > li > a {\n    line-height: 20px;\n  }\n\n  .navbar-nav .open .dropdown-menu > li > a:hover,\n  .navbar-nav .open .dropdown-menu > li > a:focus {\n    background-image: none;\n  }\n}\n\n@media (min-width: 768px) {\n  .navbar-nav {\n    float: left;\n    margin: 0;\n  }\n\n  .navbar-nav > li {\n    float: left;\n  }\n\n  .navbar-nav > li > a {\n    padding-top: 15px;\n    padding-bottom: 15px;\n  }\n}\n\n.navbar-form {\n  margin-left: -15px;\n  margin-right: -15px;\n  padding: 10px 15px;\n  border-top: 1px solid transparent;\n  border-bottom: 1px solid transparent;\n  -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1), 0 1px 0 rgba(255, 255, 255, 0.1);\n  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1), 0 1px 0 rgba(255, 255, 255, 0.1);\n  margin-top: 8px;\n  margin-bottom: 8px;\n}\n\n@media (min-width: 768px) {\n  .navbar-form .form-group {\n    display: inline-block;\n    margin-bottom: 0;\n    vertical-align: middle;\n  }\n\n  .navbar-form .form-control {\n    display: inline-block;\n    width: auto;\n    vertical-align: middle;\n  }\n\n  .navbar-form .form-control-static {\n    display: inline-block;\n  }\n\n  .navbar-form .input-group {\n    display: inline-table;\n    vertical-align: middle;\n  }\n\n  .navbar-form .input-group .input-group-addon,\n  .navbar-form .input-group .input-group-btn,\n  .navbar-form .input-group .form-control {\n    width: auto;\n  }\n\n  .navbar-form .input-group > .form-control {\n    width: 100%;\n  }\n\n  .navbar-form .control-label {\n    margin-bottom: 0;\n    vertical-align: middle;\n  }\n\n  .navbar-form .radio,\n  .navbar-form .checkbox {\n    display: inline-block;\n    margin-top: 0;\n    margin-bottom: 0;\n    vertical-align: middle;\n  }\n\n  .navbar-form .radio label,\n  .navbar-form .checkbox label {\n    padding-left: 0;\n  }\n\n  .navbar-form .radio input[type=\"radio\"],\n  .navbar-form .checkbox input[type=\"checkbox\"] {\n    position: relative;\n    margin-left: 0;\n  }\n\n  .navbar-form .has-feedback .form-control-feedback {\n    top: 0;\n  }\n}\n\n@media (max-width: 767px) {\n  .navbar-form .form-group {\n    margin-bottom: 5px;\n  }\n\n  .navbar-form .form-group:last-child {\n    margin-bottom: 0;\n  }\n}\n\n@media (min-width: 768px) {\n  .navbar-form {\n    width: auto;\n    border: 0;\n    margin-left: 0;\n    margin-right: 0;\n    padding-top: 0;\n    padding-bottom: 0;\n    -webkit-box-shadow: none;\n    box-shadow: none;\n  }\n}\n\n.navbar-nav > li > .dropdown-menu {\n  margin-top: 0;\n  border-top-right-radius: 0;\n  border-top-left-radius: 0;\n}\n\n.navbar-fixed-bottom .navbar-nav > li > .dropdown-menu {\n  margin-bottom: 0;\n  border-top-right-radius: 4px;\n  border-top-left-radius: 4px;\n  border-bottom-right-radius: 0;\n  border-bottom-left-radius: 0;\n}\n\n.navbar-btn {\n  margin-top: 8px;\n  margin-bottom: 8px;\n}\n\n.navbar-btn.btn-sm,\n.btn-group-sm > .navbar-btn.btn {\n  margin-top: 10px;\n  margin-bottom: 10px;\n}\n\n.navbar-btn.btn-xs,\n.btn-group-xs > .navbar-btn.btn {\n  margin-top: 14px;\n  margin-bottom: 14px;\n}\n\n.navbar-text {\n  margin-top: 15px;\n  margin-bottom: 15px;\n}\n\n@media (min-width: 768px) {\n  .navbar-text {\n    float: left;\n    margin-left: 15px;\n    margin-right: 15px;\n  }\n}\n\n@media (min-width: 768px) {\n  .navbar-left {\n    float: left !important;\n  }\n\n  .navbar-right {\n    float: right !important;\n    margin-right: -15px;\n  }\n\n  .navbar-right ~ .navbar-right {\n    margin-right: 0;\n  }\n}\n\n.navbar-default {\n  background-color: #f8f8f8;\n  border-color: #e7e7e7;\n}\n\n.navbar-default .navbar-brand {\n  color: #777;\n}\n\n.navbar-default .navbar-brand:hover,\n.navbar-default .navbar-brand:focus {\n  color: #5e5e5e;\n  background-color: transparent;\n}\n\n.navbar-default .navbar-text {\n  color: #777;\n}\n\n.navbar-default .navbar-nav > li > a {\n  color: #777;\n}\n\n.navbar-default .navbar-nav > li > a:hover,\n.navbar-default .navbar-nav > li > a:focus {\n  color: #333;\n  background-color: transparent;\n}\n\n.navbar-default .navbar-nav > .active > a,\n.navbar-default .navbar-nav > .active > a:hover,\n.navbar-default .navbar-nav > .active > a:focus {\n  color: #555;\n  background-color: #e7e7e7;\n}\n\n.navbar-default .navbar-nav > .disabled > a,\n.navbar-default .navbar-nav > .disabled > a:hover,\n.navbar-default .navbar-nav > .disabled > a:focus {\n  color: #ccc;\n  background-color: transparent;\n}\n\n.navbar-default .navbar-toggle {\n  border-color: #ddd;\n}\n\n.navbar-default .navbar-toggle:hover,\n.navbar-default .navbar-toggle:focus {\n  background-color: #ddd;\n}\n\n.navbar-default .navbar-toggle .icon-bar {\n  background-color: #888;\n}\n\n.navbar-default .navbar-collapse,\n.navbar-default .navbar-form {\n  border-color: #e7e7e7;\n}\n\n.navbar-default .navbar-nav > .open > a,\n.navbar-default .navbar-nav > .open > a:hover,\n.navbar-default .navbar-nav > .open > a:focus {\n  background-color: #e7e7e7;\n  color: #555;\n}\n\n@media (max-width: 767px) {\n  .navbar-default .navbar-nav .open .dropdown-menu > li > a {\n    color: #777;\n  }\n\n  .navbar-default .navbar-nav .open .dropdown-menu > li > a:hover,\n  .navbar-default .navbar-nav .open .dropdown-menu > li > a:focus {\n    color: #333;\n    background-color: transparent;\n  }\n\n  .navbar-default .navbar-nav .open .dropdown-menu > .active > a,\n  .navbar-default .navbar-nav .open .dropdown-menu > .active > a:hover,\n  .navbar-default .navbar-nav .open .dropdown-menu > .active > a:focus {\n    color: #555;\n    background-color: #e7e7e7;\n  }\n\n  .navbar-default .navbar-nav .open .dropdown-menu > .disabled > a,\n  .navbar-default .navbar-nav .open .dropdown-menu > .disabled > a:hover,\n  .navbar-default .navbar-nav .open .dropdown-menu > .disabled > a:focus {\n    color: #ccc;\n    background-color: transparent;\n  }\n}\n\n.navbar-default .navbar-link {\n  color: #777;\n}\n\n.navbar-default .navbar-link:hover {\n  color: #333;\n}\n\n.navbar-default .btn-link {\n  color: #777;\n}\n\n.navbar-default .btn-link:hover,\n.navbar-default .btn-link:focus {\n  color: #333;\n}\n\n.navbar-default .btn-link[disabled]:hover,\n.navbar-default .btn-link[disabled]:focus,\nfieldset[disabled] .navbar-default .btn-link:hover,\nfieldset[disabled] .navbar-default .btn-link:focus {\n  color: #ccc;\n}\n\n.navbar-inverse {\n  background-color: #222;\n  border-color: #090909;\n}\n\n.navbar-inverse .navbar-brand {\n  color: #9d9d9d;\n}\n\n.navbar-inverse .navbar-brand:hover,\n.navbar-inverse .navbar-brand:focus {\n  color: #fff;\n  background-color: transparent;\n}\n\n.navbar-inverse .navbar-text {\n  color: #9d9d9d;\n}\n\n.navbar-inverse .navbar-nav > li > a {\n  color: #9d9d9d;\n}\n\n.navbar-inverse .navbar-nav > li > a:hover,\n.navbar-inverse .navbar-nav > li > a:focus {\n  color: #fff;\n  background-color: transparent;\n}\n\n.navbar-inverse .navbar-nav > .active > a,\n.navbar-inverse .navbar-nav > .active > a:hover,\n.navbar-inverse .navbar-nav > .active > a:focus {\n  color: #fff;\n  background-color: #090909;\n}\n\n.navbar-inverse .navbar-nav > .disabled > a,\n.navbar-inverse .navbar-nav > .disabled > a:hover,\n.navbar-inverse .navbar-nav > .disabled > a:focus {\n  color: #444;\n  background-color: transparent;\n}\n\n.navbar-inverse .navbar-toggle {\n  border-color: #333;\n}\n\n.navbar-inverse .navbar-toggle:hover,\n.navbar-inverse .navbar-toggle:focus {\n  background-color: #333;\n}\n\n.navbar-inverse .navbar-toggle .icon-bar {\n  background-color: #fff;\n}\n\n.navbar-inverse .navbar-collapse,\n.navbar-inverse .navbar-form {\n  border-color: #101010;\n}\n\n.navbar-inverse .navbar-nav > .open > a,\n.navbar-inverse .navbar-nav > .open > a:hover,\n.navbar-inverse .navbar-nav > .open > a:focus {\n  background-color: #090909;\n  color: #fff;\n}\n\n@media (max-width: 767px) {\n  .navbar-inverse .navbar-nav .open .dropdown-menu > .dropdown-header {\n    border-color: #090909;\n  }\n\n  .navbar-inverse .navbar-nav .open .dropdown-menu .divider {\n    background-color: #090909;\n  }\n\n  .navbar-inverse .navbar-nav .open .dropdown-menu > li > a {\n    color: #9d9d9d;\n  }\n\n  .navbar-inverse .navbar-nav .open .dropdown-menu > li > a:hover,\n  .navbar-inverse .navbar-nav .open .dropdown-menu > li > a:focus {\n    color: #fff;\n    background-color: transparent;\n  }\n\n  .navbar-inverse .navbar-nav .open .dropdown-menu > .active > a,\n  .navbar-inverse .navbar-nav .open .dropdown-menu > .active > a:hover,\n  .navbar-inverse .navbar-nav .open .dropdown-menu > .active > a:focus {\n    color: #fff;\n    background-color: #090909;\n  }\n\n  .navbar-inverse .navbar-nav .open .dropdown-menu > .disabled > a,\n  .navbar-inverse .navbar-nav .open .dropdown-menu > .disabled > a:hover,\n  .navbar-inverse .navbar-nav .open .dropdown-menu > .disabled > a:focus {\n    color: #444;\n    background-color: transparent;\n  }\n}\n\n.navbar-inverse .navbar-link {\n  color: #9d9d9d;\n}\n\n.navbar-inverse .navbar-link:hover {\n  color: #fff;\n}\n\n.navbar-inverse .btn-link {\n  color: #9d9d9d;\n}\n\n.navbar-inverse .btn-link:hover,\n.navbar-inverse .btn-link:focus {\n  color: #fff;\n}\n\n.navbar-inverse .btn-link[disabled]:hover,\n.navbar-inverse .btn-link[disabled]:focus,\nfieldset[disabled] .navbar-inverse .btn-link:hover,\nfieldset[disabled] .navbar-inverse .btn-link:focus {\n  color: #444;\n}\n\n.breadcrumb {\n  padding: 8px 15px;\n  margin-bottom: 20px;\n  list-style: none;\n  background-color: #f5f5f5;\n  border-radius: 4px;\n}\n\n.breadcrumb > li {\n  display: inline-block;\n}\n\n.breadcrumb > li + li:before {\n  content: \"/\\A0\";\n  padding: 0 5px;\n  color: #ccc;\n}\n\n.breadcrumb > .active {\n  color: #777777;\n}\n\n.pagination {\n  display: inline-block;\n  padding-left: 0;\n  margin: 20px 0;\n  border-radius: 4px;\n}\n\n.pagination > li {\n  display: inline;\n}\n\n.pagination > li > a,\n.pagination > li > span {\n  position: relative;\n  float: left;\n  padding: 6px 12px;\n  line-height: 1.42857;\n  text-decoration: none;\n  color: #337ab7;\n  background-color: #fff;\n  border: 1px solid #ddd;\n  margin-left: -1px;\n}\n\n.pagination > li:first-child > a,\n.pagination > li:first-child > span {\n  margin-left: 0;\n  border-bottom-left-radius: 4px;\n  border-top-left-radius: 4px;\n}\n\n.pagination > li:last-child > a,\n.pagination > li:last-child > span {\n  border-bottom-right-radius: 4px;\n  border-top-right-radius: 4px;\n}\n\n.pagination > li > a:hover,\n.pagination > li > a:focus,\n.pagination > li > span:hover,\n.pagination > li > span:focus {\n  z-index: 2;\n  color: #23527c;\n  background-color: #eeeeee;\n  border-color: #ddd;\n}\n\n.pagination > .active > a,\n.pagination > .active > a:hover,\n.pagination > .active > a:focus,\n.pagination > .active > span,\n.pagination > .active > span:hover,\n.pagination > .active > span:focus {\n  z-index: 3;\n  color: #fff;\n  background-color: #337ab7;\n  border-color: #337ab7;\n  cursor: default;\n}\n\n.pagination > .disabled > span,\n.pagination > .disabled > span:hover,\n.pagination > .disabled > span:focus,\n.pagination > .disabled > a,\n.pagination > .disabled > a:hover,\n.pagination > .disabled > a:focus {\n  color: #777777;\n  background-color: #fff;\n  border-color: #ddd;\n  cursor: not-allowed;\n}\n\n.pagination-lg > li > a,\n.pagination-lg > li > span {\n  padding: 10px 16px;\n  font-size: 18px;\n  line-height: 1.33333;\n}\n\n.pagination-lg > li:first-child > a,\n.pagination-lg > li:first-child > span {\n  border-bottom-left-radius: 6px;\n  border-top-left-radius: 6px;\n}\n\n.pagination-lg > li:last-child > a,\n.pagination-lg > li:last-child > span {\n  border-bottom-right-radius: 6px;\n  border-top-right-radius: 6px;\n}\n\n.pagination-sm > li > a,\n.pagination-sm > li > span {\n  padding: 5px 10px;\n  font-size: 12px;\n  line-height: 1.5;\n}\n\n.pagination-sm > li:first-child > a,\n.pagination-sm > li:first-child > span {\n  border-bottom-left-radius: 3px;\n  border-top-left-radius: 3px;\n}\n\n.pagination-sm > li:last-child > a,\n.pagination-sm > li:last-child > span {\n  border-bottom-right-radius: 3px;\n  border-top-right-radius: 3px;\n}\n\n.pager {\n  padding-left: 0;\n  margin: 20px 0;\n  list-style: none;\n  text-align: center;\n}\n\n.pager:before,\n.pager:after {\n  content: \" \";\n  display: table;\n}\n\n.pager:after {\n  clear: both;\n}\n\n.pager li {\n  display: inline;\n}\n\n.pager li > a,\n.pager li > span {\n  display: inline-block;\n  padding: 5px 14px;\n  background-color: #fff;\n  border: 1px solid #ddd;\n  border-radius: 15px;\n}\n\n.pager li > a:hover,\n.pager li > a:focus {\n  text-decoration: none;\n  background-color: #eeeeee;\n}\n\n.pager .next > a,\n.pager .next > span {\n  float: right;\n}\n\n.pager .previous > a,\n.pager .previous > span {\n  float: left;\n}\n\n.pager .disabled > a,\n.pager .disabled > a:hover,\n.pager .disabled > a:focus,\n.pager .disabled > span {\n  color: #777777;\n  background-color: #fff;\n  cursor: not-allowed;\n}\n\n.label {\n  display: inline;\n  padding: .2em .6em .3em;\n  font-size: 75%;\n  font-weight: bold;\n  line-height: 1;\n  color: #fff;\n  text-align: center;\n  white-space: nowrap;\n  vertical-align: baseline;\n  border-radius: .25em;\n}\n\n.label:empty {\n  display: none;\n}\n\n.btn .label {\n  position: relative;\n  top: -1px;\n}\n\na.label:hover,\na.label:focus {\n  color: #fff;\n  text-decoration: none;\n  cursor: pointer;\n}\n\n.label-default {\n  background-color: #777777;\n}\n\n.label-default[href]:hover,\n.label-default[href]:focus {\n  background-color: #5e5e5e;\n}\n\n.label-primary {\n  background-color: #337ab7;\n}\n\n.label-primary[href]:hover,\n.label-primary[href]:focus {\n  background-color: #286090;\n}\n\n.label-success {\n  background-color: #5cb85c;\n}\n\n.label-success[href]:hover,\n.label-success[href]:focus {\n  background-color: #449d44;\n}\n\n.label-info {\n  background-color: #5bc0de;\n}\n\n.label-info[href]:hover,\n.label-info[href]:focus {\n  background-color: #31b0d5;\n}\n\n.label-warning {\n  background-color: #f0ad4e;\n}\n\n.label-warning[href]:hover,\n.label-warning[href]:focus {\n  background-color: #ec971f;\n}\n\n.label-danger {\n  background-color: #d9534f;\n}\n\n.label-danger[href]:hover,\n.label-danger[href]:focus {\n  background-color: #c9302c;\n}\n\n.badge {\n  display: inline-block;\n  min-width: 10px;\n  padding: 3px 7px;\n  font-size: 12px;\n  font-weight: bold;\n  color: #fff;\n  line-height: 1;\n  vertical-align: middle;\n  white-space: nowrap;\n  text-align: center;\n  background-color: #777777;\n  border-radius: 10px;\n}\n\n.badge:empty {\n  display: none;\n}\n\n.btn .badge {\n  position: relative;\n  top: -1px;\n}\n\n.btn-xs .badge,\n.btn-group-xs > .btn .badge,\n.btn-group-xs > .btn .badge {\n  top: 0;\n  padding: 1px 5px;\n}\n\n.list-group-item.active > .badge,\n.nav-pills > .active > a > .badge {\n  color: #337ab7;\n  background-color: #fff;\n}\n\n.list-group-item > .badge {\n  float: right;\n}\n\n.list-group-item > .badge + .badge {\n  margin-right: 5px;\n}\n\n.nav-pills > li > a > .badge {\n  margin-left: 3px;\n}\n\na.badge:hover,\na.badge:focus {\n  color: #fff;\n  text-decoration: none;\n  cursor: pointer;\n}\n\n.jumbotron {\n  padding-top: 30px;\n  padding-bottom: 30px;\n  margin-bottom: 30px;\n  color: inherit;\n  background-color: #eeeeee;\n}\n\n.jumbotron h1,\n.jumbotron .h1 {\n  color: inherit;\n}\n\n.jumbotron p {\n  margin-bottom: 15px;\n  font-size: 21px;\n  font-weight: 200;\n}\n\n.jumbotron > hr {\n  border-top-color: #d5d5d5;\n}\n\n.container .jumbotron,\n.container-fluid .jumbotron {\n  border-radius: 6px;\n  padding-left: 15px;\n  padding-right: 15px;\n}\n\n.jumbotron .container {\n  max-width: 100%;\n}\n\n@media screen and (min-width: 768px) {\n  .jumbotron {\n    padding-top: 48px;\n    padding-bottom: 48px;\n  }\n\n  .container .jumbotron,\n  .container-fluid .jumbotron {\n    padding-left: 60px;\n    padding-right: 60px;\n  }\n\n  .jumbotron h1,\n  .jumbotron .h1 {\n    font-size: 63px;\n  }\n}\n\n.thumbnail {\n  display: block;\n  padding: 4px;\n  margin-bottom: 20px;\n  line-height: 1.42857;\n  background-color: #fff;\n  border: 1px solid #ddd;\n  border-radius: 4px;\n  -webkit-transition: border 0.2s ease-in-out;\n  -o-transition: border 0.2s ease-in-out;\n  transition: border 0.2s ease-in-out;\n}\n\n.thumbnail > img,\n.thumbnail a > img {\n  display: block;\n  max-width: 100%;\n  height: auto;\n  margin-left: auto;\n  margin-right: auto;\n}\n\n.thumbnail .caption {\n  padding: 9px;\n  color: #333333;\n}\n\na.thumbnail:hover,\na.thumbnail:focus,\na.thumbnail.active {\n  border-color: #337ab7;\n}\n\n.alert {\n  padding: 15px;\n  margin-bottom: 20px;\n  border: 1px solid transparent;\n  border-radius: 4px;\n}\n\n.alert h4 {\n  margin-top: 0;\n  color: inherit;\n}\n\n.alert .alert-link {\n  font-weight: bold;\n}\n\n.alert > p,\n.alert > ul {\n  margin-bottom: 0;\n}\n\n.alert > p + p {\n  margin-top: 5px;\n}\n\n.alert-dismissable,\n.alert-dismissible {\n  padding-right: 35px;\n}\n\n.alert-dismissable .close,\n.alert-dismissible .close {\n  position: relative;\n  top: -2px;\n  right: -21px;\n  color: inherit;\n}\n\n.alert-success {\n  background-color: #dff0d8;\n  border-color: #d6e9c6;\n  color: #3c763d;\n}\n\n.alert-success hr {\n  border-top-color: #c9e2b3;\n}\n\n.alert-success .alert-link {\n  color: #2b542c;\n}\n\n.alert-info {\n  background-color: #d9edf7;\n  border-color: #bce8f1;\n  color: #31708f;\n}\n\n.alert-info hr {\n  border-top-color: #a6e1ec;\n}\n\n.alert-info .alert-link {\n  color: #245269;\n}\n\n.alert-warning {\n  background-color: #fcf8e3;\n  border-color: #faebcc;\n  color: #8a6d3b;\n}\n\n.alert-warning hr {\n  border-top-color: #f7e1b5;\n}\n\n.alert-warning .alert-link {\n  color: #66512c;\n}\n\n.alert-danger {\n  background-color: #f2dede;\n  border-color: #ebccd1;\n  color: #a94442;\n}\n\n.alert-danger hr {\n  border-top-color: #e4b9c0;\n}\n\n.alert-danger .alert-link {\n  color: #843534;\n}\n\n@-webkit-keyframes progress-bar-stripes {\n  from {\n    background-position: 40px 0;\n  }\n\n  to {\n    background-position: 0 0;\n  }\n}\n\n@keyframes progress-bar-stripes {\n  from {\n    background-position: 40px 0;\n  }\n\n  to {\n    background-position: 0 0;\n  }\n}\n\n.progress {\n  overflow: hidden;\n  height: 20px;\n  margin-bottom: 20px;\n  background-color: #f5f5f5;\n  border-radius: 4px;\n  -webkit-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);\n  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);\n}\n\n.progress-bar {\n  float: left;\n  width: 0%;\n  height: 100%;\n  font-size: 12px;\n  line-height: 20px;\n  color: #fff;\n  text-align: center;\n  background-color: #337ab7;\n  -webkit-box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.15);\n  box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.15);\n  -webkit-transition: width 0.6s ease;\n  -o-transition: width 0.6s ease;\n  transition: width 0.6s ease;\n}\n\n.progress-striped .progress-bar,\n.progress-bar-striped {\n  background-image: -webkit-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);\n  background-image: -o-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);\n  background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);\n  background-size: 40px 40px;\n}\n\n.progress.active .progress-bar,\n.progress-bar.active {\n  -webkit-animation: progress-bar-stripes 2s linear infinite;\n  -o-animation: progress-bar-stripes 2s linear infinite;\n  animation: progress-bar-stripes 2s linear infinite;\n}\n\n.progress-bar-success {\n  background-color: #5cb85c;\n}\n\n.progress-striped .progress-bar-success {\n  background-image: -webkit-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);\n  background-image: -o-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);\n  background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);\n}\n\n.progress-bar-info {\n  background-color: #5bc0de;\n}\n\n.progress-striped .progress-bar-info {\n  background-image: -webkit-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);\n  background-image: -o-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);\n  background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);\n}\n\n.progress-bar-warning {\n  background-color: #f0ad4e;\n}\n\n.progress-striped .progress-bar-warning {\n  background-image: -webkit-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);\n  background-image: -o-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);\n  background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);\n}\n\n.progress-bar-danger {\n  background-color: #d9534f;\n}\n\n.progress-striped .progress-bar-danger {\n  background-image: -webkit-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);\n  background-image: -o-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);\n  background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);\n}\n\n.media {\n  margin-top: 15px;\n}\n\n.media:first-child {\n  margin-top: 0;\n}\n\n.media,\n.media-body {\n  zoom: 1;\n  overflow: hidden;\n}\n\n.media-body {\n  width: 10000px;\n}\n\n.media-object {\n  display: block;\n}\n\n.media-object.img-thumbnail {\n  max-width: none;\n}\n\n.media-right,\n.media > .pull-right {\n  padding-left: 10px;\n}\n\n.media-left,\n.media > .pull-left {\n  padding-right: 10px;\n}\n\n.media-left,\n.media-right,\n.media-body {\n  display: table-cell;\n  vertical-align: top;\n}\n\n.media-middle {\n  vertical-align: middle;\n}\n\n.media-bottom {\n  vertical-align: bottom;\n}\n\n.media-heading {\n  margin-top: 0;\n  margin-bottom: 5px;\n}\n\n.media-list {\n  padding-left: 0;\n  list-style: none;\n}\n\n.list-group {\n  margin-bottom: 20px;\n  padding-left: 0;\n}\n\n.list-group-item {\n  position: relative;\n  display: block;\n  padding: 10px 15px;\n  margin-bottom: -1px;\n  background-color: #fff;\n  border: 1px solid #ddd;\n}\n\n.list-group-item:first-child {\n  border-top-right-radius: 4px;\n  border-top-left-radius: 4px;\n}\n\n.list-group-item:last-child {\n  margin-bottom: 0;\n  border-bottom-right-radius: 4px;\n  border-bottom-left-radius: 4px;\n}\n\na.list-group-item,\nbutton.list-group-item {\n  color: #555;\n}\n\na.list-group-item .list-group-item-heading,\nbutton.list-group-item .list-group-item-heading {\n  color: #333;\n}\n\na.list-group-item:hover,\na.list-group-item:focus,\nbutton.list-group-item:hover,\nbutton.list-group-item:focus {\n  text-decoration: none;\n  color: #555;\n  background-color: #f5f5f5;\n}\n\nbutton.list-group-item {\n  width: 100%;\n  text-align: left;\n}\n\n.list-group-item.disabled,\n.list-group-item.disabled:hover,\n.list-group-item.disabled:focus {\n  background-color: #eeeeee;\n  color: #777777;\n  cursor: not-allowed;\n}\n\n.list-group-item.disabled .list-group-item-heading,\n.list-group-item.disabled:hover .list-group-item-heading,\n.list-group-item.disabled:focus .list-group-item-heading {\n  color: inherit;\n}\n\n.list-group-item.disabled .list-group-item-text,\n.list-group-item.disabled:hover .list-group-item-text,\n.list-group-item.disabled:focus .list-group-item-text {\n  color: #777777;\n}\n\n.list-group-item.active,\n.list-group-item.active:hover,\n.list-group-item.active:focus {\n  z-index: 2;\n  color: #fff;\n  background-color: #337ab7;\n  border-color: #337ab7;\n}\n\n.list-group-item.active .list-group-item-heading,\n.list-group-item.active .list-group-item-heading > small,\n.list-group-item.active .list-group-item-heading > .small,\n.list-group-item.active:hover .list-group-item-heading,\n.list-group-item.active:hover .list-group-item-heading > small,\n.list-group-item.active:hover .list-group-item-heading > .small,\n.list-group-item.active:focus .list-group-item-heading,\n.list-group-item.active:focus .list-group-item-heading > small,\n.list-group-item.active:focus .list-group-item-heading > .small {\n  color: inherit;\n}\n\n.list-group-item.active .list-group-item-text,\n.list-group-item.active:hover .list-group-item-text,\n.list-group-item.active:focus .list-group-item-text {\n  color: #c7ddef;\n}\n\n.list-group-item-success {\n  color: #3c763d;\n  background-color: #dff0d8;\n}\n\na.list-group-item-success,\nbutton.list-group-item-success {\n  color: #3c763d;\n}\n\na.list-group-item-success .list-group-item-heading,\nbutton.list-group-item-success .list-group-item-heading {\n  color: inherit;\n}\n\na.list-group-item-success:hover,\na.list-group-item-success:focus,\nbutton.list-group-item-success:hover,\nbutton.list-group-item-success:focus {\n  color: #3c763d;\n  background-color: #d0e9c6;\n}\n\na.list-group-item-success.active,\na.list-group-item-success.active:hover,\na.list-group-item-success.active:focus,\nbutton.list-group-item-success.active,\nbutton.list-group-item-success.active:hover,\nbutton.list-group-item-success.active:focus {\n  color: #fff;\n  background-color: #3c763d;\n  border-color: #3c763d;\n}\n\n.list-group-item-info {\n  color: #31708f;\n  background-color: #d9edf7;\n}\n\na.list-group-item-info,\nbutton.list-group-item-info {\n  color: #31708f;\n}\n\na.list-group-item-info .list-group-item-heading,\nbutton.list-group-item-info .list-group-item-heading {\n  color: inherit;\n}\n\na.list-group-item-info:hover,\na.list-group-item-info:focus,\nbutton.list-group-item-info:hover,\nbutton.list-group-item-info:focus {\n  color: #31708f;\n  background-color: #c4e3f3;\n}\n\na.list-group-item-info.active,\na.list-group-item-info.active:hover,\na.list-group-item-info.active:focus,\nbutton.list-group-item-info.active,\nbutton.list-group-item-info.active:hover,\nbutton.list-group-item-info.active:focus {\n  color: #fff;\n  background-color: #31708f;\n  border-color: #31708f;\n}\n\n.list-group-item-warning {\n  color: #8a6d3b;\n  background-color: #fcf8e3;\n}\n\na.list-group-item-warning,\nbutton.list-group-item-warning {\n  color: #8a6d3b;\n}\n\na.list-group-item-warning .list-group-item-heading,\nbutton.list-group-item-warning .list-group-item-heading {\n  color: inherit;\n}\n\na.list-group-item-warning:hover,\na.list-group-item-warning:focus,\nbutton.list-group-item-warning:hover,\nbutton.list-group-item-warning:focus {\n  color: #8a6d3b;\n  background-color: #faf2cc;\n}\n\na.list-group-item-warning.active,\na.list-group-item-warning.active:hover,\na.list-group-item-warning.active:focus,\nbutton.list-group-item-warning.active,\nbutton.list-group-item-warning.active:hover,\nbutton.list-group-item-warning.active:focus {\n  color: #fff;\n  background-color: #8a6d3b;\n  border-color: #8a6d3b;\n}\n\n.list-group-item-danger {\n  color: #a94442;\n  background-color: #f2dede;\n}\n\na.list-group-item-danger,\nbutton.list-group-item-danger {\n  color: #a94442;\n}\n\na.list-group-item-danger .list-group-item-heading,\nbutton.list-group-item-danger .list-group-item-heading {\n  color: inherit;\n}\n\na.list-group-item-danger:hover,\na.list-group-item-danger:focus,\nbutton.list-group-item-danger:hover,\nbutton.list-group-item-danger:focus {\n  color: #a94442;\n  background-color: #ebcccc;\n}\n\na.list-group-item-danger.active,\na.list-group-item-danger.active:hover,\na.list-group-item-danger.active:focus,\nbutton.list-group-item-danger.active,\nbutton.list-group-item-danger.active:hover,\nbutton.list-group-item-danger.active:focus {\n  color: #fff;\n  background-color: #a94442;\n  border-color: #a94442;\n}\n\n.list-group-item-heading {\n  margin-top: 0;\n  margin-bottom: 5px;\n}\n\n.list-group-item-text {\n  margin-bottom: 0;\n  line-height: 1.3;\n}\n\n.panel {\n  margin-bottom: 20px;\n  background-color: #fff;\n  border: 1px solid transparent;\n  border-radius: 4px;\n  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);\n  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);\n}\n\n.panel-body {\n  padding: 15px;\n}\n\n.panel-body:before,\n.panel-body:after {\n  content: \" \";\n  display: table;\n}\n\n.panel-body:after {\n  clear: both;\n}\n\n.panel-heading {\n  padding: 10px 15px;\n  border-bottom: 1px solid transparent;\n  border-top-right-radius: 3px;\n  border-top-left-radius: 3px;\n}\n\n.panel-heading > .dropdown .dropdown-toggle {\n  color: inherit;\n}\n\n.panel-title {\n  margin-top: 0;\n  margin-bottom: 0;\n  font-size: 16px;\n  color: inherit;\n}\n\n.panel-title > a,\n.panel-title > small,\n.panel-title > .small,\n.panel-title > small > a,\n.panel-title > .small > a {\n  color: inherit;\n}\n\n.panel-footer {\n  padding: 10px 15px;\n  background-color: #f5f5f5;\n  border-top: 1px solid #ddd;\n  border-bottom-right-radius: 3px;\n  border-bottom-left-radius: 3px;\n}\n\n.panel > .list-group,\n.panel > .panel-collapse > .list-group {\n  margin-bottom: 0;\n}\n\n.panel > .list-group .list-group-item,\n.panel > .panel-collapse > .list-group .list-group-item {\n  border-width: 1px 0;\n  border-radius: 0;\n}\n\n.panel > .list-group:first-child .list-group-item:first-child,\n.panel > .panel-collapse > .list-group:first-child .list-group-item:first-child {\n  border-top: 0;\n  border-top-right-radius: 3px;\n  border-top-left-radius: 3px;\n}\n\n.panel > .list-group:last-child .list-group-item:last-child,\n.panel > .panel-collapse > .list-group:last-child .list-group-item:last-child {\n  border-bottom: 0;\n  border-bottom-right-radius: 3px;\n  border-bottom-left-radius: 3px;\n}\n\n.panel > .panel-heading + .panel-collapse > .list-group .list-group-item:first-child {\n  border-top-right-radius: 0;\n  border-top-left-radius: 0;\n}\n\n.panel-heading + .list-group .list-group-item:first-child {\n  border-top-width: 0;\n}\n\n.list-group + .panel-footer {\n  border-top-width: 0;\n}\n\n.panel > .table,\n.panel > .table-responsive > .table,\n.panel > .panel-collapse > .table {\n  margin-bottom: 0;\n}\n\n.panel > .table caption,\n.panel > .table-responsive > .table caption,\n.panel > .panel-collapse > .table caption {\n  padding-left: 15px;\n  padding-right: 15px;\n}\n\n.panel > .table:first-child,\n.panel > .table-responsive:first-child > .table:first-child {\n  border-top-right-radius: 3px;\n  border-top-left-radius: 3px;\n}\n\n.panel > .table:first-child > thead:first-child > tr:first-child,\n.panel > .table:first-child > tbody:first-child > tr:first-child,\n.panel > .table-responsive:first-child > .table:first-child > thead:first-child > tr:first-child,\n.panel > .table-responsive:first-child > .table:first-child > tbody:first-child > tr:first-child {\n  border-top-left-radius: 3px;\n  border-top-right-radius: 3px;\n}\n\n.panel > .table:first-child > thead:first-child > tr:first-child td:first-child,\n.panel > .table:first-child > thead:first-child > tr:first-child th:first-child,\n.panel > .table:first-child > tbody:first-child > tr:first-child td:first-child,\n.panel > .table:first-child > tbody:first-child > tr:first-child th:first-child,\n.panel > .table-responsive:first-child > .table:first-child > thead:first-child > tr:first-child td:first-child,\n.panel > .table-responsive:first-child > .table:first-child > thead:first-child > tr:first-child th:first-child,\n.panel > .table-responsive:first-child > .table:first-child > tbody:first-child > tr:first-child td:first-child,\n.panel > .table-responsive:first-child > .table:first-child > tbody:first-child > tr:first-child th:first-child {\n  border-top-left-radius: 3px;\n}\n\n.panel > .table:first-child > thead:first-child > tr:first-child td:last-child,\n.panel > .table:first-child > thead:first-child > tr:first-child th:last-child,\n.panel > .table:first-child > tbody:first-child > tr:first-child td:last-child,\n.panel > .table:first-child > tbody:first-child > tr:first-child th:last-child,\n.panel > .table-responsive:first-child > .table:first-child > thead:first-child > tr:first-child td:last-child,\n.panel > .table-responsive:first-child > .table:first-child > thead:first-child > tr:first-child th:last-child,\n.panel > .table-responsive:first-child > .table:first-child > tbody:first-child > tr:first-child td:last-child,\n.panel > .table-responsive:first-child > .table:first-child > tbody:first-child > tr:first-child th:last-child {\n  border-top-right-radius: 3px;\n}\n\n.panel > .table:last-child,\n.panel > .table-responsive:last-child > .table:last-child {\n  border-bottom-right-radius: 3px;\n  border-bottom-left-radius: 3px;\n}\n\n.panel > .table:last-child > tbody:last-child > tr:last-child,\n.panel > .table:last-child > tfoot:last-child > tr:last-child,\n.panel > .table-responsive:last-child > .table:last-child > tbody:last-child > tr:last-child,\n.panel > .table-responsive:last-child > .table:last-child > tfoot:last-child > tr:last-child {\n  border-bottom-left-radius: 3px;\n  border-bottom-right-radius: 3px;\n}\n\n.panel > .table:last-child > tbody:last-child > tr:last-child td:first-child,\n.panel > .table:last-child > tbody:last-child > tr:last-child th:first-child,\n.panel > .table:last-child > tfoot:last-child > tr:last-child td:first-child,\n.panel > .table:last-child > tfoot:last-child > tr:last-child th:first-child,\n.panel > .table-responsive:last-child > .table:last-child > tbody:last-child > tr:last-child td:first-child,\n.panel > .table-responsive:last-child > .table:last-child > tbody:last-child > tr:last-child th:first-child,\n.panel > .table-responsive:last-child > .table:last-child > tfoot:last-child > tr:last-child td:first-child,\n.panel > .table-responsive:last-child > .table:last-child > tfoot:last-child > tr:last-child th:first-child {\n  border-bottom-left-radius: 3px;\n}\n\n.panel > .table:last-child > tbody:last-child > tr:last-child td:last-child,\n.panel > .table:last-child > tbody:last-child > tr:last-child th:last-child,\n.panel > .table:last-child > tfoot:last-child > tr:last-child td:last-child,\n.panel > .table:last-child > tfoot:last-child > tr:last-child th:last-child,\n.panel > .table-responsive:last-child > .table:last-child > tbody:last-child > tr:last-child td:last-child,\n.panel > .table-responsive:last-child > .table:last-child > tbody:last-child > tr:last-child th:last-child,\n.panel > .table-responsive:last-child > .table:last-child > tfoot:last-child > tr:last-child td:last-child,\n.panel > .table-responsive:last-child > .table:last-child > tfoot:last-child > tr:last-child th:last-child {\n  border-bottom-right-radius: 3px;\n}\n\n.panel > .panel-body + .table,\n.panel > .panel-body + .table-responsive,\n.panel > .table + .panel-body,\n.panel > .table-responsive + .panel-body {\n  border-top: 1px solid #ddd;\n}\n\n.panel > .table > tbody:first-child > tr:first-child th,\n.panel > .table > tbody:first-child > tr:first-child td {\n  border-top: 0;\n}\n\n.panel > .table-bordered,\n.panel > .table-responsive > .table-bordered {\n  border: 0;\n}\n\n.panel > .table-bordered > thead > tr > th:first-child,\n.panel > .table-bordered > thead > tr > td:first-child,\n.panel > .table-bordered > tbody > tr > th:first-child,\n.panel > .table-bordered > tbody > tr > td:first-child,\n.panel > .table-bordered > tfoot > tr > th:first-child,\n.panel > .table-bordered > tfoot > tr > td:first-child,\n.panel > .table-responsive > .table-bordered > thead > tr > th:first-child,\n.panel > .table-responsive > .table-bordered > thead > tr > td:first-child,\n.panel > .table-responsive > .table-bordered > tbody > tr > th:first-child,\n.panel > .table-responsive > .table-bordered > tbody > tr > td:first-child,\n.panel > .table-responsive > .table-bordered > tfoot > tr > th:first-child,\n.panel > .table-responsive > .table-bordered > tfoot > tr > td:first-child {\n  border-left: 0;\n}\n\n.panel > .table-bordered > thead > tr > th:last-child,\n.panel > .table-bordered > thead > tr > td:last-child,\n.panel > .table-bordered > tbody > tr > th:last-child,\n.panel > .table-bordered > tbody > tr > td:last-child,\n.panel > .table-bordered > tfoot > tr > th:last-child,\n.panel > .table-bordered > tfoot > tr > td:last-child,\n.panel > .table-responsive > .table-bordered > thead > tr > th:last-child,\n.panel > .table-responsive > .table-bordered > thead > tr > td:last-child,\n.panel > .table-responsive > .table-bordered > tbody > tr > th:last-child,\n.panel > .table-responsive > .table-bordered > tbody > tr > td:last-child,\n.panel > .table-responsive > .table-bordered > tfoot > tr > th:last-child,\n.panel > .table-responsive > .table-bordered > tfoot > tr > td:last-child {\n  border-right: 0;\n}\n\n.panel > .table-bordered > thead > tr:first-child > td,\n.panel > .table-bordered > thead > tr:first-child > th,\n.panel > .table-bordered > tbody > tr:first-child > td,\n.panel > .table-bordered > tbody > tr:first-child > th,\n.panel > .table-responsive > .table-bordered > thead > tr:first-child > td,\n.panel > .table-responsive > .table-bordered > thead > tr:first-child > th,\n.panel > .table-responsive > .table-bordered > tbody > tr:first-child > td,\n.panel > .table-responsive > .table-bordered > tbody > tr:first-child > th {\n  border-bottom: 0;\n}\n\n.panel > .table-bordered > tbody > tr:last-child > td,\n.panel > .table-bordered > tbody > tr:last-child > th,\n.panel > .table-bordered > tfoot > tr:last-child > td,\n.panel > .table-bordered > tfoot > tr:last-child > th,\n.panel > .table-responsive > .table-bordered > tbody > tr:last-child > td,\n.panel > .table-responsive > .table-bordered > tbody > tr:last-child > th,\n.panel > .table-responsive > .table-bordered > tfoot > tr:last-child > td,\n.panel > .table-responsive > .table-bordered > tfoot > tr:last-child > th {\n  border-bottom: 0;\n}\n\n.panel > .table-responsive {\n  border: 0;\n  margin-bottom: 0;\n}\n\n.panel-group {\n  margin-bottom: 20px;\n}\n\n.panel-group .panel {\n  margin-bottom: 0;\n  border-radius: 4px;\n}\n\n.panel-group .panel + .panel {\n  margin-top: 5px;\n}\n\n.panel-group .panel-heading {\n  border-bottom: 0;\n}\n\n.panel-group .panel-heading + .panel-collapse > .panel-body,\n.panel-group .panel-heading + .panel-collapse > .list-group {\n  border-top: 1px solid #ddd;\n}\n\n.panel-group .panel-footer {\n  border-top: 0;\n}\n\n.panel-group .panel-footer + .panel-collapse .panel-body {\n  border-bottom: 1px solid #ddd;\n}\n\n.panel-default {\n  border-color: #ddd;\n}\n\n.panel-default > .panel-heading {\n  color: #333333;\n  background-color: #f5f5f5;\n  border-color: #ddd;\n}\n\n.panel-default > .panel-heading + .panel-collapse > .panel-body {\n  border-top-color: #ddd;\n}\n\n.panel-default > .panel-heading .badge {\n  color: #f5f5f5;\n  background-color: #333333;\n}\n\n.panel-default > .panel-footer + .panel-collapse > .panel-body {\n  border-bottom-color: #ddd;\n}\n\n.panel-primary {\n  border-color: #337ab7;\n}\n\n.panel-primary > .panel-heading {\n  color: #fff;\n  background-color: #337ab7;\n  border-color: #337ab7;\n}\n\n.panel-primary > .panel-heading + .panel-collapse > .panel-body {\n  border-top-color: #337ab7;\n}\n\n.panel-primary > .panel-heading .badge {\n  color: #337ab7;\n  background-color: #fff;\n}\n\n.panel-primary > .panel-footer + .panel-collapse > .panel-body {\n  border-bottom-color: #337ab7;\n}\n\n.panel-success {\n  border-color: #d6e9c6;\n}\n\n.panel-success > .panel-heading {\n  color: #3c763d;\n  background-color: #dff0d8;\n  border-color: #d6e9c6;\n}\n\n.panel-success > .panel-heading + .panel-collapse > .panel-body {\n  border-top-color: #d6e9c6;\n}\n\n.panel-success > .panel-heading .badge {\n  color: #dff0d8;\n  background-color: #3c763d;\n}\n\n.panel-success > .panel-footer + .panel-collapse > .panel-body {\n  border-bottom-color: #d6e9c6;\n}\n\n.panel-info {\n  border-color: #bce8f1;\n}\n\n.panel-info > .panel-heading {\n  color: #31708f;\n  background-color: #d9edf7;\n  border-color: #bce8f1;\n}\n\n.panel-info > .panel-heading + .panel-collapse > .panel-body {\n  border-top-color: #bce8f1;\n}\n\n.panel-info > .panel-heading .badge {\n  color: #d9edf7;\n  background-color: #31708f;\n}\n\n.panel-info > .panel-footer + .panel-collapse > .panel-body {\n  border-bottom-color: #bce8f1;\n}\n\n.panel-warning {\n  border-color: #faebcc;\n}\n\n.panel-warning > .panel-heading {\n  color: #8a6d3b;\n  background-color: #fcf8e3;\n  border-color: #faebcc;\n}\n\n.panel-warning > .panel-heading + .panel-collapse > .panel-body {\n  border-top-color: #faebcc;\n}\n\n.panel-warning > .panel-heading .badge {\n  color: #fcf8e3;\n  background-color: #8a6d3b;\n}\n\n.panel-warning > .panel-footer + .panel-collapse > .panel-body {\n  border-bottom-color: #faebcc;\n}\n\n.panel-danger {\n  border-color: #ebccd1;\n}\n\n.panel-danger > .panel-heading {\n  color: #a94442;\n  background-color: #f2dede;\n  border-color: #ebccd1;\n}\n\n.panel-danger > .panel-heading + .panel-collapse > .panel-body {\n  border-top-color: #ebccd1;\n}\n\n.panel-danger > .panel-heading .badge {\n  color: #f2dede;\n  background-color: #a94442;\n}\n\n.panel-danger > .panel-footer + .panel-collapse > .panel-body {\n  border-bottom-color: #ebccd1;\n}\n\n.well {\n  min-height: 20px;\n  padding: 19px;\n  margin-bottom: 20px;\n  background-color: #f5f5f5;\n  border: 1px solid #e3e3e3;\n  border-radius: 4px;\n  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);\n  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);\n}\n\n.well blockquote {\n  border-color: #ddd;\n  border-color: rgba(0, 0, 0, 0.15);\n}\n\n.well-lg {\n  padding: 24px;\n  border-radius: 6px;\n}\n\n.well-sm {\n  padding: 9px;\n  border-radius: 3px;\n}\n\n.embed-responsive {\n  position: relative;\n  display: block;\n  height: 0;\n  padding: 0;\n  overflow: hidden;\n}\n\n.embed-responsive .embed-responsive-item,\n.embed-responsive iframe,\n.embed-responsive embed,\n.embed-responsive object,\n.embed-responsive video {\n  position: absolute;\n  top: 0;\n  left: 0;\n  bottom: 0;\n  height: 100%;\n  width: 100%;\n  border: 0;\n}\n\n.embed-responsive-16by9 {\n  padding-bottom: 56.25%;\n}\n\n.embed-responsive-4by3 {\n  padding-bottom: 75%;\n}\n\n.close {\n  float: right;\n  font-size: 21px;\n  font-weight: bold;\n  line-height: 1;\n  color: #000;\n  text-shadow: 0 1px 0 #fff;\n  opacity: 0.2;\n  filter: alpha(opacity=20);\n}\n\n.close:hover,\n.close:focus {\n  color: #000;\n  text-decoration: none;\n  cursor: pointer;\n  opacity: 0.5;\n  filter: alpha(opacity=50);\n}\n\nbutton.close {\n  padding: 0;\n  cursor: pointer;\n  background: transparent;\n  border: 0;\n  -webkit-appearance: none;\n}\n\n.modal-open {\n  overflow: hidden;\n}\n\n.modal {\n  display: none;\n  overflow: hidden;\n  position: fixed;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  left: 0;\n  z-index: 1050;\n  -webkit-overflow-scrolling: touch;\n  outline: 0;\n}\n\n.modal.fade .modal-dialog {\n  -webkit-transform: translate(0, -25%);\n  -ms-transform: translate(0, -25%);\n  -o-transform: translate(0, -25%);\n  transform: translate(0, -25%);\n  -webkit-transition: -webkit-transform 0.3s ease-out;\n  -moz-transition: -moz-transform 0.3s ease-out;\n  -o-transition: -o-transform 0.3s ease-out;\n  transition: transform 0.3s ease-out;\n}\n\n.modal.in .modal-dialog {\n  -webkit-transform: translate(0, 0);\n  -ms-transform: translate(0, 0);\n  -o-transform: translate(0, 0);\n  transform: translate(0, 0);\n}\n\n.modal-open .modal {\n  overflow-x: hidden;\n  overflow-y: auto;\n}\n\n.modal-dialog {\n  position: relative;\n  width: auto;\n  margin: 10px;\n}\n\n.modal-content {\n  position: relative;\n  background-color: #fff;\n  border: 1px solid #999;\n  border: 1px solid rgba(0, 0, 0, 0.2);\n  border-radius: 6px;\n  -webkit-box-shadow: 0 3px 9px rgba(0, 0, 0, 0.5);\n  box-shadow: 0 3px 9px rgba(0, 0, 0, 0.5);\n  background-clip: padding-box;\n  outline: 0;\n}\n\n.modal-backdrop {\n  position: fixed;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  left: 0;\n  z-index: 1040;\n  background-color: #000;\n}\n\n.modal-backdrop.fade {\n  opacity: 0;\n  filter: alpha(opacity=0);\n}\n\n.modal-backdrop.in {\n  opacity: 0.5;\n  filter: alpha(opacity=50);\n}\n\n.modal-header {\n  padding: 15px;\n  border-bottom: 1px solid #e5e5e5;\n}\n\n.modal-header:before,\n.modal-header:after {\n  content: \" \";\n  display: table;\n}\n\n.modal-header:after {\n  clear: both;\n}\n\n.modal-header .close {\n  margin-top: -2px;\n}\n\n.modal-title {\n  margin: 0;\n  line-height: 1.42857;\n}\n\n.modal-body {\n  position: relative;\n  padding: 15px;\n}\n\n.modal-footer {\n  padding: 15px;\n  text-align: right;\n  border-top: 1px solid #e5e5e5;\n}\n\n.modal-footer:before,\n.modal-footer:after {\n  content: \" \";\n  display: table;\n}\n\n.modal-footer:after {\n  clear: both;\n}\n\n.modal-footer .btn + .btn {\n  margin-left: 5px;\n  margin-bottom: 0;\n}\n\n.modal-footer .btn-group .btn + .btn {\n  margin-left: -1px;\n}\n\n.modal-footer .btn-block + .btn-block {\n  margin-left: 0;\n}\n\n.modal-scrollbar-measure {\n  position: absolute;\n  top: -9999px;\n  width: 50px;\n  height: 50px;\n  overflow: scroll;\n}\n\n@media (min-width: 768px) {\n  .modal-dialog {\n    width: 600px;\n    margin: 30px auto;\n  }\n\n  .modal-content {\n    -webkit-box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);\n    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);\n  }\n\n  .modal-sm {\n    width: 300px;\n  }\n}\n\n@media (min-width: 992px) {\n  .modal-lg {\n    width: 900px;\n  }\n}\n\n.tooltip {\n  position: absolute;\n  z-index: 1070;\n  display: block;\n  font-family: \"Helvetica Neue\", Helvetica, Arial, sans-serif;\n  font-style: normal;\n  font-weight: normal;\n  letter-spacing: normal;\n  line-break: auto;\n  line-height: 1.42857;\n  text-align: left;\n  text-align: start;\n  text-decoration: none;\n  text-shadow: none;\n  text-transform: none;\n  white-space: normal;\n  word-break: normal;\n  word-spacing: normal;\n  word-wrap: normal;\n  font-size: 12px;\n  opacity: 0;\n  filter: alpha(opacity=0);\n}\n\n.tooltip.in {\n  opacity: 0.9;\n  filter: alpha(opacity=90);\n}\n\n.tooltip.top {\n  margin-top: -3px;\n  padding: 5px 0;\n}\n\n.tooltip.right {\n  margin-left: 3px;\n  padding: 0 5px;\n}\n\n.tooltip.bottom {\n  margin-top: 3px;\n  padding: 5px 0;\n}\n\n.tooltip.left {\n  margin-left: -3px;\n  padding: 0 5px;\n}\n\n.tooltip-inner {\n  max-width: 200px;\n  padding: 3px 8px;\n  color: #fff;\n  text-align: center;\n  background-color: #000;\n  border-radius: 4px;\n}\n\n.tooltip-arrow {\n  position: absolute;\n  width: 0;\n  height: 0;\n  border-color: transparent;\n  border-style: solid;\n}\n\n.tooltip.top .tooltip-arrow {\n  bottom: 0;\n  left: 50%;\n  margin-left: -5px;\n  border-width: 5px 5px 0;\n  border-top-color: #000;\n}\n\n.tooltip.top-left .tooltip-arrow {\n  bottom: 0;\n  right: 5px;\n  margin-bottom: -5px;\n  border-width: 5px 5px 0;\n  border-top-color: #000;\n}\n\n.tooltip.top-right .tooltip-arrow {\n  bottom: 0;\n  left: 5px;\n  margin-bottom: -5px;\n  border-width: 5px 5px 0;\n  border-top-color: #000;\n}\n\n.tooltip.right .tooltip-arrow {\n  top: 50%;\n  left: 0;\n  margin-top: -5px;\n  border-width: 5px 5px 5px 0;\n  border-right-color: #000;\n}\n\n.tooltip.left .tooltip-arrow {\n  top: 50%;\n  right: 0;\n  margin-top: -5px;\n  border-width: 5px 0 5px 5px;\n  border-left-color: #000;\n}\n\n.tooltip.bottom .tooltip-arrow {\n  top: 0;\n  left: 50%;\n  margin-left: -5px;\n  border-width: 0 5px 5px;\n  border-bottom-color: #000;\n}\n\n.tooltip.bottom-left .tooltip-arrow {\n  top: 0;\n  right: 5px;\n  margin-top: -5px;\n  border-width: 0 5px 5px;\n  border-bottom-color: #000;\n}\n\n.tooltip.bottom-right .tooltip-arrow {\n  top: 0;\n  left: 5px;\n  margin-top: -5px;\n  border-width: 0 5px 5px;\n  border-bottom-color: #000;\n}\n\n.popover {\n  position: absolute;\n  top: 0;\n  left: 0;\n  z-index: 1060;\n  display: none;\n  max-width: 276px;\n  padding: 1px;\n  font-family: \"Helvetica Neue\", Helvetica, Arial, sans-serif;\n  font-style: normal;\n  font-weight: normal;\n  letter-spacing: normal;\n  line-break: auto;\n  line-height: 1.42857;\n  text-align: left;\n  text-align: start;\n  text-decoration: none;\n  text-shadow: none;\n  text-transform: none;\n  white-space: normal;\n  word-break: normal;\n  word-spacing: normal;\n  word-wrap: normal;\n  font-size: 14px;\n  background-color: #fff;\n  background-clip: padding-box;\n  border: 1px solid #ccc;\n  border: 1px solid rgba(0, 0, 0, 0.2);\n  border-radius: 6px;\n  -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);\n  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);\n}\n\n.popover.top {\n  margin-top: -10px;\n}\n\n.popover.right {\n  margin-left: 10px;\n}\n\n.popover.bottom {\n  margin-top: 10px;\n}\n\n.popover.left {\n  margin-left: -10px;\n}\n\n.popover-title {\n  margin: 0;\n  padding: 8px 14px;\n  font-size: 14px;\n  background-color: #f7f7f7;\n  border-bottom: 1px solid #ebebeb;\n  border-radius: 5px 5px 0 0;\n}\n\n.popover-content {\n  padding: 9px 14px;\n}\n\n.popover > .arrow,\n.popover > .arrow:after {\n  position: absolute;\n  display: block;\n  width: 0;\n  height: 0;\n  border-color: transparent;\n  border-style: solid;\n}\n\n.popover > .arrow {\n  border-width: 11px;\n}\n\n.popover > .arrow:after {\n  border-width: 10px;\n  content: \"\";\n}\n\n.popover.top > .arrow {\n  left: 50%;\n  margin-left: -11px;\n  border-bottom-width: 0;\n  border-top-color: #999999;\n  border-top-color: rgba(0, 0, 0, 0.25);\n  bottom: -11px;\n}\n\n.popover.top > .arrow:after {\n  content: \" \";\n  bottom: 1px;\n  margin-left: -10px;\n  border-bottom-width: 0;\n  border-top-color: #fff;\n}\n\n.popover.right > .arrow {\n  top: 50%;\n  left: -11px;\n  margin-top: -11px;\n  border-left-width: 0;\n  border-right-color: #999999;\n  border-right-color: rgba(0, 0, 0, 0.25);\n}\n\n.popover.right > .arrow:after {\n  content: \" \";\n  left: 1px;\n  bottom: -10px;\n  border-left-width: 0;\n  border-right-color: #fff;\n}\n\n.popover.bottom > .arrow {\n  left: 50%;\n  margin-left: -11px;\n  border-top-width: 0;\n  border-bottom-color: #999999;\n  border-bottom-color: rgba(0, 0, 0, 0.25);\n  top: -11px;\n}\n\n.popover.bottom > .arrow:after {\n  content: \" \";\n  top: 1px;\n  margin-left: -10px;\n  border-top-width: 0;\n  border-bottom-color: #fff;\n}\n\n.popover.left > .arrow {\n  top: 50%;\n  right: -11px;\n  margin-top: -11px;\n  border-right-width: 0;\n  border-left-color: #999999;\n  border-left-color: rgba(0, 0, 0, 0.25);\n}\n\n.popover.left > .arrow:after {\n  content: \" \";\n  right: 1px;\n  border-right-width: 0;\n  border-left-color: #fff;\n  bottom: -10px;\n}\n\n.carousel {\n  position: relative;\n}\n\n.carousel-inner {\n  position: relative;\n  overflow: hidden;\n  width: 100%;\n}\n\n.carousel-inner > .item {\n  display: none;\n  position: relative;\n  -webkit-transition: 0.6s ease-in-out left;\n  -o-transition: 0.6s ease-in-out left;\n  transition: 0.6s ease-in-out left;\n}\n\n.carousel-inner > .item > img,\n.carousel-inner > .item > a > img {\n  display: block;\n  max-width: 100%;\n  height: auto;\n  line-height: 1;\n}\n\n@media all and (transform-3d), (-webkit-transform-3d) {\n  .carousel-inner > .item {\n    -webkit-transition: -webkit-transform 0.6s ease-in-out;\n    -moz-transition: -moz-transform 0.6s ease-in-out;\n    -o-transition: -o-transform 0.6s ease-in-out;\n    transition: transform 0.6s ease-in-out;\n    -webkit-backface-visibility: hidden;\n    -moz-backface-visibility: hidden;\n    backface-visibility: hidden;\n    -webkit-perspective: 1000px;\n    -moz-perspective: 1000px;\n    perspective: 1000px;\n  }\n\n  .carousel-inner > .item.next,\n  .carousel-inner > .item.active.right {\n    -webkit-transform: translate3d(100%, 0, 0);\n    transform: translate3d(100%, 0, 0);\n    left: 0;\n  }\n\n  .carousel-inner > .item.prev,\n  .carousel-inner > .item.active.left {\n    -webkit-transform: translate3d(-100%, 0, 0);\n    transform: translate3d(-100%, 0, 0);\n    left: 0;\n  }\n\n  .carousel-inner > .item.next.left,\n  .carousel-inner > .item.prev.right,\n  .carousel-inner > .item.active {\n    -webkit-transform: translate3d(0, 0, 0);\n    transform: translate3d(0, 0, 0);\n    left: 0;\n  }\n}\n\n.carousel-inner > .active,\n.carousel-inner > .next,\n.carousel-inner > .prev {\n  display: block;\n}\n\n.carousel-inner > .active {\n  left: 0;\n}\n\n.carousel-inner > .next,\n.carousel-inner > .prev {\n  position: absolute;\n  top: 0;\n  width: 100%;\n}\n\n.carousel-inner > .next {\n  left: 100%;\n}\n\n.carousel-inner > .prev {\n  left: -100%;\n}\n\n.carousel-inner > .next.left,\n.carousel-inner > .prev.right {\n  left: 0;\n}\n\n.carousel-inner > .active.left {\n  left: -100%;\n}\n\n.carousel-inner > .active.right {\n  left: 100%;\n}\n\n.carousel-control {\n  position: absolute;\n  top: 0;\n  left: 0;\n  bottom: 0;\n  width: 15%;\n  opacity: 0.5;\n  filter: alpha(opacity=50);\n  font-size: 20px;\n  color: #fff;\n  text-align: center;\n  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);\n  background-color: transparent;\n}\n\n.carousel-control.left {\n  background-image: -webkit-linear-gradient(left, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.0001) 100%);\n  background-image: -o-linear-gradient(left, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.0001) 100%);\n  background-image: linear-gradient(to right, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.0001) 100%);\n  background-repeat: repeat-x;\n  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#80000000', endColorstr='#00000000', GradientType=1);\n}\n\n.carousel-control.right {\n  left: auto;\n  right: 0;\n  background-image: -webkit-linear-gradient(left, rgba(0, 0, 0, 0.0001) 0%, rgba(0, 0, 0, 0.5) 100%);\n  background-image: -o-linear-gradient(left, rgba(0, 0, 0, 0.0001) 0%, rgba(0, 0, 0, 0.5) 100%);\n  background-image: linear-gradient(to right, rgba(0, 0, 0, 0.0001) 0%, rgba(0, 0, 0, 0.5) 100%);\n  background-repeat: repeat-x;\n  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00000000', endColorstr='#80000000', GradientType=1);\n}\n\n.carousel-control:hover,\n.carousel-control:focus {\n  outline: 0;\n  color: #fff;\n  text-decoration: none;\n  opacity: 0.9;\n  filter: alpha(opacity=90);\n}\n\n.carousel-control .icon-prev,\n.carousel-control .icon-next,\n.carousel-control .glyphicon-chevron-left,\n.carousel-control .glyphicon-chevron-right {\n  position: absolute;\n  top: 50%;\n  margin-top: -10px;\n  z-index: 5;\n  display: inline-block;\n}\n\n.carousel-control .icon-prev,\n.carousel-control .glyphicon-chevron-left {\n  left: 50%;\n  margin-left: -10px;\n}\n\n.carousel-control .icon-next,\n.carousel-control .glyphicon-chevron-right {\n  right: 50%;\n  margin-right: -10px;\n}\n\n.carousel-control .icon-prev,\n.carousel-control .icon-next {\n  width: 20px;\n  height: 20px;\n  line-height: 1;\n  font-family: serif;\n}\n\n.carousel-control .icon-prev:before {\n  content: '\\2039';\n}\n\n.carousel-control .icon-next:before {\n  content: '\\203A';\n}\n\n.carousel-indicators {\n  position: absolute;\n  bottom: 10px;\n  left: 50%;\n  z-index: 15;\n  width: 60%;\n  margin-left: -30%;\n  padding-left: 0;\n  list-style: none;\n  text-align: center;\n}\n\n.carousel-indicators li {\n  display: inline-block;\n  width: 10px;\n  height: 10px;\n  margin: 1px;\n  text-indent: -999px;\n  border: 1px solid #fff;\n  border-radius: 10px;\n  cursor: pointer;\n  background-color: #000 \\9;\n  background-color: transparent;\n}\n\n.carousel-indicators .active {\n  margin: 0;\n  width: 12px;\n  height: 12px;\n  background-color: #fff;\n}\n\n.carousel-caption {\n  position: absolute;\n  left: 15%;\n  right: 15%;\n  bottom: 20px;\n  z-index: 10;\n  padding-top: 20px;\n  padding-bottom: 20px;\n  color: #fff;\n  text-align: center;\n  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);\n}\n\n.carousel-caption .btn {\n  text-shadow: none;\n}\n\n@media screen and (min-width: 768px) {\n  .carousel-control .glyphicon-chevron-left,\n  .carousel-control .glyphicon-chevron-right,\n  .carousel-control .icon-prev,\n  .carousel-control .icon-next {\n    width: 30px;\n    height: 30px;\n    margin-top: -10px;\n    font-size: 30px;\n  }\n\n  .carousel-control .glyphicon-chevron-left,\n  .carousel-control .icon-prev {\n    margin-left: -10px;\n  }\n\n  .carousel-control .glyphicon-chevron-right,\n  .carousel-control .icon-next {\n    margin-right: -10px;\n  }\n\n  .carousel-caption {\n    left: 20%;\n    right: 20%;\n    padding-bottom: 30px;\n  }\n\n  .carousel-indicators {\n    bottom: 20px;\n  }\n}\n\n.clearfix:before,\n.clearfix:after {\n  content: \" \";\n  display: table;\n}\n\n.clearfix:after {\n  clear: both;\n}\n\n.center-block {\n  display: block;\n  margin-left: auto;\n  margin-right: auto;\n}\n\n.pull-right {\n  float: right !important;\n}\n\n.pull-left {\n  float: left !important;\n}\n\n.hide {\n  display: none !important;\n}\n\n.show {\n  display: block !important;\n}\n\n.invisible {\n  visibility: hidden;\n}\n\n.text-hide {\n  font: 0/0 a;\n  color: transparent;\n  text-shadow: none;\n  background-color: transparent;\n  border: 0;\n}\n\n.hidden {\n  display: none !important;\n}\n\n.affix {\n  position: fixed;\n}\n\n@-ms-viewport {\n  width: device-width;\n}\n\n.visible-xs {\n  display: none !important;\n}\n\n.visible-sm {\n  display: none !important;\n}\n\n.visible-md {\n  display: none !important;\n}\n\n.visible-lg {\n  display: none !important;\n}\n\n.visible-xs-block,\n.visible-xs-inline,\n.visible-xs-inline-block,\n.visible-sm-block,\n.visible-sm-inline,\n.visible-sm-inline-block,\n.visible-md-block,\n.visible-md-inline,\n.visible-md-inline-block,\n.visible-lg-block,\n.visible-lg-inline,\n.visible-lg-inline-block {\n  display: none !important;\n}\n\n@media (max-width: 767px) {\n  .visible-xs {\n    display: block !important;\n  }\n\n  table.visible-xs {\n    display: table !important;\n  }\n\n  tr.visible-xs {\n    display: table-row !important;\n  }\n\n  th.visible-xs,\n  td.visible-xs {\n    display: table-cell !important;\n  }\n}\n\n@media (max-width: 767px) {\n  .visible-xs-block {\n    display: block !important;\n  }\n}\n\n@media (max-width: 767px) {\n  .visible-xs-inline {\n    display: inline !important;\n  }\n}\n\n@media (max-width: 767px) {\n  .visible-xs-inline-block {\n    display: inline-block !important;\n  }\n}\n\n@media (min-width: 768px) and (max-width: 991px) {\n  .visible-sm {\n    display: block !important;\n  }\n\n  table.visible-sm {\n    display: table !important;\n  }\n\n  tr.visible-sm {\n    display: table-row !important;\n  }\n\n  th.visible-sm,\n  td.visible-sm {\n    display: table-cell !important;\n  }\n}\n\n@media (min-width: 768px) and (max-width: 991px) {\n  .visible-sm-block {\n    display: block !important;\n  }\n}\n\n@media (min-width: 768px) and (max-width: 991px) {\n  .visible-sm-inline {\n    display: inline !important;\n  }\n}\n\n@media (min-width: 768px) and (max-width: 991px) {\n  .visible-sm-inline-block {\n    display: inline-block !important;\n  }\n}\n\n@media (min-width: 992px) and (max-width: 1199px) {\n  .visible-md {\n    display: block !important;\n  }\n\n  table.visible-md {\n    display: table !important;\n  }\n\n  tr.visible-md {\n    display: table-row !important;\n  }\n\n  th.visible-md,\n  td.visible-md {\n    display: table-cell !important;\n  }\n}\n\n@media (min-width: 992px) and (max-width: 1199px) {\n  .visible-md-block {\n    display: block !important;\n  }\n}\n\n@media (min-width: 992px) and (max-width: 1199px) {\n  .visible-md-inline {\n    display: inline !important;\n  }\n}\n\n@media (min-width: 992px) and (max-width: 1199px) {\n  .visible-md-inline-block {\n    display: inline-block !important;\n  }\n}\n\n@media (min-width: 1200px) {\n  .visible-lg {\n    display: block !important;\n  }\n\n  table.visible-lg {\n    display: table !important;\n  }\n\n  tr.visible-lg {\n    display: table-row !important;\n  }\n\n  th.visible-lg,\n  td.visible-lg {\n    display: table-cell !important;\n  }\n}\n\n@media (min-width: 1200px) {\n  .visible-lg-block {\n    display: block !important;\n  }\n}\n\n@media (min-width: 1200px) {\n  .visible-lg-inline {\n    display: inline !important;\n  }\n}\n\n@media (min-width: 1200px) {\n  .visible-lg-inline-block {\n    display: inline-block !important;\n  }\n}\n\n@media (max-width: 767px) {\n  .hidden-xs {\n    display: none !important;\n  }\n}\n\n@media (min-width: 768px) and (max-width: 991px) {\n  .hidden-sm {\n    display: none !important;\n  }\n}\n\n@media (min-width: 992px) and (max-width: 1199px) {\n  .hidden-md {\n    display: none !important;\n  }\n}\n\n@media (min-width: 1200px) {\n  .hidden-lg {\n    display: none !important;\n  }\n}\n\n.visible-print {\n  display: none !important;\n}\n\n@media print {\n  .visible-print {\n    display: block !important;\n  }\n\n  table.visible-print {\n    display: table !important;\n  }\n\n  tr.visible-print {\n    display: table-row !important;\n  }\n\n  th.visible-print,\n  td.visible-print {\n    display: table-cell !important;\n  }\n}\n\n.visible-print-block {\n  display: none !important;\n}\n\n@media print {\n  .visible-print-block {\n    display: block !important;\n  }\n}\n\n.visible-print-inline {\n  display: none !important;\n}\n\n@media print {\n  .visible-print-inline {\n    display: inline !important;\n  }\n}\n\n.visible-print-inline-block {\n  display: none !important;\n}\n\n@media print {\n  .visible-print-inline-block {\n    display: inline-block !important;\n  }\n}\n\n@media print {\n  .hidden-print {\n    display: none !important;\n  }\n}\n\n", ""]);
+exports.push([module.i, "@charset \"UTF-8\";\n\n/*! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */\n\nhtml {\n  font-family: sans-serif;\n  -ms-text-size-adjust: 100%;\n  -webkit-text-size-adjust: 100%;\n}\n\nbody {\n  margin: 0;\n}\n\narticle,\naside,\ndetails,\nfigcaption,\nfigure,\nfooter,\nheader,\nhgroup,\nmain,\nmenu,\nnav,\nsection,\nsummary {\n  display: block;\n}\n\naudio,\ncanvas,\nprogress,\nvideo {\n  display: inline-block;\n  vertical-align: baseline;\n}\n\naudio:not([controls]) {\n  display: none;\n  height: 0;\n}\n\n[hidden],\ntemplate {\n  display: none;\n}\n\na {\n  background-color: transparent;\n}\n\na:active,\na:hover {\n  outline: 0;\n}\n\nabbr[title] {\n  border-bottom: 1px dotted;\n}\n\nb,\nstrong {\n  font-weight: bold;\n}\n\ndfn {\n  font-style: italic;\n}\n\nh1 {\n  font-size: 2em;\n  margin: 0.67em 0;\n}\n\nmark {\n  background: #ff0;\n  color: #000;\n}\n\nsmall {\n  font-size: 80%;\n}\n\nsub,\nsup {\n  font-size: 75%;\n  line-height: 0;\n  position: relative;\n  vertical-align: baseline;\n}\n\nsup {\n  top: -0.5em;\n}\n\nsub {\n  bottom: -0.25em;\n}\n\nimg {\n  border: 0;\n}\n\nsvg:not(:root) {\n  overflow: hidden;\n}\n\nfigure {\n  margin: 1em 40px;\n}\n\nhr {\n  box-sizing: content-box;\n  height: 0;\n}\n\npre {\n  overflow: auto;\n}\n\ncode,\nkbd,\npre,\nsamp {\n  font-family: monospace, monospace;\n  font-size: 1em;\n}\n\nbutton,\ninput,\noptgroup,\nselect,\ntextarea {\n  color: inherit;\n  font: inherit;\n  margin: 0;\n}\n\nbutton {\n  overflow: visible;\n}\n\nbutton,\nselect {\n  text-transform: none;\n}\n\nbutton,\nhtml input[type=\"button\"],\ninput[type=\"reset\"],\ninput[type=\"submit\"] {\n  -webkit-appearance: button;\n  cursor: pointer;\n}\n\nbutton[disabled],\nhtml input[disabled] {\n  cursor: default;\n}\n\nbutton::-moz-focus-inner,\ninput::-moz-focus-inner {\n  border: 0;\n  padding: 0;\n}\n\ninput {\n  line-height: normal;\n}\n\ninput[type=\"checkbox\"],\ninput[type=\"radio\"] {\n  box-sizing: border-box;\n  padding: 0;\n}\n\ninput[type=\"number\"]::-webkit-inner-spin-button,\ninput[type=\"number\"]::-webkit-outer-spin-button {\n  height: auto;\n}\n\ninput[type=\"search\"] {\n  -webkit-appearance: textfield;\n  box-sizing: content-box;\n}\n\ninput[type=\"search\"]::-webkit-search-cancel-button,\ninput[type=\"search\"]::-webkit-search-decoration {\n  -webkit-appearance: none;\n}\n\nfieldset {\n  border: 1px solid #c0c0c0;\n  margin: 0 2px;\n  padding: 0.35em 0.625em 0.75em;\n}\n\nlegend {\n  border: 0;\n  padding: 0;\n}\n\ntextarea {\n  overflow: auto;\n}\n\noptgroup {\n  font-weight: bold;\n}\n\ntable {\n  border-collapse: collapse;\n  border-spacing: 0;\n}\n\ntd,\nth {\n  padding: 0;\n}\n\n/*! Source: https://github.com/h5bp/html5-boilerplate/blob/master/src/css/main.css */\n\n@media print {\n  *,\n  *:before,\n  *:after {\n    background: transparent !important;\n    color: #000 !important;\n    box-shadow: none !important;\n    text-shadow: none !important;\n  }\n\n  a,\n  a:visited {\n    text-decoration: underline;\n  }\n\n  a[href]:after {\n    content: \" (\" attr(href) \")\";\n  }\n\n  abbr[title]:after {\n    content: \" (\" attr(title) \")\";\n  }\n\n  a[href^=\"#\"]:after,\n  a[href^=\"javascript:\"]:after {\n    content: \"\";\n  }\n\n  pre,\n  blockquote {\n    border: 1px solid #999;\n    page-break-inside: avoid;\n  }\n\n  thead {\n    display: table-header-group;\n  }\n\n  tr,\n  img {\n    page-break-inside: avoid;\n  }\n\n  img {\n    max-width: 100% !important;\n  }\n\n  p,\n  h2,\n  h3 {\n    orphans: 3;\n    widows: 3;\n  }\n\n  h2,\n  h3 {\n    page-break-after: avoid;\n  }\n\n  .navbar {\n    display: none;\n  }\n\n  .btn > .caret,\n  .dropup > .btn > .caret {\n    border-top-color: #000 !important;\n  }\n\n  .label {\n    border: 1px solid #000;\n  }\n\n  .table {\n    border-collapse: collapse !important;\n  }\n\n  .table td,\n  .table th {\n    background-color: #fff !important;\n  }\n\n  .table-bordered th,\n  .table-bordered td {\n    border: 1px solid #ddd !important;\n  }\n}\n\n@font-face {\n  font-family: 'Glyphicons Halflings';\n  src: url(" + __webpack_require__(210) + ");\n  src: url(" + __webpack_require__(210) + ") format(\"embedded-opentype\"), url(" + __webpack_require__(657) + ") format(\"woff2\"), url(" + __webpack_require__(658) + ") format(\"woff\"), url(" + __webpack_require__(659) + ") format(\"truetype\"), url(" + __webpack_require__(660) + ") format(\"svg\");\n}\n\n.glyphicon {\n  position: relative;\n  top: 1px;\n  display: inline-block;\n  font-family: 'Glyphicons Halflings';\n  font-style: normal;\n  font-weight: normal;\n  line-height: 1;\n  -webkit-font-smoothing: antialiased;\n  -moz-osx-font-smoothing: grayscale;\n}\n\n.glyphicon-asterisk:before {\n  content: \"*\";\n}\n\n.glyphicon-plus:before {\n  content: \"+\";\n}\n\n.glyphicon-euro:before,\n.glyphicon-eur:before {\n  content: \"\\20AC\";\n}\n\n.glyphicon-minus:before {\n  content: \"\\2212\";\n}\n\n.glyphicon-cloud:before {\n  content: \"\\2601\";\n}\n\n.glyphicon-envelope:before {\n  content: \"\\2709\";\n}\n\n.glyphicon-pencil:before {\n  content: \"\\270F\";\n}\n\n.glyphicon-glass:before {\n  content: \"\\E001\";\n}\n\n.glyphicon-music:before {\n  content: \"\\E002\";\n}\n\n.glyphicon-search:before {\n  content: \"\\E003\";\n}\n\n.glyphicon-heart:before {\n  content: \"\\E005\";\n}\n\n.glyphicon-star:before {\n  content: \"\\E006\";\n}\n\n.glyphicon-star-empty:before {\n  content: \"\\E007\";\n}\n\n.glyphicon-user:before {\n  content: \"\\E008\";\n}\n\n.glyphicon-film:before {\n  content: \"\\E009\";\n}\n\n.glyphicon-th-large:before {\n  content: \"\\E010\";\n}\n\n.glyphicon-th:before {\n  content: \"\\E011\";\n}\n\n.glyphicon-th-list:before {\n  content: \"\\E012\";\n}\n\n.glyphicon-ok:before {\n  content: \"\\E013\";\n}\n\n.glyphicon-remove:before {\n  content: \"\\E014\";\n}\n\n.glyphicon-zoom-in:before {\n  content: \"\\E015\";\n}\n\n.glyphicon-zoom-out:before {\n  content: \"\\E016\";\n}\n\n.glyphicon-off:before {\n  content: \"\\E017\";\n}\n\n.glyphicon-signal:before {\n  content: \"\\E018\";\n}\n\n.glyphicon-cog:before {\n  content: \"\\E019\";\n}\n\n.glyphicon-trash:before {\n  content: \"\\E020\";\n}\n\n.glyphicon-home:before {\n  content: \"\\E021\";\n}\n\n.glyphicon-file:before {\n  content: \"\\E022\";\n}\n\n.glyphicon-time:before {\n  content: \"\\E023\";\n}\n\n.glyphicon-road:before {\n  content: \"\\E024\";\n}\n\n.glyphicon-download-alt:before {\n  content: \"\\E025\";\n}\n\n.glyphicon-download:before {\n  content: \"\\E026\";\n}\n\n.glyphicon-upload:before {\n  content: \"\\E027\";\n}\n\n.glyphicon-inbox:before {\n  content: \"\\E028\";\n}\n\n.glyphicon-play-circle:before {\n  content: \"\\E029\";\n}\n\n.glyphicon-repeat:before {\n  content: \"\\E030\";\n}\n\n.glyphicon-refresh:before {\n  content: \"\\E031\";\n}\n\n.glyphicon-list-alt:before {\n  content: \"\\E032\";\n}\n\n.glyphicon-lock:before {\n  content: \"\\E033\";\n}\n\n.glyphicon-flag:before {\n  content: \"\\E034\";\n}\n\n.glyphicon-headphones:before {\n  content: \"\\E035\";\n}\n\n.glyphicon-volume-off:before {\n  content: \"\\E036\";\n}\n\n.glyphicon-volume-down:before {\n  content: \"\\E037\";\n}\n\n.glyphicon-volume-up:before {\n  content: \"\\E038\";\n}\n\n.glyphicon-qrcode:before {\n  content: \"\\E039\";\n}\n\n.glyphicon-barcode:before {\n  content: \"\\E040\";\n}\n\n.glyphicon-tag:before {\n  content: \"\\E041\";\n}\n\n.glyphicon-tags:before {\n  content: \"\\E042\";\n}\n\n.glyphicon-book:before {\n  content: \"\\E043\";\n}\n\n.glyphicon-bookmark:before {\n  content: \"\\E044\";\n}\n\n.glyphicon-print:before {\n  content: \"\\E045\";\n}\n\n.glyphicon-camera:before {\n  content: \"\\E046\";\n}\n\n.glyphicon-font:before {\n  content: \"\\E047\";\n}\n\n.glyphicon-bold:before {\n  content: \"\\E048\";\n}\n\n.glyphicon-italic:before {\n  content: \"\\E049\";\n}\n\n.glyphicon-text-height:before {\n  content: \"\\E050\";\n}\n\n.glyphicon-text-width:before {\n  content: \"\\E051\";\n}\n\n.glyphicon-align-left:before {\n  content: \"\\E052\";\n}\n\n.glyphicon-align-center:before {\n  content: \"\\E053\";\n}\n\n.glyphicon-align-right:before {\n  content: \"\\E054\";\n}\n\n.glyphicon-align-justify:before {\n  content: \"\\E055\";\n}\n\n.glyphicon-list:before {\n  content: \"\\E056\";\n}\n\n.glyphicon-indent-left:before {\n  content: \"\\E057\";\n}\n\n.glyphicon-indent-right:before {\n  content: \"\\E058\";\n}\n\n.glyphicon-facetime-video:before {\n  content: \"\\E059\";\n}\n\n.glyphicon-picture:before {\n  content: \"\\E060\";\n}\n\n.glyphicon-map-marker:before {\n  content: \"\\E062\";\n}\n\n.glyphicon-adjust:before {\n  content: \"\\E063\";\n}\n\n.glyphicon-tint:before {\n  content: \"\\E064\";\n}\n\n.glyphicon-edit:before {\n  content: \"\\E065\";\n}\n\n.glyphicon-share:before {\n  content: \"\\E066\";\n}\n\n.glyphicon-check:before {\n  content: \"\\E067\";\n}\n\n.glyphicon-move:before {\n  content: \"\\E068\";\n}\n\n.glyphicon-step-backward:before {\n  content: \"\\E069\";\n}\n\n.glyphicon-fast-backward:before {\n  content: \"\\E070\";\n}\n\n.glyphicon-backward:before {\n  content: \"\\E071\";\n}\n\n.glyphicon-play:before {\n  content: \"\\E072\";\n}\n\n.glyphicon-pause:before {\n  content: \"\\E073\";\n}\n\n.glyphicon-stop:before {\n  content: \"\\E074\";\n}\n\n.glyphicon-forward:before {\n  content: \"\\E075\";\n}\n\n.glyphicon-fast-forward:before {\n  content: \"\\E076\";\n}\n\n.glyphicon-step-forward:before {\n  content: \"\\E077\";\n}\n\n.glyphicon-eject:before {\n  content: \"\\E078\";\n}\n\n.glyphicon-chevron-left:before {\n  content: \"\\E079\";\n}\n\n.glyphicon-chevron-right:before {\n  content: \"\\E080\";\n}\n\n.glyphicon-plus-sign:before {\n  content: \"\\E081\";\n}\n\n.glyphicon-minus-sign:before {\n  content: \"\\E082\";\n}\n\n.glyphicon-remove-sign:before {\n  content: \"\\E083\";\n}\n\n.glyphicon-ok-sign:before {\n  content: \"\\E084\";\n}\n\n.glyphicon-question-sign:before {\n  content: \"\\E085\";\n}\n\n.glyphicon-info-sign:before {\n  content: \"\\E086\";\n}\n\n.glyphicon-screenshot:before {\n  content: \"\\E087\";\n}\n\n.glyphicon-remove-circle:before {\n  content: \"\\E088\";\n}\n\n.glyphicon-ok-circle:before {\n  content: \"\\E089\";\n}\n\n.glyphicon-ban-circle:before {\n  content: \"\\E090\";\n}\n\n.glyphicon-arrow-left:before {\n  content: \"\\E091\";\n}\n\n.glyphicon-arrow-right:before {\n  content: \"\\E092\";\n}\n\n.glyphicon-arrow-up:before {\n  content: \"\\E093\";\n}\n\n.glyphicon-arrow-down:before {\n  content: \"\\E094\";\n}\n\n.glyphicon-share-alt:before {\n  content: \"\\E095\";\n}\n\n.glyphicon-resize-full:before {\n  content: \"\\E096\";\n}\n\n.glyphicon-resize-small:before {\n  content: \"\\E097\";\n}\n\n.glyphicon-exclamation-sign:before {\n  content: \"\\E101\";\n}\n\n.glyphicon-gift:before {\n  content: \"\\E102\";\n}\n\n.glyphicon-leaf:before {\n  content: \"\\E103\";\n}\n\n.glyphicon-fire:before {\n  content: \"\\E104\";\n}\n\n.glyphicon-eye-open:before {\n  content: \"\\E105\";\n}\n\n.glyphicon-eye-close:before {\n  content: \"\\E106\";\n}\n\n.glyphicon-warning-sign:before {\n  content: \"\\E107\";\n}\n\n.glyphicon-plane:before {\n  content: \"\\E108\";\n}\n\n.glyphicon-calendar:before {\n  content: \"\\E109\";\n}\n\n.glyphicon-random:before {\n  content: \"\\E110\";\n}\n\n.glyphicon-comment:before {\n  content: \"\\E111\";\n}\n\n.glyphicon-magnet:before {\n  content: \"\\E112\";\n}\n\n.glyphicon-chevron-up:before {\n  content: \"\\E113\";\n}\n\n.glyphicon-chevron-down:before {\n  content: \"\\E114\";\n}\n\n.glyphicon-retweet:before {\n  content: \"\\E115\";\n}\n\n.glyphicon-shopping-cart:before {\n  content: \"\\E116\";\n}\n\n.glyphicon-folder-close:before {\n  content: \"\\E117\";\n}\n\n.glyphicon-folder-open:before {\n  content: \"\\E118\";\n}\n\n.glyphicon-resize-vertical:before {\n  content: \"\\E119\";\n}\n\n.glyphicon-resize-horizontal:before {\n  content: \"\\E120\";\n}\n\n.glyphicon-hdd:before {\n  content: \"\\E121\";\n}\n\n.glyphicon-bullhorn:before {\n  content: \"\\E122\";\n}\n\n.glyphicon-bell:before {\n  content: \"\\E123\";\n}\n\n.glyphicon-certificate:before {\n  content: \"\\E124\";\n}\n\n.glyphicon-thumbs-up:before {\n  content: \"\\E125\";\n}\n\n.glyphicon-thumbs-down:before {\n  content: \"\\E126\";\n}\n\n.glyphicon-hand-right:before {\n  content: \"\\E127\";\n}\n\n.glyphicon-hand-left:before {\n  content: \"\\E128\";\n}\n\n.glyphicon-hand-up:before {\n  content: \"\\E129\";\n}\n\n.glyphicon-hand-down:before {\n  content: \"\\E130\";\n}\n\n.glyphicon-circle-arrow-right:before {\n  content: \"\\E131\";\n}\n\n.glyphicon-circle-arrow-left:before {\n  content: \"\\E132\";\n}\n\n.glyphicon-circle-arrow-up:before {\n  content: \"\\E133\";\n}\n\n.glyphicon-circle-arrow-down:before {\n  content: \"\\E134\";\n}\n\n.glyphicon-globe:before {\n  content: \"\\E135\";\n}\n\n.glyphicon-wrench:before {\n  content: \"\\E136\";\n}\n\n.glyphicon-tasks:before {\n  content: \"\\E137\";\n}\n\n.glyphicon-filter:before {\n  content: \"\\E138\";\n}\n\n.glyphicon-briefcase:before {\n  content: \"\\E139\";\n}\n\n.glyphicon-fullscreen:before {\n  content: \"\\E140\";\n}\n\n.glyphicon-dashboard:before {\n  content: \"\\E141\";\n}\n\n.glyphicon-paperclip:before {\n  content: \"\\E142\";\n}\n\n.glyphicon-heart-empty:before {\n  content: \"\\E143\";\n}\n\n.glyphicon-link:before {\n  content: \"\\E144\";\n}\n\n.glyphicon-phone:before {\n  content: \"\\E145\";\n}\n\n.glyphicon-pushpin:before {\n  content: \"\\E146\";\n}\n\n.glyphicon-usd:before {\n  content: \"\\E148\";\n}\n\n.glyphicon-gbp:before {\n  content: \"\\E149\";\n}\n\n.glyphicon-sort:before {\n  content: \"\\E150\";\n}\n\n.glyphicon-sort-by-alphabet:before {\n  content: \"\\E151\";\n}\n\n.glyphicon-sort-by-alphabet-alt:before {\n  content: \"\\E152\";\n}\n\n.glyphicon-sort-by-order:before {\n  content: \"\\E153\";\n}\n\n.glyphicon-sort-by-order-alt:before {\n  content: \"\\E154\";\n}\n\n.glyphicon-sort-by-attributes:before {\n  content: \"\\E155\";\n}\n\n.glyphicon-sort-by-attributes-alt:before {\n  content: \"\\E156\";\n}\n\n.glyphicon-unchecked:before {\n  content: \"\\E157\";\n}\n\n.glyphicon-expand:before {\n  content: \"\\E158\";\n}\n\n.glyphicon-collapse-down:before {\n  content: \"\\E159\";\n}\n\n.glyphicon-collapse-up:before {\n  content: \"\\E160\";\n}\n\n.glyphicon-log-in:before {\n  content: \"\\E161\";\n}\n\n.glyphicon-flash:before {\n  content: \"\\E162\";\n}\n\n.glyphicon-log-out:before {\n  content: \"\\E163\";\n}\n\n.glyphicon-new-window:before {\n  content: \"\\E164\";\n}\n\n.glyphicon-record:before {\n  content: \"\\E165\";\n}\n\n.glyphicon-save:before {\n  content: \"\\E166\";\n}\n\n.glyphicon-open:before {\n  content: \"\\E167\";\n}\n\n.glyphicon-saved:before {\n  content: \"\\E168\";\n}\n\n.glyphicon-import:before {\n  content: \"\\E169\";\n}\n\n.glyphicon-export:before {\n  content: \"\\E170\";\n}\n\n.glyphicon-send:before {\n  content: \"\\E171\";\n}\n\n.glyphicon-floppy-disk:before {\n  content: \"\\E172\";\n}\n\n.glyphicon-floppy-saved:before {\n  content: \"\\E173\";\n}\n\n.glyphicon-floppy-remove:before {\n  content: \"\\E174\";\n}\n\n.glyphicon-floppy-save:before {\n  content: \"\\E175\";\n}\n\n.glyphicon-floppy-open:before {\n  content: \"\\E176\";\n}\n\n.glyphicon-credit-card:before {\n  content: \"\\E177\";\n}\n\n.glyphicon-transfer:before {\n  content: \"\\E178\";\n}\n\n.glyphicon-cutlery:before {\n  content: \"\\E179\";\n}\n\n.glyphicon-header:before {\n  content: \"\\E180\";\n}\n\n.glyphicon-compressed:before {\n  content: \"\\E181\";\n}\n\n.glyphicon-earphone:before {\n  content: \"\\E182\";\n}\n\n.glyphicon-phone-alt:before {\n  content: \"\\E183\";\n}\n\n.glyphicon-tower:before {\n  content: \"\\E184\";\n}\n\n.glyphicon-stats:before {\n  content: \"\\E185\";\n}\n\n.glyphicon-sd-video:before {\n  content: \"\\E186\";\n}\n\n.glyphicon-hd-video:before {\n  content: \"\\E187\";\n}\n\n.glyphicon-subtitles:before {\n  content: \"\\E188\";\n}\n\n.glyphicon-sound-stereo:before {\n  content: \"\\E189\";\n}\n\n.glyphicon-sound-dolby:before {\n  content: \"\\E190\";\n}\n\n.glyphicon-sound-5-1:before {\n  content: \"\\E191\";\n}\n\n.glyphicon-sound-6-1:before {\n  content: \"\\E192\";\n}\n\n.glyphicon-sound-7-1:before {\n  content: \"\\E193\";\n}\n\n.glyphicon-copyright-mark:before {\n  content: \"\\E194\";\n}\n\n.glyphicon-registration-mark:before {\n  content: \"\\E195\";\n}\n\n.glyphicon-cloud-download:before {\n  content: \"\\E197\";\n}\n\n.glyphicon-cloud-upload:before {\n  content: \"\\E198\";\n}\n\n.glyphicon-tree-conifer:before {\n  content: \"\\E199\";\n}\n\n.glyphicon-tree-deciduous:before {\n  content: \"\\E200\";\n}\n\n.glyphicon-cd:before {\n  content: \"\\E201\";\n}\n\n.glyphicon-save-file:before {\n  content: \"\\E202\";\n}\n\n.glyphicon-open-file:before {\n  content: \"\\E203\";\n}\n\n.glyphicon-level-up:before {\n  content: \"\\E204\";\n}\n\n.glyphicon-copy:before {\n  content: \"\\E205\";\n}\n\n.glyphicon-paste:before {\n  content: \"\\E206\";\n}\n\n.glyphicon-alert:before {\n  content: \"\\E209\";\n}\n\n.glyphicon-equalizer:before {\n  content: \"\\E210\";\n}\n\n.glyphicon-king:before {\n  content: \"\\E211\";\n}\n\n.glyphicon-queen:before {\n  content: \"\\E212\";\n}\n\n.glyphicon-pawn:before {\n  content: \"\\E213\";\n}\n\n.glyphicon-bishop:before {\n  content: \"\\E214\";\n}\n\n.glyphicon-knight:before {\n  content: \"\\E215\";\n}\n\n.glyphicon-baby-formula:before {\n  content: \"\\E216\";\n}\n\n.glyphicon-tent:before {\n  content: \"\\26FA\";\n}\n\n.glyphicon-blackboard:before {\n  content: \"\\E218\";\n}\n\n.glyphicon-bed:before {\n  content: \"\\E219\";\n}\n\n.glyphicon-apple:before {\n  content: \"\\F8FF\";\n}\n\n.glyphicon-erase:before {\n  content: \"\\E221\";\n}\n\n.glyphicon-hourglass:before {\n  content: \"\\231B\";\n}\n\n.glyphicon-lamp:before {\n  content: \"\\E223\";\n}\n\n.glyphicon-duplicate:before {\n  content: \"\\E224\";\n}\n\n.glyphicon-piggy-bank:before {\n  content: \"\\E225\";\n}\n\n.glyphicon-scissors:before {\n  content: \"\\E226\";\n}\n\n.glyphicon-bitcoin:before {\n  content: \"\\E227\";\n}\n\n.glyphicon-btc:before {\n  content: \"\\E227\";\n}\n\n.glyphicon-xbt:before {\n  content: \"\\E227\";\n}\n\n.glyphicon-yen:before {\n  content: \"\\A5\";\n}\n\n.glyphicon-jpy:before {\n  content: \"\\A5\";\n}\n\n.glyphicon-ruble:before {\n  content: \"\\20BD\";\n}\n\n.glyphicon-rub:before {\n  content: \"\\20BD\";\n}\n\n.glyphicon-scale:before {\n  content: \"\\E230\";\n}\n\n.glyphicon-ice-lolly:before {\n  content: \"\\E231\";\n}\n\n.glyphicon-ice-lolly-tasted:before {\n  content: \"\\E232\";\n}\n\n.glyphicon-education:before {\n  content: \"\\E233\";\n}\n\n.glyphicon-option-horizontal:before {\n  content: \"\\E234\";\n}\n\n.glyphicon-option-vertical:before {\n  content: \"\\E235\";\n}\n\n.glyphicon-menu-hamburger:before {\n  content: \"\\E236\";\n}\n\n.glyphicon-modal-window:before {\n  content: \"\\E237\";\n}\n\n.glyphicon-oil:before {\n  content: \"\\E238\";\n}\n\n.glyphicon-grain:before {\n  content: \"\\E239\";\n}\n\n.glyphicon-sunglasses:before {\n  content: \"\\E240\";\n}\n\n.glyphicon-text-size:before {\n  content: \"\\E241\";\n}\n\n.glyphicon-text-color:before {\n  content: \"\\E242\";\n}\n\n.glyphicon-text-background:before {\n  content: \"\\E243\";\n}\n\n.glyphicon-object-align-top:before {\n  content: \"\\E244\";\n}\n\n.glyphicon-object-align-bottom:before {\n  content: \"\\E245\";\n}\n\n.glyphicon-object-align-horizontal:before {\n  content: \"\\E246\";\n}\n\n.glyphicon-object-align-left:before {\n  content: \"\\E247\";\n}\n\n.glyphicon-object-align-vertical:before {\n  content: \"\\E248\";\n}\n\n.glyphicon-object-align-right:before {\n  content: \"\\E249\";\n}\n\n.glyphicon-triangle-right:before {\n  content: \"\\E250\";\n}\n\n.glyphicon-triangle-left:before {\n  content: \"\\E251\";\n}\n\n.glyphicon-triangle-bottom:before {\n  content: \"\\E252\";\n}\n\n.glyphicon-triangle-top:before {\n  content: \"\\E253\";\n}\n\n.glyphicon-console:before {\n  content: \"\\E254\";\n}\n\n.glyphicon-superscript:before {\n  content: \"\\E255\";\n}\n\n.glyphicon-subscript:before {\n  content: \"\\E256\";\n}\n\n.glyphicon-menu-left:before {\n  content: \"\\E257\";\n}\n\n.glyphicon-menu-right:before {\n  content: \"\\E258\";\n}\n\n.glyphicon-menu-down:before {\n  content: \"\\E259\";\n}\n\n.glyphicon-menu-up:before {\n  content: \"\\E260\";\n}\n\n* {\n  -webkit-box-sizing: border-box;\n  -moz-box-sizing: border-box;\n  box-sizing: border-box;\n}\n\n*:before,\n*:after {\n  -webkit-box-sizing: border-box;\n  -moz-box-sizing: border-box;\n  box-sizing: border-box;\n}\n\nhtml {\n  font-size: 10px;\n  -webkit-tap-highlight-color: transparent;\n}\n\nbody {\n  font-family: \"Helvetica Neue\", Helvetica, Arial, sans-serif;\n  font-size: 14px;\n  line-height: 1.42857;\n  color: #333333;\n  background-color: #fff;\n}\n\ninput,\nbutton,\nselect,\ntextarea {\n  font-family: inherit;\n  font-size: inherit;\n  line-height: inherit;\n}\n\na {\n  color: #337ab7;\n  text-decoration: none;\n}\n\na:hover,\na:focus {\n  color: #23527c;\n  text-decoration: underline;\n}\n\na:focus {\n  outline: 5px auto -webkit-focus-ring-color;\n  outline-offset: -2px;\n}\n\nfigure {\n  margin: 0;\n}\n\nimg {\n  vertical-align: middle;\n}\n\n.img-responsive {\n  display: block;\n  max-width: 100%;\n  height: auto;\n}\n\n.img-rounded {\n  border-radius: 6px;\n}\n\n.img-thumbnail {\n  padding: 4px;\n  line-height: 1.42857;\n  background-color: #fff;\n  border: 1px solid #ddd;\n  border-radius: 4px;\n  -webkit-transition: all 0.2s ease-in-out;\n  -o-transition: all 0.2s ease-in-out;\n  transition: all 0.2s ease-in-out;\n  display: inline-block;\n  max-width: 100%;\n  height: auto;\n}\n\n.img-circle {\n  border-radius: 50%;\n}\n\nhr {\n  margin-top: 20px;\n  margin-bottom: 20px;\n  border: 0;\n  border-top: 1px solid #eeeeee;\n}\n\n.sr-only {\n  position: absolute;\n  width: 1px;\n  height: 1px;\n  margin: -1px;\n  padding: 0;\n  overflow: hidden;\n  clip: rect(0, 0, 0, 0);\n  border: 0;\n}\n\n.sr-only-focusable:active,\n.sr-only-focusable:focus {\n  position: static;\n  width: auto;\n  height: auto;\n  margin: 0;\n  overflow: visible;\n  clip: auto;\n}\n\n[role=\"button\"] {\n  cursor: pointer;\n}\n\nh1,\nh2,\nh3,\nh4,\nh5,\nh6,\n.h1,\n.h2,\n.h3,\n.h4,\n.h5,\n.h6 {\n  font-family: inherit;\n  font-weight: 500;\n  line-height: 1.1;\n  color: inherit;\n}\n\nh1 small,\nh1 .small,\nh2 small,\nh2 .small,\nh3 small,\nh3 .small,\nh4 small,\nh4 .small,\nh5 small,\nh5 .small,\nh6 small,\nh6 .small,\n.h1 small,\n.h1 .small,\n.h2 small,\n.h2 .small,\n.h3 small,\n.h3 .small,\n.h4 small,\n.h4 .small,\n.h5 small,\n.h5 .small,\n.h6 small,\n.h6 .small {\n  font-weight: normal;\n  line-height: 1;\n  color: #777777;\n}\n\nh1,\n.h1,\nh2,\n.h2,\nh3,\n.h3 {\n  margin-top: 20px;\n  margin-bottom: 10px;\n}\n\nh1 small,\nh1 .small,\n.h1 small,\n.h1 .small,\nh2 small,\nh2 .small,\n.h2 small,\n.h2 .small,\nh3 small,\nh3 .small,\n.h3 small,\n.h3 .small {\n  font-size: 65%;\n}\n\nh4,\n.h4,\nh5,\n.h5,\nh6,\n.h6 {\n  margin-top: 10px;\n  margin-bottom: 10px;\n}\n\nh4 small,\nh4 .small,\n.h4 small,\n.h4 .small,\nh5 small,\nh5 .small,\n.h5 small,\n.h5 .small,\nh6 small,\nh6 .small,\n.h6 small,\n.h6 .small {\n  font-size: 75%;\n}\n\nh1,\n.h1 {\n  font-size: 36px;\n}\n\nh2,\n.h2 {\n  font-size: 30px;\n}\n\nh3,\n.h3 {\n  font-size: 24px;\n}\n\nh4,\n.h4 {\n  font-size: 18px;\n}\n\nh5,\n.h5 {\n  font-size: 14px;\n}\n\nh6,\n.h6 {\n  font-size: 12px;\n}\n\np {\n  margin: 0 0 10px;\n}\n\n.lead {\n  margin-bottom: 20px;\n  font-size: 16px;\n  font-weight: 300;\n  line-height: 1.4;\n}\n\n@media (min-width: 768px) {\n  .lead {\n    font-size: 21px;\n  }\n}\n\nsmall,\n.small {\n  font-size: 85%;\n}\n\nmark,\n.mark {\n  background-color: #fcf8e3;\n  padding: .2em;\n}\n\n.text-left {\n  text-align: left;\n}\n\n.text-right {\n  text-align: right;\n}\n\n.text-center {\n  text-align: center;\n}\n\n.text-justify {\n  text-align: justify;\n}\n\n.text-nowrap {\n  white-space: nowrap;\n}\n\n.text-lowercase {\n  text-transform: lowercase;\n}\n\n.text-uppercase,\n.initialism {\n  text-transform: uppercase;\n}\n\n.text-capitalize {\n  text-transform: capitalize;\n}\n\n.text-muted {\n  color: #777777;\n}\n\n.text-primary {\n  color: #337ab7;\n}\n\na.text-primary:hover,\na.text-primary:focus {\n  color: #286090;\n}\n\n.text-success {\n  color: #3c763d;\n}\n\na.text-success:hover,\na.text-success:focus {\n  color: #2b542c;\n}\n\n.text-info {\n  color: #31708f;\n}\n\na.text-info:hover,\na.text-info:focus {\n  color: #245269;\n}\n\n.text-warning {\n  color: #8a6d3b;\n}\n\na.text-warning:hover,\na.text-warning:focus {\n  color: #66512c;\n}\n\n.text-danger {\n  color: #a94442;\n}\n\na.text-danger:hover,\na.text-danger:focus {\n  color: #843534;\n}\n\n.bg-primary {\n  color: #fff;\n}\n\n.bg-primary {\n  background-color: #337ab7;\n}\n\na.bg-primary:hover,\na.bg-primary:focus {\n  background-color: #286090;\n}\n\n.bg-success {\n  background-color: #dff0d8;\n}\n\na.bg-success:hover,\na.bg-success:focus {\n  background-color: #c1e2b3;\n}\n\n.bg-info {\n  background-color: #d9edf7;\n}\n\na.bg-info:hover,\na.bg-info:focus {\n  background-color: #afd9ee;\n}\n\n.bg-warning {\n  background-color: #fcf8e3;\n}\n\na.bg-warning:hover,\na.bg-warning:focus {\n  background-color: #f7ecb5;\n}\n\n.bg-danger {\n  background-color: #f2dede;\n}\n\na.bg-danger:hover,\na.bg-danger:focus {\n  background-color: #e4b9b9;\n}\n\n.page-header {\n  padding-bottom: 9px;\n  margin: 40px 0 20px;\n  border-bottom: 1px solid #eeeeee;\n}\n\nul,\nol {\n  margin-top: 0;\n  margin-bottom: 10px;\n}\n\nul ul,\nul ol,\nol ul,\nol ol {\n  margin-bottom: 0;\n}\n\n.list-unstyled {\n  padding-left: 0;\n  list-style: none;\n}\n\n.list-inline {\n  padding-left: 0;\n  list-style: none;\n  margin-left: -5px;\n}\n\n.list-inline > li {\n  display: inline-block;\n  padding-left: 5px;\n  padding-right: 5px;\n}\n\ndl {\n  margin-top: 0;\n  margin-bottom: 20px;\n}\n\ndt,\ndd {\n  line-height: 1.42857;\n}\n\ndt {\n  font-weight: bold;\n}\n\ndd {\n  margin-left: 0;\n}\n\n.dl-horizontal dd:before,\n.dl-horizontal dd:after {\n  content: \" \";\n  display: table;\n}\n\n.dl-horizontal dd:after {\n  clear: both;\n}\n\n@media (min-width: 768px) {\n  .dl-horizontal dt {\n    float: left;\n    width: 160px;\n    clear: left;\n    text-align: right;\n    overflow: hidden;\n    text-overflow: ellipsis;\n    white-space: nowrap;\n  }\n\n  .dl-horizontal dd {\n    margin-left: 180px;\n  }\n}\n\nabbr[title],\nabbr[data-original-title] {\n  cursor: help;\n  border-bottom: 1px dotted #777777;\n}\n\n.initialism {\n  font-size: 90%;\n}\n\nblockquote {\n  padding: 10px 20px;\n  margin: 0 0 20px;\n  font-size: 17.5px;\n  border-left: 5px solid #eeeeee;\n}\n\nblockquote p:last-child,\nblockquote ul:last-child,\nblockquote ol:last-child {\n  margin-bottom: 0;\n}\n\nblockquote footer,\nblockquote small,\nblockquote .small {\n  display: block;\n  font-size: 80%;\n  line-height: 1.42857;\n  color: #777777;\n}\n\nblockquote footer:before,\nblockquote small:before,\nblockquote .small:before {\n  content: '\\2014   \\A0';\n}\n\n.blockquote-reverse,\nblockquote.pull-right {\n  padding-right: 15px;\n  padding-left: 0;\n  border-right: 5px solid #eeeeee;\n  border-left: 0;\n  text-align: right;\n}\n\n.blockquote-reverse footer:before,\n.blockquote-reverse small:before,\n.blockquote-reverse .small:before,\nblockquote.pull-right footer:before,\nblockquote.pull-right small:before,\nblockquote.pull-right .small:before {\n  content: '';\n}\n\n.blockquote-reverse footer:after,\n.blockquote-reverse small:after,\n.blockquote-reverse .small:after,\nblockquote.pull-right footer:after,\nblockquote.pull-right small:after,\nblockquote.pull-right .small:after {\n  content: '\\A0   \\2014';\n}\n\naddress {\n  margin-bottom: 20px;\n  font-style: normal;\n  line-height: 1.42857;\n}\n\ncode,\nkbd,\npre,\nsamp {\n  font-family: Menlo, Monaco, Consolas, \"Courier New\", monospace;\n}\n\ncode {\n  padding: 2px 4px;\n  font-size: 90%;\n  color: #c7254e;\n  background-color: #f9f2f4;\n  border-radius: 4px;\n}\n\nkbd {\n  padding: 2px 4px;\n  font-size: 90%;\n  color: #fff;\n  background-color: #333;\n  border-radius: 3px;\n  box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.25);\n}\n\nkbd kbd {\n  padding: 0;\n  font-size: 100%;\n  font-weight: bold;\n  box-shadow: none;\n}\n\npre {\n  display: block;\n  padding: 9.5px;\n  margin: 0 0 10px;\n  font-size: 13px;\n  line-height: 1.42857;\n  word-break: break-all;\n  word-wrap: break-word;\n  color: #333333;\n  background-color: #f5f5f5;\n  border: 1px solid #ccc;\n  border-radius: 4px;\n}\n\npre code {\n  padding: 0;\n  font-size: inherit;\n  color: inherit;\n  white-space: pre-wrap;\n  background-color: transparent;\n  border-radius: 0;\n}\n\n.pre-scrollable {\n  max-height: 340px;\n  overflow-y: scroll;\n}\n\n.container {\n  margin-right: auto;\n  margin-left: auto;\n  padding-left: 15px;\n  padding-right: 15px;\n}\n\n.container:before,\n.container:after {\n  content: \" \";\n  display: table;\n}\n\n.container:after {\n  clear: both;\n}\n\n@media (min-width: 768px) {\n  .container {\n    width: 750px;\n  }\n}\n\n@media (min-width: 992px) {\n  .container {\n    width: 970px;\n  }\n}\n\n@media (min-width: 1200px) {\n  .container {\n    width: 1170px;\n  }\n}\n\n.container-fluid {\n  margin-right: auto;\n  margin-left: auto;\n  padding-left: 15px;\n  padding-right: 15px;\n}\n\n.container-fluid:before,\n.container-fluid:after {\n  content: \" \";\n  display: table;\n}\n\n.container-fluid:after {\n  clear: both;\n}\n\n.row {\n  margin-left: -15px;\n  margin-right: -15px;\n}\n\n.row:before,\n.row:after {\n  content: \" \";\n  display: table;\n}\n\n.row:after {\n  clear: both;\n}\n\n.col-xs-1,\n.col-sm-1,\n.col-md-1,\n.col-lg-1,\n.col-xs-2,\n.col-sm-2,\n.col-md-2,\n.col-lg-2,\n.col-xs-3,\n.col-sm-3,\n.col-md-3,\n.col-lg-3,\n.col-xs-4,\n.col-sm-4,\n.col-md-4,\n.col-lg-4,\n.col-xs-5,\n.col-sm-5,\n.col-md-5,\n.col-lg-5,\n.col-xs-6,\n.col-sm-6,\n.col-md-6,\n.col-lg-6,\n.col-xs-7,\n.col-sm-7,\n.col-md-7,\n.col-lg-7,\n.col-xs-8,\n.col-sm-8,\n.col-md-8,\n.col-lg-8,\n.col-xs-9,\n.col-sm-9,\n.col-md-9,\n.col-lg-9,\n.col-xs-10,\n.col-sm-10,\n.col-md-10,\n.col-lg-10,\n.col-xs-11,\n.col-sm-11,\n.col-md-11,\n.col-lg-11,\n.col-xs-12,\n.col-sm-12,\n.col-md-12,\n.col-lg-12 {\n  position: relative;\n  min-height: 1px;\n  padding-left: 15px;\n  padding-right: 15px;\n}\n\n.col-xs-1,\n.col-xs-2,\n.col-xs-3,\n.col-xs-4,\n.col-xs-5,\n.col-xs-6,\n.col-xs-7,\n.col-xs-8,\n.col-xs-9,\n.col-xs-10,\n.col-xs-11,\n.col-xs-12 {\n  float: left;\n}\n\n.col-xs-1 {\n  width: 8.33333%;\n}\n\n.col-xs-2 {\n  width: 16.66667%;\n}\n\n.col-xs-3 {\n  width: 25%;\n}\n\n.col-xs-4 {\n  width: 33.33333%;\n}\n\n.col-xs-5 {\n  width: 41.66667%;\n}\n\n.col-xs-6 {\n  width: 50%;\n}\n\n.col-xs-7 {\n  width: 58.33333%;\n}\n\n.col-xs-8 {\n  width: 66.66667%;\n}\n\n.col-xs-9 {\n  width: 75%;\n}\n\n.col-xs-10 {\n  width: 83.33333%;\n}\n\n.col-xs-11 {\n  width: 91.66667%;\n}\n\n.col-xs-12 {\n  width: 100%;\n}\n\n.col-xs-pull-0 {\n  right: auto;\n}\n\n.col-xs-pull-1 {\n  right: 8.33333%;\n}\n\n.col-xs-pull-2 {\n  right: 16.66667%;\n}\n\n.col-xs-pull-3 {\n  right: 25%;\n}\n\n.col-xs-pull-4 {\n  right: 33.33333%;\n}\n\n.col-xs-pull-5 {\n  right: 41.66667%;\n}\n\n.col-xs-pull-6 {\n  right: 50%;\n}\n\n.col-xs-pull-7 {\n  right: 58.33333%;\n}\n\n.col-xs-pull-8 {\n  right: 66.66667%;\n}\n\n.col-xs-pull-9 {\n  right: 75%;\n}\n\n.col-xs-pull-10 {\n  right: 83.33333%;\n}\n\n.col-xs-pull-11 {\n  right: 91.66667%;\n}\n\n.col-xs-pull-12 {\n  right: 100%;\n}\n\n.col-xs-push-0 {\n  left: auto;\n}\n\n.col-xs-push-1 {\n  left: 8.33333%;\n}\n\n.col-xs-push-2 {\n  left: 16.66667%;\n}\n\n.col-xs-push-3 {\n  left: 25%;\n}\n\n.col-xs-push-4 {\n  left: 33.33333%;\n}\n\n.col-xs-push-5 {\n  left: 41.66667%;\n}\n\n.col-xs-push-6 {\n  left: 50%;\n}\n\n.col-xs-push-7 {\n  left: 58.33333%;\n}\n\n.col-xs-push-8 {\n  left: 66.66667%;\n}\n\n.col-xs-push-9 {\n  left: 75%;\n}\n\n.col-xs-push-10 {\n  left: 83.33333%;\n}\n\n.col-xs-push-11 {\n  left: 91.66667%;\n}\n\n.col-xs-push-12 {\n  left: 100%;\n}\n\n.col-xs-offset-0 {\n  margin-left: 0%;\n}\n\n.col-xs-offset-1 {\n  margin-left: 8.33333%;\n}\n\n.col-xs-offset-2 {\n  margin-left: 16.66667%;\n}\n\n.col-xs-offset-3 {\n  margin-left: 25%;\n}\n\n.col-xs-offset-4 {\n  margin-left: 33.33333%;\n}\n\n.col-xs-offset-5 {\n  margin-left: 41.66667%;\n}\n\n.col-xs-offset-6 {\n  margin-left: 50%;\n}\n\n.col-xs-offset-7 {\n  margin-left: 58.33333%;\n}\n\n.col-xs-offset-8 {\n  margin-left: 66.66667%;\n}\n\n.col-xs-offset-9 {\n  margin-left: 75%;\n}\n\n.col-xs-offset-10 {\n  margin-left: 83.33333%;\n}\n\n.col-xs-offset-11 {\n  margin-left: 91.66667%;\n}\n\n.col-xs-offset-12 {\n  margin-left: 100%;\n}\n\n@media (min-width: 768px) {\n  .col-sm-1,\n  .col-sm-2,\n  .col-sm-3,\n  .col-sm-4,\n  .col-sm-5,\n  .col-sm-6,\n  .col-sm-7,\n  .col-sm-8,\n  .col-sm-9,\n  .col-sm-10,\n  .col-sm-11,\n  .col-sm-12 {\n    float: left;\n  }\n\n  .col-sm-1 {\n    width: 8.33333%;\n  }\n\n  .col-sm-2 {\n    width: 16.66667%;\n  }\n\n  .col-sm-3 {\n    width: 25%;\n  }\n\n  .col-sm-4 {\n    width: 33.33333%;\n  }\n\n  .col-sm-5 {\n    width: 41.66667%;\n  }\n\n  .col-sm-6 {\n    width: 50%;\n  }\n\n  .col-sm-7 {\n    width: 58.33333%;\n  }\n\n  .col-sm-8 {\n    width: 66.66667%;\n  }\n\n  .col-sm-9 {\n    width: 75%;\n  }\n\n  .col-sm-10 {\n    width: 83.33333%;\n  }\n\n  .col-sm-11 {\n    width: 91.66667%;\n  }\n\n  .col-sm-12 {\n    width: 100%;\n  }\n\n  .col-sm-pull-0 {\n    right: auto;\n  }\n\n  .col-sm-pull-1 {\n    right: 8.33333%;\n  }\n\n  .col-sm-pull-2 {\n    right: 16.66667%;\n  }\n\n  .col-sm-pull-3 {\n    right: 25%;\n  }\n\n  .col-sm-pull-4 {\n    right: 33.33333%;\n  }\n\n  .col-sm-pull-5 {\n    right: 41.66667%;\n  }\n\n  .col-sm-pull-6 {\n    right: 50%;\n  }\n\n  .col-sm-pull-7 {\n    right: 58.33333%;\n  }\n\n  .col-sm-pull-8 {\n    right: 66.66667%;\n  }\n\n  .col-sm-pull-9 {\n    right: 75%;\n  }\n\n  .col-sm-pull-10 {\n    right: 83.33333%;\n  }\n\n  .col-sm-pull-11 {\n    right: 91.66667%;\n  }\n\n  .col-sm-pull-12 {\n    right: 100%;\n  }\n\n  .col-sm-push-0 {\n    left: auto;\n  }\n\n  .col-sm-push-1 {\n    left: 8.33333%;\n  }\n\n  .col-sm-push-2 {\n    left: 16.66667%;\n  }\n\n  .col-sm-push-3 {\n    left: 25%;\n  }\n\n  .col-sm-push-4 {\n    left: 33.33333%;\n  }\n\n  .col-sm-push-5 {\n    left: 41.66667%;\n  }\n\n  .col-sm-push-6 {\n    left: 50%;\n  }\n\n  .col-sm-push-7 {\n    left: 58.33333%;\n  }\n\n  .col-sm-push-8 {\n    left: 66.66667%;\n  }\n\n  .col-sm-push-9 {\n    left: 75%;\n  }\n\n  .col-sm-push-10 {\n    left: 83.33333%;\n  }\n\n  .col-sm-push-11 {\n    left: 91.66667%;\n  }\n\n  .col-sm-push-12 {\n    left: 100%;\n  }\n\n  .col-sm-offset-0 {\n    margin-left: 0%;\n  }\n\n  .col-sm-offset-1 {\n    margin-left: 8.33333%;\n  }\n\n  .col-sm-offset-2 {\n    margin-left: 16.66667%;\n  }\n\n  .col-sm-offset-3 {\n    margin-left: 25%;\n  }\n\n  .col-sm-offset-4 {\n    margin-left: 33.33333%;\n  }\n\n  .col-sm-offset-5 {\n    margin-left: 41.66667%;\n  }\n\n  .col-sm-offset-6 {\n    margin-left: 50%;\n  }\n\n  .col-sm-offset-7 {\n    margin-left: 58.33333%;\n  }\n\n  .col-sm-offset-8 {\n    margin-left: 66.66667%;\n  }\n\n  .col-sm-offset-9 {\n    margin-left: 75%;\n  }\n\n  .col-sm-offset-10 {\n    margin-left: 83.33333%;\n  }\n\n  .col-sm-offset-11 {\n    margin-left: 91.66667%;\n  }\n\n  .col-sm-offset-12 {\n    margin-left: 100%;\n  }\n}\n\n@media (min-width: 992px) {\n  .col-md-1,\n  .col-md-2,\n  .col-md-3,\n  .col-md-4,\n  .col-md-5,\n  .col-md-6,\n  .col-md-7,\n  .col-md-8,\n  .col-md-9,\n  .col-md-10,\n  .col-md-11,\n  .col-md-12 {\n    float: left;\n  }\n\n  .col-md-1 {\n    width: 8.33333%;\n  }\n\n  .col-md-2 {\n    width: 16.66667%;\n  }\n\n  .col-md-3 {\n    width: 25%;\n  }\n\n  .col-md-4 {\n    width: 33.33333%;\n  }\n\n  .col-md-5 {\n    width: 41.66667%;\n  }\n\n  .col-md-6 {\n    width: 50%;\n  }\n\n  .col-md-7 {\n    width: 58.33333%;\n  }\n\n  .col-md-8 {\n    width: 66.66667%;\n  }\n\n  .col-md-9 {\n    width: 75%;\n  }\n\n  .col-md-10 {\n    width: 83.33333%;\n  }\n\n  .col-md-11 {\n    width: 91.66667%;\n  }\n\n  .col-md-12 {\n    width: 100%;\n  }\n\n  .col-md-pull-0 {\n    right: auto;\n  }\n\n  .col-md-pull-1 {\n    right: 8.33333%;\n  }\n\n  .col-md-pull-2 {\n    right: 16.66667%;\n  }\n\n  .col-md-pull-3 {\n    right: 25%;\n  }\n\n  .col-md-pull-4 {\n    right: 33.33333%;\n  }\n\n  .col-md-pull-5 {\n    right: 41.66667%;\n  }\n\n  .col-md-pull-6 {\n    right: 50%;\n  }\n\n  .col-md-pull-7 {\n    right: 58.33333%;\n  }\n\n  .col-md-pull-8 {\n    right: 66.66667%;\n  }\n\n  .col-md-pull-9 {\n    right: 75%;\n  }\n\n  .col-md-pull-10 {\n    right: 83.33333%;\n  }\n\n  .col-md-pull-11 {\n    right: 91.66667%;\n  }\n\n  .col-md-pull-12 {\n    right: 100%;\n  }\n\n  .col-md-push-0 {\n    left: auto;\n  }\n\n  .col-md-push-1 {\n    left: 8.33333%;\n  }\n\n  .col-md-push-2 {\n    left: 16.66667%;\n  }\n\n  .col-md-push-3 {\n    left: 25%;\n  }\n\n  .col-md-push-4 {\n    left: 33.33333%;\n  }\n\n  .col-md-push-5 {\n    left: 41.66667%;\n  }\n\n  .col-md-push-6 {\n    left: 50%;\n  }\n\n  .col-md-push-7 {\n    left: 58.33333%;\n  }\n\n  .col-md-push-8 {\n    left: 66.66667%;\n  }\n\n  .col-md-push-9 {\n    left: 75%;\n  }\n\n  .col-md-push-10 {\n    left: 83.33333%;\n  }\n\n  .col-md-push-11 {\n    left: 91.66667%;\n  }\n\n  .col-md-push-12 {\n    left: 100%;\n  }\n\n  .col-md-offset-0 {\n    margin-left: 0%;\n  }\n\n  .col-md-offset-1 {\n    margin-left: 8.33333%;\n  }\n\n  .col-md-offset-2 {\n    margin-left: 16.66667%;\n  }\n\n  .col-md-offset-3 {\n    margin-left: 25%;\n  }\n\n  .col-md-offset-4 {\n    margin-left: 33.33333%;\n  }\n\n  .col-md-offset-5 {\n    margin-left: 41.66667%;\n  }\n\n  .col-md-offset-6 {\n    margin-left: 50%;\n  }\n\n  .col-md-offset-7 {\n    margin-left: 58.33333%;\n  }\n\n  .col-md-offset-8 {\n    margin-left: 66.66667%;\n  }\n\n  .col-md-offset-9 {\n    margin-left: 75%;\n  }\n\n  .col-md-offset-10 {\n    margin-left: 83.33333%;\n  }\n\n  .col-md-offset-11 {\n    margin-left: 91.66667%;\n  }\n\n  .col-md-offset-12 {\n    margin-left: 100%;\n  }\n}\n\n@media (min-width: 1200px) {\n  .col-lg-1,\n  .col-lg-2,\n  .col-lg-3,\n  .col-lg-4,\n  .col-lg-5,\n  .col-lg-6,\n  .col-lg-7,\n  .col-lg-8,\n  .col-lg-9,\n  .col-lg-10,\n  .col-lg-11,\n  .col-lg-12 {\n    float: left;\n  }\n\n  .col-lg-1 {\n    width: 8.33333%;\n  }\n\n  .col-lg-2 {\n    width: 16.66667%;\n  }\n\n  .col-lg-3 {\n    width: 25%;\n  }\n\n  .col-lg-4 {\n    width: 33.33333%;\n  }\n\n  .col-lg-5 {\n    width: 41.66667%;\n  }\n\n  .col-lg-6 {\n    width: 50%;\n  }\n\n  .col-lg-7 {\n    width: 58.33333%;\n  }\n\n  .col-lg-8 {\n    width: 66.66667%;\n  }\n\n  .col-lg-9 {\n    width: 75%;\n  }\n\n  .col-lg-10 {\n    width: 83.33333%;\n  }\n\n  .col-lg-11 {\n    width: 91.66667%;\n  }\n\n  .col-lg-12 {\n    width: 100%;\n  }\n\n  .col-lg-pull-0 {\n    right: auto;\n  }\n\n  .col-lg-pull-1 {\n    right: 8.33333%;\n  }\n\n  .col-lg-pull-2 {\n    right: 16.66667%;\n  }\n\n  .col-lg-pull-3 {\n    right: 25%;\n  }\n\n  .col-lg-pull-4 {\n    right: 33.33333%;\n  }\n\n  .col-lg-pull-5 {\n    right: 41.66667%;\n  }\n\n  .col-lg-pull-6 {\n    right: 50%;\n  }\n\n  .col-lg-pull-7 {\n    right: 58.33333%;\n  }\n\n  .col-lg-pull-8 {\n    right: 66.66667%;\n  }\n\n  .col-lg-pull-9 {\n    right: 75%;\n  }\n\n  .col-lg-pull-10 {\n    right: 83.33333%;\n  }\n\n  .col-lg-pull-11 {\n    right: 91.66667%;\n  }\n\n  .col-lg-pull-12 {\n    right: 100%;\n  }\n\n  .col-lg-push-0 {\n    left: auto;\n  }\n\n  .col-lg-push-1 {\n    left: 8.33333%;\n  }\n\n  .col-lg-push-2 {\n    left: 16.66667%;\n  }\n\n  .col-lg-push-3 {\n    left: 25%;\n  }\n\n  .col-lg-push-4 {\n    left: 33.33333%;\n  }\n\n  .col-lg-push-5 {\n    left: 41.66667%;\n  }\n\n  .col-lg-push-6 {\n    left: 50%;\n  }\n\n  .col-lg-push-7 {\n    left: 58.33333%;\n  }\n\n  .col-lg-push-8 {\n    left: 66.66667%;\n  }\n\n  .col-lg-push-9 {\n    left: 75%;\n  }\n\n  .col-lg-push-10 {\n    left: 83.33333%;\n  }\n\n  .col-lg-push-11 {\n    left: 91.66667%;\n  }\n\n  .col-lg-push-12 {\n    left: 100%;\n  }\n\n  .col-lg-offset-0 {\n    margin-left: 0%;\n  }\n\n  .col-lg-offset-1 {\n    margin-left: 8.33333%;\n  }\n\n  .col-lg-offset-2 {\n    margin-left: 16.66667%;\n  }\n\n  .col-lg-offset-3 {\n    margin-left: 25%;\n  }\n\n  .col-lg-offset-4 {\n    margin-left: 33.33333%;\n  }\n\n  .col-lg-offset-5 {\n    margin-left: 41.66667%;\n  }\n\n  .col-lg-offset-6 {\n    margin-left: 50%;\n  }\n\n  .col-lg-offset-7 {\n    margin-left: 58.33333%;\n  }\n\n  .col-lg-offset-8 {\n    margin-left: 66.66667%;\n  }\n\n  .col-lg-offset-9 {\n    margin-left: 75%;\n  }\n\n  .col-lg-offset-10 {\n    margin-left: 83.33333%;\n  }\n\n  .col-lg-offset-11 {\n    margin-left: 91.66667%;\n  }\n\n  .col-lg-offset-12 {\n    margin-left: 100%;\n  }\n}\n\ntable {\n  background-color: transparent;\n}\n\ncaption {\n  padding-top: 8px;\n  padding-bottom: 8px;\n  color: #777777;\n  text-align: left;\n}\n\nth {\n  text-align: left;\n}\n\n.table {\n  width: 100%;\n  max-width: 100%;\n  margin-bottom: 20px;\n}\n\n.table > thead > tr > th,\n.table > thead > tr > td,\n.table > tbody > tr > th,\n.table > tbody > tr > td,\n.table > tfoot > tr > th,\n.table > tfoot > tr > td {\n  padding: 8px;\n  line-height: 1.42857;\n  vertical-align: top;\n  border-top: 1px solid #ddd;\n}\n\n.table > thead > tr > th {\n  vertical-align: bottom;\n  border-bottom: 2px solid #ddd;\n}\n\n.table > caption + thead > tr:first-child > th,\n.table > caption + thead > tr:first-child > td,\n.table > colgroup + thead > tr:first-child > th,\n.table > colgroup + thead > tr:first-child > td,\n.table > thead:first-child > tr:first-child > th,\n.table > thead:first-child > tr:first-child > td {\n  border-top: 0;\n}\n\n.table > tbody + tbody {\n  border-top: 2px solid #ddd;\n}\n\n.table .table {\n  background-color: #fff;\n}\n\n.table-condensed > thead > tr > th,\n.table-condensed > thead > tr > td,\n.table-condensed > tbody > tr > th,\n.table-condensed > tbody > tr > td,\n.table-condensed > tfoot > tr > th,\n.table-condensed > tfoot > tr > td {\n  padding: 5px;\n}\n\n.table-bordered {\n  border: 1px solid #ddd;\n}\n\n.table-bordered > thead > tr > th,\n.table-bordered > thead > tr > td,\n.table-bordered > tbody > tr > th,\n.table-bordered > tbody > tr > td,\n.table-bordered > tfoot > tr > th,\n.table-bordered > tfoot > tr > td {\n  border: 1px solid #ddd;\n}\n\n.table-bordered > thead > tr > th,\n.table-bordered > thead > tr > td {\n  border-bottom-width: 2px;\n}\n\n.table-striped > tbody > tr:nth-of-type(odd) {\n  background-color: #f9f9f9;\n}\n\n.table-hover > tbody > tr:hover {\n  background-color: #f5f5f5;\n}\n\ntable col[class*=\"col-\"] {\n  position: static;\n  float: none;\n  display: table-column;\n}\n\ntable td[class*=\"col-\"],\ntable th[class*=\"col-\"] {\n  position: static;\n  float: none;\n  display: table-cell;\n}\n\n.table > thead > tr > td.active,\n.table > thead > tr > th.active,\n.table > thead > tr.active > td,\n.table > thead > tr.active > th,\n.table > tbody > tr > td.active,\n.table > tbody > tr > th.active,\n.table > tbody > tr.active > td,\n.table > tbody > tr.active > th,\n.table > tfoot > tr > td.active,\n.table > tfoot > tr > th.active,\n.table > tfoot > tr.active > td,\n.table > tfoot > tr.active > th {\n  background-color: #f5f5f5;\n}\n\n.table-hover > tbody > tr > td.active:hover,\n.table-hover > tbody > tr > th.active:hover,\n.table-hover > tbody > tr.active:hover > td,\n.table-hover > tbody > tr:hover > .active,\n.table-hover > tbody > tr.active:hover > th {\n  background-color: #e8e8e8;\n}\n\n.table > thead > tr > td.success,\n.table > thead > tr > th.success,\n.table > thead > tr.success > td,\n.table > thead > tr.success > th,\n.table > tbody > tr > td.success,\n.table > tbody > tr > th.success,\n.table > tbody > tr.success > td,\n.table > tbody > tr.success > th,\n.table > tfoot > tr > td.success,\n.table > tfoot > tr > th.success,\n.table > tfoot > tr.success > td,\n.table > tfoot > tr.success > th {\n  background-color: #dff0d8;\n}\n\n.table-hover > tbody > tr > td.success:hover,\n.table-hover > tbody > tr > th.success:hover,\n.table-hover > tbody > tr.success:hover > td,\n.table-hover > tbody > tr:hover > .success,\n.table-hover > tbody > tr.success:hover > th {\n  background-color: #d0e9c6;\n}\n\n.table > thead > tr > td.info,\n.table > thead > tr > th.info,\n.table > thead > tr.info > td,\n.table > thead > tr.info > th,\n.table > tbody > tr > td.info,\n.table > tbody > tr > th.info,\n.table > tbody > tr.info > td,\n.table > tbody > tr.info > th,\n.table > tfoot > tr > td.info,\n.table > tfoot > tr > th.info,\n.table > tfoot > tr.info > td,\n.table > tfoot > tr.info > th {\n  background-color: #d9edf7;\n}\n\n.table-hover > tbody > tr > td.info:hover,\n.table-hover > tbody > tr > th.info:hover,\n.table-hover > tbody > tr.info:hover > td,\n.table-hover > tbody > tr:hover > .info,\n.table-hover > tbody > tr.info:hover > th {\n  background-color: #c4e3f3;\n}\n\n.table > thead > tr > td.warning,\n.table > thead > tr > th.warning,\n.table > thead > tr.warning > td,\n.table > thead > tr.warning > th,\n.table > tbody > tr > td.warning,\n.table > tbody > tr > th.warning,\n.table > tbody > tr.warning > td,\n.table > tbody > tr.warning > th,\n.table > tfoot > tr > td.warning,\n.table > tfoot > tr > th.warning,\n.table > tfoot > tr.warning > td,\n.table > tfoot > tr.warning > th {\n  background-color: #fcf8e3;\n}\n\n.table-hover > tbody > tr > td.warning:hover,\n.table-hover > tbody > tr > th.warning:hover,\n.table-hover > tbody > tr.warning:hover > td,\n.table-hover > tbody > tr:hover > .warning,\n.table-hover > tbody > tr.warning:hover > th {\n  background-color: #faf2cc;\n}\n\n.table > thead > tr > td.danger,\n.table > thead > tr > th.danger,\n.table > thead > tr.danger > td,\n.table > thead > tr.danger > th,\n.table > tbody > tr > td.danger,\n.table > tbody > tr > th.danger,\n.table > tbody > tr.danger > td,\n.table > tbody > tr.danger > th,\n.table > tfoot > tr > td.danger,\n.table > tfoot > tr > th.danger,\n.table > tfoot > tr.danger > td,\n.table > tfoot > tr.danger > th {\n  background-color: #f2dede;\n}\n\n.table-hover > tbody > tr > td.danger:hover,\n.table-hover > tbody > tr > th.danger:hover,\n.table-hover > tbody > tr.danger:hover > td,\n.table-hover > tbody > tr:hover > .danger,\n.table-hover > tbody > tr.danger:hover > th {\n  background-color: #ebcccc;\n}\n\n.table-responsive {\n  overflow-x: auto;\n  min-height: 0.01%;\n}\n\n@media screen and (max-width: 767px) {\n  .table-responsive {\n    width: 100%;\n    margin-bottom: 15px;\n    overflow-y: hidden;\n    -ms-overflow-style: -ms-autohiding-scrollbar;\n    border: 1px solid #ddd;\n  }\n\n  .table-responsive > .table {\n    margin-bottom: 0;\n  }\n\n  .table-responsive > .table > thead > tr > th,\n  .table-responsive > .table > thead > tr > td,\n  .table-responsive > .table > tbody > tr > th,\n  .table-responsive > .table > tbody > tr > td,\n  .table-responsive > .table > tfoot > tr > th,\n  .table-responsive > .table > tfoot > tr > td {\n    white-space: nowrap;\n  }\n\n  .table-responsive > .table-bordered {\n    border: 0;\n  }\n\n  .table-responsive > .table-bordered > thead > tr > th:first-child,\n  .table-responsive > .table-bordered > thead > tr > td:first-child,\n  .table-responsive > .table-bordered > tbody > tr > th:first-child,\n  .table-responsive > .table-bordered > tbody > tr > td:first-child,\n  .table-responsive > .table-bordered > tfoot > tr > th:first-child,\n  .table-responsive > .table-bordered > tfoot > tr > td:first-child {\n    border-left: 0;\n  }\n\n  .table-responsive > .table-bordered > thead > tr > th:last-child,\n  .table-responsive > .table-bordered > thead > tr > td:last-child,\n  .table-responsive > .table-bordered > tbody > tr > th:last-child,\n  .table-responsive > .table-bordered > tbody > tr > td:last-child,\n  .table-responsive > .table-bordered > tfoot > tr > th:last-child,\n  .table-responsive > .table-bordered > tfoot > tr > td:last-child {\n    border-right: 0;\n  }\n\n  .table-responsive > .table-bordered > tbody > tr:last-child > th,\n  .table-responsive > .table-bordered > tbody > tr:last-child > td,\n  .table-responsive > .table-bordered > tfoot > tr:last-child > th,\n  .table-responsive > .table-bordered > tfoot > tr:last-child > td {\n    border-bottom: 0;\n  }\n}\n\nfieldset {\n  padding: 0;\n  margin: 0;\n  border: 0;\n  min-width: 0;\n}\n\nlegend {\n  display: block;\n  width: 100%;\n  padding: 0;\n  margin-bottom: 20px;\n  font-size: 21px;\n  line-height: inherit;\n  color: #333333;\n  border: 0;\n  border-bottom: 1px solid #e5e5e5;\n}\n\nlabel {\n  display: inline-block;\n  max-width: 100%;\n  margin-bottom: 5px;\n  font-weight: bold;\n}\n\ninput[type=\"search\"] {\n  -webkit-box-sizing: border-box;\n  -moz-box-sizing: border-box;\n  box-sizing: border-box;\n}\n\ninput[type=\"radio\"],\ninput[type=\"checkbox\"] {\n  margin: 4px 0 0;\n  margin-top: 1px \\9;\n  line-height: normal;\n}\n\ninput[type=\"file\"] {\n  display: block;\n}\n\ninput[type=\"range\"] {\n  display: block;\n  width: 100%;\n}\n\nselect[multiple],\nselect[size] {\n  height: auto;\n}\n\ninput[type=\"file\"]:focus,\ninput[type=\"radio\"]:focus,\ninput[type=\"checkbox\"]:focus {\n  outline: 5px auto -webkit-focus-ring-color;\n  outline-offset: -2px;\n}\n\noutput {\n  display: block;\n  padding-top: 7px;\n  font-size: 14px;\n  line-height: 1.42857;\n  color: #555555;\n}\n\n.form-control {\n  display: block;\n  width: 100%;\n  height: 34px;\n  padding: 6px 12px;\n  font-size: 14px;\n  line-height: 1.42857;\n  color: #555555;\n  background-color: #fff;\n  background-image: none;\n  border: 1px solid #ccc;\n  border-radius: 4px;\n  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);\n  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);\n  -webkit-transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;\n  -o-transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;\n  transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;\n}\n\n.form-control:focus {\n  border-color: #66afe9;\n  outline: 0;\n  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(102, 175, 233, 0.6);\n  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(102, 175, 233, 0.6);\n}\n\n.form-control::-moz-placeholder {\n  color: #999;\n  opacity: 1;\n}\n\n.form-control:-ms-input-placeholder {\n  color: #999;\n}\n\n.form-control::-webkit-input-placeholder {\n  color: #999;\n}\n\n.form-control::-ms-expand {\n  border: 0;\n  background-color: transparent;\n}\n\n.form-control[disabled],\n.form-control[readonly],\nfieldset[disabled] .form-control {\n  background-color: #eeeeee;\n  opacity: 1;\n}\n\n.form-control[disabled],\nfieldset[disabled] .form-control {\n  cursor: not-allowed;\n}\n\ntextarea.form-control {\n  height: auto;\n}\n\ninput[type=\"search\"] {\n  -webkit-appearance: none;\n}\n\n@media screen and (-webkit-min-device-pixel-ratio: 0) {\n  input[type=\"date\"].form-control,\n  input[type=\"time\"].form-control,\n  input[type=\"datetime-local\"].form-control,\n  input[type=\"month\"].form-control {\n    line-height: 34px;\n  }\n\n  input[type=\"date\"].input-sm,\n  .input-group-sm > input[type=\"date\"].form-control,\n  .input-group-sm > input[type=\"date\"].input-group-addon,\n  .input-group-sm > .input-group-btn > input[type=\"date\"].btn,\n  .input-group-sm input[type=\"date\"],\n  input[type=\"time\"].input-sm,\n  .input-group-sm > input[type=\"time\"].form-control,\n  .input-group-sm > input[type=\"time\"].input-group-addon,\n  .input-group-sm > .input-group-btn > input[type=\"time\"].btn,\n  .input-group-sm\n  input[type=\"time\"],\n  input[type=\"datetime-local\"].input-sm,\n  .input-group-sm > input[type=\"datetime-local\"].form-control,\n  .input-group-sm > input[type=\"datetime-local\"].input-group-addon,\n  .input-group-sm > .input-group-btn > input[type=\"datetime-local\"].btn,\n  .input-group-sm\n  input[type=\"datetime-local\"],\n  input[type=\"month\"].input-sm,\n  .input-group-sm > input[type=\"month\"].form-control,\n  .input-group-sm > input[type=\"month\"].input-group-addon,\n  .input-group-sm > .input-group-btn > input[type=\"month\"].btn,\n  .input-group-sm\n  input[type=\"month\"] {\n    line-height: 30px;\n  }\n\n  input[type=\"date\"].input-lg,\n  .input-group-lg > input[type=\"date\"].form-control,\n  .input-group-lg > input[type=\"date\"].input-group-addon,\n  .input-group-lg > .input-group-btn > input[type=\"date\"].btn,\n  .input-group-lg input[type=\"date\"],\n  input[type=\"time\"].input-lg,\n  .input-group-lg > input[type=\"time\"].form-control,\n  .input-group-lg > input[type=\"time\"].input-group-addon,\n  .input-group-lg > .input-group-btn > input[type=\"time\"].btn,\n  .input-group-lg\n  input[type=\"time\"],\n  input[type=\"datetime-local\"].input-lg,\n  .input-group-lg > input[type=\"datetime-local\"].form-control,\n  .input-group-lg > input[type=\"datetime-local\"].input-group-addon,\n  .input-group-lg > .input-group-btn > input[type=\"datetime-local\"].btn,\n  .input-group-lg\n  input[type=\"datetime-local\"],\n  input[type=\"month\"].input-lg,\n  .input-group-lg > input[type=\"month\"].form-control,\n  .input-group-lg > input[type=\"month\"].input-group-addon,\n  .input-group-lg > .input-group-btn > input[type=\"month\"].btn,\n  .input-group-lg\n  input[type=\"month\"] {\n    line-height: 46px;\n  }\n}\n\n.form-group {\n  margin-bottom: 15px;\n}\n\n.radio,\n.checkbox {\n  position: relative;\n  display: block;\n  margin-top: 10px;\n  margin-bottom: 10px;\n}\n\n.radio label,\n.checkbox label {\n  min-height: 20px;\n  padding-left: 20px;\n  margin-bottom: 0;\n  font-weight: normal;\n  cursor: pointer;\n}\n\n.radio input[type=\"radio\"],\n.radio-inline input[type=\"radio\"],\n.checkbox input[type=\"checkbox\"],\n.checkbox-inline input[type=\"checkbox\"] {\n  position: absolute;\n  margin-left: -20px;\n  margin-top: 4px \\9;\n}\n\n.radio + .radio,\n.checkbox + .checkbox {\n  margin-top: -5px;\n}\n\n.radio-inline,\n.checkbox-inline {\n  position: relative;\n  display: inline-block;\n  padding-left: 20px;\n  margin-bottom: 0;\n  vertical-align: middle;\n  font-weight: normal;\n  cursor: pointer;\n}\n\n.radio-inline + .radio-inline,\n.checkbox-inline + .checkbox-inline {\n  margin-top: 0;\n  margin-left: 10px;\n}\n\ninput[type=\"radio\"][disabled],\ninput[type=\"radio\"].disabled,\nfieldset[disabled] input[type=\"radio\"],\ninput[type=\"checkbox\"][disabled],\ninput[type=\"checkbox\"].disabled,\nfieldset[disabled]\ninput[type=\"checkbox\"] {\n  cursor: not-allowed;\n}\n\n.radio-inline.disabled,\nfieldset[disabled] .radio-inline,\n.checkbox-inline.disabled,\nfieldset[disabled]\n.checkbox-inline {\n  cursor: not-allowed;\n}\n\n.radio.disabled label,\nfieldset[disabled] .radio label,\n.checkbox.disabled label,\nfieldset[disabled]\n.checkbox label {\n  cursor: not-allowed;\n}\n\n.form-control-static {\n  padding-top: 7px;\n  padding-bottom: 7px;\n  margin-bottom: 0;\n  min-height: 34px;\n}\n\n.form-control-static.input-lg,\n.input-group-lg > .form-control-static.form-control,\n.input-group-lg > .form-control-static.input-group-addon,\n.input-group-lg > .input-group-btn > .form-control-static.btn,\n.form-control-static.input-sm,\n.input-group-sm > .form-control-static.form-control,\n.input-group-sm > .form-control-static.input-group-addon,\n.input-group-sm > .input-group-btn > .form-control-static.btn {\n  padding-left: 0;\n  padding-right: 0;\n}\n\n.input-sm,\n.input-group-sm > .form-control,\n.input-group-sm > .input-group-addon,\n.input-group-sm > .input-group-btn > .btn {\n  height: 30px;\n  padding: 5px 10px;\n  font-size: 12px;\n  line-height: 1.5;\n  border-radius: 3px;\n}\n\nselect.input-sm,\n.input-group-sm > select.form-control,\n.input-group-sm > select.input-group-addon,\n.input-group-sm > .input-group-btn > select.btn {\n  height: 30px;\n  line-height: 30px;\n}\n\ntextarea.input-sm,\n.input-group-sm > textarea.form-control,\n.input-group-sm > textarea.input-group-addon,\n.input-group-sm > .input-group-btn > textarea.btn,\nselect[multiple].input-sm,\n.input-group-sm > select[multiple].form-control,\n.input-group-sm > select[multiple].input-group-addon,\n.input-group-sm > .input-group-btn > select[multiple].btn {\n  height: auto;\n}\n\n.form-group-sm .form-control {\n  height: 30px;\n  padding: 5px 10px;\n  font-size: 12px;\n  line-height: 1.5;\n  border-radius: 3px;\n}\n\n.form-group-sm select.form-control {\n  height: 30px;\n  line-height: 30px;\n}\n\n.form-group-sm textarea.form-control,\n.form-group-sm select[multiple].form-control {\n  height: auto;\n}\n\n.form-group-sm .form-control-static {\n  height: 30px;\n  min-height: 32px;\n  padding: 6px 10px;\n  font-size: 12px;\n  line-height: 1.5;\n}\n\n.input-lg,\n.input-group-lg > .form-control,\n.input-group-lg > .input-group-addon,\n.input-group-lg > .input-group-btn > .btn {\n  height: 46px;\n  padding: 10px 16px;\n  font-size: 18px;\n  line-height: 1.33333;\n  border-radius: 6px;\n}\n\nselect.input-lg,\n.input-group-lg > select.form-control,\n.input-group-lg > select.input-group-addon,\n.input-group-lg > .input-group-btn > select.btn {\n  height: 46px;\n  line-height: 46px;\n}\n\ntextarea.input-lg,\n.input-group-lg > textarea.form-control,\n.input-group-lg > textarea.input-group-addon,\n.input-group-lg > .input-group-btn > textarea.btn,\nselect[multiple].input-lg,\n.input-group-lg > select[multiple].form-control,\n.input-group-lg > select[multiple].input-group-addon,\n.input-group-lg > .input-group-btn > select[multiple].btn {\n  height: auto;\n}\n\n.form-group-lg .form-control {\n  height: 46px;\n  padding: 10px 16px;\n  font-size: 18px;\n  line-height: 1.33333;\n  border-radius: 6px;\n}\n\n.form-group-lg select.form-control {\n  height: 46px;\n  line-height: 46px;\n}\n\n.form-group-lg textarea.form-control,\n.form-group-lg select[multiple].form-control {\n  height: auto;\n}\n\n.form-group-lg .form-control-static {\n  height: 46px;\n  min-height: 38px;\n  padding: 11px 16px;\n  font-size: 18px;\n  line-height: 1.33333;\n}\n\n.has-feedback {\n  position: relative;\n}\n\n.has-feedback .form-control {\n  padding-right: 42.5px;\n}\n\n.form-control-feedback {\n  position: absolute;\n  top: 0;\n  right: 0;\n  z-index: 2;\n  display: block;\n  width: 34px;\n  height: 34px;\n  line-height: 34px;\n  text-align: center;\n  pointer-events: none;\n}\n\n.input-lg + .form-control-feedback,\n.input-group-lg > .form-control + .form-control-feedback,\n.input-group-lg > .input-group-addon + .form-control-feedback,\n.input-group-lg > .input-group-btn > .btn + .form-control-feedback,\n.input-group-lg + .form-control-feedback,\n.form-group-lg .form-control + .form-control-feedback {\n  width: 46px;\n  height: 46px;\n  line-height: 46px;\n}\n\n.input-sm + .form-control-feedback,\n.input-group-sm > .form-control + .form-control-feedback,\n.input-group-sm > .input-group-addon + .form-control-feedback,\n.input-group-sm > .input-group-btn > .btn + .form-control-feedback,\n.input-group-sm + .form-control-feedback,\n.form-group-sm .form-control + .form-control-feedback {\n  width: 30px;\n  height: 30px;\n  line-height: 30px;\n}\n\n.has-success .help-block,\n.has-success .control-label,\n.has-success .radio,\n.has-success .checkbox,\n.has-success .radio-inline,\n.has-success .checkbox-inline,\n.has-success.radio label,\n.has-success.checkbox label,\n.has-success.radio-inline label,\n.has-success.checkbox-inline label {\n  color: #3c763d;\n}\n\n.has-success .form-control {\n  border-color: #3c763d;\n  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);\n  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);\n}\n\n.has-success .form-control:focus {\n  border-color: #2b542c;\n  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #67b168;\n  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #67b168;\n}\n\n.has-success .input-group-addon {\n  color: #3c763d;\n  border-color: #3c763d;\n  background-color: #dff0d8;\n}\n\n.has-success .form-control-feedback {\n  color: #3c763d;\n}\n\n.has-warning .help-block,\n.has-warning .control-label,\n.has-warning .radio,\n.has-warning .checkbox,\n.has-warning .radio-inline,\n.has-warning .checkbox-inline,\n.has-warning.radio label,\n.has-warning.checkbox label,\n.has-warning.radio-inline label,\n.has-warning.checkbox-inline label {\n  color: #8a6d3b;\n}\n\n.has-warning .form-control {\n  border-color: #8a6d3b;\n  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);\n  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);\n}\n\n.has-warning .form-control:focus {\n  border-color: #66512c;\n  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #c0a16b;\n  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #c0a16b;\n}\n\n.has-warning .input-group-addon {\n  color: #8a6d3b;\n  border-color: #8a6d3b;\n  background-color: #fcf8e3;\n}\n\n.has-warning .form-control-feedback {\n  color: #8a6d3b;\n}\n\n.has-error .help-block,\n.has-error .control-label,\n.has-error .radio,\n.has-error .checkbox,\n.has-error .radio-inline,\n.has-error .checkbox-inline,\n.has-error.radio label,\n.has-error.checkbox label,\n.has-error.radio-inline label,\n.has-error.checkbox-inline label {\n  color: #a94442;\n}\n\n.has-error .form-control {\n  border-color: #a94442;\n  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);\n  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);\n}\n\n.has-error .form-control:focus {\n  border-color: #843534;\n  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #ce8483;\n  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #ce8483;\n}\n\n.has-error .input-group-addon {\n  color: #a94442;\n  border-color: #a94442;\n  background-color: #f2dede;\n}\n\n.has-error .form-control-feedback {\n  color: #a94442;\n}\n\n.has-feedback label ~ .form-control-feedback {\n  top: 25px;\n}\n\n.has-feedback label.sr-only ~ .form-control-feedback {\n  top: 0;\n}\n\n.help-block {\n  display: block;\n  margin-top: 5px;\n  margin-bottom: 10px;\n  color: #737373;\n}\n\n@media (min-width: 768px) {\n  .form-inline .form-group {\n    display: inline-block;\n    margin-bottom: 0;\n    vertical-align: middle;\n  }\n\n  .form-inline .form-control {\n    display: inline-block;\n    width: auto;\n    vertical-align: middle;\n  }\n\n  .form-inline .form-control-static {\n    display: inline-block;\n  }\n\n  .form-inline .input-group {\n    display: inline-table;\n    vertical-align: middle;\n  }\n\n  .form-inline .input-group .input-group-addon,\n  .form-inline .input-group .input-group-btn,\n  .form-inline .input-group .form-control {\n    width: auto;\n  }\n\n  .form-inline .input-group > .form-control {\n    width: 100%;\n  }\n\n  .form-inline .control-label {\n    margin-bottom: 0;\n    vertical-align: middle;\n  }\n\n  .form-inline .radio,\n  .form-inline .checkbox {\n    display: inline-block;\n    margin-top: 0;\n    margin-bottom: 0;\n    vertical-align: middle;\n  }\n\n  .form-inline .radio label,\n  .form-inline .checkbox label {\n    padding-left: 0;\n  }\n\n  .form-inline .radio input[type=\"radio\"],\n  .form-inline .checkbox input[type=\"checkbox\"] {\n    position: relative;\n    margin-left: 0;\n  }\n\n  .form-inline .has-feedback .form-control-feedback {\n    top: 0;\n  }\n}\n\n.form-horizontal .radio,\n.form-horizontal .checkbox,\n.form-horizontal .radio-inline,\n.form-horizontal .checkbox-inline {\n  margin-top: 0;\n  margin-bottom: 0;\n  padding-top: 7px;\n}\n\n.form-horizontal .radio,\n.form-horizontal .checkbox {\n  min-height: 27px;\n}\n\n.form-horizontal .form-group {\n  margin-left: -15px;\n  margin-right: -15px;\n}\n\n.form-horizontal .form-group:before,\n.form-horizontal .form-group:after {\n  content: \" \";\n  display: table;\n}\n\n.form-horizontal .form-group:after {\n  clear: both;\n}\n\n@media (min-width: 768px) {\n  .form-horizontal .control-label {\n    text-align: right;\n    margin-bottom: 0;\n    padding-top: 7px;\n  }\n}\n\n.form-horizontal .has-feedback .form-control-feedback {\n  right: 15px;\n}\n\n@media (min-width: 768px) {\n  .form-horizontal .form-group-lg .control-label {\n    padding-top: 11px;\n    font-size: 18px;\n  }\n}\n\n@media (min-width: 768px) {\n  .form-horizontal .form-group-sm .control-label {\n    padding-top: 6px;\n    font-size: 12px;\n  }\n}\n\n.btn {\n  display: inline-block;\n  margin-bottom: 0;\n  font-weight: normal;\n  text-align: center;\n  vertical-align: middle;\n  touch-action: manipulation;\n  cursor: pointer;\n  background-image: none;\n  border: 1px solid transparent;\n  white-space: nowrap;\n  padding: 6px 12px;\n  font-size: 14px;\n  line-height: 1.42857;\n  border-radius: 4px;\n  -webkit-user-select: none;\n  -moz-user-select: none;\n  -ms-user-select: none;\n  user-select: none;\n}\n\n.btn:focus,\n.btn.focus,\n.btn:active:focus,\n.btn:active.focus,\n.btn.active:focus,\n.btn.active.focus {\n  outline: 5px auto -webkit-focus-ring-color;\n  outline-offset: -2px;\n}\n\n.btn:hover,\n.btn:focus,\n.btn.focus {\n  color: #333;\n  text-decoration: none;\n}\n\n.btn:active,\n.btn.active {\n  outline: 0;\n  background-image: none;\n  -webkit-box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);\n  box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);\n}\n\n.btn.disabled,\n.btn[disabled],\nfieldset[disabled] .btn {\n  cursor: not-allowed;\n  opacity: 0.65;\n  filter: alpha(opacity=65);\n  -webkit-box-shadow: none;\n  box-shadow: none;\n}\n\na.btn.disabled,\nfieldset[disabled] a.btn {\n  pointer-events: none;\n}\n\n.btn-default {\n  color: #333;\n  background-color: #fff;\n  border-color: #ccc;\n}\n\n.btn-default:focus,\n.btn-default.focus {\n  color: #333;\n  background-color: #e6e6e6;\n  border-color: #8c8c8c;\n}\n\n.btn-default:hover {\n  color: #333;\n  background-color: #e6e6e6;\n  border-color: #adadad;\n}\n\n.btn-default:active,\n.btn-default.active,\n.open > .btn-default.dropdown-toggle {\n  color: #333;\n  background-color: #e6e6e6;\n  border-color: #adadad;\n}\n\n.btn-default:active:hover,\n.btn-default:active:focus,\n.btn-default:active.focus,\n.btn-default.active:hover,\n.btn-default.active:focus,\n.btn-default.active.focus,\n.open > .btn-default.dropdown-toggle:hover,\n.open > .btn-default.dropdown-toggle:focus,\n.open > .btn-default.dropdown-toggle.focus {\n  color: #333;\n  background-color: #d4d4d4;\n  border-color: #8c8c8c;\n}\n\n.btn-default:active,\n.btn-default.active,\n.open > .btn-default.dropdown-toggle {\n  background-image: none;\n}\n\n.btn-default.disabled:hover,\n.btn-default.disabled:focus,\n.btn-default.disabled.focus,\n.btn-default[disabled]:hover,\n.btn-default[disabled]:focus,\n.btn-default[disabled].focus,\nfieldset[disabled] .btn-default:hover,\nfieldset[disabled] .btn-default:focus,\nfieldset[disabled] .btn-default.focus {\n  background-color: #fff;\n  border-color: #ccc;\n}\n\n.btn-default .badge {\n  color: #fff;\n  background-color: #333;\n}\n\n.btn-primary {\n  color: #fff;\n  background-color: #337ab7;\n  border-color: #2e6da4;\n}\n\n.btn-primary:focus,\n.btn-primary.focus {\n  color: #fff;\n  background-color: #286090;\n  border-color: #122b40;\n}\n\n.btn-primary:hover {\n  color: #fff;\n  background-color: #286090;\n  border-color: #204d74;\n}\n\n.btn-primary:active,\n.btn-primary.active,\n.open > .btn-primary.dropdown-toggle {\n  color: #fff;\n  background-color: #286090;\n  border-color: #204d74;\n}\n\n.btn-primary:active:hover,\n.btn-primary:active:focus,\n.btn-primary:active.focus,\n.btn-primary.active:hover,\n.btn-primary.active:focus,\n.btn-primary.active.focus,\n.open > .btn-primary.dropdown-toggle:hover,\n.open > .btn-primary.dropdown-toggle:focus,\n.open > .btn-primary.dropdown-toggle.focus {\n  color: #fff;\n  background-color: #204d74;\n  border-color: #122b40;\n}\n\n.btn-primary:active,\n.btn-primary.active,\n.open > .btn-primary.dropdown-toggle {\n  background-image: none;\n}\n\n.btn-primary.disabled:hover,\n.btn-primary.disabled:focus,\n.btn-primary.disabled.focus,\n.btn-primary[disabled]:hover,\n.btn-primary[disabled]:focus,\n.btn-primary[disabled].focus,\nfieldset[disabled] .btn-primary:hover,\nfieldset[disabled] .btn-primary:focus,\nfieldset[disabled] .btn-primary.focus {\n  background-color: #337ab7;\n  border-color: #2e6da4;\n}\n\n.btn-primary .badge {\n  color: #337ab7;\n  background-color: #fff;\n}\n\n.btn-success {\n  color: #fff;\n  background-color: #5cb85c;\n  border-color: #4cae4c;\n}\n\n.btn-success:focus,\n.btn-success.focus {\n  color: #fff;\n  background-color: #449d44;\n  border-color: #255625;\n}\n\n.btn-success:hover {\n  color: #fff;\n  background-color: #449d44;\n  border-color: #398439;\n}\n\n.btn-success:active,\n.btn-success.active,\n.open > .btn-success.dropdown-toggle {\n  color: #fff;\n  background-color: #449d44;\n  border-color: #398439;\n}\n\n.btn-success:active:hover,\n.btn-success:active:focus,\n.btn-success:active.focus,\n.btn-success.active:hover,\n.btn-success.active:focus,\n.btn-success.active.focus,\n.open > .btn-success.dropdown-toggle:hover,\n.open > .btn-success.dropdown-toggle:focus,\n.open > .btn-success.dropdown-toggle.focus {\n  color: #fff;\n  background-color: #398439;\n  border-color: #255625;\n}\n\n.btn-success:active,\n.btn-success.active,\n.open > .btn-success.dropdown-toggle {\n  background-image: none;\n}\n\n.btn-success.disabled:hover,\n.btn-success.disabled:focus,\n.btn-success.disabled.focus,\n.btn-success[disabled]:hover,\n.btn-success[disabled]:focus,\n.btn-success[disabled].focus,\nfieldset[disabled] .btn-success:hover,\nfieldset[disabled] .btn-success:focus,\nfieldset[disabled] .btn-success.focus {\n  background-color: #5cb85c;\n  border-color: #4cae4c;\n}\n\n.btn-success .badge {\n  color: #5cb85c;\n  background-color: #fff;\n}\n\n.btn-info {\n  color: #fff;\n  background-color: #5bc0de;\n  border-color: #46b8da;\n}\n\n.btn-info:focus,\n.btn-info.focus {\n  color: #fff;\n  background-color: #31b0d5;\n  border-color: #1b6d85;\n}\n\n.btn-info:hover {\n  color: #fff;\n  background-color: #31b0d5;\n  border-color: #269abc;\n}\n\n.btn-info:active,\n.btn-info.active,\n.open > .btn-info.dropdown-toggle {\n  color: #fff;\n  background-color: #31b0d5;\n  border-color: #269abc;\n}\n\n.btn-info:active:hover,\n.btn-info:active:focus,\n.btn-info:active.focus,\n.btn-info.active:hover,\n.btn-info.active:focus,\n.btn-info.active.focus,\n.open > .btn-info.dropdown-toggle:hover,\n.open > .btn-info.dropdown-toggle:focus,\n.open > .btn-info.dropdown-toggle.focus {\n  color: #fff;\n  background-color: #269abc;\n  border-color: #1b6d85;\n}\n\n.btn-info:active,\n.btn-info.active,\n.open > .btn-info.dropdown-toggle {\n  background-image: none;\n}\n\n.btn-info.disabled:hover,\n.btn-info.disabled:focus,\n.btn-info.disabled.focus,\n.btn-info[disabled]:hover,\n.btn-info[disabled]:focus,\n.btn-info[disabled].focus,\nfieldset[disabled] .btn-info:hover,\nfieldset[disabled] .btn-info:focus,\nfieldset[disabled] .btn-info.focus {\n  background-color: #5bc0de;\n  border-color: #46b8da;\n}\n\n.btn-info .badge {\n  color: #5bc0de;\n  background-color: #fff;\n}\n\n.btn-warning {\n  color: #fff;\n  background-color: #f0ad4e;\n  border-color: #eea236;\n}\n\n.btn-warning:focus,\n.btn-warning.focus {\n  color: #fff;\n  background-color: #ec971f;\n  border-color: #985f0d;\n}\n\n.btn-warning:hover {\n  color: #fff;\n  background-color: #ec971f;\n  border-color: #d58512;\n}\n\n.btn-warning:active,\n.btn-warning.active,\n.open > .btn-warning.dropdown-toggle {\n  color: #fff;\n  background-color: #ec971f;\n  border-color: #d58512;\n}\n\n.btn-warning:active:hover,\n.btn-warning:active:focus,\n.btn-warning:active.focus,\n.btn-warning.active:hover,\n.btn-warning.active:focus,\n.btn-warning.active.focus,\n.open > .btn-warning.dropdown-toggle:hover,\n.open > .btn-warning.dropdown-toggle:focus,\n.open > .btn-warning.dropdown-toggle.focus {\n  color: #fff;\n  background-color: #d58512;\n  border-color: #985f0d;\n}\n\n.btn-warning:active,\n.btn-warning.active,\n.open > .btn-warning.dropdown-toggle {\n  background-image: none;\n}\n\n.btn-warning.disabled:hover,\n.btn-warning.disabled:focus,\n.btn-warning.disabled.focus,\n.btn-warning[disabled]:hover,\n.btn-warning[disabled]:focus,\n.btn-warning[disabled].focus,\nfieldset[disabled] .btn-warning:hover,\nfieldset[disabled] .btn-warning:focus,\nfieldset[disabled] .btn-warning.focus {\n  background-color: #f0ad4e;\n  border-color: #eea236;\n}\n\n.btn-warning .badge {\n  color: #f0ad4e;\n  background-color: #fff;\n}\n\n.btn-danger {\n  color: #fff;\n  background-color: #d9534f;\n  border-color: #d43f3a;\n}\n\n.btn-danger:focus,\n.btn-danger.focus {\n  color: #fff;\n  background-color: #c9302c;\n  border-color: #761c19;\n}\n\n.btn-danger:hover {\n  color: #fff;\n  background-color: #c9302c;\n  border-color: #ac2925;\n}\n\n.btn-danger:active,\n.btn-danger.active,\n.open > .btn-danger.dropdown-toggle {\n  color: #fff;\n  background-color: #c9302c;\n  border-color: #ac2925;\n}\n\n.btn-danger:active:hover,\n.btn-danger:active:focus,\n.btn-danger:active.focus,\n.btn-danger.active:hover,\n.btn-danger.active:focus,\n.btn-danger.active.focus,\n.open > .btn-danger.dropdown-toggle:hover,\n.open > .btn-danger.dropdown-toggle:focus,\n.open > .btn-danger.dropdown-toggle.focus {\n  color: #fff;\n  background-color: #ac2925;\n  border-color: #761c19;\n}\n\n.btn-danger:active,\n.btn-danger.active,\n.open > .btn-danger.dropdown-toggle {\n  background-image: none;\n}\n\n.btn-danger.disabled:hover,\n.btn-danger.disabled:focus,\n.btn-danger.disabled.focus,\n.btn-danger[disabled]:hover,\n.btn-danger[disabled]:focus,\n.btn-danger[disabled].focus,\nfieldset[disabled] .btn-danger:hover,\nfieldset[disabled] .btn-danger:focus,\nfieldset[disabled] .btn-danger.focus {\n  background-color: #d9534f;\n  border-color: #d43f3a;\n}\n\n.btn-danger .badge {\n  color: #d9534f;\n  background-color: #fff;\n}\n\n.btn-link {\n  color: #337ab7;\n  font-weight: normal;\n  border-radius: 0;\n}\n\n.btn-link,\n.btn-link:active,\n.btn-link.active,\n.btn-link[disabled],\nfieldset[disabled] .btn-link {\n  background-color: transparent;\n  -webkit-box-shadow: none;\n  box-shadow: none;\n}\n\n.btn-link,\n.btn-link:hover,\n.btn-link:focus,\n.btn-link:active {\n  border-color: transparent;\n}\n\n.btn-link:hover,\n.btn-link:focus {\n  color: #23527c;\n  text-decoration: underline;\n  background-color: transparent;\n}\n\n.btn-link[disabled]:hover,\n.btn-link[disabled]:focus,\nfieldset[disabled] .btn-link:hover,\nfieldset[disabled] .btn-link:focus {\n  color: #777777;\n  text-decoration: none;\n}\n\n.btn-lg,\n.btn-group-lg > .btn {\n  padding: 10px 16px;\n  font-size: 18px;\n  line-height: 1.33333;\n  border-radius: 6px;\n}\n\n.btn-sm,\n.btn-group-sm > .btn {\n  padding: 5px 10px;\n  font-size: 12px;\n  line-height: 1.5;\n  border-radius: 3px;\n}\n\n.btn-xs,\n.btn-group-xs > .btn {\n  padding: 1px 5px;\n  font-size: 12px;\n  line-height: 1.5;\n  border-radius: 3px;\n}\n\n.btn-block {\n  display: block;\n  width: 100%;\n}\n\n.btn-block + .btn-block {\n  margin-top: 5px;\n}\n\ninput[type=\"submit\"].btn-block,\ninput[type=\"reset\"].btn-block,\ninput[type=\"button\"].btn-block {\n  width: 100%;\n}\n\n.fade {\n  opacity: 0;\n  -webkit-transition: opacity 0.15s linear;\n  -o-transition: opacity 0.15s linear;\n  transition: opacity 0.15s linear;\n}\n\n.fade.in {\n  opacity: 1;\n}\n\n.collapse {\n  display: none;\n}\n\n.collapse.in {\n  display: block;\n}\n\ntr.collapse.in {\n  display: table-row;\n}\n\ntbody.collapse.in {\n  display: table-row-group;\n}\n\n.collapsing {\n  position: relative;\n  height: 0;\n  overflow: hidden;\n  -webkit-transition-property: height, visibility;\n  transition-property: height, visibility;\n  -webkit-transition-duration: 0.35s;\n  transition-duration: 0.35s;\n  -webkit-transition-timing-function: ease;\n  transition-timing-function: ease;\n}\n\n.caret {\n  display: inline-block;\n  width: 0;\n  height: 0;\n  margin-left: 2px;\n  vertical-align: middle;\n  border-top: 4px dashed;\n  border-top: 4px solid \\9;\n  border-right: 4px solid transparent;\n  border-left: 4px solid transparent;\n}\n\n.dropup,\n.dropdown {\n  position: relative;\n}\n\n.dropdown-toggle:focus {\n  outline: 0;\n}\n\n.dropdown-menu {\n  position: absolute;\n  top: 100%;\n  left: 0;\n  z-index: 1000;\n  display: none;\n  float: left;\n  min-width: 160px;\n  padding: 5px 0;\n  margin: 2px 0 0;\n  list-style: none;\n  font-size: 14px;\n  text-align: left;\n  background-color: #fff;\n  border: 1px solid #ccc;\n  border: 1px solid rgba(0, 0, 0, 0.15);\n  border-radius: 4px;\n  -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);\n  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);\n  background-clip: padding-box;\n}\n\n.dropdown-menu.pull-right {\n  right: 0;\n  left: auto;\n}\n\n.dropdown-menu .divider {\n  height: 1px;\n  margin: 9px 0;\n  overflow: hidden;\n  background-color: #e5e5e5;\n}\n\n.dropdown-menu > li > a {\n  display: block;\n  padding: 3px 20px;\n  clear: both;\n  font-weight: normal;\n  line-height: 1.42857;\n  color: #333333;\n  white-space: nowrap;\n}\n\n.dropdown-menu > li > a:hover,\n.dropdown-menu > li > a:focus {\n  text-decoration: none;\n  color: #262626;\n  background-color: #f5f5f5;\n}\n\n.dropdown-menu > .active > a,\n.dropdown-menu > .active > a:hover,\n.dropdown-menu > .active > a:focus {\n  color: #fff;\n  text-decoration: none;\n  outline: 0;\n  background-color: #337ab7;\n}\n\n.dropdown-menu > .disabled > a,\n.dropdown-menu > .disabled > a:hover,\n.dropdown-menu > .disabled > a:focus {\n  color: #777777;\n}\n\n.dropdown-menu > .disabled > a:hover,\n.dropdown-menu > .disabled > a:focus {\n  text-decoration: none;\n  background-color: transparent;\n  background-image: none;\n  filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);\n  cursor: not-allowed;\n}\n\n.open > .dropdown-menu {\n  display: block;\n}\n\n.open > a {\n  outline: 0;\n}\n\n.dropdown-menu-right {\n  left: auto;\n  right: 0;\n}\n\n.dropdown-menu-left {\n  left: 0;\n  right: auto;\n}\n\n.dropdown-header {\n  display: block;\n  padding: 3px 20px;\n  font-size: 12px;\n  line-height: 1.42857;\n  color: #777777;\n  white-space: nowrap;\n}\n\n.dropdown-backdrop {\n  position: fixed;\n  left: 0;\n  right: 0;\n  bottom: 0;\n  top: 0;\n  z-index: 990;\n}\n\n.pull-right > .dropdown-menu {\n  right: 0;\n  left: auto;\n}\n\n.dropup .caret,\n.navbar-fixed-bottom .dropdown .caret {\n  border-top: 0;\n  border-bottom: 4px dashed;\n  border-bottom: 4px solid \\9;\n  content: \"\";\n}\n\n.dropup .dropdown-menu,\n.navbar-fixed-bottom .dropdown .dropdown-menu {\n  top: auto;\n  bottom: 100%;\n  margin-bottom: 2px;\n}\n\n@media (min-width: 768px) {\n  .navbar-right .dropdown-menu {\n    right: 0;\n    left: auto;\n  }\n\n  .navbar-right .dropdown-menu-left {\n    left: 0;\n    right: auto;\n  }\n}\n\n.btn-group,\n.btn-group-vertical {\n  position: relative;\n  display: inline-block;\n  vertical-align: middle;\n}\n\n.btn-group > .btn,\n.btn-group-vertical > .btn {\n  position: relative;\n  float: left;\n}\n\n.btn-group > .btn:hover,\n.btn-group > .btn:focus,\n.btn-group > .btn:active,\n.btn-group > .btn.active,\n.btn-group-vertical > .btn:hover,\n.btn-group-vertical > .btn:focus,\n.btn-group-vertical > .btn:active,\n.btn-group-vertical > .btn.active {\n  z-index: 2;\n}\n\n.btn-group .btn + .btn,\n.btn-group .btn + .btn-group,\n.btn-group .btn-group + .btn,\n.btn-group .btn-group + .btn-group {\n  margin-left: -1px;\n}\n\n.btn-toolbar {\n  margin-left: -5px;\n}\n\n.btn-toolbar:before,\n.btn-toolbar:after {\n  content: \" \";\n  display: table;\n}\n\n.btn-toolbar:after {\n  clear: both;\n}\n\n.btn-toolbar .btn,\n.btn-toolbar .btn-group,\n.btn-toolbar .input-group {\n  float: left;\n}\n\n.btn-toolbar > .btn,\n.btn-toolbar > .btn-group,\n.btn-toolbar > .input-group {\n  margin-left: 5px;\n}\n\n.btn-group > .btn:not(:first-child):not(:last-child):not(.dropdown-toggle) {\n  border-radius: 0;\n}\n\n.btn-group > .btn:first-child {\n  margin-left: 0;\n}\n\n.btn-group > .btn:first-child:not(:last-child):not(.dropdown-toggle) {\n  border-bottom-right-radius: 0;\n  border-top-right-radius: 0;\n}\n\n.btn-group > .btn:last-child:not(:first-child),\n.btn-group > .dropdown-toggle:not(:first-child) {\n  border-bottom-left-radius: 0;\n  border-top-left-radius: 0;\n}\n\n.btn-group > .btn-group {\n  float: left;\n}\n\n.btn-group > .btn-group:not(:first-child):not(:last-child) > .btn {\n  border-radius: 0;\n}\n\n.btn-group > .btn-group:first-child:not(:last-child) > .btn:last-child,\n.btn-group > .btn-group:first-child:not(:last-child) > .dropdown-toggle {\n  border-bottom-right-radius: 0;\n  border-top-right-radius: 0;\n}\n\n.btn-group > .btn-group:last-child:not(:first-child) > .btn:first-child {\n  border-bottom-left-radius: 0;\n  border-top-left-radius: 0;\n}\n\n.btn-group .dropdown-toggle:active,\n.btn-group.open .dropdown-toggle {\n  outline: 0;\n}\n\n.btn-group > .btn + .dropdown-toggle {\n  padding-left: 8px;\n  padding-right: 8px;\n}\n\n.btn-group > .btn-lg + .dropdown-toggle,\n.btn-group-lg.btn-group > .btn + .dropdown-toggle {\n  padding-left: 12px;\n  padding-right: 12px;\n}\n\n.btn-group.open .dropdown-toggle {\n  -webkit-box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);\n  box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);\n}\n\n.btn-group.open .dropdown-toggle.btn-link {\n  -webkit-box-shadow: none;\n  box-shadow: none;\n}\n\n.btn .caret {\n  margin-left: 0;\n}\n\n.btn-lg .caret,\n.btn-group-lg > .btn .caret {\n  border-width: 5px 5px 0;\n  border-bottom-width: 0;\n}\n\n.dropup .btn-lg .caret,\n.dropup .btn-group-lg > .btn .caret {\n  border-width: 0 5px 5px;\n}\n\n.btn-group-vertical > .btn,\n.btn-group-vertical > .btn-group,\n.btn-group-vertical > .btn-group > .btn {\n  display: block;\n  float: none;\n  width: 100%;\n  max-width: 100%;\n}\n\n.btn-group-vertical > .btn-group:before,\n.btn-group-vertical > .btn-group:after {\n  content: \" \";\n  display: table;\n}\n\n.btn-group-vertical > .btn-group:after {\n  clear: both;\n}\n\n.btn-group-vertical > .btn-group > .btn {\n  float: none;\n}\n\n.btn-group-vertical > .btn + .btn,\n.btn-group-vertical > .btn + .btn-group,\n.btn-group-vertical > .btn-group + .btn,\n.btn-group-vertical > .btn-group + .btn-group {\n  margin-top: -1px;\n  margin-left: 0;\n}\n\n.btn-group-vertical > .btn:not(:first-child):not(:last-child) {\n  border-radius: 0;\n}\n\n.btn-group-vertical > .btn:first-child:not(:last-child) {\n  border-top-right-radius: 4px;\n  border-top-left-radius: 4px;\n  border-bottom-right-radius: 0;\n  border-bottom-left-radius: 0;\n}\n\n.btn-group-vertical > .btn:last-child:not(:first-child) {\n  border-top-right-radius: 0;\n  border-top-left-radius: 0;\n  border-bottom-right-radius: 4px;\n  border-bottom-left-radius: 4px;\n}\n\n.btn-group-vertical > .btn-group:not(:first-child):not(:last-child) > .btn {\n  border-radius: 0;\n}\n\n.btn-group-vertical > .btn-group:first-child:not(:last-child) > .btn:last-child,\n.btn-group-vertical > .btn-group:first-child:not(:last-child) > .dropdown-toggle {\n  border-bottom-right-radius: 0;\n  border-bottom-left-radius: 0;\n}\n\n.btn-group-vertical > .btn-group:last-child:not(:first-child) > .btn:first-child {\n  border-top-right-radius: 0;\n  border-top-left-radius: 0;\n}\n\n.btn-group-justified {\n  display: table;\n  width: 100%;\n  table-layout: fixed;\n  border-collapse: separate;\n}\n\n.btn-group-justified > .btn,\n.btn-group-justified > .btn-group {\n  float: none;\n  display: table-cell;\n  width: 1%;\n}\n\n.btn-group-justified > .btn-group .btn {\n  width: 100%;\n}\n\n.btn-group-justified > .btn-group .dropdown-menu {\n  left: auto;\n}\n\n[data-toggle=\"buttons\"] > .btn input[type=\"radio\"],\n[data-toggle=\"buttons\"] > .btn input[type=\"checkbox\"],\n[data-toggle=\"buttons\"] > .btn-group > .btn input[type=\"radio\"],\n[data-toggle=\"buttons\"] > .btn-group > .btn input[type=\"checkbox\"] {\n  position: absolute;\n  clip: rect(0, 0, 0, 0);\n  pointer-events: none;\n}\n\n.input-group {\n  position: relative;\n  display: table;\n  border-collapse: separate;\n}\n\n.input-group[class*=\"col-\"] {\n  float: none;\n  padding-left: 0;\n  padding-right: 0;\n}\n\n.input-group .form-control {\n  position: relative;\n  z-index: 2;\n  float: left;\n  width: 100%;\n  margin-bottom: 0;\n}\n\n.input-group .form-control:focus {\n  z-index: 3;\n}\n\n.input-group-addon,\n.input-group-btn,\n.input-group .form-control {\n  display: table-cell;\n}\n\n.input-group-addon:not(:first-child):not(:last-child),\n.input-group-btn:not(:first-child):not(:last-child),\n.input-group .form-control:not(:first-child):not(:last-child) {\n  border-radius: 0;\n}\n\n.input-group-addon,\n.input-group-btn {\n  width: 1%;\n  white-space: nowrap;\n  vertical-align: middle;\n}\n\n.input-group-addon {\n  padding: 6px 12px;\n  font-size: 14px;\n  font-weight: normal;\n  line-height: 1;\n  color: #555555;\n  text-align: center;\n  background-color: #eeeeee;\n  border: 1px solid #ccc;\n  border-radius: 4px;\n}\n\n.input-group-addon.input-sm,\n.input-group-sm > .input-group-addon,\n.input-group-sm > .input-group-btn > .input-group-addon.btn {\n  padding: 5px 10px;\n  font-size: 12px;\n  border-radius: 3px;\n}\n\n.input-group-addon.input-lg,\n.input-group-lg > .input-group-addon,\n.input-group-lg > .input-group-btn > .input-group-addon.btn {\n  padding: 10px 16px;\n  font-size: 18px;\n  border-radius: 6px;\n}\n\n.input-group-addon input[type=\"radio\"],\n.input-group-addon input[type=\"checkbox\"] {\n  margin-top: 0;\n}\n\n.input-group .form-control:first-child,\n.input-group-addon:first-child,\n.input-group-btn:first-child > .btn,\n.input-group-btn:first-child > .btn-group > .btn,\n.input-group-btn:first-child > .dropdown-toggle,\n.input-group-btn:last-child > .btn:not(:last-child):not(.dropdown-toggle),\n.input-group-btn:last-child > .btn-group:not(:last-child) > .btn {\n  border-bottom-right-radius: 0;\n  border-top-right-radius: 0;\n}\n\n.input-group-addon:first-child {\n  border-right: 0;\n}\n\n.input-group .form-control:last-child,\n.input-group-addon:last-child,\n.input-group-btn:last-child > .btn,\n.input-group-btn:last-child > .btn-group > .btn,\n.input-group-btn:last-child > .dropdown-toggle,\n.input-group-btn:first-child > .btn:not(:first-child),\n.input-group-btn:first-child > .btn-group:not(:first-child) > .btn {\n  border-bottom-left-radius: 0;\n  border-top-left-radius: 0;\n}\n\n.input-group-addon:last-child {\n  border-left: 0;\n}\n\n.input-group-btn {\n  position: relative;\n  font-size: 0;\n  white-space: nowrap;\n}\n\n.input-group-btn > .btn {\n  position: relative;\n}\n\n.input-group-btn > .btn + .btn {\n  margin-left: -1px;\n}\n\n.input-group-btn > .btn:hover,\n.input-group-btn > .btn:focus,\n.input-group-btn > .btn:active {\n  z-index: 2;\n}\n\n.input-group-btn:first-child > .btn,\n.input-group-btn:first-child > .btn-group {\n  margin-right: -1px;\n}\n\n.input-group-btn:last-child > .btn,\n.input-group-btn:last-child > .btn-group {\n  z-index: 2;\n  margin-left: -1px;\n}\n\n.nav {\n  margin-bottom: 0;\n  padding-left: 0;\n  list-style: none;\n}\n\n.nav:before,\n.nav:after {\n  content: \" \";\n  display: table;\n}\n\n.nav:after {\n  clear: both;\n}\n\n.nav > li {\n  position: relative;\n  display: block;\n}\n\n.nav > li > a {\n  position: relative;\n  display: block;\n  padding: 10px 15px;\n}\n\n.nav > li > a:hover,\n.nav > li > a:focus {\n  text-decoration: none;\n  background-color: #eeeeee;\n}\n\n.nav > li.disabled > a {\n  color: #777777;\n}\n\n.nav > li.disabled > a:hover,\n.nav > li.disabled > a:focus {\n  color: #777777;\n  text-decoration: none;\n  background-color: transparent;\n  cursor: not-allowed;\n}\n\n.nav .open > a,\n.nav .open > a:hover,\n.nav .open > a:focus {\n  background-color: #eeeeee;\n  border-color: #337ab7;\n}\n\n.nav .nav-divider {\n  height: 1px;\n  margin: 9px 0;\n  overflow: hidden;\n  background-color: #e5e5e5;\n}\n\n.nav > li > a > img {\n  max-width: none;\n}\n\n.nav-tabs {\n  border-bottom: 1px solid #ddd;\n}\n\n.nav-tabs > li {\n  float: left;\n  margin-bottom: -1px;\n}\n\n.nav-tabs > li > a {\n  margin-right: 2px;\n  line-height: 1.42857;\n  border: 1px solid transparent;\n  border-radius: 4px 4px 0 0;\n}\n\n.nav-tabs > li > a:hover {\n  border-color: #eeeeee #eeeeee #ddd;\n}\n\n.nav-tabs > li.active > a,\n.nav-tabs > li.active > a:hover,\n.nav-tabs > li.active > a:focus {\n  color: #555555;\n  background-color: #fff;\n  border: 1px solid #ddd;\n  border-bottom-color: transparent;\n  cursor: default;\n}\n\n.nav-pills > li {\n  float: left;\n}\n\n.nav-pills > li > a {\n  border-radius: 4px;\n}\n\n.nav-pills > li + li {\n  margin-left: 2px;\n}\n\n.nav-pills > li.active > a,\n.nav-pills > li.active > a:hover,\n.nav-pills > li.active > a:focus {\n  color: #fff;\n  background-color: #337ab7;\n}\n\n.nav-stacked > li {\n  float: none;\n}\n\n.nav-stacked > li + li {\n  margin-top: 2px;\n  margin-left: 0;\n}\n\n.nav-justified,\n.nav-tabs.nav-justified {\n  width: 100%;\n}\n\n.nav-justified > li,\n.nav-tabs.nav-justified > li {\n  float: none;\n}\n\n.nav-justified > li > a,\n.nav-tabs.nav-justified > li > a {\n  text-align: center;\n  margin-bottom: 5px;\n}\n\n.nav-justified > .dropdown .dropdown-menu {\n  top: auto;\n  left: auto;\n}\n\n@media (min-width: 768px) {\n  .nav-justified > li,\n  .nav-tabs.nav-justified > li {\n    display: table-cell;\n    width: 1%;\n  }\n\n  .nav-justified > li > a,\n  .nav-tabs.nav-justified > li > a {\n    margin-bottom: 0;\n  }\n}\n\n.nav-tabs-justified,\n.nav-tabs.nav-justified {\n  border-bottom: 0;\n}\n\n.nav-tabs-justified > li > a,\n.nav-tabs.nav-justified > li > a {\n  margin-right: 0;\n  border-radius: 4px;\n}\n\n.nav-tabs-justified > .active > a,\n.nav-tabs.nav-justified > .active > a,\n.nav-tabs-justified > .active > a:hover,\n.nav-tabs.nav-justified > .active > a:hover,\n.nav-tabs-justified > .active > a:focus,\n.nav-tabs.nav-justified > .active > a:focus {\n  border: 1px solid #ddd;\n}\n\n@media (min-width: 768px) {\n  .nav-tabs-justified > li > a,\n  .nav-tabs.nav-justified > li > a {\n    border-bottom: 1px solid #ddd;\n    border-radius: 4px 4px 0 0;\n  }\n\n  .nav-tabs-justified > .active > a,\n  .nav-tabs.nav-justified > .active > a,\n  .nav-tabs-justified > .active > a:hover,\n  .nav-tabs.nav-justified > .active > a:hover,\n  .nav-tabs-justified > .active > a:focus,\n  .nav-tabs.nav-justified > .active > a:focus {\n    border-bottom-color: #fff;\n  }\n}\n\n.tab-content > .tab-pane {\n  display: none;\n}\n\n.tab-content > .active {\n  display: block;\n}\n\n.nav-tabs .dropdown-menu {\n  margin-top: -1px;\n  border-top-right-radius: 0;\n  border-top-left-radius: 0;\n}\n\n.navbar {\n  position: relative;\n  min-height: 50px;\n  margin-bottom: 20px;\n  border: 1px solid transparent;\n}\n\n.navbar:before,\n.navbar:after {\n  content: \" \";\n  display: table;\n}\n\n.navbar:after {\n  clear: both;\n}\n\n@media (min-width: 768px) {\n  .navbar {\n    border-radius: 4px;\n  }\n}\n\n.navbar-header:before,\n.navbar-header:after {\n  content: \" \";\n  display: table;\n}\n\n.navbar-header:after {\n  clear: both;\n}\n\n@media (min-width: 768px) {\n  .navbar-header {\n    float: left;\n  }\n}\n\n.navbar-collapse {\n  overflow-x: visible;\n  padding-right: 15px;\n  padding-left: 15px;\n  border-top: 1px solid transparent;\n  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1);\n  -webkit-overflow-scrolling: touch;\n}\n\n.navbar-collapse:before,\n.navbar-collapse:after {\n  content: \" \";\n  display: table;\n}\n\n.navbar-collapse:after {\n  clear: both;\n}\n\n.navbar-collapse.in {\n  overflow-y: auto;\n}\n\n@media (min-width: 768px) {\n  .navbar-collapse {\n    width: auto;\n    border-top: 0;\n    box-shadow: none;\n  }\n\n  .navbar-collapse.collapse {\n    display: block !important;\n    height: auto !important;\n    padding-bottom: 0;\n    overflow: visible !important;\n  }\n\n  .navbar-collapse.in {\n    overflow-y: visible;\n  }\n\n  .navbar-fixed-top .navbar-collapse,\n  .navbar-static-top .navbar-collapse,\n  .navbar-fixed-bottom .navbar-collapse {\n    padding-left: 0;\n    padding-right: 0;\n  }\n}\n\n.navbar-fixed-top .navbar-collapse,\n.navbar-fixed-bottom .navbar-collapse {\n  max-height: 340px;\n}\n\n@media (max-device-width: 480px) and (orientation: landscape) {\n  .navbar-fixed-top .navbar-collapse,\n  .navbar-fixed-bottom .navbar-collapse {\n    max-height: 200px;\n  }\n}\n\n.container > .navbar-header,\n.container > .navbar-collapse,\n.container-fluid > .navbar-header,\n.container-fluid > .navbar-collapse {\n  margin-right: -15px;\n  margin-left: -15px;\n}\n\n@media (min-width: 768px) {\n  .container > .navbar-header,\n  .container > .navbar-collapse,\n  .container-fluid > .navbar-header,\n  .container-fluid > .navbar-collapse {\n    margin-right: 0;\n    margin-left: 0;\n  }\n}\n\n.navbar-static-top {\n  z-index: 1000;\n  border-width: 0 0 1px;\n}\n\n@media (min-width: 768px) {\n  .navbar-static-top {\n    border-radius: 0;\n  }\n}\n\n.navbar-fixed-top,\n.navbar-fixed-bottom {\n  position: fixed;\n  right: 0;\n  left: 0;\n  z-index: 1030;\n}\n\n@media (min-width: 768px) {\n  .navbar-fixed-top,\n  .navbar-fixed-bottom {\n    border-radius: 0;\n  }\n}\n\n.navbar-fixed-top {\n  top: 0;\n  border-width: 0 0 1px;\n}\n\n.navbar-fixed-bottom {\n  bottom: 0;\n  margin-bottom: 0;\n  border-width: 1px 0 0;\n}\n\n.navbar-brand {\n  float: left;\n  padding: 15px 15px;\n  font-size: 18px;\n  line-height: 20px;\n  height: 50px;\n}\n\n.navbar-brand:hover,\n.navbar-brand:focus {\n  text-decoration: none;\n}\n\n.navbar-brand > img {\n  display: block;\n}\n\n@media (min-width: 768px) {\n  .navbar > .container .navbar-brand,\n  .navbar > .container-fluid .navbar-brand {\n    margin-left: -15px;\n  }\n}\n\n.navbar-toggle {\n  position: relative;\n  float: right;\n  margin-right: 15px;\n  padding: 9px 10px;\n  margin-top: 8px;\n  margin-bottom: 8px;\n  background-color: transparent;\n  background-image: none;\n  border: 1px solid transparent;\n  border-radius: 4px;\n}\n\n.navbar-toggle:focus {\n  outline: 0;\n}\n\n.navbar-toggle .icon-bar {\n  display: block;\n  width: 22px;\n  height: 2px;\n  border-radius: 1px;\n}\n\n.navbar-toggle .icon-bar + .icon-bar {\n  margin-top: 4px;\n}\n\n@media (min-width: 768px) {\n  .navbar-toggle {\n    display: none;\n  }\n}\n\n.navbar-nav {\n  margin: 7.5px -15px;\n}\n\n.navbar-nav > li > a {\n  padding-top: 10px;\n  padding-bottom: 10px;\n  line-height: 20px;\n}\n\n@media (max-width: 767px) {\n  .navbar-nav .open .dropdown-menu {\n    position: static;\n    float: none;\n    width: auto;\n    margin-top: 0;\n    background-color: transparent;\n    border: 0;\n    box-shadow: none;\n  }\n\n  .navbar-nav .open .dropdown-menu > li > a,\n  .navbar-nav .open .dropdown-menu .dropdown-header {\n    padding: 5px 15px 5px 25px;\n  }\n\n  .navbar-nav .open .dropdown-menu > li > a {\n    line-height: 20px;\n  }\n\n  .navbar-nav .open .dropdown-menu > li > a:hover,\n  .navbar-nav .open .dropdown-menu > li > a:focus {\n    background-image: none;\n  }\n}\n\n@media (min-width: 768px) {\n  .navbar-nav {\n    float: left;\n    margin: 0;\n  }\n\n  .navbar-nav > li {\n    float: left;\n  }\n\n  .navbar-nav > li > a {\n    padding-top: 15px;\n    padding-bottom: 15px;\n  }\n}\n\n.navbar-form {\n  margin-left: -15px;\n  margin-right: -15px;\n  padding: 10px 15px;\n  border-top: 1px solid transparent;\n  border-bottom: 1px solid transparent;\n  -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1), 0 1px 0 rgba(255, 255, 255, 0.1);\n  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1), 0 1px 0 rgba(255, 255, 255, 0.1);\n  margin-top: 8px;\n  margin-bottom: 8px;\n}\n\n@media (min-width: 768px) {\n  .navbar-form .form-group {\n    display: inline-block;\n    margin-bottom: 0;\n    vertical-align: middle;\n  }\n\n  .navbar-form .form-control {\n    display: inline-block;\n    width: auto;\n    vertical-align: middle;\n  }\n\n  .navbar-form .form-control-static {\n    display: inline-block;\n  }\n\n  .navbar-form .input-group {\n    display: inline-table;\n    vertical-align: middle;\n  }\n\n  .navbar-form .input-group .input-group-addon,\n  .navbar-form .input-group .input-group-btn,\n  .navbar-form .input-group .form-control {\n    width: auto;\n  }\n\n  .navbar-form .input-group > .form-control {\n    width: 100%;\n  }\n\n  .navbar-form .control-label {\n    margin-bottom: 0;\n    vertical-align: middle;\n  }\n\n  .navbar-form .radio,\n  .navbar-form .checkbox {\n    display: inline-block;\n    margin-top: 0;\n    margin-bottom: 0;\n    vertical-align: middle;\n  }\n\n  .navbar-form .radio label,\n  .navbar-form .checkbox label {\n    padding-left: 0;\n  }\n\n  .navbar-form .radio input[type=\"radio\"],\n  .navbar-form .checkbox input[type=\"checkbox\"] {\n    position: relative;\n    margin-left: 0;\n  }\n\n  .navbar-form .has-feedback .form-control-feedback {\n    top: 0;\n  }\n}\n\n@media (max-width: 767px) {\n  .navbar-form .form-group {\n    margin-bottom: 5px;\n  }\n\n  .navbar-form .form-group:last-child {\n    margin-bottom: 0;\n  }\n}\n\n@media (min-width: 768px) {\n  .navbar-form {\n    width: auto;\n    border: 0;\n    margin-left: 0;\n    margin-right: 0;\n    padding-top: 0;\n    padding-bottom: 0;\n    -webkit-box-shadow: none;\n    box-shadow: none;\n  }\n}\n\n.navbar-nav > li > .dropdown-menu {\n  margin-top: 0;\n  border-top-right-radius: 0;\n  border-top-left-radius: 0;\n}\n\n.navbar-fixed-bottom .navbar-nav > li > .dropdown-menu {\n  margin-bottom: 0;\n  border-top-right-radius: 4px;\n  border-top-left-radius: 4px;\n  border-bottom-right-radius: 0;\n  border-bottom-left-radius: 0;\n}\n\n.navbar-btn {\n  margin-top: 8px;\n  margin-bottom: 8px;\n}\n\n.navbar-btn.btn-sm,\n.btn-group-sm > .navbar-btn.btn {\n  margin-top: 10px;\n  margin-bottom: 10px;\n}\n\n.navbar-btn.btn-xs,\n.btn-group-xs > .navbar-btn.btn {\n  margin-top: 14px;\n  margin-bottom: 14px;\n}\n\n.navbar-text {\n  margin-top: 15px;\n  margin-bottom: 15px;\n}\n\n@media (min-width: 768px) {\n  .navbar-text {\n    float: left;\n    margin-left: 15px;\n    margin-right: 15px;\n  }\n}\n\n@media (min-width: 768px) {\n  .navbar-left {\n    float: left !important;\n  }\n\n  .navbar-right {\n    float: right !important;\n    margin-right: -15px;\n  }\n\n  .navbar-right ~ .navbar-right {\n    margin-right: 0;\n  }\n}\n\n.navbar-default {\n  background-color: #f8f8f8;\n  border-color: #e7e7e7;\n}\n\n.navbar-default .navbar-brand {\n  color: #777;\n}\n\n.navbar-default .navbar-brand:hover,\n.navbar-default .navbar-brand:focus {\n  color: #5e5e5e;\n  background-color: transparent;\n}\n\n.navbar-default .navbar-text {\n  color: #777;\n}\n\n.navbar-default .navbar-nav > li > a {\n  color: #777;\n}\n\n.navbar-default .navbar-nav > li > a:hover,\n.navbar-default .navbar-nav > li > a:focus {\n  color: #333;\n  background-color: transparent;\n}\n\n.navbar-default .navbar-nav > .active > a,\n.navbar-default .navbar-nav > .active > a:hover,\n.navbar-default .navbar-nav > .active > a:focus {\n  color: #555;\n  background-color: #e7e7e7;\n}\n\n.navbar-default .navbar-nav > .disabled > a,\n.navbar-default .navbar-nav > .disabled > a:hover,\n.navbar-default .navbar-nav > .disabled > a:focus {\n  color: #ccc;\n  background-color: transparent;\n}\n\n.navbar-default .navbar-toggle {\n  border-color: #ddd;\n}\n\n.navbar-default .navbar-toggle:hover,\n.navbar-default .navbar-toggle:focus {\n  background-color: #ddd;\n}\n\n.navbar-default .navbar-toggle .icon-bar {\n  background-color: #888;\n}\n\n.navbar-default .navbar-collapse,\n.navbar-default .navbar-form {\n  border-color: #e7e7e7;\n}\n\n.navbar-default .navbar-nav > .open > a,\n.navbar-default .navbar-nav > .open > a:hover,\n.navbar-default .navbar-nav > .open > a:focus {\n  background-color: #e7e7e7;\n  color: #555;\n}\n\n@media (max-width: 767px) {\n  .navbar-default .navbar-nav .open .dropdown-menu > li > a {\n    color: #777;\n  }\n\n  .navbar-default .navbar-nav .open .dropdown-menu > li > a:hover,\n  .navbar-default .navbar-nav .open .dropdown-menu > li > a:focus {\n    color: #333;\n    background-color: transparent;\n  }\n\n  .navbar-default .navbar-nav .open .dropdown-menu > .active > a,\n  .navbar-default .navbar-nav .open .dropdown-menu > .active > a:hover,\n  .navbar-default .navbar-nav .open .dropdown-menu > .active > a:focus {\n    color: #555;\n    background-color: #e7e7e7;\n  }\n\n  .navbar-default .navbar-nav .open .dropdown-menu > .disabled > a,\n  .navbar-default .navbar-nav .open .dropdown-menu > .disabled > a:hover,\n  .navbar-default .navbar-nav .open .dropdown-menu > .disabled > a:focus {\n    color: #ccc;\n    background-color: transparent;\n  }\n}\n\n.navbar-default .navbar-link {\n  color: #777;\n}\n\n.navbar-default .navbar-link:hover {\n  color: #333;\n}\n\n.navbar-default .btn-link {\n  color: #777;\n}\n\n.navbar-default .btn-link:hover,\n.navbar-default .btn-link:focus {\n  color: #333;\n}\n\n.navbar-default .btn-link[disabled]:hover,\n.navbar-default .btn-link[disabled]:focus,\nfieldset[disabled] .navbar-default .btn-link:hover,\nfieldset[disabled] .navbar-default .btn-link:focus {\n  color: #ccc;\n}\n\n.navbar-inverse {\n  background-color: #222;\n  border-color: #090909;\n}\n\n.navbar-inverse .navbar-brand {\n  color: #9d9d9d;\n}\n\n.navbar-inverse .navbar-brand:hover,\n.navbar-inverse .navbar-brand:focus {\n  color: #fff;\n  background-color: transparent;\n}\n\n.navbar-inverse .navbar-text {\n  color: #9d9d9d;\n}\n\n.navbar-inverse .navbar-nav > li > a {\n  color: #9d9d9d;\n}\n\n.navbar-inverse .navbar-nav > li > a:hover,\n.navbar-inverse .navbar-nav > li > a:focus {\n  color: #fff;\n  background-color: transparent;\n}\n\n.navbar-inverse .navbar-nav > .active > a,\n.navbar-inverse .navbar-nav > .active > a:hover,\n.navbar-inverse .navbar-nav > .active > a:focus {\n  color: #fff;\n  background-color: #090909;\n}\n\n.navbar-inverse .navbar-nav > .disabled > a,\n.navbar-inverse .navbar-nav > .disabled > a:hover,\n.navbar-inverse .navbar-nav > .disabled > a:focus {\n  color: #444;\n  background-color: transparent;\n}\n\n.navbar-inverse .navbar-toggle {\n  border-color: #333;\n}\n\n.navbar-inverse .navbar-toggle:hover,\n.navbar-inverse .navbar-toggle:focus {\n  background-color: #333;\n}\n\n.navbar-inverse .navbar-toggle .icon-bar {\n  background-color: #fff;\n}\n\n.navbar-inverse .navbar-collapse,\n.navbar-inverse .navbar-form {\n  border-color: #101010;\n}\n\n.navbar-inverse .navbar-nav > .open > a,\n.navbar-inverse .navbar-nav > .open > a:hover,\n.navbar-inverse .navbar-nav > .open > a:focus {\n  background-color: #090909;\n  color: #fff;\n}\n\n@media (max-width: 767px) {\n  .navbar-inverse .navbar-nav .open .dropdown-menu > .dropdown-header {\n    border-color: #090909;\n  }\n\n  .navbar-inverse .navbar-nav .open .dropdown-menu .divider {\n    background-color: #090909;\n  }\n\n  .navbar-inverse .navbar-nav .open .dropdown-menu > li > a {\n    color: #9d9d9d;\n  }\n\n  .navbar-inverse .navbar-nav .open .dropdown-menu > li > a:hover,\n  .navbar-inverse .navbar-nav .open .dropdown-menu > li > a:focus {\n    color: #fff;\n    background-color: transparent;\n  }\n\n  .navbar-inverse .navbar-nav .open .dropdown-menu > .active > a,\n  .navbar-inverse .navbar-nav .open .dropdown-menu > .active > a:hover,\n  .navbar-inverse .navbar-nav .open .dropdown-menu > .active > a:focus {\n    color: #fff;\n    background-color: #090909;\n  }\n\n  .navbar-inverse .navbar-nav .open .dropdown-menu > .disabled > a,\n  .navbar-inverse .navbar-nav .open .dropdown-menu > .disabled > a:hover,\n  .navbar-inverse .navbar-nav .open .dropdown-menu > .disabled > a:focus {\n    color: #444;\n    background-color: transparent;\n  }\n}\n\n.navbar-inverse .navbar-link {\n  color: #9d9d9d;\n}\n\n.navbar-inverse .navbar-link:hover {\n  color: #fff;\n}\n\n.navbar-inverse .btn-link {\n  color: #9d9d9d;\n}\n\n.navbar-inverse .btn-link:hover,\n.navbar-inverse .btn-link:focus {\n  color: #fff;\n}\n\n.navbar-inverse .btn-link[disabled]:hover,\n.navbar-inverse .btn-link[disabled]:focus,\nfieldset[disabled] .navbar-inverse .btn-link:hover,\nfieldset[disabled] .navbar-inverse .btn-link:focus {\n  color: #444;\n}\n\n.breadcrumb {\n  padding: 8px 15px;\n  margin-bottom: 20px;\n  list-style: none;\n  background-color: #f5f5f5;\n  border-radius: 4px;\n}\n\n.breadcrumb > li {\n  display: inline-block;\n}\n\n.breadcrumb > li + li:before {\n  content: \"/\\A0\";\n  padding: 0 5px;\n  color: #ccc;\n}\n\n.breadcrumb > .active {\n  color: #777777;\n}\n\n.pagination {\n  display: inline-block;\n  padding-left: 0;\n  margin: 20px 0;\n  border-radius: 4px;\n}\n\n.pagination > li {\n  display: inline;\n}\n\n.pagination > li > a,\n.pagination > li > span {\n  position: relative;\n  float: left;\n  padding: 6px 12px;\n  line-height: 1.42857;\n  text-decoration: none;\n  color: #337ab7;\n  background-color: #fff;\n  border: 1px solid #ddd;\n  margin-left: -1px;\n}\n\n.pagination > li:first-child > a,\n.pagination > li:first-child > span {\n  margin-left: 0;\n  border-bottom-left-radius: 4px;\n  border-top-left-radius: 4px;\n}\n\n.pagination > li:last-child > a,\n.pagination > li:last-child > span {\n  border-bottom-right-radius: 4px;\n  border-top-right-radius: 4px;\n}\n\n.pagination > li > a:hover,\n.pagination > li > a:focus,\n.pagination > li > span:hover,\n.pagination > li > span:focus {\n  z-index: 2;\n  color: #23527c;\n  background-color: #eeeeee;\n  border-color: #ddd;\n}\n\n.pagination > .active > a,\n.pagination > .active > a:hover,\n.pagination > .active > a:focus,\n.pagination > .active > span,\n.pagination > .active > span:hover,\n.pagination > .active > span:focus {\n  z-index: 3;\n  color: #fff;\n  background-color: #337ab7;\n  border-color: #337ab7;\n  cursor: default;\n}\n\n.pagination > .disabled > span,\n.pagination > .disabled > span:hover,\n.pagination > .disabled > span:focus,\n.pagination > .disabled > a,\n.pagination > .disabled > a:hover,\n.pagination > .disabled > a:focus {\n  color: #777777;\n  background-color: #fff;\n  border-color: #ddd;\n  cursor: not-allowed;\n}\n\n.pagination-lg > li > a,\n.pagination-lg > li > span {\n  padding: 10px 16px;\n  font-size: 18px;\n  line-height: 1.33333;\n}\n\n.pagination-lg > li:first-child > a,\n.pagination-lg > li:first-child > span {\n  border-bottom-left-radius: 6px;\n  border-top-left-radius: 6px;\n}\n\n.pagination-lg > li:last-child > a,\n.pagination-lg > li:last-child > span {\n  border-bottom-right-radius: 6px;\n  border-top-right-radius: 6px;\n}\n\n.pagination-sm > li > a,\n.pagination-sm > li > span {\n  padding: 5px 10px;\n  font-size: 12px;\n  line-height: 1.5;\n}\n\n.pagination-sm > li:first-child > a,\n.pagination-sm > li:first-child > span {\n  border-bottom-left-radius: 3px;\n  border-top-left-radius: 3px;\n}\n\n.pagination-sm > li:last-child > a,\n.pagination-sm > li:last-child > span {\n  border-bottom-right-radius: 3px;\n  border-top-right-radius: 3px;\n}\n\n.pager {\n  padding-left: 0;\n  margin: 20px 0;\n  list-style: none;\n  text-align: center;\n}\n\n.pager:before,\n.pager:after {\n  content: \" \";\n  display: table;\n}\n\n.pager:after {\n  clear: both;\n}\n\n.pager li {\n  display: inline;\n}\n\n.pager li > a,\n.pager li > span {\n  display: inline-block;\n  padding: 5px 14px;\n  background-color: #fff;\n  border: 1px solid #ddd;\n  border-radius: 15px;\n}\n\n.pager li > a:hover,\n.pager li > a:focus {\n  text-decoration: none;\n  background-color: #eeeeee;\n}\n\n.pager .next > a,\n.pager .next > span {\n  float: right;\n}\n\n.pager .previous > a,\n.pager .previous > span {\n  float: left;\n}\n\n.pager .disabled > a,\n.pager .disabled > a:hover,\n.pager .disabled > a:focus,\n.pager .disabled > span {\n  color: #777777;\n  background-color: #fff;\n  cursor: not-allowed;\n}\n\n.label {\n  display: inline;\n  padding: .2em .6em .3em;\n  font-size: 75%;\n  font-weight: bold;\n  line-height: 1;\n  color: #fff;\n  text-align: center;\n  white-space: nowrap;\n  vertical-align: baseline;\n  border-radius: .25em;\n}\n\n.label:empty {\n  display: none;\n}\n\n.btn .label {\n  position: relative;\n  top: -1px;\n}\n\na.label:hover,\na.label:focus {\n  color: #fff;\n  text-decoration: none;\n  cursor: pointer;\n}\n\n.label-default {\n  background-color: #777777;\n}\n\n.label-default[href]:hover,\n.label-default[href]:focus {\n  background-color: #5e5e5e;\n}\n\n.label-primary {\n  background-color: #337ab7;\n}\n\n.label-primary[href]:hover,\n.label-primary[href]:focus {\n  background-color: #286090;\n}\n\n.label-success {\n  background-color: #5cb85c;\n}\n\n.label-success[href]:hover,\n.label-success[href]:focus {\n  background-color: #449d44;\n}\n\n.label-info {\n  background-color: #5bc0de;\n}\n\n.label-info[href]:hover,\n.label-info[href]:focus {\n  background-color: #31b0d5;\n}\n\n.label-warning {\n  background-color: #f0ad4e;\n}\n\n.label-warning[href]:hover,\n.label-warning[href]:focus {\n  background-color: #ec971f;\n}\n\n.label-danger {\n  background-color: #d9534f;\n}\n\n.label-danger[href]:hover,\n.label-danger[href]:focus {\n  background-color: #c9302c;\n}\n\n.badge {\n  display: inline-block;\n  min-width: 10px;\n  padding: 3px 7px;\n  font-size: 12px;\n  font-weight: bold;\n  color: #fff;\n  line-height: 1;\n  vertical-align: middle;\n  white-space: nowrap;\n  text-align: center;\n  background-color: #777777;\n  border-radius: 10px;\n}\n\n.badge:empty {\n  display: none;\n}\n\n.btn .badge {\n  position: relative;\n  top: -1px;\n}\n\n.btn-xs .badge,\n.btn-group-xs > .btn .badge,\n.btn-group-xs > .btn .badge {\n  top: 0;\n  padding: 1px 5px;\n}\n\n.list-group-item.active > .badge,\n.nav-pills > .active > a > .badge {\n  color: #337ab7;\n  background-color: #fff;\n}\n\n.list-group-item > .badge {\n  float: right;\n}\n\n.list-group-item > .badge + .badge {\n  margin-right: 5px;\n}\n\n.nav-pills > li > a > .badge {\n  margin-left: 3px;\n}\n\na.badge:hover,\na.badge:focus {\n  color: #fff;\n  text-decoration: none;\n  cursor: pointer;\n}\n\n.jumbotron {\n  padding-top: 30px;\n  padding-bottom: 30px;\n  margin-bottom: 30px;\n  color: inherit;\n  background-color: #eeeeee;\n}\n\n.jumbotron h1,\n.jumbotron .h1 {\n  color: inherit;\n}\n\n.jumbotron p {\n  margin-bottom: 15px;\n  font-size: 21px;\n  font-weight: 200;\n}\n\n.jumbotron > hr {\n  border-top-color: #d5d5d5;\n}\n\n.container .jumbotron,\n.container-fluid .jumbotron {\n  border-radius: 6px;\n  padding-left: 15px;\n  padding-right: 15px;\n}\n\n.jumbotron .container {\n  max-width: 100%;\n}\n\n@media screen and (min-width: 768px) {\n  .jumbotron {\n    padding-top: 48px;\n    padding-bottom: 48px;\n  }\n\n  .container .jumbotron,\n  .container-fluid .jumbotron {\n    padding-left: 60px;\n    padding-right: 60px;\n  }\n\n  .jumbotron h1,\n  .jumbotron .h1 {\n    font-size: 63px;\n  }\n}\n\n.thumbnail {\n  display: block;\n  padding: 4px;\n  margin-bottom: 20px;\n  line-height: 1.42857;\n  background-color: #fff;\n  border: 1px solid #ddd;\n  border-radius: 4px;\n  -webkit-transition: border 0.2s ease-in-out;\n  -o-transition: border 0.2s ease-in-out;\n  transition: border 0.2s ease-in-out;\n}\n\n.thumbnail > img,\n.thumbnail a > img {\n  display: block;\n  max-width: 100%;\n  height: auto;\n  margin-left: auto;\n  margin-right: auto;\n}\n\n.thumbnail .caption {\n  padding: 9px;\n  color: #333333;\n}\n\na.thumbnail:hover,\na.thumbnail:focus,\na.thumbnail.active {\n  border-color: #337ab7;\n}\n\n.alert {\n  padding: 15px;\n  margin-bottom: 20px;\n  border: 1px solid transparent;\n  border-radius: 4px;\n}\n\n.alert h4 {\n  margin-top: 0;\n  color: inherit;\n}\n\n.alert .alert-link {\n  font-weight: bold;\n}\n\n.alert > p,\n.alert > ul {\n  margin-bottom: 0;\n}\n\n.alert > p + p {\n  margin-top: 5px;\n}\n\n.alert-dismissable,\n.alert-dismissible {\n  padding-right: 35px;\n}\n\n.alert-dismissable .close,\n.alert-dismissible .close {\n  position: relative;\n  top: -2px;\n  right: -21px;\n  color: inherit;\n}\n\n.alert-success {\n  background-color: #dff0d8;\n  border-color: #d6e9c6;\n  color: #3c763d;\n}\n\n.alert-success hr {\n  border-top-color: #c9e2b3;\n}\n\n.alert-success .alert-link {\n  color: #2b542c;\n}\n\n.alert-info {\n  background-color: #d9edf7;\n  border-color: #bce8f1;\n  color: #31708f;\n}\n\n.alert-info hr {\n  border-top-color: #a6e1ec;\n}\n\n.alert-info .alert-link {\n  color: #245269;\n}\n\n.alert-warning {\n  background-color: #fcf8e3;\n  border-color: #faebcc;\n  color: #8a6d3b;\n}\n\n.alert-warning hr {\n  border-top-color: #f7e1b5;\n}\n\n.alert-warning .alert-link {\n  color: #66512c;\n}\n\n.alert-danger {\n  background-color: #f2dede;\n  border-color: #ebccd1;\n  color: #a94442;\n}\n\n.alert-danger hr {\n  border-top-color: #e4b9c0;\n}\n\n.alert-danger .alert-link {\n  color: #843534;\n}\n\n@-webkit-keyframes progress-bar-stripes {\n  from {\n    background-position: 40px 0;\n  }\n\n  to {\n    background-position: 0 0;\n  }\n}\n\n@keyframes progress-bar-stripes {\n  from {\n    background-position: 40px 0;\n  }\n\n  to {\n    background-position: 0 0;\n  }\n}\n\n.progress {\n  overflow: hidden;\n  height: 20px;\n  margin-bottom: 20px;\n  background-color: #f5f5f5;\n  border-radius: 4px;\n  -webkit-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);\n  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);\n}\n\n.progress-bar {\n  float: left;\n  width: 0%;\n  height: 100%;\n  font-size: 12px;\n  line-height: 20px;\n  color: #fff;\n  text-align: center;\n  background-color: #337ab7;\n  -webkit-box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.15);\n  box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.15);\n  -webkit-transition: width 0.6s ease;\n  -o-transition: width 0.6s ease;\n  transition: width 0.6s ease;\n}\n\n.progress-striped .progress-bar,\n.progress-bar-striped {\n  background-image: -webkit-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);\n  background-image: -o-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);\n  background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);\n  background-size: 40px 40px;\n}\n\n.progress.active .progress-bar,\n.progress-bar.active {\n  -webkit-animation: progress-bar-stripes 2s linear infinite;\n  -o-animation: progress-bar-stripes 2s linear infinite;\n  animation: progress-bar-stripes 2s linear infinite;\n}\n\n.progress-bar-success {\n  background-color: #5cb85c;\n}\n\n.progress-striped .progress-bar-success {\n  background-image: -webkit-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);\n  background-image: -o-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);\n  background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);\n}\n\n.progress-bar-info {\n  background-color: #5bc0de;\n}\n\n.progress-striped .progress-bar-info {\n  background-image: -webkit-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);\n  background-image: -o-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);\n  background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);\n}\n\n.progress-bar-warning {\n  background-color: #f0ad4e;\n}\n\n.progress-striped .progress-bar-warning {\n  background-image: -webkit-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);\n  background-image: -o-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);\n  background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);\n}\n\n.progress-bar-danger {\n  background-color: #d9534f;\n}\n\n.progress-striped .progress-bar-danger {\n  background-image: -webkit-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);\n  background-image: -o-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);\n  background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);\n}\n\n.media {\n  margin-top: 15px;\n}\n\n.media:first-child {\n  margin-top: 0;\n}\n\n.media,\n.media-body {\n  zoom: 1;\n  overflow: hidden;\n}\n\n.media-body {\n  width: 10000px;\n}\n\n.media-object {\n  display: block;\n}\n\n.media-object.img-thumbnail {\n  max-width: none;\n}\n\n.media-right,\n.media > .pull-right {\n  padding-left: 10px;\n}\n\n.media-left,\n.media > .pull-left {\n  padding-right: 10px;\n}\n\n.media-left,\n.media-right,\n.media-body {\n  display: table-cell;\n  vertical-align: top;\n}\n\n.media-middle {\n  vertical-align: middle;\n}\n\n.media-bottom {\n  vertical-align: bottom;\n}\n\n.media-heading {\n  margin-top: 0;\n  margin-bottom: 5px;\n}\n\n.media-list {\n  padding-left: 0;\n  list-style: none;\n}\n\n.list-group {\n  margin-bottom: 20px;\n  padding-left: 0;\n}\n\n.list-group-item {\n  position: relative;\n  display: block;\n  padding: 10px 15px;\n  margin-bottom: -1px;\n  background-color: #fff;\n  border: 1px solid #ddd;\n}\n\n.list-group-item:first-child {\n  border-top-right-radius: 4px;\n  border-top-left-radius: 4px;\n}\n\n.list-group-item:last-child {\n  margin-bottom: 0;\n  border-bottom-right-radius: 4px;\n  border-bottom-left-radius: 4px;\n}\n\na.list-group-item,\nbutton.list-group-item {\n  color: #555;\n}\n\na.list-group-item .list-group-item-heading,\nbutton.list-group-item .list-group-item-heading {\n  color: #333;\n}\n\na.list-group-item:hover,\na.list-group-item:focus,\nbutton.list-group-item:hover,\nbutton.list-group-item:focus {\n  text-decoration: none;\n  color: #555;\n  background-color: #f5f5f5;\n}\n\nbutton.list-group-item {\n  width: 100%;\n  text-align: left;\n}\n\n.list-group-item.disabled,\n.list-group-item.disabled:hover,\n.list-group-item.disabled:focus {\n  background-color: #eeeeee;\n  color: #777777;\n  cursor: not-allowed;\n}\n\n.list-group-item.disabled .list-group-item-heading,\n.list-group-item.disabled:hover .list-group-item-heading,\n.list-group-item.disabled:focus .list-group-item-heading {\n  color: inherit;\n}\n\n.list-group-item.disabled .list-group-item-text,\n.list-group-item.disabled:hover .list-group-item-text,\n.list-group-item.disabled:focus .list-group-item-text {\n  color: #777777;\n}\n\n.list-group-item.active,\n.list-group-item.active:hover,\n.list-group-item.active:focus {\n  z-index: 2;\n  color: #fff;\n  background-color: #337ab7;\n  border-color: #337ab7;\n}\n\n.list-group-item.active .list-group-item-heading,\n.list-group-item.active .list-group-item-heading > small,\n.list-group-item.active .list-group-item-heading > .small,\n.list-group-item.active:hover .list-group-item-heading,\n.list-group-item.active:hover .list-group-item-heading > small,\n.list-group-item.active:hover .list-group-item-heading > .small,\n.list-group-item.active:focus .list-group-item-heading,\n.list-group-item.active:focus .list-group-item-heading > small,\n.list-group-item.active:focus .list-group-item-heading > .small {\n  color: inherit;\n}\n\n.list-group-item.active .list-group-item-text,\n.list-group-item.active:hover .list-group-item-text,\n.list-group-item.active:focus .list-group-item-text {\n  color: #c7ddef;\n}\n\n.list-group-item-success {\n  color: #3c763d;\n  background-color: #dff0d8;\n}\n\na.list-group-item-success,\nbutton.list-group-item-success {\n  color: #3c763d;\n}\n\na.list-group-item-success .list-group-item-heading,\nbutton.list-group-item-success .list-group-item-heading {\n  color: inherit;\n}\n\na.list-group-item-success:hover,\na.list-group-item-success:focus,\nbutton.list-group-item-success:hover,\nbutton.list-group-item-success:focus {\n  color: #3c763d;\n  background-color: #d0e9c6;\n}\n\na.list-group-item-success.active,\na.list-group-item-success.active:hover,\na.list-group-item-success.active:focus,\nbutton.list-group-item-success.active,\nbutton.list-group-item-success.active:hover,\nbutton.list-group-item-success.active:focus {\n  color: #fff;\n  background-color: #3c763d;\n  border-color: #3c763d;\n}\n\n.list-group-item-info {\n  color: #31708f;\n  background-color: #d9edf7;\n}\n\na.list-group-item-info,\nbutton.list-group-item-info {\n  color: #31708f;\n}\n\na.list-group-item-info .list-group-item-heading,\nbutton.list-group-item-info .list-group-item-heading {\n  color: inherit;\n}\n\na.list-group-item-info:hover,\na.list-group-item-info:focus,\nbutton.list-group-item-info:hover,\nbutton.list-group-item-info:focus {\n  color: #31708f;\n  background-color: #c4e3f3;\n}\n\na.list-group-item-info.active,\na.list-group-item-info.active:hover,\na.list-group-item-info.active:focus,\nbutton.list-group-item-info.active,\nbutton.list-group-item-info.active:hover,\nbutton.list-group-item-info.active:focus {\n  color: #fff;\n  background-color: #31708f;\n  border-color: #31708f;\n}\n\n.list-group-item-warning {\n  color: #8a6d3b;\n  background-color: #fcf8e3;\n}\n\na.list-group-item-warning,\nbutton.list-group-item-warning {\n  color: #8a6d3b;\n}\n\na.list-group-item-warning .list-group-item-heading,\nbutton.list-group-item-warning .list-group-item-heading {\n  color: inherit;\n}\n\na.list-group-item-warning:hover,\na.list-group-item-warning:focus,\nbutton.list-group-item-warning:hover,\nbutton.list-group-item-warning:focus {\n  color: #8a6d3b;\n  background-color: #faf2cc;\n}\n\na.list-group-item-warning.active,\na.list-group-item-warning.active:hover,\na.list-group-item-warning.active:focus,\nbutton.list-group-item-warning.active,\nbutton.list-group-item-warning.active:hover,\nbutton.list-group-item-warning.active:focus {\n  color: #fff;\n  background-color: #8a6d3b;\n  border-color: #8a6d3b;\n}\n\n.list-group-item-danger {\n  color: #a94442;\n  background-color: #f2dede;\n}\n\na.list-group-item-danger,\nbutton.list-group-item-danger {\n  color: #a94442;\n}\n\na.list-group-item-danger .list-group-item-heading,\nbutton.list-group-item-danger .list-group-item-heading {\n  color: inherit;\n}\n\na.list-group-item-danger:hover,\na.list-group-item-danger:focus,\nbutton.list-group-item-danger:hover,\nbutton.list-group-item-danger:focus {\n  color: #a94442;\n  background-color: #ebcccc;\n}\n\na.list-group-item-danger.active,\na.list-group-item-danger.active:hover,\na.list-group-item-danger.active:focus,\nbutton.list-group-item-danger.active,\nbutton.list-group-item-danger.active:hover,\nbutton.list-group-item-danger.active:focus {\n  color: #fff;\n  background-color: #a94442;\n  border-color: #a94442;\n}\n\n.list-group-item-heading {\n  margin-top: 0;\n  margin-bottom: 5px;\n}\n\n.list-group-item-text {\n  margin-bottom: 0;\n  line-height: 1.3;\n}\n\n.panel {\n  margin-bottom: 20px;\n  background-color: #fff;\n  border: 1px solid transparent;\n  border-radius: 4px;\n  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);\n  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);\n}\n\n.panel-body {\n  padding: 15px;\n}\n\n.panel-body:before,\n.panel-body:after {\n  content: \" \";\n  display: table;\n}\n\n.panel-body:after {\n  clear: both;\n}\n\n.panel-heading {\n  padding: 10px 15px;\n  border-bottom: 1px solid transparent;\n  border-top-right-radius: 3px;\n  border-top-left-radius: 3px;\n}\n\n.panel-heading > .dropdown .dropdown-toggle {\n  color: inherit;\n}\n\n.panel-title {\n  margin-top: 0;\n  margin-bottom: 0;\n  font-size: 16px;\n  color: inherit;\n}\n\n.panel-title > a,\n.panel-title > small,\n.panel-title > .small,\n.panel-title > small > a,\n.panel-title > .small > a {\n  color: inherit;\n}\n\n.panel-footer {\n  padding: 10px 15px;\n  background-color: #f5f5f5;\n  border-top: 1px solid #ddd;\n  border-bottom-right-radius: 3px;\n  border-bottom-left-radius: 3px;\n}\n\n.panel > .list-group,\n.panel > .panel-collapse > .list-group {\n  margin-bottom: 0;\n}\n\n.panel > .list-group .list-group-item,\n.panel > .panel-collapse > .list-group .list-group-item {\n  border-width: 1px 0;\n  border-radius: 0;\n}\n\n.panel > .list-group:first-child .list-group-item:first-child,\n.panel > .panel-collapse > .list-group:first-child .list-group-item:first-child {\n  border-top: 0;\n  border-top-right-radius: 3px;\n  border-top-left-radius: 3px;\n}\n\n.panel > .list-group:last-child .list-group-item:last-child,\n.panel > .panel-collapse > .list-group:last-child .list-group-item:last-child {\n  border-bottom: 0;\n  border-bottom-right-radius: 3px;\n  border-bottom-left-radius: 3px;\n}\n\n.panel > .panel-heading + .panel-collapse > .list-group .list-group-item:first-child {\n  border-top-right-radius: 0;\n  border-top-left-radius: 0;\n}\n\n.panel-heading + .list-group .list-group-item:first-child {\n  border-top-width: 0;\n}\n\n.list-group + .panel-footer {\n  border-top-width: 0;\n}\n\n.panel > .table,\n.panel > .table-responsive > .table,\n.panel > .panel-collapse > .table {\n  margin-bottom: 0;\n}\n\n.panel > .table caption,\n.panel > .table-responsive > .table caption,\n.panel > .panel-collapse > .table caption {\n  padding-left: 15px;\n  padding-right: 15px;\n}\n\n.panel > .table:first-child,\n.panel > .table-responsive:first-child > .table:first-child {\n  border-top-right-radius: 3px;\n  border-top-left-radius: 3px;\n}\n\n.panel > .table:first-child > thead:first-child > tr:first-child,\n.panel > .table:first-child > tbody:first-child > tr:first-child,\n.panel > .table-responsive:first-child > .table:first-child > thead:first-child > tr:first-child,\n.panel > .table-responsive:first-child > .table:first-child > tbody:first-child > tr:first-child {\n  border-top-left-radius: 3px;\n  border-top-right-radius: 3px;\n}\n\n.panel > .table:first-child > thead:first-child > tr:first-child td:first-child,\n.panel > .table:first-child > thead:first-child > tr:first-child th:first-child,\n.panel > .table:first-child > tbody:first-child > tr:first-child td:first-child,\n.panel > .table:first-child > tbody:first-child > tr:first-child th:first-child,\n.panel > .table-responsive:first-child > .table:first-child > thead:first-child > tr:first-child td:first-child,\n.panel > .table-responsive:first-child > .table:first-child > thead:first-child > tr:first-child th:first-child,\n.panel > .table-responsive:first-child > .table:first-child > tbody:first-child > tr:first-child td:first-child,\n.panel > .table-responsive:first-child > .table:first-child > tbody:first-child > tr:first-child th:first-child {\n  border-top-left-radius: 3px;\n}\n\n.panel > .table:first-child > thead:first-child > tr:first-child td:last-child,\n.panel > .table:first-child > thead:first-child > tr:first-child th:last-child,\n.panel > .table:first-child > tbody:first-child > tr:first-child td:last-child,\n.panel > .table:first-child > tbody:first-child > tr:first-child th:last-child,\n.panel > .table-responsive:first-child > .table:first-child > thead:first-child > tr:first-child td:last-child,\n.panel > .table-responsive:first-child > .table:first-child > thead:first-child > tr:first-child th:last-child,\n.panel > .table-responsive:first-child > .table:first-child > tbody:first-child > tr:first-child td:last-child,\n.panel > .table-responsive:first-child > .table:first-child > tbody:first-child > tr:first-child th:last-child {\n  border-top-right-radius: 3px;\n}\n\n.panel > .table:last-child,\n.panel > .table-responsive:last-child > .table:last-child {\n  border-bottom-right-radius: 3px;\n  border-bottom-left-radius: 3px;\n}\n\n.panel > .table:last-child > tbody:last-child > tr:last-child,\n.panel > .table:last-child > tfoot:last-child > tr:last-child,\n.panel > .table-responsive:last-child > .table:last-child > tbody:last-child > tr:last-child,\n.panel > .table-responsive:last-child > .table:last-child > tfoot:last-child > tr:last-child {\n  border-bottom-left-radius: 3px;\n  border-bottom-right-radius: 3px;\n}\n\n.panel > .table:last-child > tbody:last-child > tr:last-child td:first-child,\n.panel > .table:last-child > tbody:last-child > tr:last-child th:first-child,\n.panel > .table:last-child > tfoot:last-child > tr:last-child td:first-child,\n.panel > .table:last-child > tfoot:last-child > tr:last-child th:first-child,\n.panel > .table-responsive:last-child > .table:last-child > tbody:last-child > tr:last-child td:first-child,\n.panel > .table-responsive:last-child > .table:last-child > tbody:last-child > tr:last-child th:first-child,\n.panel > .table-responsive:last-child > .table:last-child > tfoot:last-child > tr:last-child td:first-child,\n.panel > .table-responsive:last-child > .table:last-child > tfoot:last-child > tr:last-child th:first-child {\n  border-bottom-left-radius: 3px;\n}\n\n.panel > .table:last-child > tbody:last-child > tr:last-child td:last-child,\n.panel > .table:last-child > tbody:last-child > tr:last-child th:last-child,\n.panel > .table:last-child > tfoot:last-child > tr:last-child td:last-child,\n.panel > .table:last-child > tfoot:last-child > tr:last-child th:last-child,\n.panel > .table-responsive:last-child > .table:last-child > tbody:last-child > tr:last-child td:last-child,\n.panel > .table-responsive:last-child > .table:last-child > tbody:last-child > tr:last-child th:last-child,\n.panel > .table-responsive:last-child > .table:last-child > tfoot:last-child > tr:last-child td:last-child,\n.panel > .table-responsive:last-child > .table:last-child > tfoot:last-child > tr:last-child th:last-child {\n  border-bottom-right-radius: 3px;\n}\n\n.panel > .panel-body + .table,\n.panel > .panel-body + .table-responsive,\n.panel > .table + .panel-body,\n.panel > .table-responsive + .panel-body {\n  border-top: 1px solid #ddd;\n}\n\n.panel > .table > tbody:first-child > tr:first-child th,\n.panel > .table > tbody:first-child > tr:first-child td {\n  border-top: 0;\n}\n\n.panel > .table-bordered,\n.panel > .table-responsive > .table-bordered {\n  border: 0;\n}\n\n.panel > .table-bordered > thead > tr > th:first-child,\n.panel > .table-bordered > thead > tr > td:first-child,\n.panel > .table-bordered > tbody > tr > th:first-child,\n.panel > .table-bordered > tbody > tr > td:first-child,\n.panel > .table-bordered > tfoot > tr > th:first-child,\n.panel > .table-bordered > tfoot > tr > td:first-child,\n.panel > .table-responsive > .table-bordered > thead > tr > th:first-child,\n.panel > .table-responsive > .table-bordered > thead > tr > td:first-child,\n.panel > .table-responsive > .table-bordered > tbody > tr > th:first-child,\n.panel > .table-responsive > .table-bordered > tbody > tr > td:first-child,\n.panel > .table-responsive > .table-bordered > tfoot > tr > th:first-child,\n.panel > .table-responsive > .table-bordered > tfoot > tr > td:first-child {\n  border-left: 0;\n}\n\n.panel > .table-bordered > thead > tr > th:last-child,\n.panel > .table-bordered > thead > tr > td:last-child,\n.panel > .table-bordered > tbody > tr > th:last-child,\n.panel > .table-bordered > tbody > tr > td:last-child,\n.panel > .table-bordered > tfoot > tr > th:last-child,\n.panel > .table-bordered > tfoot > tr > td:last-child,\n.panel > .table-responsive > .table-bordered > thead > tr > th:last-child,\n.panel > .table-responsive > .table-bordered > thead > tr > td:last-child,\n.panel > .table-responsive > .table-bordered > tbody > tr > th:last-child,\n.panel > .table-responsive > .table-bordered > tbody > tr > td:last-child,\n.panel > .table-responsive > .table-bordered > tfoot > tr > th:last-child,\n.panel > .table-responsive > .table-bordered > tfoot > tr > td:last-child {\n  border-right: 0;\n}\n\n.panel > .table-bordered > thead > tr:first-child > td,\n.panel > .table-bordered > thead > tr:first-child > th,\n.panel > .table-bordered > tbody > tr:first-child > td,\n.panel > .table-bordered > tbody > tr:first-child > th,\n.panel > .table-responsive > .table-bordered > thead > tr:first-child > td,\n.panel > .table-responsive > .table-bordered > thead > tr:first-child > th,\n.panel > .table-responsive > .table-bordered > tbody > tr:first-child > td,\n.panel > .table-responsive > .table-bordered > tbody > tr:first-child > th {\n  border-bottom: 0;\n}\n\n.panel > .table-bordered > tbody > tr:last-child > td,\n.panel > .table-bordered > tbody > tr:last-child > th,\n.panel > .table-bordered > tfoot > tr:last-child > td,\n.panel > .table-bordered > tfoot > tr:last-child > th,\n.panel > .table-responsive > .table-bordered > tbody > tr:last-child > td,\n.panel > .table-responsive > .table-bordered > tbody > tr:last-child > th,\n.panel > .table-responsive > .table-bordered > tfoot > tr:last-child > td,\n.panel > .table-responsive > .table-bordered > tfoot > tr:last-child > th {\n  border-bottom: 0;\n}\n\n.panel > .table-responsive {\n  border: 0;\n  margin-bottom: 0;\n}\n\n.panel-group {\n  margin-bottom: 20px;\n}\n\n.panel-group .panel {\n  margin-bottom: 0;\n  border-radius: 4px;\n}\n\n.panel-group .panel + .panel {\n  margin-top: 5px;\n}\n\n.panel-group .panel-heading {\n  border-bottom: 0;\n}\n\n.panel-group .panel-heading + .panel-collapse > .panel-body,\n.panel-group .panel-heading + .panel-collapse > .list-group {\n  border-top: 1px solid #ddd;\n}\n\n.panel-group .panel-footer {\n  border-top: 0;\n}\n\n.panel-group .panel-footer + .panel-collapse .panel-body {\n  border-bottom: 1px solid #ddd;\n}\n\n.panel-default {\n  border-color: #ddd;\n}\n\n.panel-default > .panel-heading {\n  color: #333333;\n  background-color: #f5f5f5;\n  border-color: #ddd;\n}\n\n.panel-default > .panel-heading + .panel-collapse > .panel-body {\n  border-top-color: #ddd;\n}\n\n.panel-default > .panel-heading .badge {\n  color: #f5f5f5;\n  background-color: #333333;\n}\n\n.panel-default > .panel-footer + .panel-collapse > .panel-body {\n  border-bottom-color: #ddd;\n}\n\n.panel-primary {\n  border-color: #337ab7;\n}\n\n.panel-primary > .panel-heading {\n  color: #fff;\n  background-color: #337ab7;\n  border-color: #337ab7;\n}\n\n.panel-primary > .panel-heading + .panel-collapse > .panel-body {\n  border-top-color: #337ab7;\n}\n\n.panel-primary > .panel-heading .badge {\n  color: #337ab7;\n  background-color: #fff;\n}\n\n.panel-primary > .panel-footer + .panel-collapse > .panel-body {\n  border-bottom-color: #337ab7;\n}\n\n.panel-success {\n  border-color: #d6e9c6;\n}\n\n.panel-success > .panel-heading {\n  color: #3c763d;\n  background-color: #dff0d8;\n  border-color: #d6e9c6;\n}\n\n.panel-success > .panel-heading + .panel-collapse > .panel-body {\n  border-top-color: #d6e9c6;\n}\n\n.panel-success > .panel-heading .badge {\n  color: #dff0d8;\n  background-color: #3c763d;\n}\n\n.panel-success > .panel-footer + .panel-collapse > .panel-body {\n  border-bottom-color: #d6e9c6;\n}\n\n.panel-info {\n  border-color: #bce8f1;\n}\n\n.panel-info > .panel-heading {\n  color: #31708f;\n  background-color: #d9edf7;\n  border-color: #bce8f1;\n}\n\n.panel-info > .panel-heading + .panel-collapse > .panel-body {\n  border-top-color: #bce8f1;\n}\n\n.panel-info > .panel-heading .badge {\n  color: #d9edf7;\n  background-color: #31708f;\n}\n\n.panel-info > .panel-footer + .panel-collapse > .panel-body {\n  border-bottom-color: #bce8f1;\n}\n\n.panel-warning {\n  border-color: #faebcc;\n}\n\n.panel-warning > .panel-heading {\n  color: #8a6d3b;\n  background-color: #fcf8e3;\n  border-color: #faebcc;\n}\n\n.panel-warning > .panel-heading + .panel-collapse > .panel-body {\n  border-top-color: #faebcc;\n}\n\n.panel-warning > .panel-heading .badge {\n  color: #fcf8e3;\n  background-color: #8a6d3b;\n}\n\n.panel-warning > .panel-footer + .panel-collapse > .panel-body {\n  border-bottom-color: #faebcc;\n}\n\n.panel-danger {\n  border-color: #ebccd1;\n}\n\n.panel-danger > .panel-heading {\n  color: #a94442;\n  background-color: #f2dede;\n  border-color: #ebccd1;\n}\n\n.panel-danger > .panel-heading + .panel-collapse > .panel-body {\n  border-top-color: #ebccd1;\n}\n\n.panel-danger > .panel-heading .badge {\n  color: #f2dede;\n  background-color: #a94442;\n}\n\n.panel-danger > .panel-footer + .panel-collapse > .panel-body {\n  border-bottom-color: #ebccd1;\n}\n\n.well {\n  min-height: 20px;\n  padding: 19px;\n  margin-bottom: 20px;\n  background-color: #f5f5f5;\n  border: 1px solid #e3e3e3;\n  border-radius: 4px;\n  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);\n  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);\n}\n\n.well blockquote {\n  border-color: #ddd;\n  border-color: rgba(0, 0, 0, 0.15);\n}\n\n.well-lg {\n  padding: 24px;\n  border-radius: 6px;\n}\n\n.well-sm {\n  padding: 9px;\n  border-radius: 3px;\n}\n\n.embed-responsive {\n  position: relative;\n  display: block;\n  height: 0;\n  padding: 0;\n  overflow: hidden;\n}\n\n.embed-responsive .embed-responsive-item,\n.embed-responsive iframe,\n.embed-responsive embed,\n.embed-responsive object,\n.embed-responsive video {\n  position: absolute;\n  top: 0;\n  left: 0;\n  bottom: 0;\n  height: 100%;\n  width: 100%;\n  border: 0;\n}\n\n.embed-responsive-16by9 {\n  padding-bottom: 56.25%;\n}\n\n.embed-responsive-4by3 {\n  padding-bottom: 75%;\n}\n\n.close {\n  float: right;\n  font-size: 21px;\n  font-weight: bold;\n  line-height: 1;\n  color: #000;\n  text-shadow: 0 1px 0 #fff;\n  opacity: 0.2;\n  filter: alpha(opacity=20);\n}\n\n.close:hover,\n.close:focus {\n  color: #000;\n  text-decoration: none;\n  cursor: pointer;\n  opacity: 0.5;\n  filter: alpha(opacity=50);\n}\n\nbutton.close {\n  padding: 0;\n  cursor: pointer;\n  background: transparent;\n  border: 0;\n  -webkit-appearance: none;\n}\n\n.modal-open {\n  overflow: hidden;\n}\n\n.modal {\n  display: none;\n  overflow: hidden;\n  position: fixed;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  left: 0;\n  z-index: 1050;\n  -webkit-overflow-scrolling: touch;\n  outline: 0;\n}\n\n.modal.fade .modal-dialog {\n  -webkit-transform: translate(0, -25%);\n  -ms-transform: translate(0, -25%);\n  -o-transform: translate(0, -25%);\n  transform: translate(0, -25%);\n  -webkit-transition: -webkit-transform 0.3s ease-out;\n  -moz-transition: -moz-transform 0.3s ease-out;\n  -o-transition: -o-transform 0.3s ease-out;\n  transition: transform 0.3s ease-out;\n}\n\n.modal.in .modal-dialog {\n  -webkit-transform: translate(0, 0);\n  -ms-transform: translate(0, 0);\n  -o-transform: translate(0, 0);\n  transform: translate(0, 0);\n}\n\n.modal-open .modal {\n  overflow-x: hidden;\n  overflow-y: auto;\n}\n\n.modal-dialog {\n  position: relative;\n  width: auto;\n  margin: 10px;\n}\n\n.modal-content {\n  position: relative;\n  background-color: #fff;\n  border: 1px solid #999;\n  border: 1px solid rgba(0, 0, 0, 0.2);\n  border-radius: 6px;\n  -webkit-box-shadow: 0 3px 9px rgba(0, 0, 0, 0.5);\n  box-shadow: 0 3px 9px rgba(0, 0, 0, 0.5);\n  background-clip: padding-box;\n  outline: 0;\n}\n\n.modal-backdrop {\n  position: fixed;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  left: 0;\n  z-index: 1040;\n  background-color: #000;\n}\n\n.modal-backdrop.fade {\n  opacity: 0;\n  filter: alpha(opacity=0);\n}\n\n.modal-backdrop.in {\n  opacity: 0.5;\n  filter: alpha(opacity=50);\n}\n\n.modal-header {\n  padding: 15px;\n  border-bottom: 1px solid #e5e5e5;\n}\n\n.modal-header:before,\n.modal-header:after {\n  content: \" \";\n  display: table;\n}\n\n.modal-header:after {\n  clear: both;\n}\n\n.modal-header .close {\n  margin-top: -2px;\n}\n\n.modal-title {\n  margin: 0;\n  line-height: 1.42857;\n}\n\n.modal-body {\n  position: relative;\n  padding: 15px;\n}\n\n.modal-footer {\n  padding: 15px;\n  text-align: right;\n  border-top: 1px solid #e5e5e5;\n}\n\n.modal-footer:before,\n.modal-footer:after {\n  content: \" \";\n  display: table;\n}\n\n.modal-footer:after {\n  clear: both;\n}\n\n.modal-footer .btn + .btn {\n  margin-left: 5px;\n  margin-bottom: 0;\n}\n\n.modal-footer .btn-group .btn + .btn {\n  margin-left: -1px;\n}\n\n.modal-footer .btn-block + .btn-block {\n  margin-left: 0;\n}\n\n.modal-scrollbar-measure {\n  position: absolute;\n  top: -9999px;\n  width: 50px;\n  height: 50px;\n  overflow: scroll;\n}\n\n@media (min-width: 768px) {\n  .modal-dialog {\n    width: 600px;\n    margin: 30px auto;\n  }\n\n  .modal-content {\n    -webkit-box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);\n    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);\n  }\n\n  .modal-sm {\n    width: 300px;\n  }\n}\n\n@media (min-width: 992px) {\n  .modal-lg {\n    width: 900px;\n  }\n}\n\n.tooltip {\n  position: absolute;\n  z-index: 1070;\n  display: block;\n  font-family: \"Helvetica Neue\", Helvetica, Arial, sans-serif;\n  font-style: normal;\n  font-weight: normal;\n  letter-spacing: normal;\n  line-break: auto;\n  line-height: 1.42857;\n  text-align: left;\n  text-align: start;\n  text-decoration: none;\n  text-shadow: none;\n  text-transform: none;\n  white-space: normal;\n  word-break: normal;\n  word-spacing: normal;\n  word-wrap: normal;\n  font-size: 12px;\n  opacity: 0;\n  filter: alpha(opacity=0);\n}\n\n.tooltip.in {\n  opacity: 0.9;\n  filter: alpha(opacity=90);\n}\n\n.tooltip.top {\n  margin-top: -3px;\n  padding: 5px 0;\n}\n\n.tooltip.right {\n  margin-left: 3px;\n  padding: 0 5px;\n}\n\n.tooltip.bottom {\n  margin-top: 3px;\n  padding: 5px 0;\n}\n\n.tooltip.left {\n  margin-left: -3px;\n  padding: 0 5px;\n}\n\n.tooltip-inner {\n  max-width: 200px;\n  padding: 3px 8px;\n  color: #fff;\n  text-align: center;\n  background-color: #000;\n  border-radius: 4px;\n}\n\n.tooltip-arrow {\n  position: absolute;\n  width: 0;\n  height: 0;\n  border-color: transparent;\n  border-style: solid;\n}\n\n.tooltip.top .tooltip-arrow {\n  bottom: 0;\n  left: 50%;\n  margin-left: -5px;\n  border-width: 5px 5px 0;\n  border-top-color: #000;\n}\n\n.tooltip.top-left .tooltip-arrow {\n  bottom: 0;\n  right: 5px;\n  margin-bottom: -5px;\n  border-width: 5px 5px 0;\n  border-top-color: #000;\n}\n\n.tooltip.top-right .tooltip-arrow {\n  bottom: 0;\n  left: 5px;\n  margin-bottom: -5px;\n  border-width: 5px 5px 0;\n  border-top-color: #000;\n}\n\n.tooltip.right .tooltip-arrow {\n  top: 50%;\n  left: 0;\n  margin-top: -5px;\n  border-width: 5px 5px 5px 0;\n  border-right-color: #000;\n}\n\n.tooltip.left .tooltip-arrow {\n  top: 50%;\n  right: 0;\n  margin-top: -5px;\n  border-width: 5px 0 5px 5px;\n  border-left-color: #000;\n}\n\n.tooltip.bottom .tooltip-arrow {\n  top: 0;\n  left: 50%;\n  margin-left: -5px;\n  border-width: 0 5px 5px;\n  border-bottom-color: #000;\n}\n\n.tooltip.bottom-left .tooltip-arrow {\n  top: 0;\n  right: 5px;\n  margin-top: -5px;\n  border-width: 0 5px 5px;\n  border-bottom-color: #000;\n}\n\n.tooltip.bottom-right .tooltip-arrow {\n  top: 0;\n  left: 5px;\n  margin-top: -5px;\n  border-width: 0 5px 5px;\n  border-bottom-color: #000;\n}\n\n.popover {\n  position: absolute;\n  top: 0;\n  left: 0;\n  z-index: 1060;\n  display: none;\n  max-width: 276px;\n  padding: 1px;\n  font-family: \"Helvetica Neue\", Helvetica, Arial, sans-serif;\n  font-style: normal;\n  font-weight: normal;\n  letter-spacing: normal;\n  line-break: auto;\n  line-height: 1.42857;\n  text-align: left;\n  text-align: start;\n  text-decoration: none;\n  text-shadow: none;\n  text-transform: none;\n  white-space: normal;\n  word-break: normal;\n  word-spacing: normal;\n  word-wrap: normal;\n  font-size: 14px;\n  background-color: #fff;\n  background-clip: padding-box;\n  border: 1px solid #ccc;\n  border: 1px solid rgba(0, 0, 0, 0.2);\n  border-radius: 6px;\n  -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);\n  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);\n}\n\n.popover.top {\n  margin-top: -10px;\n}\n\n.popover.right {\n  margin-left: 10px;\n}\n\n.popover.bottom {\n  margin-top: 10px;\n}\n\n.popover.left {\n  margin-left: -10px;\n}\n\n.popover-title {\n  margin: 0;\n  padding: 8px 14px;\n  font-size: 14px;\n  background-color: #f7f7f7;\n  border-bottom: 1px solid #ebebeb;\n  border-radius: 5px 5px 0 0;\n}\n\n.popover-content {\n  padding: 9px 14px;\n}\n\n.popover > .arrow,\n.popover > .arrow:after {\n  position: absolute;\n  display: block;\n  width: 0;\n  height: 0;\n  border-color: transparent;\n  border-style: solid;\n}\n\n.popover > .arrow {\n  border-width: 11px;\n}\n\n.popover > .arrow:after {\n  border-width: 10px;\n  content: \"\";\n}\n\n.popover.top > .arrow {\n  left: 50%;\n  margin-left: -11px;\n  border-bottom-width: 0;\n  border-top-color: #999999;\n  border-top-color: rgba(0, 0, 0, 0.25);\n  bottom: -11px;\n}\n\n.popover.top > .arrow:after {\n  content: \" \";\n  bottom: 1px;\n  margin-left: -10px;\n  border-bottom-width: 0;\n  border-top-color: #fff;\n}\n\n.popover.right > .arrow {\n  top: 50%;\n  left: -11px;\n  margin-top: -11px;\n  border-left-width: 0;\n  border-right-color: #999999;\n  border-right-color: rgba(0, 0, 0, 0.25);\n}\n\n.popover.right > .arrow:after {\n  content: \" \";\n  left: 1px;\n  bottom: -10px;\n  border-left-width: 0;\n  border-right-color: #fff;\n}\n\n.popover.bottom > .arrow {\n  left: 50%;\n  margin-left: -11px;\n  border-top-width: 0;\n  border-bottom-color: #999999;\n  border-bottom-color: rgba(0, 0, 0, 0.25);\n  top: -11px;\n}\n\n.popover.bottom > .arrow:after {\n  content: \" \";\n  top: 1px;\n  margin-left: -10px;\n  border-top-width: 0;\n  border-bottom-color: #fff;\n}\n\n.popover.left > .arrow {\n  top: 50%;\n  right: -11px;\n  margin-top: -11px;\n  border-right-width: 0;\n  border-left-color: #999999;\n  border-left-color: rgba(0, 0, 0, 0.25);\n}\n\n.popover.left > .arrow:after {\n  content: \" \";\n  right: 1px;\n  border-right-width: 0;\n  border-left-color: #fff;\n  bottom: -10px;\n}\n\n.carousel {\n  position: relative;\n}\n\n.carousel-inner {\n  position: relative;\n  overflow: hidden;\n  width: 100%;\n}\n\n.carousel-inner > .item {\n  display: none;\n  position: relative;\n  -webkit-transition: 0.6s ease-in-out left;\n  -o-transition: 0.6s ease-in-out left;\n  transition: 0.6s ease-in-out left;\n}\n\n.carousel-inner > .item > img,\n.carousel-inner > .item > a > img {\n  display: block;\n  max-width: 100%;\n  height: auto;\n  line-height: 1;\n}\n\n@media all and (transform-3d), (-webkit-transform-3d) {\n  .carousel-inner > .item {\n    -webkit-transition: -webkit-transform 0.6s ease-in-out;\n    -moz-transition: -moz-transform 0.6s ease-in-out;\n    -o-transition: -o-transform 0.6s ease-in-out;\n    transition: transform 0.6s ease-in-out;\n    -webkit-backface-visibility: hidden;\n    -moz-backface-visibility: hidden;\n    backface-visibility: hidden;\n    -webkit-perspective: 1000px;\n    -moz-perspective: 1000px;\n    perspective: 1000px;\n  }\n\n  .carousel-inner > .item.next,\n  .carousel-inner > .item.active.right {\n    -webkit-transform: translate3d(100%, 0, 0);\n    transform: translate3d(100%, 0, 0);\n    left: 0;\n  }\n\n  .carousel-inner > .item.prev,\n  .carousel-inner > .item.active.left {\n    -webkit-transform: translate3d(-100%, 0, 0);\n    transform: translate3d(-100%, 0, 0);\n    left: 0;\n  }\n\n  .carousel-inner > .item.next.left,\n  .carousel-inner > .item.prev.right,\n  .carousel-inner > .item.active {\n    -webkit-transform: translate3d(0, 0, 0);\n    transform: translate3d(0, 0, 0);\n    left: 0;\n  }\n}\n\n.carousel-inner > .active,\n.carousel-inner > .next,\n.carousel-inner > .prev {\n  display: block;\n}\n\n.carousel-inner > .active {\n  left: 0;\n}\n\n.carousel-inner > .next,\n.carousel-inner > .prev {\n  position: absolute;\n  top: 0;\n  width: 100%;\n}\n\n.carousel-inner > .next {\n  left: 100%;\n}\n\n.carousel-inner > .prev {\n  left: -100%;\n}\n\n.carousel-inner > .next.left,\n.carousel-inner > .prev.right {\n  left: 0;\n}\n\n.carousel-inner > .active.left {\n  left: -100%;\n}\n\n.carousel-inner > .active.right {\n  left: 100%;\n}\n\n.carousel-control {\n  position: absolute;\n  top: 0;\n  left: 0;\n  bottom: 0;\n  width: 15%;\n  opacity: 0.5;\n  filter: alpha(opacity=50);\n  font-size: 20px;\n  color: #fff;\n  text-align: center;\n  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);\n  background-color: transparent;\n}\n\n.carousel-control.left {\n  background-image: -webkit-linear-gradient(left, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.0001) 100%);\n  background-image: -o-linear-gradient(left, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.0001) 100%);\n  background-image: linear-gradient(to right, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.0001) 100%);\n  background-repeat: repeat-x;\n  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#80000000', endColorstr='#00000000', GradientType=1);\n}\n\n.carousel-control.right {\n  left: auto;\n  right: 0;\n  background-image: -webkit-linear-gradient(left, rgba(0, 0, 0, 0.0001) 0%, rgba(0, 0, 0, 0.5) 100%);\n  background-image: -o-linear-gradient(left, rgba(0, 0, 0, 0.0001) 0%, rgba(0, 0, 0, 0.5) 100%);\n  background-image: linear-gradient(to right, rgba(0, 0, 0, 0.0001) 0%, rgba(0, 0, 0, 0.5) 100%);\n  background-repeat: repeat-x;\n  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00000000', endColorstr='#80000000', GradientType=1);\n}\n\n.carousel-control:hover,\n.carousel-control:focus {\n  outline: 0;\n  color: #fff;\n  text-decoration: none;\n  opacity: 0.9;\n  filter: alpha(opacity=90);\n}\n\n.carousel-control .icon-prev,\n.carousel-control .icon-next,\n.carousel-control .glyphicon-chevron-left,\n.carousel-control .glyphicon-chevron-right {\n  position: absolute;\n  top: 50%;\n  margin-top: -10px;\n  z-index: 5;\n  display: inline-block;\n}\n\n.carousel-control .icon-prev,\n.carousel-control .glyphicon-chevron-left {\n  left: 50%;\n  margin-left: -10px;\n}\n\n.carousel-control .icon-next,\n.carousel-control .glyphicon-chevron-right {\n  right: 50%;\n  margin-right: -10px;\n}\n\n.carousel-control .icon-prev,\n.carousel-control .icon-next {\n  width: 20px;\n  height: 20px;\n  line-height: 1;\n  font-family: serif;\n}\n\n.carousel-control .icon-prev:before {\n  content: '\\2039';\n}\n\n.carousel-control .icon-next:before {\n  content: '\\203A';\n}\n\n.carousel-indicators {\n  position: absolute;\n  bottom: 10px;\n  left: 50%;\n  z-index: 15;\n  width: 60%;\n  margin-left: -30%;\n  padding-left: 0;\n  list-style: none;\n  text-align: center;\n}\n\n.carousel-indicators li {\n  display: inline-block;\n  width: 10px;\n  height: 10px;\n  margin: 1px;\n  text-indent: -999px;\n  border: 1px solid #fff;\n  border-radius: 10px;\n  cursor: pointer;\n  background-color: #000 \\9;\n  background-color: transparent;\n}\n\n.carousel-indicators .active {\n  margin: 0;\n  width: 12px;\n  height: 12px;\n  background-color: #fff;\n}\n\n.carousel-caption {\n  position: absolute;\n  left: 15%;\n  right: 15%;\n  bottom: 20px;\n  z-index: 10;\n  padding-top: 20px;\n  padding-bottom: 20px;\n  color: #fff;\n  text-align: center;\n  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);\n}\n\n.carousel-caption .btn {\n  text-shadow: none;\n}\n\n@media screen and (min-width: 768px) {\n  .carousel-control .glyphicon-chevron-left,\n  .carousel-control .glyphicon-chevron-right,\n  .carousel-control .icon-prev,\n  .carousel-control .icon-next {\n    width: 30px;\n    height: 30px;\n    margin-top: -10px;\n    font-size: 30px;\n  }\n\n  .carousel-control .glyphicon-chevron-left,\n  .carousel-control .icon-prev {\n    margin-left: -10px;\n  }\n\n  .carousel-control .glyphicon-chevron-right,\n  .carousel-control .icon-next {\n    margin-right: -10px;\n  }\n\n  .carousel-caption {\n    left: 20%;\n    right: 20%;\n    padding-bottom: 30px;\n  }\n\n  .carousel-indicators {\n    bottom: 20px;\n  }\n}\n\n.clearfix:before,\n.clearfix:after {\n  content: \" \";\n  display: table;\n}\n\n.clearfix:after {\n  clear: both;\n}\n\n.center-block {\n  display: block;\n  margin-left: auto;\n  margin-right: auto;\n}\n\n.pull-right {\n  float: right !important;\n}\n\n.pull-left {\n  float: left !important;\n}\n\n.hide {\n  display: none !important;\n}\n\n.show {\n  display: block !important;\n}\n\n.invisible {\n  visibility: hidden;\n}\n\n.text-hide {\n  font: 0/0 a;\n  color: transparent;\n  text-shadow: none;\n  background-color: transparent;\n  border: 0;\n}\n\n.hidden {\n  display: none !important;\n}\n\n.affix {\n  position: fixed;\n}\n\n@-ms-viewport {\n  width: device-width;\n}\n\n.visible-xs {\n  display: none !important;\n}\n\n.visible-sm {\n  display: none !important;\n}\n\n.visible-md {\n  display: none !important;\n}\n\n.visible-lg {\n  display: none !important;\n}\n\n.visible-xs-block,\n.visible-xs-inline,\n.visible-xs-inline-block,\n.visible-sm-block,\n.visible-sm-inline,\n.visible-sm-inline-block,\n.visible-md-block,\n.visible-md-inline,\n.visible-md-inline-block,\n.visible-lg-block,\n.visible-lg-inline,\n.visible-lg-inline-block {\n  display: none !important;\n}\n\n@media (max-width: 767px) {\n  .visible-xs {\n    display: block !important;\n  }\n\n  table.visible-xs {\n    display: table !important;\n  }\n\n  tr.visible-xs {\n    display: table-row !important;\n  }\n\n  th.visible-xs,\n  td.visible-xs {\n    display: table-cell !important;\n  }\n}\n\n@media (max-width: 767px) {\n  .visible-xs-block {\n    display: block !important;\n  }\n}\n\n@media (max-width: 767px) {\n  .visible-xs-inline {\n    display: inline !important;\n  }\n}\n\n@media (max-width: 767px) {\n  .visible-xs-inline-block {\n    display: inline-block !important;\n  }\n}\n\n@media (min-width: 768px) and (max-width: 991px) {\n  .visible-sm {\n    display: block !important;\n  }\n\n  table.visible-sm {\n    display: table !important;\n  }\n\n  tr.visible-sm {\n    display: table-row !important;\n  }\n\n  th.visible-sm,\n  td.visible-sm {\n    display: table-cell !important;\n  }\n}\n\n@media (min-width: 768px) and (max-width: 991px) {\n  .visible-sm-block {\n    display: block !important;\n  }\n}\n\n@media (min-width: 768px) and (max-width: 991px) {\n  .visible-sm-inline {\n    display: inline !important;\n  }\n}\n\n@media (min-width: 768px) and (max-width: 991px) {\n  .visible-sm-inline-block {\n    display: inline-block !important;\n  }\n}\n\n@media (min-width: 992px) and (max-width: 1199px) {\n  .visible-md {\n    display: block !important;\n  }\n\n  table.visible-md {\n    display: table !important;\n  }\n\n  tr.visible-md {\n    display: table-row !important;\n  }\n\n  th.visible-md,\n  td.visible-md {\n    display: table-cell !important;\n  }\n}\n\n@media (min-width: 992px) and (max-width: 1199px) {\n  .visible-md-block {\n    display: block !important;\n  }\n}\n\n@media (min-width: 992px) and (max-width: 1199px) {\n  .visible-md-inline {\n    display: inline !important;\n  }\n}\n\n@media (min-width: 992px) and (max-width: 1199px) {\n  .visible-md-inline-block {\n    display: inline-block !important;\n  }\n}\n\n@media (min-width: 1200px) {\n  .visible-lg {\n    display: block !important;\n  }\n\n  table.visible-lg {\n    display: table !important;\n  }\n\n  tr.visible-lg {\n    display: table-row !important;\n  }\n\n  th.visible-lg,\n  td.visible-lg {\n    display: table-cell !important;\n  }\n}\n\n@media (min-width: 1200px) {\n  .visible-lg-block {\n    display: block !important;\n  }\n}\n\n@media (min-width: 1200px) {\n  .visible-lg-inline {\n    display: inline !important;\n  }\n}\n\n@media (min-width: 1200px) {\n  .visible-lg-inline-block {\n    display: inline-block !important;\n  }\n}\n\n@media (max-width: 767px) {\n  .hidden-xs {\n    display: none !important;\n  }\n}\n\n@media (min-width: 768px) and (max-width: 991px) {\n  .hidden-sm {\n    display: none !important;\n  }\n}\n\n@media (min-width: 992px) and (max-width: 1199px) {\n  .hidden-md {\n    display: none !important;\n  }\n}\n\n@media (min-width: 1200px) {\n  .hidden-lg {\n    display: none !important;\n  }\n}\n\n.visible-print {\n  display: none !important;\n}\n\n@media print {\n  .visible-print {\n    display: block !important;\n  }\n\n  table.visible-print {\n    display: table !important;\n  }\n\n  tr.visible-print {\n    display: table-row !important;\n  }\n\n  th.visible-print,\n  td.visible-print {\n    display: table-cell !important;\n  }\n}\n\n.visible-print-block {\n  display: none !important;\n}\n\n@media print {\n  .visible-print-block {\n    display: block !important;\n  }\n}\n\n.visible-print-inline {\n  display: none !important;\n}\n\n@media print {\n  .visible-print-inline {\n    display: inline !important;\n  }\n}\n\n.visible-print-inline-block {\n  display: none !important;\n}\n\n@media print {\n  .visible-print-inline-block {\n    display: inline-block !important;\n  }\n}\n\n@media print {\n  .hidden-print {\n    display: none !important;\n  }\n}\n\n", ""]);
 
 // exports
 
 
 /***/ }),
 
-/***/ 656:
+/***/ 657:
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__.p + "assets/glyphicons-halflings-regular.448c34a56d699c29117adc64c43affeb.woff2";
 
 /***/ }),
 
-/***/ 657:
+/***/ 658:
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__.p + "assets/glyphicons-halflings-regular.fa2772327f55d8198301fdb8bcfc8158.woff";
 
 /***/ }),
 
-/***/ 658:
+/***/ 659:
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__.p + "a88eb08033c05c9055d8e0fbdc16a730.ttf";
 
 /***/ }),
 
-/***/ 659:
+/***/ 660:
 /***/ (function(module, exports) {
 
 module.exports = "data:application/font-woff;base64,bW9kdWxlLmV4cG9ydHMgPSBfX3dlYnBhY2tfcHVibGljX3BhdGhfXyArICI5MTYzYjFhYjcwNmQ5NWI4MDViYzc5OTg0NTI0YzVhZS5zdmciOw=="
 
 /***/ }),
 
-/***/ 660:
+/***/ 661:
 /***/ (function(module, exports) {
 
 
@@ -20589,10 +21920,9 @@ module.exports = function (css) {
 
 /***/ }),
 
-/***/ 661:
+/***/ 662:
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__ (662);
 __webpack_require__ (663);
 __webpack_require__ (664);
 __webpack_require__ (665);
@@ -20604,11 +21934,12 @@ __webpack_require__ (670);
 __webpack_require__ (671);
 __webpack_require__ (672);
 __webpack_require__ (673);
+__webpack_require__ (674);
 
 
 /***/ }),
 
-/***/ 662:
+/***/ 663:
 /***/ (function(module, exports, __webpack_require__) {
 
 /*** IMPORTS FROM imports-loader ***/
@@ -20678,7 +22009,7 @@ var jQuery = __webpack_require__(27);
 
 /***/ }),
 
-/***/ 663:
+/***/ 664:
 /***/ (function(module, exports, __webpack_require__) {
 
 /*** IMPORTS FROM imports-loader ***/
@@ -20783,7 +22114,7 @@ var jQuery = __webpack_require__(27);
 
 /***/ }),
 
-/***/ 664:
+/***/ 665:
 /***/ (function(module, exports, __webpack_require__) {
 
 /*** IMPORTS FROM imports-loader ***/
@@ -20919,7 +22250,7 @@ var jQuery = __webpack_require__(27);
 
 /***/ }),
 
-/***/ 665:
+/***/ 666:
 /***/ (function(module, exports, __webpack_require__) {
 
 /*** IMPORTS FROM imports-loader ***/
@@ -21167,7 +22498,7 @@ var jQuery = __webpack_require__(27);
 
 /***/ }),
 
-/***/ 666:
+/***/ 667:
 /***/ (function(module, exports, __webpack_require__) {
 
 /*** IMPORTS FROM imports-loader ***/
@@ -21390,7 +22721,7 @@ var jQuery = __webpack_require__(27);
 
 /***/ }),
 
-/***/ 667:
+/***/ 668:
 /***/ (function(module, exports, __webpack_require__) {
 
 /*** IMPORTS FROM imports-loader ***/
@@ -21566,7 +22897,7 @@ var jQuery = __webpack_require__(27);
 
 /***/ }),
 
-/***/ 668:
+/***/ 669:
 /***/ (function(module, exports, __webpack_require__) {
 
 /*** IMPORTS FROM imports-loader ***/
@@ -21916,7 +23247,7 @@ var jQuery = __webpack_require__(27);
 
 /***/ }),
 
-/***/ 669:
+/***/ 670:
 /***/ (function(module, exports, __webpack_require__) {
 
 /*** IMPORTS FROM imports-loader ***/
@@ -22447,7 +23778,7 @@ var jQuery = __webpack_require__(27);
 
 /***/ }),
 
-/***/ 670:
+/***/ 671:
 /***/ (function(module, exports, __webpack_require__) {
 
 /*** IMPORTS FROM imports-loader ***/
@@ -22566,7 +23897,7 @@ var jQuery = __webpack_require__(27);
 
 /***/ }),
 
-/***/ 671:
+/***/ 672:
 /***/ (function(module, exports, __webpack_require__) {
 
 /*** IMPORTS FROM imports-loader ***/
@@ -22749,7 +24080,7 @@ var jQuery = __webpack_require__(27);
 
 /***/ }),
 
-/***/ 672:
+/***/ 673:
 /***/ (function(module, exports, __webpack_require__) {
 
 /*** IMPORTS FROM imports-loader ***/
@@ -22915,7 +24246,7 @@ var jQuery = __webpack_require__(27);
 
 /***/ }),
 
-/***/ 673:
+/***/ 674:
 /***/ (function(module, exports, __webpack_require__) {
 
 /*** IMPORTS FROM imports-loader ***/
@@ -23088,16 +24419,16 @@ var jQuery = __webpack_require__(27);
 
 /***/ }),
 
-/***/ 674:
+/***/ 675:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
-const platform_browser_dynamic_1 = __webpack_require__(180);
+const platform_browser_dynamic_1 = __webpack_require__(181);
 const core_1 = __webpack_require__(3);
-const app_module_1 = __webpack_require__(675);
-__webpack_require__(722);
-__webpack_require__(723);
+const app_module_1 = __webpack_require__(676);
+__webpack_require__(728);
+__webpack_require__(729);
 if (true) {
     core_1.enableProdMode();
 }
@@ -23106,7 +24437,7 @@ platform_browser_dynamic_1.platformBrowserDynamic().bootstrapModule(app_module_1
 
 /***/ }),
 
-/***/ 675:
+/***/ 676:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -23118,18 +24449,18 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 const core_1 = __webpack_require__(3);
-const http_1 = __webpack_require__(31);
-const app_component_1 = __webpack_require__(676);
-const platform_browser_1 = __webpack_require__(68);
+const http_1 = __webpack_require__(32);
+const app_component_1 = __webpack_require__(677);
+const platform_browser_1 = __webpack_require__(60);
 const forms_1 = __webpack_require__(103);
-const http_2 = __webpack_require__(181);
+const http_2 = __webpack_require__(182);
 const common_1 = __webpack_require__(24);
-const app_routing_1 = __webpack_require__(679);
-const login_routing_module_1 = __webpack_require__(680);
-const public_module_1 = __webpack_require__(684);
-const private_module_1 = __webpack_require__(692);
-const login_component_1 = __webpack_require__(210);
-const globalnav_component_1 = __webpack_require__(720);
+const app_routing_1 = __webpack_require__(680);
+const login_routing_module_1 = __webpack_require__(681);
+const public_module_1 = __webpack_require__(685);
+const private_module_1 = __webpack_require__(693);
+const login_component_1 = __webpack_require__(211);
+const globalnav_component_1 = __webpack_require__(726);
 let AppModule = class AppModule {
 };
 AppModule = __decorate([
@@ -23161,7 +24492,7 @@ exports.AppModule = AppModule;
 
 /***/ }),
 
-/***/ 676:
+/***/ 677:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -23185,8 +24516,8 @@ let AppComponent = class AppComponent {
 AppComponent = __decorate([
     core_1.Component({
         selector: "app-root",
-        template: __webpack_require__(677),
-        styles: [__webpack_require__(678)],
+        template: __webpack_require__(678),
+        styles: [__webpack_require__(679)],
         encapsulation: core_1.ViewEncapsulation.None
     }),
     __metadata("design:paramtypes", [])
@@ -23196,21 +24527,21 @@ exports.AppComponent = AppComponent;
 
 /***/ }),
 
-/***/ 677:
+/***/ 678:
 /***/ (function(module, exports) {
 
 module.exports = "<app-globalnav></app-globalnav><div class=\"container-fluid\"><div class=\"row\"><router-outlet></router-outlet></div></div>"
 
 /***/ }),
 
-/***/ 678:
+/***/ 679:
 /***/ (function(module, exports) {
 
 module.exports = "html, body, h1 {\n  margin: 0;\n  padding: 0; }\n\nbody {\n  font-family: Tahoma, Arial, sans-serif;\n  font-size: 14px;\n  padding: 20px; }\n\n.box-shadow {\n  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); }\n\n/* panels */\n.panel-footer {\n  display: inline-block;\n  width: 50%;\n  text-align: center; }\n\n.panel-footer:first-of-type {\n  border-right: 1px solid #ddd;\n  border-bottom-right-radius: 0px; }\n\n.panel-footer:last-of-type {\n  border-left: 1px solid #ddd;\n  border-bottom-left-radius: 0px; }\n\n.panel-footer:hover {\n  background-color: #d9edf7;\n  color: #31708f;\n  cursor: pointer; }\n\n.input-group {\n  width: 100%; }\n\n.input-group-addon,\n.input-group-btn {\n  width: 35%; }\n\n.input-group-btn button {\n  width: 100%; }\n\nspan.input-group-addon {\n  color: #ffffff;\n  background-color: #5bc0de;\n  border-color: #46b8da; }\n\nspan.input-group-addon[disabled=true] {\n  color: #ffffff;\n  background-color: #97D6E9;\n  border-color: #8BD1E6; }\n\n.done-edit {\n  width: 100%;\n  border-bottom-left-radius: 3px;\n  border-bottom-right-radius: 3px; }\n"
 
 /***/ }),
 
-/***/ 679:
+/***/ 680:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -23263,7 +24594,7 @@ exports.AppRouting = AppRouting;
 
 /***/ }),
 
-/***/ 680:
+/***/ 681:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -23276,7 +24607,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 const core_1 = __webpack_require__(3);
 const router_1 = __webpack_require__(20);
-const login_component_1 = __webpack_require__(210);
+const login_component_1 = __webpack_require__(211);
 const authentication_service_1 = __webpack_require__(16);
 const LoginRoutes = [
     {
@@ -23304,7 +24635,7 @@ exports.LoginRoutingModule = LoginRoutingModule;
 
 /***/ }),
 
-/***/ 681:
+/***/ 682:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -23321,21 +24652,21 @@ exports.LoginModel = LoginModel;
 
 /***/ }),
 
-/***/ 682:
+/***/ 683:
 /***/ (function(module, exports) {
 
 module.exports = "<div tabindex=\"-1\" role=\"dialog\"><div class=\"modal-dialog\" role=\"document\"><div class=\"modal-content\"><form (ngSubmit)=\"onSubmit()\" #loginForm=\"ngForm\"><div class=\"modal-body\"><div class=\"form-group\"><label for=\"userName\">User Name</label><input class=\"form-control\" type=\"email\" id=\"userName\" aria-describedby=\"emailHelp\" placeholder=\"Enter User Name\" required [(ngModel)]=\"loginModel.username\" name=\"username\" #username=\"ngModel\"></div><div class=\"alert alert-danger\" [hidden]=\"username.valid || username.pristine\">User ID Required</div><div class=\"form-group\"><label for=\"password\" required>Password</label><input class=\"form-control\" type=\"password\" id=\"password\" placeholder=\"Password\" required [(ngModel)]=\"loginModel.password\" name=\"password\" #password=\"ngModel\"></div><div class=\"alert alert-danger\" [hidden]=\"password.valid || password.pristine\">Password Required</div></div><div class=\"modal-footer\"><button class=\"btn btn-secondary\" type=\"button\" data-dismiss=\"modal\" (click)=\"onCancel()\">Close</button><button class=\"btn btn-primary\" type=\"submit\">Submit</button></div></form></div></div></div>"
 
 /***/ }),
 
-/***/ 683:
+/***/ 684:
 /***/ (function(module, exports) {
 
 module.exports = ""
 
 /***/ }),
 
-/***/ 684:
+/***/ 685:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -23348,11 +24679,11 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 const core_1 = __webpack_require__(3);
 const common_1 = __webpack_require__(24);
-const about_component_1 = __webpack_require__(211);
-const contact_component_1 = __webpack_require__(212);
-const work_component_1 = __webpack_require__(213);
-const home_component_1 = __webpack_require__(214);
-const public_routing_module_1 = __webpack_require__(691);
+const about_component_1 = __webpack_require__(212);
+const contact_component_1 = __webpack_require__(213);
+const work_component_1 = __webpack_require__(214);
+const home_component_1 = __webpack_require__(215);
+const public_routing_module_1 = __webpack_require__(692);
 let PublicModule = class PublicModule {
 };
 PublicModule = __decorate([
@@ -23376,49 +24707,49 @@ exports.PublicModule = PublicModule;
 
 /***/ }),
 
-/***/ 685:
+/***/ 686:
 /***/ (function(module, exports) {
 
 module.exports = "hello from about component"
 
 /***/ }),
 
-/***/ 686:
+/***/ 687:
 /***/ (function(module, exports) {
 
 module.exports = "hello from contact component"
 
 /***/ }),
 
-/***/ 687:
+/***/ 688:
 /***/ (function(module, exports) {
 
 module.exports = "<p>hello from work</p>"
 
 /***/ }),
 
-/***/ 688:
+/***/ 689:
 /***/ (function(module, exports) {
 
 module.exports = {"App":{"test":"app comp loaded from JSON OK","test2":"bla2","test3":"bla3"},"Home":["one","two","three"]}
 
 /***/ }),
 
-/***/ 689:
+/***/ 690:
 /***/ (function(module, exports) {
 
 module.exports = "<div class=\"appHome\"><p>hello from home component</p></div>"
 
 /***/ }),
 
-/***/ 690:
+/***/ 691:
 /***/ (function(module, exports) {
 
 module.exports = ""
 
 /***/ }),
 
-/***/ 691:
+/***/ 692:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -23431,10 +24762,10 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 const router_1 = __webpack_require__(20);
 const core_1 = __webpack_require__(3);
-const about_component_1 = __webpack_require__(211);
-const home_component_1 = __webpack_require__(214);
-const work_component_1 = __webpack_require__(213);
-const contact_component_1 = __webpack_require__(212);
+const about_component_1 = __webpack_require__(212);
+const home_component_1 = __webpack_require__(215);
+const work_component_1 = __webpack_require__(214);
+const contact_component_1 = __webpack_require__(213);
 const PUBLIC_ROUTES = [
     {
         path: '',
@@ -23475,7 +24806,7 @@ exports.PublicRoutingModule = PublicRoutingModule;
 
 /***/ }),
 
-/***/ 692:
+/***/ 693:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -23488,17 +24819,17 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 const core_1 = __webpack_require__(3);
 const common_1 = __webpack_require__(24);
-const private_routing_module_1 = __webpack_require__(693);
+const private_routing_module_1 = __webpack_require__(694);
 const image_services_1 = __webpack_require__(72);
-const http_interceptors_1 = __webpack_require__(694);
-const user_services_1 = __webpack_require__(60);
+const http_interceptors_1 = __webpack_require__(695);
+const user_services_1 = __webpack_require__(61);
 const forms_1 = __webpack_require__(103);
 const account_services_1 = __webpack_require__(54);
 const permission_services_1 = __webpack_require__(46);
 const set_message_service_1 = __webpack_require__(53);
-const admin_domain_module_1 = __webpack_require__(696);
-const user_domain_module_1 = __webpack_require__(714);
-const service_model_manager_service_1 = __webpack_require__(32);
+const admin_domain_module_1 = __webpack_require__(697);
+const user_domain_module_1 = __webpack_require__(719);
+const service_model_manager_service_1 = __webpack_require__(33);
 let PrivateModule = class PrivateModule {
 };
 PrivateModule = __decorate([
@@ -23528,7 +24859,7 @@ exports.PrivateModule = PrivateModule;
 
 /***/ }),
 
-/***/ 693:
+/***/ 694:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -23572,13 +24903,13 @@ exports.PrivateRoutingModule = PrivateRoutingModule;
 
 /***/ }),
 
-/***/ 694:
+/***/ 695:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
-const http_1 = __webpack_require__(31);
-const jwt_interceptor_service_1 = __webpack_require__(695);
+const http_1 = __webpack_require__(32);
+const jwt_interceptor_service_1 = __webpack_require__(696);
 exports.httpInterceptorProviders = [
     { provide: http_1.HTTP_INTERCEPTORS, useClass: jwt_interceptor_service_1.JwtInterceptorService, multi: true }
 ];
@@ -23586,7 +24917,7 @@ exports.httpInterceptorProviders = [
 
 /***/ }),
 
-/***/ 695:
+/***/ 696:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -23611,7 +24942,7 @@ exports.JwtInterceptorService = JwtInterceptorService;
 
 /***/ }),
 
-/***/ 696:
+/***/ 697:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -23624,16 +24955,16 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 const core_1 = __webpack_require__(3);
 const common_1 = __webpack_require__(24);
-const admin_domain_routing_module_1 = __webpack_require__(697);
-const admin_domain_component_1 = __webpack_require__(217);
-const users_component_1 = __webpack_require__(215);
-const accounts_component_1 = __webpack_require__(218);
-const permissions_component_1 = __webpack_require__(219);
+const admin_domain_routing_module_1 = __webpack_require__(698);
+const admin_domain_component_1 = __webpack_require__(218);
+const users_component_1 = __webpack_require__(216);
+const accounts_component_1 = __webpack_require__(219);
+const permissions_component_1 = __webpack_require__(220);
 const forms_1 = __webpack_require__(103);
-const uuid_transform_1 = __webpack_require__(707);
-const message_bar_module_1 = __webpack_require__(220);
-const sidebar_cta_module_1 = __webpack_require__(221);
-const form_submission_module_1 = __webpack_require__(222);
+const uuid_transform_1 = __webpack_require__(708);
+const message_bar_module_1 = __webpack_require__(221);
+const sidebar_cta_module_1 = __webpack_require__(222);
+const form_submission_module_1 = __webpack_require__(223);
 let AdminDomainModule = class AdminDomainModule {
 };
 AdminDomainModule = __decorate([
@@ -23662,7 +24993,7 @@ exports.AdminDomainModule = AdminDomainModule;
 
 /***/ }),
 
-/***/ 697:
+/***/ 698:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -23675,11 +25006,11 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 const core_1 = __webpack_require__(3);
 const router_1 = __webpack_require__(20);
-const users_component_1 = __webpack_require__(215);
-const admin_domain_component_1 = __webpack_require__(217);
+const users_component_1 = __webpack_require__(216);
+const admin_domain_component_1 = __webpack_require__(218);
 const authentication_guard_service_1 = __webpack_require__(83);
-const accounts_component_1 = __webpack_require__(218);
-const permissions_component_1 = __webpack_require__(219);
+const accounts_component_1 = __webpack_require__(219);
+const permissions_component_1 = __webpack_require__(220);
 const ADMIN_ROUTES = [
     {
         path: '',
@@ -23719,7 +25050,7 @@ exports.AdminDomainRoutingModule = AdminDomainRoutingModule;
 
 /***/ }),
 
-/***/ 698:
+/***/ 699:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -23738,7 +25069,7 @@ exports.UserModel = UserModel;
 
 /***/ }),
 
-/***/ 699:
+/***/ 700:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -23755,7 +25086,7 @@ exports.AccountModel = AccountModel;
 
 /***/ }),
 
-/***/ 700:
+/***/ 701:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -23784,28 +25115,28 @@ exports.ImageModel = ImageModel;
 
 /***/ }),
 
-/***/ 701:
+/***/ 702:
 /***/ (function(module, exports) {
 
 module.exports = "<span *ngIf=\"!this.userService.message.failure\"><div *ngFor=\"let user of this.userService.users as users; index as i\"><div class=\"col-sm-6 col-md-4\"><form class=\"box-shadow panel panel-info\" #editUserForm=\"ngForm\" id=\"{{user.user_id}}\"><div class=\"panel-heading\"><h3 class=\"panel-title\">{{user.user_name}}</h3></div><div class=\"panel-body\"><div class=\"input-group input-group-sm\"><span class=\"input-group-addon\" disabled>Id</span><input class=\"form-control\" disabled type=\"text\" placeholder=\"{{user.user_id}}\"></div><div class=\"input-group input-group-sm\"><div class=\"input-group-btn\"><button class=\"btn btn-info dropdown-toggle\" type=\"button\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\" [attr.disabled]=\"this.doEdit[user.user_name] == true ? null : true\">Type<span class=\"caret\"></span></button><ul class=\"dropdown-menu\"><li *ngFor=\"let account of this.accountService.accounts as accounts; index as j\"><a (click)=\"(this.user.account_type = account.account_id) &amp;&amp; (this.userUpdated = true)\">{{account.account_name}}</a></li></ul></div><input class=\"form-control\" *ngIf=\"this.doEdit[user.user_name]\" [attr.disabled]=\"this.doEdit[user.user_name] == true ? null : true\" type=\"text\" placeholder=\"{{user.account_type}}\" [(ngModel)]=\"users[i].account_type\" name=\"account_type\" #account_type=\"ngModel\"><input class=\"form-control\" *ngIf=\"!this.doEdit[user.user_name]\" type=\"text\" placeholder=\"{{user.account_type | uuidTransform:this.accountService.accounts}}\" disabled></div><div class=\"input-group input-group-sm\"><div class=\"input-group-btn\"><button class=\"btn btn-info dropdown-toggle\" type=\"button\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\" [attr.disabled]=\"this.doEdit[user.user_name] == true ? null : true\">Language<span class=\"caret\"></span></button><ul class=\"dropdown-menu\"><li *ngFor=\"let language of this.formManager.languages\"><a (click)=\"(this.user.language = language.language) &amp;&amp; (this.userUpdated = true)\">{{language.language}}</a></li></ul></div><input class=\"form-control\" [attr.disabled]=\"this.doEdit[user.user_name] == true ? null : true\" type=\"text\" placeholder=\"{{user.language}}\" [(ngModel)]=\"users[i].language\" name=\"language\" #user_name=\"ngModel\"></div><div class=\"input-group input-group-sm\"><span class=\"input-group-addon\" [attr.disabled]=\"this.doEdit[user.user_name] == true ? null : true\">Password</span><input class=\"form-control\" [attr.disabled]=\"this.doEdit[user.user_name] == true ? null : true\" type=\"password\" placeholder=\"****\" [(ngModel)]=\"users[i].password\" name=\"password\" #password=\"ngModel\"></div></div><div class=\"panel-footer done-edit\" *ngIf=\"this.doEdit[user.user_name]\" (click)=\"done(this.user, i)\">done</div><div class=\"panel-footer\" *ngIf=\"!this.doEdit[user.user_name]\" (click)=\"edit(this.user, i)\">edit</div><div class=\"panel-footer\" *ngIf=\"!this.doEdit[user.user_name]\" (click)=\"delete(this.user.user_id, i)\">delete</div></form></div></div></span>"
 
 /***/ }),
 
-/***/ 702:
+/***/ 703:
 /***/ (function(module, exports) {
 
 module.exports = "<div class=\"col-sm-2\"><app-sidebar-cta></app-sidebar-cta></div><div class=\"col-sm-8\"><app-messagebar></app-messagebar><router-outlet></router-outlet></div><div class=\"col-sm-2\"><app-form-submission></app-form-submission></div>"
 
 /***/ }),
 
-/***/ 703:
+/***/ 704:
 /***/ (function(module, exports) {
 
 module.exports = ""
 
 /***/ }),
 
-/***/ 704:
+/***/ 705:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -23822,21 +25153,21 @@ exports.ListValidator = ListValidator;
 
 /***/ }),
 
-/***/ 705:
+/***/ 706:
 /***/ (function(module, exports) {
 
 module.exports = "<!--app-accounts-panel--><span *ngIf=\"!this.accountService.message.failure\"><div *ngFor=\"let account of this.accountService.accounts as accounts; index as i\"><div class=\"col-sm-6 col-md-4\"><form class=\"box-shadow panel panel-info\" #editAccountForm=\"ngForm\" id=\"{{account.account_id}}\"><div class=\"panel-heading\"><h3 class=\"panel-title\">{{account.account_name}}</h3></div><div class=\"panel-body\"><div class=\"input-group input-group-sm\"><span class=\"input-group-addon\">Id</span><input class=\"form-control\" type=\"text\" placeholder=\"{{account.account_id}}\" disabled></div><div class=\"input-group input-group-sm\" *ngFor=\"let permission of account.account_permissions; index as j\"><span class=\"input-group-btn\"><button class=\"btn btn-info\" (click)=\"revokePermission(permission, i)\" [attr.disabled]=\"this.doEdit[account.account_name] == true ? null : true\" type=\"button\">Revoke</button></span><input class=\"form-control\" type=\"text\" placeholder=\"{{permission | uuidTransform: this.permissionService.permissions}}\" disabled></div><div class=\"input-group input-group-sm\" *ngIf=\"account.account_permissions.length &lt; this.permissionService.permissions.length\"><div class=\"input-group-btn\" disabled><button class=\"btn btn-info dropdown-toggle\" [attr.disabled]=\"this.doEdit[account.account_name] == true ? null : true\" type=\"button\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">Grant<span class=\"caret\"></span></button><ul class=\"dropdown-menu\"><li *ngFor=\"let permission of this.permissionService.permissions as permissions; index as j\" id=\"{{permission.permission_id}}\"><a *ngIf=\"j == this.permissionService.permissions.length -1\" (click)=\"grantPermission('all', i)\">all permissions</a><a *ngIf=\"validator.validateList(this.accountService.accounts[i].account_permissions, permission.permission_id)\" (click)=\"grantPermission(permission.permission_id, i)\">{{permission.permission_name}}</a></li></ul></div><input class=\"form-control\" type=\"text\" placeholder=\"{{this.tempPlaceholder}}\"></div></div><div class=\"panel-footer\" *ngIf=\"!this.doEdit[account.account_name]\" (click)=\"this.edit(this.account, i)\" [attr.disabled]=\"this.doEdit[account.account_name] == true ? null : true || this.account.account_name == 'administrator' ? null: true \">edit</div><div class=\"panel-footer done-edit\" *ngIf=\"this.doEdit[account.account_name]\" (click)=\"this.done(this.account, i)\" [attr.disabled]=\"!this.doEdit[account.account_name] == true ? null : true\">done</div><div class=\"panel-footer\" *ngIf=\"!this.doEdit[account.account_name]\" (click)=\"this.delete(this.account.account_id, i)\" [attr.disabled]=\"this.doEdit[account.account_name] == true ? null : true || this.account.account_name == 'administrator' ? null: true \">delete</div></form></div></div></span>"
 
 /***/ }),
 
-/***/ 706:
+/***/ 707:
 /***/ (function(module, exports) {
 
 module.exports = "<!--app-permissions-panel--><span *ngIf=\"!this.permissionService.message.failure\"><div *ngFor=\"let permission of this.permissionService.permissions as permissions; index as i\"><div class=\"col-sm-6 col-md-4\"><form class=\"box-shadow panel panel-info\" #editUserForm=\"ngForm\" id=\"\"><div class=\"panel-heading\"><h3 class=\"panel-title\">{{permission.permission_name}}</h3></div><div class=\"panel-body\"><div class=\"input-group input-group-sm\"><span class=\"input-group-addon\">Id</span><input class=\"form-control\" type=\"text\" placeholder=\"{{permission.permission_id}}\" disabled></div></div><div class=\"panel-footer done-edit\" (click)=\"this.delete(this.permission.permission_id)\">delete</div></form></div></div></span>"
 
 /***/ }),
 
-/***/ 707:
+/***/ 708:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -23878,7 +25209,7 @@ exports.UuidTransformPipe = UuidTransformPipe;
 
 /***/ }),
 
-/***/ 708:
+/***/ 709:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -23894,18 +25225,37 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 const core_1 = __webpack_require__(3);
 const set_message_service_1 = __webpack_require__(53);
+const animations_1 = __webpack_require__(139);
 let MessagebarComponent = class MessagebarComponent {
     constructor(setMessage) {
         this.setMessage = setMessage;
     }
     ngOnInit() {
+        this.state = this.setMessage.getResponseState();
+    }
+    ngDoCheck() {
+        this.state = this.setMessage.getResponseState();
     }
 };
 MessagebarComponent = __decorate([
     core_1.Component({
         selector: "app-messagebar",
-        template: __webpack_require__(709),
-        encapsulation: core_1.ViewEncapsulation.None
+        template: __webpack_require__(710),
+        styles: [__webpack_require__(711)],
+        encapsulation: core_1.ViewEncapsulation.None,
+        animations: [
+            animations_1.trigger('message', [
+                animations_1.state('hidden', animations_1.style({
+                    opacity: '0',
+                    zIndex: '-10'
+                })),
+                animations_1.state('visible', animations_1.style({
+                    opacity: '1',
+                    zIndex: '1000'
+                })),
+                animations_1.transition('hidden <=> visible', [animations_1.animate(300, animations_1.style({})), animations_1.animate(500)])
+            ])
+        ]
     }),
     __metadata("design:paramtypes", [set_message_service_1.SetMessageService])
 ], MessagebarComponent);
@@ -23914,14 +25264,6003 @@ exports.MessagebarComponent = MessagebarComponent;
 
 /***/ }),
 
-/***/ 709:
+/***/ 710:
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"panel panel-warning\" *ngIf=\"this.setMessage.response.failure\"><div class=\"panel-heading\">status: {{ this.setMessage.response.failure.status }}</div><div class=\"panel-body\">message: {{ this.setMessage.response.failure.message }}</div></div><div class=\"panel panel-success\" *ngIf=\"this.setMessage.response.success\"><div class=\"panel-heading\">status: {{ this.setMessage.response.success.status }}</div><div class=\"panel-body\">message: {{ this.setMessage.response.success.message }}</div></div>"
+module.exports = "<div class=\"panel panel-warning message-panel\" *ngIf=\"this.setMessage.response.failure\" [@message]=\"state\"><div class=\"panel-heading\">status: {{ this.setMessage.response.failure.status }}</div><div class=\"panel-body\">message: {{ this.setMessage.response.failure.message }}</div></div><div class=\"panel panel-success message-panel\" *ngIf=\"this.setMessage.response.success\" [@message]=\"state\"><div class=\"panel-heading\">status: {{ this.setMessage.response.success.status }}</div><div class=\"panel-body\">message: {{ this.setMessage.response.success.message }}</div></div>"
 
 /***/ }),
 
-/***/ 710:
+/***/ 711:
+/***/ (function(module, exports) {
+
+module.exports = ".message-panel {\n  position: fixed;\n  bottom: 25px;\n  right: 20%; }\n"
+
+/***/ }),
+
+/***/ 712:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "BrowserAnimationsModule", function() { return BrowserAnimationsModule; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "NoopAnimationsModule", function() { return NoopAnimationsModule; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵBrowserAnimationBuilder", function() { return BrowserAnimationBuilder; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵBrowserAnimationFactory", function() { return BrowserAnimationFactory; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵAnimationRenderer", function() { return AnimationRenderer; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵAnimationRendererFactory", function() { return AnimationRendererFactory; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵa", function() { return BaseAnimationRenderer; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵf", function() { return BROWSER_ANIMATIONS_PROVIDERS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵg", function() { return BROWSER_NOOP_ANIMATIONS_PROVIDERS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵb", function() { return InjectableAnimationEngine; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵd", function() { return instantiateDefaultStyleNormalizer; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵe", function() { return instantiateRendererFactory; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵc", function() { return instantiateSupportedAnimationDriver; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_tslib__ = __webpack_require__(31);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_platform_browser__ = __webpack_require__(60);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_animations__ = __webpack_require__(139);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__angular_animations_browser__ = __webpack_require__(713);
+
+/**
+ * @license Angular v4.3.6
+ * (c) 2010-2017 Google, Inc. https://angular.io/
+ * License: MIT
+ */
+
+
+
+
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
+var BrowserAnimationBuilder = (function (_super) {
+    __WEBPACK_IMPORTED_MODULE_0_tslib__["a" /* __extends */](BrowserAnimationBuilder, _super);
+    /**
+     * @param {?} rootRenderer
+     * @param {?} doc
+     */
+    function BrowserAnimationBuilder(rootRenderer, doc) {
+        var _this = _super.call(this) || this;
+        _this._nextAnimationId = 0;
+        var typeData = {
+            id: '0',
+            encapsulation: __WEBPACK_IMPORTED_MODULE_1__angular_core__["ViewEncapsulation"].None,
+            styles: [],
+            data: { animation: [] }
+        };
+        _this._renderer = rootRenderer.createRenderer(doc.body, typeData);
+        return _this;
+    }
+    /**
+     * @param {?} animation
+     * @return {?}
+     */
+    BrowserAnimationBuilder.prototype.build = function (animation) {
+        var /** @type {?} */ id = this._nextAnimationId.toString();
+        this._nextAnimationId++;
+        var /** @type {?} */ entry = Array.isArray(animation) ? Object(__WEBPACK_IMPORTED_MODULE_3__angular_animations__["sequence"])(animation) : animation;
+        issueAnimationCommand(this._renderer, null, id, 'register', [entry]);
+        return new BrowserAnimationFactory(id, this._renderer);
+    };
+    return BrowserAnimationBuilder;
+}(__WEBPACK_IMPORTED_MODULE_3__angular_animations__["AnimationBuilder"]));
+BrowserAnimationBuilder.decorators = [
+    { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["Injectable"] },
+];
+/**
+ * @nocollapse
+ */
+BrowserAnimationBuilder.ctorParameters = function () { return [
+    { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["RendererFactory2"], },
+    { type: undefined, decorators: [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["Inject"], args: [__WEBPACK_IMPORTED_MODULE_2__angular_platform_browser__["DOCUMENT"],] },] },
+]; };
+var BrowserAnimationFactory = (function (_super) {
+    __WEBPACK_IMPORTED_MODULE_0_tslib__["a" /* __extends */](BrowserAnimationFactory, _super);
+    /**
+     * @param {?} _id
+     * @param {?} _renderer
+     */
+    function BrowserAnimationFactory(_id, _renderer) {
+        var _this = _super.call(this) || this;
+        _this._id = _id;
+        _this._renderer = _renderer;
+        return _this;
+    }
+    /**
+     * @param {?} element
+     * @param {?=} options
+     * @return {?}
+     */
+    BrowserAnimationFactory.prototype.create = function (element, options) {
+        return new RendererAnimationPlayer(this._id, element, options || {}, this._renderer);
+    };
+    return BrowserAnimationFactory;
+}(__WEBPACK_IMPORTED_MODULE_3__angular_animations__["AnimationFactory"]));
+var RendererAnimationPlayer = (function () {
+    /**
+     * @param {?} id
+     * @param {?} element
+     * @param {?} options
+     * @param {?} _renderer
+     */
+    function RendererAnimationPlayer(id, element, options, _renderer) {
+        this.id = id;
+        this.element = element;
+        this._renderer = _renderer;
+        this.parentPlayer = null;
+        this._started = false;
+        this.totalTime = 0;
+        this._command('create', options);
+    }
+    /**
+     * @param {?} eventName
+     * @param {?} callback
+     * @return {?}
+     */
+    RendererAnimationPlayer.prototype._listen = function (eventName, callback) {
+        return this._renderer.listen(this.element, "@@" + this.id + ":" + eventName, callback);
+    };
+    /**
+     * @param {?} command
+     * @param {...?} args
+     * @return {?}
+     */
+    RendererAnimationPlayer.prototype._command = function (command) {
+        var args = [];
+        for (var _i = 1; _i < arguments.length; _i++) {
+            args[_i - 1] = arguments[_i];
+        }
+        return issueAnimationCommand(this._renderer, this.element, this.id, command, args);
+    };
+    /**
+     * @param {?} fn
+     * @return {?}
+     */
+    RendererAnimationPlayer.prototype.onDone = function (fn) { this._listen('done', fn); };
+    /**
+     * @param {?} fn
+     * @return {?}
+     */
+    RendererAnimationPlayer.prototype.onStart = function (fn) { this._listen('start', fn); };
+    /**
+     * @param {?} fn
+     * @return {?}
+     */
+    RendererAnimationPlayer.prototype.onDestroy = function (fn) { this._listen('destroy', fn); };
+    /**
+     * @return {?}
+     */
+    RendererAnimationPlayer.prototype.init = function () { this._command('init'); };
+    /**
+     * @return {?}
+     */
+    RendererAnimationPlayer.prototype.hasStarted = function () { return this._started; };
+    /**
+     * @return {?}
+     */
+    RendererAnimationPlayer.prototype.play = function () {
+        this._command('play');
+        this._started = true;
+    };
+    /**
+     * @return {?}
+     */
+    RendererAnimationPlayer.prototype.pause = function () { this._command('pause'); };
+    /**
+     * @return {?}
+     */
+    RendererAnimationPlayer.prototype.restart = function () { this._command('restart'); };
+    /**
+     * @return {?}
+     */
+    RendererAnimationPlayer.prototype.finish = function () { this._command('finish'); };
+    /**
+     * @return {?}
+     */
+    RendererAnimationPlayer.prototype.destroy = function () { this._command('destroy'); };
+    /**
+     * @return {?}
+     */
+    RendererAnimationPlayer.prototype.reset = function () { this._command('reset'); };
+    /**
+     * @param {?} p
+     * @return {?}
+     */
+    RendererAnimationPlayer.prototype.setPosition = function (p) { this._command('setPosition', p); };
+    /**
+     * @return {?}
+     */
+    RendererAnimationPlayer.prototype.getPosition = function () { return 0; };
+    return RendererAnimationPlayer;
+}());
+/**
+ * @param {?} renderer
+ * @param {?} element
+ * @param {?} id
+ * @param {?} command
+ * @param {?} args
+ * @return {?}
+ */
+function issueAnimationCommand(renderer, element, id, command, args) {
+    return renderer.setProperty(element, "@@" + id + ":" + command, args);
+}
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
+var ANIMATION_PREFIX = '@';
+var DISABLE_ANIMATIONS_FLAG = '@.disabled';
+var AnimationRendererFactory = (function () {
+    /**
+     * @param {?} delegate
+     * @param {?} engine
+     * @param {?} _zone
+     */
+    function AnimationRendererFactory(delegate, engine, _zone) {
+        this.delegate = delegate;
+        this.engine = engine;
+        this._zone = _zone;
+        this._currentId = 0;
+        this._microtaskId = 1;
+        this._animationCallbacksBuffer = [];
+        this._rendererCache = new Map();
+        this._cdRecurDepth = 0;
+        engine.onRemovalComplete = function (element, delegate) {
+            // Note: if an component element has a leave animation, and the component
+            // a host leave animation, the view engine will call `removeChild` for the parent
+            // component renderer as well as for the child component renderer.
+            // Therefore, we need to check if we already removed the element.
+            if (delegate && delegate.parentNode(element)) {
+                delegate.removeChild(element.parentNode, element);
+            }
+        };
+    }
+    /**
+     * @param {?} hostElement
+     * @param {?} type
+     * @return {?}
+     */
+    AnimationRendererFactory.prototype.createRenderer = function (hostElement, type) {
+        var _this = this;
+        var /** @type {?} */ EMPTY_NAMESPACE_ID = '';
+        // cache the delegates to find out which cached delegate can
+        // be used by which cached renderer
+        var /** @type {?} */ delegate = this.delegate.createRenderer(hostElement, type);
+        if (!hostElement || !type || !type.data || !type.data['animation']) {
+            var /** @type {?} */ renderer = this._rendererCache.get(delegate);
+            if (!renderer) {
+                renderer = new BaseAnimationRenderer(EMPTY_NAMESPACE_ID, delegate, this.engine);
+                // only cache this result when the base renderer is used
+                this._rendererCache.set(delegate, renderer);
+            }
+            return renderer;
+        }
+        var /** @type {?} */ componentId = type.id;
+        var /** @type {?} */ namespaceId = type.id + '-' + this._currentId;
+        this._currentId++;
+        this.engine.register(namespaceId, hostElement);
+        var /** @type {?} */ animationTriggers = (type.data['animation']);
+        animationTriggers.forEach(function (trigger) { return _this.engine.registerTrigger(componentId, namespaceId, hostElement, trigger.name, trigger); });
+        return new AnimationRenderer(this, namespaceId, delegate, this.engine);
+    };
+    /**
+     * @return {?}
+     */
+    AnimationRendererFactory.prototype.begin = function () {
+        this._cdRecurDepth++;
+        if (this.delegate.begin) {
+            this.delegate.begin();
+        }
+    };
+    /**
+     * @return {?}
+     */
+    AnimationRendererFactory.prototype._scheduleCountTask = function () {
+        var _this = this;
+        Zone.current.scheduleMicroTask('incremenet the animation microtask', function () { return _this._microtaskId++; });
+    };
+    /**
+     * @param {?} count
+     * @param {?} fn
+     * @param {?} data
+     * @return {?}
+     */
+    AnimationRendererFactory.prototype.scheduleListenerCallback = function (count, fn, data) {
+        var _this = this;
+        if (count >= 0 && count < this._microtaskId) {
+            this._zone.run(function () { return fn(data); });
+            return;
+        }
+        if (this._animationCallbacksBuffer.length == 0) {
+            Promise.resolve(null).then(function () {
+                _this._zone.run(function () {
+                    _this._animationCallbacksBuffer.forEach(function (tuple) {
+                        var fn = tuple[0], data = tuple[1];
+                        fn(data);
+                    });
+                    _this._animationCallbacksBuffer = [];
+                });
+            });
+        }
+        this._animationCallbacksBuffer.push([fn, data]);
+    };
+    /**
+     * @return {?}
+     */
+    AnimationRendererFactory.prototype.end = function () {
+        var _this = this;
+        this._cdRecurDepth--;
+        // this is to prevent animations from running twice when an inner
+        // component does CD when a parent component insted has inserted it
+        if (this._cdRecurDepth == 0) {
+            this._zone.runOutsideAngular(function () {
+                _this._scheduleCountTask();
+                _this.engine.flush(_this._microtaskId);
+            });
+        }
+        if (this.delegate.end) {
+            this.delegate.end();
+        }
+    };
+    /**
+     * @return {?}
+     */
+    AnimationRendererFactory.prototype.whenRenderingDone = function () { return this.engine.whenRenderingDone(); };
+    return AnimationRendererFactory;
+}());
+AnimationRendererFactory.decorators = [
+    { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["Injectable"] },
+];
+/**
+ * @nocollapse
+ */
+AnimationRendererFactory.ctorParameters = function () { return [
+    { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["RendererFactory2"], },
+    { type: __WEBPACK_IMPORTED_MODULE_4__angular_animations_browser__["b" /* ɵAnimationEngine */], },
+    { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["NgZone"], },
+]; };
+var BaseAnimationRenderer = (function () {
+    /**
+     * @param {?} namespaceId
+     * @param {?} delegate
+     * @param {?} engine
+     */
+    function BaseAnimationRenderer(namespaceId, delegate, engine) {
+        this.namespaceId = namespaceId;
+        this.delegate = delegate;
+        this.engine = engine;
+        this.destroyNode = this.delegate.destroyNode ? function (n) { return delegate.destroyNode(n); } : null;
+    }
+    Object.defineProperty(BaseAnimationRenderer.prototype, "data", {
+        /**
+         * @return {?}
+         */
+        get: function () { return this.delegate.data; },
+        enumerable: true,
+        configurable: true
+    });
+    /**
+     * @return {?}
+     */
+    BaseAnimationRenderer.prototype.destroy = function () {
+        this.engine.destroy(this.namespaceId, this.delegate);
+        this.delegate.destroy();
+    };
+    /**
+     * @param {?} name
+     * @param {?=} namespace
+     * @return {?}
+     */
+    BaseAnimationRenderer.prototype.createElement = function (name, namespace) {
+        return this.delegate.createElement(name, namespace);
+    };
+    /**
+     * @param {?} value
+     * @return {?}
+     */
+    BaseAnimationRenderer.prototype.createComment = function (value) { return this.delegate.createComment(value); };
+    /**
+     * @param {?} value
+     * @return {?}
+     */
+    BaseAnimationRenderer.prototype.createText = function (value) { return this.delegate.createText(value); };
+    /**
+     * @param {?} parent
+     * @param {?} newChild
+     * @return {?}
+     */
+    BaseAnimationRenderer.prototype.appendChild = function (parent, newChild) {
+        this.delegate.appendChild(parent, newChild);
+        this.engine.onInsert(this.namespaceId, newChild, parent, false);
+    };
+    /**
+     * @param {?} parent
+     * @param {?} newChild
+     * @param {?} refChild
+     * @return {?}
+     */
+    BaseAnimationRenderer.prototype.insertBefore = function (parent, newChild, refChild) {
+        this.delegate.insertBefore(parent, newChild, refChild);
+        this.engine.onInsert(this.namespaceId, newChild, parent, true);
+    };
+    /**
+     * @param {?} parent
+     * @param {?} oldChild
+     * @return {?}
+     */
+    BaseAnimationRenderer.prototype.removeChild = function (parent, oldChild) {
+        this.engine.onRemove(this.namespaceId, oldChild, this.delegate);
+    };
+    /**
+     * @param {?} selectorOrNode
+     * @return {?}
+     */
+    BaseAnimationRenderer.prototype.selectRootElement = function (selectorOrNode) { return this.delegate.selectRootElement(selectorOrNode); };
+    /**
+     * @param {?} node
+     * @return {?}
+     */
+    BaseAnimationRenderer.prototype.parentNode = function (node) { return this.delegate.parentNode(node); };
+    /**
+     * @param {?} node
+     * @return {?}
+     */
+    BaseAnimationRenderer.prototype.nextSibling = function (node) { return this.delegate.nextSibling(node); };
+    /**
+     * @param {?} el
+     * @param {?} name
+     * @param {?} value
+     * @param {?=} namespace
+     * @return {?}
+     */
+    BaseAnimationRenderer.prototype.setAttribute = function (el, name, value, namespace) {
+        this.delegate.setAttribute(el, name, value, namespace);
+    };
+    /**
+     * @param {?} el
+     * @param {?} name
+     * @param {?=} namespace
+     * @return {?}
+     */
+    BaseAnimationRenderer.prototype.removeAttribute = function (el, name, namespace) {
+        this.delegate.removeAttribute(el, name, namespace);
+    };
+    /**
+     * @param {?} el
+     * @param {?} name
+     * @return {?}
+     */
+    BaseAnimationRenderer.prototype.addClass = function (el, name) { this.delegate.addClass(el, name); };
+    /**
+     * @param {?} el
+     * @param {?} name
+     * @return {?}
+     */
+    BaseAnimationRenderer.prototype.removeClass = function (el, name) { this.delegate.removeClass(el, name); };
+    /**
+     * @param {?} el
+     * @param {?} style
+     * @param {?} value
+     * @param {?=} flags
+     * @return {?}
+     */
+    BaseAnimationRenderer.prototype.setStyle = function (el, style, value, flags) {
+        this.delegate.setStyle(el, style, value, flags);
+    };
+    /**
+     * @param {?} el
+     * @param {?} style
+     * @param {?=} flags
+     * @return {?}
+     */
+    BaseAnimationRenderer.prototype.removeStyle = function (el, style, flags) {
+        this.delegate.removeStyle(el, style, flags);
+    };
+    /**
+     * @param {?} el
+     * @param {?} name
+     * @param {?} value
+     * @return {?}
+     */
+    BaseAnimationRenderer.prototype.setProperty = function (el, name, value) {
+        if (name.charAt(0) == ANIMATION_PREFIX && name == DISABLE_ANIMATIONS_FLAG) {
+            this.disableAnimations(el, !!value);
+        }
+        else {
+            this.delegate.setProperty(el, name, value);
+        }
+    };
+    /**
+     * @param {?} node
+     * @param {?} value
+     * @return {?}
+     */
+    BaseAnimationRenderer.prototype.setValue = function (node, value) { this.delegate.setValue(node, value); };
+    /**
+     * @param {?} target
+     * @param {?} eventName
+     * @param {?} callback
+     * @return {?}
+     */
+    BaseAnimationRenderer.prototype.listen = function (target, eventName, callback) {
+        return this.delegate.listen(target, eventName, callback);
+    };
+    /**
+     * @param {?} element
+     * @param {?} value
+     * @return {?}
+     */
+    BaseAnimationRenderer.prototype.disableAnimations = function (element, value) {
+        this.engine.disableAnimations(element, value);
+    };
+    return BaseAnimationRenderer;
+}());
+var AnimationRenderer = (function (_super) {
+    __WEBPACK_IMPORTED_MODULE_0_tslib__["a" /* __extends */](AnimationRenderer, _super);
+    /**
+     * @param {?} factory
+     * @param {?} namespaceId
+     * @param {?} delegate
+     * @param {?} engine
+     */
+    function AnimationRenderer(factory, namespaceId, delegate, engine) {
+        var _this = _super.call(this, namespaceId, delegate, engine) || this;
+        _this.factory = factory;
+        _this.namespaceId = namespaceId;
+        return _this;
+    }
+    /**
+     * @param {?} el
+     * @param {?} name
+     * @param {?} value
+     * @return {?}
+     */
+    AnimationRenderer.prototype.setProperty = function (el, name, value) {
+        if (name.charAt(0) == ANIMATION_PREFIX) {
+            if (name.charAt(1) == '.' && name == DISABLE_ANIMATIONS_FLAG) {
+                value = value === undefined ? true : !!value;
+                this.disableAnimations(el, /** @type {?} */ (value));
+            }
+            else {
+                this.engine.process(this.namespaceId, el, name.substr(1), value);
+            }
+        }
+        else {
+            this.delegate.setProperty(el, name, value);
+        }
+    };
+    /**
+     * @param {?} target
+     * @param {?} eventName
+     * @param {?} callback
+     * @return {?}
+     */
+    AnimationRenderer.prototype.listen = function (target, eventName, callback) {
+        var _this = this;
+        if (eventName.charAt(0) == ANIMATION_PREFIX) {
+            var /** @type {?} */ element = resolveElementFromTarget(target);
+            var /** @type {?} */ name = eventName.substr(1);
+            var /** @type {?} */ phase = '';
+            // @listener.phase is for trigger animation callbacks
+            // @@listener is for animation builder callbacks
+            if (name.charAt(0) != ANIMATION_PREFIX) {
+                _a = parseTriggerCallbackName(name), name = _a[0], phase = _a[1];
+            }
+            return this.engine.listen(this.namespaceId, element, name, phase, function (event) {
+                var /** @type {?} */ countId = ((event))['_data'] || -1;
+                _this.factory.scheduleListenerCallback(countId, callback, event);
+            });
+        }
+        return this.delegate.listen(target, eventName, callback);
+        var _a;
+    };
+    return AnimationRenderer;
+}(BaseAnimationRenderer));
+/**
+ * @param {?} target
+ * @return {?}
+ */
+function resolveElementFromTarget(target) {
+    switch (target) {
+        case 'body':
+            return document.body;
+        case 'document':
+            return document;
+        case 'window':
+            return window;
+        default:
+            return target;
+    }
+}
+/**
+ * @param {?} triggerName
+ * @return {?}
+ */
+function parseTriggerCallbackName(triggerName) {
+    var /** @type {?} */ dotIndex = triggerName.indexOf('.');
+    var /** @type {?} */ trigger = triggerName.substring(0, dotIndex);
+    var /** @type {?} */ phase = triggerName.substr(dotIndex + 1);
+    return [trigger, phase];
+}
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
+var InjectableAnimationEngine = (function (_super) {
+    __WEBPACK_IMPORTED_MODULE_0_tslib__["a" /* __extends */](InjectableAnimationEngine, _super);
+    /**
+     * @param {?} driver
+     * @param {?} normalizer
+     */
+    function InjectableAnimationEngine(driver, normalizer) {
+        return _super.call(this, driver, normalizer) || this;
+    }
+    return InjectableAnimationEngine;
+}(__WEBPACK_IMPORTED_MODULE_4__angular_animations_browser__["b" /* ɵAnimationEngine */]));
+InjectableAnimationEngine.decorators = [
+    { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["Injectable"] },
+];
+/**
+ * @nocollapse
+ */
+InjectableAnimationEngine.ctorParameters = function () { return [
+    { type: __WEBPACK_IMPORTED_MODULE_4__angular_animations_browser__["a" /* AnimationDriver */], },
+    { type: __WEBPACK_IMPORTED_MODULE_4__angular_animations_browser__["c" /* ɵAnimationStyleNormalizer */], },
+]; };
+/**
+ * @return {?}
+ */
+function instantiateSupportedAnimationDriver() {
+    if (Object(__WEBPACK_IMPORTED_MODULE_4__angular_animations_browser__["g" /* ɵsupportsWebAnimations */])()) {
+        return new __WEBPACK_IMPORTED_MODULE_4__angular_animations_browser__["e" /* ɵWebAnimationsDriver */]();
+    }
+    return new __WEBPACK_IMPORTED_MODULE_4__angular_animations_browser__["d" /* ɵNoopAnimationDriver */]();
+}
+/**
+ * @return {?}
+ */
+function instantiateDefaultStyleNormalizer() {
+    return new __WEBPACK_IMPORTED_MODULE_4__angular_animations_browser__["f" /* ɵWebAnimationsStyleNormalizer */]();
+}
+/**
+ * @param {?} renderer
+ * @param {?} engine
+ * @param {?} zone
+ * @return {?}
+ */
+function instantiateRendererFactory(renderer, engine, zone) {
+    return new AnimationRendererFactory(renderer, engine, zone);
+}
+var SHARED_ANIMATION_PROVIDERS = [
+    { provide: __WEBPACK_IMPORTED_MODULE_3__angular_animations__["AnimationBuilder"], useClass: BrowserAnimationBuilder },
+    { provide: __WEBPACK_IMPORTED_MODULE_4__angular_animations_browser__["c" /* ɵAnimationStyleNormalizer */], useFactory: instantiateDefaultStyleNormalizer },
+    { provide: __WEBPACK_IMPORTED_MODULE_4__angular_animations_browser__["b" /* ɵAnimationEngine */], useClass: InjectableAnimationEngine }, {
+        provide: __WEBPACK_IMPORTED_MODULE_1__angular_core__["RendererFactory2"],
+        useFactory: instantiateRendererFactory,
+        deps: [__WEBPACK_IMPORTED_MODULE_2__angular_platform_browser__["ɵDomRendererFactory2"], __WEBPACK_IMPORTED_MODULE_4__angular_animations_browser__["b" /* ɵAnimationEngine */], __WEBPACK_IMPORTED_MODULE_1__angular_core__["NgZone"]]
+    }
+];
+/**
+ * Separate providers from the actual module so that we can do a local modification in Google3 to
+ * include them in the BrowserModule.
+ */
+var BROWSER_ANIMATIONS_PROVIDERS = [
+    { provide: __WEBPACK_IMPORTED_MODULE_4__angular_animations_browser__["a" /* AnimationDriver */], useFactory: instantiateSupportedAnimationDriver }
+].concat(SHARED_ANIMATION_PROVIDERS);
+/**
+ * Separate providers from the actual module so that we can do a local modification in Google3 to
+ * include them in the BrowserTestingModule.
+ */
+var BROWSER_NOOP_ANIMATIONS_PROVIDERS = [{ provide: __WEBPACK_IMPORTED_MODULE_4__angular_animations_browser__["a" /* AnimationDriver */], useClass: __WEBPACK_IMPORTED_MODULE_4__angular_animations_browser__["d" /* ɵNoopAnimationDriver */] }].concat(SHARED_ANIMATION_PROVIDERS);
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
+/**
+ * \@experimental Animation support is experimental.
+ */
+var BrowserAnimationsModule = (function () {
+    function BrowserAnimationsModule() {
+    }
+    return BrowserAnimationsModule;
+}());
+BrowserAnimationsModule.decorators = [
+    { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["NgModule"], args: [{
+                exports: [__WEBPACK_IMPORTED_MODULE_2__angular_platform_browser__["BrowserModule"]],
+                providers: BROWSER_ANIMATIONS_PROVIDERS,
+            },] },
+];
+/**
+ * @nocollapse
+ */
+BrowserAnimationsModule.ctorParameters = function () { return []; };
+/**
+ * \@experimental Animation support is experimental.
+ */
+var NoopAnimationsModule = (function () {
+    function NoopAnimationsModule() {
+    }
+    return NoopAnimationsModule;
+}());
+NoopAnimationsModule.decorators = [
+    { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["NgModule"], args: [{
+                exports: [__WEBPACK_IMPORTED_MODULE_2__angular_platform_browser__["BrowserModule"]],
+                providers: BROWSER_NOOP_ANIMATIONS_PROVIDERS,
+            },] },
+];
+/**
+ * @nocollapse
+ */
+NoopAnimationsModule.ctorParameters = function () { return []; };
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
+/**
+ * @module
+ * @description
+ * Entry point for all animation APIs of the animation browser package.
+ */
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
+/**
+ * @module
+ * @description
+ * Entry point for all public APIs of the animation package.
+ */
+/**
+ * Generated bundle index. Do not edit.
+ */
+
+//# sourceMappingURL=animations.es5.js.map
+
+
+/***/ }),
+
+/***/ 713:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AnimationDriver; });
+/* unused harmony export ɵAnimation */
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return AnimationStyleNormalizer; });
+/* unused harmony export ɵNoopAnimationStyleNormalizer */
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "f", function() { return WebAnimationsStyleNormalizer; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return NoopAnimationDriver; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return AnimationEngine; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "e", function() { return WebAnimationsDriver; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "g", function() { return supportsWebAnimations; });
+/* unused harmony export ɵWebAnimationsPlayer */
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_tslib__ = __webpack_require__(31);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_animations__ = __webpack_require__(139);
+
+/**
+ * @license Angular v4.3.6
+ * (c) 2010-2017 Google, Inc. https://angular.io/
+ * License: MIT
+ */
+
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
+function optimizeGroupPlayer(players) {
+    switch (players.length) {
+        case 0:
+            return new __WEBPACK_IMPORTED_MODULE_1__angular_animations__["NoopAnimationPlayer"]();
+        case 1:
+            return players[0];
+        default:
+            return new __WEBPACK_IMPORTED_MODULE_1__angular_animations__["ɵAnimationGroupPlayer"](players);
+    }
+}
+function normalizeKeyframes(driver, normalizer, element, keyframes, preStyles, postStyles) {
+    if (preStyles === void 0) { preStyles = {}; }
+    if (postStyles === void 0) { postStyles = {}; }
+    var errors = [];
+    var normalizedKeyframes = [];
+    var previousOffset = -1;
+    var previousKeyframe = null;
+    keyframes.forEach(function (kf) {
+        var offset = kf['offset'];
+        var isSameOffset = offset == previousOffset;
+        var normalizedKeyframe = (isSameOffset && previousKeyframe) || {};
+        Object.keys(kf).forEach(function (prop) {
+            var normalizedProp = prop;
+            var normalizedValue = kf[prop];
+            if (prop !== 'offset') {
+                normalizedProp = normalizer.normalizePropertyName(normalizedProp, errors);
+                switch (normalizedValue) {
+                    case __WEBPACK_IMPORTED_MODULE_1__angular_animations__["ɵPRE_STYLE"]:
+                        normalizedValue = preStyles[prop];
+                        break;
+                    case __WEBPACK_IMPORTED_MODULE_1__angular_animations__["AUTO_STYLE"]:
+                        normalizedValue = postStyles[prop];
+                        break;
+                    default:
+                        normalizedValue =
+                            normalizer.normalizeStyleValue(prop, normalizedProp, normalizedValue, errors);
+                        break;
+                }
+            }
+            normalizedKeyframe[normalizedProp] = normalizedValue;
+        });
+        if (!isSameOffset) {
+            normalizedKeyframes.push(normalizedKeyframe);
+        }
+        previousKeyframe = normalizedKeyframe;
+        previousOffset = offset;
+    });
+    if (errors.length) {
+        var LINE_START = '\n - ';
+        throw new Error("Unable to animate due to the following errors:" + LINE_START + errors.join(LINE_START));
+    }
+    return normalizedKeyframes;
+}
+function listenOnPlayer(player, eventName, event, callback) {
+    switch (eventName) {
+        case 'start':
+            player.onStart(function () { return callback(event && copyAnimationEvent(event, 'start', player.totalTime)); });
+            break;
+        case 'done':
+            player.onDone(function () { return callback(event && copyAnimationEvent(event, 'done', player.totalTime)); });
+            break;
+        case 'destroy':
+            player.onDestroy(function () { return callback(event && copyAnimationEvent(event, 'destroy', player.totalTime)); });
+            break;
+    }
+}
+function copyAnimationEvent(e, phaseName, totalTime) {
+    var event = makeAnimationEvent(e.element, e.triggerName, e.fromState, e.toState, phaseName || e.phaseName, totalTime == undefined ? e.totalTime : totalTime);
+    var data = e['_data'];
+    if (data != null) {
+        event['_data'] = data;
+    }
+    return event;
+}
+function makeAnimationEvent(element, triggerName, fromState, toState, phaseName, totalTime) {
+    if (phaseName === void 0) { phaseName = ''; }
+    if (totalTime === void 0) { totalTime = 0; }
+    return { element: element, triggerName: triggerName, fromState: fromState, toState: toState, phaseName: phaseName, totalTime: totalTime };
+}
+function getOrSetAsInMap(map, key, defaultValue) {
+    var value;
+    if (map instanceof Map) {
+        value = map.get(key);
+        if (!value) {
+            map.set(key, value = defaultValue);
+        }
+    }
+    else {
+        value = map[key];
+        if (!value) {
+            value = map[key] = defaultValue;
+        }
+    }
+    return value;
+}
+function parseTimelineCommand(command) {
+    var separatorPos = command.indexOf(':');
+    var id = command.substring(1, separatorPos);
+    var action = command.substr(separatorPos + 1);
+    return [id, action];
+}
+var _contains = function (elm1, elm2) { return false; };
+var _matches = function (element, selector) { return false; };
+var _query = function (element, selector, multi) {
+    return [];
+};
+if (typeof Element != 'undefined') {
+    // this is well supported in all browsers
+    _contains = function (elm1, elm2) { return elm1.contains(elm2); };
+    if (Element.prototype.matches) {
+        _matches = function (element, selector) { return element.matches(selector); };
+    }
+    else {
+        var proto = Element.prototype;
+        var fn_1 = proto.matchesSelector || proto.mozMatchesSelector || proto.msMatchesSelector ||
+            proto.oMatchesSelector || proto.webkitMatchesSelector;
+        if (fn_1) {
+            _matches = function (element, selector) { return fn_1.apply(element, [selector]); };
+        }
+    }
+    _query = function (element, selector, multi) {
+        var results = [];
+        if (multi) {
+            results.push.apply(results, element.querySelectorAll(selector));
+        }
+        else {
+            var elm = element.querySelector(selector);
+            if (elm) {
+                results.push(elm);
+            }
+        }
+        return results;
+    };
+}
+var matchesElement = _matches;
+var containsElement = _contains;
+var invokeQuery = _query;
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
+/**
+ * @experimental
+ */
+var NoopAnimationDriver = (function () {
+    function NoopAnimationDriver() {
+    }
+    NoopAnimationDriver.prototype.matchesElement = function (element, selector) {
+        return matchesElement(element, selector);
+    };
+    NoopAnimationDriver.prototype.containsElement = function (elm1, elm2) { return containsElement(elm1, elm2); };
+    NoopAnimationDriver.prototype.query = function (element, selector, multi) {
+        return invokeQuery(element, selector, multi);
+    };
+    NoopAnimationDriver.prototype.computeStyle = function (element, prop, defaultValue) {
+        return defaultValue || '';
+    };
+    NoopAnimationDriver.prototype.animate = function (element, keyframes, duration, delay, easing, previousPlayers) {
+        if (previousPlayers === void 0) { previousPlayers = []; }
+        return new __WEBPACK_IMPORTED_MODULE_1__angular_animations__["NoopAnimationPlayer"]();
+    };
+    return NoopAnimationDriver;
+}());
+/**
+ * @experimental
+ */
+var AnimationDriver = (function () {
+    function AnimationDriver() {
+    }
+    return AnimationDriver;
+}());
+AnimationDriver.NOOP = new NoopAnimationDriver();
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
+var ONE_SECOND = 1000;
+var SUBSTITUTION_EXPR_START = '{{';
+var SUBSTITUTION_EXPR_END = '}}';
+var ENTER_CLASSNAME = 'ng-enter';
+var LEAVE_CLASSNAME = 'ng-leave';
+var ENTER_SELECTOR = '.ng-enter';
+var LEAVE_SELECTOR = '.ng-leave';
+var NG_TRIGGER_CLASSNAME = 'ng-trigger';
+var NG_TRIGGER_SELECTOR = '.ng-trigger';
+var NG_ANIMATING_CLASSNAME = 'ng-animating';
+var NG_ANIMATING_SELECTOR = '.ng-animating';
+function resolveTimingValue(value) {
+    if (typeof value == 'number')
+        return value;
+    var matches = value.match(/^(-?[\.\d]+)(m?s)/);
+    if (!matches || matches.length < 2)
+        return 0;
+    return _convertTimeValueToMS(parseFloat(matches[1]), matches[2]);
+}
+function _convertTimeValueToMS(value, unit) {
+    switch (unit) {
+        case 's':
+            return value * ONE_SECOND;
+        default:
+            return value;
+    }
+}
+function resolveTiming(timings, errors, allowNegativeValues) {
+    return timings.hasOwnProperty('duration') ?
+        timings :
+        parseTimeExpression(timings, errors, allowNegativeValues);
+}
+function parseTimeExpression(exp, errors, allowNegativeValues) {
+    var regex = /^(-?[\.\d]+)(m?s)(?:\s+(-?[\.\d]+)(m?s))?(?:\s+([-a-z]+(?:\(.+?\))?))?$/i;
+    var duration;
+    var delay = 0;
+    var easing = '';
+    if (typeof exp === 'string') {
+        var matches = exp.match(regex);
+        if (matches === null) {
+            errors.push("The provided timing value \"" + exp + "\" is invalid.");
+            return { duration: 0, delay: 0, easing: '' };
+        }
+        duration = _convertTimeValueToMS(parseFloat(matches[1]), matches[2]);
+        var delayMatch = matches[3];
+        if (delayMatch != null) {
+            delay = _convertTimeValueToMS(Math.floor(parseFloat(delayMatch)), matches[4]);
+        }
+        var easingVal = matches[5];
+        if (easingVal) {
+            easing = easingVal;
+        }
+    }
+    else {
+        duration = exp;
+    }
+    if (!allowNegativeValues) {
+        var containsErrors = false;
+        var startIndex = errors.length;
+        if (duration < 0) {
+            errors.push("Duration values below 0 are not allowed for this animation step.");
+            containsErrors = true;
+        }
+        if (delay < 0) {
+            errors.push("Delay values below 0 are not allowed for this animation step.");
+            containsErrors = true;
+        }
+        if (containsErrors) {
+            errors.splice(startIndex, 0, "The provided timing value \"" + exp + "\" is invalid.");
+        }
+    }
+    return { duration: duration, delay: delay, easing: easing };
+}
+function copyObj(obj, destination) {
+    if (destination === void 0) { destination = {}; }
+    Object.keys(obj).forEach(function (prop) { destination[prop] = obj[prop]; });
+    return destination;
+}
+function normalizeStyles(styles) {
+    var normalizedStyles = {};
+    if (Array.isArray(styles)) {
+        styles.forEach(function (data) { return copyStyles(data, false, normalizedStyles); });
+    }
+    else {
+        copyStyles(styles, false, normalizedStyles);
+    }
+    return normalizedStyles;
+}
+function copyStyles(styles, readPrototype, destination) {
+    if (destination === void 0) { destination = {}; }
+    if (readPrototype) {
+        // we make use of a for-in loop so that the
+        // prototypically inherited properties are
+        // revealed from the backFill map
+        for (var prop in styles) {
+            destination[prop] = styles[prop];
+        }
+    }
+    else {
+        copyObj(styles, destination);
+    }
+    return destination;
+}
+function setStyles(element, styles) {
+    if (element['style']) {
+        Object.keys(styles).forEach(function (prop) {
+            var camelProp = dashCaseToCamelCase(prop);
+            element.style[camelProp] = styles[prop];
+        });
+    }
+}
+function eraseStyles(element, styles) {
+    if (element['style']) {
+        Object.keys(styles).forEach(function (prop) {
+            var camelProp = dashCaseToCamelCase(prop);
+            element.style[camelProp] = '';
+        });
+    }
+}
+function normalizeAnimationEntry(steps) {
+    if (Array.isArray(steps)) {
+        if (steps.length == 1)
+            return steps[0];
+        return Object(__WEBPACK_IMPORTED_MODULE_1__angular_animations__["sequence"])(steps);
+    }
+    return steps;
+}
+function validateStyleParams(value, options, errors) {
+    var params = options.params || {};
+    var matches = extractStyleParams(value);
+    if (matches.length) {
+        matches.forEach(function (varName) {
+            if (!params.hasOwnProperty(varName)) {
+                errors.push("Unable to resolve the local animation param " + varName + " in the given list of values");
+            }
+        });
+    }
+}
+var PARAM_REGEX = new RegExp(SUBSTITUTION_EXPR_START + "\\s*(.+?)\\s*" + SUBSTITUTION_EXPR_END, 'g');
+function extractStyleParams(value) {
+    var params = [];
+    if (typeof value === 'string') {
+        var val = value.toString();
+        var match = void 0;
+        while (match = PARAM_REGEX.exec(val)) {
+            params.push(match[1]);
+        }
+        PARAM_REGEX.lastIndex = 0;
+    }
+    return params;
+}
+function interpolateParams(value, params, errors) {
+    var original = value.toString();
+    var str = original.replace(PARAM_REGEX, function (_, varName) {
+        var localVal = params[varName];
+        // this means that the value was never overidden by the data passed in by the user
+        if (!params.hasOwnProperty(varName)) {
+            errors.push("Please provide a value for the animation param " + varName);
+            localVal = '';
+        }
+        return localVal.toString();
+    });
+    // we do this to assert that numeric values stay as they are
+    return str == original ? value : str;
+}
+function iteratorToArray(iterator) {
+    var arr = [];
+    var item = iterator.next();
+    while (!item.done) {
+        arr.push(item.value);
+        item = iterator.next();
+    }
+    return arr;
+}
+var DASH_CASE_REGEXP = /-+([a-z0-9])/g;
+function dashCaseToCamelCase(input) {
+    return input.replace(DASH_CASE_REGEXP, function () {
+        var m = [];
+        for (var _i = 0; _i < arguments.length; _i++) {
+            m[_i] = arguments[_i];
+        }
+        return m[1].toUpperCase();
+    });
+}
+function allowPreviousPlayerStylesMerge(duration, delay) {
+    return duration === 0 || delay === 0;
+}
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
+var EMPTY_ANIMATION_OPTIONS = {};
+/**
+ * @abstract
+ */
+var Ast = (function () {
+    function Ast() {
+        this.options = EMPTY_ANIMATION_OPTIONS;
+    }
+    /**
+     * @abstract
+     * @param {?} ast
+     * @param {?} context
+     * @return {?}
+     */
+    Ast.prototype.visit = function (ast, context) { };
+    Object.defineProperty(Ast.prototype, "params", {
+        /**
+         * @return {?}
+         */
+        get: function () { return this.options['params'] || null; },
+        enumerable: true,
+        configurable: true
+    });
+    return Ast;
+}());
+var TriggerAst = (function (_super) {
+    __WEBPACK_IMPORTED_MODULE_0_tslib__["a" /* __extends */](TriggerAst, _super);
+    /**
+     * @param {?} name
+     * @param {?} states
+     * @param {?} transitions
+     */
+    function TriggerAst(name, states, transitions) {
+        var _this = _super.call(this) || this;
+        _this.name = name;
+        _this.states = states;
+        _this.transitions = transitions;
+        _this.queryCount = 0;
+        _this.depCount = 0;
+        return _this;
+    }
+    /**
+     * @param {?} visitor
+     * @param {?} context
+     * @return {?}
+     */
+    TriggerAst.prototype.visit = function (visitor, context) { return visitor.visitTrigger(this, context); };
+    return TriggerAst;
+}(Ast));
+var StateAst = (function (_super) {
+    __WEBPACK_IMPORTED_MODULE_0_tslib__["a" /* __extends */](StateAst, _super);
+    /**
+     * @param {?} name
+     * @param {?} style
+     */
+    function StateAst(name, style$$1) {
+        var _this = _super.call(this) || this;
+        _this.name = name;
+        _this.style = style$$1;
+        return _this;
+    }
+    /**
+     * @param {?} visitor
+     * @param {?} context
+     * @return {?}
+     */
+    StateAst.prototype.visit = function (visitor, context) { return visitor.visitState(this, context); };
+    return StateAst;
+}(Ast));
+var TransitionAst = (function (_super) {
+    __WEBPACK_IMPORTED_MODULE_0_tslib__["a" /* __extends */](TransitionAst, _super);
+    /**
+     * @param {?} matchers
+     * @param {?} animation
+     */
+    function TransitionAst(matchers, animation) {
+        var _this = _super.call(this) || this;
+        _this.matchers = matchers;
+        _this.animation = animation;
+        _this.queryCount = 0;
+        _this.depCount = 0;
+        return _this;
+    }
+    /**
+     * @param {?} visitor
+     * @param {?} context
+     * @return {?}
+     */
+    TransitionAst.prototype.visit = function (visitor, context) { return visitor.visitTransition(this, context); };
+    return TransitionAst;
+}(Ast));
+var SequenceAst = (function (_super) {
+    __WEBPACK_IMPORTED_MODULE_0_tslib__["a" /* __extends */](SequenceAst, _super);
+    /**
+     * @param {?} steps
+     */
+    function SequenceAst(steps) {
+        var _this = _super.call(this) || this;
+        _this.steps = steps;
+        return _this;
+    }
+    /**
+     * @param {?} visitor
+     * @param {?} context
+     * @return {?}
+     */
+    SequenceAst.prototype.visit = function (visitor, context) { return visitor.visitSequence(this, context); };
+    return SequenceAst;
+}(Ast));
+var GroupAst = (function (_super) {
+    __WEBPACK_IMPORTED_MODULE_0_tslib__["a" /* __extends */](GroupAst, _super);
+    /**
+     * @param {?} steps
+     */
+    function GroupAst(steps) {
+        var _this = _super.call(this) || this;
+        _this.steps = steps;
+        return _this;
+    }
+    /**
+     * @param {?} visitor
+     * @param {?} context
+     * @return {?}
+     */
+    GroupAst.prototype.visit = function (visitor, context) { return visitor.visitGroup(this, context); };
+    return GroupAst;
+}(Ast));
+var AnimateAst = (function (_super) {
+    __WEBPACK_IMPORTED_MODULE_0_tslib__["a" /* __extends */](AnimateAst, _super);
+    /**
+     * @param {?} timings
+     * @param {?} style
+     */
+    function AnimateAst(timings, style$$1) {
+        var _this = _super.call(this) || this;
+        _this.timings = timings;
+        _this.style = style$$1;
+        return _this;
+    }
+    /**
+     * @param {?} visitor
+     * @param {?} context
+     * @return {?}
+     */
+    AnimateAst.prototype.visit = function (visitor, context) { return visitor.visitAnimate(this, context); };
+    return AnimateAst;
+}(Ast));
+var StyleAst = (function (_super) {
+    __WEBPACK_IMPORTED_MODULE_0_tslib__["a" /* __extends */](StyleAst, _super);
+    /**
+     * @param {?} styles
+     * @param {?} easing
+     * @param {?} offset
+     */
+    function StyleAst(styles, easing, offset) {
+        var _this = _super.call(this) || this;
+        _this.styles = styles;
+        _this.easing = easing;
+        _this.offset = offset;
+        _this.isEmptyStep = false;
+        _this.containsDynamicStyles = false;
+        return _this;
+    }
+    /**
+     * @param {?} visitor
+     * @param {?} context
+     * @return {?}
+     */
+    StyleAst.prototype.visit = function (visitor, context) { return visitor.visitStyle(this, context); };
+    return StyleAst;
+}(Ast));
+var KeyframesAst = (function (_super) {
+    __WEBPACK_IMPORTED_MODULE_0_tslib__["a" /* __extends */](KeyframesAst, _super);
+    /**
+     * @param {?} styles
+     */
+    function KeyframesAst(styles) {
+        var _this = _super.call(this) || this;
+        _this.styles = styles;
+        return _this;
+    }
+    /**
+     * @param {?} visitor
+     * @param {?} context
+     * @return {?}
+     */
+    KeyframesAst.prototype.visit = function (visitor, context) { return visitor.visitKeyframes(this, context); };
+    return KeyframesAst;
+}(Ast));
+var ReferenceAst = (function (_super) {
+    __WEBPACK_IMPORTED_MODULE_0_tslib__["a" /* __extends */](ReferenceAst, _super);
+    /**
+     * @param {?} animation
+     */
+    function ReferenceAst(animation) {
+        var _this = _super.call(this) || this;
+        _this.animation = animation;
+        return _this;
+    }
+    /**
+     * @param {?} visitor
+     * @param {?} context
+     * @return {?}
+     */
+    ReferenceAst.prototype.visit = function (visitor, context) { return visitor.visitReference(this, context); };
+    return ReferenceAst;
+}(Ast));
+var AnimateChildAst = (function (_super) {
+    __WEBPACK_IMPORTED_MODULE_0_tslib__["a" /* __extends */](AnimateChildAst, _super);
+    function AnimateChildAst() {
+        return _super.call(this) || this;
+    }
+    /**
+     * @param {?} visitor
+     * @param {?} context
+     * @return {?}
+     */
+    AnimateChildAst.prototype.visit = function (visitor, context) { return visitor.visitAnimateChild(this, context); };
+    return AnimateChildAst;
+}(Ast));
+var AnimateRefAst = (function (_super) {
+    __WEBPACK_IMPORTED_MODULE_0_tslib__["a" /* __extends */](AnimateRefAst, _super);
+    /**
+     * @param {?} animation
+     */
+    function AnimateRefAst(animation) {
+        var _this = _super.call(this) || this;
+        _this.animation = animation;
+        return _this;
+    }
+    /**
+     * @param {?} visitor
+     * @param {?} context
+     * @return {?}
+     */
+    AnimateRefAst.prototype.visit = function (visitor, context) { return visitor.visitAnimateRef(this, context); };
+    return AnimateRefAst;
+}(Ast));
+var QueryAst = (function (_super) {
+    __WEBPACK_IMPORTED_MODULE_0_tslib__["a" /* __extends */](QueryAst, _super);
+    /**
+     * @param {?} selector
+     * @param {?} limit
+     * @param {?} optional
+     * @param {?} includeSelf
+     * @param {?} animation
+     */
+    function QueryAst(selector, limit, optional, includeSelf, animation) {
+        var _this = _super.call(this) || this;
+        _this.selector = selector;
+        _this.limit = limit;
+        _this.optional = optional;
+        _this.includeSelf = includeSelf;
+        _this.animation = animation;
+        return _this;
+    }
+    /**
+     * @param {?} visitor
+     * @param {?} context
+     * @return {?}
+     */
+    QueryAst.prototype.visit = function (visitor, context) { return visitor.visitQuery(this, context); };
+    return QueryAst;
+}(Ast));
+var StaggerAst = (function (_super) {
+    __WEBPACK_IMPORTED_MODULE_0_tslib__["a" /* __extends */](StaggerAst, _super);
+    /**
+     * @param {?} timings
+     * @param {?} animation
+     */
+    function StaggerAst(timings, animation) {
+        var _this = _super.call(this) || this;
+        _this.timings = timings;
+        _this.animation = animation;
+        return _this;
+    }
+    /**
+     * @param {?} visitor
+     * @param {?} context
+     * @return {?}
+     */
+    StaggerAst.prototype.visit = function (visitor, context) { return visitor.visitStagger(this, context); };
+    return StaggerAst;
+}(Ast));
+var TimingAst = (function (_super) {
+    __WEBPACK_IMPORTED_MODULE_0_tslib__["a" /* __extends */](TimingAst, _super);
+    /**
+     * @param {?} duration
+     * @param {?=} delay
+     * @param {?=} easing
+     */
+    function TimingAst(duration, delay, easing) {
+        if (delay === void 0) { delay = 0; }
+        if (easing === void 0) { easing = null; }
+        var _this = _super.call(this) || this;
+        _this.duration = duration;
+        _this.delay = delay;
+        _this.easing = easing;
+        return _this;
+    }
+    /**
+     * @param {?} visitor
+     * @param {?} context
+     * @return {?}
+     */
+    TimingAst.prototype.visit = function (visitor, context) { return visitor.visitTiming(this, context); };
+    return TimingAst;
+}(Ast));
+var DynamicTimingAst = (function (_super) {
+    __WEBPACK_IMPORTED_MODULE_0_tslib__["a" /* __extends */](DynamicTimingAst, _super);
+    /**
+     * @param {?} value
+     */
+    function DynamicTimingAst(value) {
+        var _this = _super.call(this, 0, 0, '') || this;
+        _this.value = value;
+        return _this;
+    }
+    /**
+     * @param {?} visitor
+     * @param {?} context
+     * @return {?}
+     */
+    DynamicTimingAst.prototype.visit = function (visitor, context) { return visitor.visitTiming(this, context); };
+    return DynamicTimingAst;
+}(TimingAst));
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
+/**
+ * @param {?} visitor
+ * @param {?} node
+ * @param {?} context
+ * @return {?}
+ */
+function visitAnimationNode(visitor, node, context) {
+    switch (node.type) {
+        case 7 /* Trigger */:
+            return visitor.visitTrigger(/** @type {?} */ (node), context);
+        case 0 /* State */:
+            return visitor.visitState(/** @type {?} */ (node), context);
+        case 1 /* Transition */:
+            return visitor.visitTransition(/** @type {?} */ (node), context);
+        case 2 /* Sequence */:
+            return visitor.visitSequence(/** @type {?} */ (node), context);
+        case 3 /* Group */:
+            return visitor.visitGroup(/** @type {?} */ (node), context);
+        case 4 /* Animate */:
+            return visitor.visitAnimate(/** @type {?} */ (node), context);
+        case 5 /* Keyframes */:
+            return visitor.visitKeyframes(/** @type {?} */ (node), context);
+        case 6 /* Style */:
+            return visitor.visitStyle(/** @type {?} */ (node), context);
+        case 8 /* Reference */:
+            return visitor.visitReference(/** @type {?} */ (node), context);
+        case 9 /* AnimateChild */:
+            return visitor.visitAnimateChild(/** @type {?} */ (node), context);
+        case 10 /* AnimateRef */:
+            return visitor.visitAnimateRef(/** @type {?} */ (node), context);
+        case 11 /* Query */:
+            return visitor.visitQuery(/** @type {?} */ (node), context);
+        case 12 /* Stagger */:
+            return visitor.visitStagger(/** @type {?} */ (node), context);
+        default:
+            throw new Error("Unable to resolve animation metadata node #" + node.type);
+    }
+}
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
+var ANY_STATE = '*';
+/**
+ * @param {?} transitionValue
+ * @param {?} errors
+ * @return {?}
+ */
+function parseTransitionExpr(transitionValue, errors) {
+    var /** @type {?} */ expressions = [];
+    if (typeof transitionValue == 'string') {
+        ((transitionValue))
+            .split(/\s*,\s*/)
+            .forEach(function (str) { return parseInnerTransitionStr(str, expressions, errors); });
+    }
+    else {
+        expressions.push(/** @type {?} */ (transitionValue));
+    }
+    return expressions;
+}
+/**
+ * @param {?} eventStr
+ * @param {?} expressions
+ * @param {?} errors
+ * @return {?}
+ */
+function parseInnerTransitionStr(eventStr, expressions, errors) {
+    if (eventStr[0] == ':') {
+        eventStr = parseAnimationAlias(eventStr, errors);
+    }
+    var /** @type {?} */ match = eventStr.match(/^(\*|[-\w]+)\s*(<?[=-]>)\s*(\*|[-\w]+)$/);
+    if (match == null || match.length < 4) {
+        errors.push("The provided transition expression \"" + eventStr + "\" is not supported");
+        return expressions;
+    }
+    var /** @type {?} */ fromState = match[1];
+    var /** @type {?} */ separator = match[2];
+    var /** @type {?} */ toState = match[3];
+    expressions.push(makeLambdaFromStates(fromState, toState));
+    var /** @type {?} */ isFullAnyStateExpr = fromState == ANY_STATE && toState == ANY_STATE;
+    if (separator[0] == '<' && !isFullAnyStateExpr) {
+        expressions.push(makeLambdaFromStates(toState, fromState));
+    }
+}
+/**
+ * @param {?} alias
+ * @param {?} errors
+ * @return {?}
+ */
+function parseAnimationAlias(alias, errors) {
+    switch (alias) {
+        case ':enter':
+            return 'void => *';
+        case ':leave':
+            return '* => void';
+        default:
+            errors.push("The transition alias value \"" + alias + "\" is not supported");
+            return '* => *';
+    }
+}
+/**
+ * @param {?} lhs
+ * @param {?} rhs
+ * @return {?}
+ */
+function makeLambdaFromStates(lhs, rhs) {
+    return function (fromState, toState) {
+        var /** @type {?} */ lhsMatch = lhs == ANY_STATE || lhs == fromState;
+        var /** @type {?} */ rhsMatch = rhs == ANY_STATE || rhs == toState;
+        if (!lhsMatch && typeof fromState === 'boolean') {
+            lhsMatch = fromState ? lhs === 'true' : lhs === 'false';
+        }
+        if (!rhsMatch && typeof toState === 'boolean') {
+            rhsMatch = toState ? rhs === 'true' : rhs === 'false';
+        }
+        return lhsMatch && rhsMatch;
+    };
+}
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
+var SELF_TOKEN = ':self';
+var SELF_TOKEN_REGEX = new RegExp("s*" + SELF_TOKEN + "s*,?", 'g');
+/**
+ * @param {?} metadata
+ * @param {?} errors
+ * @return {?}
+ */
+function buildAnimationAst(metadata, errors) {
+    return new AnimationAstBuilderVisitor().build(metadata, errors);
+}
+var LEAVE_TOKEN = ':leave';
+var LEAVE_TOKEN_REGEX = new RegExp(LEAVE_TOKEN, 'g');
+var ENTER_TOKEN = ':enter';
+var ENTER_TOKEN_REGEX = new RegExp(ENTER_TOKEN, 'g');
+var ROOT_SELECTOR = '';
+var AnimationAstBuilderVisitor = (function () {
+    function AnimationAstBuilderVisitor() {
+    }
+    /**
+     * @param {?} metadata
+     * @param {?} errors
+     * @return {?}
+     */
+    AnimationAstBuilderVisitor.prototype.build = function (metadata, errors) {
+        var /** @type {?} */ context = new AnimationAstBuilderContext(errors);
+        this._resetContextStyleTimingState(context);
+        return (visitAnimationNode(this, normalizeAnimationEntry(metadata), context));
+    };
+    /**
+     * @param {?} context
+     * @return {?}
+     */
+    AnimationAstBuilderVisitor.prototype._resetContextStyleTimingState = function (context) {
+        context.currentQuerySelector = ROOT_SELECTOR;
+        context.collectedStyles = {};
+        context.collectedStyles[ROOT_SELECTOR] = {};
+        context.currentTime = 0;
+    };
+    /**
+     * @param {?} metadata
+     * @param {?} context
+     * @return {?}
+     */
+    AnimationAstBuilderVisitor.prototype.visitTrigger = function (metadata, context) {
+        var _this = this;
+        var /** @type {?} */ queryCount = context.queryCount = 0;
+        var /** @type {?} */ depCount = context.depCount = 0;
+        var /** @type {?} */ states = [];
+        var /** @type {?} */ transitions = [];
+        metadata.definitions.forEach(function (def) {
+            _this._resetContextStyleTimingState(context);
+            if (def.type == 0 /* State */) {
+                var /** @type {?} */ stateDef_1 = (def);
+                var /** @type {?} */ name = stateDef_1.name;
+                name.split(/\s*,\s*/).forEach(function (n) {
+                    stateDef_1.name = n;
+                    states.push(_this.visitState(stateDef_1, context));
+                });
+                stateDef_1.name = name;
+            }
+            else if (def.type == 1 /* Transition */) {
+                var /** @type {?} */ transition = _this.visitTransition(/** @type {?} */ (def), context);
+                queryCount += transition.queryCount;
+                depCount += transition.depCount;
+                transitions.push(transition);
+            }
+            else {
+                context.errors.push('only state() and transition() definitions can sit inside of a trigger()');
+            }
+        });
+        var /** @type {?} */ ast = new TriggerAst(metadata.name, states, transitions);
+        ast.options = normalizeAnimationOptions(metadata.options);
+        ast.queryCount = queryCount;
+        ast.depCount = depCount;
+        return ast;
+    };
+    /**
+     * @param {?} metadata
+     * @param {?} context
+     * @return {?}
+     */
+    AnimationAstBuilderVisitor.prototype.visitState = function (metadata, context) {
+        var /** @type {?} */ styleAst = this.visitStyle(metadata.styles, context);
+        var /** @type {?} */ astParams = (metadata.options && metadata.options.params) || null;
+        if (styleAst.containsDynamicStyles) {
+            var /** @type {?} */ missingSubs_1 = new Set();
+            var /** @type {?} */ params_1 = astParams || {};
+            styleAst.styles.forEach(function (value) {
+                if (isObject(value)) {
+                    var /** @type {?} */ stylesObj_1 = (value);
+                    Object.keys(stylesObj_1).forEach(function (prop) {
+                        extractStyleParams(stylesObj_1[prop]).forEach(function (sub) {
+                            if (!params_1.hasOwnProperty(sub)) {
+                                missingSubs_1.add(sub);
+                            }
+                        });
+                    });
+                }
+            });
+            if (missingSubs_1.size) {
+                var /** @type {?} */ missingSubsArr = iteratorToArray(missingSubs_1.values());
+                context.errors.push("state(\"" + metadata.name + "\", ...) must define default values for all the following style substitutions: " + missingSubsArr.join(', '));
+            }
+        }
+        var /** @type {?} */ stateAst = new StateAst(metadata.name, styleAst);
+        if (astParams) {
+            stateAst.options = { params: astParams };
+        }
+        return stateAst;
+    };
+    /**
+     * @param {?} metadata
+     * @param {?} context
+     * @return {?}
+     */
+    AnimationAstBuilderVisitor.prototype.visitTransition = function (metadata, context) {
+        context.queryCount = 0;
+        context.depCount = 0;
+        var /** @type {?} */ entry = visitAnimationNode(this, normalizeAnimationEntry(metadata.animation), context);
+        var /** @type {?} */ matchers = parseTransitionExpr(metadata.expr, context.errors);
+        var /** @type {?} */ ast = new TransitionAst(matchers, entry);
+        ast.options = normalizeAnimationOptions(metadata.options);
+        ast.queryCount = context.queryCount;
+        ast.depCount = context.depCount;
+        return ast;
+    };
+    /**
+     * @param {?} metadata
+     * @param {?} context
+     * @return {?}
+     */
+    AnimationAstBuilderVisitor.prototype.visitSequence = function (metadata, context) {
+        var _this = this;
+        var /** @type {?} */ ast = new SequenceAst(metadata.steps.map(function (s) { return visitAnimationNode(_this, s, context); }));
+        ast.options = normalizeAnimationOptions(metadata.options);
+        return ast;
+    };
+    /**
+     * @param {?} metadata
+     * @param {?} context
+     * @return {?}
+     */
+    AnimationAstBuilderVisitor.prototype.visitGroup = function (metadata, context) {
+        var _this = this;
+        var /** @type {?} */ currentTime = context.currentTime;
+        var /** @type {?} */ furthestTime = 0;
+        var /** @type {?} */ steps = metadata.steps.map(function (step) {
+            context.currentTime = currentTime;
+            var /** @type {?} */ innerAst = visitAnimationNode(_this, step, context);
+            furthestTime = Math.max(furthestTime, context.currentTime);
+            return innerAst;
+        });
+        context.currentTime = furthestTime;
+        var /** @type {?} */ ast = new GroupAst(steps);
+        ast.options = normalizeAnimationOptions(metadata.options);
+        return ast;
+    };
+    /**
+     * @param {?} metadata
+     * @param {?} context
+     * @return {?}
+     */
+    AnimationAstBuilderVisitor.prototype.visitAnimate = function (metadata, context) {
+        var /** @type {?} */ timingAst = constructTimingAst(metadata.timings, context.errors);
+        context.currentAnimateTimings = timingAst;
+        var /** @type {?} */ styles;
+        var /** @type {?} */ styleMetadata = metadata.styles ? metadata.styles : Object(__WEBPACK_IMPORTED_MODULE_1__angular_animations__["style"])({});
+        if (styleMetadata.type == 5 /* Keyframes */) {
+            styles = this.visitKeyframes(/** @type {?} */ (styleMetadata), context);
+        }
+        else {
+            var /** @type {?} */ styleMetadata_1 = (metadata.styles);
+            var /** @type {?} */ isEmpty = false;
+            if (!styleMetadata_1) {
+                isEmpty = true;
+                var /** @type {?} */ newStyleData = {};
+                if (timingAst.easing) {
+                    newStyleData['easing'] = timingAst.easing;
+                }
+                styleMetadata_1 = Object(__WEBPACK_IMPORTED_MODULE_1__angular_animations__["style"])(newStyleData);
+            }
+            context.currentTime += timingAst.duration + timingAst.delay;
+            var /** @type {?} */ styleAst = this.visitStyle(styleMetadata_1, context);
+            styleAst.isEmptyStep = isEmpty;
+            styles = styleAst;
+        }
+        context.currentAnimateTimings = null;
+        return new AnimateAst(timingAst, styles);
+    };
+    /**
+     * @param {?} metadata
+     * @param {?} context
+     * @return {?}
+     */
+    AnimationAstBuilderVisitor.prototype.visitStyle = function (metadata, context) {
+        var /** @type {?} */ ast = this._makeStyleAst(metadata, context);
+        this._validateStyleAst(ast, context);
+        return ast;
+    };
+    /**
+     * @param {?} metadata
+     * @param {?} context
+     * @return {?}
+     */
+    AnimationAstBuilderVisitor.prototype._makeStyleAst = function (metadata, context) {
+        var /** @type {?} */ styles = [];
+        if (Array.isArray(metadata.styles)) {
+            ((metadata.styles)).forEach(function (styleTuple) {
+                if (typeof styleTuple == 'string') {
+                    if (styleTuple == __WEBPACK_IMPORTED_MODULE_1__angular_animations__["AUTO_STYLE"]) {
+                        styles.push(/** @type {?} */ (styleTuple));
+                    }
+                    else {
+                        context.errors.push("The provided style string value " + styleTuple + " is not allowed.");
+                    }
+                }
+                else {
+                    styles.push(/** @type {?} */ (styleTuple));
+                }
+            });
+        }
+        else {
+            styles.push(metadata.styles);
+        }
+        var /** @type {?} */ containsDynamicStyles = false;
+        var /** @type {?} */ collectedEasing = null;
+        styles.forEach(function (styleData) {
+            if (isObject(styleData)) {
+                var /** @type {?} */ styleMap = (styleData);
+                var /** @type {?} */ easing = styleMap['easing'];
+                if (easing) {
+                    collectedEasing = (easing);
+                    delete styleMap['easing'];
+                }
+                if (!containsDynamicStyles) {
+                    for (var /** @type {?} */ prop in styleMap) {
+                        var /** @type {?} */ value = styleMap[prop];
+                        if (value.toString().indexOf(SUBSTITUTION_EXPR_START) >= 0) {
+                            containsDynamicStyles = true;
+                            break;
+                        }
+                    }
+                }
+            }
+        });
+        var /** @type {?} */ ast = new StyleAst(styles, collectedEasing, metadata.offset);
+        ast.containsDynamicStyles = containsDynamicStyles;
+        return ast;
+    };
+    /**
+     * @param {?} ast
+     * @param {?} context
+     * @return {?}
+     */
+    AnimationAstBuilderVisitor.prototype._validateStyleAst = function (ast, context) {
+        var /** @type {?} */ timings = context.currentAnimateTimings;
+        var /** @type {?} */ endTime = context.currentTime;
+        var /** @type {?} */ startTime = context.currentTime;
+        if (timings && startTime > 0) {
+            startTime -= timings.duration + timings.delay;
+        }
+        ast.styles.forEach(function (tuple) {
+            if (typeof tuple == 'string')
+                return;
+            Object.keys(tuple).forEach(function (prop) {
+                var /** @type {?} */ collectedStyles = context.collectedStyles[((context.currentQuerySelector))];
+                var /** @type {?} */ collectedEntry = collectedStyles[prop];
+                var /** @type {?} */ updateCollectedStyle = true;
+                if (collectedEntry) {
+                    if (startTime != endTime && startTime >= collectedEntry.startTime &&
+                        endTime <= collectedEntry.endTime) {
+                        context.errors.push("The CSS property \"" + prop + "\" that exists between the times of \"" + collectedEntry.startTime + "ms\" and \"" + collectedEntry.endTime + "ms\" is also being animated in a parallel animation between the times of \"" + startTime + "ms\" and \"" + endTime + "ms\"");
+                        updateCollectedStyle = false;
+                    }
+                    // we always choose the smaller start time value since we
+                    // want to have a record of the entire animation window where
+                    // the style property is being animated in between
+                    startTime = collectedEntry.startTime;
+                }
+                if (updateCollectedStyle) {
+                    collectedStyles[prop] = { startTime: startTime, endTime: endTime };
+                }
+                if (context.options) {
+                    validateStyleParams(tuple[prop], context.options, context.errors);
+                }
+            });
+        });
+    };
+    /**
+     * @param {?} metadata
+     * @param {?} context
+     * @return {?}
+     */
+    AnimationAstBuilderVisitor.prototype.visitKeyframes = function (metadata, context) {
+        var _this = this;
+        if (!context.currentAnimateTimings) {
+            context.errors.push("keyframes() must be placed inside of a call to animate()");
+            return new KeyframesAst([]);
+        }
+        var /** @type {?} */ MAX_KEYFRAME_OFFSET = 1;
+        var /** @type {?} */ totalKeyframesWithOffsets = 0;
+        var /** @type {?} */ offsets = [];
+        var /** @type {?} */ offsetsOutOfOrder = false;
+        var /** @type {?} */ keyframesOutOfRange = false;
+        var /** @type {?} */ previousOffset = 0;
+        var /** @type {?} */ keyframes = metadata.steps.map(function (styles) {
+            var /** @type {?} */ style$$1 = _this._makeStyleAst(styles, context);
+            var /** @type {?} */ offsetVal = style$$1.offset != null ? style$$1.offset : consumeOffset(style$$1.styles);
+            var /** @type {?} */ offset = 0;
+            if (offsetVal != null) {
+                totalKeyframesWithOffsets++;
+                offset = style$$1.offset = offsetVal;
+            }
+            keyframesOutOfRange = keyframesOutOfRange || offset < 0 || offset > 1;
+            offsetsOutOfOrder = offsetsOutOfOrder || offset < previousOffset;
+            previousOffset = offset;
+            offsets.push(offset);
+            return style$$1;
+        });
+        if (keyframesOutOfRange) {
+            context.errors.push("Please ensure that all keyframe offsets are between 0 and 1");
+        }
+        if (offsetsOutOfOrder) {
+            context.errors.push("Please ensure that all keyframe offsets are in order");
+        }
+        var /** @type {?} */ length = metadata.steps.length;
+        var /** @type {?} */ generatedOffset = 0;
+        if (totalKeyframesWithOffsets > 0 && totalKeyframesWithOffsets < length) {
+            context.errors.push("Not all style() steps within the declared keyframes() contain offsets");
+        }
+        else if (totalKeyframesWithOffsets == 0) {
+            generatedOffset = MAX_KEYFRAME_OFFSET / (length - 1);
+        }
+        var /** @type {?} */ limit = length - 1;
+        var /** @type {?} */ currentTime = context.currentTime;
+        var /** @type {?} */ currentAnimateTimings = ((context.currentAnimateTimings));
+        var /** @type {?} */ animateDuration = currentAnimateTimings.duration;
+        keyframes.forEach(function (kf, i) {
+            var /** @type {?} */ offset = generatedOffset > 0 ? (i == limit ? 1 : (generatedOffset * i)) : offsets[i];
+            var /** @type {?} */ durationUpToThisFrame = offset * animateDuration;
+            context.currentTime = currentTime + currentAnimateTimings.delay + durationUpToThisFrame;
+            currentAnimateTimings.duration = durationUpToThisFrame;
+            _this._validateStyleAst(kf, context);
+            kf.offset = offset;
+        });
+        return new KeyframesAst(keyframes);
+    };
+    /**
+     * @param {?} metadata
+     * @param {?} context
+     * @return {?}
+     */
+    AnimationAstBuilderVisitor.prototype.visitReference = function (metadata, context) {
+        var /** @type {?} */ entry = visitAnimationNode(this, normalizeAnimationEntry(metadata.animation), context);
+        var /** @type {?} */ ast = new ReferenceAst(entry);
+        ast.options = normalizeAnimationOptions(metadata.options);
+        return ast;
+    };
+    /**
+     * @param {?} metadata
+     * @param {?} context
+     * @return {?}
+     */
+    AnimationAstBuilderVisitor.prototype.visitAnimateChild = function (metadata, context) {
+        context.depCount++;
+        var /** @type {?} */ ast = new AnimateChildAst();
+        ast.options = normalizeAnimationOptions(metadata.options);
+        return ast;
+    };
+    /**
+     * @param {?} metadata
+     * @param {?} context
+     * @return {?}
+     */
+    AnimationAstBuilderVisitor.prototype.visitAnimateRef = function (metadata, context) {
+        var /** @type {?} */ animation = this.visitReference(metadata.animation, context);
+        var /** @type {?} */ ast = new AnimateRefAst(animation);
+        ast.options = normalizeAnimationOptions(metadata.options);
+        return ast;
+    };
+    /**
+     * @param {?} metadata
+     * @param {?} context
+     * @return {?}
+     */
+    AnimationAstBuilderVisitor.prototype.visitQuery = function (metadata, context) {
+        var /** @type {?} */ parentSelector = ((context.currentQuerySelector));
+        var /** @type {?} */ options = ((metadata.options || {}));
+        context.queryCount++;
+        context.currentQuery = metadata;
+        var _a = normalizeSelector(metadata.selector), selector = _a[0], includeSelf = _a[1];
+        context.currentQuerySelector =
+            parentSelector.length ? (parentSelector + ' ' + selector) : selector;
+        getOrSetAsInMap(context.collectedStyles, context.currentQuerySelector, {});
+        var /** @type {?} */ entry = visitAnimationNode(this, normalizeAnimationEntry(metadata.animation), context);
+        context.currentQuery = null;
+        context.currentQuerySelector = parentSelector;
+        var /** @type {?} */ ast = new QueryAst(selector, options.limit || 0, !!options.optional, includeSelf, entry);
+        ast.originalSelector = metadata.selector;
+        ast.options = normalizeAnimationOptions(metadata.options);
+        return ast;
+    };
+    /**
+     * @param {?} metadata
+     * @param {?} context
+     * @return {?}
+     */
+    AnimationAstBuilderVisitor.prototype.visitStagger = function (metadata, context) {
+        if (!context.currentQuery) {
+            context.errors.push("stagger() can only be used inside of query()");
+        }
+        var /** @type {?} */ timings = metadata.timings === 'full' ?
+            { duration: 0, delay: 0, easing: 'full' } :
+            resolveTiming(metadata.timings, context.errors, true);
+        var /** @type {?} */ animation = visitAnimationNode(this, normalizeAnimationEntry(metadata.animation), context);
+        return new StaggerAst(timings, animation);
+    };
+    return AnimationAstBuilderVisitor;
+}());
+/**
+ * @param {?} selector
+ * @return {?}
+ */
+function normalizeSelector(selector) {
+    var /** @type {?} */ hasAmpersand = selector.split(/\s*,\s*/).find(function (token) { return token == SELF_TOKEN; }) ? true : false;
+    if (hasAmpersand) {
+        selector = selector.replace(SELF_TOKEN_REGEX, '');
+    }
+    selector = selector.replace(ENTER_TOKEN_REGEX, ENTER_SELECTOR)
+        .replace(LEAVE_TOKEN_REGEX, LEAVE_SELECTOR)
+        .replace(/@\*/g, NG_TRIGGER_SELECTOR)
+        .replace(/@\w+/g, function (match) { return NG_TRIGGER_SELECTOR + '-' + match.substr(1); })
+        .replace(/:animating/g, NG_ANIMATING_SELECTOR);
+    return [selector, hasAmpersand];
+}
+/**
+ * @param {?} obj
+ * @return {?}
+ */
+function normalizeParams(obj) {
+    return obj ? copyObj(obj) : null;
+}
+var AnimationAstBuilderContext = (function () {
+    /**
+     * @param {?} errors
+     */
+    function AnimationAstBuilderContext(errors) {
+        this.errors = errors;
+        this.queryCount = 0;
+        this.depCount = 0;
+        this.currentTransition = null;
+        this.currentQuery = null;
+        this.currentQuerySelector = null;
+        this.currentAnimateTimings = null;
+        this.currentTime = 0;
+        this.collectedStyles = {};
+        this.options = null;
+    }
+    return AnimationAstBuilderContext;
+}());
+/**
+ * @param {?} styles
+ * @return {?}
+ */
+function consumeOffset(styles) {
+    if (typeof styles == 'string')
+        return null;
+    var /** @type {?} */ offset = null;
+    if (Array.isArray(styles)) {
+        styles.forEach(function (styleTuple) {
+            if (isObject(styleTuple) && styleTuple.hasOwnProperty('offset')) {
+                var /** @type {?} */ obj = (styleTuple);
+                offset = parseFloat(/** @type {?} */ (obj['offset']));
+                delete obj['offset'];
+            }
+        });
+    }
+    else if (isObject(styles) && styles.hasOwnProperty('offset')) {
+        var /** @type {?} */ obj = (styles);
+        offset = parseFloat(/** @type {?} */ (obj['offset']));
+        delete obj['offset'];
+    }
+    return offset;
+}
+/**
+ * @param {?} value
+ * @return {?}
+ */
+function isObject(value) {
+    return !Array.isArray(value) && typeof value == 'object';
+}
+/**
+ * @param {?} value
+ * @param {?} errors
+ * @return {?}
+ */
+function constructTimingAst(value, errors) {
+    var /** @type {?} */ timings = null;
+    if (value.hasOwnProperty('duration')) {
+        timings = (value);
+    }
+    else if (typeof value == 'number') {
+        var /** @type {?} */ duration = resolveTiming(/** @type {?} */ (value), errors).duration;
+        return new TimingAst(/** @type {?} */ (value), 0, '');
+    }
+    var /** @type {?} */ strValue = (value);
+    var /** @type {?} */ isDynamic = strValue.split(/\s+/).some(function (v) { return v.charAt(0) == '{' && v.charAt(1) == '{'; });
+    if (isDynamic) {
+        return new DynamicTimingAst(strValue);
+    }
+    timings = timings || resolveTiming(strValue, errors);
+    return new TimingAst(timings.duration, timings.delay, timings.easing);
+}
+/**
+ * @param {?} options
+ * @return {?}
+ */
+function normalizeAnimationOptions(options) {
+    if (options) {
+        options = copyObj(options);
+        if (options['params']) {
+            options['params'] = ((normalizeParams(options['params'])));
+        }
+    }
+    else {
+        options = {};
+    }
+    return options;
+}
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
+/**
+ * @param {?} element
+ * @param {?} keyframes
+ * @param {?} preStyleProps
+ * @param {?} postStyleProps
+ * @param {?} duration
+ * @param {?} delay
+ * @param {?=} easing
+ * @param {?=} subTimeline
+ * @return {?}
+ */
+function createTimelineInstruction(element, keyframes, preStyleProps, postStyleProps, duration, delay, easing, subTimeline) {
+    if (easing === void 0) { easing = null; }
+    if (subTimeline === void 0) { subTimeline = false; }
+    return {
+        type: 1 /* TimelineAnimation */,
+        element: element,
+        keyframes: keyframes,
+        preStyleProps: preStyleProps,
+        postStyleProps: postStyleProps,
+        duration: duration,
+        delay: delay,
+        totalTime: duration + delay, easing: easing, subTimeline: subTimeline
+    };
+}
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
+var ElementInstructionMap = (function () {
+    function ElementInstructionMap() {
+        this._map = new Map();
+    }
+    /**
+     * @param {?} element
+     * @return {?}
+     */
+    ElementInstructionMap.prototype.consume = function (element) {
+        var /** @type {?} */ instructions = this._map.get(element);
+        if (instructions) {
+            this._map.delete(element);
+        }
+        else {
+            instructions = [];
+        }
+        return instructions;
+    };
+    /**
+     * @param {?} element
+     * @param {?} instructions
+     * @return {?}
+     */
+    ElementInstructionMap.prototype.append = function (element, instructions) {
+        var /** @type {?} */ existingInstructions = this._map.get(element);
+        if (!existingInstructions) {
+            this._map.set(element, existingInstructions = []);
+        }
+        existingInstructions.push.apply(existingInstructions, instructions);
+    };
+    /**
+     * @param {?} element
+     * @return {?}
+     */
+    ElementInstructionMap.prototype.has = function (element) { return this._map.has(element); };
+    /**
+     * @return {?}
+     */
+    ElementInstructionMap.prototype.clear = function () { this._map.clear(); };
+    return ElementInstructionMap;
+}());
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
+var ONE_FRAME_IN_MILLISECONDS = 1;
+/**
+ * @param {?} driver
+ * @param {?} rootElement
+ * @param {?} ast
+ * @param {?=} startingStyles
+ * @param {?=} finalStyles
+ * @param {?=} options
+ * @param {?=} subInstructions
+ * @param {?=} errors
+ * @return {?}
+ */
+function buildAnimationTimelines(driver, rootElement, ast, startingStyles, finalStyles, options, subInstructions, errors) {
+    if (startingStyles === void 0) { startingStyles = {}; }
+    if (finalStyles === void 0) { finalStyles = {}; }
+    if (errors === void 0) { errors = []; }
+    return new AnimationTimelineBuilderVisitor().buildKeyframes(driver, rootElement, ast, startingStyles, finalStyles, options, subInstructions, errors);
+}
+var AnimationTimelineBuilderVisitor = (function () {
+    function AnimationTimelineBuilderVisitor() {
+    }
+    /**
+     * @param {?} driver
+     * @param {?} rootElement
+     * @param {?} ast
+     * @param {?} startingStyles
+     * @param {?} finalStyles
+     * @param {?} options
+     * @param {?=} subInstructions
+     * @param {?=} errors
+     * @return {?}
+     */
+    AnimationTimelineBuilderVisitor.prototype.buildKeyframes = function (driver, rootElement, ast, startingStyles, finalStyles, options, subInstructions, errors) {
+        if (errors === void 0) { errors = []; }
+        subInstructions = subInstructions || new ElementInstructionMap();
+        var /** @type {?} */ context = new AnimationTimelineContext(driver, rootElement, subInstructions, errors, []);
+        context.options = options;
+        context.currentTimeline.setStyles([startingStyles], null, context.errors, options);
+        ast.visit(this, context);
+        // this checks to see if an actual animation happened
+        var /** @type {?} */ timelines = context.timelines.filter(function (timeline) { return timeline.containsAnimation(); });
+        if (timelines.length && Object.keys(finalStyles).length) {
+            var /** @type {?} */ tl = timelines[timelines.length - 1];
+            if (!tl.allowOnlyTimelineStyles()) {
+                tl.setStyles([finalStyles], null, context.errors, options);
+            }
+        }
+        return timelines.length ? timelines.map(function (timeline) { return timeline.buildKeyframes(); }) :
+            [createTimelineInstruction(rootElement, [], [], [], 0, 0, '', false)];
+    };
+    /**
+     * @param {?} ast
+     * @param {?} context
+     * @return {?}
+     */
+    AnimationTimelineBuilderVisitor.prototype.visitTrigger = function (ast, context) {
+        // these values are not visited in this AST
+    };
+    /**
+     * @param {?} ast
+     * @param {?} context
+     * @return {?}
+     */
+    AnimationTimelineBuilderVisitor.prototype.visitState = function (ast, context) {
+        // these values are not visited in this AST
+    };
+    /**
+     * @param {?} ast
+     * @param {?} context
+     * @return {?}
+     */
+    AnimationTimelineBuilderVisitor.prototype.visitTransition = function (ast, context) {
+        // these values are not visited in this AST
+    };
+    /**
+     * @param {?} ast
+     * @param {?} context
+     * @return {?}
+     */
+    AnimationTimelineBuilderVisitor.prototype.visitAnimateChild = function (ast, context) {
+        var /** @type {?} */ elementInstructions = context.subInstructions.consume(context.element);
+        if (elementInstructions) {
+            var /** @type {?} */ innerContext = context.createSubContext(ast.options);
+            var /** @type {?} */ startTime = context.currentTimeline.currentTime;
+            var /** @type {?} */ endTime = this._visitSubInstructions(elementInstructions, innerContext, /** @type {?} */ (innerContext.options));
+            if (startTime != endTime) {
+                // we do this on the upper context because we created a sub context for
+                // the sub child animations
+                context.transformIntoNewTimeline(endTime);
+            }
+        }
+        context.previousNode = ast;
+    };
+    /**
+     * @param {?} ast
+     * @param {?} context
+     * @return {?}
+     */
+    AnimationTimelineBuilderVisitor.prototype.visitAnimateRef = function (ast, context) {
+        var /** @type {?} */ innerContext = context.createSubContext(ast.options);
+        innerContext.transformIntoNewTimeline();
+        this.visitReference(ast.animation, innerContext);
+        context.transformIntoNewTimeline(innerContext.currentTimeline.currentTime);
+        context.previousNode = ast;
+    };
+    /**
+     * @param {?} instructions
+     * @param {?} context
+     * @param {?} options
+     * @return {?}
+     */
+    AnimationTimelineBuilderVisitor.prototype._visitSubInstructions = function (instructions, context, options) {
+        var /** @type {?} */ startTime = context.currentTimeline.currentTime;
+        var /** @type {?} */ furthestTime = startTime;
+        // this is a special-case for when a user wants to skip a sub
+        // animation from being fired entirely.
+        var /** @type {?} */ duration = options.duration != null ? resolveTimingValue(options.duration) : null;
+        var /** @type {?} */ delay = options.delay != null ? resolveTimingValue(options.delay) : null;
+        if (duration !== 0) {
+            instructions.forEach(function (instruction) {
+                var /** @type {?} */ instructionTimings = context.appendInstructionToTimeline(instruction, duration, delay);
+                furthestTime =
+                    Math.max(furthestTime, instructionTimings.duration + instructionTimings.delay);
+            });
+        }
+        return furthestTime;
+    };
+    /**
+     * @param {?} ast
+     * @param {?} context
+     * @return {?}
+     */
+    AnimationTimelineBuilderVisitor.prototype.visitReference = function (ast, context) {
+        context.updateOptions(ast.options, true);
+        ast.animation.visit(this, context);
+        context.previousNode = ast;
+    };
+    /**
+     * @param {?} ast
+     * @param {?} context
+     * @return {?}
+     */
+    AnimationTimelineBuilderVisitor.prototype.visitSequence = function (ast, context) {
+        var _this = this;
+        var /** @type {?} */ subContextCount = context.subContextCount;
+        var /** @type {?} */ ctx = context;
+        var /** @type {?} */ options = ast.options;
+        if (options && (options.params || options.delay)) {
+            ctx = context.createSubContext(options);
+            ctx.transformIntoNewTimeline();
+            if (options.delay != null) {
+                if (ctx.previousNode instanceof StyleAst) {
+                    ctx.currentTimeline.snapshotCurrentStyles();
+                    ctx.previousNode = DEFAULT_NOOP_PREVIOUS_NODE;
+                }
+                var /** @type {?} */ delay = resolveTimingValue(options.delay);
+                ctx.delayNextStep(delay);
+            }
+        }
+        if (ast.steps.length) {
+            ast.steps.forEach(function (s) { return s.visit(_this, ctx); });
+            // this is here just incase the inner steps only contain or end with a style() call
+            ctx.currentTimeline.applyStylesToKeyframe();
+            // this means that some animation function within the sequence
+            // ended up creating a sub timeline (which means the current
+            // timeline cannot overlap with the contents of the sequence)
+            if (ctx.subContextCount > subContextCount) {
+                ctx.transformIntoNewTimeline();
+            }
+        }
+        context.previousNode = ast;
+    };
+    /**
+     * @param {?} ast
+     * @param {?} context
+     * @return {?}
+     */
+    AnimationTimelineBuilderVisitor.prototype.visitGroup = function (ast, context) {
+        var _this = this;
+        var /** @type {?} */ innerTimelines = [];
+        var /** @type {?} */ furthestTime = context.currentTimeline.currentTime;
+        var /** @type {?} */ delay = ast.options && ast.options.delay ? resolveTimingValue(ast.options.delay) : 0;
+        ast.steps.forEach(function (s) {
+            var /** @type {?} */ innerContext = context.createSubContext(ast.options);
+            if (delay) {
+                innerContext.delayNextStep(delay);
+            }
+            s.visit(_this, innerContext);
+            furthestTime = Math.max(furthestTime, innerContext.currentTimeline.currentTime);
+            innerTimelines.push(innerContext.currentTimeline);
+        });
+        // this operation is run after the AST loop because otherwise
+        // if the parent timeline's collected styles were updated then
+        // it would pass in invalid data into the new-to-be forked items
+        innerTimelines.forEach(function (timeline) { return context.currentTimeline.mergeTimelineCollectedStyles(timeline); });
+        context.transformIntoNewTimeline(furthestTime);
+        context.previousNode = ast;
+    };
+    /**
+     * @param {?} ast
+     * @param {?} context
+     * @return {?}
+     */
+    AnimationTimelineBuilderVisitor.prototype.visitTiming = function (ast, context) {
+        if (ast instanceof DynamicTimingAst) {
+            var /** @type {?} */ strValue = context.params ?
+                interpolateParams(ast.value, context.params, context.errors) :
+                ast.value.toString();
+            return resolveTiming(strValue, context.errors);
+        }
+        else {
+            return { duration: ast.duration, delay: ast.delay, easing: ast.easing };
+        }
+    };
+    /**
+     * @param {?} ast
+     * @param {?} context
+     * @return {?}
+     */
+    AnimationTimelineBuilderVisitor.prototype.visitAnimate = function (ast, context) {
+        var /** @type {?} */ timings = context.currentAnimateTimings = this.visitTiming(ast.timings, context);
+        var /** @type {?} */ timeline = context.currentTimeline;
+        if (timings.delay) {
+            context.incrementTime(timings.delay);
+            timeline.snapshotCurrentStyles();
+        }
+        var /** @type {?} */ style$$1 = ast.style;
+        if (style$$1 instanceof KeyframesAst) {
+            this.visitKeyframes(style$$1, context);
+        }
+        else {
+            context.incrementTime(timings.duration);
+            this.visitStyle(/** @type {?} */ (style$$1), context);
+            timeline.applyStylesToKeyframe();
+        }
+        context.currentAnimateTimings = null;
+        context.previousNode = ast;
+    };
+    /**
+     * @param {?} ast
+     * @param {?} context
+     * @return {?}
+     */
+    AnimationTimelineBuilderVisitor.prototype.visitStyle = function (ast, context) {
+        var /** @type {?} */ timeline = context.currentTimeline;
+        var /** @type {?} */ timings = ((context.currentAnimateTimings));
+        // this is a special case for when a style() call
+        // directly follows  an animate() call (but not inside of an animate() call)
+        if (!timings && timeline.getCurrentStyleProperties().length) {
+            timeline.forwardFrame();
+        }
+        var /** @type {?} */ easing = (timings && timings.easing) || ast.easing;
+        if (ast.isEmptyStep) {
+            timeline.applyEmptyStep(easing);
+        }
+        else {
+            timeline.setStyles(ast.styles, easing, context.errors, context.options);
+        }
+        context.previousNode = ast;
+    };
+    /**
+     * @param {?} ast
+     * @param {?} context
+     * @return {?}
+     */
+    AnimationTimelineBuilderVisitor.prototype.visitKeyframes = function (ast, context) {
+        var /** @type {?} */ currentAnimateTimings = ((context.currentAnimateTimings));
+        var /** @type {?} */ startTime = (((context.currentTimeline))).duration;
+        var /** @type {?} */ duration = currentAnimateTimings.duration;
+        var /** @type {?} */ innerContext = context.createSubContext();
+        var /** @type {?} */ innerTimeline = innerContext.currentTimeline;
+        innerTimeline.easing = currentAnimateTimings.easing;
+        ast.styles.forEach(function (step) {
+            var /** @type {?} */ offset = step.offset || 0;
+            innerTimeline.forwardTime(offset * duration);
+            innerTimeline.setStyles(step.styles, step.easing, context.errors, context.options);
+            innerTimeline.applyStylesToKeyframe();
+        });
+        // this will ensure that the parent timeline gets all the styles from
+        // the child even if the new timeline below is not used
+        context.currentTimeline.mergeTimelineCollectedStyles(innerTimeline);
+        // we do this because the window between this timeline and the sub timeline
+        // should ensure that the styles within are exactly the same as they were before
+        context.transformIntoNewTimeline(startTime + duration);
+        context.previousNode = ast;
+    };
+    /**
+     * @param {?} ast
+     * @param {?} context
+     * @return {?}
+     */
+    AnimationTimelineBuilderVisitor.prototype.visitQuery = function (ast, context) {
+        var _this = this;
+        // in the event that the first step before this is a style step we need
+        // to ensure the styles are applied before the children are animated
+        var /** @type {?} */ startTime = context.currentTimeline.currentTime;
+        var /** @type {?} */ options = ((ast.options || {}));
+        var /** @type {?} */ delay = options.delay ? resolveTimingValue(options.delay) : 0;
+        if (delay && (context.previousNode instanceof StyleAst ||
+            (startTime == 0 && context.currentTimeline.getCurrentStyleProperties().length))) {
+            context.currentTimeline.snapshotCurrentStyles();
+            context.previousNode = DEFAULT_NOOP_PREVIOUS_NODE;
+        }
+        var /** @type {?} */ furthestTime = startTime;
+        var /** @type {?} */ elms = context.invokeQuery(ast.selector, ast.originalSelector, ast.limit, ast.includeSelf, options.optional ? true : false, context.errors);
+        context.currentQueryTotal = elms.length;
+        var /** @type {?} */ sameElementTimeline = null;
+        elms.forEach(function (element, i) {
+            context.currentQueryIndex = i;
+            var /** @type {?} */ innerContext = context.createSubContext(ast.options, element);
+            if (delay) {
+                innerContext.delayNextStep(delay);
+            }
+            if (element === context.element) {
+                sameElementTimeline = innerContext.currentTimeline;
+            }
+            ast.animation.visit(_this, innerContext);
+            // this is here just incase the inner steps only contain or end
+            // with a style() call (which is here to signal that this is a preparatory
+            // call to style an element before it is animated again)
+            innerContext.currentTimeline.applyStylesToKeyframe();
+            var /** @type {?} */ endTime = innerContext.currentTimeline.currentTime;
+            furthestTime = Math.max(furthestTime, endTime);
+        });
+        context.currentQueryIndex = 0;
+        context.currentQueryTotal = 0;
+        context.transformIntoNewTimeline(furthestTime);
+        if (sameElementTimeline) {
+            context.currentTimeline.mergeTimelineCollectedStyles(sameElementTimeline);
+            context.currentTimeline.snapshotCurrentStyles();
+        }
+        context.previousNode = ast;
+    };
+    /**
+     * @param {?} ast
+     * @param {?} context
+     * @return {?}
+     */
+    AnimationTimelineBuilderVisitor.prototype.visitStagger = function (ast, context) {
+        var /** @type {?} */ parentContext = ((context.parentContext));
+        var /** @type {?} */ tl = context.currentTimeline;
+        var /** @type {?} */ timings = ast.timings;
+        var /** @type {?} */ duration = Math.abs(timings.duration);
+        var /** @type {?} */ maxTime = duration * (context.currentQueryTotal - 1);
+        var /** @type {?} */ delay = duration * context.currentQueryIndex;
+        var /** @type {?} */ staggerTransformer = timings.duration < 0 ? 'reverse' : timings.easing;
+        switch (staggerTransformer) {
+            case 'reverse':
+                delay = maxTime - delay;
+                break;
+            case 'full':
+                delay = parentContext.currentStaggerTime;
+                break;
+        }
+        var /** @type {?} */ timeline = context.currentTimeline;
+        if (delay) {
+            timeline.delayNextStep(delay);
+        }
+        var /** @type {?} */ startingTime = timeline.currentTime;
+        ast.animation.visit(this, context);
+        context.previousNode = ast;
+        // time = duration + delay
+        // the reason why this computation is so complex is because
+        // the inner timeline may either have a delay value or a stretched
+        // keyframe depending on if a subtimeline is not used or is used.
+        parentContext.currentStaggerTime =
+            (tl.currentTime - startingTime) + (tl.startTime - parentContext.currentTimeline.startTime);
+    };
+    return AnimationTimelineBuilderVisitor;
+}());
+var DEFAULT_NOOP_PREVIOUS_NODE = ({});
+var AnimationTimelineContext = (function () {
+    /**
+     * @param {?} _driver
+     * @param {?} element
+     * @param {?} subInstructions
+     * @param {?} errors
+     * @param {?} timelines
+     * @param {?=} initialTimeline
+     */
+    function AnimationTimelineContext(_driver, element, subInstructions, errors, timelines, initialTimeline) {
+        this._driver = _driver;
+        this.element = element;
+        this.subInstructions = subInstructions;
+        this.errors = errors;
+        this.timelines = timelines;
+        this.parentContext = null;
+        this.currentAnimateTimings = null;
+        this.previousNode = DEFAULT_NOOP_PREVIOUS_NODE;
+        this.subContextCount = 0;
+        this.options = {};
+        this.currentQueryIndex = 0;
+        this.currentQueryTotal = 0;
+        this.currentStaggerTime = 0;
+        this.currentTimeline = initialTimeline || new TimelineBuilder(element, 0);
+        timelines.push(this.currentTimeline);
+    }
+    Object.defineProperty(AnimationTimelineContext.prototype, "params", {
+        /**
+         * @return {?}
+         */
+        get: function () { return this.options.params; },
+        enumerable: true,
+        configurable: true
+    });
+    /**
+     * @param {?} options
+     * @param {?=} skipIfExists
+     * @return {?}
+     */
+    AnimationTimelineContext.prototype.updateOptions = function (options, skipIfExists) {
+        var _this = this;
+        if (!options)
+            return;
+        var /** @type {?} */ newOptions = (options);
+        var /** @type {?} */ optionsToUpdate = this.options;
+        // NOTE: this will get patched up when other animation methods support duration overrides
+        if (newOptions.duration != null) {
+            ((optionsToUpdate)).duration = resolveTimingValue(newOptions.duration);
+        }
+        if (newOptions.delay != null) {
+            optionsToUpdate.delay = resolveTimingValue(newOptions.delay);
+        }
+        var /** @type {?} */ newParams = newOptions.params;
+        if (newParams) {
+            var /** @type {?} */ paramsToUpdate_1 = ((optionsToUpdate.params));
+            if (!paramsToUpdate_1) {
+                paramsToUpdate_1 = this.options.params = {};
+            }
+            Object.keys(newParams).forEach(function (name) {
+                if (!skipIfExists || !paramsToUpdate_1.hasOwnProperty(name)) {
+                    paramsToUpdate_1[name] = interpolateParams(newParams[name], paramsToUpdate_1, _this.errors);
+                }
+            });
+        }
+    };
+    /**
+     * @return {?}
+     */
+    AnimationTimelineContext.prototype._copyOptions = function () {
+        var /** @type {?} */ options = {};
+        if (this.options) {
+            var /** @type {?} */ oldParams_1 = this.options.params;
+            if (oldParams_1) {
+                var /** @type {?} */ params_2 = options['params'] = {};
+                Object.keys(this.options.params).forEach(function (name) { params_2[name] = oldParams_1[name]; });
+            }
+        }
+        return options;
+    };
+    /**
+     * @param {?=} options
+     * @param {?=} element
+     * @param {?=} newTime
+     * @return {?}
+     */
+    AnimationTimelineContext.prototype.createSubContext = function (options, element, newTime) {
+        if (options === void 0) { options = null; }
+        var /** @type {?} */ target = element || this.element;
+        var /** @type {?} */ context = new AnimationTimelineContext(this._driver, target, this.subInstructions, this.errors, this.timelines, this.currentTimeline.fork(target, newTime || 0));
+        context.previousNode = this.previousNode;
+        context.currentAnimateTimings = this.currentAnimateTimings;
+        context.options = this._copyOptions();
+        context.updateOptions(options);
+        context.currentQueryIndex = this.currentQueryIndex;
+        context.currentQueryTotal = this.currentQueryTotal;
+        context.parentContext = this;
+        this.subContextCount++;
+        return context;
+    };
+    /**
+     * @param {?=} newTime
+     * @return {?}
+     */
+    AnimationTimelineContext.prototype.transformIntoNewTimeline = function (newTime) {
+        this.previousNode = DEFAULT_NOOP_PREVIOUS_NODE;
+        this.currentTimeline = this.currentTimeline.fork(this.element, newTime);
+        this.timelines.push(this.currentTimeline);
+        return this.currentTimeline;
+    };
+    /**
+     * @param {?} instruction
+     * @param {?} duration
+     * @param {?} delay
+     * @return {?}
+     */
+    AnimationTimelineContext.prototype.appendInstructionToTimeline = function (instruction, duration, delay) {
+        var /** @type {?} */ updatedTimings = {
+            duration: duration != null ? duration : instruction.duration,
+            delay: this.currentTimeline.currentTime + (delay != null ? delay : 0) + instruction.delay,
+            easing: ''
+        };
+        var /** @type {?} */ builder = new SubTimelineBuilder(instruction.element, instruction.keyframes, instruction.preStyleProps, instruction.postStyleProps, updatedTimings, instruction.stretchStartingKeyframe);
+        this.timelines.push(builder);
+        return updatedTimings;
+    };
+    /**
+     * @param {?} time
+     * @return {?}
+     */
+    AnimationTimelineContext.prototype.incrementTime = function (time) {
+        this.currentTimeline.forwardTime(this.currentTimeline.duration + time);
+    };
+    /**
+     * @param {?} delay
+     * @return {?}
+     */
+    AnimationTimelineContext.prototype.delayNextStep = function (delay) {
+        // negative delays are not yet supported
+        if (delay > 0) {
+            this.currentTimeline.delayNextStep(delay);
+        }
+    };
+    /**
+     * @param {?} selector
+     * @param {?} originalSelector
+     * @param {?} limit
+     * @param {?} includeSelf
+     * @param {?} optional
+     * @param {?} errors
+     * @return {?}
+     */
+    AnimationTimelineContext.prototype.invokeQuery = function (selector, originalSelector, limit, includeSelf, optional, errors) {
+        var /** @type {?} */ results = [];
+        if (includeSelf) {
+            results.push(this.element);
+        }
+        if (selector.length > 0) {
+            var /** @type {?} */ multi = limit != 1;
+            results.push.apply(results, this._driver.query(this.element, selector, multi));
+        }
+        if (!optional && results.length == 0) {
+            errors.push("`query(\"" + originalSelector + "\")` returned zero elements. (Use `query(\"" + originalSelector + "\", { optional: true })` if you wish to allow this.)");
+        }
+        return results;
+    };
+    return AnimationTimelineContext;
+}());
+var TimelineBuilder = (function () {
+    /**
+     * @param {?} element
+     * @param {?} startTime
+     * @param {?=} _elementTimelineStylesLookup
+     */
+    function TimelineBuilder(element, startTime, _elementTimelineStylesLookup) {
+        this.element = element;
+        this.startTime = startTime;
+        this._elementTimelineStylesLookup = _elementTimelineStylesLookup;
+        this.duration = 0;
+        this._previousKeyframe = {};
+        this._currentKeyframe = {};
+        this._keyframes = new Map();
+        this._styleSummary = {};
+        this._pendingStyles = {};
+        this._backFill = {};
+        this._currentEmptyStepKeyframe = null;
+        if (!this._elementTimelineStylesLookup) {
+            this._elementTimelineStylesLookup = new Map();
+        }
+        this._localTimelineStyles = Object.create(this._backFill, {});
+        this._globalTimelineStyles = this._elementTimelineStylesLookup.get(element);
+        if (!this._globalTimelineStyles) {
+            this._globalTimelineStyles = this._localTimelineStyles;
+            this._elementTimelineStylesLookup.set(element, this._localTimelineStyles);
+        }
+        this._loadKeyframe();
+    }
+    /**
+     * @return {?}
+     */
+    TimelineBuilder.prototype.containsAnimation = function () {
+        switch (this._keyframes.size) {
+            case 0:
+                return false;
+            case 1:
+                return this.getCurrentStyleProperties().length > 0;
+            default:
+                return true;
+        }
+    };
+    /**
+     * @return {?}
+     */
+    TimelineBuilder.prototype.getCurrentStyleProperties = function () { return Object.keys(this._currentKeyframe); };
+    Object.defineProperty(TimelineBuilder.prototype, "currentTime", {
+        /**
+         * @return {?}
+         */
+        get: function () { return this.startTime + this.duration; },
+        enumerable: true,
+        configurable: true
+    });
+    /**
+     * @param {?} delay
+     * @return {?}
+     */
+    TimelineBuilder.prototype.delayNextStep = function (delay) {
+        // in the event that a style() step is placed right before a stagger()
+        // and that style() step is the very first style() value in the animation
+        // then we need to make a copy of the keyframe [0, copy, 1] so that the delay
+        // properly applies the style() values to work with the stagger...
+        var /** @type {?} */ hasPreStyleStep = this._keyframes.size == 1 && Object.keys(this._pendingStyles).length;
+        if (this.duration || hasPreStyleStep) {
+            this.forwardTime(this.currentTime + delay);
+            if (hasPreStyleStep) {
+                this.snapshotCurrentStyles();
+            }
+        }
+        else {
+            this.startTime += delay;
+        }
+    };
+    /**
+     * @param {?} element
+     * @param {?=} currentTime
+     * @return {?}
+     */
+    TimelineBuilder.prototype.fork = function (element, currentTime) {
+        this.applyStylesToKeyframe();
+        return new TimelineBuilder(element, currentTime || this.currentTime, this._elementTimelineStylesLookup);
+    };
+    /**
+     * @return {?}
+     */
+    TimelineBuilder.prototype._loadKeyframe = function () {
+        if (this._currentKeyframe) {
+            this._previousKeyframe = this._currentKeyframe;
+        }
+        this._currentKeyframe = ((this._keyframes.get(this.duration)));
+        if (!this._currentKeyframe) {
+            this._currentKeyframe = Object.create(this._backFill, {});
+            this._keyframes.set(this.duration, this._currentKeyframe);
+        }
+    };
+    /**
+     * @return {?}
+     */
+    TimelineBuilder.prototype.forwardFrame = function () {
+        this.duration += ONE_FRAME_IN_MILLISECONDS;
+        this._loadKeyframe();
+    };
+    /**
+     * @param {?} time
+     * @return {?}
+     */
+    TimelineBuilder.prototype.forwardTime = function (time) {
+        this.applyStylesToKeyframe();
+        this.duration = time;
+        this._loadKeyframe();
+    };
+    /**
+     * @param {?} prop
+     * @param {?} value
+     * @return {?}
+     */
+    TimelineBuilder.prototype._updateStyle = function (prop, value) {
+        this._localTimelineStyles[prop] = value;
+        this._globalTimelineStyles[prop] = value;
+        this._styleSummary[prop] = { time: this.currentTime, value: value };
+    };
+    /**
+     * @return {?}
+     */
+    TimelineBuilder.prototype.allowOnlyTimelineStyles = function () { return this._currentEmptyStepKeyframe !== this._currentKeyframe; };
+    /**
+     * @param {?} easing
+     * @return {?}
+     */
+    TimelineBuilder.prototype.applyEmptyStep = function (easing) {
+        var _this = this;
+        if (easing) {
+            this._previousKeyframe['easing'] = easing;
+        }
+        // special case for animate(duration):
+        // all missing styles are filled with a `*` value then
+        // if any destination styles are filled in later on the same
+        // keyframe then they will override the overridden styles
+        // We use `_globalTimelineStyles` here because there may be
+        // styles in previous keyframes that are not present in this timeline
+        Object.keys(this._globalTimelineStyles).forEach(function (prop) {
+            _this._backFill[prop] = _this._globalTimelineStyles[prop] || __WEBPACK_IMPORTED_MODULE_1__angular_animations__["AUTO_STYLE"];
+            _this._currentKeyframe[prop] = __WEBPACK_IMPORTED_MODULE_1__angular_animations__["AUTO_STYLE"];
+        });
+        this._currentEmptyStepKeyframe = this._currentKeyframe;
+    };
+    /**
+     * @param {?} input
+     * @param {?} easing
+     * @param {?} errors
+     * @param {?=} options
+     * @return {?}
+     */
+    TimelineBuilder.prototype.setStyles = function (input, easing, errors, options) {
+        var _this = this;
+        if (easing) {
+            this._previousKeyframe['easing'] = easing;
+        }
+        var /** @type {?} */ params = (options && options.params) || {};
+        var /** @type {?} */ styles = flattenStyles(input, this._globalTimelineStyles);
+        Object.keys(styles).forEach(function (prop) {
+            var /** @type {?} */ val = interpolateParams(styles[prop], params, errors);
+            _this._pendingStyles[prop] = val;
+            if (!_this._localTimelineStyles.hasOwnProperty(prop)) {
+                _this._backFill[prop] = _this._globalTimelineStyles.hasOwnProperty(prop) ?
+                    _this._globalTimelineStyles[prop] :
+                    __WEBPACK_IMPORTED_MODULE_1__angular_animations__["AUTO_STYLE"];
+            }
+            _this._updateStyle(prop, val);
+        });
+    };
+    /**
+     * @return {?}
+     */
+    TimelineBuilder.prototype.applyStylesToKeyframe = function () {
+        var _this = this;
+        var /** @type {?} */ styles = this._pendingStyles;
+        var /** @type {?} */ props = Object.keys(styles);
+        if (props.length == 0)
+            return;
+        this._pendingStyles = {};
+        props.forEach(function (prop) {
+            var /** @type {?} */ val = styles[prop];
+            _this._currentKeyframe[prop] = val;
+        });
+        Object.keys(this._localTimelineStyles).forEach(function (prop) {
+            if (!_this._currentKeyframe.hasOwnProperty(prop)) {
+                _this._currentKeyframe[prop] = _this._localTimelineStyles[prop];
+            }
+        });
+    };
+    /**
+     * @return {?}
+     */
+    TimelineBuilder.prototype.snapshotCurrentStyles = function () {
+        var _this = this;
+        Object.keys(this._localTimelineStyles).forEach(function (prop) {
+            var /** @type {?} */ val = _this._localTimelineStyles[prop];
+            _this._pendingStyles[prop] = val;
+            _this._updateStyle(prop, val);
+        });
+    };
+    /**
+     * @return {?}
+     */
+    TimelineBuilder.prototype.getFinalKeyframe = function () { return this._keyframes.get(this.duration); };
+    Object.defineProperty(TimelineBuilder.prototype, "properties", {
+        /**
+         * @return {?}
+         */
+        get: function () {
+            var /** @type {?} */ properties = [];
+            for (var /** @type {?} */ prop in this._currentKeyframe) {
+                properties.push(prop);
+            }
+            return properties;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    /**
+     * @param {?} timeline
+     * @return {?}
+     */
+    TimelineBuilder.prototype.mergeTimelineCollectedStyles = function (timeline) {
+        var _this = this;
+        Object.keys(timeline._styleSummary).forEach(function (prop) {
+            var /** @type {?} */ details0 = _this._styleSummary[prop];
+            var /** @type {?} */ details1 = timeline._styleSummary[prop];
+            if (!details0 || details1.time > details0.time) {
+                _this._updateStyle(prop, details1.value);
+            }
+        });
+    };
+    /**
+     * @return {?}
+     */
+    TimelineBuilder.prototype.buildKeyframes = function () {
+        var _this = this;
+        this.applyStylesToKeyframe();
+        var /** @type {?} */ preStyleProps = new Set();
+        var /** @type {?} */ postStyleProps = new Set();
+        var /** @type {?} */ isEmpty = this._keyframes.size === 1 && this.duration === 0;
+        var /** @type {?} */ finalKeyframes = [];
+        this._keyframes.forEach(function (keyframe, time) {
+            var /** @type {?} */ finalKeyframe = copyStyles(keyframe, true);
+            Object.keys(finalKeyframe).forEach(function (prop) {
+                var /** @type {?} */ value = finalKeyframe[prop];
+                if (value == __WEBPACK_IMPORTED_MODULE_1__angular_animations__["ɵPRE_STYLE"]) {
+                    preStyleProps.add(prop);
+                }
+                else if (value == __WEBPACK_IMPORTED_MODULE_1__angular_animations__["AUTO_STYLE"]) {
+                    postStyleProps.add(prop);
+                }
+            });
+            if (!isEmpty) {
+                finalKeyframe['offset'] = time / _this.duration;
+            }
+            finalKeyframes.push(finalKeyframe);
+        });
+        var /** @type {?} */ preProps = preStyleProps.size ? iteratorToArray(preStyleProps.values()) : [];
+        var /** @type {?} */ postProps = postStyleProps.size ? iteratorToArray(postStyleProps.values()) : [];
+        // special case for a 0-second animation (which is designed just to place styles onscreen)
+        if (isEmpty) {
+            var /** @type {?} */ kf0 = finalKeyframes[0];
+            var /** @type {?} */ kf1 = copyObj(kf0);
+            kf0['offset'] = 0;
+            kf1['offset'] = 1;
+            finalKeyframes = [kf0, kf1];
+        }
+        return createTimelineInstruction(this.element, finalKeyframes, preProps, postProps, this.duration, this.startTime, this.easing, false);
+    };
+    return TimelineBuilder;
+}());
+var SubTimelineBuilder = (function (_super) {
+    __WEBPACK_IMPORTED_MODULE_0_tslib__["a" /* __extends */](SubTimelineBuilder, _super);
+    /**
+     * @param {?} element
+     * @param {?} keyframes
+     * @param {?} preStyleProps
+     * @param {?} postStyleProps
+     * @param {?} timings
+     * @param {?=} _stretchStartingKeyframe
+     */
+    function SubTimelineBuilder(element, keyframes, preStyleProps, postStyleProps, timings, _stretchStartingKeyframe) {
+        if (_stretchStartingKeyframe === void 0) { _stretchStartingKeyframe = false; }
+        var _this = _super.call(this, element, timings.delay) || this;
+        _this.element = element;
+        _this.keyframes = keyframes;
+        _this.preStyleProps = preStyleProps;
+        _this.postStyleProps = postStyleProps;
+        _this._stretchStartingKeyframe = _stretchStartingKeyframe;
+        _this.timings = { duration: timings.duration, delay: timings.delay, easing: timings.easing };
+        return _this;
+    }
+    /**
+     * @return {?}
+     */
+    SubTimelineBuilder.prototype.containsAnimation = function () { return this.keyframes.length > 1; };
+    /**
+     * @return {?}
+     */
+    SubTimelineBuilder.prototype.buildKeyframes = function () {
+        var /** @type {?} */ keyframes = this.keyframes;
+        var _a = this.timings, delay = _a.delay, duration = _a.duration, easing = _a.easing;
+        if (this._stretchStartingKeyframe && delay) {
+            var /** @type {?} */ newKeyframes = [];
+            var /** @type {?} */ totalTime = duration + delay;
+            var /** @type {?} */ startingGap = delay / totalTime;
+            // the original starting keyframe now starts once the delay is done
+            var /** @type {?} */ newFirstKeyframe = copyStyles(keyframes[0], false);
+            newFirstKeyframe['offset'] = 0;
+            newKeyframes.push(newFirstKeyframe);
+            var /** @type {?} */ oldFirstKeyframe = copyStyles(keyframes[0], false);
+            oldFirstKeyframe['offset'] = roundOffset(startingGap);
+            newKeyframes.push(oldFirstKeyframe);
+            /*
+              When the keyframe is stretched then it means that the delay before the animation
+              starts is gone. Instead the first keyframe is placed at the start of the animation
+              and it is then copied to where it starts when the original delay is over. This basically
+              means nothing animates during that delay, but the styles are still renderered. For this
+              to work the original offset values that exist in the original keyframes must be "warped"
+              so that they can take the new keyframe + delay into account.
+      
+              delay=1000, duration=1000, keyframes = 0 .5 1
+      
+              turns into
+      
+              delay=0, duration=2000, keyframes = 0 .33 .66 1
+             */
+            // offsets between 1 ... n -1 are all warped by the keyframe stretch
+            var /** @type {?} */ limit = keyframes.length - 1;
+            for (var /** @type {?} */ i = 1; i <= limit; i++) {
+                var /** @type {?} */ kf = copyStyles(keyframes[i], false);
+                var /** @type {?} */ oldOffset = (kf['offset']);
+                var /** @type {?} */ timeAtKeyframe = delay + oldOffset * duration;
+                kf['offset'] = roundOffset(timeAtKeyframe / totalTime);
+                newKeyframes.push(kf);
+            }
+            // the new starting keyframe should be added at the start
+            duration = totalTime;
+            delay = 0;
+            easing = '';
+            keyframes = newKeyframes;
+        }
+        return createTimelineInstruction(this.element, keyframes, this.preStyleProps, this.postStyleProps, duration, delay, easing, true);
+    };
+    return SubTimelineBuilder;
+}(TimelineBuilder));
+/**
+ * @param {?} offset
+ * @param {?=} decimalPoints
+ * @return {?}
+ */
+function roundOffset(offset, decimalPoints) {
+    if (decimalPoints === void 0) { decimalPoints = 3; }
+    var /** @type {?} */ mult = Math.pow(10, decimalPoints - 1);
+    return Math.round(offset * mult) / mult;
+}
+/**
+ * @param {?} input
+ * @param {?} allStyles
+ * @return {?}
+ */
+function flattenStyles(input, allStyles) {
+    var /** @type {?} */ styles = {};
+    var /** @type {?} */ allProperties;
+    input.forEach(function (token) {
+        if (token === '*') {
+            allProperties = allProperties || Object.keys(allStyles);
+            allProperties.forEach(function (prop) { styles[prop] = __WEBPACK_IMPORTED_MODULE_1__angular_animations__["AUTO_STYLE"]; });
+        }
+        else {
+            copyStyles(/** @type {?} */ (token), false, styles);
+        }
+    });
+    return styles;
+}
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
+var Animation = (function () {
+    /**
+     * @param {?} _driver
+     * @param {?} input
+     */
+    function Animation(_driver, input) {
+        this._driver = _driver;
+        var errors = [];
+        var ast = buildAnimationAst(input, errors);
+        if (errors.length) {
+            var errorMessage = "animation validation failed:\n" + errors.join("\n");
+            throw new Error(errorMessage);
+        }
+        this._animationAst = ast;
+    }
+    /**
+     * @param {?} element
+     * @param {?} startingStyles
+     * @param {?} destinationStyles
+     * @param {?} options
+     * @param {?=} subInstructions
+     * @return {?}
+     */
+    Animation.prototype.buildTimelines = function (element, startingStyles, destinationStyles, options, subInstructions) {
+        var /** @type {?} */ start = Array.isArray(startingStyles) ? normalizeStyles(startingStyles) : (startingStyles);
+        var /** @type {?} */ dest = Array.isArray(destinationStyles) ? normalizeStyles(destinationStyles) : (destinationStyles);
+        var /** @type {?} */ errors = [];
+        subInstructions = subInstructions || new ElementInstructionMap();
+        var /** @type {?} */ result = buildAnimationTimelines(this._driver, element, this._animationAst, start, dest, options, subInstructions, errors);
+        if (errors.length) {
+            var /** @type {?} */ errorMessage = "animation building failed:\n" + errors.join("\n");
+            throw new Error(errorMessage);
+        }
+        return result;
+    };
+    return Animation;
+}());
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
+/**
+ * @experimental Animation support is experimental.
+ */
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */ var AnimationStyleNormalizer = (function () {
+    function AnimationStyleNormalizer() {
+    }
+    return AnimationStyleNormalizer;
+}());
+/**
+ * @experimental Animation support is experimental.
+ */
+var NoopAnimationStyleNormalizer = (function () {
+    function NoopAnimationStyleNormalizer() {
+    }
+    NoopAnimationStyleNormalizer.prototype.normalizePropertyName = function (propertyName, errors) { return propertyName; };
+    NoopAnimationStyleNormalizer.prototype.normalizeStyleValue = function (userProvidedProperty, normalizedProperty, value, errors) {
+        return value;
+    };
+    return NoopAnimationStyleNormalizer;
+}());
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
+var WebAnimationsStyleNormalizer = (function (_super) {
+    __WEBPACK_IMPORTED_MODULE_0_tslib__["a" /* __extends */](WebAnimationsStyleNormalizer, _super);
+    function WebAnimationsStyleNormalizer() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    /**
+     * @param {?} propertyName
+     * @param {?} errors
+     * @return {?}
+     */
+    WebAnimationsStyleNormalizer.prototype.normalizePropertyName = function (propertyName, errors) {
+        return dashCaseToCamelCase(propertyName);
+    };
+    /**
+     * @param {?} userProvidedProperty
+     * @param {?} normalizedProperty
+     * @param {?} value
+     * @param {?} errors
+     * @return {?}
+     */
+    WebAnimationsStyleNormalizer.prototype.normalizeStyleValue = function (userProvidedProperty, normalizedProperty, value, errors) {
+        var /** @type {?} */ unit = '';
+        var /** @type {?} */ strVal = value.toString().trim();
+        if (DIMENSIONAL_PROP_MAP[normalizedProperty] && value !== 0 && value !== '0') {
+            if (typeof value === 'number') {
+                unit = 'px';
+            }
+            else {
+                var /** @type {?} */ valAndSuffixMatch = value.match(/^[+-]?[\d\.]+([a-z]*)$/);
+                if (valAndSuffixMatch && valAndSuffixMatch[1].length == 0) {
+                    errors.push("Please provide a CSS unit value for " + userProvidedProperty + ":" + value);
+                }
+            }
+        }
+        return strVal + unit;
+    };
+    return WebAnimationsStyleNormalizer;
+}(AnimationStyleNormalizer));
+var DIMENSIONAL_PROP_MAP = makeBooleanMap('width,height,minWidth,minHeight,maxWidth,maxHeight,left,top,bottom,right,fontSize,outlineWidth,outlineOffset,paddingTop,paddingLeft,paddingBottom,paddingRight,marginTop,marginLeft,marginBottom,marginRight,borderRadius,borderWidth,borderTopWidth,borderLeftWidth,borderRightWidth,borderBottomWidth,textIndent,perspective'
+    .split(','));
+/**
+ * @param {?} keys
+ * @return {?}
+ */
+function makeBooleanMap(keys) {
+    var /** @type {?} */ map = {};
+    keys.forEach(function (key) { return map[key] = true; });
+    return map;
+}
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
+/**
+ * @param {?} element
+ * @param {?} triggerName
+ * @param {?} fromState
+ * @param {?} toState
+ * @param {?} isRemovalTransition
+ * @param {?} fromStyles
+ * @param {?} toStyles
+ * @param {?} timelines
+ * @param {?} queriedElements
+ * @param {?} preStyleProps
+ * @param {?} postStyleProps
+ * @param {?=} errors
+ * @return {?}
+ */
+function createTransitionInstruction(element, triggerName, fromState, toState, isRemovalTransition, fromStyles, toStyles, timelines, queriedElements, preStyleProps, postStyleProps, errors) {
+    return {
+        type: 0 /* TransitionAnimation */,
+        element: element,
+        triggerName: triggerName,
+        isRemovalTransition: isRemovalTransition,
+        fromState: fromState,
+        fromStyles: fromStyles,
+        toState: toState,
+        toStyles: toStyles,
+        timelines: timelines,
+        queriedElements: queriedElements,
+        preStyleProps: preStyleProps,
+        postStyleProps: postStyleProps,
+        errors: errors
+    };
+}
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
+var EMPTY_OBJECT = {};
+var AnimationTransitionFactory = (function () {
+    /**
+     * @param {?} _triggerName
+     * @param {?} ast
+     * @param {?} _stateStyles
+     */
+    function AnimationTransitionFactory(_triggerName, ast, _stateStyles) {
+        this._triggerName = _triggerName;
+        this.ast = ast;
+        this._stateStyles = _stateStyles;
+    }
+    /**
+     * @param {?} currentState
+     * @param {?} nextState
+     * @return {?}
+     */
+    AnimationTransitionFactory.prototype.match = function (currentState, nextState) {
+        return oneOrMoreTransitionsMatch(this.ast.matchers, currentState, nextState);
+    };
+    /**
+     * @param {?} stateName
+     * @param {?} params
+     * @param {?} errors
+     * @return {?}
+     */
+    AnimationTransitionFactory.prototype.buildStyles = function (stateName, params, errors) {
+        var /** @type {?} */ backupStateStyler = this._stateStyles['*'];
+        var /** @type {?} */ stateStyler = this._stateStyles[stateName];
+        var /** @type {?} */ backupStyles = backupStateStyler ? backupStateStyler.buildStyles(params, errors) : {};
+        return stateStyler ? stateStyler.buildStyles(params, errors) : backupStyles;
+    };
+    /**
+     * @param {?} driver
+     * @param {?} element
+     * @param {?} currentState
+     * @param {?} nextState
+     * @param {?=} currentOptions
+     * @param {?=} nextOptions
+     * @param {?=} subInstructions
+     * @return {?}
+     */
+    AnimationTransitionFactory.prototype.build = function (driver, element, currentState, nextState, currentOptions, nextOptions, subInstructions) {
+        var /** @type {?} */ errors = [];
+        var /** @type {?} */ transitionAnimationParams = this.ast.options && this.ast.options.params || EMPTY_OBJECT;
+        var /** @type {?} */ currentAnimationParams = currentOptions && currentOptions.params || EMPTY_OBJECT;
+        var /** @type {?} */ currentStateStyles = this.buildStyles(currentState, currentAnimationParams, errors);
+        var /** @type {?} */ nextAnimationParams = nextOptions && nextOptions.params || EMPTY_OBJECT;
+        var /** @type {?} */ nextStateStyles = this.buildStyles(nextState, nextAnimationParams, errors);
+        var /** @type {?} */ queriedElements = new Set();
+        var /** @type {?} */ preStyleMap = new Map();
+        var /** @type {?} */ postStyleMap = new Map();
+        var /** @type {?} */ isRemoval = nextState === 'void';
+        var /** @type {?} */ animationOptions = { params: Object.assign({}, transitionAnimationParams, nextAnimationParams) };
+        var /** @type {?} */ timelines = buildAnimationTimelines(driver, element, this.ast.animation, currentStateStyles, nextStateStyles, animationOptions, subInstructions, errors);
+        if (errors.length) {
+            return createTransitionInstruction(element, this._triggerName, currentState, nextState, isRemoval, currentStateStyles, nextStateStyles, [], [], preStyleMap, postStyleMap, errors);
+        }
+        timelines.forEach(function (tl) {
+            var /** @type {?} */ elm = tl.element;
+            var /** @type {?} */ preProps = getOrSetAsInMap(preStyleMap, elm, {});
+            tl.preStyleProps.forEach(function (prop) { return preProps[prop] = true; });
+            var /** @type {?} */ postProps = getOrSetAsInMap(postStyleMap, elm, {});
+            tl.postStyleProps.forEach(function (prop) { return postProps[prop] = true; });
+            if (elm !== element) {
+                queriedElements.add(elm);
+            }
+        });
+        var /** @type {?} */ queriedElementsList = iteratorToArray(queriedElements.values());
+        return createTransitionInstruction(element, this._triggerName, currentState, nextState, isRemoval, currentStateStyles, nextStateStyles, timelines, queriedElementsList, preStyleMap, postStyleMap);
+    };
+    return AnimationTransitionFactory;
+}());
+/**
+ * @param {?} matchFns
+ * @param {?} currentState
+ * @param {?} nextState
+ * @return {?}
+ */
+function oneOrMoreTransitionsMatch(matchFns, currentState, nextState) {
+    return matchFns.some(function (fn) { return fn(currentState, nextState); });
+}
+var AnimationStateStyles = (function () {
+    /**
+     * @param {?} styles
+     * @param {?} defaultParams
+     */
+    function AnimationStateStyles(styles, defaultParams) {
+        this.styles = styles;
+        this.defaultParams = defaultParams;
+    }
+    /**
+     * @param {?} params
+     * @param {?} errors
+     * @return {?}
+     */
+    AnimationStateStyles.prototype.buildStyles = function (params, errors) {
+        var /** @type {?} */ finalStyles = {};
+        var /** @type {?} */ combinedParams = copyObj(this.defaultParams);
+        Object.keys(params).forEach(function (key) {
+            var /** @type {?} */ value = params[key];
+            if (value != null) {
+                combinedParams[key] = value;
+            }
+        });
+        this.styles.styles.forEach(function (value) {
+            if (typeof value !== 'string') {
+                var /** @type {?} */ styleObj_1 = (value);
+                Object.keys(styleObj_1).forEach(function (prop) {
+                    var /** @type {?} */ val = styleObj_1[prop];
+                    if (val.length > 1) {
+                        val = interpolateParams(val, combinedParams, errors);
+                    }
+                    finalStyles[prop] = val;
+                });
+            }
+        });
+        return finalStyles;
+    };
+    return AnimationStateStyles;
+}());
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
+/**
+ * \@experimental Animation support is experimental.
+ * @param {?} name
+ * @param {?} ast
+ * @return {?}
+ */
+function buildTrigger(name, ast) {
+    return new AnimationTrigger(name, ast);
+}
+/**
+ * \@experimental Animation support is experimental.
+ */
+var AnimationTrigger = (function () {
+    /**
+     * @param {?} name
+     * @param {?} ast
+     */
+    function AnimationTrigger(name, ast) {
+        var _this = this;
+        this.name = name;
+        this.ast = ast;
+        this.transitionFactories = [];
+        this.states = {};
+        ast.states.forEach(function (ast) {
+            var defaultParams = (ast.options && ast.options.params) || {};
+            _this.states[ast.name] = new AnimationStateStyles(ast.style, defaultParams);
+        });
+        balanceProperties(this.states, 'true', '1');
+        balanceProperties(this.states, 'false', '0');
+        ast.transitions.forEach(function (ast) {
+            _this.transitionFactories.push(new AnimationTransitionFactory(name, ast, _this.states));
+        });
+        this.fallbackTransition = createFallbackTransition(name, this.states);
+    }
+    Object.defineProperty(AnimationTrigger.prototype, "containsQueries", {
+        /**
+         * @return {?}
+         */
+        get: function () { return this.ast.queryCount > 0; },
+        enumerable: true,
+        configurable: true
+    });
+    /**
+     * @param {?} currentState
+     * @param {?} nextState
+     * @return {?}
+     */
+    AnimationTrigger.prototype.matchTransition = function (currentState, nextState) {
+        var /** @type {?} */ entry = this.transitionFactories.find(function (f) { return f.match(currentState, nextState); });
+        return entry || null;
+    };
+    /**
+     * @param {?} currentState
+     * @param {?} params
+     * @param {?} errors
+     * @return {?}
+     */
+    AnimationTrigger.prototype.matchStyles = function (currentState, params, errors) {
+        return this.fallbackTransition.buildStyles(currentState, params, errors);
+    };
+    return AnimationTrigger;
+}());
+/**
+ * @param {?} triggerName
+ * @param {?} states
+ * @return {?}
+ */
+function createFallbackTransition(triggerName, states) {
+    var /** @type {?} */ matchers = [function (fromState, toState) { return true; }];
+    var /** @type {?} */ animation = new SequenceAst([]);
+    var /** @type {?} */ transition = new TransitionAst(matchers, animation);
+    return new AnimationTransitionFactory(triggerName, transition, states);
+}
+/**
+ * @param {?} obj
+ * @param {?} key1
+ * @param {?} key2
+ * @return {?}
+ */
+function balanceProperties(obj, key1, key2) {
+    if (obj.hasOwnProperty(key1)) {
+        if (!obj.hasOwnProperty(key2)) {
+            obj[key2] = obj[key1];
+        }
+    }
+    else if (obj.hasOwnProperty(key2)) {
+        obj[key1] = obj[key2];
+    }
+}
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
+var EMPTY_INSTRUCTION_MAP = new ElementInstructionMap();
+var TimelineAnimationEngine = (function () {
+    /**
+     * @param {?} _driver
+     * @param {?} _normalizer
+     */
+    function TimelineAnimationEngine(_driver, _normalizer) {
+        this._driver = _driver;
+        this._normalizer = _normalizer;
+        this._animations = {};
+        this._playersById = {};
+        this.players = [];
+    }
+    /**
+     * @param {?} id
+     * @param {?} metadata
+     * @return {?}
+     */
+    TimelineAnimationEngine.prototype.register = function (id, metadata) {
+        var /** @type {?} */ errors = [];
+        var /** @type {?} */ ast = buildAnimationAst(metadata, errors);
+        if (errors.length) {
+            throw new Error("Unable to build the animation due to the following errors: " + errors.join("\n"));
+        }
+        else {
+            this._animations[id] = ast;
+        }
+    };
+    /**
+     * @param {?} i
+     * @param {?} preStyles
+     * @param {?=} postStyles
+     * @return {?}
+     */
+    TimelineAnimationEngine.prototype._buildPlayer = function (i, preStyles, postStyles) {
+        var /** @type {?} */ element = i.element;
+        var /** @type {?} */ keyframes = normalizeKeyframes(this._driver, this._normalizer, element, i.keyframes, preStyles, postStyles);
+        return this._driver.animate(element, keyframes, i.duration, i.delay, i.easing, []);
+    };
+    /**
+     * @param {?} id
+     * @param {?} element
+     * @param {?=} options
+     * @return {?}
+     */
+    TimelineAnimationEngine.prototype.create = function (id, element, options) {
+        var _this = this;
+        if (options === void 0) { options = {}; }
+        var /** @type {?} */ errors = [];
+        var /** @type {?} */ ast = this._animations[id];
+        var /** @type {?} */ instructions;
+        var /** @type {?} */ autoStylesMap = new Map();
+        if (ast) {
+            instructions = buildAnimationTimelines(this._driver, element, ast, {}, {}, options, EMPTY_INSTRUCTION_MAP, errors);
+            instructions.forEach(function (inst) {
+                var /** @type {?} */ styles = getOrSetAsInMap(autoStylesMap, inst.element, {});
+                inst.postStyleProps.forEach(function (prop) { return styles[prop] = null; });
+            });
+        }
+        else {
+            errors.push('The requested animation doesn\'t exist or has already been destroyed');
+            instructions = [];
+        }
+        if (errors.length) {
+            throw new Error("Unable to create the animation due to the following errors: " + errors.join("\n"));
+        }
+        autoStylesMap.forEach(function (styles, element) {
+            Object.keys(styles).forEach(function (prop) { styles[prop] = _this._driver.computeStyle(element, prop, __WEBPACK_IMPORTED_MODULE_1__angular_animations__["AUTO_STYLE"]); });
+        });
+        var /** @type {?} */ players = instructions.map(function (i) {
+            var /** @type {?} */ styles = autoStylesMap.get(i.element);
+            return _this._buildPlayer(i, {}, styles);
+        });
+        var /** @type {?} */ player = optimizeGroupPlayer(players);
+        this._playersById[id] = player;
+        player.onDestroy(function () { return _this.destroy(id); });
+        this.players.push(player);
+        return player;
+    };
+    /**
+     * @param {?} id
+     * @return {?}
+     */
+    TimelineAnimationEngine.prototype.destroy = function (id) {
+        var /** @type {?} */ player = this._getPlayer(id);
+        player.destroy();
+        delete this._playersById[id];
+        var /** @type {?} */ index = this.players.indexOf(player);
+        if (index >= 0) {
+            this.players.splice(index, 1);
+        }
+    };
+    /**
+     * @param {?} id
+     * @return {?}
+     */
+    TimelineAnimationEngine.prototype._getPlayer = function (id) {
+        var /** @type {?} */ player = this._playersById[id];
+        if (!player) {
+            throw new Error("Unable to find the timeline player referenced by " + id);
+        }
+        return player;
+    };
+    /**
+     * @param {?} id
+     * @param {?} element
+     * @param {?} eventName
+     * @param {?} callback
+     * @return {?}
+     */
+    TimelineAnimationEngine.prototype.listen = function (id, element, eventName, callback) {
+        // triggerName, fromState, toState are all ignored for timeline animations
+        var /** @type {?} */ baseEvent = makeAnimationEvent(element, '', '', '');
+        listenOnPlayer(this._getPlayer(id), eventName, baseEvent, callback);
+        return function () { };
+    };
+    /**
+     * @param {?} id
+     * @param {?} element
+     * @param {?} command
+     * @param {?} args
+     * @return {?}
+     */
+    TimelineAnimationEngine.prototype.command = function (id, element, command, args) {
+        if (command == 'register') {
+            this.register(id, /** @type {?} */ (args[0]));
+            return;
+        }
+        if (command == 'create') {
+            var /** @type {?} */ options = ((args[0] || {}));
+            this.create(id, element, options);
+            return;
+        }
+        var /** @type {?} */ player = this._getPlayer(id);
+        switch (command) {
+            case 'play':
+                player.play();
+                break;
+            case 'pause':
+                player.pause();
+                break;
+            case 'reset':
+                player.reset();
+                break;
+            case 'restart':
+                player.restart();
+                break;
+            case 'finish':
+                player.finish();
+                break;
+            case 'init':
+                player.init();
+                break;
+            case 'setPosition':
+                player.setPosition(parseFloat(/** @type {?} */ (args[0])));
+                break;
+            case 'destroy':
+                this.destroy(id);
+                break;
+        }
+    };
+    return TimelineAnimationEngine;
+}());
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
+var QUEUED_CLASSNAME = 'ng-animate-queued';
+var QUEUED_SELECTOR = '.ng-animate-queued';
+var DISABLED_CLASSNAME = 'ng-animate-disabled';
+var DISABLED_SELECTOR = '.ng-animate-disabled';
+var EMPTY_PLAYER_ARRAY = [];
+var NULL_REMOVAL_STATE = {
+    namespaceId: '',
+    setForRemoval: null,
+    hasAnimation: false,
+    removedBeforeQueried: false
+};
+var NULL_REMOVED_QUERIED_STATE = {
+    namespaceId: '',
+    setForRemoval: null,
+    hasAnimation: false,
+    removedBeforeQueried: true
+};
+var REMOVAL_FLAG = '__ng_removed';
+var StateValue = (function () {
+    /**
+     * @param {?} input
+     */
+    function StateValue(input) {
+        var isObj = input && input.hasOwnProperty('value');
+        var value = isObj ? input['value'] : input;
+        this.value = normalizeTriggerValue(value);
+        if (isObj) {
+            var options = copyObj(input);
+            delete options['value'];
+            this.options = options;
+        }
+        else {
+            this.options = {};
+        }
+        if (!this.options.params) {
+            this.options.params = {};
+        }
+    }
+    Object.defineProperty(StateValue.prototype, "params", {
+        /**
+         * @return {?}
+         */
+        get: function () { return (this.options.params); },
+        enumerable: true,
+        configurable: true
+    });
+    /**
+     * @param {?} options
+     * @return {?}
+     */
+    StateValue.prototype.absorbOptions = function (options) {
+        var /** @type {?} */ newParams = options.params;
+        if (newParams) {
+            var /** @type {?} */ oldParams_2 = ((this.options.params));
+            Object.keys(newParams).forEach(function (prop) {
+                if (oldParams_2[prop] == null) {
+                    oldParams_2[prop] = newParams[prop];
+                }
+            });
+        }
+    };
+    return StateValue;
+}());
+var VOID_VALUE = 'void';
+var DEFAULT_STATE_VALUE = new StateValue(VOID_VALUE);
+var DELETED_STATE_VALUE = new StateValue('DELETED');
+var AnimationTransitionNamespace = (function () {
+    /**
+     * @param {?} id
+     * @param {?} hostElement
+     * @param {?} _engine
+     */
+    function AnimationTransitionNamespace(id, hostElement, _engine) {
+        this.id = id;
+        this.hostElement = hostElement;
+        this._engine = _engine;
+        this.players = [];
+        this._triggers = {};
+        this._queue = [];
+        this._elementListeners = new Map();
+        this._hostClassName = 'ng-tns-' + id;
+        addClass(hostElement, this._hostClassName);
+    }
+    /**
+     * @param {?} element
+     * @param {?} name
+     * @param {?} phase
+     * @param {?} callback
+     * @return {?}
+     */
+    AnimationTransitionNamespace.prototype.listen = function (element, name, phase, callback) {
+        var _this = this;
+        if (!this._triggers.hasOwnProperty(name)) {
+            throw new Error("Unable to listen on the animation trigger event \"" + phase + "\" because the animation trigger \"" + name + "\" doesn't exist!");
+        }
+        if (phase == null || phase.length == 0) {
+            throw new Error("Unable to listen on the animation trigger \"" + name + "\" because the provided event is undefined!");
+        }
+        if (!isTriggerEventValid(phase)) {
+            throw new Error("The provided animation trigger event \"" + phase + "\" for the animation trigger \"" + name + "\" is not supported!");
+        }
+        var /** @type {?} */ listeners = getOrSetAsInMap(this._elementListeners, element, []);
+        var /** @type {?} */ data = { name: name, phase: phase, callback: callback };
+        listeners.push(data);
+        var /** @type {?} */ triggersWithStates = getOrSetAsInMap(this._engine.statesByElement, element, {});
+        if (!triggersWithStates.hasOwnProperty(name)) {
+            addClass(element, NG_TRIGGER_CLASSNAME);
+            addClass(element, NG_TRIGGER_CLASSNAME + '-' + name);
+            triggersWithStates[name] = null;
+        }
+        return function () {
+            // the event listener is removed AFTER the flush has occurred such
+            // that leave animations callbacks can fire (otherwise if the node
+            // is removed in between then the listeners would be deregistered)
+            _this._engine.afterFlush(function () {
+                var /** @type {?} */ index = listeners.indexOf(data);
+                if (index >= 0) {
+                    listeners.splice(index, 1);
+                }
+                if (!_this._triggers[name]) {
+                    delete triggersWithStates[name];
+                }
+            });
+        };
+    };
+    /**
+     * @param {?} name
+     * @param {?} ast
+     * @return {?}
+     */
+    AnimationTransitionNamespace.prototype.register = function (name, ast) {
+        if (this._triggers[name]) {
+            // throw
+            return false;
+        }
+        else {
+            this._triggers[name] = ast;
+            return true;
+        }
+    };
+    /**
+     * @param {?} name
+     * @return {?}
+     */
+    AnimationTransitionNamespace.prototype._getTrigger = function (name) {
+        var /** @type {?} */ trigger = this._triggers[name];
+        if (!trigger) {
+            throw new Error("The provided animation trigger \"" + name + "\" has not been registered!");
+        }
+        return trigger;
+    };
+    /**
+     * @param {?} element
+     * @param {?} triggerName
+     * @param {?} value
+     * @param {?=} defaultToFallback
+     * @return {?}
+     */
+    AnimationTransitionNamespace.prototype.trigger = function (element, triggerName, value, defaultToFallback) {
+        var _this = this;
+        if (defaultToFallback === void 0) { defaultToFallback = true; }
+        var /** @type {?} */ trigger = this._getTrigger(triggerName);
+        var /** @type {?} */ player = new TransitionAnimationPlayer(this.id, triggerName, element);
+        var /** @type {?} */ triggersWithStates = this._engine.statesByElement.get(element);
+        if (!triggersWithStates) {
+            addClass(element, NG_TRIGGER_CLASSNAME);
+            addClass(element, NG_TRIGGER_CLASSNAME + '-' + triggerName);
+            this._engine.statesByElement.set(element, triggersWithStates = {});
+        }
+        var /** @type {?} */ fromState = triggersWithStates[triggerName];
+        var /** @type {?} */ toState = new StateValue(value);
+        var /** @type {?} */ isObj = value && value.hasOwnProperty('value');
+        if (!isObj && fromState) {
+            toState.absorbOptions(fromState.options);
+        }
+        triggersWithStates[triggerName] = toState;
+        if (!fromState) {
+            fromState = DEFAULT_STATE_VALUE;
+        }
+        else if (fromState === DELETED_STATE_VALUE) {
+            return player;
+        }
+        var /** @type {?} */ isRemoval = toState.value === VOID_VALUE;
+        // normally this isn't reached by here, however, if an object expression
+        // is passed in then it may be a new object each time. Comparing the value
+        // is important since that will stay the same despite there being a new object.
+        // The removal arc here is special cased because the same element is triggered
+        // twice in the event that it contains animations on the outer/inner portions
+        // of the host container
+        if (!isRemoval && fromState.value === toState.value) {
+            // this means that despite the value not changing, some inner params
+            // have changed which means that the animation final styles need to be applied
+            if (!objEquals(fromState.params, toState.params)) {
+                var /** @type {?} */ errors = [];
+                var /** @type {?} */ fromStyles_1 = trigger.matchStyles(fromState.value, fromState.params, errors);
+                var /** @type {?} */ toStyles_1 = trigger.matchStyles(toState.value, toState.params, errors);
+                if (errors.length) {
+                    this._engine.reportError(errors);
+                }
+                else {
+                    this._engine.afterFlush(function () {
+                        eraseStyles(element, fromStyles_1);
+                        setStyles(element, toStyles_1);
+                    });
+                }
+            }
+            return;
+        }
+        var /** @type {?} */ playersOnElement = getOrSetAsInMap(this._engine.playersByElement, element, []);
+        playersOnElement.forEach(function (player) {
+            // only remove the player if it is queued on the EXACT same trigger/namespace
+            // we only also deal with queued players here because if the animation has
+            // started then we want to keep the player alive until the flush happens
+            // (which is where the previousPlayers are passed into the new palyer)
+            if (player.namespaceId == _this.id && player.triggerName == triggerName && player.queued) {
+                player.destroy();
+            }
+        });
+        var /** @type {?} */ transition = trigger.matchTransition(fromState.value, toState.value);
+        var /** @type {?} */ isFallbackTransition = false;
+        if (!transition) {
+            if (!defaultToFallback)
+                return;
+            transition = trigger.fallbackTransition;
+            isFallbackTransition = true;
+        }
+        this._engine.totalQueuedPlayers++;
+        this._queue.push({ element: element, triggerName: triggerName, transition: transition, fromState: fromState, toState: toState, player: player, isFallbackTransition: isFallbackTransition });
+        if (!isFallbackTransition) {
+            addClass(element, QUEUED_CLASSNAME);
+            player.onStart(function () { removeClass(element, QUEUED_CLASSNAME); });
+        }
+        player.onDone(function () {
+            var /** @type {?} */ index = _this.players.indexOf(player);
+            if (index >= 0) {
+                _this.players.splice(index, 1);
+            }
+            var /** @type {?} */ players = _this._engine.playersByElement.get(element);
+            if (players) {
+                var /** @type {?} */ index_1 = players.indexOf(player);
+                if (index_1 >= 0) {
+                    players.splice(index_1, 1);
+                }
+            }
+        });
+        this.players.push(player);
+        playersOnElement.push(player);
+        return player;
+    };
+    /**
+     * @param {?} name
+     * @return {?}
+     */
+    AnimationTransitionNamespace.prototype.deregister = function (name) {
+        var _this = this;
+        delete this._triggers[name];
+        this._engine.statesByElement.forEach(function (stateMap, element) { delete stateMap[name]; });
+        this._elementListeners.forEach(function (listeners, element) {
+            _this._elementListeners.set(element, listeners.filter(function (entry) { return entry.name != name; }));
+        });
+    };
+    /**
+     * @param {?} element
+     * @return {?}
+     */
+    AnimationTransitionNamespace.prototype.clearElementCache = function (element) {
+        this._engine.statesByElement.delete(element);
+        this._elementListeners.delete(element);
+        var /** @type {?} */ elementPlayers = this._engine.playersByElement.get(element);
+        if (elementPlayers) {
+            elementPlayers.forEach(function (player) { return player.destroy(); });
+            this._engine.playersByElement.delete(element);
+        }
+    };
+    /**
+     * @param {?} rootElement
+     * @param {?} context
+     * @param {?=} animate
+     * @return {?}
+     */
+    AnimationTransitionNamespace.prototype._destroyInnerNodes = function (rootElement, context, animate) {
+        var _this = this;
+        if (animate === void 0) { animate = false; }
+        this._engine.driver.query(rootElement, NG_TRIGGER_SELECTOR, true).forEach(function (elm) {
+            if (animate && containsClass(elm, _this._hostClassName)) {
+                var /** @type {?} */ innerNs = _this._engine.namespacesByHostElement.get(elm);
+                // special case for a host element with animations on the same element
+                if (innerNs) {
+                    innerNs.removeNode(elm, context, true);
+                }
+                _this.removeNode(elm, context, true);
+            }
+            else {
+                _this.clearElementCache(elm);
+            }
+        });
+    };
+    /**
+     * @param {?} element
+     * @param {?} context
+     * @param {?=} doNotRecurse
+     * @return {?}
+     */
+    AnimationTransitionNamespace.prototype.removeNode = function (element, context, doNotRecurse) {
+        var _this = this;
+        var /** @type {?} */ engine = this._engine;
+        if (!doNotRecurse && element.childElementCount) {
+            this._destroyInnerNodes(element, context, true);
+        }
+        var /** @type {?} */ triggerStates = engine.statesByElement.get(element);
+        if (triggerStates) {
+            var /** @type {?} */ players_1 = [];
+            Object.keys(triggerStates).forEach(function (triggerName) {
+                // this check is here in the event that an element is removed
+                // twice (both on the host level and the component level)
+                if (_this._triggers[triggerName]) {
+                    var /** @type {?} */ player = _this.trigger(element, triggerName, VOID_VALUE, false);
+                    if (player) {
+                        players_1.push(player);
+                    }
+                }
+            });
+            if (players_1.length) {
+                engine.markElementAsRemoved(this.id, element, true, context);
+                optimizeGroupPlayer(players_1).onDone(function () { return engine.processLeaveNode(element); });
+                return;
+            }
+        }
+        // find the player that is animating and make sure that the
+        // removal is delayed until that player has completed
+        var /** @type {?} */ containsPotentialParentTransition = false;
+        if (engine.totalAnimations) {
+            var /** @type {?} */ currentPlayers = engine.players.length ? engine.playersByQueriedElement.get(element) : [];
+            // when this `if statement` does not continue forward it means that
+            // a previous animation query has selected the current element and
+            // is animating it. In this situation want to continue fowards and
+            // allow the element to be queued up for animation later.
+            if (currentPlayers && currentPlayers.length) {
+                containsPotentialParentTransition = true;
+            }
+            else {
+                var /** @type {?} */ parent = element;
+                while (parent = parent.parentNode) {
+                    var /** @type {?} */ triggers = engine.statesByElement.get(parent);
+                    if (triggers) {
+                        containsPotentialParentTransition = true;
+                        break;
+                    }
+                }
+            }
+        }
+        // at this stage we know that the element will either get removed
+        // during flush or will be picked up by a parent query. Either way
+        // we need to fire the listeners for this element when it DOES get
+        // removed (once the query parent animation is done or after flush)
+        var /** @type {?} */ listeners = this._elementListeners.get(element);
+        if (listeners) {
+            var /** @type {?} */ visitedTriggers_1 = new Set();
+            listeners.forEach(function (listener) {
+                var /** @type {?} */ triggerName = listener.name;
+                if (visitedTriggers_1.has(triggerName))
+                    return;
+                visitedTriggers_1.add(triggerName);
+                var /** @type {?} */ trigger = _this._triggers[triggerName];
+                var /** @type {?} */ transition = trigger.fallbackTransition;
+                var /** @type {?} */ elementStates = ((engine.statesByElement.get(element)));
+                var /** @type {?} */ fromState = elementStates[triggerName] || DEFAULT_STATE_VALUE;
+                var /** @type {?} */ toState = new StateValue(VOID_VALUE);
+                var /** @type {?} */ player = new TransitionAnimationPlayer(_this.id, triggerName, element);
+                _this._engine.totalQueuedPlayers++;
+                _this._queue.push({
+                    element: element,
+                    triggerName: triggerName,
+                    transition: transition,
+                    fromState: fromState,
+                    toState: toState,
+                    player: player,
+                    isFallbackTransition: true
+                });
+            });
+        }
+        // whether or not a parent has an animation we need to delay the deferral of the leave
+        // operation until we have more information (which we do after flush() has been called)
+        if (containsPotentialParentTransition) {
+            engine.markElementAsRemoved(this.id, element, false, context);
+        }
+        else {
+            // we do this after the flush has occurred such
+            // that the callbacks can be fired
+            engine.afterFlush(function () { return _this.clearElementCache(element); });
+            engine.destroyInnerAnimations(element);
+            engine._onRemovalComplete(element, context);
+        }
+    };
+    /**
+     * @param {?} element
+     * @param {?} parent
+     * @return {?}
+     */
+    AnimationTransitionNamespace.prototype.insertNode = function (element, parent) { addClass(element, this._hostClassName); };
+    /**
+     * @param {?} microtaskId
+     * @return {?}
+     */
+    AnimationTransitionNamespace.prototype.drainQueuedTransitions = function (microtaskId) {
+        var _this = this;
+        var /** @type {?} */ instructions = [];
+        this._queue.forEach(function (entry) {
+            var /** @type {?} */ player = entry.player;
+            if (player.destroyed)
+                return;
+            var /** @type {?} */ element = entry.element;
+            var /** @type {?} */ listeners = _this._elementListeners.get(element);
+            if (listeners) {
+                listeners.forEach(function (listener) {
+                    if (listener.name == entry.triggerName) {
+                        var /** @type {?} */ baseEvent = makeAnimationEvent(element, entry.triggerName, entry.fromState.value, entry.toState.value);
+                        ((baseEvent))['_data'] = microtaskId;
+                        listenOnPlayer(entry.player, listener.phase, baseEvent, listener.callback);
+                    }
+                });
+            }
+            if (player.markedForDestroy) {
+                _this._engine.afterFlush(function () {
+                    // now we can destroy the element properly since the event listeners have
+                    // been bound to the player
+                    player.destroy();
+                });
+            }
+            else {
+                instructions.push(entry);
+            }
+        });
+        this._queue = [];
+        return instructions.sort(function (a, b) {
+            // if depCount == 0 them move to front
+            // otherwise if a contains b then move back
+            var /** @type {?} */ d0 = a.transition.ast.depCount;
+            var /** @type {?} */ d1 = b.transition.ast.depCount;
+            if (d0 == 0 || d1 == 0) {
+                return d0 - d1;
+            }
+            return _this._engine.driver.containsElement(a.element, b.element) ? 1 : -1;
+        });
+    };
+    /**
+     * @param {?} context
+     * @return {?}
+     */
+    AnimationTransitionNamespace.prototype.destroy = function (context) {
+        this.players.forEach(function (p) { return p.destroy(); });
+        this._destroyInnerNodes(this.hostElement, context);
+    };
+    /**
+     * @param {?} element
+     * @return {?}
+     */
+    AnimationTransitionNamespace.prototype.elementContainsData = function (element) {
+        var /** @type {?} */ containsData = false;
+        if (this._elementListeners.has(element))
+            containsData = true;
+        containsData =
+            (this._queue.find(function (entry) { return entry.element === element; }) ? true : false) || containsData;
+        return containsData;
+    };
+    return AnimationTransitionNamespace;
+}());
+var TransitionAnimationEngine = (function () {
+    /**
+     * @param {?} driver
+     * @param {?} _normalizer
+     */
+    function TransitionAnimationEngine(driver, _normalizer) {
+        this.driver = driver;
+        this._normalizer = _normalizer;
+        this.players = [];
+        this.newHostElements = new Map();
+        this.playersByElement = new Map();
+        this.playersByQueriedElement = new Map();
+        this.statesByElement = new Map();
+        this.disabledNodes = new Set();
+        this.totalAnimations = 0;
+        this.totalQueuedPlayers = 0;
+        this._namespaceLookup = {};
+        this._namespaceList = [];
+        this._flushFns = [];
+        this._whenQuietFns = [];
+        this.namespacesByHostElement = new Map();
+        this.collectedEnterElements = [];
+        this.collectedLeaveElements = [];
+        this.onRemovalComplete = function (element, context) { };
+    }
+    /**
+     * @param {?} element
+     * @param {?} context
+     * @return {?}
+     */
+    TransitionAnimationEngine.prototype._onRemovalComplete = function (element, context) { this.onRemovalComplete(element, context); };
+    Object.defineProperty(TransitionAnimationEngine.prototype, "queuedPlayers", {
+        /**
+         * @return {?}
+         */
+        get: function () {
+            var /** @type {?} */ players = [];
+            this._namespaceList.forEach(function (ns) {
+                ns.players.forEach(function (player) {
+                    if (player.queued) {
+                        players.push(player);
+                    }
+                });
+            });
+            return players;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    /**
+     * @param {?} namespaceId
+     * @param {?} hostElement
+     * @return {?}
+     */
+    TransitionAnimationEngine.prototype.createNamespace = function (namespaceId, hostElement) {
+        var /** @type {?} */ ns = new AnimationTransitionNamespace(namespaceId, hostElement, this);
+        if (hostElement.parentNode) {
+            this._balanceNamespaceList(ns, hostElement);
+        }
+        else {
+            // defer this later until flush during when the host element has
+            // been inserted so that we know exactly where to place it in
+            // the namespace list
+            this.newHostElements.set(hostElement, ns);
+            // given that this host element is apart of the animation code, it
+            // may or may not be inserted by a parent node that is an of an
+            // animation renderer type. If this happens then we can still have
+            // access to this item when we query for :enter nodes. If the parent
+            // is a renderer then the set data-structure will normalize the entry
+            this.collectEnterElement(hostElement);
+        }
+        return this._namespaceLookup[namespaceId] = ns;
+    };
+    /**
+     * @param {?} ns
+     * @param {?} hostElement
+     * @return {?}
+     */
+    TransitionAnimationEngine.prototype._balanceNamespaceList = function (ns, hostElement) {
+        var /** @type {?} */ limit = this._namespaceList.length - 1;
+        if (limit >= 0) {
+            var /** @type {?} */ found = false;
+            for (var /** @type {?} */ i = limit; i >= 0; i--) {
+                var /** @type {?} */ nextNamespace = this._namespaceList[i];
+                if (this.driver.containsElement(nextNamespace.hostElement, hostElement)) {
+                    this._namespaceList.splice(i + 1, 0, ns);
+                    found = true;
+                    break;
+                }
+            }
+            if (!found) {
+                this._namespaceList.splice(0, 0, ns);
+            }
+        }
+        else {
+            this._namespaceList.push(ns);
+        }
+        this.namespacesByHostElement.set(hostElement, ns);
+        return ns;
+    };
+    /**
+     * @param {?} namespaceId
+     * @param {?} hostElement
+     * @return {?}
+     */
+    TransitionAnimationEngine.prototype.register = function (namespaceId, hostElement) {
+        var /** @type {?} */ ns = this._namespaceLookup[namespaceId];
+        if (!ns) {
+            ns = this.createNamespace(namespaceId, hostElement);
+        }
+        return ns;
+    };
+    /**
+     * @param {?} namespaceId
+     * @param {?} name
+     * @param {?} trigger
+     * @return {?}
+     */
+    TransitionAnimationEngine.prototype.registerTrigger = function (namespaceId, name, trigger) {
+        var /** @type {?} */ ns = this._namespaceLookup[namespaceId];
+        if (ns && ns.register(name, trigger)) {
+            this.totalAnimations++;
+        }
+    };
+    /**
+     * @param {?} namespaceId
+     * @param {?} context
+     * @return {?}
+     */
+    TransitionAnimationEngine.prototype.destroy = function (namespaceId, context) {
+        var _this = this;
+        if (!namespaceId)
+            return;
+        var /** @type {?} */ ns = this._fetchNamespace(namespaceId);
+        this.afterFlush(function () {
+            _this.namespacesByHostElement.delete(ns.hostElement);
+            delete _this._namespaceLookup[namespaceId];
+            var /** @type {?} */ index = _this._namespaceList.indexOf(ns);
+            if (index >= 0) {
+                _this._namespaceList.splice(index, 1);
+            }
+        });
+        this.afterFlushAnimationsDone(function () { return ns.destroy(context); });
+    };
+    /**
+     * @param {?} id
+     * @return {?}
+     */
+    TransitionAnimationEngine.prototype._fetchNamespace = function (id) { return this._namespaceLookup[id]; };
+    /**
+     * @param {?} namespaceId
+     * @param {?} element
+     * @param {?} name
+     * @param {?} value
+     * @return {?}
+     */
+    TransitionAnimationEngine.prototype.trigger = function (namespaceId, element, name, value) {
+        if (isElementNode(element)) {
+            this._fetchNamespace(namespaceId).trigger(element, name, value);
+            return true;
+        }
+        return false;
+    };
+    /**
+     * @param {?} namespaceId
+     * @param {?} element
+     * @param {?} parent
+     * @param {?} insertBefore
+     * @return {?}
+     */
+    TransitionAnimationEngine.prototype.insertNode = function (namespaceId, element, parent, insertBefore) {
+        if (!isElementNode(element))
+            return;
+        // special case for when an element is removed and reinserted (move operation)
+        // when this occurs we do not want to use the element for deletion later
+        var /** @type {?} */ details = (element[REMOVAL_FLAG]);
+        if (details && details.setForRemoval) {
+            details.setForRemoval = false;
+        }
+        // in the event that the namespaceId is blank then the caller
+        // code does not contain any animation code in it, but it is
+        // just being called so that the node is marked as being inserted
+        if (namespaceId) {
+            this._fetchNamespace(namespaceId).insertNode(element, parent);
+        }
+        // only *directives and host elements are inserted before
+        if (insertBefore) {
+            this.collectEnterElement(element);
+        }
+    };
+    /**
+     * @param {?} element
+     * @return {?}
+     */
+    TransitionAnimationEngine.prototype.collectEnterElement = function (element) { this.collectedEnterElements.push(element); };
+    /**
+     * @param {?} element
+     * @param {?} value
+     * @return {?}
+     */
+    TransitionAnimationEngine.prototype.markElementAsDisabled = function (element, value) {
+        if (value) {
+            if (!this.disabledNodes.has(element)) {
+                this.disabledNodes.add(element);
+                addClass(element, DISABLED_CLASSNAME);
+            }
+        }
+        else if (this.disabledNodes.has(element)) {
+            this.disabledNodes.delete(element);
+            removeClass(element, DISABLED_CLASSNAME);
+        }
+    };
+    /**
+     * @param {?} namespaceId
+     * @param {?} element
+     * @param {?} context
+     * @param {?=} doNotRecurse
+     * @return {?}
+     */
+    TransitionAnimationEngine.prototype.removeNode = function (namespaceId, element, context, doNotRecurse) {
+        if (!isElementNode(element)) {
+            this._onRemovalComplete(element, context);
+            return;
+        }
+        var /** @type {?} */ ns = namespaceId ? this._fetchNamespace(namespaceId) : null;
+        if (ns) {
+            ns.removeNode(element, context, doNotRecurse);
+        }
+        else {
+            this.markElementAsRemoved(namespaceId, element, false, context);
+        }
+    };
+    /**
+     * @param {?} namespaceId
+     * @param {?} element
+     * @param {?=} hasAnimation
+     * @param {?=} context
+     * @return {?}
+     */
+    TransitionAnimationEngine.prototype.markElementAsRemoved = function (namespaceId, element, hasAnimation, context) {
+        this.collectedLeaveElements.push(element);
+        element[REMOVAL_FLAG] = {
+            namespaceId: namespaceId,
+            setForRemoval: context, hasAnimation: hasAnimation,
+            removedBeforeQueried: false
+        };
+    };
+    /**
+     * @param {?} namespaceId
+     * @param {?} element
+     * @param {?} name
+     * @param {?} phase
+     * @param {?} callback
+     * @return {?}
+     */
+    TransitionAnimationEngine.prototype.listen = function (namespaceId, element, name, phase, callback) {
+        if (isElementNode(element)) {
+            return this._fetchNamespace(namespaceId).listen(element, name, phase, callback);
+        }
+        return function () { };
+    };
+    /**
+     * @param {?} entry
+     * @param {?} subTimelines
+     * @return {?}
+     */
+    TransitionAnimationEngine.prototype._buildInstruction = function (entry, subTimelines) {
+        return entry.transition.build(this.driver, entry.element, entry.fromState.value, entry.toState.value, entry.fromState.options, entry.toState.options, subTimelines);
+    };
+    /**
+     * @param {?} containerElement
+     * @return {?}
+     */
+    TransitionAnimationEngine.prototype.destroyInnerAnimations = function (containerElement) {
+        var _this = this;
+        var /** @type {?} */ elements = this.driver.query(containerElement, NG_TRIGGER_SELECTOR, true);
+        elements.forEach(function (element) {
+            var /** @type {?} */ players = _this.playersByElement.get(element);
+            if (players) {
+                players.forEach(function (player) {
+                    // special case for when an element is set for destruction, but hasn't started.
+                    // in this situation we want to delay the destruction until the flush occurs
+                    // so that any event listeners attached to the player are triggered.
+                    if (player.queued) {
+                        player.markedForDestroy = true;
+                    }
+                    else {
+                        player.destroy();
+                    }
+                });
+            }
+            var /** @type {?} */ stateMap = _this.statesByElement.get(element);
+            if (stateMap) {
+                Object.keys(stateMap).forEach(function (triggerName) { return stateMap[triggerName] = DELETED_STATE_VALUE; });
+            }
+        });
+        if (this.playersByQueriedElement.size == 0)
+            return;
+        elements = this.driver.query(containerElement, NG_ANIMATING_SELECTOR, true);
+        if (elements.length) {
+            elements.forEach(function (element) {
+                var /** @type {?} */ players = _this.playersByQueriedElement.get(element);
+                if (players) {
+                    players.forEach(function (player) { return player.finish(); });
+                }
+            });
+        }
+    };
+    /**
+     * @return {?}
+     */
+    TransitionAnimationEngine.prototype.whenRenderingDone = function () {
+        var _this = this;
+        return new Promise(function (resolve) {
+            if (_this.players.length) {
+                return optimizeGroupPlayer(_this.players).onDone(function () { return resolve(); });
+            }
+            else {
+                resolve();
+            }
+        });
+    };
+    /**
+     * @param {?} element
+     * @return {?}
+     */
+    TransitionAnimationEngine.prototype.processLeaveNode = function (element) {
+        var _this = this;
+        var /** @type {?} */ details = (element[REMOVAL_FLAG]);
+        if (details && details.setForRemoval) {
+            // this will prevent it from removing it twice
+            element[REMOVAL_FLAG] = NULL_REMOVAL_STATE;
+            if (details.namespaceId) {
+                this.destroyInnerAnimations(element);
+                var /** @type {?} */ ns = this._fetchNamespace(details.namespaceId);
+                if (ns) {
+                    ns.clearElementCache(element);
+                }
+            }
+            this._onRemovalComplete(element, details.setForRemoval);
+        }
+        if (this.driver.matchesElement(element, DISABLED_SELECTOR)) {
+            this.markElementAsDisabled(element, false);
+        }
+        this.driver.query(element, DISABLED_SELECTOR, true).forEach(function (node) {
+            _this.markElementAsDisabled(element, false);
+        });
+    };
+    /**
+     * @param {?=} microtaskId
+     * @return {?}
+     */
+    TransitionAnimationEngine.prototype.flush = function (microtaskId) {
+        var _this = this;
+        if (microtaskId === void 0) { microtaskId = -1; }
+        var /** @type {?} */ players = [];
+        if (this.newHostElements.size) {
+            this.newHostElements.forEach(function (ns, element) { return _this._balanceNamespaceList(ns, element); });
+            this.newHostElements.clear();
+        }
+        if (this._namespaceList.length &&
+            (this.totalQueuedPlayers || this.collectedLeaveElements.length)) {
+            var /** @type {?} */ cleanupFns = [];
+            try {
+                players = this._flushAnimations(cleanupFns, microtaskId);
+            }
+            finally {
+                for (var /** @type {?} */ i = 0; i < cleanupFns.length; i++) {
+                    cleanupFns[i]();
+                }
+            }
+        }
+        else {
+            for (var /** @type {?} */ i = 0; i < this.collectedLeaveElements.length; i++) {
+                var /** @type {?} */ element = this.collectedLeaveElements[i];
+                this.processLeaveNode(element);
+            }
+        }
+        this.totalQueuedPlayers = 0;
+        this.collectedEnterElements.length = 0;
+        this.collectedLeaveElements.length = 0;
+        this._flushFns.forEach(function (fn) { return fn(); });
+        this._flushFns = [];
+        if (this._whenQuietFns.length) {
+            // we move these over to a variable so that
+            // if any new callbacks are registered in another
+            // flush they do not populate the existing set
+            var /** @type {?} */ quietFns_1 = this._whenQuietFns;
+            this._whenQuietFns = [];
+            if (players.length) {
+                optimizeGroupPlayer(players).onDone(function () { quietFns_1.forEach(function (fn) { return fn(); }); });
+            }
+            else {
+                quietFns_1.forEach(function (fn) { return fn(); });
+            }
+        }
+    };
+    /**
+     * @param {?} errors
+     * @return {?}
+     */
+    TransitionAnimationEngine.prototype.reportError = function (errors) {
+        throw new Error("Unable to process animations due to the following failed trigger transitions\n " + errors.join("\n"));
+    };
+    /**
+     * @param {?} cleanupFns
+     * @param {?} microtaskId
+     * @return {?}
+     */
+    TransitionAnimationEngine.prototype._flushAnimations = function (cleanupFns, microtaskId) {
+        var _this = this;
+        var /** @type {?} */ subTimelines = new ElementInstructionMap();
+        var /** @type {?} */ skippedPlayers = [];
+        var /** @type {?} */ skippedPlayersMap = new Map();
+        var /** @type {?} */ queuedInstructions = [];
+        var /** @type {?} */ queriedElements = new Map();
+        var /** @type {?} */ allPreStyleElements = new Map();
+        var /** @type {?} */ allPostStyleElements = new Map();
+        var /** @type {?} */ disabledElementsSet = new Set();
+        this.disabledNodes.forEach(function (node) {
+            disabledElementsSet.add(node);
+            var /** @type {?} */ nodesThatAreDisabled = _this.driver.query(node, QUEUED_SELECTOR, true);
+            for (var /** @type {?} */ i = 0; i < nodesThatAreDisabled.length; i++) {
+                disabledElementsSet.add(nodesThatAreDisabled[i]);
+            }
+        });
+        var /** @type {?} */ bodyNode = getBodyNode();
+        var /** @type {?} */ allEnterNodes = this.collectedEnterElements.length ?
+            this.collectedEnterElements.filter(createIsRootFilterFn(this.collectedEnterElements)) :
+            [];
+        // this must occur before the instructions are built below such that
+        // the :enter queries match the elements (since the timeline queries
+        // are fired during instruction building).
+        for (var /** @type {?} */ i = 0; i < allEnterNodes.length; i++) {
+            addClass(allEnterNodes[i], ENTER_CLASSNAME);
+        }
+        var /** @type {?} */ allLeaveNodes = [];
+        var /** @type {?} */ leaveNodesWithoutAnimations = [];
+        for (var /** @type {?} */ i = 0; i < this.collectedLeaveElements.length; i++) {
+            var /** @type {?} */ element = this.collectedLeaveElements[i];
+            var /** @type {?} */ details = (element[REMOVAL_FLAG]);
+            if (details && details.setForRemoval) {
+                addClass(element, LEAVE_CLASSNAME);
+                allLeaveNodes.push(element);
+                if (!details.hasAnimation) {
+                    leaveNodesWithoutAnimations.push(element);
+                }
+            }
+        }
+        cleanupFns.push(function () {
+            allEnterNodes.forEach(function (element) { return removeClass(element, ENTER_CLASSNAME); });
+            allLeaveNodes.forEach(function (element) {
+                removeClass(element, LEAVE_CLASSNAME);
+                _this.processLeaveNode(element);
+            });
+        });
+        var /** @type {?} */ allPlayers = [];
+        var /** @type {?} */ erroneousTransitions = [];
+        for (var /** @type {?} */ i = this._namespaceList.length - 1; i >= 0; i--) {
+            var /** @type {?} */ ns = this._namespaceList[i];
+            ns.drainQueuedTransitions(microtaskId).forEach(function (entry) {
+                var /** @type {?} */ player = entry.player;
+                allPlayers.push(player);
+                var /** @type {?} */ element = entry.element;
+                if (!bodyNode || !_this.driver.containsElement(bodyNode, element)) {
+                    player.destroy();
+                    return;
+                }
+                var /** @type {?} */ instruction = ((_this._buildInstruction(entry, subTimelines)));
+                if (instruction.errors && instruction.errors.length) {
+                    erroneousTransitions.push(instruction);
+                    return;
+                }
+                // if a unmatched transition is queued to go then it SHOULD NOT render
+                // an animation and cancel the previously running animations.
+                if (entry.isFallbackTransition) {
+                    player.onStart(function () { return eraseStyles(element, instruction.fromStyles); });
+                    player.onDestroy(function () { return setStyles(element, instruction.toStyles); });
+                    skippedPlayers.push(player);
+                    return;
+                }
+                // this means that if a parent animation uses this animation as a sub trigger
+                // then it will instruct the timeline builder to not add a player delay, but
+                // instead stretch the first keyframe gap up until the animation starts. The
+                // reason this is important is to prevent extra initialization styles from being
+                // required by the user in the animation.
+                instruction.timelines.forEach(function (tl) { return tl.stretchStartingKeyframe = true; });
+                subTimelines.append(element, instruction.timelines);
+                var /** @type {?} */ tuple = { instruction: instruction, player: player, element: element };
+                queuedInstructions.push(tuple);
+                instruction.queriedElements.forEach(function (element) { return getOrSetAsInMap(queriedElements, element, []).push(player); });
+                instruction.preStyleProps.forEach(function (stringMap, element) {
+                    var /** @type {?} */ props = Object.keys(stringMap);
+                    if (props.length) {
+                        var /** @type {?} */ setVal_1 = ((allPreStyleElements.get(element)));
+                        if (!setVal_1) {
+                            allPreStyleElements.set(element, setVal_1 = new Set());
+                        }
+                        props.forEach(function (prop) { return setVal_1.add(prop); });
+                    }
+                });
+                instruction.postStyleProps.forEach(function (stringMap, element) {
+                    var /** @type {?} */ props = Object.keys(stringMap);
+                    var /** @type {?} */ setVal = ((allPostStyleElements.get(element)));
+                    if (!setVal) {
+                        allPostStyleElements.set(element, setVal = new Set());
+                    }
+                    props.forEach(function (prop) { return setVal.add(prop); });
+                });
+            });
+        }
+        if (erroneousTransitions.length) {
+            var /** @type {?} */ errors_1 = [];
+            erroneousTransitions.forEach(function (instruction) {
+                errors_1.push("@" + instruction.triggerName + " has failed due to:\n"); /** @type {?} */
+                ((instruction.errors)).forEach(function (error) { return errors_1.push("- " + error + "\n"); });
+            });
+            allPlayers.forEach(function (player) { return player.destroy(); });
+            this.reportError(errors_1);
+        }
+        // these can only be detected here since we have a map of all the elements
+        // that have animations attached to them...
+        var /** @type {?} */ enterNodesWithoutAnimations = [];
+        for (var /** @type {?} */ i = 0; i < allEnterNodes.length; i++) {
+            var /** @type {?} */ element = allEnterNodes[i];
+            if (!subTimelines.has(element)) {
+                enterNodesWithoutAnimations.push(element);
+            }
+        }
+        var /** @type {?} */ allPreviousPlayersMap = new Map();
+        var /** @type {?} */ sortedParentElements = [];
+        queuedInstructions.forEach(function (entry) {
+            var /** @type {?} */ element = entry.element;
+            if (subTimelines.has(element)) {
+                sortedParentElements.unshift(element);
+                _this._beforeAnimationBuild(entry.player.namespaceId, entry.instruction, allPreviousPlayersMap);
+            }
+        });
+        skippedPlayers.forEach(function (player) {
+            var /** @type {?} */ element = player.element;
+            var /** @type {?} */ previousPlayers = _this._getPreviousPlayers(element, false, player.namespaceId, player.triggerName, null);
+            previousPlayers.forEach(function (prevPlayer) {
+                getOrSetAsInMap(allPreviousPlayersMap, element, []).push(prevPlayer);
+                prevPlayer.destroy();
+            });
+        });
+        // this is a special case for nodes that will be removed (either by)
+        // having their own leave animations or by being queried in a container
+        // that will be removed once a parent animation is complete. The idea
+        // here is that * styles must be identical to ! styles because of
+        // backwards compatibility (* is also filled in by default in many places).
+        // Otherwise * styles will return an empty value or auto since the element
+        // that is being getComputedStyle'd will not be visible (since * = destination)
+        var /** @type {?} */ replaceNodes = allLeaveNodes.filter(function (node) {
+            return replacePostStylesAsPre(node, allPreStyleElements, allPostStyleElements);
+        });
+        // POST STAGE: fill the * styles
+        var _a = cloakAndComputeStyles(this.driver, leaveNodesWithoutAnimations, allPostStyleElements, __WEBPACK_IMPORTED_MODULE_1__angular_animations__["AUTO_STYLE"]), postStylesMap = _a[0], allLeaveQueriedNodes = _a[1];
+        allLeaveQueriedNodes.forEach(function (node) {
+            if (replacePostStylesAsPre(node, allPreStyleElements, allPostStyleElements)) {
+                replaceNodes.push(node);
+            }
+        });
+        // PRE STAGE: fill the ! styles
+        var preStylesMap = (allPreStyleElements.size ?
+            cloakAndComputeStyles(this.driver, enterNodesWithoutAnimations, allPreStyleElements, __WEBPACK_IMPORTED_MODULE_1__angular_animations__["ɵPRE_STYLE"]) :
+            [new Map()])[0];
+        replaceNodes.forEach(function (node) {
+            var /** @type {?} */ post = postStylesMap.get(node);
+            var /** @type {?} */ pre = preStylesMap.get(node);
+            postStylesMap.set(node, /** @type {?} */ (Object.assign({}, post, pre)));
+        });
+        var /** @type {?} */ rootPlayers = [];
+        var /** @type {?} */ subPlayers = [];
+        queuedInstructions.forEach(function (entry) {
+            var element = entry.element, player = entry.player, instruction = entry.instruction;
+            // this means that it was never consumed by a parent animation which
+            // means that it is independent and therefore should be set for animation
+            if (subTimelines.has(element)) {
+                if (disabledElementsSet.has(element)) {
+                    skippedPlayers.push(player);
+                    return;
+                }
+                var /** @type {?} */ innerPlayer = _this._buildAnimation(player.namespaceId, instruction, allPreviousPlayersMap, skippedPlayersMap, preStylesMap, postStylesMap);
+                player.setRealPlayer(innerPlayer);
+                var /** @type {?} */ parentHasPriority = null;
+                for (var /** @type {?} */ i = 0; i < sortedParentElements.length; i++) {
+                    var /** @type {?} */ parent = sortedParentElements[i];
+                    if (parent === element)
+                        break;
+                    if (_this.driver.containsElement(parent, element)) {
+                        parentHasPriority = parent;
+                        break;
+                    }
+                }
+                if (parentHasPriority) {
+                    var /** @type {?} */ parentPlayers = _this.playersByElement.get(parentHasPriority);
+                    if (parentPlayers && parentPlayers.length) {
+                        player.parentPlayer = optimizeGroupPlayer(parentPlayers);
+                    }
+                    skippedPlayers.push(player);
+                }
+                else {
+                    rootPlayers.push(player);
+                }
+            }
+            else {
+                eraseStyles(element, instruction.fromStyles);
+                player.onDestroy(function () { return setStyles(element, instruction.toStyles); });
+                // there still might be a ancestor player animating this
+                // element therefore we will still add it as a sub player
+                // even if its animation may be disabled
+                subPlayers.push(player);
+                if (disabledElementsSet.has(element)) {
+                    skippedPlayers.push(player);
+                }
+            }
+        });
+        // find all of the sub players' corresponding inner animation player
+        subPlayers.forEach(function (player) {
+            // even if any players are not found for a sub animation then it
+            // will still complete itself after the next tick since it's Noop
+            var /** @type {?} */ playersForElement = skippedPlayersMap.get(player.element);
+            if (playersForElement && playersForElement.length) {
+                var /** @type {?} */ innerPlayer = optimizeGroupPlayer(playersForElement);
+                player.setRealPlayer(innerPlayer);
+            }
+        });
+        // the reason why we don't actually play the animation is
+        // because all that a skipped player is designed to do is to
+        // fire the start/done transition callback events
+        skippedPlayers.forEach(function (player) {
+            if (player.parentPlayer) {
+                player.parentPlayer.onDestroy(function () { return player.destroy(); });
+            }
+            else {
+                player.destroy();
+            }
+        });
+        // run through all of the queued removals and see if they
+        // were picked up by a query. If not then perform the removal
+        // operation right away unless a parent animation is ongoing.
+        for (var /** @type {?} */ i = 0; i < allLeaveNodes.length; i++) {
+            var /** @type {?} */ element = allLeaveNodes[i];
+            var /** @type {?} */ details = (element[REMOVAL_FLAG]);
+            removeClass(element, LEAVE_CLASSNAME);
+            // this means the element has a removal animation that is being
+            // taken care of and therefore the inner elements will hang around
+            // until that animation is over (or the parent queried animation)
+            if (details && details.hasAnimation)
+                continue;
+            var /** @type {?} */ players = [];
+            // if this element is queried or if it contains queried children
+            // then we want for the element not to be removed from the page
+            // until the queried animations have finished
+            if (queriedElements.size) {
+                var /** @type {?} */ queriedPlayerResults = queriedElements.get(element);
+                if (queriedPlayerResults && queriedPlayerResults.length) {
+                    players.push.apply(players, queriedPlayerResults);
+                }
+                var /** @type {?} */ queriedInnerElements = this.driver.query(element, NG_ANIMATING_SELECTOR, true);
+                for (var /** @type {?} */ j = 0; j < queriedInnerElements.length; j++) {
+                    var /** @type {?} */ queriedPlayers = queriedElements.get(queriedInnerElements[j]);
+                    if (queriedPlayers && queriedPlayers.length) {
+                        players.push.apply(players, queriedPlayers);
+                    }
+                }
+            }
+            var /** @type {?} */ activePlayers = players.filter(function (p) { return !p.destroyed; });
+            if (activePlayers.length) {
+                removeNodesAfterAnimationDone(this, element, activePlayers);
+            }
+            else {
+                this.processLeaveNode(element);
+            }
+        }
+        // this is required so the cleanup method doesn't remove them
+        allLeaveNodes.length = 0;
+        rootPlayers.forEach(function (player) {
+            _this.players.push(player);
+            player.onDone(function () {
+                player.destroy();
+                var /** @type {?} */ index = _this.players.indexOf(player);
+                _this.players.splice(index, 1);
+            });
+            player.play();
+        });
+        return rootPlayers;
+    };
+    /**
+     * @param {?} namespaceId
+     * @param {?} element
+     * @return {?}
+     */
+    TransitionAnimationEngine.prototype.elementContainsData = function (namespaceId, element) {
+        var /** @type {?} */ containsData = false;
+        var /** @type {?} */ details = (element[REMOVAL_FLAG]);
+        if (details && details.setForRemoval)
+            containsData = true;
+        if (this.playersByElement.has(element))
+            containsData = true;
+        if (this.playersByQueriedElement.has(element))
+            containsData = true;
+        if (this.statesByElement.has(element))
+            containsData = true;
+        return this._fetchNamespace(namespaceId).elementContainsData(element) || containsData;
+    };
+    /**
+     * @param {?} callback
+     * @return {?}
+     */
+    TransitionAnimationEngine.prototype.afterFlush = function (callback) { this._flushFns.push(callback); };
+    /**
+     * @param {?} callback
+     * @return {?}
+     */
+    TransitionAnimationEngine.prototype.afterFlushAnimationsDone = function (callback) { this._whenQuietFns.push(callback); };
+    /**
+     * @param {?} element
+     * @param {?} isQueriedElement
+     * @param {?=} namespaceId
+     * @param {?=} triggerName
+     * @param {?=} toStateValue
+     * @return {?}
+     */
+    TransitionAnimationEngine.prototype._getPreviousPlayers = function (element, isQueriedElement, namespaceId, triggerName, toStateValue) {
+        var /** @type {?} */ players = [];
+        if (isQueriedElement) {
+            var /** @type {?} */ queriedElementPlayers = this.playersByQueriedElement.get(element);
+            if (queriedElementPlayers) {
+                players = queriedElementPlayers;
+            }
+        }
+        else {
+            var /** @type {?} */ elementPlayers = this.playersByElement.get(element);
+            if (elementPlayers) {
+                var /** @type {?} */ isRemovalAnimation_1 = !toStateValue || toStateValue == VOID_VALUE;
+                elementPlayers.forEach(function (player) {
+                    if (player.queued)
+                        return;
+                    if (!isRemovalAnimation_1 && player.triggerName != triggerName)
+                        return;
+                    players.push(player);
+                });
+            }
+        }
+        if (namespaceId || triggerName) {
+            players = players.filter(function (player) {
+                if (namespaceId && namespaceId != player.namespaceId)
+                    return false;
+                if (triggerName && triggerName != player.triggerName)
+                    return false;
+                return true;
+            });
+        }
+        return players;
+    };
+    /**
+     * @param {?} namespaceId
+     * @param {?} instruction
+     * @param {?} allPreviousPlayersMap
+     * @return {?}
+     */
+    TransitionAnimationEngine.prototype._beforeAnimationBuild = function (namespaceId, instruction, allPreviousPlayersMap) {
+        var _this = this;
+        var /** @type {?} */ triggerName = instruction.triggerName;
+        var /** @type {?} */ rootElement = instruction.element;
+        // when a removal animation occurs, ALL previous players are collected
+        // and destroyed (even if they are outside of the current namespace)
+        var /** @type {?} */ targetNameSpaceId = instruction.isRemovalTransition ? undefined : namespaceId;
+        var /** @type {?} */ targetTriggerName = instruction.isRemovalTransition ? undefined : triggerName;
+        instruction.timelines.map(function (timelineInstruction) {
+            var /** @type {?} */ element = timelineInstruction.element;
+            var /** @type {?} */ isQueriedElement = element !== rootElement;
+            var /** @type {?} */ players = getOrSetAsInMap(allPreviousPlayersMap, element, []);
+            var /** @type {?} */ previousPlayers = _this._getPreviousPlayers(element, isQueriedElement, targetNameSpaceId, targetTriggerName, instruction.toState);
+            previousPlayers.forEach(function (player) {
+                var /** @type {?} */ realPlayer = (player.getRealPlayer());
+                if (realPlayer.beforeDestroy) {
+                    realPlayer.beforeDestroy();
+                }
+                player.destroy();
+                players.push(player);
+            });
+        });
+        // this needs to be done so that the PRE/POST styles can be
+        // computed properly without interfering with the previous animation
+        eraseStyles(rootElement, instruction.fromStyles);
+    };
+    /**
+     * @param {?} namespaceId
+     * @param {?} instruction
+     * @param {?} allPreviousPlayersMap
+     * @param {?} skippedPlayersMap
+     * @param {?} preStylesMap
+     * @param {?} postStylesMap
+     * @return {?}
+     */
+    TransitionAnimationEngine.prototype._buildAnimation = function (namespaceId, instruction, allPreviousPlayersMap, skippedPlayersMap, preStylesMap, postStylesMap) {
+        var _this = this;
+        var /** @type {?} */ triggerName = instruction.triggerName;
+        var /** @type {?} */ rootElement = instruction.element;
+        // we first run this so that the previous animation player
+        // data can be passed into the successive animation players
+        var /** @type {?} */ allQueriedPlayers = [];
+        var /** @type {?} */ allConsumedElements = new Set();
+        var /** @type {?} */ allSubElements = new Set();
+        var /** @type {?} */ allNewPlayers = instruction.timelines.map(function (timelineInstruction) {
+            var /** @type {?} */ element = timelineInstruction.element;
+            allConsumedElements.add(element);
+            // FIXME (matsko): make sure to-be-removed animations are removed properly
+            var /** @type {?} */ details = element[REMOVAL_FLAG];
+            if (details && details.removedBeforeQueried)
+                return new __WEBPACK_IMPORTED_MODULE_1__angular_animations__["NoopAnimationPlayer"]();
+            var /** @type {?} */ isQueriedElement = element !== rootElement;
+            var /** @type {?} */ previousPlayers = flattenGroupPlayers((allPreviousPlayersMap.get(element) || EMPTY_PLAYER_ARRAY)
+                .map(function (p) { return p.getRealPlayer(); }))
+                .filter(function (p) {
+                // the `element` is not apart of the AnimationPlayer definition, but
+                // Mock/WebAnimations
+                // use the element within their implementation. This will be added in Angular5 to
+                // AnimationPlayer
+                var /** @type {?} */ pp = (p);
+                return pp.element ? pp.element === element : false;
+            });
+            var /** @type {?} */ preStyles = preStylesMap.get(element);
+            var /** @type {?} */ postStyles = postStylesMap.get(element);
+            var /** @type {?} */ keyframes = normalizeKeyframes(_this.driver, _this._normalizer, element, timelineInstruction.keyframes, preStyles, postStyles);
+            var /** @type {?} */ player = _this._buildPlayer(timelineInstruction, keyframes, previousPlayers);
+            // this means that this particular player belongs to a sub trigger. It is
+            // important that we match this player up with the corresponding (@trigger.listener)
+            if (timelineInstruction.subTimeline && skippedPlayersMap) {
+                allSubElements.add(element);
+            }
+            if (isQueriedElement) {
+                var /** @type {?} */ wrappedPlayer = new TransitionAnimationPlayer(namespaceId, triggerName, element);
+                wrappedPlayer.setRealPlayer(player);
+                allQueriedPlayers.push(wrappedPlayer);
+            }
+            return player;
+        });
+        allQueriedPlayers.forEach(function (player) {
+            getOrSetAsInMap(_this.playersByQueriedElement, player.element, []).push(player);
+            player.onDone(function () { return deleteOrUnsetInMap(_this.playersByQueriedElement, player.element, player); });
+        });
+        allConsumedElements.forEach(function (element) { return addClass(element, NG_ANIMATING_CLASSNAME); });
+        var /** @type {?} */ player = optimizeGroupPlayer(allNewPlayers);
+        player.onDestroy(function () {
+            allConsumedElements.forEach(function (element) { return removeClass(element, NG_ANIMATING_CLASSNAME); });
+            setStyles(rootElement, instruction.toStyles);
+        });
+        // this basically makes all of the callbacks for sub element animations
+        // be dependent on the upper players for when they finish
+        allSubElements.forEach(function (element) { getOrSetAsInMap(skippedPlayersMap, element, []).push(player); });
+        return player;
+    };
+    /**
+     * @param {?} instruction
+     * @param {?} keyframes
+     * @param {?} previousPlayers
+     * @return {?}
+     */
+    TransitionAnimationEngine.prototype._buildPlayer = function (instruction, keyframes, previousPlayers) {
+        if (keyframes.length > 0) {
+            return this.driver.animate(instruction.element, keyframes, instruction.duration, instruction.delay, instruction.easing, previousPlayers);
+        }
+        // special case for when an empty transition|definition is provided
+        // ... there is no point in rendering an empty animation
+        return new __WEBPACK_IMPORTED_MODULE_1__angular_animations__["NoopAnimationPlayer"]();
+    };
+    return TransitionAnimationEngine;
+}());
+var TransitionAnimationPlayer = (function () {
+    /**
+     * @param {?} namespaceId
+     * @param {?} triggerName
+     * @param {?} element
+     */
+    function TransitionAnimationPlayer(namespaceId, triggerName, element) {
+        this.namespaceId = namespaceId;
+        this.triggerName = triggerName;
+        this.element = element;
+        this._player = new __WEBPACK_IMPORTED_MODULE_1__angular_animations__["NoopAnimationPlayer"]();
+        this._containsRealPlayer = false;
+        this._queuedCallbacks = {};
+        this._destroyed = false;
+        this.markedForDestroy = false;
+    }
+    Object.defineProperty(TransitionAnimationPlayer.prototype, "queued", {
+        /**
+         * @return {?}
+         */
+        get: function () { return this._containsRealPlayer == false; },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(TransitionAnimationPlayer.prototype, "destroyed", {
+        /**
+         * @return {?}
+         */
+        get: function () { return this._destroyed; },
+        enumerable: true,
+        configurable: true
+    });
+    /**
+     * @param {?} player
+     * @return {?}
+     */
+    TransitionAnimationPlayer.prototype.setRealPlayer = function (player) {
+        var _this = this;
+        if (this._containsRealPlayer)
+            return;
+        this._player = player;
+        Object.keys(this._queuedCallbacks).forEach(function (phase) {
+            _this._queuedCallbacks[phase].forEach(function (callback) { return listenOnPlayer(player, phase, undefined, callback); });
+        });
+        this._queuedCallbacks = {};
+        this._containsRealPlayer = true;
+    };
+    /**
+     * @return {?}
+     */
+    TransitionAnimationPlayer.prototype.getRealPlayer = function () { return this._player; };
+    /**
+     * @param {?} name
+     * @param {?} callback
+     * @return {?}
+     */
+    TransitionAnimationPlayer.prototype._queueEvent = function (name, callback) {
+        getOrSetAsInMap(this._queuedCallbacks, name, []).push(callback);
+    };
+    /**
+     * @param {?} fn
+     * @return {?}
+     */
+    TransitionAnimationPlayer.prototype.onDone = function (fn) {
+        if (this.queued) {
+            this._queueEvent('done', fn);
+        }
+        this._player.onDone(fn);
+    };
+    /**
+     * @param {?} fn
+     * @return {?}
+     */
+    TransitionAnimationPlayer.prototype.onStart = function (fn) {
+        if (this.queued) {
+            this._queueEvent('start', fn);
+        }
+        this._player.onStart(fn);
+    };
+    /**
+     * @param {?} fn
+     * @return {?}
+     */
+    TransitionAnimationPlayer.prototype.onDestroy = function (fn) {
+        if (this.queued) {
+            this._queueEvent('destroy', fn);
+        }
+        this._player.onDestroy(fn);
+    };
+    /**
+     * @return {?}
+     */
+    TransitionAnimationPlayer.prototype.init = function () { this._player.init(); };
+    /**
+     * @return {?}
+     */
+    TransitionAnimationPlayer.prototype.hasStarted = function () { return this.queued ? false : this._player.hasStarted(); };
+    /**
+     * @return {?}
+     */
+    TransitionAnimationPlayer.prototype.play = function () { !this.queued && this._player.play(); };
+    /**
+     * @return {?}
+     */
+    TransitionAnimationPlayer.prototype.pause = function () { !this.queued && this._player.pause(); };
+    /**
+     * @return {?}
+     */
+    TransitionAnimationPlayer.prototype.restart = function () { !this.queued && this._player.restart(); };
+    /**
+     * @return {?}
+     */
+    TransitionAnimationPlayer.prototype.finish = function () { this._player.finish(); };
+    /**
+     * @return {?}
+     */
+    TransitionAnimationPlayer.prototype.destroy = function () {
+        this._destroyed = true;
+        this._player.destroy();
+    };
+    /**
+     * @return {?}
+     */
+    TransitionAnimationPlayer.prototype.reset = function () { !this.queued && this._player.reset(); };
+    /**
+     * @param {?} p
+     * @return {?}
+     */
+    TransitionAnimationPlayer.prototype.setPosition = function (p) {
+        if (!this.queued) {
+            this._player.setPosition(p);
+        }
+    };
+    /**
+     * @return {?}
+     */
+    TransitionAnimationPlayer.prototype.getPosition = function () { return this.queued ? 0 : this._player.getPosition(); };
+    Object.defineProperty(TransitionAnimationPlayer.prototype, "totalTime", {
+        /**
+         * @return {?}
+         */
+        get: function () { return this._player.totalTime; },
+        enumerable: true,
+        configurable: true
+    });
+    return TransitionAnimationPlayer;
+}());
+/**
+ * @param {?} map
+ * @param {?} key
+ * @param {?} value
+ * @return {?}
+ */
+function deleteOrUnsetInMap(map, key, value) {
+    var /** @type {?} */ currentValues;
+    if (map instanceof Map) {
+        currentValues = map.get(key);
+        if (currentValues) {
+            if (currentValues.length) {
+                var /** @type {?} */ index = currentValues.indexOf(value);
+                currentValues.splice(index, 1);
+            }
+            if (currentValues.length == 0) {
+                map.delete(key);
+            }
+        }
+    }
+    else {
+        currentValues = map[key];
+        if (currentValues) {
+            if (currentValues.length) {
+                var /** @type {?} */ index = currentValues.indexOf(value);
+                currentValues.splice(index, 1);
+            }
+            if (currentValues.length == 0) {
+                delete map[key];
+            }
+        }
+    }
+    return currentValues;
+}
+/**
+ * @param {?} value
+ * @return {?}
+ */
+function normalizeTriggerValue(value) {
+    switch (typeof value) {
+        case 'boolean':
+            return value ? '1' : '0';
+        default:
+            return value != null ? value.toString() : null;
+    }
+}
+/**
+ * @param {?} node
+ * @return {?}
+ */
+function isElementNode(node) {
+    return node && node['nodeType'] === 1;
+}
+/**
+ * @param {?} eventName
+ * @return {?}
+ */
+function isTriggerEventValid(eventName) {
+    return eventName == 'start' || eventName == 'done';
+}
+/**
+ * @param {?} element
+ * @param {?=} value
+ * @return {?}
+ */
+function cloakElement(element, value) {
+    var /** @type {?} */ oldValue = element.style.display;
+    element.style.display = value != null ? value : 'none';
+    return oldValue;
+}
+/**
+ * @param {?} driver
+ * @param {?} elements
+ * @param {?} elementPropsMap
+ * @param {?} defaultStyle
+ * @return {?}
+ */
+function cloakAndComputeStyles(driver, elements, elementPropsMap, defaultStyle) {
+    var /** @type {?} */ cloakVals = elements.map(function (element) { return cloakElement(element); });
+    var /** @type {?} */ valuesMap = new Map();
+    var /** @type {?} */ failedElements = [];
+    elementPropsMap.forEach(function (props, element) {
+        var /** @type {?} */ styles = {};
+        props.forEach(function (prop) {
+            var /** @type {?} */ value = styles[prop] = driver.computeStyle(element, prop, defaultStyle);
+            // there is no easy way to detect this because a sub element could be removed
+            // by a parent animation element being detached.
+            if (!value || value.length == 0) {
+                element[REMOVAL_FLAG] = NULL_REMOVED_QUERIED_STATE;
+                failedElements.push(element);
+            }
+        });
+        valuesMap.set(element, styles);
+    });
+    elements.forEach(function (element, i) { return cloakElement(element, cloakVals[i]); });
+    return [valuesMap, failedElements];
+}
+/**
+ * @param {?} nodes
+ * @return {?}
+ */
+function createIsRootFilterFn(nodes) {
+    var /** @type {?} */ nodeSet = new Set(nodes);
+    var /** @type {?} */ knownRootContainer = new Set();
+    var /** @type {?} */ isRoot;
+    isRoot = function (node) {
+        if (!node)
+            return true;
+        if (nodeSet.has(node.parentNode))
+            return false;
+        if (knownRootContainer.has(node.parentNode))
+            return true;
+        if (isRoot(node.parentNode)) {
+            knownRootContainer.add(node);
+            return true;
+        }
+        return false;
+    };
+    return isRoot;
+}
+var CLASSES_CACHE_KEY = '$$classes';
+/**
+ * @param {?} element
+ * @param {?} className
+ * @return {?}
+ */
+function containsClass(element, className) {
+    if (element.classList) {
+        return element.classList.contains(className);
+    }
+    else {
+        var /** @type {?} */ classes = element[CLASSES_CACHE_KEY];
+        return classes && classes[className];
+    }
+}
+/**
+ * @param {?} element
+ * @param {?} className
+ * @return {?}
+ */
+function addClass(element, className) {
+    if (element.classList) {
+        element.classList.add(className);
+    }
+    else {
+        var /** @type {?} */ classes = element[CLASSES_CACHE_KEY];
+        if (!classes) {
+            classes = element[CLASSES_CACHE_KEY] = {};
+        }
+        classes[className] = true;
+    }
+}
+/**
+ * @param {?} element
+ * @param {?} className
+ * @return {?}
+ */
+function removeClass(element, className) {
+    if (element.classList) {
+        element.classList.remove(className);
+    }
+    else {
+        var /** @type {?} */ classes = element[CLASSES_CACHE_KEY];
+        if (classes) {
+            delete classes[className];
+        }
+    }
+}
+/**
+ * @return {?}
+ */
+function getBodyNode() {
+    if (typeof document != 'undefined') {
+        return document.body;
+    }
+    return null;
+}
+/**
+ * @param {?} engine
+ * @param {?} element
+ * @param {?} players
+ * @return {?}
+ */
+function removeNodesAfterAnimationDone(engine, element, players) {
+    optimizeGroupPlayer(players).onDone(function () { return engine.processLeaveNode(element); });
+}
+/**
+ * @param {?} players
+ * @return {?}
+ */
+function flattenGroupPlayers(players) {
+    var /** @type {?} */ finalPlayers = [];
+    _flattenGroupPlayersRecur(players, finalPlayers);
+    return finalPlayers;
+}
+/**
+ * @param {?} players
+ * @param {?} finalPlayers
+ * @return {?}
+ */
+function _flattenGroupPlayersRecur(players, finalPlayers) {
+    for (var /** @type {?} */ i = 0; i < players.length; i++) {
+        var /** @type {?} */ player = players[i];
+        if (player instanceof __WEBPACK_IMPORTED_MODULE_1__angular_animations__["ɵAnimationGroupPlayer"]) {
+            _flattenGroupPlayersRecur(player.players, finalPlayers);
+        }
+        else {
+            finalPlayers.push(/** @type {?} */ (player));
+        }
+    }
+}
+/**
+ * @param {?} a
+ * @param {?} b
+ * @return {?}
+ */
+function objEquals(a, b) {
+    var /** @type {?} */ k1 = Object.keys(a);
+    var /** @type {?} */ k2 = Object.keys(b);
+    if (k1.length != k2.length)
+        return false;
+    for (var /** @type {?} */ i = 0; i < k1.length; i++) {
+        var /** @type {?} */ prop = k1[i];
+        if (!b.hasOwnProperty(prop) || a[prop] !== b[prop])
+            return false;
+    }
+    return true;
+}
+/**
+ * @param {?} element
+ * @param {?} allPreStyleElements
+ * @param {?} allPostStyleElements
+ * @return {?}
+ */
+function replacePostStylesAsPre(element, allPreStyleElements, allPostStyleElements) {
+    var /** @type {?} */ postEntry = allPostStyleElements.get(element);
+    if (!postEntry)
+        return false;
+    var /** @type {?} */ preEntry = allPreStyleElements.get(element);
+    if (preEntry) {
+        postEntry.forEach(function (data) { return ((preEntry)).add(data); });
+    }
+    else {
+        allPreStyleElements.set(element, postEntry);
+    }
+    allPostStyleElements.delete(element);
+    return true;
+}
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
+var AnimationEngine = (function () {
+    /**
+     * @param {?} driver
+     * @param {?} normalizer
+     */
+    function AnimationEngine(driver, normalizer) {
+        var _this = this;
+        this._triggerCache = {};
+        this.onRemovalComplete = function (element, context) { };
+        this._transitionEngine = new TransitionAnimationEngine(driver, normalizer);
+        this._timelineEngine = new TimelineAnimationEngine(driver, normalizer);
+        this._transitionEngine.onRemovalComplete = function (element, context) { return _this.onRemovalComplete(element, context); };
+    }
+    /**
+     * @param {?} componentId
+     * @param {?} namespaceId
+     * @param {?} hostElement
+     * @param {?} name
+     * @param {?} metadata
+     * @return {?}
+     */
+    AnimationEngine.prototype.registerTrigger = function (componentId, namespaceId, hostElement, name, metadata) {
+        var /** @type {?} */ cacheKey = componentId + '-' + name;
+        var /** @type {?} */ trigger = this._triggerCache[cacheKey];
+        if (!trigger) {
+            var /** @type {?} */ errors = [];
+            var /** @type {?} */ ast = (buildAnimationAst(/** @type {?} */ (metadata), errors));
+            if (errors.length) {
+                throw new Error("The animation trigger \"" + name + "\" has failed to build due to the following errors:\n - " + errors.join("\n - "));
+            }
+            trigger = buildTrigger(name, ast);
+            this._triggerCache[cacheKey] = trigger;
+        }
+        this._transitionEngine.registerTrigger(namespaceId, name, trigger);
+    };
+    /**
+     * @param {?} namespaceId
+     * @param {?} hostElement
+     * @return {?}
+     */
+    AnimationEngine.prototype.register = function (namespaceId, hostElement) {
+        this._transitionEngine.register(namespaceId, hostElement);
+    };
+    /**
+     * @param {?} namespaceId
+     * @param {?} context
+     * @return {?}
+     */
+    AnimationEngine.prototype.destroy = function (namespaceId, context) {
+        this._transitionEngine.destroy(namespaceId, context);
+    };
+    /**
+     * @param {?} namespaceId
+     * @param {?} element
+     * @param {?} parent
+     * @param {?} insertBefore
+     * @return {?}
+     */
+    AnimationEngine.prototype.onInsert = function (namespaceId, element, parent, insertBefore) {
+        this._transitionEngine.insertNode(namespaceId, element, parent, insertBefore);
+    };
+    /**
+     * @param {?} namespaceId
+     * @param {?} element
+     * @param {?} context
+     * @return {?}
+     */
+    AnimationEngine.prototype.onRemove = function (namespaceId, element, context) {
+        this._transitionEngine.removeNode(namespaceId, element, context);
+    };
+    /**
+     * @param {?} element
+     * @param {?} disable
+     * @return {?}
+     */
+    AnimationEngine.prototype.disableAnimations = function (element, disable) {
+        this._transitionEngine.markElementAsDisabled(element, disable);
+    };
+    /**
+     * @param {?} namespaceId
+     * @param {?} element
+     * @param {?} property
+     * @param {?} value
+     * @return {?}
+     */
+    AnimationEngine.prototype.process = function (namespaceId, element, property, value) {
+        if (property.charAt(0) == '@') {
+            var _a = parseTimelineCommand(property), id = _a[0], action = _a[1];
+            var /** @type {?} */ args = (value);
+            this._timelineEngine.command(id, element, action, args);
+        }
+        else {
+            this._transitionEngine.trigger(namespaceId, element, property, value);
+        }
+    };
+    /**
+     * @param {?} namespaceId
+     * @param {?} element
+     * @param {?} eventName
+     * @param {?} eventPhase
+     * @param {?} callback
+     * @return {?}
+     */
+    AnimationEngine.prototype.listen = function (namespaceId, element, eventName, eventPhase, callback) {
+        // @@listen
+        if (eventName.charAt(0) == '@') {
+            var _a = parseTimelineCommand(eventName), id = _a[0], action = _a[1];
+            return this._timelineEngine.listen(id, element, action, callback);
+        }
+        return this._transitionEngine.listen(namespaceId, element, eventName, eventPhase, callback);
+    };
+    /**
+     * @param {?=} microtaskId
+     * @return {?}
+     */
+    AnimationEngine.prototype.flush = function (microtaskId) {
+        if (microtaskId === void 0) { microtaskId = -1; }
+        this._transitionEngine.flush(microtaskId);
+    };
+    Object.defineProperty(AnimationEngine.prototype, "players", {
+        /**
+         * @return {?}
+         */
+        get: function () {
+            return ((this._transitionEngine.players))
+                .concat(/** @type {?} */ (this._timelineEngine.players));
+        },
+        enumerable: true,
+        configurable: true
+    });
+    /**
+     * @return {?}
+     */
+    AnimationEngine.prototype.whenRenderingDone = function () { return this._transitionEngine.whenRenderingDone(); };
+    return AnimationEngine;
+}());
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
+var WebAnimationsPlayer = (function () {
+    /**
+     * @param {?} element
+     * @param {?} keyframes
+     * @param {?} options
+     * @param {?=} previousPlayers
+     */
+    function WebAnimationsPlayer(element, keyframes, options, previousPlayers) {
+        if (previousPlayers === void 0) { previousPlayers = []; }
+        var _this = this;
+        this.element = element;
+        this.keyframes = keyframes;
+        this.options = options;
+        this.previousPlayers = previousPlayers;
+        this._onDoneFns = [];
+        this._onStartFns = [];
+        this._onDestroyFns = [];
+        this._initialized = false;
+        this._finished = false;
+        this._started = false;
+        this._destroyed = false;
+        this.time = 0;
+        this.parentPlayer = null;
+        this.previousStyles = {};
+        this.currentSnapshot = {};
+        this._duration = options['duration'];
+        this._delay = options['delay'] || 0;
+        this.time = this._duration + this._delay;
+        if (allowPreviousPlayerStylesMerge(this._duration, this._delay)) {
+            previousPlayers.forEach(function (player) {
+                var styles = player.currentSnapshot;
+                Object.keys(styles).forEach(function (prop) { return _this.previousStyles[prop] = styles[prop]; });
+            });
+        }
+    }
+    /**
+     * @return {?}
+     */
+    WebAnimationsPlayer.prototype._onFinish = function () {
+        if (!this._finished) {
+            this._finished = true;
+            this._onDoneFns.forEach(function (fn) { return fn(); });
+            this._onDoneFns = [];
+        }
+    };
+    /**
+     * @return {?}
+     */
+    WebAnimationsPlayer.prototype.init = function () {
+        this._buildPlayer();
+        this._preparePlayerBeforeStart();
+    };
+    /**
+     * @return {?}
+     */
+    WebAnimationsPlayer.prototype._buildPlayer = function () {
+        var _this = this;
+        if (this._initialized)
+            return;
+        this._initialized = true;
+        var /** @type {?} */ keyframes = this.keyframes.map(function (styles) { return copyStyles(styles, false); });
+        var /** @type {?} */ previousStyleProps = Object.keys(this.previousStyles);
+        if (previousStyleProps.length) {
+            var /** @type {?} */ startingKeyframe_1 = keyframes[0];
+            var /** @type {?} */ missingStyleProps_1 = [];
+            previousStyleProps.forEach(function (prop) {
+                if (!startingKeyframe_1.hasOwnProperty(prop)) {
+                    missingStyleProps_1.push(prop);
+                }
+                startingKeyframe_1[prop] = _this.previousStyles[prop];
+            });
+            if (missingStyleProps_1.length) {
+                var /** @type {?} */ self_1 = this;
+                var _loop_1 = function () {
+                    var /** @type {?} */ kf = keyframes[i];
+                    missingStyleProps_1.forEach(function (prop) {
+                        kf[prop] = _computeStyle(self_1.element, prop);
+                    });
+                };
+                // tslint:disable-next-line
+                for (var /** @type {?} */ i = 1; i < keyframes.length; i++) {
+                    _loop_1();
+                }
+            }
+        }
+        this._player = this._triggerWebAnimation(this.element, keyframes, this.options);
+        this._finalKeyframe = keyframes.length ? keyframes[keyframes.length - 1] : {};
+        this._player.addEventListener('finish', function () { return _this._onFinish(); });
+    };
+    /**
+     * @return {?}
+     */
+    WebAnimationsPlayer.prototype._preparePlayerBeforeStart = function () {
+        // this is required so that the player doesn't start to animate right away
+        if (this._delay) {
+            this._resetDomPlayerState();
+        }
+        else {
+            this._player.pause();
+        }
+    };
+    /**
+     * \@internal
+     * @param {?} element
+     * @param {?} keyframes
+     * @param {?} options
+     * @return {?}
+     */
+    WebAnimationsPlayer.prototype._triggerWebAnimation = function (element, keyframes, options) {
+        // jscompiler doesn't seem to know animate is a native property because it's not fully
+        // supported yet across common browsers (we polyfill it for Edge/Safari) [CL #143630929]
+        return (element['animate'](keyframes, options));
+    };
+    Object.defineProperty(WebAnimationsPlayer.prototype, "domPlayer", {
+        /**
+         * @return {?}
+         */
+        get: function () { return this._player; },
+        enumerable: true,
+        configurable: true
+    });
+    /**
+     * @param {?} fn
+     * @return {?}
+     */
+    WebAnimationsPlayer.prototype.onStart = function (fn) { this._onStartFns.push(fn); };
+    /**
+     * @param {?} fn
+     * @return {?}
+     */
+    WebAnimationsPlayer.prototype.onDone = function (fn) { this._onDoneFns.push(fn); };
+    /**
+     * @param {?} fn
+     * @return {?}
+     */
+    WebAnimationsPlayer.prototype.onDestroy = function (fn) { this._onDestroyFns.push(fn); };
+    /**
+     * @return {?}
+     */
+    WebAnimationsPlayer.prototype.play = function () {
+        this._buildPlayer();
+        if (!this.hasStarted()) {
+            this._onStartFns.forEach(function (fn) { return fn(); });
+            this._onStartFns = [];
+            this._started = true;
+        }
+        this._player.play();
+    };
+    /**
+     * @return {?}
+     */
+    WebAnimationsPlayer.prototype.pause = function () {
+        this.init();
+        this._player.pause();
+    };
+    /**
+     * @return {?}
+     */
+    WebAnimationsPlayer.prototype.finish = function () {
+        this.init();
+        this._onFinish();
+        this._player.finish();
+    };
+    /**
+     * @return {?}
+     */
+    WebAnimationsPlayer.prototype.reset = function () {
+        this._resetDomPlayerState();
+        this._destroyed = false;
+        this._finished = false;
+        this._started = false;
+    };
+    /**
+     * @return {?}
+     */
+    WebAnimationsPlayer.prototype._resetDomPlayerState = function () {
+        if (this._player) {
+            this._player.cancel();
+        }
+    };
+    /**
+     * @return {?}
+     */
+    WebAnimationsPlayer.prototype.restart = function () {
+        this.reset();
+        this.play();
+    };
+    /**
+     * @return {?}
+     */
+    WebAnimationsPlayer.prototype.hasStarted = function () { return this._started; };
+    /**
+     * @return {?}
+     */
+    WebAnimationsPlayer.prototype.destroy = function () {
+        if (!this._destroyed) {
+            this._destroyed = true;
+            this._resetDomPlayerState();
+            this._onFinish();
+            this._onDestroyFns.forEach(function (fn) { return fn(); });
+            this._onDestroyFns = [];
+        }
+    };
+    /**
+     * @param {?} p
+     * @return {?}
+     */
+    WebAnimationsPlayer.prototype.setPosition = function (p) { this._player.currentTime = p * this.time; };
+    /**
+     * @return {?}
+     */
+    WebAnimationsPlayer.prototype.getPosition = function () { return this._player.currentTime / this.time; };
+    Object.defineProperty(WebAnimationsPlayer.prototype, "totalTime", {
+        /**
+         * @return {?}
+         */
+        get: function () { return this._delay + this._duration; },
+        enumerable: true,
+        configurable: true
+    });
+    /**
+     * @return {?}
+     */
+    WebAnimationsPlayer.prototype.beforeDestroy = function () {
+        var _this = this;
+        var /** @type {?} */ styles = {};
+        if (this.hasStarted()) {
+            Object.keys(this._finalKeyframe).forEach(function (prop) {
+                if (prop != 'offset') {
+                    styles[prop] =
+                        _this._finished ? _this._finalKeyframe[prop] : _computeStyle(_this.element, prop);
+                }
+            });
+        }
+        this.currentSnapshot = styles;
+    };
+    return WebAnimationsPlayer;
+}());
+/**
+ * @param {?} element
+ * @param {?} prop
+ * @return {?}
+ */
+function _computeStyle(element, prop) {
+    return ((window.getComputedStyle(element)))[prop];
+}
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
+var WebAnimationsDriver = (function () {
+    function WebAnimationsDriver() {
+    }
+    /**
+     * @param {?} element
+     * @param {?} selector
+     * @return {?}
+     */
+    WebAnimationsDriver.prototype.matchesElement = function (element, selector) {
+        return matchesElement(element, selector);
+    };
+    /**
+     * @param {?} elm1
+     * @param {?} elm2
+     * @return {?}
+     */
+    WebAnimationsDriver.prototype.containsElement = function (elm1, elm2) { return containsElement(elm1, elm2); };
+    /**
+     * @param {?} element
+     * @param {?} selector
+     * @param {?} multi
+     * @return {?}
+     */
+    WebAnimationsDriver.prototype.query = function (element, selector, multi) {
+        return invokeQuery(element, selector, multi);
+    };
+    /**
+     * @param {?} element
+     * @param {?} prop
+     * @param {?=} defaultValue
+     * @return {?}
+     */
+    WebAnimationsDriver.prototype.computeStyle = function (element, prop, defaultValue) {
+        return (((window.getComputedStyle(element)))[prop]);
+    };
+    /**
+     * @param {?} element
+     * @param {?} keyframes
+     * @param {?} duration
+     * @param {?} delay
+     * @param {?} easing
+     * @param {?=} previousPlayers
+     * @return {?}
+     */
+    WebAnimationsDriver.prototype.animate = function (element, keyframes, duration, delay, easing, previousPlayers) {
+        if (previousPlayers === void 0) { previousPlayers = []; }
+        var /** @type {?} */ fill = delay == 0 ? 'both' : 'forwards';
+        var /** @type {?} */ playerOptions = { duration: duration, delay: delay, fill: fill };
+        // we check for this to avoid having a null|undefined value be present
+        // for the easing (which results in an error for certain browsers #9752)
+        if (easing) {
+            playerOptions['easing'] = easing;
+        }
+        var /** @type {?} */ previousWebAnimationPlayers = (previousPlayers.filter(function (player) { return player instanceof WebAnimationsPlayer; }));
+        return new WebAnimationsPlayer(element, keyframes, playerOptions, previousWebAnimationPlayers);
+    };
+    return WebAnimationsDriver;
+}());
+/**
+ * @return {?}
+ */
+function supportsWebAnimations() {
+    return typeof Element !== 'undefined' && typeof ((Element)).prototype['animate'] === 'function';
+}
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
+/**
+ * @module
+ * @description
+ * Entry point for all animation APIs of the animation browser package.
+ */
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
+/**
+ * @module
+ * @description
+ * Entry point for all public APIs of the animation package.
+ */
+/**
+ * Generated bundle index. Do not edit.
+ */
+
+//# sourceMappingURL=browser.es5.js.map
+
+
+/***/ }),
+
+/***/ 714:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -23937,10 +31276,10 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 const core_1 = __webpack_require__(3);
 const image_services_1 = __webpack_require__(72);
-const user_services_1 = __webpack_require__(60);
+const user_services_1 = __webpack_require__(61);
 const account_services_1 = __webpack_require__(54);
 const permission_services_1 = __webpack_require__(46);
-const service_model_manager_service_1 = __webpack_require__(32);
+const service_model_manager_service_1 = __webpack_require__(33);
 let SidebarCtaComponent = class SidebarCtaComponent {
     constructor(formManager, permissions, accounts, images, users) {
         this.formManager = formManager;
@@ -23976,7 +31315,8 @@ let SidebarCtaComponent = class SidebarCtaComponent {
 SidebarCtaComponent = __decorate([
     core_1.Component({
         selector: 'app-sidebar-cta',
-        template: __webpack_require__(711),
+        template: __webpack_require__(715),
+        styles: [__webpack_require__(716)],
         encapsulation: core_1.ViewEncapsulation.None
     }),
     __metadata("design:paramtypes", [service_model_manager_service_1.ServiceModelManagerService, permission_services_1.PermissionServices, account_services_1.AccountServices, image_services_1.ImageServices, user_services_1.UserServices])
@@ -23986,14 +31326,21 @@ exports.SidebarCtaComponent = SidebarCtaComponent;
 
 /***/ }),
 
-/***/ 711:
+/***/ 715:
 /***/ (function(module, exports) {
 
-module.exports = "<ul class=\"list-group box-shadow\" style=\"border: 1px, solid, black;\"><li class=\"list-group-item\" *ngIf=\"this.formManager.getService() =='images'\"><a (click)=\"getLatest()\">get latest</a></li><li class=\"list-group-item\"><a (click)=\"getList()\">filter</a></li></ul>"
+module.exports = "<ul class=\"list-group box-shadow cta-list\" style=\"border: 1px, solid, black;\"><li class=\"list-group-item\" *ngIf=\"this.formManager.getService() =='images'\"><a (click)=\"getLatest()\">get latest</a></li><li class=\"list-group-item\"><a (click)=\"getList()\">filter</a></li></ul>"
 
 /***/ }),
 
-/***/ 712:
+/***/ 716:
+/***/ (function(module, exports) {
+
+module.exports = ""
+
+/***/ }),
+
+/***/ 717:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -24009,10 +31356,10 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 const core_1 = __webpack_require__(3);
 const authentication_service_1 = __webpack_require__(16);
-const user_services_1 = __webpack_require__(60);
+const user_services_1 = __webpack_require__(61);
 const account_services_1 = __webpack_require__(54);
 const permission_services_1 = __webpack_require__(46);
-const service_model_manager_service_1 = __webpack_require__(32);
+const service_model_manager_service_1 = __webpack_require__(33);
 let FormSubmissionComponent = class FormSubmissionComponent {
     constructor(formManager, users, accounts, permissions, activeUser) {
         this.formManager = formManager;
@@ -24034,14 +31381,13 @@ let FormSubmissionComponent = class FormSubmissionComponent {
         this[this.formManager.getService()].addRecord(this.recordModel)
             .then(() => {
             this.formManager.initializeRecordModel();
-            console.log('this is now: ', this.recordModel);
         });
     }
 };
 FormSubmissionComponent = __decorate([
     core_1.Component({
         selector: 'app-form-submission',
-        template: __webpack_require__(713),
+        template: __webpack_require__(718),
         encapsulation: core_1.ViewEncapsulation.None
     }),
     __metadata("design:paramtypes", [service_model_manager_service_1.ServiceModelManagerService, user_services_1.UserServices, account_services_1.AccountServices, permission_services_1.PermissionServices, authentication_service_1.AuthenticationService])
@@ -24051,14 +31397,14 @@ exports.FormSubmissionComponent = FormSubmissionComponent;
 
 /***/ }),
 
-/***/ 713:
+/***/ 718:
 /***/ (function(module, exports) {
 
 module.exports = "<span *ngIf=\"this.formManager.getService() == 'images'\"><div class=\"panel panel-default box-shadow\"><div class=\"panel-heading\"><h3 class=\"panel-title\">image info</h3></div><div class=\"panel-body\" *ngFor=\"let property of this.formManager.getProperties() as form;\"><p>{{property}}</p><hr></div></div></span><span *ngIf=\"this.activeUser.isPermitted['to_add_'+ this.formManager.getService()] &amp;&amp; this.formManager.getService() !='images'\"><form class=\"panel panel-default box-shadow\" #addrecordModel=\"ngForm\"><div class=\"panel-heading\"><h3 class=\"panel-title\">add {{this.formManager.getService()}}</h3></div><div class=\"panel-body\"><div class=\"input-group input-group-sm\" *ngFor=\"let property of this.formManager.getProperties(); index as i\"><div class=\"input-group-btn\" *ngIf=\"property != 'account_permissions' &amp;&amp; property !='language' &amp;&amp; property != 'account_type' &amp;&amp; property.slice(-3) != '_id'\"><span class=\"input-group-addon btn-info\" id=\"{{property}}\">Enter</span></div><div class=\"input-group-btn\" *ngIf=\"this.formManager.getService() == 'users' &amp;&amp; property =='account_type'\"><button class=\"btn btn-info dropdown-toggle\" type=\"button\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">Select<span class=\"caret\"></span></button><ul class=\"dropdown-menu\"><li *ngFor=\"let account of this.accounts.accounts as accounts; index as j\"><a (click)=\"this.recordModel[property] = account.account_id\">{{account.account_name}}</a></li></ul></div><div class=\"input-group-btn\" *ngIf=\"this.formManager.getService() =='users' &amp;&amp; property =='language'\"><button class=\"btn btn-info dropdown-toggle\" type=\"button\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">Select<span class=\"caret\"></span></button><ul class=\"dropdown-menu\"><li *ngFor=\"let language of this.formManager.getLanguages() as languages; index as k\"><a (click)=\"this.recordModel[property] = language.language\">{{language.language}}</a></li></ul></div><div class=\"input-group-btn\" *ngIf=\"this.formManager.getService() =='accounts' &amp;&amp; property =='account_permissions'\"><button class=\"btn btn-info dropdown-toggle\" type=\"button\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">Select<span class=\"caret\"></span></button><ul class=\"dropdown-menu\"><li *ngFor=\"let permission of this.permissions.permissions as permissions; index as l\"><a (click)=\"this.recordModel[property].push(permission.permission_id)\">{{permission.permission_name}}</a></li></ul></div><input class=\"form-control\" *ngIf=\"property.slice(-3) != '_id'\" type=\"text\" placeholder=\"{{property}}\" [(ngModel)]=\"this.recordModel[property]\" name=\"{{property}}\"></div></div><div class=\"panel-footer done-edit\" (click)=\"onSubmit()\">submit</div></form></span>"
 
 /***/ }),
 
-/***/ 714:
+/***/ 719:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -24071,15 +31417,15 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 const core_1 = __webpack_require__(3);
 const common_1 = __webpack_require__(24);
-const user_domain_routing_module_1 = __webpack_require__(715);
-const videos_component_1 = __webpack_require__(224);
+const user_domain_routing_module_1 = __webpack_require__(720);
+const videos_component_1 = __webpack_require__(225);
 const router_1 = __webpack_require__(20);
 const authentication_guard_service_1 = __webpack_require__(83);
-const images_component_1 = __webpack_require__(223);
-const user_domain_component_1 = __webpack_require__(225);
-const message_bar_module_1 = __webpack_require__(220);
-const sidebar_cta_module_1 = __webpack_require__(221);
-const form_submission_module_1 = __webpack_require__(222);
+const images_component_1 = __webpack_require__(224);
+const user_domain_component_1 = __webpack_require__(226);
+const message_bar_module_1 = __webpack_require__(221);
+const sidebar_cta_module_1 = __webpack_require__(222);
+const form_submission_module_1 = __webpack_require__(223);
 let UserDomainModule = class UserDomainModule {
 };
 UserDomainModule = __decorate([
@@ -24105,86 +31451,6 @@ exports.UserDomainModule = UserDomainModule;
 
 /***/ }),
 
-/***/ 715:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-const core_1 = __webpack_require__(3);
-const router_1 = __webpack_require__(20);
-const authentication_guard_service_1 = __webpack_require__(83);
-const images_component_1 = __webpack_require__(223);
-const videos_component_1 = __webpack_require__(224);
-const user_domain_component_1 = __webpack_require__(225);
-const USER_ROUTES = [
-    {
-        path: '',
-        component: user_domain_component_1.UserDomainComponent,
-        canActivateChild: [authentication_guard_service_1.AuthenticationGuardService],
-        children: [
-            {
-                path: 'images',
-                component: images_component_1.ImagesComponent
-            },
-            {
-                path: 'videos',
-                component: videos_component_1.VideosComponent
-            }
-        ]
-    }
-];
-let UserDomainRoutingModule = class UserDomainRoutingModule {
-};
-UserDomainRoutingModule = __decorate([
-    core_1.NgModule({
-        imports: [
-            router_1.RouterModule.forChild(USER_ROUTES)
-        ],
-        exports: [
-            router_1.RouterModule
-        ],
-        providers: [authentication_guard_service_1.AuthenticationGuardService]
-    })
-], UserDomainRoutingModule);
-exports.UserDomainRoutingModule = UserDomainRoutingModule;
-
-
-/***/ }),
-
-/***/ 716:
-/***/ (function(module, exports) {
-
-module.exports = "<span *ngIf=\"!this.imageService.message.failure\"><div class=\"col-sm-6 col-md-4\" *ngFor=\"let image of this.imageService.images as images; index as i\"><div class=\"thumbnail box-shadow\" id=\"{{image.id}}\"><img src=\"{{image.file}}\" alt=\"...\"><div class=\"caption\"><h4>{{image.created}}</h4><p> {{image.event_en}}</p><p><a class=\"btn btn-primary\" role=\"button\">Enlarge</a><a class=\"btn btn-primary\" role=\"button\">Print</a><a class=\"btn btn-primary\" role=\"button\">Close</a></p></div></div></div></span>"
-
-/***/ }),
-
-/***/ 717:
-/***/ (function(module, exports) {
-
-module.exports = "app-images {\n  background-color: whitesmoke; }\n\nul {\n  border-radius: 4px; }\n"
-
-/***/ }),
-
-/***/ 718:
-/***/ (function(module, exports) {
-
-module.exports = "hello from events<!--.col-sm-2--><!--    app-sidebar--><!--.col-sm-8--><!--    p events component--><!--.col-sm-2-->"
-
-/***/ }),
-
-/***/ 719:
-/***/ (function(module, exports) {
-
-module.exports = "<div class=\"col-sm-2\"><app-sidebar-cta></app-sidebar-cta></div><div class=\"col-sm-8\"><app-messagebar></app-messagebar><router-outlet></router-outlet></div><div class=\"col-sm-2\"><app-form-submission></app-form-submission></div>"
-
-/***/ }),
-
 /***/ 72:
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -24200,7 +31466,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 const core_1 = __webpack_require__(3);
-const http_1 = __webpack_require__(31);
+const http_1 = __webpack_require__(32);
 __webpack_require__(71);
 const error_parser_1 = __webpack_require__(84);
 const authentication_service_1 = __webpack_require__(16);
@@ -24302,12 +31568,99 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+const core_1 = __webpack_require__(3);
+const router_1 = __webpack_require__(20);
+const authentication_guard_service_1 = __webpack_require__(83);
+const images_component_1 = __webpack_require__(224);
+const videos_component_1 = __webpack_require__(225);
+const user_domain_component_1 = __webpack_require__(226);
+const USER_ROUTES = [
+    {
+        path: '',
+        component: user_domain_component_1.UserDomainComponent,
+        canActivateChild: [authentication_guard_service_1.AuthenticationGuardService],
+        children: [
+            {
+                path: 'images',
+                component: images_component_1.ImagesComponent
+            },
+            {
+                path: 'videos',
+                component: videos_component_1.VideosComponent
+            }
+        ]
+    }
+];
+let UserDomainRoutingModule = class UserDomainRoutingModule {
+};
+UserDomainRoutingModule = __decorate([
+    core_1.NgModule({
+        imports: [
+            router_1.RouterModule.forChild(USER_ROUTES)
+        ],
+        exports: [
+            router_1.RouterModule
+        ],
+        providers: [authentication_guard_service_1.AuthenticationGuardService]
+    })
+], UserDomainRoutingModule);
+exports.UserDomainRoutingModule = UserDomainRoutingModule;
+
+
+/***/ }),
+
+/***/ 721:
+/***/ (function(module, exports) {
+
+module.exports = "<span *ngIf=\"!this.imageService.message.failure\"><div class=\"col-sm-6 col-md-4\" *ngFor=\"let image of this.imageService.images as images; index as i\"><div class=\"thumbnail box-shadow\" id=\"{{image.id}}\"><img src=\"{{image.file}}\" alt=\"...\"><div class=\"caption\"><h4>{{image.created}}</h4><p> {{image.event_en}}</p><p><a class=\"btn btn-primary\" role=\"button\">Enlarge</a><a class=\"btn btn-primary\" role=\"button\">Print</a><a class=\"btn btn-primary\" role=\"button\">Close</a></p></div></div></div></span>"
+
+/***/ }),
+
+/***/ 722:
+/***/ (function(module, exports) {
+
+module.exports = "app-images {\n  background-color: whitesmoke; }\n\nul {\n  border-radius: 4px; }\n"
+
+/***/ }),
+
+/***/ 723:
+/***/ (function(module, exports) {
+
+module.exports = "hello from events<!--.col-sm-2--><!--    app-sidebar--><!--.col-sm-8--><!--    p events component--><!--.col-sm-2-->"
+
+/***/ }),
+
+/***/ 724:
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"col-sm-2\"><app-sidebar-cta></app-sidebar-cta></div><div class=\"col-sm-8\"><app-messagebar></app-messagebar><router-outlet></router-outlet></div><div class=\"col-sm-2\"><app-form-submission></app-form-submission></div>"
+
+/***/ }),
+
+/***/ 725:
+/***/ (function(module, exports) {
+
+module.exports = ""
+
+/***/ }),
+
+/***/ 726:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 const core_1 = __webpack_require__(3);
 const router_1 = __webpack_require__(20);
-const http_1 = __webpack_require__(31);
+const http_1 = __webpack_require__(32);
 const authentication_service_1 = __webpack_require__(16);
 let GlobalnavComponent = class GlobalnavComponent {
     constructor(http, router, activatedRoute, activeUser) {
@@ -24337,7 +31690,7 @@ let GlobalnavComponent = class GlobalnavComponent {
 GlobalnavComponent = __decorate([
     core_1.Component({
         selector: 'app-globalnav',
-        template: __webpack_require__(721),
+        template: __webpack_require__(727),
         encapsulation: core_1.ViewEncapsulation.None
     }),
     __metadata("design:paramtypes", [http_1.HttpClient, router_1.Router, router_1.ActivatedRoute, authentication_service_1.AuthenticationService])
@@ -24347,27 +31700,27 @@ exports.GlobalnavComponent = GlobalnavComponent;
 
 /***/ }),
 
-/***/ 721:
+/***/ 727:
 /***/ (function(module, exports) {
 
 module.exports = "<div><nav class=\"navbar navbar-default\"><div class=\"container-fluid\"><!-- BRANDING--><div class=\"navbar-header\"><button class=\"navbar-toggle collapsed\" type=\"button\" data-toggle=\"collapse\" data-target=\"#bs-example-navbar-collapse-1\" aria-expanded=\"false\"><span class=\"sr-only\">Toggle navigation</span><span class=\"icon-bar\"></span><span class=\"icon-bar\"></span><span class=\"icon-bar\"></span></button><a class=\"navbar-brand\" href=\"#\">Brand &#8200;</a></div><div class=\"collapse navbar-collapse\" id=\"bs-example-navbar-collapse-1\"><ul class=\"nav navbar-nav\" *ngFor=\"let link of navbarLinks, let i = index\"><li *ngIf=\"this.activeUser.isLoggedIn\"><a *ngIf=\"this.activeUser.isPermitted[link.permission]\" routerLink=\"{{link.name}}\" routerLinkActive=\"active\">{{link.name}}<span class=\"sr-only\" current></span></a></li><li *ngIf=\"!this.activeUser.isLoggedIn\"><a *ngIf=\"!link.permission\" routerLink=\"{{link.name}}\" routerLinkActive=\"active\">{{link.name}}</a></li></ul><ul class=\"nav navbar-nav navbar-right\"><li><a *ngIf=\"!this.activeUser.isLoggedIn\" routerLink=\"/login\" routerLinkActive=\"active\">Login</a><a *ngIf=\"this.activeUser.isLoggedIn\" (click)=\"logout()\" routerLink=\"\" routerLinkActive=\"\">Logout</a></li></ul></div></div></nav></div>"
 
 /***/ }),
 
-/***/ 722:
+/***/ 728:
 /***/ (function(module, exports) {
 
 module.exports = "@charset \"UTF-8\";\n/*!\n *  Font Awesome 4.7.0 by @davegandy - http://fontawesome.io - @fontawesome\n *  License - http://fontawesome.io/license (Font: SIL OFL 1.1, CSS: MIT License)\n */\n/* FONT PATH\n * -------------------------- */\n@font-face {\n  font-family: 'FontAwesome';\n  src: url(\"../fonts/fontawesome-webfont.eot?v=4.7.0\");\n  src: url(\"../fonts/fontawesome-webfont.eot?#iefix&v=4.7.0\") format(\"embedded-opentype\"), url(\"../fonts/fontawesome-webfont.woff2?v=4.7.0\") format(\"woff2\"), url(\"../fonts/fontawesome-webfont.woff?v=4.7.0\") format(\"woff\"), url(\"../fonts/fontawesome-webfont.ttf?v=4.7.0\") format(\"truetype\"), url(\"../fonts/fontawesome-webfont.svg?v=4.7.0#fontawesomeregular\") format(\"svg\");\n  font-weight: normal;\n  font-style: normal; }\n\n.fa {\n  display: inline-block;\n  font: normal normal normal 14px/1 FontAwesome;\n  font-size: inherit;\n  text-rendering: auto;\n  -webkit-font-smoothing: antialiased;\n  -moz-osx-font-smoothing: grayscale; }\n\n/* makes the font 33% larger relative to the icon container */\n.fa-lg {\n  font-size: 1.33333em;\n  line-height: 0.75em;\n  vertical-align: -15%; }\n\n.fa-2x {\n  font-size: 2em; }\n\n.fa-3x {\n  font-size: 3em; }\n\n.fa-4x {\n  font-size: 4em; }\n\n.fa-5x {\n  font-size: 5em; }\n\n.fa-fw {\n  width: 1.28571em;\n  text-align: center; }\n\n.fa-ul {\n  padding-left: 0;\n  margin-left: 2.14286em;\n  list-style-type: none; }\n  .fa-ul > li {\n    position: relative; }\n\n.fa-li {\n  position: absolute;\n  left: -2.14286em;\n  width: 2.14286em;\n  top: 0.14286em;\n  text-align: center; }\n  .fa-li.fa-lg {\n    left: -1.85714em; }\n\n.fa-border {\n  padding: .2em .25em .15em;\n  border: solid 0.08em #eee;\n  border-radius: .1em; }\n\n.fa-pull-left {\n  float: left; }\n\n.fa-pull-right {\n  float: right; }\n\n.fa.fa-pull-left {\n  margin-right: .3em; }\n\n.fa.fa-pull-right {\n  margin-left: .3em; }\n\n/* Deprecated as of 4.4.0 */\n.pull-right {\n  float: right; }\n\n.pull-left {\n  float: left; }\n\n.fa.pull-left {\n  margin-right: .3em; }\n\n.fa.pull-right {\n  margin-left: .3em; }\n\n.fa-spin {\n  -webkit-animation: fa-spin 2s infinite linear;\n  animation: fa-spin 2s infinite linear; }\n\n.fa-pulse {\n  -webkit-animation: fa-spin 1s infinite steps(8);\n  animation: fa-spin 1s infinite steps(8); }\n\n@-webkit-keyframes fa-spin {\n  0% {\n    -webkit-transform: rotate(0deg);\n    transform: rotate(0deg); }\n  100% {\n    -webkit-transform: rotate(359deg);\n    transform: rotate(359deg); } }\n\n@keyframes fa-spin {\n  0% {\n    -webkit-transform: rotate(0deg);\n    transform: rotate(0deg); }\n  100% {\n    -webkit-transform: rotate(359deg);\n    transform: rotate(359deg); } }\n\n.fa-rotate-90 {\n  -ms-filter: \"progid:DXImageTransform.Microsoft.BasicImage(rotation=1)\";\n  -webkit-transform: rotate(90deg);\n  -ms-transform: rotate(90deg);\n  transform: rotate(90deg); }\n\n.fa-rotate-180 {\n  -ms-filter: \"progid:DXImageTransform.Microsoft.BasicImage(rotation=2)\";\n  -webkit-transform: rotate(180deg);\n  -ms-transform: rotate(180deg);\n  transform: rotate(180deg); }\n\n.fa-rotate-270 {\n  -ms-filter: \"progid:DXImageTransform.Microsoft.BasicImage(rotation=3)\";\n  -webkit-transform: rotate(270deg);\n  -ms-transform: rotate(270deg);\n  transform: rotate(270deg); }\n\n.fa-flip-horizontal {\n  -ms-filter: \"progid:DXImageTransform.Microsoft.BasicImage(rotation=0, mirror=1)\";\n  -webkit-transform: scale(-1, 1);\n  -ms-transform: scale(-1, 1);\n  transform: scale(-1, 1); }\n\n.fa-flip-vertical {\n  -ms-filter: \"progid:DXImageTransform.Microsoft.BasicImage(rotation=2, mirror=1)\";\n  -webkit-transform: scale(1, -1);\n  -ms-transform: scale(1, -1);\n  transform: scale(1, -1); }\n\n:root .fa-rotate-90,\n:root .fa-rotate-180,\n:root .fa-rotate-270,\n:root .fa-flip-horizontal,\n:root .fa-flip-vertical {\n  filter: none; }\n\n.fa-stack {\n  position: relative;\n  display: inline-block;\n  width: 2em;\n  height: 2em;\n  line-height: 2em;\n  vertical-align: middle; }\n\n.fa-stack-1x, .fa-stack-2x {\n  position: absolute;\n  left: 0;\n  width: 100%;\n  text-align: center; }\n\n.fa-stack-1x {\n  line-height: inherit; }\n\n.fa-stack-2x {\n  font-size: 2em; }\n\n.fa-inverse {\n  color: #fff; }\n\n/* Font Awesome uses the Unicode Private Use Area (PUA) to ensure screen\n   readers do not read off random characters that represent icons */\n.fa-glass:before {\n  content: \"\"; }\n\n.fa-music:before {\n  content: \"\"; }\n\n.fa-search:before {\n  content: \"\"; }\n\n.fa-envelope-o:before {\n  content: \"\"; }\n\n.fa-heart:before {\n  content: \"\"; }\n\n.fa-star:before {\n  content: \"\"; }\n\n.fa-star-o:before {\n  content: \"\"; }\n\n.fa-user:before {\n  content: \"\"; }\n\n.fa-film:before {\n  content: \"\"; }\n\n.fa-th-large:before {\n  content: \"\"; }\n\n.fa-th:before {\n  content: \"\"; }\n\n.fa-th-list:before {\n  content: \"\"; }\n\n.fa-check:before {\n  content: \"\"; }\n\n.fa-remove:before,\n.fa-close:before,\n.fa-times:before {\n  content: \"\"; }\n\n.fa-search-plus:before {\n  content: \"\"; }\n\n.fa-search-minus:before {\n  content: \"\"; }\n\n.fa-power-off:before {\n  content: \"\"; }\n\n.fa-signal:before {\n  content: \"\"; }\n\n.fa-gear:before,\n.fa-cog:before {\n  content: \"\"; }\n\n.fa-trash-o:before {\n  content: \"\"; }\n\n.fa-home:before {\n  content: \"\"; }\n\n.fa-file-o:before {\n  content: \"\"; }\n\n.fa-clock-o:before {\n  content: \"\"; }\n\n.fa-road:before {\n  content: \"\"; }\n\n.fa-download:before {\n  content: \"\"; }\n\n.fa-arrow-circle-o-down:before {\n  content: \"\"; }\n\n.fa-arrow-circle-o-up:before {\n  content: \"\"; }\n\n.fa-inbox:before {\n  content: \"\"; }\n\n.fa-play-circle-o:before {\n  content: \"\"; }\n\n.fa-rotate-right:before,\n.fa-repeat:before {\n  content: \"\"; }\n\n.fa-refresh:before {\n  content: \"\"; }\n\n.fa-list-alt:before {\n  content: \"\"; }\n\n.fa-lock:before {\n  content: \"\"; }\n\n.fa-flag:before {\n  content: \"\"; }\n\n.fa-headphones:before {\n  content: \"\"; }\n\n.fa-volume-off:before {\n  content: \"\"; }\n\n.fa-volume-down:before {\n  content: \"\"; }\n\n.fa-volume-up:before {\n  content: \"\"; }\n\n.fa-qrcode:before {\n  content: \"\"; }\n\n.fa-barcode:before {\n  content: \"\"; }\n\n.fa-tag:before {\n  content: \"\"; }\n\n.fa-tags:before {\n  content: \"\"; }\n\n.fa-book:before {\n  content: \"\"; }\n\n.fa-bookmark:before {\n  content: \"\"; }\n\n.fa-print:before {\n  content: \"\"; }\n\n.fa-camera:before {\n  content: \"\"; }\n\n.fa-font:before {\n  content: \"\"; }\n\n.fa-bold:before {\n  content: \"\"; }\n\n.fa-italic:before {\n  content: \"\"; }\n\n.fa-text-height:before {\n  content: \"\"; }\n\n.fa-text-width:before {\n  content: \"\"; }\n\n.fa-align-left:before {\n  content: \"\"; }\n\n.fa-align-center:before {\n  content: \"\"; }\n\n.fa-align-right:before {\n  content: \"\"; }\n\n.fa-align-justify:before {\n  content: \"\"; }\n\n.fa-list:before {\n  content: \"\"; }\n\n.fa-dedent:before,\n.fa-outdent:before {\n  content: \"\"; }\n\n.fa-indent:before {\n  content: \"\"; }\n\n.fa-video-camera:before {\n  content: \"\"; }\n\n.fa-photo:before,\n.fa-image:before,\n.fa-picture-o:before {\n  content: \"\"; }\n\n.fa-pencil:before {\n  content: \"\"; }\n\n.fa-map-marker:before {\n  content: \"\"; }\n\n.fa-adjust:before {\n  content: \"\"; }\n\n.fa-tint:before {\n  content: \"\"; }\n\n.fa-edit:before,\n.fa-pencil-square-o:before {\n  content: \"\"; }\n\n.fa-share-square-o:before {\n  content: \"\"; }\n\n.fa-check-square-o:before {\n  content: \"\"; }\n\n.fa-arrows:before {\n  content: \"\"; }\n\n.fa-step-backward:before {\n  content: \"\"; }\n\n.fa-fast-backward:before {\n  content: \"\"; }\n\n.fa-backward:before {\n  content: \"\"; }\n\n.fa-play:before {\n  content: \"\"; }\n\n.fa-pause:before {\n  content: \"\"; }\n\n.fa-stop:before {\n  content: \"\"; }\n\n.fa-forward:before {\n  content: \"\"; }\n\n.fa-fast-forward:before {\n  content: \"\"; }\n\n.fa-step-forward:before {\n  content: \"\"; }\n\n.fa-eject:before {\n  content: \"\"; }\n\n.fa-chevron-left:before {\n  content: \"\"; }\n\n.fa-chevron-right:before {\n  content: \"\"; }\n\n.fa-plus-circle:before {\n  content: \"\"; }\n\n.fa-minus-circle:before {\n  content: \"\"; }\n\n.fa-times-circle:before {\n  content: \"\"; }\n\n.fa-check-circle:before {\n  content: \"\"; }\n\n.fa-question-circle:before {\n  content: \"\"; }\n\n.fa-info-circle:before {\n  content: \"\"; }\n\n.fa-crosshairs:before {\n  content: \"\"; }\n\n.fa-times-circle-o:before {\n  content: \"\"; }\n\n.fa-check-circle-o:before {\n  content: \"\"; }\n\n.fa-ban:before {\n  content: \"\"; }\n\n.fa-arrow-left:before {\n  content: \"\"; }\n\n.fa-arrow-right:before {\n  content: \"\"; }\n\n.fa-arrow-up:before {\n  content: \"\"; }\n\n.fa-arrow-down:before {\n  content: \"\"; }\n\n.fa-mail-forward:before,\n.fa-share:before {\n  content: \"\"; }\n\n.fa-expand:before {\n  content: \"\"; }\n\n.fa-compress:before {\n  content: \"\"; }\n\n.fa-plus:before {\n  content: \"\"; }\n\n.fa-minus:before {\n  content: \"\"; }\n\n.fa-asterisk:before {\n  content: \"\"; }\n\n.fa-exclamation-circle:before {\n  content: \"\"; }\n\n.fa-gift:before {\n  content: \"\"; }\n\n.fa-leaf:before {\n  content: \"\"; }\n\n.fa-fire:before {\n  content: \"\"; }\n\n.fa-eye:before {\n  content: \"\"; }\n\n.fa-eye-slash:before {\n  content: \"\"; }\n\n.fa-warning:before,\n.fa-exclamation-triangle:before {\n  content: \"\"; }\n\n.fa-plane:before {\n  content: \"\"; }\n\n.fa-calendar:before {\n  content: \"\"; }\n\n.fa-random:before {\n  content: \"\"; }\n\n.fa-comment:before {\n  content: \"\"; }\n\n.fa-magnet:before {\n  content: \"\"; }\n\n.fa-chevron-up:before {\n  content: \"\"; }\n\n.fa-chevron-down:before {\n  content: \"\"; }\n\n.fa-retweet:before {\n  content: \"\"; }\n\n.fa-shopping-cart:before {\n  content: \"\"; }\n\n.fa-folder:before {\n  content: \"\"; }\n\n.fa-folder-open:before {\n  content: \"\"; }\n\n.fa-arrows-v:before {\n  content: \"\"; }\n\n.fa-arrows-h:before {\n  content: \"\"; }\n\n.fa-bar-chart-o:before,\n.fa-bar-chart:before {\n  content: \"\"; }\n\n.fa-twitter-square:before {\n  content: \"\"; }\n\n.fa-facebook-square:before {\n  content: \"\"; }\n\n.fa-camera-retro:before {\n  content: \"\"; }\n\n.fa-key:before {\n  content: \"\"; }\n\n.fa-gears:before,\n.fa-cogs:before {\n  content: \"\"; }\n\n.fa-comments:before {\n  content: \"\"; }\n\n.fa-thumbs-o-up:before {\n  content: \"\"; }\n\n.fa-thumbs-o-down:before {\n  content: \"\"; }\n\n.fa-star-half:before {\n  content: \"\"; }\n\n.fa-heart-o:before {\n  content: \"\"; }\n\n.fa-sign-out:before {\n  content: \"\"; }\n\n.fa-linkedin-square:before {\n  content: \"\"; }\n\n.fa-thumb-tack:before {\n  content: \"\"; }\n\n.fa-external-link:before {\n  content: \"\"; }\n\n.fa-sign-in:before {\n  content: \"\"; }\n\n.fa-trophy:before {\n  content: \"\"; }\n\n.fa-github-square:before {\n  content: \"\"; }\n\n.fa-upload:before {\n  content: \"\"; }\n\n.fa-lemon-o:before {\n  content: \"\"; }\n\n.fa-phone:before {\n  content: \"\"; }\n\n.fa-square-o:before {\n  content: \"\"; }\n\n.fa-bookmark-o:before {\n  content: \"\"; }\n\n.fa-phone-square:before {\n  content: \"\"; }\n\n.fa-twitter:before {\n  content: \"\"; }\n\n.fa-facebook-f:before,\n.fa-facebook:before {\n  content: \"\"; }\n\n.fa-github:before {\n  content: \"\"; }\n\n.fa-unlock:before {\n  content: \"\"; }\n\n.fa-credit-card:before {\n  content: \"\"; }\n\n.fa-feed:before,\n.fa-rss:before {\n  content: \"\"; }\n\n.fa-hdd-o:before {\n  content: \"\"; }\n\n.fa-bullhorn:before {\n  content: \"\"; }\n\n.fa-bell:before {\n  content: \"\"; }\n\n.fa-certificate:before {\n  content: \"\"; }\n\n.fa-hand-o-right:before {\n  content: \"\"; }\n\n.fa-hand-o-left:before {\n  content: \"\"; }\n\n.fa-hand-o-up:before {\n  content: \"\"; }\n\n.fa-hand-o-down:before {\n  content: \"\"; }\n\n.fa-arrow-circle-left:before {\n  content: \"\"; }\n\n.fa-arrow-circle-right:before {\n  content: \"\"; }\n\n.fa-arrow-circle-up:before {\n  content: \"\"; }\n\n.fa-arrow-circle-down:before {\n  content: \"\"; }\n\n.fa-globe:before {\n  content: \"\"; }\n\n.fa-wrench:before {\n  content: \"\"; }\n\n.fa-tasks:before {\n  content: \"\"; }\n\n.fa-filter:before {\n  content: \"\"; }\n\n.fa-briefcase:before {\n  content: \"\"; }\n\n.fa-arrows-alt:before {\n  content: \"\"; }\n\n.fa-group:before,\n.fa-users:before {\n  content: \"\"; }\n\n.fa-chain:before,\n.fa-link:before {\n  content: \"\"; }\n\n.fa-cloud:before {\n  content: \"\"; }\n\n.fa-flask:before {\n  content: \"\"; }\n\n.fa-cut:before,\n.fa-scissors:before {\n  content: \"\"; }\n\n.fa-copy:before,\n.fa-files-o:before {\n  content: \"\"; }\n\n.fa-paperclip:before {\n  content: \"\"; }\n\n.fa-save:before,\n.fa-floppy-o:before {\n  content: \"\"; }\n\n.fa-square:before {\n  content: \"\"; }\n\n.fa-navicon:before,\n.fa-reorder:before,\n.fa-bars:before {\n  content: \"\"; }\n\n.fa-list-ul:before {\n  content: \"\"; }\n\n.fa-list-ol:before {\n  content: \"\"; }\n\n.fa-strikethrough:before {\n  content: \"\"; }\n\n.fa-underline:before {\n  content: \"\"; }\n\n.fa-table:before {\n  content: \"\"; }\n\n.fa-magic:before {\n  content: \"\"; }\n\n.fa-truck:before {\n  content: \"\"; }\n\n.fa-pinterest:before {\n  content: \"\"; }\n\n.fa-pinterest-square:before {\n  content: \"\"; }\n\n.fa-google-plus-square:before {\n  content: \"\"; }\n\n.fa-google-plus:before {\n  content: \"\"; }\n\n.fa-money:before {\n  content: \"\"; }\n\n.fa-caret-down:before {\n  content: \"\"; }\n\n.fa-caret-up:before {\n  content: \"\"; }\n\n.fa-caret-left:before {\n  content: \"\"; }\n\n.fa-caret-right:before {\n  content: \"\"; }\n\n.fa-columns:before {\n  content: \"\"; }\n\n.fa-unsorted:before,\n.fa-sort:before {\n  content: \"\"; }\n\n.fa-sort-down:before,\n.fa-sort-desc:before {\n  content: \"\"; }\n\n.fa-sort-up:before,\n.fa-sort-asc:before {\n  content: \"\"; }\n\n.fa-envelope:before {\n  content: \"\"; }\n\n.fa-linkedin:before {\n  content: \"\"; }\n\n.fa-rotate-left:before,\n.fa-undo:before {\n  content: \"\"; }\n\n.fa-legal:before,\n.fa-gavel:before {\n  content: \"\"; }\n\n.fa-dashboard:before,\n.fa-tachometer:before {\n  content: \"\"; }\n\n.fa-comment-o:before {\n  content: \"\"; }\n\n.fa-comments-o:before {\n  content: \"\"; }\n\n.fa-flash:before,\n.fa-bolt:before {\n  content: \"\"; }\n\n.fa-sitemap:before {\n  content: \"\"; }\n\n.fa-umbrella:before {\n  content: \"\"; }\n\n.fa-paste:before,\n.fa-clipboard:before {\n  content: \"\"; }\n\n.fa-lightbulb-o:before {\n  content: \"\"; }\n\n.fa-exchange:before {\n  content: \"\"; }\n\n.fa-cloud-download:before {\n  content: \"\"; }\n\n.fa-cloud-upload:before {\n  content: \"\"; }\n\n.fa-user-md:before {\n  content: \"\"; }\n\n.fa-stethoscope:before {\n  content: \"\"; }\n\n.fa-suitcase:before {\n  content: \"\"; }\n\n.fa-bell-o:before {\n  content: \"\"; }\n\n.fa-coffee:before {\n  content: \"\"; }\n\n.fa-cutlery:before {\n  content: \"\"; }\n\n.fa-file-text-o:before {\n  content: \"\"; }\n\n.fa-building-o:before {\n  content: \"\"; }\n\n.fa-hospital-o:before {\n  content: \"\"; }\n\n.fa-ambulance:before {\n  content: \"\"; }\n\n.fa-medkit:before {\n  content: \"\"; }\n\n.fa-fighter-jet:before {\n  content: \"\"; }\n\n.fa-beer:before {\n  content: \"\"; }\n\n.fa-h-square:before {\n  content: \"\"; }\n\n.fa-plus-square:before {\n  content: \"\"; }\n\n.fa-angle-double-left:before {\n  content: \"\"; }\n\n.fa-angle-double-right:before {\n  content: \"\"; }\n\n.fa-angle-double-up:before {\n  content: \"\"; }\n\n.fa-angle-double-down:before {\n  content: \"\"; }\n\n.fa-angle-left:before {\n  content: \"\"; }\n\n.fa-angle-right:before {\n  content: \"\"; }\n\n.fa-angle-up:before {\n  content: \"\"; }\n\n.fa-angle-down:before {\n  content: \"\"; }\n\n.fa-desktop:before {\n  content: \"\"; }\n\n.fa-laptop:before {\n  content: \"\"; }\n\n.fa-tablet:before {\n  content: \"\"; }\n\n.fa-mobile-phone:before,\n.fa-mobile:before {\n  content: \"\"; }\n\n.fa-circle-o:before {\n  content: \"\"; }\n\n.fa-quote-left:before {\n  content: \"\"; }\n\n.fa-quote-right:before {\n  content: \"\"; }\n\n.fa-spinner:before {\n  content: \"\"; }\n\n.fa-circle:before {\n  content: \"\"; }\n\n.fa-mail-reply:before,\n.fa-reply:before {\n  content: \"\"; }\n\n.fa-github-alt:before {\n  content: \"\"; }\n\n.fa-folder-o:before {\n  content: \"\"; }\n\n.fa-folder-open-o:before {\n  content: \"\"; }\n\n.fa-smile-o:before {\n  content: \"\"; }\n\n.fa-frown-o:before {\n  content: \"\"; }\n\n.fa-meh-o:before {\n  content: \"\"; }\n\n.fa-gamepad:before {\n  content: \"\"; }\n\n.fa-keyboard-o:before {\n  content: \"\"; }\n\n.fa-flag-o:before {\n  content: \"\"; }\n\n.fa-flag-checkered:before {\n  content: \"\"; }\n\n.fa-terminal:before {\n  content: \"\"; }\n\n.fa-code:before {\n  content: \"\"; }\n\n.fa-mail-reply-all:before,\n.fa-reply-all:before {\n  content: \"\"; }\n\n.fa-star-half-empty:before,\n.fa-star-half-full:before,\n.fa-star-half-o:before {\n  content: \"\"; }\n\n.fa-location-arrow:before {\n  content: \"\"; }\n\n.fa-crop:before {\n  content: \"\"; }\n\n.fa-code-fork:before {\n  content: \"\"; }\n\n.fa-unlink:before,\n.fa-chain-broken:before {\n  content: \"\"; }\n\n.fa-question:before {\n  content: \"\"; }\n\n.fa-info:before {\n  content: \"\"; }\n\n.fa-exclamation:before {\n  content: \"\"; }\n\n.fa-superscript:before {\n  content: \"\"; }\n\n.fa-subscript:before {\n  content: \"\"; }\n\n.fa-eraser:before {\n  content: \"\"; }\n\n.fa-puzzle-piece:before {\n  content: \"\"; }\n\n.fa-microphone:before {\n  content: \"\"; }\n\n.fa-microphone-slash:before {\n  content: \"\"; }\n\n.fa-shield:before {\n  content: \"\"; }\n\n.fa-calendar-o:before {\n  content: \"\"; }\n\n.fa-fire-extinguisher:before {\n  content: \"\"; }\n\n.fa-rocket:before {\n  content: \"\"; }\n\n.fa-maxcdn:before {\n  content: \"\"; }\n\n.fa-chevron-circle-left:before {\n  content: \"\"; }\n\n.fa-chevron-circle-right:before {\n  content: \"\"; }\n\n.fa-chevron-circle-up:before {\n  content: \"\"; }\n\n.fa-chevron-circle-down:before {\n  content: \"\"; }\n\n.fa-html5:before {\n  content: \"\"; }\n\n.fa-css3:before {\n  content: \"\"; }\n\n.fa-anchor:before {\n  content: \"\"; }\n\n.fa-unlock-alt:before {\n  content: \"\"; }\n\n.fa-bullseye:before {\n  content: \"\"; }\n\n.fa-ellipsis-h:before {\n  content: \"\"; }\n\n.fa-ellipsis-v:before {\n  content: \"\"; }\n\n.fa-rss-square:before {\n  content: \"\"; }\n\n.fa-play-circle:before {\n  content: \"\"; }\n\n.fa-ticket:before {\n  content: \"\"; }\n\n.fa-minus-square:before {\n  content: \"\"; }\n\n.fa-minus-square-o:before {\n  content: \"\"; }\n\n.fa-level-up:before {\n  content: \"\"; }\n\n.fa-level-down:before {\n  content: \"\"; }\n\n.fa-check-square:before {\n  content: \"\"; }\n\n.fa-pencil-square:before {\n  content: \"\"; }\n\n.fa-external-link-square:before {\n  content: \"\"; }\n\n.fa-share-square:before {\n  content: \"\"; }\n\n.fa-compass:before {\n  content: \"\"; }\n\n.fa-toggle-down:before,\n.fa-caret-square-o-down:before {\n  content: \"\"; }\n\n.fa-toggle-up:before,\n.fa-caret-square-o-up:before {\n  content: \"\"; }\n\n.fa-toggle-right:before,\n.fa-caret-square-o-right:before {\n  content: \"\"; }\n\n.fa-euro:before,\n.fa-eur:before {\n  content: \"\"; }\n\n.fa-gbp:before {\n  content: \"\"; }\n\n.fa-dollar:before,\n.fa-usd:before {\n  content: \"\"; }\n\n.fa-rupee:before,\n.fa-inr:before {\n  content: \"\"; }\n\n.fa-cny:before,\n.fa-rmb:before,\n.fa-yen:before,\n.fa-jpy:before {\n  content: \"\"; }\n\n.fa-ruble:before,\n.fa-rouble:before,\n.fa-rub:before {\n  content: \"\"; }\n\n.fa-won:before,\n.fa-krw:before {\n  content: \"\"; }\n\n.fa-bitcoin:before,\n.fa-btc:before {\n  content: \"\"; }\n\n.fa-file:before {\n  content: \"\"; }\n\n.fa-file-text:before {\n  content: \"\"; }\n\n.fa-sort-alpha-asc:before {\n  content: \"\"; }\n\n.fa-sort-alpha-desc:before {\n  content: \"\"; }\n\n.fa-sort-amount-asc:before {\n  content: \"\"; }\n\n.fa-sort-amount-desc:before {\n  content: \"\"; }\n\n.fa-sort-numeric-asc:before {\n  content: \"\"; }\n\n.fa-sort-numeric-desc:before {\n  content: \"\"; }\n\n.fa-thumbs-up:before {\n  content: \"\"; }\n\n.fa-thumbs-down:before {\n  content: \"\"; }\n\n.fa-youtube-square:before {\n  content: \"\"; }\n\n.fa-youtube:before {\n  content: \"\"; }\n\n.fa-xing:before {\n  content: \"\"; }\n\n.fa-xing-square:before {\n  content: \"\"; }\n\n.fa-youtube-play:before {\n  content: \"\"; }\n\n.fa-dropbox:before {\n  content: \"\"; }\n\n.fa-stack-overflow:before {\n  content: \"\"; }\n\n.fa-instagram:before {\n  content: \"\"; }\n\n.fa-flickr:before {\n  content: \"\"; }\n\n.fa-adn:before {\n  content: \"\"; }\n\n.fa-bitbucket:before {\n  content: \"\"; }\n\n.fa-bitbucket-square:before {\n  content: \"\"; }\n\n.fa-tumblr:before {\n  content: \"\"; }\n\n.fa-tumblr-square:before {\n  content: \"\"; }\n\n.fa-long-arrow-down:before {\n  content: \"\"; }\n\n.fa-long-arrow-up:before {\n  content: \"\"; }\n\n.fa-long-arrow-left:before {\n  content: \"\"; }\n\n.fa-long-arrow-right:before {\n  content: \"\"; }\n\n.fa-apple:before {\n  content: \"\"; }\n\n.fa-windows:before {\n  content: \"\"; }\n\n.fa-android:before {\n  content: \"\"; }\n\n.fa-linux:before {\n  content: \"\"; }\n\n.fa-dribbble:before {\n  content: \"\"; }\n\n.fa-skype:before {\n  content: \"\"; }\n\n.fa-foursquare:before {\n  content: \"\"; }\n\n.fa-trello:before {\n  content: \"\"; }\n\n.fa-female:before {\n  content: \"\"; }\n\n.fa-male:before {\n  content: \"\"; }\n\n.fa-gittip:before,\n.fa-gratipay:before {\n  content: \"\"; }\n\n.fa-sun-o:before {\n  content: \"\"; }\n\n.fa-moon-o:before {\n  content: \"\"; }\n\n.fa-archive:before {\n  content: \"\"; }\n\n.fa-bug:before {\n  content: \"\"; }\n\n.fa-vk:before {\n  content: \"\"; }\n\n.fa-weibo:before {\n  content: \"\"; }\n\n.fa-renren:before {\n  content: \"\"; }\n\n.fa-pagelines:before {\n  content: \"\"; }\n\n.fa-stack-exchange:before {\n  content: \"\"; }\n\n.fa-arrow-circle-o-right:before {\n  content: \"\"; }\n\n.fa-arrow-circle-o-left:before {\n  content: \"\"; }\n\n.fa-toggle-left:before,\n.fa-caret-square-o-left:before {\n  content: \"\"; }\n\n.fa-dot-circle-o:before {\n  content: \"\"; }\n\n.fa-wheelchair:before {\n  content: \"\"; }\n\n.fa-vimeo-square:before {\n  content: \"\"; }\n\n.fa-turkish-lira:before,\n.fa-try:before {\n  content: \"\"; }\n\n.fa-plus-square-o:before {\n  content: \"\"; }\n\n.fa-space-shuttle:before {\n  content: \"\"; }\n\n.fa-slack:before {\n  content: \"\"; }\n\n.fa-envelope-square:before {\n  content: \"\"; }\n\n.fa-wordpress:before {\n  content: \"\"; }\n\n.fa-openid:before {\n  content: \"\"; }\n\n.fa-institution:before,\n.fa-bank:before,\n.fa-university:before {\n  content: \"\"; }\n\n.fa-mortar-board:before,\n.fa-graduation-cap:before {\n  content: \"\"; }\n\n.fa-yahoo:before {\n  content: \"\"; }\n\n.fa-google:before {\n  content: \"\"; }\n\n.fa-reddit:before {\n  content: \"\"; }\n\n.fa-reddit-square:before {\n  content: \"\"; }\n\n.fa-stumbleupon-circle:before {\n  content: \"\"; }\n\n.fa-stumbleupon:before {\n  content: \"\"; }\n\n.fa-delicious:before {\n  content: \"\"; }\n\n.fa-digg:before {\n  content: \"\"; }\n\n.fa-pied-piper-pp:before {\n  content: \"\"; }\n\n.fa-pied-piper-alt:before {\n  content: \"\"; }\n\n.fa-drupal:before {\n  content: \"\"; }\n\n.fa-joomla:before {\n  content: \"\"; }\n\n.fa-language:before {\n  content: \"\"; }\n\n.fa-fax:before {\n  content: \"\"; }\n\n.fa-building:before {\n  content: \"\"; }\n\n.fa-child:before {\n  content: \"\"; }\n\n.fa-paw:before {\n  content: \"\"; }\n\n.fa-spoon:before {\n  content: \"\"; }\n\n.fa-cube:before {\n  content: \"\"; }\n\n.fa-cubes:before {\n  content: \"\"; }\n\n.fa-behance:before {\n  content: \"\"; }\n\n.fa-behance-square:before {\n  content: \"\"; }\n\n.fa-steam:before {\n  content: \"\"; }\n\n.fa-steam-square:before {\n  content: \"\"; }\n\n.fa-recycle:before {\n  content: \"\"; }\n\n.fa-automobile:before,\n.fa-car:before {\n  content: \"\"; }\n\n.fa-cab:before,\n.fa-taxi:before {\n  content: \"\"; }\n\n.fa-tree:before {\n  content: \"\"; }\n\n.fa-spotify:before {\n  content: \"\"; }\n\n.fa-deviantart:before {\n  content: \"\"; }\n\n.fa-soundcloud:before {\n  content: \"\"; }\n\n.fa-database:before {\n  content: \"\"; }\n\n.fa-file-pdf-o:before {\n  content: \"\"; }\n\n.fa-file-word-o:before {\n  content: \"\"; }\n\n.fa-file-excel-o:before {\n  content: \"\"; }\n\n.fa-file-powerpoint-o:before {\n  content: \"\"; }\n\n.fa-file-photo-o:before,\n.fa-file-picture-o:before,\n.fa-file-image-o:before {\n  content: \"\"; }\n\n.fa-file-zip-o:before,\n.fa-file-archive-o:before {\n  content: \"\"; }\n\n.fa-file-sound-o:before,\n.fa-file-audio-o:before {\n  content: \"\"; }\n\n.fa-file-movie-o:before,\n.fa-file-video-o:before {\n  content: \"\"; }\n\n.fa-file-code-o:before {\n  content: \"\"; }\n\n.fa-vine:before {\n  content: \"\"; }\n\n.fa-codepen:before {\n  content: \"\"; }\n\n.fa-jsfiddle:before {\n  content: \"\"; }\n\n.fa-life-bouy:before,\n.fa-life-buoy:before,\n.fa-life-saver:before,\n.fa-support:before,\n.fa-life-ring:before {\n  content: \"\"; }\n\n.fa-circle-o-notch:before {\n  content: \"\"; }\n\n.fa-ra:before,\n.fa-resistance:before,\n.fa-rebel:before {\n  content: \"\"; }\n\n.fa-ge:before,\n.fa-empire:before {\n  content: \"\"; }\n\n.fa-git-square:before {\n  content: \"\"; }\n\n.fa-git:before {\n  content: \"\"; }\n\n.fa-y-combinator-square:before,\n.fa-yc-square:before,\n.fa-hacker-news:before {\n  content: \"\"; }\n\n.fa-tencent-weibo:before {\n  content: \"\"; }\n\n.fa-qq:before {\n  content: \"\"; }\n\n.fa-wechat:before,\n.fa-weixin:before {\n  content: \"\"; }\n\n.fa-send:before,\n.fa-paper-plane:before {\n  content: \"\"; }\n\n.fa-send-o:before,\n.fa-paper-plane-o:before {\n  content: \"\"; }\n\n.fa-history:before {\n  content: \"\"; }\n\n.fa-circle-thin:before {\n  content: \"\"; }\n\n.fa-header:before {\n  content: \"\"; }\n\n.fa-paragraph:before {\n  content: \"\"; }\n\n.fa-sliders:before {\n  content: \"\"; }\n\n.fa-share-alt:before {\n  content: \"\"; }\n\n.fa-share-alt-square:before {\n  content: \"\"; }\n\n.fa-bomb:before {\n  content: \"\"; }\n\n.fa-soccer-ball-o:before,\n.fa-futbol-o:before {\n  content: \"\"; }\n\n.fa-tty:before {\n  content: \"\"; }\n\n.fa-binoculars:before {\n  content: \"\"; }\n\n.fa-plug:before {\n  content: \"\"; }\n\n.fa-slideshare:before {\n  content: \"\"; }\n\n.fa-twitch:before {\n  content: \"\"; }\n\n.fa-yelp:before {\n  content: \"\"; }\n\n.fa-newspaper-o:before {\n  content: \"\"; }\n\n.fa-wifi:before {\n  content: \"\"; }\n\n.fa-calculator:before {\n  content: \"\"; }\n\n.fa-paypal:before {\n  content: \"\"; }\n\n.fa-google-wallet:before {\n  content: \"\"; }\n\n.fa-cc-visa:before {\n  content: \"\"; }\n\n.fa-cc-mastercard:before {\n  content: \"\"; }\n\n.fa-cc-discover:before {\n  content: \"\"; }\n\n.fa-cc-amex:before {\n  content: \"\"; }\n\n.fa-cc-paypal:before {\n  content: \"\"; }\n\n.fa-cc-stripe:before {\n  content: \"\"; }\n\n.fa-bell-slash:before {\n  content: \"\"; }\n\n.fa-bell-slash-o:before {\n  content: \"\"; }\n\n.fa-trash:before {\n  content: \"\"; }\n\n.fa-copyright:before {\n  content: \"\"; }\n\n.fa-at:before {\n  content: \"\"; }\n\n.fa-eyedropper:before {\n  content: \"\"; }\n\n.fa-paint-brush:before {\n  content: \"\"; }\n\n.fa-birthday-cake:before {\n  content: \"\"; }\n\n.fa-area-chart:before {\n  content: \"\"; }\n\n.fa-pie-chart:before {\n  content: \"\"; }\n\n.fa-line-chart:before {\n  content: \"\"; }\n\n.fa-lastfm:before {\n  content: \"\"; }\n\n.fa-lastfm-square:before {\n  content: \"\"; }\n\n.fa-toggle-off:before {\n  content: \"\"; }\n\n.fa-toggle-on:before {\n  content: \"\"; }\n\n.fa-bicycle:before {\n  content: \"\"; }\n\n.fa-bus:before {\n  content: \"\"; }\n\n.fa-ioxhost:before {\n  content: \"\"; }\n\n.fa-angellist:before {\n  content: \"\"; }\n\n.fa-cc:before {\n  content: \"\"; }\n\n.fa-shekel:before,\n.fa-sheqel:before,\n.fa-ils:before {\n  content: \"\"; }\n\n.fa-meanpath:before {\n  content: \"\"; }\n\n.fa-buysellads:before {\n  content: \"\"; }\n\n.fa-connectdevelop:before {\n  content: \"\"; }\n\n.fa-dashcube:before {\n  content: \"\"; }\n\n.fa-forumbee:before {\n  content: \"\"; }\n\n.fa-leanpub:before {\n  content: \"\"; }\n\n.fa-sellsy:before {\n  content: \"\"; }\n\n.fa-shirtsinbulk:before {\n  content: \"\"; }\n\n.fa-simplybuilt:before {\n  content: \"\"; }\n\n.fa-skyatlas:before {\n  content: \"\"; }\n\n.fa-cart-plus:before {\n  content: \"\"; }\n\n.fa-cart-arrow-down:before {\n  content: \"\"; }\n\n.fa-diamond:before {\n  content: \"\"; }\n\n.fa-ship:before {\n  content: \"\"; }\n\n.fa-user-secret:before {\n  content: \"\"; }\n\n.fa-motorcycle:before {\n  content: \"\"; }\n\n.fa-street-view:before {\n  content: \"\"; }\n\n.fa-heartbeat:before {\n  content: \"\"; }\n\n.fa-venus:before {\n  content: \"\"; }\n\n.fa-mars:before {\n  content: \"\"; }\n\n.fa-mercury:before {\n  content: \"\"; }\n\n.fa-intersex:before,\n.fa-transgender:before {\n  content: \"\"; }\n\n.fa-transgender-alt:before {\n  content: \"\"; }\n\n.fa-venus-double:before {\n  content: \"\"; }\n\n.fa-mars-double:before {\n  content: \"\"; }\n\n.fa-venus-mars:before {\n  content: \"\"; }\n\n.fa-mars-stroke:before {\n  content: \"\"; }\n\n.fa-mars-stroke-v:before {\n  content: \"\"; }\n\n.fa-mars-stroke-h:before {\n  content: \"\"; }\n\n.fa-neuter:before {\n  content: \"\"; }\n\n.fa-genderless:before {\n  content: \"\"; }\n\n.fa-facebook-official:before {\n  content: \"\"; }\n\n.fa-pinterest-p:before {\n  content: \"\"; }\n\n.fa-whatsapp:before {\n  content: \"\"; }\n\n.fa-server:before {\n  content: \"\"; }\n\n.fa-user-plus:before {\n  content: \"\"; }\n\n.fa-user-times:before {\n  content: \"\"; }\n\n.fa-hotel:before,\n.fa-bed:before {\n  content: \"\"; }\n\n.fa-viacoin:before {\n  content: \"\"; }\n\n.fa-train:before {\n  content: \"\"; }\n\n.fa-subway:before {\n  content: \"\"; }\n\n.fa-medium:before {\n  content: \"\"; }\n\n.fa-yc:before,\n.fa-y-combinator:before {\n  content: \"\"; }\n\n.fa-optin-monster:before {\n  content: \"\"; }\n\n.fa-opencart:before {\n  content: \"\"; }\n\n.fa-expeditedssl:before {\n  content: \"\"; }\n\n.fa-battery-4:before,\n.fa-battery:before,\n.fa-battery-full:before {\n  content: \"\"; }\n\n.fa-battery-3:before,\n.fa-battery-three-quarters:before {\n  content: \"\"; }\n\n.fa-battery-2:before,\n.fa-battery-half:before {\n  content: \"\"; }\n\n.fa-battery-1:before,\n.fa-battery-quarter:before {\n  content: \"\"; }\n\n.fa-battery-0:before,\n.fa-battery-empty:before {\n  content: \"\"; }\n\n.fa-mouse-pointer:before {\n  content: \"\"; }\n\n.fa-i-cursor:before {\n  content: \"\"; }\n\n.fa-object-group:before {\n  content: \"\"; }\n\n.fa-object-ungroup:before {\n  content: \"\"; }\n\n.fa-sticky-note:before {\n  content: \"\"; }\n\n.fa-sticky-note-o:before {\n  content: \"\"; }\n\n.fa-cc-jcb:before {\n  content: \"\"; }\n\n.fa-cc-diners-club:before {\n  content: \"\"; }\n\n.fa-clone:before {\n  content: \"\"; }\n\n.fa-balance-scale:before {\n  content: \"\"; }\n\n.fa-hourglass-o:before {\n  content: \"\"; }\n\n.fa-hourglass-1:before,\n.fa-hourglass-start:before {\n  content: \"\"; }\n\n.fa-hourglass-2:before,\n.fa-hourglass-half:before {\n  content: \"\"; }\n\n.fa-hourglass-3:before,\n.fa-hourglass-end:before {\n  content: \"\"; }\n\n.fa-hourglass:before {\n  content: \"\"; }\n\n.fa-hand-grab-o:before,\n.fa-hand-rock-o:before {\n  content: \"\"; }\n\n.fa-hand-stop-o:before,\n.fa-hand-paper-o:before {\n  content: \"\"; }\n\n.fa-hand-scissors-o:before {\n  content: \"\"; }\n\n.fa-hand-lizard-o:before {\n  content: \"\"; }\n\n.fa-hand-spock-o:before {\n  content: \"\"; }\n\n.fa-hand-pointer-o:before {\n  content: \"\"; }\n\n.fa-hand-peace-o:before {\n  content: \"\"; }\n\n.fa-trademark:before {\n  content: \"\"; }\n\n.fa-registered:before {\n  content: \"\"; }\n\n.fa-creative-commons:before {\n  content: \"\"; }\n\n.fa-gg:before {\n  content: \"\"; }\n\n.fa-gg-circle:before {\n  content: \"\"; }\n\n.fa-tripadvisor:before {\n  content: \"\"; }\n\n.fa-odnoklassniki:before {\n  content: \"\"; }\n\n.fa-odnoklassniki-square:before {\n  content: \"\"; }\n\n.fa-get-pocket:before {\n  content: \"\"; }\n\n.fa-wikipedia-w:before {\n  content: \"\"; }\n\n.fa-safari:before {\n  content: \"\"; }\n\n.fa-chrome:before {\n  content: \"\"; }\n\n.fa-firefox:before {\n  content: \"\"; }\n\n.fa-opera:before {\n  content: \"\"; }\n\n.fa-internet-explorer:before {\n  content: \"\"; }\n\n.fa-tv:before,\n.fa-television:before {\n  content: \"\"; }\n\n.fa-contao:before {\n  content: \"\"; }\n\n.fa-500px:before {\n  content: \"\"; }\n\n.fa-amazon:before {\n  content: \"\"; }\n\n.fa-calendar-plus-o:before {\n  content: \"\"; }\n\n.fa-calendar-minus-o:before {\n  content: \"\"; }\n\n.fa-calendar-times-o:before {\n  content: \"\"; }\n\n.fa-calendar-check-o:before {\n  content: \"\"; }\n\n.fa-industry:before {\n  content: \"\"; }\n\n.fa-map-pin:before {\n  content: \"\"; }\n\n.fa-map-signs:before {\n  content: \"\"; }\n\n.fa-map-o:before {\n  content: \"\"; }\n\n.fa-map:before {\n  content: \"\"; }\n\n.fa-commenting:before {\n  content: \"\"; }\n\n.fa-commenting-o:before {\n  content: \"\"; }\n\n.fa-houzz:before {\n  content: \"\"; }\n\n.fa-vimeo:before {\n  content: \"\"; }\n\n.fa-black-tie:before {\n  content: \"\"; }\n\n.fa-fonticons:before {\n  content: \"\"; }\n\n.fa-reddit-alien:before {\n  content: \"\"; }\n\n.fa-edge:before {\n  content: \"\"; }\n\n.fa-credit-card-alt:before {\n  content: \"\"; }\n\n.fa-codiepie:before {\n  content: \"\"; }\n\n.fa-modx:before {\n  content: \"\"; }\n\n.fa-fort-awesome:before {\n  content: \"\"; }\n\n.fa-usb:before {\n  content: \"\"; }\n\n.fa-product-hunt:before {\n  content: \"\"; }\n\n.fa-mixcloud:before {\n  content: \"\"; }\n\n.fa-scribd:before {\n  content: \"\"; }\n\n.fa-pause-circle:before {\n  content: \"\"; }\n\n.fa-pause-circle-o:before {\n  content: \"\"; }\n\n.fa-stop-circle:before {\n  content: \"\"; }\n\n.fa-stop-circle-o:before {\n  content: \"\"; }\n\n.fa-shopping-bag:before {\n  content: \"\"; }\n\n.fa-shopping-basket:before {\n  content: \"\"; }\n\n.fa-hashtag:before {\n  content: \"\"; }\n\n.fa-bluetooth:before {\n  content: \"\"; }\n\n.fa-bluetooth-b:before {\n  content: \"\"; }\n\n.fa-percent:before {\n  content: \"\"; }\n\n.fa-gitlab:before {\n  content: \"\"; }\n\n.fa-wpbeginner:before {\n  content: \"\"; }\n\n.fa-wpforms:before {\n  content: \"\"; }\n\n.fa-envira:before {\n  content: \"\"; }\n\n.fa-universal-access:before {\n  content: \"\"; }\n\n.fa-wheelchair-alt:before {\n  content: \"\"; }\n\n.fa-question-circle-o:before {\n  content: \"\"; }\n\n.fa-blind:before {\n  content: \"\"; }\n\n.fa-audio-description:before {\n  content: \"\"; }\n\n.fa-volume-control-phone:before {\n  content: \"\"; }\n\n.fa-braille:before {\n  content: \"\"; }\n\n.fa-assistive-listening-systems:before {\n  content: \"\"; }\n\n.fa-asl-interpreting:before,\n.fa-american-sign-language-interpreting:before {\n  content: \"\"; }\n\n.fa-deafness:before,\n.fa-hard-of-hearing:before,\n.fa-deaf:before {\n  content: \"\"; }\n\n.fa-glide:before {\n  content: \"\"; }\n\n.fa-glide-g:before {\n  content: \"\"; }\n\n.fa-signing:before,\n.fa-sign-language:before {\n  content: \"\"; }\n\n.fa-low-vision:before {\n  content: \"\"; }\n\n.fa-viadeo:before {\n  content: \"\"; }\n\n.fa-viadeo-square:before {\n  content: \"\"; }\n\n.fa-snapchat:before {\n  content: \"\"; }\n\n.fa-snapchat-ghost:before {\n  content: \"\"; }\n\n.fa-snapchat-square:before {\n  content: \"\"; }\n\n.fa-pied-piper:before {\n  content: \"\"; }\n\n.fa-first-order:before {\n  content: \"\"; }\n\n.fa-yoast:before {\n  content: \"\"; }\n\n.fa-themeisle:before {\n  content: \"\"; }\n\n.fa-google-plus-circle:before,\n.fa-google-plus-official:before {\n  content: \"\"; }\n\n.fa-fa:before,\n.fa-font-awesome:before {\n  content: \"\"; }\n\n.fa-handshake-o:before {\n  content: \"\"; }\n\n.fa-envelope-open:before {\n  content: \"\"; }\n\n.fa-envelope-open-o:before {\n  content: \"\"; }\n\n.fa-linode:before {\n  content: \"\"; }\n\n.fa-address-book:before {\n  content: \"\"; }\n\n.fa-address-book-o:before {\n  content: \"\"; }\n\n.fa-vcard:before,\n.fa-address-card:before {\n  content: \"\"; }\n\n.fa-vcard-o:before,\n.fa-address-card-o:before {\n  content: \"\"; }\n\n.fa-user-circle:before {\n  content: \"\"; }\n\n.fa-user-circle-o:before {\n  content: \"\"; }\n\n.fa-user-o:before {\n  content: \"\"; }\n\n.fa-id-badge:before {\n  content: \"\"; }\n\n.fa-drivers-license:before,\n.fa-id-card:before {\n  content: \"\"; }\n\n.fa-drivers-license-o:before,\n.fa-id-card-o:before {\n  content: \"\"; }\n\n.fa-quora:before {\n  content: \"\"; }\n\n.fa-free-code-camp:before {\n  content: \"\"; }\n\n.fa-telegram:before {\n  content: \"\"; }\n\n.fa-thermometer-4:before,\n.fa-thermometer:before,\n.fa-thermometer-full:before {\n  content: \"\"; }\n\n.fa-thermometer-3:before,\n.fa-thermometer-three-quarters:before {\n  content: \"\"; }\n\n.fa-thermometer-2:before,\n.fa-thermometer-half:before {\n  content: \"\"; }\n\n.fa-thermometer-1:before,\n.fa-thermometer-quarter:before {\n  content: \"\"; }\n\n.fa-thermometer-0:before,\n.fa-thermometer-empty:before {\n  content: \"\"; }\n\n.fa-shower:before {\n  content: \"\"; }\n\n.fa-bathtub:before,\n.fa-s15:before,\n.fa-bath:before {\n  content: \"\"; }\n\n.fa-podcast:before {\n  content: \"\"; }\n\n.fa-window-maximize:before {\n  content: \"\"; }\n\n.fa-window-minimize:before {\n  content: \"\"; }\n\n.fa-window-restore:before {\n  content: \"\"; }\n\n.fa-times-rectangle:before,\n.fa-window-close:before {\n  content: \"\"; }\n\n.fa-times-rectangle-o:before,\n.fa-window-close-o:before {\n  content: \"\"; }\n\n.fa-bandcamp:before {\n  content: \"\"; }\n\n.fa-grav:before {\n  content: \"\"; }\n\n.fa-etsy:before {\n  content: \"\"; }\n\n.fa-imdb:before {\n  content: \"\"; }\n\n.fa-ravelry:before {\n  content: \"\"; }\n\n.fa-eercast:before {\n  content: \"\"; }\n\n.fa-microchip:before {\n  content: \"\"; }\n\n.fa-snowflake-o:before {\n  content: \"\"; }\n\n.fa-superpowers:before {\n  content: \"\"; }\n\n.fa-wpexplorer:before {\n  content: \"\"; }\n\n.fa-meetup:before {\n  content: \"\"; }\n\n.sr-only {\n  position: absolute;\n  width: 1px;\n  height: 1px;\n  padding: 0;\n  margin: -1px;\n  overflow: hidden;\n  clip: rect(0, 0, 0, 0);\n  border: 0; }\n\n.sr-only-focusable:active, .sr-only-focusable:focus {\n  position: static;\n  width: auto;\n  height: auto;\n  margin: 0;\n  overflow: visible;\n  clip: auto; }\n"
 
 /***/ }),
 
-/***/ 723:
+/***/ 729:
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(724);
+var content = __webpack_require__(730);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // Prepare cssTransformation
 var transform;
@@ -24393,20 +31746,20 @@ if(false) {
 
 /***/ }),
 
-/***/ 724:
+/***/ 730:
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(725);
+__webpack_require__(731);
 
 /***/ }),
 
-/***/ 725:
+/***/ 731:
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(726);
+var content = __webpack_require__(732);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // Prepare cssTransformation
 var transform;
@@ -24432,57 +31785,57 @@ if(false) {
 
 /***/ }),
 
-/***/ 726:
+/***/ 732:
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(208)(undefined);
+exports = module.exports = __webpack_require__(209)(undefined);
 // imports
 
 
 // module
-exports.push([module.i, "@charset \"UTF-8\";\n/*\nThis file will be mported after Font-Awesome's default variable, but before anything else\nUse to override/customise Font-Awesome\n*/\n.fa-border {\n  padding: .2em .25em .15em;\n  border: solid 0.08em #eee;\n  border-radius: .1em; }\n\n.fa-pull-left {\n  float: left; }\n\n.fa-pull-right {\n  float: right; }\n\n.fa.fa-pull-left {\n  margin-right: .3em; }\n\n.fa.fa-pull-right {\n  margin-left: .3em; }\n\n/* Deprecated as of 4.4.0 */\n.pull-right {\n  float: right; }\n\n.pull-left {\n  float: left; }\n\n.fa.pull-left {\n  margin-right: .3em; }\n\n.fa.pull-right {\n  margin-left: .3em; }\n\n.fa {\n  display: inline-block;\n  font: normal normal normal 14px/1 FontAwesome;\n  font-size: inherit;\n  text-rendering: auto;\n  -webkit-font-smoothing: antialiased;\n  -moz-osx-font-smoothing: grayscale; }\n\n.fa-fw {\n  width: 1.28571em;\n  text-align: center; }\n\n/* Font Awesome uses the Unicode Private Use Area (PUA) to ensure screen\n   readers do not read off random characters that represent icons */\n.fa-glass:before {\n  content: \"\\F000\"; }\n\n.fa-music:before {\n  content: \"\\F001\"; }\n\n.fa-search:before {\n  content: \"\\F002\"; }\n\n.fa-envelope-o:before {\n  content: \"\\F003\"; }\n\n.fa-heart:before {\n  content: \"\\F004\"; }\n\n.fa-star:before {\n  content: \"\\F005\"; }\n\n.fa-star-o:before {\n  content: \"\\F006\"; }\n\n.fa-user:before {\n  content: \"\\F007\"; }\n\n.fa-film:before {\n  content: \"\\F008\"; }\n\n.fa-th-large:before {\n  content: \"\\F009\"; }\n\n.fa-th:before {\n  content: \"\\F00A\"; }\n\n.fa-th-list:before {\n  content: \"\\F00B\"; }\n\n.fa-check:before {\n  content: \"\\F00C\"; }\n\n.fa-remove:before,\n.fa-close:before,\n.fa-times:before {\n  content: \"\\F00D\"; }\n\n.fa-search-plus:before {\n  content: \"\\F00E\"; }\n\n.fa-search-minus:before {\n  content: \"\\F010\"; }\n\n.fa-power-off:before {\n  content: \"\\F011\"; }\n\n.fa-signal:before {\n  content: \"\\F012\"; }\n\n.fa-gear:before,\n.fa-cog:before {\n  content: \"\\F013\"; }\n\n.fa-trash-o:before {\n  content: \"\\F014\"; }\n\n.fa-home:before {\n  content: \"\\F015\"; }\n\n.fa-file-o:before {\n  content: \"\\F016\"; }\n\n.fa-clock-o:before {\n  content: \"\\F017\"; }\n\n.fa-road:before {\n  content: \"\\F018\"; }\n\n.fa-download:before {\n  content: \"\\F019\"; }\n\n.fa-arrow-circle-o-down:before {\n  content: \"\\F01A\"; }\n\n.fa-arrow-circle-o-up:before {\n  content: \"\\F01B\"; }\n\n.fa-inbox:before {\n  content: \"\\F01C\"; }\n\n.fa-play-circle-o:before {\n  content: \"\\F01D\"; }\n\n.fa-rotate-right:before,\n.fa-repeat:before {\n  content: \"\\F01E\"; }\n\n.fa-refresh:before {\n  content: \"\\F021\"; }\n\n.fa-list-alt:before {\n  content: \"\\F022\"; }\n\n.fa-lock:before {\n  content: \"\\F023\"; }\n\n.fa-flag:before {\n  content: \"\\F024\"; }\n\n.fa-headphones:before {\n  content: \"\\F025\"; }\n\n.fa-volume-off:before {\n  content: \"\\F026\"; }\n\n.fa-volume-down:before {\n  content: \"\\F027\"; }\n\n.fa-volume-up:before {\n  content: \"\\F028\"; }\n\n.fa-qrcode:before {\n  content: \"\\F029\"; }\n\n.fa-barcode:before {\n  content: \"\\F02A\"; }\n\n.fa-tag:before {\n  content: \"\\F02B\"; }\n\n.fa-tags:before {\n  content: \"\\F02C\"; }\n\n.fa-book:before {\n  content: \"\\F02D\"; }\n\n.fa-bookmark:before {\n  content: \"\\F02E\"; }\n\n.fa-print:before {\n  content: \"\\F02F\"; }\n\n.fa-camera:before {\n  content: \"\\F030\"; }\n\n.fa-font:before {\n  content: \"\\F031\"; }\n\n.fa-bold:before {\n  content: \"\\F032\"; }\n\n.fa-italic:before {\n  content: \"\\F033\"; }\n\n.fa-text-height:before {\n  content: \"\\F034\"; }\n\n.fa-text-width:before {\n  content: \"\\F035\"; }\n\n.fa-align-left:before {\n  content: \"\\F036\"; }\n\n.fa-align-center:before {\n  content: \"\\F037\"; }\n\n.fa-align-right:before {\n  content: \"\\F038\"; }\n\n.fa-align-justify:before {\n  content: \"\\F039\"; }\n\n.fa-list:before {\n  content: \"\\F03A\"; }\n\n.fa-dedent:before,\n.fa-outdent:before {\n  content: \"\\F03B\"; }\n\n.fa-indent:before {\n  content: \"\\F03C\"; }\n\n.fa-video-camera:before {\n  content: \"\\F03D\"; }\n\n.fa-photo:before,\n.fa-image:before,\n.fa-picture-o:before {\n  content: \"\\F03E\"; }\n\n.fa-pencil:before {\n  content: \"\\F040\"; }\n\n.fa-map-marker:before {\n  content: \"\\F041\"; }\n\n.fa-adjust:before {\n  content: \"\\F042\"; }\n\n.fa-tint:before {\n  content: \"\\F043\"; }\n\n.fa-edit:before,\n.fa-pencil-square-o:before {\n  content: \"\\F044\"; }\n\n.fa-share-square-o:before {\n  content: \"\\F045\"; }\n\n.fa-check-square-o:before {\n  content: \"\\F046\"; }\n\n.fa-arrows:before {\n  content: \"\\F047\"; }\n\n.fa-step-backward:before {\n  content: \"\\F048\"; }\n\n.fa-fast-backward:before {\n  content: \"\\F049\"; }\n\n.fa-backward:before {\n  content: \"\\F04A\"; }\n\n.fa-play:before {\n  content: \"\\F04B\"; }\n\n.fa-pause:before {\n  content: \"\\F04C\"; }\n\n.fa-stop:before {\n  content: \"\\F04D\"; }\n\n.fa-forward:before {\n  content: \"\\F04E\"; }\n\n.fa-fast-forward:before {\n  content: \"\\F050\"; }\n\n.fa-step-forward:before {\n  content: \"\\F051\"; }\n\n.fa-eject:before {\n  content: \"\\F052\"; }\n\n.fa-chevron-left:before {\n  content: \"\\F053\"; }\n\n.fa-chevron-right:before {\n  content: \"\\F054\"; }\n\n.fa-plus-circle:before {\n  content: \"\\F055\"; }\n\n.fa-minus-circle:before {\n  content: \"\\F056\"; }\n\n.fa-times-circle:before {\n  content: \"\\F057\"; }\n\n.fa-check-circle:before {\n  content: \"\\F058\"; }\n\n.fa-question-circle:before {\n  content: \"\\F059\"; }\n\n.fa-info-circle:before {\n  content: \"\\F05A\"; }\n\n.fa-crosshairs:before {\n  content: \"\\F05B\"; }\n\n.fa-times-circle-o:before {\n  content: \"\\F05C\"; }\n\n.fa-check-circle-o:before {\n  content: \"\\F05D\"; }\n\n.fa-ban:before {\n  content: \"\\F05E\"; }\n\n.fa-arrow-left:before {\n  content: \"\\F060\"; }\n\n.fa-arrow-right:before {\n  content: \"\\F061\"; }\n\n.fa-arrow-up:before {\n  content: \"\\F062\"; }\n\n.fa-arrow-down:before {\n  content: \"\\F063\"; }\n\n.fa-mail-forward:before,\n.fa-share:before {\n  content: \"\\F064\"; }\n\n.fa-expand:before {\n  content: \"\\F065\"; }\n\n.fa-compress:before {\n  content: \"\\F066\"; }\n\n.fa-plus:before {\n  content: \"\\F067\"; }\n\n.fa-minus:before {\n  content: \"\\F068\"; }\n\n.fa-asterisk:before {\n  content: \"\\F069\"; }\n\n.fa-exclamation-circle:before {\n  content: \"\\F06A\"; }\n\n.fa-gift:before {\n  content: \"\\F06B\"; }\n\n.fa-leaf:before {\n  content: \"\\F06C\"; }\n\n.fa-fire:before {\n  content: \"\\F06D\"; }\n\n.fa-eye:before {\n  content: \"\\F06E\"; }\n\n.fa-eye-slash:before {\n  content: \"\\F070\"; }\n\n.fa-warning:before,\n.fa-exclamation-triangle:before {\n  content: \"\\F071\"; }\n\n.fa-plane:before {\n  content: \"\\F072\"; }\n\n.fa-calendar:before {\n  content: \"\\F073\"; }\n\n.fa-random:before {\n  content: \"\\F074\"; }\n\n.fa-comment:before {\n  content: \"\\F075\"; }\n\n.fa-magnet:before {\n  content: \"\\F076\"; }\n\n.fa-chevron-up:before {\n  content: \"\\F077\"; }\n\n.fa-chevron-down:before {\n  content: \"\\F078\"; }\n\n.fa-retweet:before {\n  content: \"\\F079\"; }\n\n.fa-shopping-cart:before {\n  content: \"\\F07A\"; }\n\n.fa-folder:before {\n  content: \"\\F07B\"; }\n\n.fa-folder-open:before {\n  content: \"\\F07C\"; }\n\n.fa-arrows-v:before {\n  content: \"\\F07D\"; }\n\n.fa-arrows-h:before {\n  content: \"\\F07E\"; }\n\n.fa-bar-chart-o:before,\n.fa-bar-chart:before {\n  content: \"\\F080\"; }\n\n.fa-twitter-square:before {\n  content: \"\\F081\"; }\n\n.fa-facebook-square:before {\n  content: \"\\F082\"; }\n\n.fa-camera-retro:before {\n  content: \"\\F083\"; }\n\n.fa-key:before {\n  content: \"\\F084\"; }\n\n.fa-gears:before,\n.fa-cogs:before {\n  content: \"\\F085\"; }\n\n.fa-comments:before {\n  content: \"\\F086\"; }\n\n.fa-thumbs-o-up:before {\n  content: \"\\F087\"; }\n\n.fa-thumbs-o-down:before {\n  content: \"\\F088\"; }\n\n.fa-star-half:before {\n  content: \"\\F089\"; }\n\n.fa-heart-o:before {\n  content: \"\\F08A\"; }\n\n.fa-sign-out:before {\n  content: \"\\F08B\"; }\n\n.fa-linkedin-square:before {\n  content: \"\\F08C\"; }\n\n.fa-thumb-tack:before {\n  content: \"\\F08D\"; }\n\n.fa-external-link:before {\n  content: \"\\F08E\"; }\n\n.fa-sign-in:before {\n  content: \"\\F090\"; }\n\n.fa-trophy:before {\n  content: \"\\F091\"; }\n\n.fa-github-square:before {\n  content: \"\\F092\"; }\n\n.fa-upload:before {\n  content: \"\\F093\"; }\n\n.fa-lemon-o:before {\n  content: \"\\F094\"; }\n\n.fa-phone:before {\n  content: \"\\F095\"; }\n\n.fa-square-o:before {\n  content: \"\\F096\"; }\n\n.fa-bookmark-o:before {\n  content: \"\\F097\"; }\n\n.fa-phone-square:before {\n  content: \"\\F098\"; }\n\n.fa-twitter:before {\n  content: \"\\F099\"; }\n\n.fa-facebook-f:before,\n.fa-facebook:before {\n  content: \"\\F09A\"; }\n\n.fa-github:before {\n  content: \"\\F09B\"; }\n\n.fa-unlock:before {\n  content: \"\\F09C\"; }\n\n.fa-credit-card:before {\n  content: \"\\F09D\"; }\n\n.fa-feed:before,\n.fa-rss:before {\n  content: \"\\F09E\"; }\n\n.fa-hdd-o:before {\n  content: \"\\F0A0\"; }\n\n.fa-bullhorn:before {\n  content: \"\\F0A1\"; }\n\n.fa-bell:before {\n  content: \"\\F0F3\"; }\n\n.fa-certificate:before {\n  content: \"\\F0A3\"; }\n\n.fa-hand-o-right:before {\n  content: \"\\F0A4\"; }\n\n.fa-hand-o-left:before {\n  content: \"\\F0A5\"; }\n\n.fa-hand-o-up:before {\n  content: \"\\F0A6\"; }\n\n.fa-hand-o-down:before {\n  content: \"\\F0A7\"; }\n\n.fa-arrow-circle-left:before {\n  content: \"\\F0A8\"; }\n\n.fa-arrow-circle-right:before {\n  content: \"\\F0A9\"; }\n\n.fa-arrow-circle-up:before {\n  content: \"\\F0AA\"; }\n\n.fa-arrow-circle-down:before {\n  content: \"\\F0AB\"; }\n\n.fa-globe:before {\n  content: \"\\F0AC\"; }\n\n.fa-wrench:before {\n  content: \"\\F0AD\"; }\n\n.fa-tasks:before {\n  content: \"\\F0AE\"; }\n\n.fa-filter:before {\n  content: \"\\F0B0\"; }\n\n.fa-briefcase:before {\n  content: \"\\F0B1\"; }\n\n.fa-arrows-alt:before {\n  content: \"\\F0B2\"; }\n\n.fa-group:before,\n.fa-users:before {\n  content: \"\\F0C0\"; }\n\n.fa-chain:before,\n.fa-link:before {\n  content: \"\\F0C1\"; }\n\n.fa-cloud:before {\n  content: \"\\F0C2\"; }\n\n.fa-flask:before {\n  content: \"\\F0C3\"; }\n\n.fa-cut:before,\n.fa-scissors:before {\n  content: \"\\F0C4\"; }\n\n.fa-copy:before,\n.fa-files-o:before {\n  content: \"\\F0C5\"; }\n\n.fa-paperclip:before {\n  content: \"\\F0C6\"; }\n\n.fa-save:before,\n.fa-floppy-o:before {\n  content: \"\\F0C7\"; }\n\n.fa-square:before {\n  content: \"\\F0C8\"; }\n\n.fa-navicon:before,\n.fa-reorder:before,\n.fa-bars:before {\n  content: \"\\F0C9\"; }\n\n.fa-list-ul:before {\n  content: \"\\F0CA\"; }\n\n.fa-list-ol:before {\n  content: \"\\F0CB\"; }\n\n.fa-strikethrough:before {\n  content: \"\\F0CC\"; }\n\n.fa-underline:before {\n  content: \"\\F0CD\"; }\n\n.fa-table:before {\n  content: \"\\F0CE\"; }\n\n.fa-magic:before {\n  content: \"\\F0D0\"; }\n\n.fa-truck:before {\n  content: \"\\F0D1\"; }\n\n.fa-pinterest:before {\n  content: \"\\F0D2\"; }\n\n.fa-pinterest-square:before {\n  content: \"\\F0D3\"; }\n\n.fa-google-plus-square:before {\n  content: \"\\F0D4\"; }\n\n.fa-google-plus:before {\n  content: \"\\F0D5\"; }\n\n.fa-money:before {\n  content: \"\\F0D6\"; }\n\n.fa-caret-down:before {\n  content: \"\\F0D7\"; }\n\n.fa-caret-up:before {\n  content: \"\\F0D8\"; }\n\n.fa-caret-left:before {\n  content: \"\\F0D9\"; }\n\n.fa-caret-right:before {\n  content: \"\\F0DA\"; }\n\n.fa-columns:before {\n  content: \"\\F0DB\"; }\n\n.fa-unsorted:before,\n.fa-sort:before {\n  content: \"\\F0DC\"; }\n\n.fa-sort-down:before,\n.fa-sort-desc:before {\n  content: \"\\F0DD\"; }\n\n.fa-sort-up:before,\n.fa-sort-asc:before {\n  content: \"\\F0DE\"; }\n\n.fa-envelope:before {\n  content: \"\\F0E0\"; }\n\n.fa-linkedin:before {\n  content: \"\\F0E1\"; }\n\n.fa-rotate-left:before,\n.fa-undo:before {\n  content: \"\\F0E2\"; }\n\n.fa-legal:before,\n.fa-gavel:before {\n  content: \"\\F0E3\"; }\n\n.fa-dashboard:before,\n.fa-tachometer:before {\n  content: \"\\F0E4\"; }\n\n.fa-comment-o:before {\n  content: \"\\F0E5\"; }\n\n.fa-comments-o:before {\n  content: \"\\F0E6\"; }\n\n.fa-flash:before,\n.fa-bolt:before {\n  content: \"\\F0E7\"; }\n\n.fa-sitemap:before {\n  content: \"\\F0E8\"; }\n\n.fa-umbrella:before {\n  content: \"\\F0E9\"; }\n\n.fa-paste:before,\n.fa-clipboard:before {\n  content: \"\\F0EA\"; }\n\n.fa-lightbulb-o:before {\n  content: \"\\F0EB\"; }\n\n.fa-exchange:before {\n  content: \"\\F0EC\"; }\n\n.fa-cloud-download:before {\n  content: \"\\F0ED\"; }\n\n.fa-cloud-upload:before {\n  content: \"\\F0EE\"; }\n\n.fa-user-md:before {\n  content: \"\\F0F0\"; }\n\n.fa-stethoscope:before {\n  content: \"\\F0F1\"; }\n\n.fa-suitcase:before {\n  content: \"\\F0F2\"; }\n\n.fa-bell-o:before {\n  content: \"\\F0A2\"; }\n\n.fa-coffee:before {\n  content: \"\\F0F4\"; }\n\n.fa-cutlery:before {\n  content: \"\\F0F5\"; }\n\n.fa-file-text-o:before {\n  content: \"\\F0F6\"; }\n\n.fa-building-o:before {\n  content: \"\\F0F7\"; }\n\n.fa-hospital-o:before {\n  content: \"\\F0F8\"; }\n\n.fa-ambulance:before {\n  content: \"\\F0F9\"; }\n\n.fa-medkit:before {\n  content: \"\\F0FA\"; }\n\n.fa-fighter-jet:before {\n  content: \"\\F0FB\"; }\n\n.fa-beer:before {\n  content: \"\\F0FC\"; }\n\n.fa-h-square:before {\n  content: \"\\F0FD\"; }\n\n.fa-plus-square:before {\n  content: \"\\F0FE\"; }\n\n.fa-angle-double-left:before {\n  content: \"\\F100\"; }\n\n.fa-angle-double-right:before {\n  content: \"\\F101\"; }\n\n.fa-angle-double-up:before {\n  content: \"\\F102\"; }\n\n.fa-angle-double-down:before {\n  content: \"\\F103\"; }\n\n.fa-angle-left:before {\n  content: \"\\F104\"; }\n\n.fa-angle-right:before {\n  content: \"\\F105\"; }\n\n.fa-angle-up:before {\n  content: \"\\F106\"; }\n\n.fa-angle-down:before {\n  content: \"\\F107\"; }\n\n.fa-desktop:before {\n  content: \"\\F108\"; }\n\n.fa-laptop:before {\n  content: \"\\F109\"; }\n\n.fa-tablet:before {\n  content: \"\\F10A\"; }\n\n.fa-mobile-phone:before,\n.fa-mobile:before {\n  content: \"\\F10B\"; }\n\n.fa-circle-o:before {\n  content: \"\\F10C\"; }\n\n.fa-quote-left:before {\n  content: \"\\F10D\"; }\n\n.fa-quote-right:before {\n  content: \"\\F10E\"; }\n\n.fa-spinner:before {\n  content: \"\\F110\"; }\n\n.fa-circle:before {\n  content: \"\\F111\"; }\n\n.fa-mail-reply:before,\n.fa-reply:before {\n  content: \"\\F112\"; }\n\n.fa-github-alt:before {\n  content: \"\\F113\"; }\n\n.fa-folder-o:before {\n  content: \"\\F114\"; }\n\n.fa-folder-open-o:before {\n  content: \"\\F115\"; }\n\n.fa-smile-o:before {\n  content: \"\\F118\"; }\n\n.fa-frown-o:before {\n  content: \"\\F119\"; }\n\n.fa-meh-o:before {\n  content: \"\\F11A\"; }\n\n.fa-gamepad:before {\n  content: \"\\F11B\"; }\n\n.fa-keyboard-o:before {\n  content: \"\\F11C\"; }\n\n.fa-flag-o:before {\n  content: \"\\F11D\"; }\n\n.fa-flag-checkered:before {\n  content: \"\\F11E\"; }\n\n.fa-terminal:before {\n  content: \"\\F120\"; }\n\n.fa-code:before {\n  content: \"\\F121\"; }\n\n.fa-mail-reply-all:before,\n.fa-reply-all:before {\n  content: \"\\F122\"; }\n\n.fa-star-half-empty:before,\n.fa-star-half-full:before,\n.fa-star-half-o:before {\n  content: \"\\F123\"; }\n\n.fa-location-arrow:before {\n  content: \"\\F124\"; }\n\n.fa-crop:before {\n  content: \"\\F125\"; }\n\n.fa-code-fork:before {\n  content: \"\\F126\"; }\n\n.fa-unlink:before,\n.fa-chain-broken:before {\n  content: \"\\F127\"; }\n\n.fa-question:before {\n  content: \"\\F128\"; }\n\n.fa-info:before {\n  content: \"\\F129\"; }\n\n.fa-exclamation:before {\n  content: \"\\F12A\"; }\n\n.fa-superscript:before {\n  content: \"\\F12B\"; }\n\n.fa-subscript:before {\n  content: \"\\F12C\"; }\n\n.fa-eraser:before {\n  content: \"\\F12D\"; }\n\n.fa-puzzle-piece:before {\n  content: \"\\F12E\"; }\n\n.fa-microphone:before {\n  content: \"\\F130\"; }\n\n.fa-microphone-slash:before {\n  content: \"\\F131\"; }\n\n.fa-shield:before {\n  content: \"\\F132\"; }\n\n.fa-calendar-o:before {\n  content: \"\\F133\"; }\n\n.fa-fire-extinguisher:before {\n  content: \"\\F134\"; }\n\n.fa-rocket:before {\n  content: \"\\F135\"; }\n\n.fa-maxcdn:before {\n  content: \"\\F136\"; }\n\n.fa-chevron-circle-left:before {\n  content: \"\\F137\"; }\n\n.fa-chevron-circle-right:before {\n  content: \"\\F138\"; }\n\n.fa-chevron-circle-up:before {\n  content: \"\\F139\"; }\n\n.fa-chevron-circle-down:before {\n  content: \"\\F13A\"; }\n\n.fa-html5:before {\n  content: \"\\F13B\"; }\n\n.fa-css3:before {\n  content: \"\\F13C\"; }\n\n.fa-anchor:before {\n  content: \"\\F13D\"; }\n\n.fa-unlock-alt:before {\n  content: \"\\F13E\"; }\n\n.fa-bullseye:before {\n  content: \"\\F140\"; }\n\n.fa-ellipsis-h:before {\n  content: \"\\F141\"; }\n\n.fa-ellipsis-v:before {\n  content: \"\\F142\"; }\n\n.fa-rss-square:before {\n  content: \"\\F143\"; }\n\n.fa-play-circle:before {\n  content: \"\\F144\"; }\n\n.fa-ticket:before {\n  content: \"\\F145\"; }\n\n.fa-minus-square:before {\n  content: \"\\F146\"; }\n\n.fa-minus-square-o:before {\n  content: \"\\F147\"; }\n\n.fa-level-up:before {\n  content: \"\\F148\"; }\n\n.fa-level-down:before {\n  content: \"\\F149\"; }\n\n.fa-check-square:before {\n  content: \"\\F14A\"; }\n\n.fa-pencil-square:before {\n  content: \"\\F14B\"; }\n\n.fa-external-link-square:before {\n  content: \"\\F14C\"; }\n\n.fa-share-square:before {\n  content: \"\\F14D\"; }\n\n.fa-compass:before {\n  content: \"\\F14E\"; }\n\n.fa-toggle-down:before,\n.fa-caret-square-o-down:before {\n  content: \"\\F150\"; }\n\n.fa-toggle-up:before,\n.fa-caret-square-o-up:before {\n  content: \"\\F151\"; }\n\n.fa-toggle-right:before,\n.fa-caret-square-o-right:before {\n  content: \"\\F152\"; }\n\n.fa-euro:before,\n.fa-eur:before {\n  content: \"\\F153\"; }\n\n.fa-gbp:before {\n  content: \"\\F154\"; }\n\n.fa-dollar:before,\n.fa-usd:before {\n  content: \"\\F155\"; }\n\n.fa-rupee:before,\n.fa-inr:before {\n  content: \"\\F156\"; }\n\n.fa-cny:before,\n.fa-rmb:before,\n.fa-yen:before,\n.fa-jpy:before {\n  content: \"\\F157\"; }\n\n.fa-ruble:before,\n.fa-rouble:before,\n.fa-rub:before {\n  content: \"\\F158\"; }\n\n.fa-won:before,\n.fa-krw:before {\n  content: \"\\F159\"; }\n\n.fa-bitcoin:before,\n.fa-btc:before {\n  content: \"\\F15A\"; }\n\n.fa-file:before {\n  content: \"\\F15B\"; }\n\n.fa-file-text:before {\n  content: \"\\F15C\"; }\n\n.fa-sort-alpha-asc:before {\n  content: \"\\F15D\"; }\n\n.fa-sort-alpha-desc:before {\n  content: \"\\F15E\"; }\n\n.fa-sort-amount-asc:before {\n  content: \"\\F160\"; }\n\n.fa-sort-amount-desc:before {\n  content: \"\\F161\"; }\n\n.fa-sort-numeric-asc:before {\n  content: \"\\F162\"; }\n\n.fa-sort-numeric-desc:before {\n  content: \"\\F163\"; }\n\n.fa-thumbs-up:before {\n  content: \"\\F164\"; }\n\n.fa-thumbs-down:before {\n  content: \"\\F165\"; }\n\n.fa-youtube-square:before {\n  content: \"\\F166\"; }\n\n.fa-youtube:before {\n  content: \"\\F167\"; }\n\n.fa-xing:before {\n  content: \"\\F168\"; }\n\n.fa-xing-square:before {\n  content: \"\\F169\"; }\n\n.fa-youtube-play:before {\n  content: \"\\F16A\"; }\n\n.fa-dropbox:before {\n  content: \"\\F16B\"; }\n\n.fa-stack-overflow:before {\n  content: \"\\F16C\"; }\n\n.fa-instagram:before {\n  content: \"\\F16D\"; }\n\n.fa-flickr:before {\n  content: \"\\F16E\"; }\n\n.fa-adn:before {\n  content: \"\\F170\"; }\n\n.fa-bitbucket:before {\n  content: \"\\F171\"; }\n\n.fa-bitbucket-square:before {\n  content: \"\\F172\"; }\n\n.fa-tumblr:before {\n  content: \"\\F173\"; }\n\n.fa-tumblr-square:before {\n  content: \"\\F174\"; }\n\n.fa-long-arrow-down:before {\n  content: \"\\F175\"; }\n\n.fa-long-arrow-up:before {\n  content: \"\\F176\"; }\n\n.fa-long-arrow-left:before {\n  content: \"\\F177\"; }\n\n.fa-long-arrow-right:before {\n  content: \"\\F178\"; }\n\n.fa-apple:before {\n  content: \"\\F179\"; }\n\n.fa-windows:before {\n  content: \"\\F17A\"; }\n\n.fa-android:before {\n  content: \"\\F17B\"; }\n\n.fa-linux:before {\n  content: \"\\F17C\"; }\n\n.fa-dribbble:before {\n  content: \"\\F17D\"; }\n\n.fa-skype:before {\n  content: \"\\F17E\"; }\n\n.fa-foursquare:before {\n  content: \"\\F180\"; }\n\n.fa-trello:before {\n  content: \"\\F181\"; }\n\n.fa-female:before {\n  content: \"\\F182\"; }\n\n.fa-male:before {\n  content: \"\\F183\"; }\n\n.fa-gittip:before,\n.fa-gratipay:before {\n  content: \"\\F184\"; }\n\n.fa-sun-o:before {\n  content: \"\\F185\"; }\n\n.fa-moon-o:before {\n  content: \"\\F186\"; }\n\n.fa-archive:before {\n  content: \"\\F187\"; }\n\n.fa-bug:before {\n  content: \"\\F188\"; }\n\n.fa-vk:before {\n  content: \"\\F189\"; }\n\n.fa-weibo:before {\n  content: \"\\F18A\"; }\n\n.fa-renren:before {\n  content: \"\\F18B\"; }\n\n.fa-pagelines:before {\n  content: \"\\F18C\"; }\n\n.fa-stack-exchange:before {\n  content: \"\\F18D\"; }\n\n.fa-arrow-circle-o-right:before {\n  content: \"\\F18E\"; }\n\n.fa-arrow-circle-o-left:before {\n  content: \"\\F190\"; }\n\n.fa-toggle-left:before,\n.fa-caret-square-o-left:before {\n  content: \"\\F191\"; }\n\n.fa-dot-circle-o:before {\n  content: \"\\F192\"; }\n\n.fa-wheelchair:before {\n  content: \"\\F193\"; }\n\n.fa-vimeo-square:before {\n  content: \"\\F194\"; }\n\n.fa-turkish-lira:before,\n.fa-try:before {\n  content: \"\\F195\"; }\n\n.fa-plus-square-o:before {\n  content: \"\\F196\"; }\n\n.fa-space-shuttle:before {\n  content: \"\\F197\"; }\n\n.fa-slack:before {\n  content: \"\\F198\"; }\n\n.fa-envelope-square:before {\n  content: \"\\F199\"; }\n\n.fa-wordpress:before {\n  content: \"\\F19A\"; }\n\n.fa-openid:before {\n  content: \"\\F19B\"; }\n\n.fa-institution:before,\n.fa-bank:before,\n.fa-university:before {\n  content: \"\\F19C\"; }\n\n.fa-mortar-board:before,\n.fa-graduation-cap:before {\n  content: \"\\F19D\"; }\n\n.fa-yahoo:before {\n  content: \"\\F19E\"; }\n\n.fa-google:before {\n  content: \"\\F1A0\"; }\n\n.fa-reddit:before {\n  content: \"\\F1A1\"; }\n\n.fa-reddit-square:before {\n  content: \"\\F1A2\"; }\n\n.fa-stumbleupon-circle:before {\n  content: \"\\F1A3\"; }\n\n.fa-stumbleupon:before {\n  content: \"\\F1A4\"; }\n\n.fa-delicious:before {\n  content: \"\\F1A5\"; }\n\n.fa-digg:before {\n  content: \"\\F1A6\"; }\n\n.fa-pied-piper-pp:before {\n  content: \"\\F1A7\"; }\n\n.fa-pied-piper-alt:before {\n  content: \"\\F1A8\"; }\n\n.fa-drupal:before {\n  content: \"\\F1A9\"; }\n\n.fa-joomla:before {\n  content: \"\\F1AA\"; }\n\n.fa-language:before {\n  content: \"\\F1AB\"; }\n\n.fa-fax:before {\n  content: \"\\F1AC\"; }\n\n.fa-building:before {\n  content: \"\\F1AD\"; }\n\n.fa-child:before {\n  content: \"\\F1AE\"; }\n\n.fa-paw:before {\n  content: \"\\F1B0\"; }\n\n.fa-spoon:before {\n  content: \"\\F1B1\"; }\n\n.fa-cube:before {\n  content: \"\\F1B2\"; }\n\n.fa-cubes:before {\n  content: \"\\F1B3\"; }\n\n.fa-behance:before {\n  content: \"\\F1B4\"; }\n\n.fa-behance-square:before {\n  content: \"\\F1B5\"; }\n\n.fa-steam:before {\n  content: \"\\F1B6\"; }\n\n.fa-steam-square:before {\n  content: \"\\F1B7\"; }\n\n.fa-recycle:before {\n  content: \"\\F1B8\"; }\n\n.fa-automobile:before,\n.fa-car:before {\n  content: \"\\F1B9\"; }\n\n.fa-cab:before,\n.fa-taxi:before {\n  content: \"\\F1BA\"; }\n\n.fa-tree:before {\n  content: \"\\F1BB\"; }\n\n.fa-spotify:before {\n  content: \"\\F1BC\"; }\n\n.fa-deviantart:before {\n  content: \"\\F1BD\"; }\n\n.fa-soundcloud:before {\n  content: \"\\F1BE\"; }\n\n.fa-database:before {\n  content: \"\\F1C0\"; }\n\n.fa-file-pdf-o:before {\n  content: \"\\F1C1\"; }\n\n.fa-file-word-o:before {\n  content: \"\\F1C2\"; }\n\n.fa-file-excel-o:before {\n  content: \"\\F1C3\"; }\n\n.fa-file-powerpoint-o:before {\n  content: \"\\F1C4\"; }\n\n.fa-file-photo-o:before,\n.fa-file-picture-o:before,\n.fa-file-image-o:before {\n  content: \"\\F1C5\"; }\n\n.fa-file-zip-o:before,\n.fa-file-archive-o:before {\n  content: \"\\F1C6\"; }\n\n.fa-file-sound-o:before,\n.fa-file-audio-o:before {\n  content: \"\\F1C7\"; }\n\n.fa-file-movie-o:before,\n.fa-file-video-o:before {\n  content: \"\\F1C8\"; }\n\n.fa-file-code-o:before {\n  content: \"\\F1C9\"; }\n\n.fa-vine:before {\n  content: \"\\F1CA\"; }\n\n.fa-codepen:before {\n  content: \"\\F1CB\"; }\n\n.fa-jsfiddle:before {\n  content: \"\\F1CC\"; }\n\n.fa-life-bouy:before,\n.fa-life-buoy:before,\n.fa-life-saver:before,\n.fa-support:before,\n.fa-life-ring:before {\n  content: \"\\F1CD\"; }\n\n.fa-circle-o-notch:before {\n  content: \"\\F1CE\"; }\n\n.fa-ra:before,\n.fa-resistance:before,\n.fa-rebel:before {\n  content: \"\\F1D0\"; }\n\n.fa-ge:before,\n.fa-empire:before {\n  content: \"\\F1D1\"; }\n\n.fa-git-square:before {\n  content: \"\\F1D2\"; }\n\n.fa-git:before {\n  content: \"\\F1D3\"; }\n\n.fa-y-combinator-square:before,\n.fa-yc-square:before,\n.fa-hacker-news:before {\n  content: \"\\F1D4\"; }\n\n.fa-tencent-weibo:before {\n  content: \"\\F1D5\"; }\n\n.fa-qq:before {\n  content: \"\\F1D6\"; }\n\n.fa-wechat:before,\n.fa-weixin:before {\n  content: \"\\F1D7\"; }\n\n.fa-send:before,\n.fa-paper-plane:before {\n  content: \"\\F1D8\"; }\n\n.fa-send-o:before,\n.fa-paper-plane-o:before {\n  content: \"\\F1D9\"; }\n\n.fa-history:before {\n  content: \"\\F1DA\"; }\n\n.fa-circle-thin:before {\n  content: \"\\F1DB\"; }\n\n.fa-header:before {\n  content: \"\\F1DC\"; }\n\n.fa-paragraph:before {\n  content: \"\\F1DD\"; }\n\n.fa-sliders:before {\n  content: \"\\F1DE\"; }\n\n.fa-share-alt:before {\n  content: \"\\F1E0\"; }\n\n.fa-share-alt-square:before {\n  content: \"\\F1E1\"; }\n\n.fa-bomb:before {\n  content: \"\\F1E2\"; }\n\n.fa-soccer-ball-o:before,\n.fa-futbol-o:before {\n  content: \"\\F1E3\"; }\n\n.fa-tty:before {\n  content: \"\\F1E4\"; }\n\n.fa-binoculars:before {\n  content: \"\\F1E5\"; }\n\n.fa-plug:before {\n  content: \"\\F1E6\"; }\n\n.fa-slideshare:before {\n  content: \"\\F1E7\"; }\n\n.fa-twitch:before {\n  content: \"\\F1E8\"; }\n\n.fa-yelp:before {\n  content: \"\\F1E9\"; }\n\n.fa-newspaper-o:before {\n  content: \"\\F1EA\"; }\n\n.fa-wifi:before {\n  content: \"\\F1EB\"; }\n\n.fa-calculator:before {\n  content: \"\\F1EC\"; }\n\n.fa-paypal:before {\n  content: \"\\F1ED\"; }\n\n.fa-google-wallet:before {\n  content: \"\\F1EE\"; }\n\n.fa-cc-visa:before {\n  content: \"\\F1F0\"; }\n\n.fa-cc-mastercard:before {\n  content: \"\\F1F1\"; }\n\n.fa-cc-discover:before {\n  content: \"\\F1F2\"; }\n\n.fa-cc-amex:before {\n  content: \"\\F1F3\"; }\n\n.fa-cc-paypal:before {\n  content: \"\\F1F4\"; }\n\n.fa-cc-stripe:before {\n  content: \"\\F1F5\"; }\n\n.fa-bell-slash:before {\n  content: \"\\F1F6\"; }\n\n.fa-bell-slash-o:before {\n  content: \"\\F1F7\"; }\n\n.fa-trash:before {\n  content: \"\\F1F8\"; }\n\n.fa-copyright:before {\n  content: \"\\F1F9\"; }\n\n.fa-at:before {\n  content: \"\\F1FA\"; }\n\n.fa-eyedropper:before {\n  content: \"\\F1FB\"; }\n\n.fa-paint-brush:before {\n  content: \"\\F1FC\"; }\n\n.fa-birthday-cake:before {\n  content: \"\\F1FD\"; }\n\n.fa-area-chart:before {\n  content: \"\\F1FE\"; }\n\n.fa-pie-chart:before {\n  content: \"\\F200\"; }\n\n.fa-line-chart:before {\n  content: \"\\F201\"; }\n\n.fa-lastfm:before {\n  content: \"\\F202\"; }\n\n.fa-lastfm-square:before {\n  content: \"\\F203\"; }\n\n.fa-toggle-off:before {\n  content: \"\\F204\"; }\n\n.fa-toggle-on:before {\n  content: \"\\F205\"; }\n\n.fa-bicycle:before {\n  content: \"\\F206\"; }\n\n.fa-bus:before {\n  content: \"\\F207\"; }\n\n.fa-ioxhost:before {\n  content: \"\\F208\"; }\n\n.fa-angellist:before {\n  content: \"\\F209\"; }\n\n.fa-cc:before {\n  content: \"\\F20A\"; }\n\n.fa-shekel:before,\n.fa-sheqel:before,\n.fa-ils:before {\n  content: \"\\F20B\"; }\n\n.fa-meanpath:before {\n  content: \"\\F20C\"; }\n\n.fa-buysellads:before {\n  content: \"\\F20D\"; }\n\n.fa-connectdevelop:before {\n  content: \"\\F20E\"; }\n\n.fa-dashcube:before {\n  content: \"\\F210\"; }\n\n.fa-forumbee:before {\n  content: \"\\F211\"; }\n\n.fa-leanpub:before {\n  content: \"\\F212\"; }\n\n.fa-sellsy:before {\n  content: \"\\F213\"; }\n\n.fa-shirtsinbulk:before {\n  content: \"\\F214\"; }\n\n.fa-simplybuilt:before {\n  content: \"\\F215\"; }\n\n.fa-skyatlas:before {\n  content: \"\\F216\"; }\n\n.fa-cart-plus:before {\n  content: \"\\F217\"; }\n\n.fa-cart-arrow-down:before {\n  content: \"\\F218\"; }\n\n.fa-diamond:before {\n  content: \"\\F219\"; }\n\n.fa-ship:before {\n  content: \"\\F21A\"; }\n\n.fa-user-secret:before {\n  content: \"\\F21B\"; }\n\n.fa-motorcycle:before {\n  content: \"\\F21C\"; }\n\n.fa-street-view:before {\n  content: \"\\F21D\"; }\n\n.fa-heartbeat:before {\n  content: \"\\F21E\"; }\n\n.fa-venus:before {\n  content: \"\\F221\"; }\n\n.fa-mars:before {\n  content: \"\\F222\"; }\n\n.fa-mercury:before {\n  content: \"\\F223\"; }\n\n.fa-intersex:before,\n.fa-transgender:before {\n  content: \"\\F224\"; }\n\n.fa-transgender-alt:before {\n  content: \"\\F225\"; }\n\n.fa-venus-double:before {\n  content: \"\\F226\"; }\n\n.fa-mars-double:before {\n  content: \"\\F227\"; }\n\n.fa-venus-mars:before {\n  content: \"\\F228\"; }\n\n.fa-mars-stroke:before {\n  content: \"\\F229\"; }\n\n.fa-mars-stroke-v:before {\n  content: \"\\F22A\"; }\n\n.fa-mars-stroke-h:before {\n  content: \"\\F22B\"; }\n\n.fa-neuter:before {\n  content: \"\\F22C\"; }\n\n.fa-genderless:before {\n  content: \"\\F22D\"; }\n\n.fa-facebook-official:before {\n  content: \"\\F230\"; }\n\n.fa-pinterest-p:before {\n  content: \"\\F231\"; }\n\n.fa-whatsapp:before {\n  content: \"\\F232\"; }\n\n.fa-server:before {\n  content: \"\\F233\"; }\n\n.fa-user-plus:before {\n  content: \"\\F234\"; }\n\n.fa-user-times:before {\n  content: \"\\F235\"; }\n\n.fa-hotel:before,\n.fa-bed:before {\n  content: \"\\F236\"; }\n\n.fa-viacoin:before {\n  content: \"\\F237\"; }\n\n.fa-train:before {\n  content: \"\\F238\"; }\n\n.fa-subway:before {\n  content: \"\\F239\"; }\n\n.fa-medium:before {\n  content: \"\\F23A\"; }\n\n.fa-yc:before,\n.fa-y-combinator:before {\n  content: \"\\F23B\"; }\n\n.fa-optin-monster:before {\n  content: \"\\F23C\"; }\n\n.fa-opencart:before {\n  content: \"\\F23D\"; }\n\n.fa-expeditedssl:before {\n  content: \"\\F23E\"; }\n\n.fa-battery-4:before,\n.fa-battery:before,\n.fa-battery-full:before {\n  content: \"\\F240\"; }\n\n.fa-battery-3:before,\n.fa-battery-three-quarters:before {\n  content: \"\\F241\"; }\n\n.fa-battery-2:before,\n.fa-battery-half:before {\n  content: \"\\F242\"; }\n\n.fa-battery-1:before,\n.fa-battery-quarter:before {\n  content: \"\\F243\"; }\n\n.fa-battery-0:before,\n.fa-battery-empty:before {\n  content: \"\\F244\"; }\n\n.fa-mouse-pointer:before {\n  content: \"\\F245\"; }\n\n.fa-i-cursor:before {\n  content: \"\\F246\"; }\n\n.fa-object-group:before {\n  content: \"\\F247\"; }\n\n.fa-object-ungroup:before {\n  content: \"\\F248\"; }\n\n.fa-sticky-note:before {\n  content: \"\\F249\"; }\n\n.fa-sticky-note-o:before {\n  content: \"\\F24A\"; }\n\n.fa-cc-jcb:before {\n  content: \"\\F24B\"; }\n\n.fa-cc-diners-club:before {\n  content: \"\\F24C\"; }\n\n.fa-clone:before {\n  content: \"\\F24D\"; }\n\n.fa-balance-scale:before {\n  content: \"\\F24E\"; }\n\n.fa-hourglass-o:before {\n  content: \"\\F250\"; }\n\n.fa-hourglass-1:before,\n.fa-hourglass-start:before {\n  content: \"\\F251\"; }\n\n.fa-hourglass-2:before,\n.fa-hourglass-half:before {\n  content: \"\\F252\"; }\n\n.fa-hourglass-3:before,\n.fa-hourglass-end:before {\n  content: \"\\F253\"; }\n\n.fa-hourglass:before {\n  content: \"\\F254\"; }\n\n.fa-hand-grab-o:before,\n.fa-hand-rock-o:before {\n  content: \"\\F255\"; }\n\n.fa-hand-stop-o:before,\n.fa-hand-paper-o:before {\n  content: \"\\F256\"; }\n\n.fa-hand-scissors-o:before {\n  content: \"\\F257\"; }\n\n.fa-hand-lizard-o:before {\n  content: \"\\F258\"; }\n\n.fa-hand-spock-o:before {\n  content: \"\\F259\"; }\n\n.fa-hand-pointer-o:before {\n  content: \"\\F25A\"; }\n\n.fa-hand-peace-o:before {\n  content: \"\\F25B\"; }\n\n.fa-trademark:before {\n  content: \"\\F25C\"; }\n\n.fa-registered:before {\n  content: \"\\F25D\"; }\n\n.fa-creative-commons:before {\n  content: \"\\F25E\"; }\n\n.fa-gg:before {\n  content: \"\\F260\"; }\n\n.fa-gg-circle:before {\n  content: \"\\F261\"; }\n\n.fa-tripadvisor:before {\n  content: \"\\F262\"; }\n\n.fa-odnoklassniki:before {\n  content: \"\\F263\"; }\n\n.fa-odnoklassniki-square:before {\n  content: \"\\F264\"; }\n\n.fa-get-pocket:before {\n  content: \"\\F265\"; }\n\n.fa-wikipedia-w:before {\n  content: \"\\F266\"; }\n\n.fa-safari:before {\n  content: \"\\F267\"; }\n\n.fa-chrome:before {\n  content: \"\\F268\"; }\n\n.fa-firefox:before {\n  content: \"\\F269\"; }\n\n.fa-opera:before {\n  content: \"\\F26A\"; }\n\n.fa-internet-explorer:before {\n  content: \"\\F26B\"; }\n\n.fa-tv:before,\n.fa-television:before {\n  content: \"\\F26C\"; }\n\n.fa-contao:before {\n  content: \"\\F26D\"; }\n\n.fa-500px:before {\n  content: \"\\F26E\"; }\n\n.fa-amazon:before {\n  content: \"\\F270\"; }\n\n.fa-calendar-plus-o:before {\n  content: \"\\F271\"; }\n\n.fa-calendar-minus-o:before {\n  content: \"\\F272\"; }\n\n.fa-calendar-times-o:before {\n  content: \"\\F273\"; }\n\n.fa-calendar-check-o:before {\n  content: \"\\F274\"; }\n\n.fa-industry:before {\n  content: \"\\F275\"; }\n\n.fa-map-pin:before {\n  content: \"\\F276\"; }\n\n.fa-map-signs:before {\n  content: \"\\F277\"; }\n\n.fa-map-o:before {\n  content: \"\\F278\"; }\n\n.fa-map:before {\n  content: \"\\F279\"; }\n\n.fa-commenting:before {\n  content: \"\\F27A\"; }\n\n.fa-commenting-o:before {\n  content: \"\\F27B\"; }\n\n.fa-houzz:before {\n  content: \"\\F27C\"; }\n\n.fa-vimeo:before {\n  content: \"\\F27D\"; }\n\n.fa-black-tie:before {\n  content: \"\\F27E\"; }\n\n.fa-fonticons:before {\n  content: \"\\F280\"; }\n\n.fa-reddit-alien:before {\n  content: \"\\F281\"; }\n\n.fa-edge:before {\n  content: \"\\F282\"; }\n\n.fa-credit-card-alt:before {\n  content: \"\\F283\"; }\n\n.fa-codiepie:before {\n  content: \"\\F284\"; }\n\n.fa-modx:before {\n  content: \"\\F285\"; }\n\n.fa-fort-awesome:before {\n  content: \"\\F286\"; }\n\n.fa-usb:before {\n  content: \"\\F287\"; }\n\n.fa-product-hunt:before {\n  content: \"\\F288\"; }\n\n.fa-mixcloud:before {\n  content: \"\\F289\"; }\n\n.fa-scribd:before {\n  content: \"\\F28A\"; }\n\n.fa-pause-circle:before {\n  content: \"\\F28B\"; }\n\n.fa-pause-circle-o:before {\n  content: \"\\F28C\"; }\n\n.fa-stop-circle:before {\n  content: \"\\F28D\"; }\n\n.fa-stop-circle-o:before {\n  content: \"\\F28E\"; }\n\n.fa-shopping-bag:before {\n  content: \"\\F290\"; }\n\n.fa-shopping-basket:before {\n  content: \"\\F291\"; }\n\n.fa-hashtag:before {\n  content: \"\\F292\"; }\n\n.fa-bluetooth:before {\n  content: \"\\F293\"; }\n\n.fa-bluetooth-b:before {\n  content: \"\\F294\"; }\n\n.fa-percent:before {\n  content: \"\\F295\"; }\n\n.fa-gitlab:before {\n  content: \"\\F296\"; }\n\n.fa-wpbeginner:before {\n  content: \"\\F297\"; }\n\n.fa-wpforms:before {\n  content: \"\\F298\"; }\n\n.fa-envira:before {\n  content: \"\\F299\"; }\n\n.fa-universal-access:before {\n  content: \"\\F29A\"; }\n\n.fa-wheelchair-alt:before {\n  content: \"\\F29B\"; }\n\n.fa-question-circle-o:before {\n  content: \"\\F29C\"; }\n\n.fa-blind:before {\n  content: \"\\F29D\"; }\n\n.fa-audio-description:before {\n  content: \"\\F29E\"; }\n\n.fa-volume-control-phone:before {\n  content: \"\\F2A0\"; }\n\n.fa-braille:before {\n  content: \"\\F2A1\"; }\n\n.fa-assistive-listening-systems:before {\n  content: \"\\F2A2\"; }\n\n.fa-asl-interpreting:before,\n.fa-american-sign-language-interpreting:before {\n  content: \"\\F2A3\"; }\n\n.fa-deafness:before,\n.fa-hard-of-hearing:before,\n.fa-deaf:before {\n  content: \"\\F2A4\"; }\n\n.fa-glide:before {\n  content: \"\\F2A5\"; }\n\n.fa-glide-g:before {\n  content: \"\\F2A6\"; }\n\n.fa-signing:before,\n.fa-sign-language:before {\n  content: \"\\F2A7\"; }\n\n.fa-low-vision:before {\n  content: \"\\F2A8\"; }\n\n.fa-viadeo:before {\n  content: \"\\F2A9\"; }\n\n.fa-viadeo-square:before {\n  content: \"\\F2AA\"; }\n\n.fa-snapchat:before {\n  content: \"\\F2AB\"; }\n\n.fa-snapchat-ghost:before {\n  content: \"\\F2AC\"; }\n\n.fa-snapchat-square:before {\n  content: \"\\F2AD\"; }\n\n.fa-pied-piper:before {\n  content: \"\\F2AE\"; }\n\n.fa-first-order:before {\n  content: \"\\F2B0\"; }\n\n.fa-yoast:before {\n  content: \"\\F2B1\"; }\n\n.fa-themeisle:before {\n  content: \"\\F2B2\"; }\n\n.fa-google-plus-circle:before,\n.fa-google-plus-official:before {\n  content: \"\\F2B3\"; }\n\n.fa-fa:before,\n.fa-font-awesome:before {\n  content: \"\\F2B4\"; }\n\n.fa-handshake-o:before {\n  content: \"\\F2B5\"; }\n\n.fa-envelope-open:before {\n  content: \"\\F2B6\"; }\n\n.fa-envelope-open-o:before {\n  content: \"\\F2B7\"; }\n\n.fa-linode:before {\n  content: \"\\F2B8\"; }\n\n.fa-address-book:before {\n  content: \"\\F2B9\"; }\n\n.fa-address-book-o:before {\n  content: \"\\F2BA\"; }\n\n.fa-vcard:before,\n.fa-address-card:before {\n  content: \"\\F2BB\"; }\n\n.fa-vcard-o:before,\n.fa-address-card-o:before {\n  content: \"\\F2BC\"; }\n\n.fa-user-circle:before {\n  content: \"\\F2BD\"; }\n\n.fa-user-circle-o:before {\n  content: \"\\F2BE\"; }\n\n.fa-user-o:before {\n  content: \"\\F2C0\"; }\n\n.fa-id-badge:before {\n  content: \"\\F2C1\"; }\n\n.fa-drivers-license:before,\n.fa-id-card:before {\n  content: \"\\F2C2\"; }\n\n.fa-drivers-license-o:before,\n.fa-id-card-o:before {\n  content: \"\\F2C3\"; }\n\n.fa-quora:before {\n  content: \"\\F2C4\"; }\n\n.fa-free-code-camp:before {\n  content: \"\\F2C5\"; }\n\n.fa-telegram:before {\n  content: \"\\F2C6\"; }\n\n.fa-thermometer-4:before,\n.fa-thermometer:before,\n.fa-thermometer-full:before {\n  content: \"\\F2C7\"; }\n\n.fa-thermometer-3:before,\n.fa-thermometer-three-quarters:before {\n  content: \"\\F2C8\"; }\n\n.fa-thermometer-2:before,\n.fa-thermometer-half:before {\n  content: \"\\F2C9\"; }\n\n.fa-thermometer-1:before,\n.fa-thermometer-quarter:before {\n  content: \"\\F2CA\"; }\n\n.fa-thermometer-0:before,\n.fa-thermometer-empty:before {\n  content: \"\\F2CB\"; }\n\n.fa-shower:before {\n  content: \"\\F2CC\"; }\n\n.fa-bathtub:before,\n.fa-s15:before,\n.fa-bath:before {\n  content: \"\\F2CD\"; }\n\n.fa-podcast:before {\n  content: \"\\F2CE\"; }\n\n.fa-window-maximize:before {\n  content: \"\\F2D0\"; }\n\n.fa-window-minimize:before {\n  content: \"\\F2D1\"; }\n\n.fa-window-restore:before {\n  content: \"\\F2D2\"; }\n\n.fa-times-rectangle:before,\n.fa-window-close:before {\n  content: \"\\F2D3\"; }\n\n.fa-times-rectangle-o:before,\n.fa-window-close-o:before {\n  content: \"\\F2D4\"; }\n\n.fa-bandcamp:before {\n  content: \"\\F2D5\"; }\n\n.fa-grav:before {\n  content: \"\\F2D6\"; }\n\n.fa-etsy:before {\n  content: \"\\F2D7\"; }\n\n.fa-imdb:before {\n  content: \"\\F2D8\"; }\n\n.fa-ravelry:before {\n  content: \"\\F2D9\"; }\n\n.fa-eercast:before {\n  content: \"\\F2DA\"; }\n\n.fa-microchip:before {\n  content: \"\\F2DB\"; }\n\n.fa-snowflake-o:before {\n  content: \"\\F2DC\"; }\n\n.fa-superpowers:before {\n  content: \"\\F2DD\"; }\n\n.fa-wpexplorer:before {\n  content: \"\\F2DE\"; }\n\n.fa-meetup:before {\n  content: \"\\F2E0\"; }\n\n/* makes the font 33% larger relative to the icon container */\n.fa-lg {\n  font-size: 1.33333em;\n  line-height: 0.75em;\n  vertical-align: -15%; }\n\n.fa-2x {\n  font-size: 2em; }\n\n.fa-3x {\n  font-size: 3em; }\n\n.fa-4x {\n  font-size: 4em; }\n\n.fa-5x {\n  font-size: 5em; }\n\n.fa-ul {\n  padding-left: 0;\n  margin-left: 2.14286em;\n  list-style-type: none; }\n  .fa-ul > li {\n    position: relative; }\n\n.fa-li {\n  position: absolute;\n  left: -2.14286em;\n  width: 2.14286em;\n  top: 0.14286em;\n  text-align: center; }\n  .fa-li.fa-lg {\n    left: -1.85714em; }\n\n/* FONT PATH\n * -------------------------- */\n@font-face {\n  font-family: 'FontAwesome';\n  src: url(" + __webpack_require__(727) + ");\n  src: url(" + __webpack_require__(728) + "?#iefix&v=4.7.0) format(\"embedded-opentype\"), url(" + __webpack_require__(729) + ") format(\"woff2\"), url(" + __webpack_require__(730) + ") format(\"woff\"), url(" + __webpack_require__(731) + ") format(\"truetype\"), url(" + __webpack_require__(732) + "#fontawesomeregular) format(\"svg\");\n  font-weight: normal;\n  font-style: normal; }\n\n.fa-rotate-90 {\n  -ms-filter: \"progid:DXImageTransform.Microsoft.BasicImage(rotation=1)\";\n  -webkit-transform: rotate(90deg);\n  -ms-transform: rotate(90deg);\n  transform: rotate(90deg); }\n\n.fa-rotate-180 {\n  -ms-filter: \"progid:DXImageTransform.Microsoft.BasicImage(rotation=2)\";\n  -webkit-transform: rotate(180deg);\n  -ms-transform: rotate(180deg);\n  transform: rotate(180deg); }\n\n.fa-rotate-270 {\n  -ms-filter: \"progid:DXImageTransform.Microsoft.BasicImage(rotation=3)\";\n  -webkit-transform: rotate(270deg);\n  -ms-transform: rotate(270deg);\n  transform: rotate(270deg); }\n\n.fa-flip-horizontal {\n  -ms-filter: \"progid:DXImageTransform.Microsoft.BasicImage(rotation=0, mirror=1)\";\n  -webkit-transform: scale(-1, 1);\n  -ms-transform: scale(-1, 1);\n  transform: scale(-1, 1); }\n\n.fa-flip-vertical {\n  -ms-filter: \"progid:DXImageTransform.Microsoft.BasicImage(rotation=2, mirror=1)\";\n  -webkit-transform: scale(1, -1);\n  -ms-transform: scale(1, -1);\n  transform: scale(1, -1); }\n\n:root .fa-rotate-90,\n:root .fa-rotate-180,\n:root .fa-rotate-270,\n:root .fa-flip-horizontal,\n:root .fa-flip-vertical {\n  filter: none; }\n\n.fa-spin {\n  -webkit-animation: fa-spin 2s infinite linear;\n  animation: fa-spin 2s infinite linear; }\n\n.fa-pulse {\n  -webkit-animation: fa-spin 1s infinite steps(8);\n  animation: fa-spin 1s infinite steps(8); }\n\n@-webkit-keyframes fa-spin {\n  0% {\n    -webkit-transform: rotate(0deg);\n    transform: rotate(0deg); }\n  100% {\n    -webkit-transform: rotate(359deg);\n    transform: rotate(359deg); } }\n\n@keyframes fa-spin {\n  0% {\n    -webkit-transform: rotate(0deg);\n    transform: rotate(0deg); }\n  100% {\n    -webkit-transform: rotate(359deg);\n    transform: rotate(359deg); } }\n\n.fa-stack {\n  position: relative;\n  display: inline-block;\n  width: 2em;\n  height: 2em;\n  line-height: 2em;\n  vertical-align: middle; }\n\n.fa-stack-1x, .fa-stack-2x {\n  position: absolute;\n  left: 0;\n  width: 100%;\n  text-align: center; }\n\n.fa-stack-1x {\n  line-height: inherit; }\n\n.fa-stack-2x {\n  font-size: 2em; }\n\n.fa-inverse {\n  color: #fff; }\n", ""]);
+exports.push([module.i, "@charset \"UTF-8\";\n/*\nThis file will be mported after Font-Awesome's default variable, but before anything else\nUse to override/customise Font-Awesome\n*/\n.fa-border {\n  padding: .2em .25em .15em;\n  border: solid 0.08em #eee;\n  border-radius: .1em; }\n\n.fa-pull-left {\n  float: left; }\n\n.fa-pull-right {\n  float: right; }\n\n.fa.fa-pull-left {\n  margin-right: .3em; }\n\n.fa.fa-pull-right {\n  margin-left: .3em; }\n\n/* Deprecated as of 4.4.0 */\n.pull-right {\n  float: right; }\n\n.pull-left {\n  float: left; }\n\n.fa.pull-left {\n  margin-right: .3em; }\n\n.fa.pull-right {\n  margin-left: .3em; }\n\n.fa {\n  display: inline-block;\n  font: normal normal normal 14px/1 FontAwesome;\n  font-size: inherit;\n  text-rendering: auto;\n  -webkit-font-smoothing: antialiased;\n  -moz-osx-font-smoothing: grayscale; }\n\n.fa-fw {\n  width: 1.28571em;\n  text-align: center; }\n\n/* Font Awesome uses the Unicode Private Use Area (PUA) to ensure screen\n   readers do not read off random characters that represent icons */\n.fa-glass:before {\n  content: \"\\F000\"; }\n\n.fa-music:before {\n  content: \"\\F001\"; }\n\n.fa-search:before {\n  content: \"\\F002\"; }\n\n.fa-envelope-o:before {\n  content: \"\\F003\"; }\n\n.fa-heart:before {\n  content: \"\\F004\"; }\n\n.fa-star:before {\n  content: \"\\F005\"; }\n\n.fa-star-o:before {\n  content: \"\\F006\"; }\n\n.fa-user:before {\n  content: \"\\F007\"; }\n\n.fa-film:before {\n  content: \"\\F008\"; }\n\n.fa-th-large:before {\n  content: \"\\F009\"; }\n\n.fa-th:before {\n  content: \"\\F00A\"; }\n\n.fa-th-list:before {\n  content: \"\\F00B\"; }\n\n.fa-check:before {\n  content: \"\\F00C\"; }\n\n.fa-remove:before,\n.fa-close:before,\n.fa-times:before {\n  content: \"\\F00D\"; }\n\n.fa-search-plus:before {\n  content: \"\\F00E\"; }\n\n.fa-search-minus:before {\n  content: \"\\F010\"; }\n\n.fa-power-off:before {\n  content: \"\\F011\"; }\n\n.fa-signal:before {\n  content: \"\\F012\"; }\n\n.fa-gear:before,\n.fa-cog:before {\n  content: \"\\F013\"; }\n\n.fa-trash-o:before {\n  content: \"\\F014\"; }\n\n.fa-home:before {\n  content: \"\\F015\"; }\n\n.fa-file-o:before {\n  content: \"\\F016\"; }\n\n.fa-clock-o:before {\n  content: \"\\F017\"; }\n\n.fa-road:before {\n  content: \"\\F018\"; }\n\n.fa-download:before {\n  content: \"\\F019\"; }\n\n.fa-arrow-circle-o-down:before {\n  content: \"\\F01A\"; }\n\n.fa-arrow-circle-o-up:before {\n  content: \"\\F01B\"; }\n\n.fa-inbox:before {\n  content: \"\\F01C\"; }\n\n.fa-play-circle-o:before {\n  content: \"\\F01D\"; }\n\n.fa-rotate-right:before,\n.fa-repeat:before {\n  content: \"\\F01E\"; }\n\n.fa-refresh:before {\n  content: \"\\F021\"; }\n\n.fa-list-alt:before {\n  content: \"\\F022\"; }\n\n.fa-lock:before {\n  content: \"\\F023\"; }\n\n.fa-flag:before {\n  content: \"\\F024\"; }\n\n.fa-headphones:before {\n  content: \"\\F025\"; }\n\n.fa-volume-off:before {\n  content: \"\\F026\"; }\n\n.fa-volume-down:before {\n  content: \"\\F027\"; }\n\n.fa-volume-up:before {\n  content: \"\\F028\"; }\n\n.fa-qrcode:before {\n  content: \"\\F029\"; }\n\n.fa-barcode:before {\n  content: \"\\F02A\"; }\n\n.fa-tag:before {\n  content: \"\\F02B\"; }\n\n.fa-tags:before {\n  content: \"\\F02C\"; }\n\n.fa-book:before {\n  content: \"\\F02D\"; }\n\n.fa-bookmark:before {\n  content: \"\\F02E\"; }\n\n.fa-print:before {\n  content: \"\\F02F\"; }\n\n.fa-camera:before {\n  content: \"\\F030\"; }\n\n.fa-font:before {\n  content: \"\\F031\"; }\n\n.fa-bold:before {\n  content: \"\\F032\"; }\n\n.fa-italic:before {\n  content: \"\\F033\"; }\n\n.fa-text-height:before {\n  content: \"\\F034\"; }\n\n.fa-text-width:before {\n  content: \"\\F035\"; }\n\n.fa-align-left:before {\n  content: \"\\F036\"; }\n\n.fa-align-center:before {\n  content: \"\\F037\"; }\n\n.fa-align-right:before {\n  content: \"\\F038\"; }\n\n.fa-align-justify:before {\n  content: \"\\F039\"; }\n\n.fa-list:before {\n  content: \"\\F03A\"; }\n\n.fa-dedent:before,\n.fa-outdent:before {\n  content: \"\\F03B\"; }\n\n.fa-indent:before {\n  content: \"\\F03C\"; }\n\n.fa-video-camera:before {\n  content: \"\\F03D\"; }\n\n.fa-photo:before,\n.fa-image:before,\n.fa-picture-o:before {\n  content: \"\\F03E\"; }\n\n.fa-pencil:before {\n  content: \"\\F040\"; }\n\n.fa-map-marker:before {\n  content: \"\\F041\"; }\n\n.fa-adjust:before {\n  content: \"\\F042\"; }\n\n.fa-tint:before {\n  content: \"\\F043\"; }\n\n.fa-edit:before,\n.fa-pencil-square-o:before {\n  content: \"\\F044\"; }\n\n.fa-share-square-o:before {\n  content: \"\\F045\"; }\n\n.fa-check-square-o:before {\n  content: \"\\F046\"; }\n\n.fa-arrows:before {\n  content: \"\\F047\"; }\n\n.fa-step-backward:before {\n  content: \"\\F048\"; }\n\n.fa-fast-backward:before {\n  content: \"\\F049\"; }\n\n.fa-backward:before {\n  content: \"\\F04A\"; }\n\n.fa-play:before {\n  content: \"\\F04B\"; }\n\n.fa-pause:before {\n  content: \"\\F04C\"; }\n\n.fa-stop:before {\n  content: \"\\F04D\"; }\n\n.fa-forward:before {\n  content: \"\\F04E\"; }\n\n.fa-fast-forward:before {\n  content: \"\\F050\"; }\n\n.fa-step-forward:before {\n  content: \"\\F051\"; }\n\n.fa-eject:before {\n  content: \"\\F052\"; }\n\n.fa-chevron-left:before {\n  content: \"\\F053\"; }\n\n.fa-chevron-right:before {\n  content: \"\\F054\"; }\n\n.fa-plus-circle:before {\n  content: \"\\F055\"; }\n\n.fa-minus-circle:before {\n  content: \"\\F056\"; }\n\n.fa-times-circle:before {\n  content: \"\\F057\"; }\n\n.fa-check-circle:before {\n  content: \"\\F058\"; }\n\n.fa-question-circle:before {\n  content: \"\\F059\"; }\n\n.fa-info-circle:before {\n  content: \"\\F05A\"; }\n\n.fa-crosshairs:before {\n  content: \"\\F05B\"; }\n\n.fa-times-circle-o:before {\n  content: \"\\F05C\"; }\n\n.fa-check-circle-o:before {\n  content: \"\\F05D\"; }\n\n.fa-ban:before {\n  content: \"\\F05E\"; }\n\n.fa-arrow-left:before {\n  content: \"\\F060\"; }\n\n.fa-arrow-right:before {\n  content: \"\\F061\"; }\n\n.fa-arrow-up:before {\n  content: \"\\F062\"; }\n\n.fa-arrow-down:before {\n  content: \"\\F063\"; }\n\n.fa-mail-forward:before,\n.fa-share:before {\n  content: \"\\F064\"; }\n\n.fa-expand:before {\n  content: \"\\F065\"; }\n\n.fa-compress:before {\n  content: \"\\F066\"; }\n\n.fa-plus:before {\n  content: \"\\F067\"; }\n\n.fa-minus:before {\n  content: \"\\F068\"; }\n\n.fa-asterisk:before {\n  content: \"\\F069\"; }\n\n.fa-exclamation-circle:before {\n  content: \"\\F06A\"; }\n\n.fa-gift:before {\n  content: \"\\F06B\"; }\n\n.fa-leaf:before {\n  content: \"\\F06C\"; }\n\n.fa-fire:before {\n  content: \"\\F06D\"; }\n\n.fa-eye:before {\n  content: \"\\F06E\"; }\n\n.fa-eye-slash:before {\n  content: \"\\F070\"; }\n\n.fa-warning:before,\n.fa-exclamation-triangle:before {\n  content: \"\\F071\"; }\n\n.fa-plane:before {\n  content: \"\\F072\"; }\n\n.fa-calendar:before {\n  content: \"\\F073\"; }\n\n.fa-random:before {\n  content: \"\\F074\"; }\n\n.fa-comment:before {\n  content: \"\\F075\"; }\n\n.fa-magnet:before {\n  content: \"\\F076\"; }\n\n.fa-chevron-up:before {\n  content: \"\\F077\"; }\n\n.fa-chevron-down:before {\n  content: \"\\F078\"; }\n\n.fa-retweet:before {\n  content: \"\\F079\"; }\n\n.fa-shopping-cart:before {\n  content: \"\\F07A\"; }\n\n.fa-folder:before {\n  content: \"\\F07B\"; }\n\n.fa-folder-open:before {\n  content: \"\\F07C\"; }\n\n.fa-arrows-v:before {\n  content: \"\\F07D\"; }\n\n.fa-arrows-h:before {\n  content: \"\\F07E\"; }\n\n.fa-bar-chart-o:before,\n.fa-bar-chart:before {\n  content: \"\\F080\"; }\n\n.fa-twitter-square:before {\n  content: \"\\F081\"; }\n\n.fa-facebook-square:before {\n  content: \"\\F082\"; }\n\n.fa-camera-retro:before {\n  content: \"\\F083\"; }\n\n.fa-key:before {\n  content: \"\\F084\"; }\n\n.fa-gears:before,\n.fa-cogs:before {\n  content: \"\\F085\"; }\n\n.fa-comments:before {\n  content: \"\\F086\"; }\n\n.fa-thumbs-o-up:before {\n  content: \"\\F087\"; }\n\n.fa-thumbs-o-down:before {\n  content: \"\\F088\"; }\n\n.fa-star-half:before {\n  content: \"\\F089\"; }\n\n.fa-heart-o:before {\n  content: \"\\F08A\"; }\n\n.fa-sign-out:before {\n  content: \"\\F08B\"; }\n\n.fa-linkedin-square:before {\n  content: \"\\F08C\"; }\n\n.fa-thumb-tack:before {\n  content: \"\\F08D\"; }\n\n.fa-external-link:before {\n  content: \"\\F08E\"; }\n\n.fa-sign-in:before {\n  content: \"\\F090\"; }\n\n.fa-trophy:before {\n  content: \"\\F091\"; }\n\n.fa-github-square:before {\n  content: \"\\F092\"; }\n\n.fa-upload:before {\n  content: \"\\F093\"; }\n\n.fa-lemon-o:before {\n  content: \"\\F094\"; }\n\n.fa-phone:before {\n  content: \"\\F095\"; }\n\n.fa-square-o:before {\n  content: \"\\F096\"; }\n\n.fa-bookmark-o:before {\n  content: \"\\F097\"; }\n\n.fa-phone-square:before {\n  content: \"\\F098\"; }\n\n.fa-twitter:before {\n  content: \"\\F099\"; }\n\n.fa-facebook-f:before,\n.fa-facebook:before {\n  content: \"\\F09A\"; }\n\n.fa-github:before {\n  content: \"\\F09B\"; }\n\n.fa-unlock:before {\n  content: \"\\F09C\"; }\n\n.fa-credit-card:before {\n  content: \"\\F09D\"; }\n\n.fa-feed:before,\n.fa-rss:before {\n  content: \"\\F09E\"; }\n\n.fa-hdd-o:before {\n  content: \"\\F0A0\"; }\n\n.fa-bullhorn:before {\n  content: \"\\F0A1\"; }\n\n.fa-bell:before {\n  content: \"\\F0F3\"; }\n\n.fa-certificate:before {\n  content: \"\\F0A3\"; }\n\n.fa-hand-o-right:before {\n  content: \"\\F0A4\"; }\n\n.fa-hand-o-left:before {\n  content: \"\\F0A5\"; }\n\n.fa-hand-o-up:before {\n  content: \"\\F0A6\"; }\n\n.fa-hand-o-down:before {\n  content: \"\\F0A7\"; }\n\n.fa-arrow-circle-left:before {\n  content: \"\\F0A8\"; }\n\n.fa-arrow-circle-right:before {\n  content: \"\\F0A9\"; }\n\n.fa-arrow-circle-up:before {\n  content: \"\\F0AA\"; }\n\n.fa-arrow-circle-down:before {\n  content: \"\\F0AB\"; }\n\n.fa-globe:before {\n  content: \"\\F0AC\"; }\n\n.fa-wrench:before {\n  content: \"\\F0AD\"; }\n\n.fa-tasks:before {\n  content: \"\\F0AE\"; }\n\n.fa-filter:before {\n  content: \"\\F0B0\"; }\n\n.fa-briefcase:before {\n  content: \"\\F0B1\"; }\n\n.fa-arrows-alt:before {\n  content: \"\\F0B2\"; }\n\n.fa-group:before,\n.fa-users:before {\n  content: \"\\F0C0\"; }\n\n.fa-chain:before,\n.fa-link:before {\n  content: \"\\F0C1\"; }\n\n.fa-cloud:before {\n  content: \"\\F0C2\"; }\n\n.fa-flask:before {\n  content: \"\\F0C3\"; }\n\n.fa-cut:before,\n.fa-scissors:before {\n  content: \"\\F0C4\"; }\n\n.fa-copy:before,\n.fa-files-o:before {\n  content: \"\\F0C5\"; }\n\n.fa-paperclip:before {\n  content: \"\\F0C6\"; }\n\n.fa-save:before,\n.fa-floppy-o:before {\n  content: \"\\F0C7\"; }\n\n.fa-square:before {\n  content: \"\\F0C8\"; }\n\n.fa-navicon:before,\n.fa-reorder:before,\n.fa-bars:before {\n  content: \"\\F0C9\"; }\n\n.fa-list-ul:before {\n  content: \"\\F0CA\"; }\n\n.fa-list-ol:before {\n  content: \"\\F0CB\"; }\n\n.fa-strikethrough:before {\n  content: \"\\F0CC\"; }\n\n.fa-underline:before {\n  content: \"\\F0CD\"; }\n\n.fa-table:before {\n  content: \"\\F0CE\"; }\n\n.fa-magic:before {\n  content: \"\\F0D0\"; }\n\n.fa-truck:before {\n  content: \"\\F0D1\"; }\n\n.fa-pinterest:before {\n  content: \"\\F0D2\"; }\n\n.fa-pinterest-square:before {\n  content: \"\\F0D3\"; }\n\n.fa-google-plus-square:before {\n  content: \"\\F0D4\"; }\n\n.fa-google-plus:before {\n  content: \"\\F0D5\"; }\n\n.fa-money:before {\n  content: \"\\F0D6\"; }\n\n.fa-caret-down:before {\n  content: \"\\F0D7\"; }\n\n.fa-caret-up:before {\n  content: \"\\F0D8\"; }\n\n.fa-caret-left:before {\n  content: \"\\F0D9\"; }\n\n.fa-caret-right:before {\n  content: \"\\F0DA\"; }\n\n.fa-columns:before {\n  content: \"\\F0DB\"; }\n\n.fa-unsorted:before,\n.fa-sort:before {\n  content: \"\\F0DC\"; }\n\n.fa-sort-down:before,\n.fa-sort-desc:before {\n  content: \"\\F0DD\"; }\n\n.fa-sort-up:before,\n.fa-sort-asc:before {\n  content: \"\\F0DE\"; }\n\n.fa-envelope:before {\n  content: \"\\F0E0\"; }\n\n.fa-linkedin:before {\n  content: \"\\F0E1\"; }\n\n.fa-rotate-left:before,\n.fa-undo:before {\n  content: \"\\F0E2\"; }\n\n.fa-legal:before,\n.fa-gavel:before {\n  content: \"\\F0E3\"; }\n\n.fa-dashboard:before,\n.fa-tachometer:before {\n  content: \"\\F0E4\"; }\n\n.fa-comment-o:before {\n  content: \"\\F0E5\"; }\n\n.fa-comments-o:before {\n  content: \"\\F0E6\"; }\n\n.fa-flash:before,\n.fa-bolt:before {\n  content: \"\\F0E7\"; }\n\n.fa-sitemap:before {\n  content: \"\\F0E8\"; }\n\n.fa-umbrella:before {\n  content: \"\\F0E9\"; }\n\n.fa-paste:before,\n.fa-clipboard:before {\n  content: \"\\F0EA\"; }\n\n.fa-lightbulb-o:before {\n  content: \"\\F0EB\"; }\n\n.fa-exchange:before {\n  content: \"\\F0EC\"; }\n\n.fa-cloud-download:before {\n  content: \"\\F0ED\"; }\n\n.fa-cloud-upload:before {\n  content: \"\\F0EE\"; }\n\n.fa-user-md:before {\n  content: \"\\F0F0\"; }\n\n.fa-stethoscope:before {\n  content: \"\\F0F1\"; }\n\n.fa-suitcase:before {\n  content: \"\\F0F2\"; }\n\n.fa-bell-o:before {\n  content: \"\\F0A2\"; }\n\n.fa-coffee:before {\n  content: \"\\F0F4\"; }\n\n.fa-cutlery:before {\n  content: \"\\F0F5\"; }\n\n.fa-file-text-o:before {\n  content: \"\\F0F6\"; }\n\n.fa-building-o:before {\n  content: \"\\F0F7\"; }\n\n.fa-hospital-o:before {\n  content: \"\\F0F8\"; }\n\n.fa-ambulance:before {\n  content: \"\\F0F9\"; }\n\n.fa-medkit:before {\n  content: \"\\F0FA\"; }\n\n.fa-fighter-jet:before {\n  content: \"\\F0FB\"; }\n\n.fa-beer:before {\n  content: \"\\F0FC\"; }\n\n.fa-h-square:before {\n  content: \"\\F0FD\"; }\n\n.fa-plus-square:before {\n  content: \"\\F0FE\"; }\n\n.fa-angle-double-left:before {\n  content: \"\\F100\"; }\n\n.fa-angle-double-right:before {\n  content: \"\\F101\"; }\n\n.fa-angle-double-up:before {\n  content: \"\\F102\"; }\n\n.fa-angle-double-down:before {\n  content: \"\\F103\"; }\n\n.fa-angle-left:before {\n  content: \"\\F104\"; }\n\n.fa-angle-right:before {\n  content: \"\\F105\"; }\n\n.fa-angle-up:before {\n  content: \"\\F106\"; }\n\n.fa-angle-down:before {\n  content: \"\\F107\"; }\n\n.fa-desktop:before {\n  content: \"\\F108\"; }\n\n.fa-laptop:before {\n  content: \"\\F109\"; }\n\n.fa-tablet:before {\n  content: \"\\F10A\"; }\n\n.fa-mobile-phone:before,\n.fa-mobile:before {\n  content: \"\\F10B\"; }\n\n.fa-circle-o:before {\n  content: \"\\F10C\"; }\n\n.fa-quote-left:before {\n  content: \"\\F10D\"; }\n\n.fa-quote-right:before {\n  content: \"\\F10E\"; }\n\n.fa-spinner:before {\n  content: \"\\F110\"; }\n\n.fa-circle:before {\n  content: \"\\F111\"; }\n\n.fa-mail-reply:before,\n.fa-reply:before {\n  content: \"\\F112\"; }\n\n.fa-github-alt:before {\n  content: \"\\F113\"; }\n\n.fa-folder-o:before {\n  content: \"\\F114\"; }\n\n.fa-folder-open-o:before {\n  content: \"\\F115\"; }\n\n.fa-smile-o:before {\n  content: \"\\F118\"; }\n\n.fa-frown-o:before {\n  content: \"\\F119\"; }\n\n.fa-meh-o:before {\n  content: \"\\F11A\"; }\n\n.fa-gamepad:before {\n  content: \"\\F11B\"; }\n\n.fa-keyboard-o:before {\n  content: \"\\F11C\"; }\n\n.fa-flag-o:before {\n  content: \"\\F11D\"; }\n\n.fa-flag-checkered:before {\n  content: \"\\F11E\"; }\n\n.fa-terminal:before {\n  content: \"\\F120\"; }\n\n.fa-code:before {\n  content: \"\\F121\"; }\n\n.fa-mail-reply-all:before,\n.fa-reply-all:before {\n  content: \"\\F122\"; }\n\n.fa-star-half-empty:before,\n.fa-star-half-full:before,\n.fa-star-half-o:before {\n  content: \"\\F123\"; }\n\n.fa-location-arrow:before {\n  content: \"\\F124\"; }\n\n.fa-crop:before {\n  content: \"\\F125\"; }\n\n.fa-code-fork:before {\n  content: \"\\F126\"; }\n\n.fa-unlink:before,\n.fa-chain-broken:before {\n  content: \"\\F127\"; }\n\n.fa-question:before {\n  content: \"\\F128\"; }\n\n.fa-info:before {\n  content: \"\\F129\"; }\n\n.fa-exclamation:before {\n  content: \"\\F12A\"; }\n\n.fa-superscript:before {\n  content: \"\\F12B\"; }\n\n.fa-subscript:before {\n  content: \"\\F12C\"; }\n\n.fa-eraser:before {\n  content: \"\\F12D\"; }\n\n.fa-puzzle-piece:before {\n  content: \"\\F12E\"; }\n\n.fa-microphone:before {\n  content: \"\\F130\"; }\n\n.fa-microphone-slash:before {\n  content: \"\\F131\"; }\n\n.fa-shield:before {\n  content: \"\\F132\"; }\n\n.fa-calendar-o:before {\n  content: \"\\F133\"; }\n\n.fa-fire-extinguisher:before {\n  content: \"\\F134\"; }\n\n.fa-rocket:before {\n  content: \"\\F135\"; }\n\n.fa-maxcdn:before {\n  content: \"\\F136\"; }\n\n.fa-chevron-circle-left:before {\n  content: \"\\F137\"; }\n\n.fa-chevron-circle-right:before {\n  content: \"\\F138\"; }\n\n.fa-chevron-circle-up:before {\n  content: \"\\F139\"; }\n\n.fa-chevron-circle-down:before {\n  content: \"\\F13A\"; }\n\n.fa-html5:before {\n  content: \"\\F13B\"; }\n\n.fa-css3:before {\n  content: \"\\F13C\"; }\n\n.fa-anchor:before {\n  content: \"\\F13D\"; }\n\n.fa-unlock-alt:before {\n  content: \"\\F13E\"; }\n\n.fa-bullseye:before {\n  content: \"\\F140\"; }\n\n.fa-ellipsis-h:before {\n  content: \"\\F141\"; }\n\n.fa-ellipsis-v:before {\n  content: \"\\F142\"; }\n\n.fa-rss-square:before {\n  content: \"\\F143\"; }\n\n.fa-play-circle:before {\n  content: \"\\F144\"; }\n\n.fa-ticket:before {\n  content: \"\\F145\"; }\n\n.fa-minus-square:before {\n  content: \"\\F146\"; }\n\n.fa-minus-square-o:before {\n  content: \"\\F147\"; }\n\n.fa-level-up:before {\n  content: \"\\F148\"; }\n\n.fa-level-down:before {\n  content: \"\\F149\"; }\n\n.fa-check-square:before {\n  content: \"\\F14A\"; }\n\n.fa-pencil-square:before {\n  content: \"\\F14B\"; }\n\n.fa-external-link-square:before {\n  content: \"\\F14C\"; }\n\n.fa-share-square:before {\n  content: \"\\F14D\"; }\n\n.fa-compass:before {\n  content: \"\\F14E\"; }\n\n.fa-toggle-down:before,\n.fa-caret-square-o-down:before {\n  content: \"\\F150\"; }\n\n.fa-toggle-up:before,\n.fa-caret-square-o-up:before {\n  content: \"\\F151\"; }\n\n.fa-toggle-right:before,\n.fa-caret-square-o-right:before {\n  content: \"\\F152\"; }\n\n.fa-euro:before,\n.fa-eur:before {\n  content: \"\\F153\"; }\n\n.fa-gbp:before {\n  content: \"\\F154\"; }\n\n.fa-dollar:before,\n.fa-usd:before {\n  content: \"\\F155\"; }\n\n.fa-rupee:before,\n.fa-inr:before {\n  content: \"\\F156\"; }\n\n.fa-cny:before,\n.fa-rmb:before,\n.fa-yen:before,\n.fa-jpy:before {\n  content: \"\\F157\"; }\n\n.fa-ruble:before,\n.fa-rouble:before,\n.fa-rub:before {\n  content: \"\\F158\"; }\n\n.fa-won:before,\n.fa-krw:before {\n  content: \"\\F159\"; }\n\n.fa-bitcoin:before,\n.fa-btc:before {\n  content: \"\\F15A\"; }\n\n.fa-file:before {\n  content: \"\\F15B\"; }\n\n.fa-file-text:before {\n  content: \"\\F15C\"; }\n\n.fa-sort-alpha-asc:before {\n  content: \"\\F15D\"; }\n\n.fa-sort-alpha-desc:before {\n  content: \"\\F15E\"; }\n\n.fa-sort-amount-asc:before {\n  content: \"\\F160\"; }\n\n.fa-sort-amount-desc:before {\n  content: \"\\F161\"; }\n\n.fa-sort-numeric-asc:before {\n  content: \"\\F162\"; }\n\n.fa-sort-numeric-desc:before {\n  content: \"\\F163\"; }\n\n.fa-thumbs-up:before {\n  content: \"\\F164\"; }\n\n.fa-thumbs-down:before {\n  content: \"\\F165\"; }\n\n.fa-youtube-square:before {\n  content: \"\\F166\"; }\n\n.fa-youtube:before {\n  content: \"\\F167\"; }\n\n.fa-xing:before {\n  content: \"\\F168\"; }\n\n.fa-xing-square:before {\n  content: \"\\F169\"; }\n\n.fa-youtube-play:before {\n  content: \"\\F16A\"; }\n\n.fa-dropbox:before {\n  content: \"\\F16B\"; }\n\n.fa-stack-overflow:before {\n  content: \"\\F16C\"; }\n\n.fa-instagram:before {\n  content: \"\\F16D\"; }\n\n.fa-flickr:before {\n  content: \"\\F16E\"; }\n\n.fa-adn:before {\n  content: \"\\F170\"; }\n\n.fa-bitbucket:before {\n  content: \"\\F171\"; }\n\n.fa-bitbucket-square:before {\n  content: \"\\F172\"; }\n\n.fa-tumblr:before {\n  content: \"\\F173\"; }\n\n.fa-tumblr-square:before {\n  content: \"\\F174\"; }\n\n.fa-long-arrow-down:before {\n  content: \"\\F175\"; }\n\n.fa-long-arrow-up:before {\n  content: \"\\F176\"; }\n\n.fa-long-arrow-left:before {\n  content: \"\\F177\"; }\n\n.fa-long-arrow-right:before {\n  content: \"\\F178\"; }\n\n.fa-apple:before {\n  content: \"\\F179\"; }\n\n.fa-windows:before {\n  content: \"\\F17A\"; }\n\n.fa-android:before {\n  content: \"\\F17B\"; }\n\n.fa-linux:before {\n  content: \"\\F17C\"; }\n\n.fa-dribbble:before {\n  content: \"\\F17D\"; }\n\n.fa-skype:before {\n  content: \"\\F17E\"; }\n\n.fa-foursquare:before {\n  content: \"\\F180\"; }\n\n.fa-trello:before {\n  content: \"\\F181\"; }\n\n.fa-female:before {\n  content: \"\\F182\"; }\n\n.fa-male:before {\n  content: \"\\F183\"; }\n\n.fa-gittip:before,\n.fa-gratipay:before {\n  content: \"\\F184\"; }\n\n.fa-sun-o:before {\n  content: \"\\F185\"; }\n\n.fa-moon-o:before {\n  content: \"\\F186\"; }\n\n.fa-archive:before {\n  content: \"\\F187\"; }\n\n.fa-bug:before {\n  content: \"\\F188\"; }\n\n.fa-vk:before {\n  content: \"\\F189\"; }\n\n.fa-weibo:before {\n  content: \"\\F18A\"; }\n\n.fa-renren:before {\n  content: \"\\F18B\"; }\n\n.fa-pagelines:before {\n  content: \"\\F18C\"; }\n\n.fa-stack-exchange:before {\n  content: \"\\F18D\"; }\n\n.fa-arrow-circle-o-right:before {\n  content: \"\\F18E\"; }\n\n.fa-arrow-circle-o-left:before {\n  content: \"\\F190\"; }\n\n.fa-toggle-left:before,\n.fa-caret-square-o-left:before {\n  content: \"\\F191\"; }\n\n.fa-dot-circle-o:before {\n  content: \"\\F192\"; }\n\n.fa-wheelchair:before {\n  content: \"\\F193\"; }\n\n.fa-vimeo-square:before {\n  content: \"\\F194\"; }\n\n.fa-turkish-lira:before,\n.fa-try:before {\n  content: \"\\F195\"; }\n\n.fa-plus-square-o:before {\n  content: \"\\F196\"; }\n\n.fa-space-shuttle:before {\n  content: \"\\F197\"; }\n\n.fa-slack:before {\n  content: \"\\F198\"; }\n\n.fa-envelope-square:before {\n  content: \"\\F199\"; }\n\n.fa-wordpress:before {\n  content: \"\\F19A\"; }\n\n.fa-openid:before {\n  content: \"\\F19B\"; }\n\n.fa-institution:before,\n.fa-bank:before,\n.fa-university:before {\n  content: \"\\F19C\"; }\n\n.fa-mortar-board:before,\n.fa-graduation-cap:before {\n  content: \"\\F19D\"; }\n\n.fa-yahoo:before {\n  content: \"\\F19E\"; }\n\n.fa-google:before {\n  content: \"\\F1A0\"; }\n\n.fa-reddit:before {\n  content: \"\\F1A1\"; }\n\n.fa-reddit-square:before {\n  content: \"\\F1A2\"; }\n\n.fa-stumbleupon-circle:before {\n  content: \"\\F1A3\"; }\n\n.fa-stumbleupon:before {\n  content: \"\\F1A4\"; }\n\n.fa-delicious:before {\n  content: \"\\F1A5\"; }\n\n.fa-digg:before {\n  content: \"\\F1A6\"; }\n\n.fa-pied-piper-pp:before {\n  content: \"\\F1A7\"; }\n\n.fa-pied-piper-alt:before {\n  content: \"\\F1A8\"; }\n\n.fa-drupal:before {\n  content: \"\\F1A9\"; }\n\n.fa-joomla:before {\n  content: \"\\F1AA\"; }\n\n.fa-language:before {\n  content: \"\\F1AB\"; }\n\n.fa-fax:before {\n  content: \"\\F1AC\"; }\n\n.fa-building:before {\n  content: \"\\F1AD\"; }\n\n.fa-child:before {\n  content: \"\\F1AE\"; }\n\n.fa-paw:before {\n  content: \"\\F1B0\"; }\n\n.fa-spoon:before {\n  content: \"\\F1B1\"; }\n\n.fa-cube:before {\n  content: \"\\F1B2\"; }\n\n.fa-cubes:before {\n  content: \"\\F1B3\"; }\n\n.fa-behance:before {\n  content: \"\\F1B4\"; }\n\n.fa-behance-square:before {\n  content: \"\\F1B5\"; }\n\n.fa-steam:before {\n  content: \"\\F1B6\"; }\n\n.fa-steam-square:before {\n  content: \"\\F1B7\"; }\n\n.fa-recycle:before {\n  content: \"\\F1B8\"; }\n\n.fa-automobile:before,\n.fa-car:before {\n  content: \"\\F1B9\"; }\n\n.fa-cab:before,\n.fa-taxi:before {\n  content: \"\\F1BA\"; }\n\n.fa-tree:before {\n  content: \"\\F1BB\"; }\n\n.fa-spotify:before {\n  content: \"\\F1BC\"; }\n\n.fa-deviantart:before {\n  content: \"\\F1BD\"; }\n\n.fa-soundcloud:before {\n  content: \"\\F1BE\"; }\n\n.fa-database:before {\n  content: \"\\F1C0\"; }\n\n.fa-file-pdf-o:before {\n  content: \"\\F1C1\"; }\n\n.fa-file-word-o:before {\n  content: \"\\F1C2\"; }\n\n.fa-file-excel-o:before {\n  content: \"\\F1C3\"; }\n\n.fa-file-powerpoint-o:before {\n  content: \"\\F1C4\"; }\n\n.fa-file-photo-o:before,\n.fa-file-picture-o:before,\n.fa-file-image-o:before {\n  content: \"\\F1C5\"; }\n\n.fa-file-zip-o:before,\n.fa-file-archive-o:before {\n  content: \"\\F1C6\"; }\n\n.fa-file-sound-o:before,\n.fa-file-audio-o:before {\n  content: \"\\F1C7\"; }\n\n.fa-file-movie-o:before,\n.fa-file-video-o:before {\n  content: \"\\F1C8\"; }\n\n.fa-file-code-o:before {\n  content: \"\\F1C9\"; }\n\n.fa-vine:before {\n  content: \"\\F1CA\"; }\n\n.fa-codepen:before {\n  content: \"\\F1CB\"; }\n\n.fa-jsfiddle:before {\n  content: \"\\F1CC\"; }\n\n.fa-life-bouy:before,\n.fa-life-buoy:before,\n.fa-life-saver:before,\n.fa-support:before,\n.fa-life-ring:before {\n  content: \"\\F1CD\"; }\n\n.fa-circle-o-notch:before {\n  content: \"\\F1CE\"; }\n\n.fa-ra:before,\n.fa-resistance:before,\n.fa-rebel:before {\n  content: \"\\F1D0\"; }\n\n.fa-ge:before,\n.fa-empire:before {\n  content: \"\\F1D1\"; }\n\n.fa-git-square:before {\n  content: \"\\F1D2\"; }\n\n.fa-git:before {\n  content: \"\\F1D3\"; }\n\n.fa-y-combinator-square:before,\n.fa-yc-square:before,\n.fa-hacker-news:before {\n  content: \"\\F1D4\"; }\n\n.fa-tencent-weibo:before {\n  content: \"\\F1D5\"; }\n\n.fa-qq:before {\n  content: \"\\F1D6\"; }\n\n.fa-wechat:before,\n.fa-weixin:before {\n  content: \"\\F1D7\"; }\n\n.fa-send:before,\n.fa-paper-plane:before {\n  content: \"\\F1D8\"; }\n\n.fa-send-o:before,\n.fa-paper-plane-o:before {\n  content: \"\\F1D9\"; }\n\n.fa-history:before {\n  content: \"\\F1DA\"; }\n\n.fa-circle-thin:before {\n  content: \"\\F1DB\"; }\n\n.fa-header:before {\n  content: \"\\F1DC\"; }\n\n.fa-paragraph:before {\n  content: \"\\F1DD\"; }\n\n.fa-sliders:before {\n  content: \"\\F1DE\"; }\n\n.fa-share-alt:before {\n  content: \"\\F1E0\"; }\n\n.fa-share-alt-square:before {\n  content: \"\\F1E1\"; }\n\n.fa-bomb:before {\n  content: \"\\F1E2\"; }\n\n.fa-soccer-ball-o:before,\n.fa-futbol-o:before {\n  content: \"\\F1E3\"; }\n\n.fa-tty:before {\n  content: \"\\F1E4\"; }\n\n.fa-binoculars:before {\n  content: \"\\F1E5\"; }\n\n.fa-plug:before {\n  content: \"\\F1E6\"; }\n\n.fa-slideshare:before {\n  content: \"\\F1E7\"; }\n\n.fa-twitch:before {\n  content: \"\\F1E8\"; }\n\n.fa-yelp:before {\n  content: \"\\F1E9\"; }\n\n.fa-newspaper-o:before {\n  content: \"\\F1EA\"; }\n\n.fa-wifi:before {\n  content: \"\\F1EB\"; }\n\n.fa-calculator:before {\n  content: \"\\F1EC\"; }\n\n.fa-paypal:before {\n  content: \"\\F1ED\"; }\n\n.fa-google-wallet:before {\n  content: \"\\F1EE\"; }\n\n.fa-cc-visa:before {\n  content: \"\\F1F0\"; }\n\n.fa-cc-mastercard:before {\n  content: \"\\F1F1\"; }\n\n.fa-cc-discover:before {\n  content: \"\\F1F2\"; }\n\n.fa-cc-amex:before {\n  content: \"\\F1F3\"; }\n\n.fa-cc-paypal:before {\n  content: \"\\F1F4\"; }\n\n.fa-cc-stripe:before {\n  content: \"\\F1F5\"; }\n\n.fa-bell-slash:before {\n  content: \"\\F1F6\"; }\n\n.fa-bell-slash-o:before {\n  content: \"\\F1F7\"; }\n\n.fa-trash:before {\n  content: \"\\F1F8\"; }\n\n.fa-copyright:before {\n  content: \"\\F1F9\"; }\n\n.fa-at:before {\n  content: \"\\F1FA\"; }\n\n.fa-eyedropper:before {\n  content: \"\\F1FB\"; }\n\n.fa-paint-brush:before {\n  content: \"\\F1FC\"; }\n\n.fa-birthday-cake:before {\n  content: \"\\F1FD\"; }\n\n.fa-area-chart:before {\n  content: \"\\F1FE\"; }\n\n.fa-pie-chart:before {\n  content: \"\\F200\"; }\n\n.fa-line-chart:before {\n  content: \"\\F201\"; }\n\n.fa-lastfm:before {\n  content: \"\\F202\"; }\n\n.fa-lastfm-square:before {\n  content: \"\\F203\"; }\n\n.fa-toggle-off:before {\n  content: \"\\F204\"; }\n\n.fa-toggle-on:before {\n  content: \"\\F205\"; }\n\n.fa-bicycle:before {\n  content: \"\\F206\"; }\n\n.fa-bus:before {\n  content: \"\\F207\"; }\n\n.fa-ioxhost:before {\n  content: \"\\F208\"; }\n\n.fa-angellist:before {\n  content: \"\\F209\"; }\n\n.fa-cc:before {\n  content: \"\\F20A\"; }\n\n.fa-shekel:before,\n.fa-sheqel:before,\n.fa-ils:before {\n  content: \"\\F20B\"; }\n\n.fa-meanpath:before {\n  content: \"\\F20C\"; }\n\n.fa-buysellads:before {\n  content: \"\\F20D\"; }\n\n.fa-connectdevelop:before {\n  content: \"\\F20E\"; }\n\n.fa-dashcube:before {\n  content: \"\\F210\"; }\n\n.fa-forumbee:before {\n  content: \"\\F211\"; }\n\n.fa-leanpub:before {\n  content: \"\\F212\"; }\n\n.fa-sellsy:before {\n  content: \"\\F213\"; }\n\n.fa-shirtsinbulk:before {\n  content: \"\\F214\"; }\n\n.fa-simplybuilt:before {\n  content: \"\\F215\"; }\n\n.fa-skyatlas:before {\n  content: \"\\F216\"; }\n\n.fa-cart-plus:before {\n  content: \"\\F217\"; }\n\n.fa-cart-arrow-down:before {\n  content: \"\\F218\"; }\n\n.fa-diamond:before {\n  content: \"\\F219\"; }\n\n.fa-ship:before {\n  content: \"\\F21A\"; }\n\n.fa-user-secret:before {\n  content: \"\\F21B\"; }\n\n.fa-motorcycle:before {\n  content: \"\\F21C\"; }\n\n.fa-street-view:before {\n  content: \"\\F21D\"; }\n\n.fa-heartbeat:before {\n  content: \"\\F21E\"; }\n\n.fa-venus:before {\n  content: \"\\F221\"; }\n\n.fa-mars:before {\n  content: \"\\F222\"; }\n\n.fa-mercury:before {\n  content: \"\\F223\"; }\n\n.fa-intersex:before,\n.fa-transgender:before {\n  content: \"\\F224\"; }\n\n.fa-transgender-alt:before {\n  content: \"\\F225\"; }\n\n.fa-venus-double:before {\n  content: \"\\F226\"; }\n\n.fa-mars-double:before {\n  content: \"\\F227\"; }\n\n.fa-venus-mars:before {\n  content: \"\\F228\"; }\n\n.fa-mars-stroke:before {\n  content: \"\\F229\"; }\n\n.fa-mars-stroke-v:before {\n  content: \"\\F22A\"; }\n\n.fa-mars-stroke-h:before {\n  content: \"\\F22B\"; }\n\n.fa-neuter:before {\n  content: \"\\F22C\"; }\n\n.fa-genderless:before {\n  content: \"\\F22D\"; }\n\n.fa-facebook-official:before {\n  content: \"\\F230\"; }\n\n.fa-pinterest-p:before {\n  content: \"\\F231\"; }\n\n.fa-whatsapp:before {\n  content: \"\\F232\"; }\n\n.fa-server:before {\n  content: \"\\F233\"; }\n\n.fa-user-plus:before {\n  content: \"\\F234\"; }\n\n.fa-user-times:before {\n  content: \"\\F235\"; }\n\n.fa-hotel:before,\n.fa-bed:before {\n  content: \"\\F236\"; }\n\n.fa-viacoin:before {\n  content: \"\\F237\"; }\n\n.fa-train:before {\n  content: \"\\F238\"; }\n\n.fa-subway:before {\n  content: \"\\F239\"; }\n\n.fa-medium:before {\n  content: \"\\F23A\"; }\n\n.fa-yc:before,\n.fa-y-combinator:before {\n  content: \"\\F23B\"; }\n\n.fa-optin-monster:before {\n  content: \"\\F23C\"; }\n\n.fa-opencart:before {\n  content: \"\\F23D\"; }\n\n.fa-expeditedssl:before {\n  content: \"\\F23E\"; }\n\n.fa-battery-4:before,\n.fa-battery:before,\n.fa-battery-full:before {\n  content: \"\\F240\"; }\n\n.fa-battery-3:before,\n.fa-battery-three-quarters:before {\n  content: \"\\F241\"; }\n\n.fa-battery-2:before,\n.fa-battery-half:before {\n  content: \"\\F242\"; }\n\n.fa-battery-1:before,\n.fa-battery-quarter:before {\n  content: \"\\F243\"; }\n\n.fa-battery-0:before,\n.fa-battery-empty:before {\n  content: \"\\F244\"; }\n\n.fa-mouse-pointer:before {\n  content: \"\\F245\"; }\n\n.fa-i-cursor:before {\n  content: \"\\F246\"; }\n\n.fa-object-group:before {\n  content: \"\\F247\"; }\n\n.fa-object-ungroup:before {\n  content: \"\\F248\"; }\n\n.fa-sticky-note:before {\n  content: \"\\F249\"; }\n\n.fa-sticky-note-o:before {\n  content: \"\\F24A\"; }\n\n.fa-cc-jcb:before {\n  content: \"\\F24B\"; }\n\n.fa-cc-diners-club:before {\n  content: \"\\F24C\"; }\n\n.fa-clone:before {\n  content: \"\\F24D\"; }\n\n.fa-balance-scale:before {\n  content: \"\\F24E\"; }\n\n.fa-hourglass-o:before {\n  content: \"\\F250\"; }\n\n.fa-hourglass-1:before,\n.fa-hourglass-start:before {\n  content: \"\\F251\"; }\n\n.fa-hourglass-2:before,\n.fa-hourglass-half:before {\n  content: \"\\F252\"; }\n\n.fa-hourglass-3:before,\n.fa-hourglass-end:before {\n  content: \"\\F253\"; }\n\n.fa-hourglass:before {\n  content: \"\\F254\"; }\n\n.fa-hand-grab-o:before,\n.fa-hand-rock-o:before {\n  content: \"\\F255\"; }\n\n.fa-hand-stop-o:before,\n.fa-hand-paper-o:before {\n  content: \"\\F256\"; }\n\n.fa-hand-scissors-o:before {\n  content: \"\\F257\"; }\n\n.fa-hand-lizard-o:before {\n  content: \"\\F258\"; }\n\n.fa-hand-spock-o:before {\n  content: \"\\F259\"; }\n\n.fa-hand-pointer-o:before {\n  content: \"\\F25A\"; }\n\n.fa-hand-peace-o:before {\n  content: \"\\F25B\"; }\n\n.fa-trademark:before {\n  content: \"\\F25C\"; }\n\n.fa-registered:before {\n  content: \"\\F25D\"; }\n\n.fa-creative-commons:before {\n  content: \"\\F25E\"; }\n\n.fa-gg:before {\n  content: \"\\F260\"; }\n\n.fa-gg-circle:before {\n  content: \"\\F261\"; }\n\n.fa-tripadvisor:before {\n  content: \"\\F262\"; }\n\n.fa-odnoklassniki:before {\n  content: \"\\F263\"; }\n\n.fa-odnoklassniki-square:before {\n  content: \"\\F264\"; }\n\n.fa-get-pocket:before {\n  content: \"\\F265\"; }\n\n.fa-wikipedia-w:before {\n  content: \"\\F266\"; }\n\n.fa-safari:before {\n  content: \"\\F267\"; }\n\n.fa-chrome:before {\n  content: \"\\F268\"; }\n\n.fa-firefox:before {\n  content: \"\\F269\"; }\n\n.fa-opera:before {\n  content: \"\\F26A\"; }\n\n.fa-internet-explorer:before {\n  content: \"\\F26B\"; }\n\n.fa-tv:before,\n.fa-television:before {\n  content: \"\\F26C\"; }\n\n.fa-contao:before {\n  content: \"\\F26D\"; }\n\n.fa-500px:before {\n  content: \"\\F26E\"; }\n\n.fa-amazon:before {\n  content: \"\\F270\"; }\n\n.fa-calendar-plus-o:before {\n  content: \"\\F271\"; }\n\n.fa-calendar-minus-o:before {\n  content: \"\\F272\"; }\n\n.fa-calendar-times-o:before {\n  content: \"\\F273\"; }\n\n.fa-calendar-check-o:before {\n  content: \"\\F274\"; }\n\n.fa-industry:before {\n  content: \"\\F275\"; }\n\n.fa-map-pin:before {\n  content: \"\\F276\"; }\n\n.fa-map-signs:before {\n  content: \"\\F277\"; }\n\n.fa-map-o:before {\n  content: \"\\F278\"; }\n\n.fa-map:before {\n  content: \"\\F279\"; }\n\n.fa-commenting:before {\n  content: \"\\F27A\"; }\n\n.fa-commenting-o:before {\n  content: \"\\F27B\"; }\n\n.fa-houzz:before {\n  content: \"\\F27C\"; }\n\n.fa-vimeo:before {\n  content: \"\\F27D\"; }\n\n.fa-black-tie:before {\n  content: \"\\F27E\"; }\n\n.fa-fonticons:before {\n  content: \"\\F280\"; }\n\n.fa-reddit-alien:before {\n  content: \"\\F281\"; }\n\n.fa-edge:before {\n  content: \"\\F282\"; }\n\n.fa-credit-card-alt:before {\n  content: \"\\F283\"; }\n\n.fa-codiepie:before {\n  content: \"\\F284\"; }\n\n.fa-modx:before {\n  content: \"\\F285\"; }\n\n.fa-fort-awesome:before {\n  content: \"\\F286\"; }\n\n.fa-usb:before {\n  content: \"\\F287\"; }\n\n.fa-product-hunt:before {\n  content: \"\\F288\"; }\n\n.fa-mixcloud:before {\n  content: \"\\F289\"; }\n\n.fa-scribd:before {\n  content: \"\\F28A\"; }\n\n.fa-pause-circle:before {\n  content: \"\\F28B\"; }\n\n.fa-pause-circle-o:before {\n  content: \"\\F28C\"; }\n\n.fa-stop-circle:before {\n  content: \"\\F28D\"; }\n\n.fa-stop-circle-o:before {\n  content: \"\\F28E\"; }\n\n.fa-shopping-bag:before {\n  content: \"\\F290\"; }\n\n.fa-shopping-basket:before {\n  content: \"\\F291\"; }\n\n.fa-hashtag:before {\n  content: \"\\F292\"; }\n\n.fa-bluetooth:before {\n  content: \"\\F293\"; }\n\n.fa-bluetooth-b:before {\n  content: \"\\F294\"; }\n\n.fa-percent:before {\n  content: \"\\F295\"; }\n\n.fa-gitlab:before {\n  content: \"\\F296\"; }\n\n.fa-wpbeginner:before {\n  content: \"\\F297\"; }\n\n.fa-wpforms:before {\n  content: \"\\F298\"; }\n\n.fa-envira:before {\n  content: \"\\F299\"; }\n\n.fa-universal-access:before {\n  content: \"\\F29A\"; }\n\n.fa-wheelchair-alt:before {\n  content: \"\\F29B\"; }\n\n.fa-question-circle-o:before {\n  content: \"\\F29C\"; }\n\n.fa-blind:before {\n  content: \"\\F29D\"; }\n\n.fa-audio-description:before {\n  content: \"\\F29E\"; }\n\n.fa-volume-control-phone:before {\n  content: \"\\F2A0\"; }\n\n.fa-braille:before {\n  content: \"\\F2A1\"; }\n\n.fa-assistive-listening-systems:before {\n  content: \"\\F2A2\"; }\n\n.fa-asl-interpreting:before,\n.fa-american-sign-language-interpreting:before {\n  content: \"\\F2A3\"; }\n\n.fa-deafness:before,\n.fa-hard-of-hearing:before,\n.fa-deaf:before {\n  content: \"\\F2A4\"; }\n\n.fa-glide:before {\n  content: \"\\F2A5\"; }\n\n.fa-glide-g:before {\n  content: \"\\F2A6\"; }\n\n.fa-signing:before,\n.fa-sign-language:before {\n  content: \"\\F2A7\"; }\n\n.fa-low-vision:before {\n  content: \"\\F2A8\"; }\n\n.fa-viadeo:before {\n  content: \"\\F2A9\"; }\n\n.fa-viadeo-square:before {\n  content: \"\\F2AA\"; }\n\n.fa-snapchat:before {\n  content: \"\\F2AB\"; }\n\n.fa-snapchat-ghost:before {\n  content: \"\\F2AC\"; }\n\n.fa-snapchat-square:before {\n  content: \"\\F2AD\"; }\n\n.fa-pied-piper:before {\n  content: \"\\F2AE\"; }\n\n.fa-first-order:before {\n  content: \"\\F2B0\"; }\n\n.fa-yoast:before {\n  content: \"\\F2B1\"; }\n\n.fa-themeisle:before {\n  content: \"\\F2B2\"; }\n\n.fa-google-plus-circle:before,\n.fa-google-plus-official:before {\n  content: \"\\F2B3\"; }\n\n.fa-fa:before,\n.fa-font-awesome:before {\n  content: \"\\F2B4\"; }\n\n.fa-handshake-o:before {\n  content: \"\\F2B5\"; }\n\n.fa-envelope-open:before {\n  content: \"\\F2B6\"; }\n\n.fa-envelope-open-o:before {\n  content: \"\\F2B7\"; }\n\n.fa-linode:before {\n  content: \"\\F2B8\"; }\n\n.fa-address-book:before {\n  content: \"\\F2B9\"; }\n\n.fa-address-book-o:before {\n  content: \"\\F2BA\"; }\n\n.fa-vcard:before,\n.fa-address-card:before {\n  content: \"\\F2BB\"; }\n\n.fa-vcard-o:before,\n.fa-address-card-o:before {\n  content: \"\\F2BC\"; }\n\n.fa-user-circle:before {\n  content: \"\\F2BD\"; }\n\n.fa-user-circle-o:before {\n  content: \"\\F2BE\"; }\n\n.fa-user-o:before {\n  content: \"\\F2C0\"; }\n\n.fa-id-badge:before {\n  content: \"\\F2C1\"; }\n\n.fa-drivers-license:before,\n.fa-id-card:before {\n  content: \"\\F2C2\"; }\n\n.fa-drivers-license-o:before,\n.fa-id-card-o:before {\n  content: \"\\F2C3\"; }\n\n.fa-quora:before {\n  content: \"\\F2C4\"; }\n\n.fa-free-code-camp:before {\n  content: \"\\F2C5\"; }\n\n.fa-telegram:before {\n  content: \"\\F2C6\"; }\n\n.fa-thermometer-4:before,\n.fa-thermometer:before,\n.fa-thermometer-full:before {\n  content: \"\\F2C7\"; }\n\n.fa-thermometer-3:before,\n.fa-thermometer-three-quarters:before {\n  content: \"\\F2C8\"; }\n\n.fa-thermometer-2:before,\n.fa-thermometer-half:before {\n  content: \"\\F2C9\"; }\n\n.fa-thermometer-1:before,\n.fa-thermometer-quarter:before {\n  content: \"\\F2CA\"; }\n\n.fa-thermometer-0:before,\n.fa-thermometer-empty:before {\n  content: \"\\F2CB\"; }\n\n.fa-shower:before {\n  content: \"\\F2CC\"; }\n\n.fa-bathtub:before,\n.fa-s15:before,\n.fa-bath:before {\n  content: \"\\F2CD\"; }\n\n.fa-podcast:before {\n  content: \"\\F2CE\"; }\n\n.fa-window-maximize:before {\n  content: \"\\F2D0\"; }\n\n.fa-window-minimize:before {\n  content: \"\\F2D1\"; }\n\n.fa-window-restore:before {\n  content: \"\\F2D2\"; }\n\n.fa-times-rectangle:before,\n.fa-window-close:before {\n  content: \"\\F2D3\"; }\n\n.fa-times-rectangle-o:before,\n.fa-window-close-o:before {\n  content: \"\\F2D4\"; }\n\n.fa-bandcamp:before {\n  content: \"\\F2D5\"; }\n\n.fa-grav:before {\n  content: \"\\F2D6\"; }\n\n.fa-etsy:before {\n  content: \"\\F2D7\"; }\n\n.fa-imdb:before {\n  content: \"\\F2D8\"; }\n\n.fa-ravelry:before {\n  content: \"\\F2D9\"; }\n\n.fa-eercast:before {\n  content: \"\\F2DA\"; }\n\n.fa-microchip:before {\n  content: \"\\F2DB\"; }\n\n.fa-snowflake-o:before {\n  content: \"\\F2DC\"; }\n\n.fa-superpowers:before {\n  content: \"\\F2DD\"; }\n\n.fa-wpexplorer:before {\n  content: \"\\F2DE\"; }\n\n.fa-meetup:before {\n  content: \"\\F2E0\"; }\n\n/* makes the font 33% larger relative to the icon container */\n.fa-lg {\n  font-size: 1.33333em;\n  line-height: 0.75em;\n  vertical-align: -15%; }\n\n.fa-2x {\n  font-size: 2em; }\n\n.fa-3x {\n  font-size: 3em; }\n\n.fa-4x {\n  font-size: 4em; }\n\n.fa-5x {\n  font-size: 5em; }\n\n.fa-ul {\n  padding-left: 0;\n  margin-left: 2.14286em;\n  list-style-type: none; }\n  .fa-ul > li {\n    position: relative; }\n\n.fa-li {\n  position: absolute;\n  left: -2.14286em;\n  width: 2.14286em;\n  top: 0.14286em;\n  text-align: center; }\n  .fa-li.fa-lg {\n    left: -1.85714em; }\n\n/* FONT PATH\n * -------------------------- */\n@font-face {\n  font-family: 'FontAwesome';\n  src: url(" + __webpack_require__(733) + ");\n  src: url(" + __webpack_require__(734) + "?#iefix&v=4.7.0) format(\"embedded-opentype\"), url(" + __webpack_require__(735) + ") format(\"woff2\"), url(" + __webpack_require__(736) + ") format(\"woff\"), url(" + __webpack_require__(737) + ") format(\"truetype\"), url(" + __webpack_require__(738) + "#fontawesomeregular) format(\"svg\");\n  font-weight: normal;\n  font-style: normal; }\n\n.fa-rotate-90 {\n  -ms-filter: \"progid:DXImageTransform.Microsoft.BasicImage(rotation=1)\";\n  -webkit-transform: rotate(90deg);\n  -ms-transform: rotate(90deg);\n  transform: rotate(90deg); }\n\n.fa-rotate-180 {\n  -ms-filter: \"progid:DXImageTransform.Microsoft.BasicImage(rotation=2)\";\n  -webkit-transform: rotate(180deg);\n  -ms-transform: rotate(180deg);\n  transform: rotate(180deg); }\n\n.fa-rotate-270 {\n  -ms-filter: \"progid:DXImageTransform.Microsoft.BasicImage(rotation=3)\";\n  -webkit-transform: rotate(270deg);\n  -ms-transform: rotate(270deg);\n  transform: rotate(270deg); }\n\n.fa-flip-horizontal {\n  -ms-filter: \"progid:DXImageTransform.Microsoft.BasicImage(rotation=0, mirror=1)\";\n  -webkit-transform: scale(-1, 1);\n  -ms-transform: scale(-1, 1);\n  transform: scale(-1, 1); }\n\n.fa-flip-vertical {\n  -ms-filter: \"progid:DXImageTransform.Microsoft.BasicImage(rotation=2, mirror=1)\";\n  -webkit-transform: scale(1, -1);\n  -ms-transform: scale(1, -1);\n  transform: scale(1, -1); }\n\n:root .fa-rotate-90,\n:root .fa-rotate-180,\n:root .fa-rotate-270,\n:root .fa-flip-horizontal,\n:root .fa-flip-vertical {\n  filter: none; }\n\n.fa-spin {\n  -webkit-animation: fa-spin 2s infinite linear;\n  animation: fa-spin 2s infinite linear; }\n\n.fa-pulse {\n  -webkit-animation: fa-spin 1s infinite steps(8);\n  animation: fa-spin 1s infinite steps(8); }\n\n@-webkit-keyframes fa-spin {\n  0% {\n    -webkit-transform: rotate(0deg);\n    transform: rotate(0deg); }\n  100% {\n    -webkit-transform: rotate(359deg);\n    transform: rotate(359deg); } }\n\n@keyframes fa-spin {\n  0% {\n    -webkit-transform: rotate(0deg);\n    transform: rotate(0deg); }\n  100% {\n    -webkit-transform: rotate(359deg);\n    transform: rotate(359deg); } }\n\n.fa-stack {\n  position: relative;\n  display: inline-block;\n  width: 2em;\n  height: 2em;\n  line-height: 2em;\n  vertical-align: middle; }\n\n.fa-stack-1x, .fa-stack-2x {\n  position: absolute;\n  left: 0;\n  width: 100%;\n  text-align: center; }\n\n.fa-stack-1x {\n  line-height: inherit; }\n\n.fa-stack-2x {\n  font-size: 2em; }\n\n.fa-inverse {\n  color: #fff; }\n", ""]);
 
 // exports
 
 
 /***/ }),
 
-/***/ 727:
+/***/ 733:
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__.p + "716ae98af7f26c14e0dc1d0fa8e5734c.eot";
 
 /***/ }),
 
-/***/ 728:
+/***/ 734:
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__.p + "716ae98af7f26c14e0dc1d0fa8e5734c.eot";
 
 /***/ }),
 
-/***/ 729:
+/***/ 735:
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__.p + "assets/fontawesome-webfont.af7ae505a9eed503f8b8e6982036873e.woff2";
 
 /***/ }),
 
-/***/ 730:
+/***/ 736:
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__.p + "assets/fontawesome-webfont.fee66e712a8a08eef5805a46892932ad.woff";
 
 /***/ }),
 
-/***/ 731:
+/***/ 737:
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__.p + "cb33834b058bf34d881ba594550c5b7f.ttf";
 
 /***/ }),
 
-/***/ 732:
+/***/ 738:
 /***/ (function(module, exports) {
 
 module.exports = "data:application/font-woff;base64,bW9kdWxlLmV4cG9ydHMgPSBfX3dlYnBhY2tfcHVibGljX3BhdGhfXyArICIzYTc1Zjk0NDE3MDdmZTNkMmQ5M2ZiYmY2M2QzNWM1Ni5zdmciOw=="
@@ -24520,16 +31873,13 @@ let AuthenticationGuardService = class AuthenticationGuardService {
         return false;
     }
     canActivate(route, state) {
-        console.log('auth guard canActivate', route, state);
         let url = state.url;
         return this.checkLogin(url);
     }
     canActivateChild(route, state) {
-        console.log('auth guard canActivateChild', route, state);
         return this.canActivate(route, state);
     }
     canLoad(route) {
-        console.log('auth guard canLoad', route);
         let url = `${route.path}`;
         return this.checkLogin(url);
     }
@@ -24579,5 +31929,5 @@ exports.ErrorParser = ErrorParser;
 
 /***/ })
 
-},[651]);
-//# sourceMappingURL=app.1ab48bee7b6fe3702ab1.js.map
+},[652]);
+//# sourceMappingURL=app.24f51819a709091ccb42.js.map

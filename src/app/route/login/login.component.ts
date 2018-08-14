@@ -40,7 +40,6 @@ export class LoginComponent implements OnInit {
                         })
                     })
                     .then(() => {
-                        console.log('what user: ', user);
                         let redirect =  user.userParameters.type != 'standard_user' ? '/private/admin-domain': '/private/user-domain';
                         // let redirect = this.authenticator.redirectUrl ? this.authenticator.redirectUrl : '/private';
                         let navigationExtras : NavigationExtras = {

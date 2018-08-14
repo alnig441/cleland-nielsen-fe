@@ -8,6 +8,7 @@ import { ServiceModelManagerService } from "../../services/service-model-manager
 @Component({
     selector: 'app-sidebar-cta',
     template: require('./sidebar-cta.component.pug'),
+    styleUrls: ['./sidebar-cta.component.scss'],
     encapsulation: ViewEncapsulation.None
 })
 
