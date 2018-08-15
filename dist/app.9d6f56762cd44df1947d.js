@@ -21445,13 +21445,16 @@ let SetMessageService = class SetMessageService {
         this.response = {};
         this.responseState = 'hidden';
     }
-    set(error) {
+    set(message) {
+        this.responseType = null;
         this.response = {};
-        error.status != 200 ? this.response.failure = error : this.response.success = error;
+        let httpStatus = parseInt(message.status) ? parseInt(message.status) : null;
+        this.responseType = httpStatus < 300 ? 'success' : httpStatus < 400 ? 'warning' : httpStatus >= 400 ? 'danger' : 'info';
+        this.response = message;
         this.responseState = 'visible';
         setTimeout(() => {
             this.responseState = 'hidden';
-            if (error.forceLogout) {
+            if (message.forceLogout) {
                 this.activeUser.logout();
                 this.router.navigate(['/login']);
             }
@@ -21459,6 +21462,9 @@ let SetMessageService = class SetMessageService {
     }
     getResponseState() {
         return this.responseState;
+    }
+    getResponseType() {
+        return this.responseType;
     }
 };
 SetMessageService = __decorate([
@@ -25267,14 +25273,14 @@ exports.MessagebarComponent = MessagebarComponent;
 /***/ 710:
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"panel panel-warning message-panel\" *ngIf=\"this.setMessage.response.failure\" [@message]=\"state\"><div class=\"panel-heading\">status: {{ this.setMessage.response.failure.status }}</div><div class=\"panel-body\">message: {{ this.setMessage.response.failure.message }}</div></div><div class=\"panel panel-success message-panel\" *ngIf=\"this.setMessage.response.success\" [@message]=\"state\"><div class=\"panel-heading\">status: {{ this.setMessage.response.success.status }}</div><div class=\"panel-body\">message: {{ this.setMessage.response.success.message }}</div></div>"
+module.exports = "<div class=\"panel panel-{{this.setMessage.getResponseType()}} message-panel\" *ngIf=\"this.setMessage.getResponseType()\" [@message]=\"state\"><div class=\"panel-heading\">status: {{ this.setMessage.response.status }}</div><div class=\"panel-body\">message: {{ this.setMessage.response.message }}</div></div>"
 
 /***/ }),
 
 /***/ 711:
 /***/ (function(module, exports) {
 
-module.exports = ".message-panel {\n  position: fixed;\n  bottom: 25px;\n  right: 20%; }\n"
+module.exports = ".message-panel {\n  position: fixed;\n  top: 25px;\n  width: 30%;\n  left: 35%; }\n"
 
 /***/ }),
 
@@ -31930,4 +31936,4 @@ exports.ErrorParser = ErrorParser;
 /***/ })
 
 },[652]);
-//# sourceMappingURL=app.24f51819a709091ccb42.js.map
+//# sourceMappingURL=app.9d6f56762cd44df1947d.js.map

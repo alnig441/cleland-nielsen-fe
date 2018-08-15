@@ -7,21 +7,26 @@ import { AuthenticationService } from "./authentication.service";
 export class SetMessageService {
     
     private response: any = {};
+    private responseType: string;
     private responseState : string = 'hidden';
 
     constructor(
         private router: Router,
         private activeUser: AuthenticationService) {}
 
-    set(error?: any): any {
+    set(message?: any): any {
+        this.responseType = null;
         this.response = {};
 
-        error.status != 200 ? this.response.failure = error : this.response.success = error;
+        let httpStatus = parseInt(message.status) ? parseInt(message.status): null;
+        this.responseType = httpStatus < 300 ? 'success': httpStatus < 400 ? 'warning' : httpStatus >= 400 ? 'danger': 'info';
+        this.response = message;
+
         this.responseState = 'visible';
 
         setTimeout(() => {
             this.responseState = 'hidden';
-            if(error.forceLogout){
+            if(message.forceLogout){
                 this.activeUser.logout();
                 this.router.navigate(['/login'])
             }
@@ -30,5 +35,9 @@ export class SetMessageService {
 
     getResponseState():string {
         return this.responseState;
+    }
+
+    getResponseType(): string {
+        return this.responseType;
     }
 }

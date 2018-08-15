@@ -1,6 +1,3 @@
-div(*ngIf="this.setMessage.response.failure", [@message]="state", class="panel panel-warning message-panel")
-    div(class="panel-heading") status: {{ this.setMessage.response.failure.status }}
-    div(class="panel-body") message: {{ this.setMessage.response.failure.message }}
-div(*ngIf="this.setMessage.response.success", [@message]="state", class="panel panel-success message-panel")
-    div(class="panel-heading") status: {{ this.setMessage.response.success.status }}
-    div(class="panel-body") message: {{ this.setMessage.response.success.message }}
+div(*ngIf="this.setMessage.getResponseType()", [@message]="state", class="panel panel-{{this.setMessage.getResponseType()}} message-panel")
+    div(class="panel-heading") status: {{ this.setMessage.response.status }}
+    div(class="panel-body") message: {{ this.setMessage.response.message }}
