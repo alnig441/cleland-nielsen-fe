@@ -21449,7 +21449,8 @@ let SetMessageService = class SetMessageService {
         this.responseType = null;
         this.response = {};
         let httpStatus = parseInt(message.status) ? parseInt(message.status) : null;
-        this.responseType = httpStatus < 300 ? 'success' : httpStatus < 400 ? 'warning' : httpStatus >= 400 ? 'danger' : 'info';
+        console.log('httpstatus: ', httpStatus);
+        this.responseType = httpStatus == null ? 'info' : httpStatus < 300 ? 'success' : httpStatus < 400 ? 'warning' : 'danger';
         this.response = message;
         this.responseState = 'visible';
         setTimeout(() => {
@@ -21652,7 +21653,7 @@ let UserServices = class UserServices {
             this.message.set({ status: 405, message: 'insufficient permissions' });
         }
         else {
-            return Promise.reject({ status: '', message: 'method not yet defined' });
+            return Promise.reject({ status: null, message: 'method not yet defined' });
         }
     }
     getList() {
@@ -21661,7 +21662,7 @@ let UserServices = class UserServices {
             this.message.set({ status: 405, message: 'insufficient permissions' });
         }
         else {
-            return Promise.reject({ status: '', message: 'method not yet defined' })
+            return Promise.reject({ status: null, message: 'method not yet defined' })
                 .catch((result) => {
                 this.message.set(result);
             });
@@ -31936,4 +31937,4 @@ exports.ErrorParser = ErrorParser;
 /***/ })
 
 },[652]);
-//# sourceMappingURL=app.9d6f56762cd44df1947d.js.map
+//# sourceMappingURL=app.ccc9ff66455be3db0ce2.js.map

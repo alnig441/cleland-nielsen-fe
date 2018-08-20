@@ -19,7 +19,8 @@ export class SetMessageService {
         this.response = {};
 
         let httpStatus = parseInt(message.status) ? parseInt(message.status): null;
-        this.responseType = httpStatus < 300 ? 'success': httpStatus < 400 ? 'warning' : httpStatus >= 400 ? 'danger': 'info';
+        this.responseType = httpStatus == null ? 'info': httpStatus < 300 ? 'success': httpStatus < 400 ? 'warning' : 'danger';
+
         this.response = message;
 
         this.responseState = 'visible';

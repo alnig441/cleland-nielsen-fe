@@ -42,7 +42,7 @@ export class UserServices {
         }
 
         else {
-            return Promise.reject({ status: '', message: 'method not yet defined'})
+            return Promise.reject({ status: null, message: 'method not yet defined'})
         }
 
     }
@@ -54,7 +54,7 @@ export class UserServices {
         }
 
         else {
-            return Promise.reject({ status: '', message: 'method not yet defined'})
+            return Promise.reject({ status: null , message: 'method not yet defined'})
                 .catch((result: any) => {
                     this.message.set(result);
                 })
