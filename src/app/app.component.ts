@@ -11,6 +11,8 @@ export class AppComponent implements OnInit {
     constructor() {}
 
     public ngOnInit(): void {
+
         console.log('app comp init');
+
     }
 }

@@ -6,6 +6,8 @@ import { AuthenticationService } from "../../services/authentication.service";
 import { PermissionServices } from "../../services/permission.services";
 import { ErrorParser } from "../../services/error-parser";
 
+const $ = require('jquery');
+
 @Component({
     selector: 'app-login',
     template: require('./login.component.pug'),
@@ -29,6 +31,8 @@ export class LoginComponent implements OnInit {
         this.authenticator.login(this.loginModel).subscribe((user : any) => {
 
             if(this.authenticator.isLoggedIn) {
+
+                $('#loginModal').modal('hide');
 
                 this.http.get('/permissionsDb', {observe: "response"})
                     .toPromise()

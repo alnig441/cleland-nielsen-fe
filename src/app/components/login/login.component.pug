@@ -1,5 +1,5 @@
-div(class="" tabindex="-1" role="dialog")
-    div(class="modal-dialog" role="document")
+div(id="loginModal", class="modal fade" tabindex="-1" role="dialog")
+    div(class="modal-dialog")
         div(class="modal-content")
             form((ngSubmit)="onSubmit()", #loginForm="ngForm")
                 div(class="modal-body")
@@ -20,4 +20,4 @@ div(class="" tabindex="-1" role="dialog")
                     div(class="alert alert-danger",[hidden]="password.valid || password.pristine") Password Required
                 div(class="modal-footer")
                     button(type="button" class="btn btn-secondary" data-dismiss="modal", (click)="onCancel()") Close
-                    button(type="submit" class="btn btn-primary") Submit
+                    button(type="submit" class="btn btn-primary") Login

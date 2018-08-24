@@ -6,6 +6,7 @@ import { AuthenticationService } from "../../services/authentication.service";
 @Component({
     selector: 'app-globalnav',
     template: require('./globalnav.component.pug'),
+    styleUrls: ['./globalnav.component.scss'],
     encapsulation: ViewEncapsulation.None
 })
 

@@ -7,16 +7,13 @@ import { HttpModule } from "@angular/http";
 import { CommonModule } from "@angular/common";
 
 import { AppRouting } from "./app.routing";
-import { LoginRoutingModule } from "./route/login/login-routing.module";
-
 import { PublicModule } from "./route/public/public.module";
 import { PrivateModule } from "./route/private/private.module";
 
-import { LoginComponent } from "./route/login/login.component";
+import { LoginComponent } from "./components/login/login.component";
 import { GlobalnavComponent } from "./components/globalnav/globalnav.component";
 import { AppLoadModule } from "./load/app-load.module";
-
-
+import { AuthenticationService } from "./services/authentication.service";
 
 
 @NgModule({
@@ -26,7 +23,6 @@ import { AppLoadModule } from "./load/app-load.module";
         FormsModule,
         HttpModule,
         CommonModule,
-        LoginRoutingModule,
         PublicModule,
         PrivateModule,
         AppRouting,
@@ -38,6 +34,7 @@ import { AppLoadModule } from "./load/app-load.module";
         LoginComponent,
     ],
     providers: [
+        AuthenticationService
     ],
     bootstrap: [
         AppComponent

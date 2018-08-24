@@ -18,5 +18,7 @@ div
                         a(*ngIf="!link.permission", routerLink="{{link.name}}" routerLinkActive="active") {{link.name}}
                 ul(class="nav navbar-nav navbar-right")
                     li
-                        a(*ngIf='!this.activeUser.isLoggedIn' routerLink="/login" routerLinkActive='active') Login
-                        a(*ngIf='this.activeUser.isLoggedIn', (click)='logout()' routerLink='' routerLinkActive='') Logout
+                        //a(*ngIf='!this.activeUser.isLoggedIn' routerLink="/login" routerLinkActive='active') Login
+                        //a(*ngIf='!this.activeUser.isLoggedIn', href="#loginModal", class="btn btn-info" data-toggle="modal") Login
+                        p(*ngIf='!this.activeUser.isLoggedIn', type='button' data-target="#loginModal", class="btn btn-info" data-toggle="modal") Login
+                        p(*ngIf='this.activeUser.isLoggedIn', class="btn btn-warning",  (click)='logout()') Logout
