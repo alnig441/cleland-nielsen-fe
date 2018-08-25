@@ -1,23 +1,27 @@
 div(id="loginModal", class="modal fade" tabindex="-1" role="dialog")
-    div(class="modal-dialog")
+    div(class="modal-dialog modal-sm" role="document")
         div(class="modal-content")
             form((ngSubmit)="onSubmit()", #loginForm="ngForm")
+                div(class="modal-header")
+                    h4 Login Dialog
                 div(class="modal-body")
                     div(class="form-group")
-                        label(for="userName") User Name
-                        input(type="email" class="form-control" id="userName" aria-describedby="emailHelp" placeholder="Enter User Name"
+                        div(class="input-group")
+                            span(class="input-group-addon") Username
+                            input(type="email" class="form-control" id="userName" placeholder="Enter User Name"
                         required,
                         [(ngModel)]="loginModel.username" name="username",
                         #username="ngModel")
 
                     div(class="alert alert-danger",[hidden]="username.valid || username.pristine") User ID Required
                     div(class="form-group")
-                        label(for="password" required) Password
-                        input(type="password" class="form-control" id="password" placeholder="Password"
+                        div(class="input-group")
+                            span(class="input-group-addon") Password
+                            input(type="password" class="form-control" id="password" placeholder="Password"
                         required,
                         [(ngModel)]="loginModel.password" name="password",
                         #password="ngModel")
                     div(class="alert alert-danger",[hidden]="password.valid || password.pristine") Password Required
                 div(class="modal-footer")
-                    button(type="button" class="btn btn-secondary" data-dismiss="modal", (click)="onCancel()") Close
+                    button(type="button" class="btn btn-secondary" data-dismiss="modal", (click)="onCancel()") Cancel
                     button(type="submit" class="btn btn-primary") Login

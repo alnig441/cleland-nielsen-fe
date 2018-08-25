@@ -31601,7 +31601,7 @@ exports.LoginModel = LoginModel;
 /***/ 723:
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"modal fade\" id=\"loginModal\" tabindex=\"-1\" role=\"dialog\"><div class=\"modal-dialog\"><div class=\"modal-content\"><form (ngSubmit)=\"onSubmit()\" #loginForm=\"ngForm\"><div class=\"modal-body\"><div class=\"form-group\"><label for=\"userName\">User Name</label><input class=\"form-control\" type=\"email\" id=\"userName\" aria-describedby=\"emailHelp\" placeholder=\"Enter User Name\" required [(ngModel)]=\"loginModel.username\" name=\"username\" #username=\"ngModel\"></div><div class=\"alert alert-danger\" [hidden]=\"username.valid || username.pristine\">User ID Required</div><div class=\"form-group\"><label for=\"password\" required>Password</label><input class=\"form-control\" type=\"password\" id=\"password\" placeholder=\"Password\" required [(ngModel)]=\"loginModel.password\" name=\"password\" #password=\"ngModel\"></div><div class=\"alert alert-danger\" [hidden]=\"password.valid || password.pristine\">Password Required</div></div><div class=\"modal-footer\"><button class=\"btn btn-secondary\" type=\"button\" data-dismiss=\"modal\" (click)=\"onCancel()\">Close</button><button class=\"btn btn-primary\" type=\"submit\">Login</button></div></form></div></div></div>"
+module.exports = "<div class=\"modal fade\" id=\"loginModal\" tabindex=\"-1\" role=\"dialog\"><div class=\"modal-dialog modal-sm\" role=\"document\"><div class=\"modal-content\"><form (ngSubmit)=\"onSubmit()\" #loginForm=\"ngForm\"><div class=\"modal-header\"><h4>Login Dialog</h4></div><div class=\"modal-body\"><div class=\"form-group\"><div class=\"input-group\"><span class=\"input-group-addon\">Username<!--label(for=\"userName\") User Name--></span><input class=\"form-control\" type=\"email\" id=\"userName\" placeholder=\"Enter User Name\" required [(ngModel)]=\"loginModel.username\" name=\"username\" #username=\"ngModel\"></div></div><div class=\"alert alert-danger\" [hidden]=\"username.valid || username.pristine\">User ID Required</div><div class=\"form-group\"><div class=\"input-group\"><span class=\"input-group-addon\">Password</span><!--label(for=\"password\" required) Password--><input class=\"form-control\" type=\"password\" id=\"password\" placeholder=\"Password\" required [(ngModel)]=\"loginModel.password\" name=\"password\" #password=\"ngModel\"></div></div><div class=\"alert alert-danger\" [hidden]=\"password.valid || password.pristine\">Password Required</div></div><div class=\"modal-footer\"><button class=\"btn btn-secondary\" type=\"button\" data-dismiss=\"modal\" (click)=\"onCancel()\">Cancel</button><button class=\"btn btn-primary\" type=\"submit\">Login</button></div></form></div></div></div>"
 
 /***/ }),
 
@@ -31906,4 +31906,4 @@ exports.ErrorParser = ErrorParser;
 /***/ })
 
 },[651]);
-//# sourceMappingURL=app.c75032044905132ce1b8.js.map
+//# sourceMappingURL=app.389245075410d5429bf2.js.map
