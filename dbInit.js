@@ -10,42 +10,103 @@ let client = new Client({ connectionString: connectionString });
 
 client.connect()
 
-client.query(`INSERT INTO accounts VALUES 
-    (uuid_generate_v4(), 'administrator', (select array(select permission_id::uuid from permissions)),
-    (uuid_generate_v4(), 'standard_user'),
-    (uuid_generate_v4(), 'super_user')`)
+client.query('CREATE TABLE permissions (' +
+    'permission_id uuid not null primary key, ' +
+    'permission_name character varying unique not null);')
+    .then(() => {
+        console.log('permissions SUCCESS');
+    })
+    .catch(err => {
+        console.log('error creating permissions table: ', err);
+        client.end();
+    })
+
+client.query('CREATE TABLE accounts (' +
+    'account_id uuid not null primary key,' +
+    'account_name character varying not null unique,' +
+    'account_permissions uuid[]);')
+    .then(() => {
+        console.log('accounts SUCCESS');
+    })
+    .catch((err) => {
+        console.log('error creating accounts table: ', err.error);
+        client.end()
+    })
+
+client.query('CREATE TABLE users (' +
+    'user_id uuid not null primary key, ' +
+    'account_type character varying not null,' +
+    'user_name character varying not null unique,' +
+    'password character varying not null,' +
+    'language character varying);')
     .then(res => {
+        console.log('users SUCCESS');
+    })
+    .catch(err => {
+        console.log('error creating users table: ', err);
+        client.end();
+    })
 
-        console.log('result: ', res);
+client.query(`INSERT INTO permissions VALUES
+    (uuid_generate_v4(), 'to_view_images'),
+    (uuid_generate_v4(), 'to_view_videos'),
+    (uuid_generate_v4(), 'to_view_users'),
+    (uuid_generate_v4(), 'to_view_accounts'),
+    (uuid_generate_v4(), 'to_view_permissions'),
+    (uuid_generate_v4(), 'to_edit_images'),
+    (uuid_generate_v4(), 'to_edit_videos'),
+    (uuid_generate_v4(), 'to_edit_users'),
+    (uuid_generate_v4(), 'to_edit_accounts'),
+    (uuid_generate_v4(), 'to_edit_permissions'),
+    (uuid_generate_v4(), 'to_add_images'),
+    (uuid_generate_v4(), 'to_add_videos'),
+    (uuid_generate_v4(), 'to_add_users'),
+    (uuid_generate_v4(), 'to_add_accounts'),
+    (uuid_generate_v4(), 'to_add_permissions'),
+    (uuid_generate_v4(), 'to_delete_images'),
+    (uuid_generate_v4(), 'to_delete_videos'),
+    (uuid_generate_v4(), 'to_delete_users'),
+    (uuid_generate_v4(), 'to_delete_accounts'),
+    (uuid_generate_v4(), 'to_delete_permissions')`)
+    .then(() => {
+        console.log('permissions added');
+    })
+    .catch(err => {
+        console.log('adding permissions failed: ', err);
+        client.end();
+    })
 
-        bcrypt.hash('jacn2014', saltRounds)
-            .then((hash, err) => {
-                if(err) {
+client.query(`INSERT INTO accounts VALUES
+    (uuid_generate_v4(), 'administrator', (select array(select permission_id::uuid from permissions)))`)
+    .then(() => {
+        console.log('accounts added');
+    })
+    .catch(err => {
+        console.log('adding accounts failed: ', err);
+        client.end();
+    })
 
-                    console.log('error: ', err);
-                }
+bcrypt.hash('jacn2014', saltRounds)
+    .then((hash, err) => {
+        if(err){
+            console.log('hash error: ', err);
+            client.end();
+        }
 
-                client.query(`Insert into users values 
-            (uuid_generate_v4(), (select account_id from accounts where account_type='administrator'), 'alnig441', '${hash}'),
-            (uuid_generate_v4(), (select account_id from accounts where account_type='standard_user'), 'vandel', '${hash}'),
-            (uuid_generate_v4(), (select account_id from accounts where account_type='standard_user'), 'kilsyth', '${hash}')`)
-                    .then(result => {
-                        console.log('result: ', result);
-                        client.end()
-
-                    })
-                    .catch(err => {
-                        console.log('insert users error: ', err);
-                    })
-
+        client.query(`INSERT INTO users VALUES
+            (uuid_generate_v4(), (select account_id from accounts where account_name = 'administrator'), 'alnig441', '${hash}')`)
+            .then(() => {
+                console.log(`admin user 'alnig441' added`);
+                client.end();
             })
             .catch(err => {
-                console.log('bcrypt error: ', err)
+                console.log('admin user add failed: ', err);
+                client.end();
             })
     })
     .catch(err => {
-        console.log('insert accounts error: ', err);
-
+        console.log('hash error: ', err);
+        client.end();
     })
 
 

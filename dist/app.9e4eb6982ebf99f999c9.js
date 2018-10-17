@@ -7889,7 +7889,7 @@ let AuthenticationService = class AuthenticationService {
         this.isPermitted = {};
     }
     login(form) {
-        this.redirectUrl = "/private";
+        this.redirectUrl = "/private/user-domain";
         return this.http.post('/login', form)
             .map(activeUser => {
             if (activeUser && activeUser.token) {
@@ -8579,9 +8579,15 @@ let ImagesComponent = class ImagesComponent {
         this.activatedRoute = activatedRoute;
         this.activeUser = activeUser;
         this.imageService = imageService;
+        this.latest = new Array();
     }
     ngOnInit() {
         this.formManager.setService(this.activatedRoute.snapshot.url[0].path);
+        this.imageService.getAll()
+            .then((response) => {
+            this.latest = this.imageService.images.slice(0, 9);
+            console.log(response);
+        });
     }
 };
 ImagesComponent = __decorate([
@@ -21697,8 +21703,8 @@ if(content.locals) module.exports = content.locals;
 if(false) {
 	// When the styles change, update the <style> tags
 	if(!content.locals) {
-		module.hot.accept("!!../css-loader/index.js!../resolve-url-loader/index.js!../sass-loader/lib/loader.js?sourceMap!./lib/bootstrap.styles.loader.js?{\"bootstrapVersion\":3,\"useCustomIconFontPath\":false,\"extractStyles\":false,\"styleLoaders\":[\"style\",\"css\",\"sass\"],\"styles\":[\"mixins\",\"normalize\",\"print\",\"glyphicons\",\"scaffolding\",\"type\",\"code\",\"grid\",\"tables\",\"forms\",\"buttons\",\"component-animations\",\"dropdowns\",\"button-groups\",\"input-groups\",\"navs\",\"navbar\",\"breadcrumbs\",\"pagination\",\"pager\",\"labels\",\"badges\",\"jumbotron\",\"thumbnails\",\"alerts\",\"progress-bars\",\"media\",\"list-group\",\"panels\",\"wells\",\"responsive-embed\",\"close\",\"modals\",\"tooltip\",\"popovers\",\"carousel\",\"utilities\",\"responsive-utilities\"],\"scripts\":[\"transition\",\"alert\",\"button\",\"carousel\",\"collapse\",\"dropdown\",\"modal\",\"tooltip\",\"popover\",\"scrollspy\",\"tab\",\"affix\"],\"configFilePath\":\"/Users/allannielsen/WebstormProjects/jacnweb-ng4-refactor/node_modules/bootstrap-loader/.bootstraprc-3-default\",\"bootstrapPath\":\"/Users/allannielsen/WebstormProjects/jacnweb-ng4-refactor/node_modules/bootstrap-sass\",\"bootstrapRelPath\":\"../bootstrap-sass\"}!./no-op.js", function() {
-			var newContent = require("!!../css-loader/index.js!../resolve-url-loader/index.js!../sass-loader/lib/loader.js?sourceMap!./lib/bootstrap.styles.loader.js?{\"bootstrapVersion\":3,\"useCustomIconFontPath\":false,\"extractStyles\":false,\"styleLoaders\":[\"style\",\"css\",\"sass\"],\"styles\":[\"mixins\",\"normalize\",\"print\",\"glyphicons\",\"scaffolding\",\"type\",\"code\",\"grid\",\"tables\",\"forms\",\"buttons\",\"component-animations\",\"dropdowns\",\"button-groups\",\"input-groups\",\"navs\",\"navbar\",\"breadcrumbs\",\"pagination\",\"pager\",\"labels\",\"badges\",\"jumbotron\",\"thumbnails\",\"alerts\",\"progress-bars\",\"media\",\"list-group\",\"panels\",\"wells\",\"responsive-embed\",\"close\",\"modals\",\"tooltip\",\"popovers\",\"carousel\",\"utilities\",\"responsive-utilities\"],\"scripts\":[\"transition\",\"alert\",\"button\",\"carousel\",\"collapse\",\"dropdown\",\"modal\",\"tooltip\",\"popover\",\"scrollspy\",\"tab\",\"affix\"],\"configFilePath\":\"/Users/allannielsen/WebstormProjects/jacnweb-ng4-refactor/node_modules/bootstrap-loader/.bootstraprc-3-default\",\"bootstrapPath\":\"/Users/allannielsen/WebstormProjects/jacnweb-ng4-refactor/node_modules/bootstrap-sass\",\"bootstrapRelPath\":\"../bootstrap-sass\"}!./no-op.js");
+		module.hot.accept("!!../css-loader/index.js!../resolve-url-loader/index.js!../sass-loader/lib/loader.js?sourceMap!./lib/bootstrap.styles.loader.js?{\"bootstrapVersion\":3,\"useCustomIconFontPath\":false,\"extractStyles\":false,\"styleLoaders\":[\"style\",\"css\",\"sass\"],\"styles\":[\"mixins\",\"normalize\",\"print\",\"glyphicons\",\"scaffolding\",\"type\",\"code\",\"grid\",\"tables\",\"forms\",\"buttons\",\"component-animations\",\"dropdowns\",\"button-groups\",\"input-groups\",\"navs\",\"navbar\",\"breadcrumbs\",\"pagination\",\"pager\",\"labels\",\"badges\",\"jumbotron\",\"thumbnails\",\"alerts\",\"progress-bars\",\"media\",\"list-group\",\"panels\",\"wells\",\"responsive-embed\",\"close\",\"modals\",\"tooltip\",\"popovers\",\"carousel\",\"utilities\",\"responsive-utilities\"],\"scripts\":[\"transition\",\"alert\",\"button\",\"carousel\",\"collapse\",\"dropdown\",\"modal\",\"tooltip\",\"popover\",\"scrollspy\",\"tab\",\"affix\"],\"configFilePath\":\"/Users/allannielsen/Sites/22may2018/node_modules/bootstrap-loader/.bootstraprc-3-default\",\"bootstrapPath\":\"/Users/allannielsen/Sites/22may2018/node_modules/bootstrap-sass\",\"bootstrapRelPath\":\"../bootstrap-sass\"}!./no-op.js", function() {
+			var newContent = require("!!../css-loader/index.js!../resolve-url-loader/index.js!../sass-loader/lib/loader.js?sourceMap!./lib/bootstrap.styles.loader.js?{\"bootstrapVersion\":3,\"useCustomIconFontPath\":false,\"extractStyles\":false,\"styleLoaders\":[\"style\",\"css\",\"sass\"],\"styles\":[\"mixins\",\"normalize\",\"print\",\"glyphicons\",\"scaffolding\",\"type\",\"code\",\"grid\",\"tables\",\"forms\",\"buttons\",\"component-animations\",\"dropdowns\",\"button-groups\",\"input-groups\",\"navs\",\"navbar\",\"breadcrumbs\",\"pagination\",\"pager\",\"labels\",\"badges\",\"jumbotron\",\"thumbnails\",\"alerts\",\"progress-bars\",\"media\",\"list-group\",\"panels\",\"wells\",\"responsive-embed\",\"close\",\"modals\",\"tooltip\",\"popovers\",\"carousel\",\"utilities\",\"responsive-utilities\"],\"scripts\":[\"transition\",\"alert\",\"button\",\"carousel\",\"collapse\",\"dropdown\",\"modal\",\"tooltip\",\"popover\",\"scrollspy\",\"tab\",\"affix\"],\"configFilePath\":\"/Users/allannielsen/Sites/22may2018/node_modules/bootstrap-loader/.bootstraprc-3-default\",\"bootstrapPath\":\"/Users/allannielsen/Sites/22may2018/node_modules/bootstrap-sass\",\"bootstrapRelPath\":\"../bootstrap-sass\"}!./no-op.js");
 			if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
 			update(newContent);
 		});
@@ -31186,7 +31192,7 @@ exports.SidebarCtaComponent = SidebarCtaComponent;
 /***/ 710:
 /***/ (function(module, exports) {
 
-module.exports = "<ul class=\"list-group box-shadow cta-list\" style=\"border: 1px, solid, black;\"><li class=\"list-group-item\" *ngIf=\"this.formManager.getService() =='images'\"><a (click)=\"getLatest()\">get latest</a></li><li class=\"list-group-item\"><a (click)=\"getList()\">filter</a></li></ul>"
+module.exports = "<ul class=\"list-group box-shadow cta-list\" style=\"border: 1px, solid, black;\"><li class=\"list-group-item\" *ngIf=\"this.formManager.getService() =='images'\"><a (click)=\"getLatest()\">get latest</a></li><li class=\"list-group-item\"><a (click)=\"getList()\">filter</a></li><li><input type=\"text\"></li></ul>"
 
 /***/ }),
 
@@ -31363,7 +31369,7 @@ exports.UserDomainRoutingModule = UserDomainRoutingModule;
 /***/ 716:
 /***/ (function(module, exports) {
 
-module.exports = "<span *ngIf=\"!this.imageService.message.failure\"><div class=\"col-sm-6 col-md-4\" *ngFor=\"let image of this.imageService.images as images; index as i\"><div class=\"thumbnail box-shadow\" id=\"{{image.id}}\"><img src=\"{{image.file}}\" alt=\"...\"><div class=\"caption\"><h4>{{image.created}}</h4><p> {{image.event_en}}</p><p><a class=\"btn btn-primary\" role=\"button\">Enlarge</a><a class=\"btn btn-primary\" role=\"button\">Print</a><a class=\"btn btn-primary\" role=\"button\">Close</a></p></div></div></div></span>"
+module.exports = "<span *ngIf=\"!this.imageService.message.failure\"><div class=\"col-sm-6 col-md-4\" *ngFor=\"let image of this.latest as images; index as i\"><div class=\"thumbnail box-shadow\" *ngIf=\"i &lt; 9\" id=\"{{image.id}}\"><img src=\"{{image.file}}\" alt=\"...\"><div class=\"caption\"><h4>{{image.created}}</h4><p> {{image.event_en}}</p><p><a class=\"btn btn-primary\" role=\"button\">Enlarge</a><a class=\"btn btn-primary\" role=\"button\">Print</a><a class=\"btn btn-primary\" role=\"button\">Close</a></p></div></div></div></span>"
 
 /***/ }),
 
@@ -31377,7 +31383,7 @@ module.exports = "app-images {\n  background-color: whitesmoke; }\n\nul {\n  bor
 /***/ 718:
 /***/ (function(module, exports) {
 
-module.exports = "hello from events<!--.col-sm-2--><!--    app-sidebar--><!--.col-sm-8--><!--    p events component--><!--.col-sm-2-->"
+module.exports = "hello from videos<!--.col-sm-2--><!--    app-sidebar--><!--.col-sm-8--><!--    p events component--><!--.col-sm-2-->"
 
 /***/ }),
 
@@ -31549,13 +31555,11 @@ let LoginComponent = class LoginComponent {
                     });
                 })
                     .then(() => {
-                    let redirect = user.userParameters.type != 'standard_user' ? '/private/admin-domain' : '/private/user-domain';
-                    // let redirect = this.authenticator.redirectUrl ? this.authenticator.redirectUrl : '/private';
                     let navigationExtras = {
                         queryParamsHandling: 'preserve',
                         preserveFragment: true
                     };
-                    this.router.navigate([redirect], navigationExtras);
+                    this.router.navigate([this.authenticator.redirectUrl], navigationExtras);
                 })
                     .catch(this.errorParser.handleError)
                     .catch(error => console.log(error));
@@ -31601,7 +31605,7 @@ exports.LoginModel = LoginModel;
 /***/ 723:
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"modal fade\" id=\"loginModal\" tabindex=\"-1\" role=\"dialog\"><div class=\"modal-dialog modal-sm\" role=\"document\"><div class=\"modal-content\"><form (ngSubmit)=\"onSubmit()\" #loginForm=\"ngForm\"><div class=\"modal-header\"><h4>Login Dialog</h4></div><div class=\"modal-body\"><div class=\"form-group\"><div class=\"input-group\"><span class=\"input-group-addon\">Username<!--label(for=\"userName\") User Name--></span><input class=\"form-control\" type=\"email\" id=\"userName\" placeholder=\"Enter User Name\" required [(ngModel)]=\"loginModel.username\" name=\"username\" #username=\"ngModel\"></div></div><div class=\"alert alert-danger\" [hidden]=\"username.valid || username.pristine\">User ID Required</div><div class=\"form-group\"><div class=\"input-group\"><span class=\"input-group-addon\">Password</span><!--label(for=\"password\" required) Password--><input class=\"form-control\" type=\"password\" id=\"password\" placeholder=\"Password\" required [(ngModel)]=\"loginModel.password\" name=\"password\" #password=\"ngModel\"></div></div><div class=\"alert alert-danger\" [hidden]=\"password.valid || password.pristine\">Password Required</div></div><div class=\"modal-footer\"><button class=\"btn btn-secondary\" type=\"button\" data-dismiss=\"modal\" (click)=\"onCancel()\">Cancel</button><button class=\"btn btn-primary\" type=\"submit\">Login</button></div></form></div></div></div>"
+module.exports = "<div class=\"modal fade\" id=\"loginModal\" tabindex=\"-1\" role=\"dialog\"><div class=\"modal-dialog modal-sm\" role=\"document\"><div class=\"modal-content\"><form (ngSubmit)=\"onSubmit()\" #loginForm=\"ngForm\"><div class=\"modal-header\"><h4>Login Dialog</h4></div><div class=\"modal-body\"><div class=\"form-group\"><div class=\"input-group\"><span class=\"input-group-addon\">Username</span><input class=\"form-control\" type=\"email\" id=\"userName\" placeholder=\"Enter User Name\" required [(ngModel)]=\"loginModel.username\" name=\"username\" #username=\"ngModel\"></div></div><div class=\"alert alert-danger\" [hidden]=\"username.valid || username.pristine\">User ID Required</div><div class=\"form-group\"><div class=\"input-group\"><span class=\"input-group-addon\">Password</span><input class=\"form-control\" type=\"password\" id=\"password\" placeholder=\"Password\" required [(ngModel)]=\"loginModel.password\" name=\"password\" #password=\"ngModel\"></div></div><div class=\"alert alert-danger\" [hidden]=\"password.valid || password.pristine\">Password Required</div></div><div class=\"modal-footer\"><button class=\"btn btn-secondary\" type=\"button\" data-dismiss=\"modal\" (click)=\"onCancel()\">Cancel</button><button class=\"btn btn-primary\" type=\"submit\">Login</button></div></form></div></div></div>"
 
 /***/ }),
 
@@ -31906,4 +31910,4 @@ exports.ErrorParser = ErrorParser;
 /***/ })
 
 },[651]);
-//# sourceMappingURL=app.389245075410d5429bf2.js.map
+//# sourceMappingURL=app.9e4eb6982ebf99f999c9.js.map

@@ -17,7 +17,7 @@ export class AuthenticationService {
 
     login(form: LoginModel) {
 
-        this.redirectUrl = "/private"
+        this.redirectUrl = "/private/user-domain"
 
         return this.http.post<any>('/login', form)
             .map(activeUser => {

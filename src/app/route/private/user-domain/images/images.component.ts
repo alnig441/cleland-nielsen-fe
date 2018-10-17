@@ -15,10 +15,18 @@ import { ActivatedRoute } from "@angular/router";
 export class ImagesComponent implements OnInit {
 
     private imageForm: ImageModel;
+    private latest: ImageModel[] = new Array();
 
     constructor(private formManager: ServiceModelManagerService, private activatedRoute: ActivatedRoute, private activeUser: AuthenticationService, private imageService: ImageServices){}
 
     ngOnInit(): void {
         this.formManager.setService(this.activatedRoute.snapshot.url[0].path);
+        this.imageService.getAll()
+            .then((response) => {
+                this.latest = this.imageService.images.slice(0,9);
+                console.log(response);
+            });
+
     }
+
 }

@@ -2,6 +2,9 @@ const express = require('express'),
     router = express.Router();
 const passport = require('passport');
 
+const   { Client } = require('pg'),
+        connectionString = process.env.MYDB || 'postgresql://allannielsen:1109721405@localhost:5432/jacn2014_ng4';
+
 const mockImages = [
     {
         id: 1,
@@ -21,7 +24,23 @@ const mockImages = [
 
 
 router.get('/', (req, res, next) => {
-    res.send(mockImages);
+
+    console.log('images get:');
+
+    const client = new Client({
+        connectionString: connectionString
+    })
+
+    client.connect();
+    return client.query('SELECT * FROM images')
+        .then(result => {
+            res.send(result.rows);
+        })
+        .catch(err => {
+            console.log('error getting ALL images', err);
+        })
+    client.end();
+    // res.send(mockImages);
 })
 
 router.get('/latest', (req, res, next) => {

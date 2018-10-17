@@ -44,14 +44,12 @@ export class LoginComponent implements OnInit {
                         })
                     })
                     .then(() => {
-                        let redirect =  user.userParameters.type != 'standard_user' ? '/private/admin-domain': '/private/user-domain';
-                        // let redirect = this.authenticator.redirectUrl ? this.authenticator.redirectUrl : '/private';
                         let navigationExtras : NavigationExtras = {
                             queryParamsHandling: 'preserve',
                             preserveFragment: true
                         };
 
-                        this.router.navigate([redirect],navigationExtras);
+                        this.router.navigate([this.authenticator.redirectUrl],navigationExtras);
                     })
                     .catch(this.errorParser.handleError)
                     .catch(error => console.log(error));

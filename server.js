@@ -7,7 +7,7 @@ const port = process.env.NODE_ENV === "production" ? process.env.PORT: "3000";
 const app = express();
 const bodyParser = require('body-parser');
 const passport = require('passport');
-const dbInit = process.env.DB_INIT ? process.evn.DB_INIT : false;
+const dbInit = process.env.DB_INIT ? process.env.DB_INIT : false;
 
 require('./routes/authenticate/passport');
 
@@ -53,7 +53,7 @@ app.listen(port, hostName, function onStart(err) {
     console.info('==> 🌎 Listening on port %s. Open up http://'+hostName+':%s/ in your browser.', port, port);
 });
 
-cron.schedule('* * * * *', () => {
-    console.log('running task every minute');
-});
+// cron.schedule('* * * * *', () => {
+//     console.log('running task every minute');
+// });
 
