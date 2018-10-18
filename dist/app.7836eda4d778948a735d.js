@@ -8585,9 +8585,15 @@ let ImagesComponent = class ImagesComponent {
         this.formManager.setService(this.activatedRoute.snapshot.url[0].path);
         this.imageService.getAll()
             .then((response) => {
-            this.latest = this.imageService.images.slice(0, 9);
-            console.log(response);
+            let array = [];
+            this.latest = this.imageService.images.slice(0, 39);
         });
+        this.imageService.getTabInfo()
+            .then(res => {
+            this.tabs = res.body;
+            console.log('tabs: ', this.tabs);
+        });
+        console.log(this.tabs);
     }
 };
 ImagesComponent = __decorate([
@@ -31192,7 +31198,7 @@ exports.SidebarCtaComponent = SidebarCtaComponent;
 /***/ 710:
 /***/ (function(module, exports) {
 
-module.exports = "<ul class=\"list-group box-shadow cta-list\" style=\"border: 1px, solid, black;\"><li class=\"list-group-item\" *ngIf=\"this.formManager.getService() =='images'\"><a (click)=\"getLatest()\">get latest</a></li><li class=\"list-group-item\"><a (click)=\"getList()\">filter</a></li><li><input type=\"text\"></li></ul>"
+module.exports = "<ul class=\"list-group box-shadow cta-list\" style=\"border: 1px, solid, black;\"><li class=\"list-group-item\" *ngIf=\"this.formManager.getService() =='images'\"><a (click)=\"getLatest()\">get latest</a></li><li class=\"list-group-item\"><a (click)=\"getList()\">filter</a></li><li class=\"list-group-item\"><input type=\"text\"></li></ul>"
 
 /***/ }),
 
@@ -31369,14 +31375,14 @@ exports.UserDomainRoutingModule = UserDomainRoutingModule;
 /***/ 716:
 /***/ (function(module, exports) {
 
-module.exports = "<span *ngIf=\"!this.imageService.message.failure\"><div class=\"col-sm-6 col-md-4\" *ngFor=\"let image of this.latest as images; index as i\"><div class=\"thumbnail box-shadow\" *ngIf=\"i &lt; 9\" id=\"{{image.id}}\"><img src=\"{{image.file}}\" alt=\"...\"><div class=\"caption\"><h4>{{image.created}}</h4><p> {{image.event_en}}</p><p><a class=\"btn btn-primary\" role=\"button\">Enlarge</a><a class=\"btn btn-primary\" role=\"button\">Print</a><a class=\"btn btn-primary\" role=\"button\">Close</a></p></div></div></div></span>"
+module.exports = "<span *ngIf=\"!this.imageService.message.failure\"><div class=\"tab {{tab.year}}\" *ngFor=\"let tab of this.tabs; index as i\"><a>{{tab.year}}</a></div><div class=\"reel-container\"><div class=\"image-container\" *ngFor=\"let image of this.latest as images; index as j\"><a class=\"thumbnail\" *ngIf=\"image.year == tabs[0].year\"><!--img( src='{{image.file}}')--><img src=\"https://d2gne97vdumgn3.cloudfront.net/api/file/Rx1s76VjTAO1Qc4GY7jY\"></a></div></div></span>"
 
 /***/ }),
 
 /***/ 717:
 /***/ (function(module, exports) {
 
-module.exports = "app-images {\n  background-color: whitesmoke; }\n\nul {\n  border-radius: 4px; }\n"
+module.exports = "app-images {\n  background-color: whitesmoke; }\n\nul {\n  border-radius: 4px; }\n\n.reel-container {\n  border-radius: 3px;\n  background-color: #777777;\n  text-align: center;\n  opacity: .95; }\n\n.image-container {\n  display: inline-block;\n  background-color: #777777; }\n\n.reel {\n  display: inline;\n  background-color: #777777;\n  border-top: 1px solid black;\n  overflow: hidden; }\n\n.tab {\n  display: inline-block;\n  margin-left: 3px; }\n\n.tab a {\n  cursor: pointer;\n  color: white;\n  text-decoration: none;\n  background-color: #777777;\n  width: auto;\n  border: 1px solid black;\n  border-bottom: 1px solid #777777;\n  border-top-left-radius: 3px;\n  border-top-right-radius: 3px;\n  padding: 0px 5px; }\n\n.thumbnail {\n  display: inline-flex;\n  margin: 2px; }\n\n.thumbnail,\n.thumbnail > img {\n  height: 80px; }\n"
 
 /***/ }),
 
@@ -31435,6 +31441,19 @@ let ImageServices = class ImageServices {
                 this.images = res.body;
                 this.imagesUpdated = true;
                 return Promise.resolve('success');
+            })
+                .catch(this.errorParser.handleError);
+        }
+    }
+    getTabInfo() {
+        if (!this.activeUser.isPermitted['to_view_images']) {
+            this.message.set({ status: 405, message: 'insufficient permissions' });
+        }
+        else {
+            return this.http.get(this.baseUrl + '/tabs', { observe: "response" })
+                .toPromise()
+                .then(res => {
+                return Promise.resolve(res);
             })
                 .catch(this.errorParser.handleError);
         }
@@ -31910,4 +31929,4 @@ exports.ErrorParser = ErrorParser;
 /***/ })
 
 },[651]);
-//# sourceMappingURL=app.9e4eb6982ebf99f999c9.js.map
+//# sourceMappingURL=app.7836eda4d778948a735d.js.map

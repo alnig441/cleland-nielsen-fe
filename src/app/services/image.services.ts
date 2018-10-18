@@ -34,6 +34,20 @@ export class ImageServices {
 
     }
 
+    getTabInfo(): Promise<any> {
+        if(!this.activeUser.isPermitted['to_view_images']){
+            this.message.set({ status: 405, message: 'insufficient permissions'});
+        }
+        else{
+            return this.http.get(this.baseUrl + '/tabs', {observe: "response"})
+                .toPromise()
+                .then(res => {
+                    return Promise.resolve(res);
+                })
+                .catch(this.errorParser.handleError);
+        }
+    }
+
     getOne(): Promise<any> {
         if(!this.activeUser.isPermitted['to_view_images']){
             this.message.set({ status: 405, message: 'insufficient permissions'});

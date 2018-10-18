@@ -1,11 +1,8 @@
 span(*ngIf="!this.imageService.message.failure")
-    div(*ngFor="let image of this.latest as images; index as i" class="col-sm-6 col-md-4")
-        div(*ngIf="i < 9" id="{{image.id}}" class="thumbnail box-shadow")
-            img(src="{{image.file}}" alt="...")
-            div(class="caption")
-                h4 {{image.created}}
-                p  {{image.event_en}}
-                p
-                    a(class="btn btn-primary", role="button") Enlarge
-                    a(class="btn btn-primary", role="button") Print
-                    a(class="btn btn-primary", role="button") Close
+    div(*ngFor='let tab of this.tabs; index as i' class='tab {{tab.year}}')
+        a {{tab.year}}
+    div( class='reel-container')
+        div(*ngFor='let image of this.latest as images; index as j' class='image-container')
+            a(*ngIf='image.year == tabs[0].year' class='thumbnail')
+              //img( src='{{image.file}}')
+              img(src='https://d2gne97vdumgn3.cloudfront.net/api/file/Rx1s76VjTAO1Qc4GY7jY')

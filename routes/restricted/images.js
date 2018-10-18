@@ -47,6 +47,20 @@ router.get('/latest', (req, res, next) => {
     res.send([mockImages[1]]);
 })
 
+router.get('/tabs', (req, res, next) => {
+    const client = new Client({
+        connectionString : connectionString
+    })
+    client.connect();
+    return client.query('SELECT DISTINCT(year) FROM images ORDER BY year ASC')
+        .then(result => {
+            res.send(result.rows);
+        })
+        .catch(err => {
+            console.log('error getting tab info: ', err);
+        })
+})
+
 router.param('image_id', (req, res, next, image_id) => {
     req.image = image_id;
     next();

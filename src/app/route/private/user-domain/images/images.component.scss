@@ -5,3 +5,52 @@ app-images {
 ul {
   border-radius: 4px;
 }
+
+
+.reel-container {
+  border-radius: 3px;
+  background-color: #777777;
+  text-align: center;
+  opacity: .95;
+}
+
+.image-container {
+  display: inline-block;
+  background-color: #777777;
+}
+
+.reel {
+  display: inline;
+  background-color: #777777;
+  border-top: 1px solid black;
+  overflow: hidden;
+}
+
+.tab {
+  display: inline-block;
+  margin-left: 3px;
+}
+
+.tab a {
+  cursor: pointer;
+  color: white;
+  text-decoration: none;
+  background-color: #777777;
+  //background-color: black;
+  width: auto;
+  border: 1px solid black;
+  border-bottom: 1px solid #777777;
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+  padding:0px 5px;
+}
+
+.thumbnail {
+  display: inline-flex;
+  margin: 2px;
+}
+
+.thumbnail,
+.thumbnail > img {
+  height: 80px;
+}
