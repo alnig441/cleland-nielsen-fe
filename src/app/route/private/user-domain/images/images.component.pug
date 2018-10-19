@@ -1,8 +1,7 @@
 span(*ngIf="!this.imageService.message.failure")
-    div(*ngFor='let tab of this.tabs; index as i' class='tab {{tab.year}}')
-        a {{tab.year}}
+    div(*ngFor='let year of this.tabs as years; index as i' class='tab {{i}}')
+        a {{year}}
     div( class='reel-container')
-        div(*ngFor='let image of this.latest as images; index as j' class='image-container')
-            a(*ngIf='image.year == tabs[0].year' class='thumbnail')
-              //img( src='{{image.file}}')
+        div(*ngFor='let image of this.currentView as images; index as j' class='image-container')
+            a(*ngIf='j < 10' class='thumbnail')
               img(src='https://d2gne97vdumgn3.cloudfront.net/api/file/Rx1s76VjTAO1Qc4GY7jY')

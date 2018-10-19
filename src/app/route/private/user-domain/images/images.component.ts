@@ -15,8 +15,8 @@ import { ActivatedRoute } from "@angular/router";
 export class ImagesComponent implements OnInit {
 
     private imageForm: ImageModel;
-    private latest: ImageModel[] = new Array();
-    private tabs: any[];
+    private currentView: ImageModel[] = new Array();
+    private tabs: any[] = new Array();
 
     constructor(private formManager: ServiceModelManagerService, private activatedRoute: ActivatedRoute, private activeUser: AuthenticationService, private imageService: ImageServices){}
 
@@ -25,14 +25,14 @@ export class ImagesComponent implements OnInit {
         this.imageService.getAll()
             .then((response) => {
                 let array: any[] = [];
-                this.latest = this.imageService.images.slice(0,39);
+                this.imageService.images.forEach((year, tab) => {
+                    if(year){
+                        array.push(tab);
+                    }
+                })
+                this.tabs = array.reverse();
+                this.currentView = this.imageService.images[this.tabs[0]] as ImageModel[];
             });
-        this.imageService.getTabInfo()
-            .then(res => {
-                this.tabs = res.body;
-                console.log('tabs: ', this.tabs)
-            })
-        console.log(this.tabs);
     }
 
 }

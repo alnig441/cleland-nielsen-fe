@@ -32,9 +32,21 @@ router.get('/', (req, res, next) => {
     })
 
     client.connect();
-    return client.query('SELECT * FROM images')
-        .then(result => {
-            res.send(result.rows);
+    return client.query('SELECT * FROM images ORDER BY created DESC')
+        .then(images => {
+            client.query('SELECT DISTINCT(year) FROM images ORDER BY year DESC')
+                .then(years => {
+                    let arr = [];
+                    years.rows.forEach(current => {
+                        arr[current.year] = [];
+                        images.rows.forEach(image => {
+                            if(parseInt(current.year) == parseInt(image.year)){
+                                arr[current.year].push(image);
+                            }
+                        })
+                    })
+                    res.send(arr);
+                })
         })
         .catch(err => {
             console.log('error getting ALL images', err);

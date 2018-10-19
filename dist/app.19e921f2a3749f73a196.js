@@ -8579,21 +8579,22 @@ let ImagesComponent = class ImagesComponent {
         this.activatedRoute = activatedRoute;
         this.activeUser = activeUser;
         this.imageService = imageService;
-        this.latest = new Array();
+        this.currentView = new Array();
+        this.tabs = new Array();
     }
     ngOnInit() {
         this.formManager.setService(this.activatedRoute.snapshot.url[0].path);
         this.imageService.getAll()
             .then((response) => {
             let array = [];
-            this.latest = this.imageService.images.slice(0, 39);
+            this.imageService.images.forEach((year, tab) => {
+                if (year) {
+                    array.push(tab);
+                }
+            });
+            this.tabs = array.reverse();
+            this.currentView = this.imageService.images[this.tabs[0]];
         });
-        this.imageService.getTabInfo()
-            .then(res => {
-            this.tabs = res.body;
-            console.log('tabs: ', this.tabs);
-        });
-        console.log(this.tabs);
     }
 };
 ImagesComponent = __decorate([
@@ -31375,7 +31376,7 @@ exports.UserDomainRoutingModule = UserDomainRoutingModule;
 /***/ 716:
 /***/ (function(module, exports) {
 
-module.exports = "<span *ngIf=\"!this.imageService.message.failure\"><div class=\"tab {{tab.year}}\" *ngFor=\"let tab of this.tabs; index as i\"><a>{{tab.year}}</a></div><div class=\"reel-container\"><div class=\"image-container\" *ngFor=\"let image of this.latest as images; index as j\"><a class=\"thumbnail\" *ngIf=\"image.year == tabs[0].year\"><!--img( src='{{image.file}}')--><img src=\"https://d2gne97vdumgn3.cloudfront.net/api/file/Rx1s76VjTAO1Qc4GY7jY\"></a></div></div></span>"
+module.exports = "<span *ngIf=\"!this.imageService.message.failure\"><div class=\"tab {{i}}\" *ngFor=\"let year of this.tabs as years; index as i\"><a>{{year}}</a></div><div class=\"reel-container\"><div class=\"image-container\" *ngFor=\"let image of this.currentView as images; index as j\"><a class=\"thumbnail\" *ngIf=\"j &lt; 10\"><img src=\"https://d2gne97vdumgn3.cloudfront.net/api/file/Rx1s76VjTAO1Qc4GY7jY\"></a></div></div></span>"
 
 /***/ }),
 
@@ -31929,4 +31930,4 @@ exports.ErrorParser = ErrorParser;
 /***/ })
 
 },[651]);
-//# sourceMappingURL=app.7836eda4d778948a735d.js.map
+//# sourceMappingURL=app.19e921f2a3749f73a196.js.map
