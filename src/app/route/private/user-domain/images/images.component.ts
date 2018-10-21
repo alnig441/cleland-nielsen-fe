@@ -32,6 +32,7 @@ export class ImagesComponent implements OnInit {
                 })
                 this.tabs = array.reverse();
                 this.currentView = this.imageService.images[this.tabs[0]] as ImageModel[];
+                console.log('current view: ', this.currentView)
             });
     }
 

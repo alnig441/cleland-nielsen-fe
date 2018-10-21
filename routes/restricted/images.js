@@ -40,9 +40,7 @@ router.get('/', (req, res, next) => {
                     years.rows.forEach(current => {
                         arr[current.year] = [];
                         images.rows.forEach(image => {
-                            if(parseInt(current.year) == parseInt(image.year)){
-                                arr[current.year].push(image);
-                            }
+                            arr[current.year][image.month] ? arr[current.year][image.month].push(image) : arr[current.year][image.month] = [];
                         })
                     })
                     res.send(arr);
@@ -52,7 +50,6 @@ router.get('/', (req, res, next) => {
             console.log('error getting ALL images', err);
         })
     client.end();
-    // res.send(mockImages);
 })
 
 router.get('/latest', (req, res, next) => {

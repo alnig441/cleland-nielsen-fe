@@ -63,6 +63,9 @@ export class ServiceModelManagerService {
             case 'images':
                 this.recordModel = new ImageModel();
                 break;
+            default:
+                this.recordModel = '';
+                break;
         }
 
         if(this.recordModel){

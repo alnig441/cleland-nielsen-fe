@@ -9,6 +9,7 @@ import { UserDomainComponent } from "./user-domain.component";
 import { MessageBarModule } from "../../../modules/message-bar/message-bar.module";
 import { SidebarCtaModule } from "../../../modules/sidebar-cta/sidebar-cta.module";
 import { FormSubmissionModule } from "../../../modules/form-submission/form-submission.module";
+import { MonthTransform } from "../../../pipes/month.transform";
 
 @NgModule({
     imports: [
@@ -22,8 +23,9 @@ import { FormSubmissionModule } from "../../../modules/form-submission/form-subm
         UserDomainComponent,
         ImagesComponent,
         VideosComponent,
+        MonthTransform
     ],
-    exports: [ RouterModule ],
+    exports: [ MonthTransform ],
     providers: [ AuthenticationGuardService ]
 })
 

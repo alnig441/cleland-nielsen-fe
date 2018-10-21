@@ -2,12 +2,15 @@ span(*ngIf="this.formManager.getService() == 'images'")
     div(class="panel panel-default box-shadow")
         div(class="panel-heading")
             h3(class="panel-title") image info
-        div(*ngFor="let property of this.formManager.getProperties() as form;", class="panel-body")
-            p {{property}}
-            hr
+        div(class="panel-body")
+            //p(*ngFor="let property of this.formManager.getProperties() as form;") {{property}}
+            p location:
+            p date:
+            p event:
+            p names:
 
 
-span(*ngIf="this.activeUser.isPermitted['to_add_'+ this.formManager.getService()] && this.formManager.getService() !='images'")
+span(*ngIf="this.activeUser.isPermitted['to_add_'+ this.formManager.getService()] && this.formManager.getService() !='images' && this.formManager.getService() !='videos'")
     form(#addrecordModel="ngForm" class="panel panel-default box-shadow")
         div(class="panel-heading")
             h3(class="panel-title") add {{this.formManager.getService()}}

@@ -2,16 +2,22 @@ app-images {
   background-color: whitesmoke;
 }
 
-ul {
-  border-radius: 4px;
+.month {
+  border-left: 1px solid;
+  padding: 0 5px;
+  float: left;
+  position: absolute;
+  border-radius: 3px 0 0 0;
 }
 
 
 .reel-container {
-  border-radius: 3px;
-  background-color: #777777;
+  border-top: 1px solid;
+  background-image: linear-gradient(to right, white, #777777,#777777,#777777,#777777, white);
+  background-image
   text-align: center;
   opacity: .95;
+  border-radius: 3px 0 0 0;
 }
 
 .image-container {
@@ -35,8 +41,8 @@ ul {
   cursor: pointer;
   color: white;
   text-decoration: none;
-  background-color: #777777;
-  //background-color: black;
+  //background-color: #777777;
+  background-color: black;
   width: auto;
   border: 1px solid black;
   border-bottom: 1px solid #777777;
