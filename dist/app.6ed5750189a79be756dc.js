@@ -31386,14 +31386,14 @@ exports.UserDomainRoutingModule = UserDomainRoutingModule;
 /***/ 716:
 /***/ (function(module, exports) {
 
-module.exports = "<span *ngIf=\"!this.imageService.message.failure\"><div><div class=\"tab {{year}}\" *ngFor=\"let year of this.tabs as years; index as i\"><a>{{year}}</a></div><div class=\"reel-container {{months.length - m}}\" *ngFor=\"let month of this.currentView as months; index as m\"><p class=\"month\">{{ (months.length - 1 - m) | monthTransform }}</p><div class=\"image-container\" *ngFor=\"let image of months[months.length - 1 - m] as images; index as j\"><a class=\"thumbnail\" *ngIf=\"j &lt; 6\"><img src=\"https://d2gne97vdumgn3.cloudfront.net/api/file/Rx1s76VjTAO1Qc4GY7jY\"></a></div></div></div></span>"
+module.exports = "<span *ngIf=\"!this.imageService.message.failure\"><div><div class=\"tab {{i | monthTransform}}\" *ngFor=\"let month of this.currentView as months; index as i\"><a>{{i | monthTransform}}</a></div><div class=\"reel-container {{ year }}\"><ul class=\"year\"><li *ngFor=\"let year of this.tabs as years; index as m\"><a>{{ year }}</a></li></ul><div class=\"image-container\" *ngFor=\"let image of this.currentView[this.currentView.length - 1] as images; index as j\"><a class=\"thumbnail\" *ngIf=\"j &lt; 4\"><img src=\"https://d2gne97vdumgn3.cloudfront.net/api/file/Rx1s76VjTAO1Qc4GY7jY\"></a></div></div></div></span>"
 
 /***/ }),
 
 /***/ 717:
 /***/ (function(module, exports) {
 
-module.exports = "app-images {\n  background-color: whitesmoke; }\n\n.month {\n  border-left: 1px solid;\n  padding: 0 5px;\n  float: left;\n  position: absolute;\n  border-radius: 3px 0 0 0; }\n\n.reel-container {\n  border-top: 1px solid;\n  background-image: linear-gradient(to right, white, #777777, #777777, #777777, #777777, white);\n  text-align: center;\n  opacity: .95;\n  border-radius: 3px 0 0 0; }\n\n.image-container {\n  display: inline-block;\n  background-color: #777777; }\n\n.reel {\n  display: inline;\n  background-color: #777777;\n  border-top: 1px solid black;\n  overflow: hidden; }\n\n.tab {\n  display: inline-block;\n  margin-left: 3px; }\n\n.tab a {\n  cursor: pointer;\n  color: white;\n  text-decoration: none;\n  background-color: black;\n  width: auto;\n  border: 1px solid black;\n  border-bottom: 1px solid #777777;\n  border-top-left-radius: 3px;\n  border-top-right-radius: 3px;\n  padding: 0px 5px; }\n\n.thumbnail {\n  display: inline-flex;\n  margin: 2px; }\n\n.thumbnail,\n.thumbnail > img {\n  height: 80px; }\n"
+module.exports = "app-images {\n  background-color: whitesmoke;\n  text-align: center; }\n\n.year {\n  list-style-type: none;\n  padding: 0;\n  float: left;\n  position: absolute; }\n\n.year li {\n  border-top: 1px solid;\n  border-left: 1px solid;\n  border-radius: 3px 0 0 3px; }\n\n.year li:first-child {\n  border-top: none;\n  border-radius: 0; }\n\n.year li:last-child {\n  border-bottom: 1px solid; }\n\n.year a {\n  color: black;\n  text-decoration: none;\n  margin: 8px; }\n\n.reel-container {\n  border-top: 1px solid;\n  background-image: linear-gradient(to right, white, #777777, #777777, #777777, #777777, white);\n  text-align: center;\n  opacity: .95;\n  border-radius: 3px 0 0 0; }\n\n.image-container {\n  display: inline-block; }\n\n.reel {\n  display: inline;\n  border-top: 1px solid black;\n  overflow: hidden; }\n\n.tab {\n  display: inline-block;\n  margin-left: 3px; }\n\n.tab a {\n  cursor: pointer;\n  color: white;\n  text-decoration: none;\n  background-color: black;\n  width: auto;\n  border: 1px solid black;\n  border-bottom: 1px solid #777777;\n  border-top-left-radius: 3px;\n  border-top-right-radius: 3px;\n  padding: 0px 5px; }\n\n.thumbnail {\n  display: inline-flex;\n  margin: 2px; }\n\n.thumbnail,\n.thumbnail > img {\n  height: 200px; }\n"
 
 /***/ }),
 
@@ -31407,7 +31407,7 @@ module.exports = "hello from videos<!--.col-sm-2--><!--    app-sidebar--><!--.co
 /***/ 719:
 /***/ (function(module, exports) {
 
-module.exports = "<router-outlet></router-outlet><div class=\"col-sm-2\"><app-sidebar-cta></app-sidebar-cta></div><div class=\"col-sm-8\"><app-messagebar></app-messagebar></div><div class=\"col-sm-2\"><app-form-submission></app-form-submission></div>"
+module.exports = "<!--router-outlet--><div class=\"col-sm-2\"><app-sidebar-cta></app-sidebar-cta></div><div class=\"col-sm-8\"><app-messagebar></app-messagebar><router-outlet></router-outlet></div><div class=\"col-sm-2\"><app-form-submission></app-form-submission></div>"
 
 /***/ }),
 
@@ -31551,6 +31551,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 const core_1 = __webpack_require__(3);
 let MonthTransform = class MonthTransform {
     transform(month) {
+        console.log(month);
         if (month || month == 0) {
             let months = [
                 'January',
@@ -31981,4 +31982,4 @@ exports.ErrorParser = ErrorParser;
 /***/ })
 
 },[651]);
-//# sourceMappingURL=app.91c2226fd4bc56a2abf4.js.map
+//# sourceMappingURL=app.6ed5750189a79be756dc.js.map

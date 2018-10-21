@@ -1,9 +1,11 @@
 span(*ngIf="!this.imageService.message.failure")
     div
-        div(*ngFor='let year of this.tabs as years; index as i' class='tab {{year}}')
-            a {{year}}
-        div(*ngFor='let month of this.currentView as months; index as m' class='reel-container {{months.length - m}}')
-            p(class='month') {{ (months.length - 1 - m) | monthTransform }}
-            div(*ngFor='let image of months[months.length - 1 - m] as images; index as j' class='image-container')
-                a(*ngIf='j < 6' class='thumbnail')
+        div(*ngFor='let month of this.currentView as months; index as i' class='tab {{i | monthTransform}}')
+            a {{i | monthTransform}}
+        div( class='reel-container {{ year }}')
+            ul(class='year')
+                li(*ngFor='let year of this.tabs as years; index as m' )
+                    a {{ year }}
+            div(*ngFor='let image of this.currentView[this.currentView.length - 1] as images; index as j' class='image-container')
+                a(*ngIf='j < 4' class='thumbnail')
                   img(src='https://d2gne97vdumgn3.cloudfront.net/api/file/Rx1s76VjTAO1Qc4GY7jY')

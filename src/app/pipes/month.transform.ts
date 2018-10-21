@@ -5,6 +5,8 @@ export class MonthTransform implements PipeTransform {
 
     transform(month: any) {
 
+        console.log(month);
+
         if(month || month == 0){
 
             let months = [
