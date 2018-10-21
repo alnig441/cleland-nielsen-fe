@@ -8594,7 +8594,6 @@ let ImagesComponent = class ImagesComponent {
             });
             this.tabs = array.reverse();
             this.currentView = this.imageService.images[this.tabs[0]];
-            console.log('current view: ', this.currentView);
         });
     }
 };
@@ -31393,7 +31392,7 @@ module.exports = "<span *ngIf=\"!this.imageService.message.failure\"><div><div c
 /***/ 717:
 /***/ (function(module, exports) {
 
-module.exports = "app-images {\n  background-color: whitesmoke;\n  text-align: center; }\n\n.year {\n  list-style-type: none;\n  padding: 0;\n  float: left;\n  position: absolute; }\n\n.year li {\n  border-top: 1px solid;\n  border-left: 1px solid;\n  border-radius: 3px 0 0 3px; }\n\n.year li:first-child {\n  border-top: none;\n  border-radius: 0; }\n\n.year li:last-child {\n  border-bottom: 1px solid; }\n\n.year a {\n  color: black;\n  text-decoration: none;\n  margin: 8px; }\n\n.reel-container {\n  border-top: 1px solid;\n  background-image: linear-gradient(to right, white, #777777, #777777, #777777, #777777, white);\n  text-align: center;\n  opacity: .95;\n  border-radius: 3px 0 0 0; }\n\n.image-container {\n  display: inline-block; }\n\n.reel {\n  display: inline;\n  border-top: 1px solid black;\n  overflow: hidden; }\n\n.tab {\n  display: inline-block;\n  margin-left: 3px; }\n\n.tab a {\n  cursor: pointer;\n  color: white;\n  text-decoration: none;\n  background-color: black;\n  width: auto;\n  border: 1px solid black;\n  border-bottom: 1px solid #777777;\n  border-top-left-radius: 3px;\n  border-top-right-radius: 3px;\n  padding: 0px 5px; }\n\n.thumbnail {\n  display: inline-flex;\n  margin: 2px; }\n\n.thumbnail,\n.thumbnail > img {\n  height: 200px; }\n"
+module.exports = "app-images {\n  background-color: whitesmoke;\n  text-align: center; }\n\n.year {\n  list-style-type: none;\n  padding: 0;\n  float: left;\n  position: absolute; }\n\n.year li {\n  border-top: 1px solid;\n  border-left: 1px solid;\n  border-radius: 3px 0 0 3px; }\n\n.year li:first-child {\n  border-top: none;\n  border-radius: 0; }\n\n.year li:last-child {\n  border-bottom: 1px solid; }\n\n.year a {\n  color: black;\n  text-decoration: none;\n  margin: 8px;\n  cursor: pointer; }\n\n.year li:hover {\n  background-color: white; }\n\n.year a:hover {\n  font-style: italic; }\n\n.reel-container {\n  border-top: 1px solid;\n  background-image: linear-gradient(to right, white, #777777, white);\n  text-align: center;\n  opacity: .95;\n  border-radius: 3px 0 0 0; }\n\n.image-container {\n  display: inline-block; }\n\n.reel {\n  display: inline;\n  border-top: 1px solid black;\n  overflow: hidden; }\n\n.tab {\n  display: inline-block;\n  margin-left: 3px; }\n\n.tab a {\n  cursor: pointer;\n  color: white;\n  text-decoration: none;\n  background-color: black;\n  width: auto;\n  border: 1px solid black;\n  border-bottom: 1px solid #777777;\n  border-top-left-radius: 3px;\n  border-top-right-radius: 3px;\n  padding: 0px 5px; }\n\n.tab a:hover {\n  background-color: white;\n  color: black;\n  font-style: italic;\n  border-bottom: 0px; }\n\n.thumbnail {\n  display: inline-flex;\n  margin: 2px; }\n\n.thumbnail,\n.thumbnail > img {\n  height: 200px; }\n"
 
 /***/ }),
 
@@ -31551,7 +31550,6 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 const core_1 = __webpack_require__(3);
 let MonthTransform = class MonthTransform {
     transform(month) {
-        console.log(month);
         if (month || month == 0) {
             let months = [
                 'January',
@@ -31982,4 +31980,4 @@ exports.ErrorParser = ErrorParser;
 /***/ })
 
 },[651]);
-//# sourceMappingURL=app.6ed5750189a79be756dc.js.map
+//# sourceMappingURL=app.f7b542a5193118594c0c.js.map

@@ -32,9 +32,17 @@ app-images {
   cursor: pointer;
 }
 
+.year li:hover {
+  background-color: white;
+}
+
+.year a:hover {
+  font-style: italic;
+}
+
 .reel-container {
   border-top: 1px solid;
-  background-image: linear-gradient(to right, white, #777777,#777777,#777777,#777777, white);
+  background-image: linear-gradient(to right, white ,#777777, white);
   text-align: center;
   opacity: .95;
   border-radius: 3px 0 0 0;
@@ -66,6 +74,13 @@ app-images {
   border-top-left-radius: 3px;
   border-top-right-radius: 3px;
   padding:0px 5px;
+}
+
+.tab a:hover {
+  background-color: white;
+  color: black;
+  font-style: italic;
+  border-bottom: 0px;
 }
 
 .thumbnail {
