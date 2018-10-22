@@ -1,10 +1,10 @@
 span(*ngIf="!this.imageService.message.failure")
     div
-        div(*ngFor='let month of this.currentView as months; index as i' class='month {{i | monthTransform}}')
+        div(*ngFor='let month of this.currentView as months; index as i' class='month {{i | monthTransform}}', [ngClass]="{'active': i == this.activePeriod.month}")
             a {{i | monthTransform}}
         div( class='reel-container {{ year }}')
             ul(class='year')
-                li(*ngFor='let year of this.tabs as years; index as m' )
+                li(*ngFor='let year of this.tabs as years; index as m', [ngClass]="{'active': this.tabs[m] == this.activePeriod.year}")
                     a {{ year }}
             div(*ngFor='let image of this.currentView[this.currentView.length - 1] as images; index as j' class='image-container')
                 a(*ngIf='j < 4' class='thumbnail')

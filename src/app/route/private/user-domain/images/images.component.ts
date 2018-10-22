@@ -17,6 +17,7 @@ export class ImagesComponent implements OnInit {
     private imageForm: ImageModel;
     private currentView: ImageModel[] = new Array();
     private tabs: any[] = new Array();
+    private activePeriod: object = new Object();
 
     constructor(private formManager: ServiceModelManagerService, private activatedRoute: ActivatedRoute, private activeUser: AuthenticationService, private imageService: ImageServices){}
 
@@ -31,6 +32,8 @@ export class ImagesComponent implements OnInit {
                     }
                 })
                 this.tabs = array.reverse();
+                this.activePeriod["year"] = this.tabs[0];
+                this.activePeriod["month"] = 11;
                 this.currentView = this.imageService.images[this.tabs[0]] as ImageModel[];
             });
     }

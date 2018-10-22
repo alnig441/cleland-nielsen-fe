@@ -8581,6 +8581,7 @@ let ImagesComponent = class ImagesComponent {
         this.imageService = imageService;
         this.currentView = new Array();
         this.tabs = new Array();
+        this.activePeriod = new Object();
     }
     ngOnInit() {
         this.formManager.setService(this.activatedRoute.snapshot.url[0].path);
@@ -8593,6 +8594,8 @@ let ImagesComponent = class ImagesComponent {
                 }
             });
             this.tabs = array.reverse();
+            this.activePeriod["year"] = this.tabs[0];
+            this.activePeriod["month"] = 11;
             this.currentView = this.imageService.images[this.tabs[0]];
         });
     }
@@ -31385,7 +31388,7 @@ exports.UserDomainRoutingModule = UserDomainRoutingModule;
 /***/ 716:
 /***/ (function(module, exports) {
 
-module.exports = "<span *ngIf=\"!this.imageService.message.failure\"><div><div class=\"month {{i | monthTransform}}\" *ngFor=\"let month of this.currentView as months; index as i\"><a>{{i | monthTransform}}</a></div><div class=\"reel-container {{ year }}\"><ul class=\"year\"><li *ngFor=\"let year of this.tabs as years; index as m\"><a>{{ year }}</a></li></ul><div class=\"image-container\" *ngFor=\"let image of this.currentView[this.currentView.length - 1] as images; index as j\"><a class=\"thumbnail\" *ngIf=\"j &lt; 4\"><img src=\"https://d2gne97vdumgn3.cloudfront.net/api/file/Rx1s76VjTAO1Qc4GY7jY\"></a></div></div></div></span>"
+module.exports = "<span *ngIf=\"!this.imageService.message.failure\"><div><div class=\"month {{i | monthTransform}}\" *ngFor=\"let month of this.currentView as months; index as i\" [ngClass]=\"{'active': i == this.activePeriod.month}\"><a>{{i | monthTransform}}</a></div><div class=\"reel-container {{ year }}\"><ul class=\"year\"><li *ngFor=\"let year of this.tabs as years; index as m\" [ngClass]=\"{'active': this.tabs[m] == this.activePeriod.year}\"><a>{{ year }}</a></li></ul><div class=\"image-container\" *ngFor=\"let image of this.currentView[this.currentView.length - 1] as images; index as j\"><a class=\"thumbnail\" *ngIf=\"j &lt; 4\"><img src=\"https://d2gne97vdumgn3.cloudfront.net/api/file/Rx1s76VjTAO1Qc4GY7jY\"></a></div></div></div></span>"
 
 /***/ }),
 
@@ -31980,4 +31983,4 @@ exports.ErrorParser = ErrorParser;
 /***/ })
 
 },[651]);
-//# sourceMappingURL=app.acb06290775077f771a0.js.map
+//# sourceMappingURL=app.6ce22b7406ad3bdbbd20.js.map
