@@ -33,6 +33,7 @@ app-images {
 }
 .year a:hover {
   background-color:black;
+  border-radius: 3px;
   color:white;
   font-style: italic;
 }
@@ -81,6 +82,16 @@ app-images {
   border-bottom: 0px;
 }
 
+//.month.active hover {
+//  border-bottom: 1px solid black;
+//}
+
+.month.active a:hover {
+  font-style: normal;
+  cursor: text;
+  border-bottom: 1px solid black;
+}
+
 .thumbnail {
   display: inline-flex;
   margin: 2px;
@@ -92,25 +103,30 @@ app-images {
 }
 
 /* TO DO */
-//.month.active a {
-//  color: black;
-//  padding-top: 10px;
-//  padding-bottom: 10px;
-//  background-color: white;
-//  z-index: 1;
-//  position: relative;
-//  border-radius: 4px;
-//}
+.month.active a {
+  color: black;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  background-color: white;
+  z-index: 1;
+  position: relative;
+  border-radius: 4px;
+}
 
 /*  TO DO */
-//.year.active {
-//  padding: 5px;
-//  background-color: black;
-//  border-radius: 8px;
-//  border: 2px solid white;
-//}
+.year li.active {
+  padding: 5px 0px;
+}
 
 /* TO DO */
-//.year.active a {
-//  color: white;
-//}
+.year li.active a {
+  border: 2px solid white;
+  border-radius: 5px;
+  background-color: black;
+  color: white;
+}
+
+.year li.active a {
+  font-style: normal;
+  cursor: text;
+}
