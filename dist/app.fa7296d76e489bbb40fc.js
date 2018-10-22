@@ -8599,6 +8599,16 @@ let ImagesComponent = class ImagesComponent {
             this.currentView = this.imageService.images[this.tabs[0]];
         });
     }
+    setActivePeriod(x) {
+        if (x > 11) {
+            this.activePeriod['year'] = x;
+            this.activePeriod['month'] = 11;
+            this.currentView = this.imageService.images[x];
+        }
+        else {
+            this.activePeriod['month'] = x;
+        }
+    }
 };
 ImagesComponent = __decorate([
     core_1.Component({
@@ -31388,7 +31398,7 @@ exports.UserDomainRoutingModule = UserDomainRoutingModule;
 /***/ 716:
 /***/ (function(module, exports) {
 
-module.exports = "<span *ngIf=\"!this.imageService.message.failure\"><div><div class=\"month {{i | monthTransform}}\" *ngFor=\"let month of this.currentView as months; index as i\" [ngClass]=\"{'active': i == this.activePeriod.month}\"><a>{{i | monthTransform}}</a></div><div class=\"reel-container {{ year }}\"><ul class=\"year\"><li *ngFor=\"let year of this.tabs as years; index as m\" [ngClass]=\"{'active': this.tabs[m] == this.activePeriod.year}\"><a>{{ year }}</a></li></ul><div class=\"image-container\" *ngFor=\"let image of this.currentView[this.currentView.length - 1] as images; index as j\"><a class=\"thumbnail\" *ngIf=\"j &lt; 4\"><img src=\"https://d2gne97vdumgn3.cloudfront.net/api/file/Rx1s76VjTAO1Qc4GY7jY\"></a></div></div></div></span>"
+module.exports = "<span *ngIf=\"!this.imageService.message.failure\"><div><div class=\"month {{i | monthTransform}}\" *ngFor=\"let month of this.currentView as months; index as i\" [ngClass]=\"{'active': i == this.activePeriod.month}\"><a (click)=\"setActivePeriod(i)\">{{i | monthTransform}}</a></div><div class=\"reel-container {{ year }}\"><ul class=\"year\"><li *ngFor=\"let year of this.tabs as years; index as m\" [ngClass]=\"{'active': this.tabs[m] == this.activePeriod.year}\"><a (click)=\"setActivePeriod(year)\">{{ year }}</a></li></ul><div class=\"image-container\" *ngFor=\"let image of this.currentView[this.currentView.length - 1] as images; index as j\"><a class=\"thumbnail\" *ngIf=\"j &lt; 4\"><img src=\"https://d2gne97vdumgn3.cloudfront.net/api/file/Rx1s76VjTAO1Qc4GY7jY\"></a></div></div></div></span>"
 
 /***/ }),
 
@@ -31983,4 +31993,4 @@ exports.ErrorParser = ErrorParser;
 /***/ })
 
 },[651]);
-//# sourceMappingURL=app.6ce22b7406ad3bdbbd20.js.map
+//# sourceMappingURL=app.fa7296d76e489bbb40fc.js.map

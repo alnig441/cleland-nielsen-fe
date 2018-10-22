@@ -38,4 +38,14 @@ export class ImagesComponent implements OnInit {
             });
     }
 
+    setActivePeriod(x: any):void {
+        if(x > 11){
+            this.activePeriod['year'] = x;
+            this.activePeriod['month'] = 11;
+            this.currentView = this.imageService.images[x] as ImageModel[];
+        } else {
+            this.activePeriod['month'] = x;
+        }
+    }
+
 }
