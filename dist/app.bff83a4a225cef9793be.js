@@ -8580,7 +8580,8 @@ let ImagesComponent = class ImagesComponent {
         this.activeUser = activeUser;
         this.imageService = imageService;
         this.currentView = new Array();
-        this.tabs = new Array();
+        this.years = new Array();
+        this.months = new Array();
         this.activePeriod = new Object();
     }
     ngOnInit() {
@@ -8593,21 +8594,26 @@ let ImagesComponent = class ImagesComponent {
                     array.push(tab);
                 }
             });
-            this.tabs = array.reverse();
-            this.activePeriod["year"] = this.tabs[0];
-            this.activePeriod["month"] = 11;
-            this.currentView = this.imageService.images[this.tabs[0]];
+            this.years = array.reverse();
+            this.months = this.imageService.images[this.years[0]];
+            this.activePeriod['year'] = this.imageService.images.length - 1;
+            this.activePeriod['month'] = this.months.length - 1;
+            this.currentView = this.months[this.activePeriod['month']];
         });
     }
     setActivePeriod(x) {
         if (x > 11) {
             this.activePeriod['year'] = x;
-            this.activePeriod['month'] = 11;
-            this.currentView = this.imageService.images[x];
+            this.months = this.imageService.images[x];
+            this.activePeriod['month'] = this.months.length - 1;
+            this.currentView = this.imageService.images[x][this.activePeriod['month']];
         }
         else {
             this.activePeriod['month'] = x;
+            this.currentView = this.imageService.images[this.activePeriod['year']][x];
         }
+        console.log('active period: ', this.activePeriod, '\ncurrent view: ', this.currentView[0]);
+        console.log('images: ', this.imageService.images);
     }
 };
 ImagesComponent = __decorate([
@@ -31398,7 +31404,7 @@ exports.UserDomainRoutingModule = UserDomainRoutingModule;
 /***/ 716:
 /***/ (function(module, exports) {
 
-module.exports = "<span *ngIf=\"!this.imageService.message.failure\"><div><div class=\"month {{i | monthTransform}}\" *ngFor=\"let month of this.currentView as months; index as i\" [ngClass]=\"{'active': i == this.activePeriod.month}\"><a (click)=\"setActivePeriod(i)\">{{i | monthTransform}}</a></div><div class=\"reel-container {{ year }}\"><ul class=\"year\"><li *ngFor=\"let year of this.tabs as years; index as m\" [ngClass]=\"{'active': this.tabs[m] == this.activePeriod.year}\"><a (click)=\"setActivePeriod(year)\">{{ year }}</a></li></ul><div class=\"image-container\" *ngFor=\"let image of this.currentView[this.currentView.length - 1] as images; index as j\"><a class=\"thumbnail\" *ngIf=\"j &lt; 4\"><img src=\"https://d2gne97vdumgn3.cloudfront.net/api/file/Rx1s76VjTAO1Qc4GY7jY\"></a></div></div></div></span>"
+module.exports = "<span *ngIf=\"!this.imageService.message.failure\"><div><div class=\"month {{i | monthTransform}}\" *ngFor=\"let month of this.months as months; index as i\" [ngClass]=\"{'active': i == this.activePeriod.month}\"><a *ngIf=\"month != null\" (click)=\"setActivePeriod(i)\">{{i | monthTransform}}</a></div><div class=\"reel-container {{ year }}\"><ul class=\"year\"><li *ngFor=\"let year of this.years as years; index as m\" [ngClass]=\"{'active': year == this.activePeriod.year}\"><a (click)=\"setActivePeriod(year)\">{{ year }}</a></li></ul><div class=\"image-container\" *ngFor=\"let image of this.currentView as images; index as j\"><a class=\"thumbnail {{image.year}}\" *ngIf=\"j &lt; 4\"><img src=\"https://d2gne97vdumgn3.cloudfront.net/api/file/Rx1s76VjTAO1Qc4GY7jY\"></a></div></div></div></span>"
 
 /***/ }),
 
@@ -31993,4 +31999,4 @@ exports.ErrorParser = ErrorParser;
 /***/ })
 
 },[651]);
-//# sourceMappingURL=app.fa7296d76e489bbb40fc.js.map
+//# sourceMappingURL=app.bff83a4a225cef9793be.js.map

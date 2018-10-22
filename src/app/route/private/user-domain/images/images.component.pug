@@ -1,11 +1,11 @@
 span(*ngIf="!this.imageService.message.failure")
     div
-        div(*ngFor='let month of this.currentView as months; index as i' class='month {{i | monthTransform}}', [ngClass]="{'active': i == this.activePeriod.month}")
-            a((click)='setActivePeriod(i)') {{i | monthTransform}}
+        div(*ngFor='let month of this.months as months; index as i' class='month {{i | monthTransform}}', [ngClass]="{'active': i == this.activePeriod.month}")
+            a(*ngIf="month != null", (click)='setActivePeriod(i)') {{i | monthTransform}}
         div( class='reel-container {{ year }}')
             ul(class='year')
-                li(*ngFor='let year of this.tabs as years; index as m', [ngClass]="{'active': this.tabs[m] == this.activePeriod.year}")
+                li(*ngFor='let year of this.years as years; index as m', [ngClass]="{'active': year == this.activePeriod.year}")
                     a((click)='setActivePeriod(year)') {{ year }}
-            div(*ngFor='let image of this.currentView[this.currentView.length - 1] as images; index as j' class='image-container')
-                a(*ngIf='j < 4' class='thumbnail')
+            div(*ngFor='let image of this.currentView as images; index as j' class='image-container')
+                a(*ngIf='j < 4' class='thumbnail {{image.year}}')
                   img(src='https://d2gne97vdumgn3.cloudfront.net/api/file/Rx1s76VjTAO1Qc4GY7jY')
