@@ -1,6 +1,6 @@
 app-images {
   background-color: whitesmoke;
-  text-align: center;
+  text-align: right;
 }
 
 .year {
@@ -28,15 +28,12 @@ app-images {
 .year a {
   color: black;
   text-decoration: none;
-  margin: 8px;
+  padding: 0px 15px;
   cursor: pointer;
 }
-
-.year li:hover {
-  background-color: white;
-}
-
 .year a:hover {
+  background-color:black;
+  color:white;
   font-style: italic;
 }
 
@@ -49,6 +46,7 @@ app-images {
 }
 
 .image-container {
+  padding-top: 10px;
   display: inline-block;
 }
 
@@ -58,12 +56,12 @@ app-images {
   overflow: hidden;
 }
 
-.tab {
+.month {
   display: inline-block;
   margin-left: 3px;
 }
 
-.tab a {
+.month a {
   cursor: pointer;
   color: white;
   text-decoration: none;
@@ -76,7 +74,7 @@ app-images {
   padding:0px 5px;
 }
 
-.tab a:hover {
+.month a:hover {
   background-color: white;
   color: black;
   font-style: italic;
@@ -92,3 +90,27 @@ app-images {
 .thumbnail > img {
   height: 200px;
 }
+
+/* TO DO */
+//.month.active a {
+//  color: black;
+//  padding-top: 10px;
+//  padding-bottom: 10px;
+//  background-color: white;
+//  z-index: 1;
+//  position: relative;
+//  border-radius: 4px;
+//}
+
+/*  TO DO */
+//.year.active {
+//  padding: 5px;
+//  background-color: black;
+//  border-radius: 8px;
+//  border: 2px solid white;
+//}
+
+/* TO DO */
+//.year.active a {
+//  color: white;
+//}

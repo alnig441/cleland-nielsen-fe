@@ -1,6 +1,6 @@
 span(*ngIf="!this.imageService.message.failure")
     div
-        div(*ngFor='let month of this.currentView as months; index as i' class='tab {{i | monthTransform}}')
+        div(*ngFor='let month of this.currentView as months; index as i' class='month {{i | monthTransform}}')
             a {{i | monthTransform}}
         div( class='reel-container {{ year }}')
             ul(class='year')
