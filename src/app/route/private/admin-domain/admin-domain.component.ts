@@ -8,7 +8,7 @@ import { AuthenticationService } from "../../../services/authentication.service"
 import {SetMessageService} from "../../../services/set-message.service";
 
 @Component({
-    selector: 'app-admin',
+    selector: 'app-admin-domain',
     template: require('./admin-domain.component.pug'),
     styleUrls: ['./admin-domain.component.scss'],
     encapsulation: ViewEncapsulation.None

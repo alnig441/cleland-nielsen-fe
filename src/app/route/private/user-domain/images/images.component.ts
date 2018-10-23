@@ -34,26 +34,18 @@ export class ImagesComponent implements OnInit {
                 })
                 this.years = array.reverse();
 
-                this.months = this.imageService.images[this.years[0]] as any;
-
-                this.activePeriod['year'] = this.imageService.images.length -1;
-                this.activePeriod['month'] = this.months.length -1;
-
-                this.currentView = this.months[this.activePeriod['month']] as ImageModel[];
+                this.setActivePeriod();
             });
     }
 
-    setActivePeriod(x: any):void {
-
-        if(x > 11){
-            this.activePeriod['year'] = x;
-            this.months = this.imageService.images[x] as any;
-            this.activePeriod['month'] = this.months.length -1;
-            this.currentView = this.imageService.images[x][this.activePeriod['month']] as ImageModel[];
-        } else {
-            this.activePeriod['month'] = x;
-            this.currentView = this.imageService.images[this.activePeriod['year']][x];
-        }
+    selectPeriod(x: any):void {
+        this.setActivePeriod(x);
     }
 
+    setActivePeriod(x?: any): void {
+        this.activePeriod['year'] = (!x && x !=0) ? this.imageService.images.length - 1 : x > 11 ? x : this.activePeriod['year'];
+        this.months = this.imageService.images[this.activePeriod['year']] as any;
+        this.activePeriod['month'] = ((!x && x != 0) || x > 11) ? this.months.length -1 : this.activePeriod['month'] = x ;
+        this.currentView = this.months[this.activePeriod['month']] as ImageModel[];
+    }
 }

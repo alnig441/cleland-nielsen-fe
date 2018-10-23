@@ -8274,7 +8274,7 @@ let AdminDomainComponent = class AdminDomainComponent {
 };
 AdminDomainComponent = __decorate([
     core_1.Component({
-        selector: 'app-admin',
+        selector: 'app-admin-domain',
         template: __webpack_require__(698),
         styles: [__webpack_require__(699)],
         encapsulation: core_1.ViewEncapsulation.None
@@ -8595,25 +8595,17 @@ let ImagesComponent = class ImagesComponent {
                 }
             });
             this.years = array.reverse();
-            this.months = this.imageService.images[this.years[0]];
-            this.activePeriod['year'] = this.imageService.images.length - 1;
-            this.activePeriod['month'] = this.months.length - 1;
-            this.currentView = this.months[this.activePeriod['month']];
+            this.setActivePeriod();
         });
     }
+    selectPeriod(x) {
+        this.setActivePeriod(x);
+    }
     setActivePeriod(x) {
-        if (x > 11) {
-            this.activePeriod['year'] = x;
-            this.months = this.imageService.images[x];
-            this.activePeriod['month'] = this.months.length - 1;
-            this.currentView = this.imageService.images[x][this.activePeriod['month']];
-        }
-        else {
-            this.activePeriod['month'] = x;
-            this.currentView = this.imageService.images[this.activePeriod['year']][x];
-        }
-        console.log('active period: ', this.activePeriod, '\ncurrent view: ', this.currentView[0]);
-        console.log('images: ', this.imageService.images);
+        this.activePeriod['year'] = (!x && x != 0) ? this.imageService.images.length - 1 : x > 11 ? x : this.activePeriod['year'];
+        this.months = this.imageService.images[this.activePeriod['year']];
+        this.activePeriod['month'] = ((!x && x != 0) || x > 11) ? this.months.length - 1 : this.activePeriod['month'] = x;
+        this.currentView = this.months[this.activePeriod['month']];
     }
 };
 ImagesComponent = __decorate([
@@ -21737,8 +21729,8 @@ if(content.locals) module.exports = content.locals;
 if(false) {
 	// When the styles change, update the <style> tags
 	if(!content.locals) {
-		module.hot.accept("!!../css-loader/index.js!../resolve-url-loader/index.js!../sass-loader/lib/loader.js?sourceMap!./lib/bootstrap.styles.loader.js?{\"bootstrapVersion\":3,\"useCustomIconFontPath\":false,\"extractStyles\":false,\"styleLoaders\":[\"style\",\"css\",\"sass\"],\"styles\":[\"mixins\",\"normalize\",\"print\",\"glyphicons\",\"scaffolding\",\"type\",\"code\",\"grid\",\"tables\",\"forms\",\"buttons\",\"component-animations\",\"dropdowns\",\"button-groups\",\"input-groups\",\"navs\",\"navbar\",\"breadcrumbs\",\"pagination\",\"pager\",\"labels\",\"badges\",\"jumbotron\",\"thumbnails\",\"alerts\",\"progress-bars\",\"media\",\"list-group\",\"panels\",\"wells\",\"responsive-embed\",\"close\",\"modals\",\"tooltip\",\"popovers\",\"carousel\",\"utilities\",\"responsive-utilities\"],\"scripts\":[\"transition\",\"alert\",\"button\",\"carousel\",\"collapse\",\"dropdown\",\"modal\",\"tooltip\",\"popover\",\"scrollspy\",\"tab\",\"affix\"],\"configFilePath\":\"/Users/allannielsen/Sites/22may2018/node_modules/bootstrap-loader/.bootstraprc-3-default\",\"bootstrapPath\":\"/Users/allannielsen/Sites/22may2018/node_modules/bootstrap-sass\",\"bootstrapRelPath\":\"../bootstrap-sass\"}!./no-op.js", function() {
-			var newContent = require("!!../css-loader/index.js!../resolve-url-loader/index.js!../sass-loader/lib/loader.js?sourceMap!./lib/bootstrap.styles.loader.js?{\"bootstrapVersion\":3,\"useCustomIconFontPath\":false,\"extractStyles\":false,\"styleLoaders\":[\"style\",\"css\",\"sass\"],\"styles\":[\"mixins\",\"normalize\",\"print\",\"glyphicons\",\"scaffolding\",\"type\",\"code\",\"grid\",\"tables\",\"forms\",\"buttons\",\"component-animations\",\"dropdowns\",\"button-groups\",\"input-groups\",\"navs\",\"navbar\",\"breadcrumbs\",\"pagination\",\"pager\",\"labels\",\"badges\",\"jumbotron\",\"thumbnails\",\"alerts\",\"progress-bars\",\"media\",\"list-group\",\"panels\",\"wells\",\"responsive-embed\",\"close\",\"modals\",\"tooltip\",\"popovers\",\"carousel\",\"utilities\",\"responsive-utilities\"],\"scripts\":[\"transition\",\"alert\",\"button\",\"carousel\",\"collapse\",\"dropdown\",\"modal\",\"tooltip\",\"popover\",\"scrollspy\",\"tab\",\"affix\"],\"configFilePath\":\"/Users/allannielsen/Sites/22may2018/node_modules/bootstrap-loader/.bootstraprc-3-default\",\"bootstrapPath\":\"/Users/allannielsen/Sites/22may2018/node_modules/bootstrap-sass\",\"bootstrapRelPath\":\"../bootstrap-sass\"}!./no-op.js");
+		module.hot.accept("!!../css-loader/index.js!../resolve-url-loader/index.js!../sass-loader/lib/loader.js?sourceMap!./lib/bootstrap.styles.loader.js?{\"bootstrapVersion\":3,\"useCustomIconFontPath\":false,\"extractStyles\":false,\"styleLoaders\":[\"style\",\"css\",\"sass\"],\"styles\":[\"mixins\",\"normalize\",\"print\",\"glyphicons\",\"scaffolding\",\"type\",\"code\",\"grid\",\"tables\",\"forms\",\"buttons\",\"component-animations\",\"dropdowns\",\"button-groups\",\"input-groups\",\"navs\",\"navbar\",\"breadcrumbs\",\"pagination\",\"pager\",\"labels\",\"badges\",\"jumbotron\",\"thumbnails\",\"alerts\",\"progress-bars\",\"media\",\"list-group\",\"panels\",\"wells\",\"responsive-embed\",\"close\",\"modals\",\"tooltip\",\"popovers\",\"carousel\",\"utilities\",\"responsive-utilities\"],\"scripts\":[\"transition\",\"alert\",\"button\",\"carousel\",\"collapse\",\"dropdown\",\"modal\",\"tooltip\",\"popover\",\"scrollspy\",\"tab\",\"affix\"],\"configFilePath\":\"/Users/allannielsen/WebstormProjects/jacnweb-ng4-refactor/node_modules/bootstrap-loader/.bootstraprc-3-default\",\"bootstrapPath\":\"/Users/allannielsen/WebstormProjects/jacnweb-ng4-refactor/node_modules/bootstrap-sass\",\"bootstrapRelPath\":\"../bootstrap-sass\"}!./no-op.js", function() {
+			var newContent = require("!!../css-loader/index.js!../resolve-url-loader/index.js!../sass-loader/lib/loader.js?sourceMap!./lib/bootstrap.styles.loader.js?{\"bootstrapVersion\":3,\"useCustomIconFontPath\":false,\"extractStyles\":false,\"styleLoaders\":[\"style\",\"css\",\"sass\"],\"styles\":[\"mixins\",\"normalize\",\"print\",\"glyphicons\",\"scaffolding\",\"type\",\"code\",\"grid\",\"tables\",\"forms\",\"buttons\",\"component-animations\",\"dropdowns\",\"button-groups\",\"input-groups\",\"navs\",\"navbar\",\"breadcrumbs\",\"pagination\",\"pager\",\"labels\",\"badges\",\"jumbotron\",\"thumbnails\",\"alerts\",\"progress-bars\",\"media\",\"list-group\",\"panels\",\"wells\",\"responsive-embed\",\"close\",\"modals\",\"tooltip\",\"popovers\",\"carousel\",\"utilities\",\"responsive-utilities\"],\"scripts\":[\"transition\",\"alert\",\"button\",\"carousel\",\"collapse\",\"dropdown\",\"modal\",\"tooltip\",\"popover\",\"scrollspy\",\"tab\",\"affix\"],\"configFilePath\":\"/Users/allannielsen/WebstormProjects/jacnweb-ng4-refactor/node_modules/bootstrap-loader/.bootstraprc-3-default\",\"bootstrapPath\":\"/Users/allannielsen/WebstormProjects/jacnweb-ng4-refactor/node_modules/bootstrap-sass\",\"bootstrapRelPath\":\"../bootstrap-sass\"}!./no-op.js");
 			if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
 			update(newContent);
 		});
@@ -24499,14 +24491,14 @@ exports.AppComponent = AppComponent;
 /***/ 677:
 /***/ (function(module, exports) {
 
-module.exports = "<app-globalnav></app-globalnav><div class=\"container-fluid\"><div class=\"row\"><router-outlet></router-outlet></div></div><app-login></app-login>"
+module.exports = "<app-globalnav></app-globalnav><div class=\"container-fluid domain-view\"><div class=\"row\"><router-outlet></router-outlet></div></div><app-login></app-login>"
 
 /***/ }),
 
 /***/ 678:
 /***/ (function(module, exports) {
 
-module.exports = "html, body, h1 {\n  margin: 0;\n  padding: 0; }\n\nbody {\n  font-family: Tahoma, Arial, sans-serif;\n  font-size: 14px;\n  padding: 20px; }\n\n.box-shadow {\n  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); }\n\n/* panels */\n.panel-footer {\n  display: inline-block;\n  width: 50%;\n  text-align: center; }\n\n.panel-footer:first-of-type {\n  border-right: 1px solid #ddd;\n  border-bottom-right-radius: 0px; }\n\n.panel-footer:last-of-type {\n  border-left: 1px solid #ddd;\n  border-bottom-left-radius: 0px; }\n\n.panel-footer:hover {\n  background-color: #d9edf7;\n  color: #31708f;\n  cursor: pointer; }\n\n.input-group {\n  width: 100%; }\n\n.input-group-addon,\n.input-group-btn {\n  width: 35%; }\n\n.input-group-btn button {\n  width: 100%; }\n\nspan.input-group-addon {\n  color: #ffffff;\n  background-color: #5bc0de;\n  border-color: #46b8da; }\n\nspan.input-group-addon[disabled=true] {\n  color: #ffffff;\n  background-color: #97D6E9;\n  border-color: #8BD1E6; }\n\n.done-edit {\n  width: 100%;\n  border-bottom-left-radius: 3px;\n  border-bottom-right-radius: 3px; }\n"
+module.exports = ".domain-view {\n  max-width: 1200px; }\n\nhtml, body, h1 {\n  margin: 0;\n  padding: 0; }\n\nbody {\n  font-family: Tahoma, Arial, sans-serif;\n  font-size: 14px;\n  padding: 20px; }\n\n.box-shadow {\n  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); }\n\n/* panels */\n.panel-footer {\n  display: inline-block;\n  width: 50%;\n  text-align: center; }\n\n.panel-footer:first-of-type {\n  border-right: 1px solid #ddd;\n  border-bottom-right-radius: 0px; }\n\n.panel-footer:last-of-type {\n  border-left: 1px solid #ddd;\n  border-bottom-left-radius: 0px; }\n\n.panel-footer:hover {\n  background-color: #d9edf7;\n  color: #31708f;\n  cursor: pointer; }\n\n.input-group {\n  width: 100%; }\n\n.input-group-addon,\n.input-group-btn {\n  width: 35%; }\n\n.input-group-btn button {\n  width: 100%; }\n\nspan.input-group-addon {\n  color: #ffffff;\n  background-color: #5bc0de;\n  border-color: #46b8da; }\n\nspan.input-group-addon[disabled=true] {\n  color: #ffffff;\n  background-color: #97D6E9;\n  border-color: #8BD1E6; }\n\n.done-edit {\n  width: 100%;\n  border-bottom-left-radius: 3px;\n  border-bottom-right-radius: 3px; }\n"
 
 /***/ }),
 
@@ -31404,7 +31396,7 @@ exports.UserDomainRoutingModule = UserDomainRoutingModule;
 /***/ 716:
 /***/ (function(module, exports) {
 
-module.exports = "<span *ngIf=\"!this.imageService.message.failure\"><div><div class=\"month {{i | monthTransform}}\" *ngFor=\"let month of this.months as months; index as i\" [ngClass]=\"{'active': i == this.activePeriod.month}\"><a *ngIf=\"month != null\" (click)=\"setActivePeriod(i)\">{{i | monthTransform}}</a></div><div class=\"reel-container {{ year }}\"><ul class=\"year\"><li *ngFor=\"let year of this.years as years; index as m\" [ngClass]=\"{'active': year == this.activePeriod.year}\"><a (click)=\"setActivePeriod(year)\">{{ year }}</a></li></ul><div class=\"image-container\" *ngFor=\"let image of this.currentView as images; index as j\"><a class=\"thumbnail {{image.year}}\" *ngIf=\"j &lt; 4\"><img src=\"https://d2gne97vdumgn3.cloudfront.net/api/file/Rx1s76VjTAO1Qc4GY7jY\"></a></div></div></div></span>"
+module.exports = "<span *ngIf=\"!this.imageService.message.failure\"><div><div class=\"month {{i | monthTransform}}\" *ngFor=\"let month of this.months as months; index as i\" [ngClass]=\"{'active': i == this.activePeriod.month}\"><a *ngIf=\"month != null\" (click)=\"selectPeriod(i)\">{{i | monthTransform}}</a></div><div class=\"reel-container {{ year }}\"><ul class=\"year\"><li *ngFor=\"let year of this.years as years; index as m\" [ngClass]=\"{'active': year == this.activePeriod.year}\"><a (click)=\"selectPeriod(year)\">{{ year }}</a></li></ul><div class=\"image-container\" *ngFor=\"let image of this.currentView as images; index as j\"><a class=\"thumbnail {{image.year}}\" *ngIf=\"j &lt; 6\"><img src=\"https://d2gne97vdumgn3.cloudfront.net/api/file/Rx1s76VjTAO1Qc4GY7jY\"></a></div></div></div></span>"
 
 /***/ }),
 
@@ -31425,7 +31417,7 @@ module.exports = "hello from videos<!--.col-sm-2--><!--    app-sidebar--><!--.co
 /***/ 719:
 /***/ (function(module, exports) {
 
-module.exports = "<!--router-outlet--><div class=\"col-sm-2\"><app-sidebar-cta></app-sidebar-cta></div><div class=\"col-sm-8\"><app-messagebar></app-messagebar><router-outlet></router-outlet></div><div class=\"col-sm-2\"><app-form-submission></app-form-submission></div>"
+module.exports = "<div class=\"col-sm-2\"><app-sidebar-cta></app-sidebar-cta></div><div class=\"col-sm-8\"><app-messagebar></app-messagebar><router-outlet></router-outlet></div><div class=\"col-sm-2\"><app-form-submission></app-form-submission></div>"
 
 /***/ }),
 
@@ -31999,4 +31991,4 @@ exports.ErrorParser = ErrorParser;
 /***/ })
 
 },[651]);
-//# sourceMappingURL=app.bff83a4a225cef9793be.js.map
+//# sourceMappingURL=app.b2a5b6c419f257eb85b0.js.map

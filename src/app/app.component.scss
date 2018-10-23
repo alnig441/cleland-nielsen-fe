@@ -1,13 +1,15 @@
 @import "../constants";
 
+.domain-view {
+    max-width: 1200px;
+}
+
 html, body, h1 {
     margin: 0;
     padding: 0;
 }
 
 body {
-    //background-color: $primary-bg;
-    //color: #ffffff;
     font-family: $primary-font;
     font-size: $primary-font-size;
     padding: 20px;
@@ -16,7 +18,6 @@ body {
 .box-shadow {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
-
 
 /* panels */
 
