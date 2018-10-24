@@ -31636,7 +31636,7 @@ module.exports = "<div class=\"modal fade assetviewer-modal\" tabindex=\"-1\" ro
 /***/ 724:
 /***/ (function(module, exports) {
 
-module.exports = ".assetviewer-modal {\n  margin: auto;\n  max-width: 775px; }\n\n.assetviewer-modal img {\n  width: 100%;\n  border: 5px solid lightgray; }\n\n.assetviewer-modal ul {\n  left: 0px;\n  width: 75px;\n  top: 60px;\n  position: absolute;\n  padding: 0;\n  display: inline-flex;\n  list-style: none; }\n\n.assetviewer-modal li {\n  color: white;\n  background-color: #777777;\n  text-align: center;\n  border: 1px solid;\n  opacity: .5; }\n\n.assetviewer-modal li.previous {\n  border-left: none;\n  width: 100%; }\n\n.assetviewer-modal li.next {\n  border-right: none;\n  position: absolute;\n  left: 699px;\n  width: 75px; }\n\n.assetviewer-modal li.next:hover,\n.assetviewer-modal li.previous:hover {\n  opacity: .9; }\n"
+module.exports = ".assetviewer-modal {\n  margin: auto;\n  max-width: 775px; }\n\n.assetviewer-modal img {\n  width: 100%;\n  border: 5px solid lightgray; }\n\n.assetviewer-modal ul {\n  left: 0px;\n  width: 75px;\n  top: 60px;\n  position: absolute;\n  padding: 0;\n  display: inline-flex;\n  list-style: none; }\n\n.assetviewer-modal li {\n  color: white;\n  background-color: lightgrey;\n  text-align: center;\n  border: 1px solid black;\n  opacity: .5; }\n\n.assetviewer-modal li.previous {\n  border-left: none;\n  width: 100%; }\n\n.assetviewer-modal li.next {\n  border-right: none;\n  position: absolute;\n  left: 698px;\n  width: 75px; }\n\n.assetviewer-modal li.next:hover,\n.assetviewer-modal li.previous:hover {\n  opacity: .9; }\n"
 
 /***/ }),
 
@@ -32043,4 +32043,4 @@ exports.ErrorParser = ErrorParser;
 /***/ })
 
 },[651]);
-//# sourceMappingURL=app.aba45ecec45a0006efaa.js.map
+//# sourceMappingURL=app.c41161a0122ef9288521.js.map
