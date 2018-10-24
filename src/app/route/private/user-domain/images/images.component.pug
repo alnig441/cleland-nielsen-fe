@@ -7,5 +7,7 @@ span(*ngIf="!this.imageService.message.failure")
                 li(*ngFor='let year of this.years as years; index as m', [ngClass]="{'active': year == this.activePeriod.year}")
                     a((click)='selectPeriod(year)') {{ year }}
             div(*ngFor='let image of this.currentView as images; index as j' class='image-container')
-                a(*ngIf='j < 6' class='thumbnail {{image.year}}')
+                a(*ngIf='j < 6' class='thumbnail {{image.year}}', data-toggle='modal' data-target='.assetviewer-modal')
                   img(src='https://d2gne97vdumgn3.cloudfront.net/api/file/Rx1s76VjTAO1Qc4GY7jY')
+
+app-assetviewer
