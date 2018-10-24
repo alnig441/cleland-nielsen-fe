@@ -8420,306 +8420,7 @@ exports.PermissionsComponent = PermissionsComponent;
 
 /***/ }),
 
-/***/ 220:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-const core_1 = __webpack_require__(3);
-const common_1 = __webpack_require__(24);
-const message_bar_component_1 = __webpack_require__(704);
-const set_message_service_1 = __webpack_require__(53);
-const animations_1 = __webpack_require__(707);
-let MessageBarModule = class MessageBarModule {
-};
-MessageBarModule = __decorate([
-    core_1.NgModule({
-        imports: [
-            common_1.CommonModule,
-            animations_1.BrowserAnimationsModule
-        ],
-        declarations: [
-            message_bar_component_1.MessagebarComponent
-        ],
-        exports: [
-            message_bar_component_1.MessagebarComponent
-        ],
-        providers: [
-            set_message_service_1.SetMessageService,
-        ]
-    })
-], MessageBarModule);
-exports.MessageBarModule = MessageBarModule;
-
-
-/***/ }),
-
-/***/ 221:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-const core_1 = __webpack_require__(3);
-const common_1 = __webpack_require__(24);
-const sidebar_cta_component_1 = __webpack_require__(709);
-const service_model_manager_service_1 = __webpack_require__(28);
-const permission_services_1 = __webpack_require__(46);
-const account_services_1 = __webpack_require__(54);
-const user_services_1 = __webpack_require__(62);
-const image_services_1 = __webpack_require__(61);
-let SidebarCtaModule = class SidebarCtaModule {
-};
-SidebarCtaModule = __decorate([
-    core_1.NgModule({
-        imports: [
-            common_1.CommonModule
-        ],
-        declarations: [
-            sidebar_cta_component_1.SidebarCtaComponent
-        ],
-        exports: [
-            sidebar_cta_component_1.SidebarCtaComponent
-        ],
-        providers: [
-            service_model_manager_service_1.ServiceModelManagerService,
-            permission_services_1.PermissionServices,
-            account_services_1.AccountServices,
-            user_services_1.UserServices,
-            image_services_1.ImageServices,
-        ]
-    })
-], SidebarCtaModule);
-exports.SidebarCtaModule = SidebarCtaModule;
-
-
-/***/ }),
-
-/***/ 222:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-const core_1 = __webpack_require__(3);
-const common_1 = __webpack_require__(24);
-const form_submission_component_1 = __webpack_require__(712);
-const service_model_manager_service_1 = __webpack_require__(28);
-const image_services_1 = __webpack_require__(61);
-const user_services_1 = __webpack_require__(62);
-const account_services_1 = __webpack_require__(54);
-const permission_services_1 = __webpack_require__(46);
-const forms_1 = __webpack_require__(103);
-let FormSubmissionModule = class FormSubmissionModule {
-};
-FormSubmissionModule = __decorate([
-    core_1.NgModule({
-        imports: [
-            common_1.CommonModule,
-            forms_1.FormsModule
-        ],
-        declarations: [
-            form_submission_component_1.FormSubmissionComponent
-        ],
-        exports: [
-            form_submission_component_1.FormSubmissionComponent
-        ],
-        providers: [
-            service_model_manager_service_1.ServiceModelManagerService,
-            image_services_1.ImageServices,
-            user_services_1.UserServices,
-            account_services_1.AccountServices,
-            permission_services_1.PermissionServices
-        ]
-    })
-], FormSubmissionModule);
-exports.FormSubmissionModule = FormSubmissionModule;
-
-
-/***/ }),
-
-/***/ 223:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-const core_1 = __webpack_require__(3);
-const image_services_1 = __webpack_require__(61);
-const authentication_service_1 = __webpack_require__(16);
-const service_model_manager_service_1 = __webpack_require__(28);
-const router_1 = __webpack_require__(20);
-let ImagesComponent = class ImagesComponent {
-    constructor(formManager, activatedRoute, activeUser, imageService) {
-        this.formManager = formManager;
-        this.activatedRoute = activatedRoute;
-        this.activeUser = activeUser;
-        this.imageService = imageService;
-        this.currentView = new Array();
-        this.years = new Array();
-        this.months = new Array();
-        this.activePeriod = new Object();
-    }
-    ngOnInit() {
-        this.formManager.setService(this.activatedRoute.snapshot.url[0].path);
-        this.imageService.getAll()
-            .then((response) => {
-            let array = [];
-            this.imageService.images.forEach((year, tab) => {
-                if (year) {
-                    array.push(tab);
-                }
-            });
-            this.years = array.reverse();
-            this.setActivePeriod();
-        });
-    }
-    selectPeriod(x) {
-        this.setActivePeriod(x);
-    }
-    setActivePeriod(x) {
-        this.activePeriod['year'] = (!x && x != 0) ? this.imageService.images.length - 1 : x > 11 ? x : this.activePeriod['year'];
-        this.months = this.imageService.images[this.activePeriod['year']];
-        this.activePeriod['month'] = ((!x && x != 0) || x > 11) ? this.months.length - 1 : this.activePeriod['month'] = x;
-        this.currentView = this.months[this.activePeriod['month']];
-    }
-};
-ImagesComponent = __decorate([
-    core_1.Component({
-        selector: 'app-images',
-        template: __webpack_require__(716),
-        styles: [__webpack_require__(717)],
-        encapsulation: core_1.ViewEncapsulation.None
-    }),
-    __metadata("design:paramtypes", [service_model_manager_service_1.ServiceModelManagerService, router_1.ActivatedRoute, authentication_service_1.AuthenticationService, image_services_1.ImageServices])
-], ImagesComponent);
-exports.ImagesComponent = ImagesComponent;
-
-
-/***/ }),
-
-/***/ 224:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-const core_1 = __webpack_require__(3);
-const authentication_service_1 = __webpack_require__(16);
-const service_model_manager_service_1 = __webpack_require__(28);
-const router_1 = __webpack_require__(20);
-let VideosComponent = class VideosComponent {
-    constructor(formManager, activeUser, activatedRoute) {
-        this.formManager = formManager;
-        this.activeUser = activeUser;
-        this.activatedRoute = activatedRoute;
-    }
-    ngOnInit() {
-        console.log('events comp init', this.activeUser.isPermitted);
-        this.formManager.setService(this.activatedRoute.snapshot.url[0].path);
-    }
-};
-VideosComponent = __decorate([
-    core_1.Component({
-        selector: 'app-events',
-        template: __webpack_require__(718),
-        encapsulation: core_1.ViewEncapsulation.None
-    }),
-    __metadata("design:paramtypes", [service_model_manager_service_1.ServiceModelManagerService, authentication_service_1.AuthenticationService, router_1.ActivatedRoute])
-], VideosComponent);
-exports.VideosComponent = VideosComponent;
-
-
-/***/ }),
-
-/***/ 225:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-const core_1 = __webpack_require__(3);
-const authentication_service_1 = __webpack_require__(16);
-const set_message_service_1 = __webpack_require__(53);
-const service_model_manager_service_1 = __webpack_require__(28);
-const image_services_1 = __webpack_require__(61);
-let UserDomainComponent = class UserDomainComponent {
-    constructor(activeUser, setMessage, formManager, images) {
-        this.activeUser = activeUser;
-        this.setMessage = setMessage;
-        this.formManager = formManager;
-        this.images = images;
-    }
-    ngOnInit() {
-        this.images.getAll();
-    }
-    ngDoCheck() {
-        if (this.formManager.getService()) {
-            this.recordModel = this.formManager.getRecordModel();
-        }
-    }
-    getLatest() {
-        console.log('get latest');
-    }
-    getList() {
-        console.log('get list');
-    }
-};
-UserDomainComponent = __decorate([
-    core_1.Component({
-        selector: 'app-user-domain',
-        template: __webpack_require__(719),
-        styles: [__webpack_require__(720)],
-        encapsulation: core_1.ViewEncapsulation.None
-    }),
-    __metadata("design:paramtypes", [authentication_service_1.AuthenticationService, set_message_service_1.SetMessageService, service_model_manager_service_1.ServiceModelManagerService, image_services_1.ImageServices])
-], UserDomainComponent);
-exports.UserDomainComponent = UserDomainComponent;
-
-
-/***/ }),
-
-/***/ 25:
+/***/ 22:
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -18980,6 +18681,305 @@ return jQuery;
 
 /***/ }),
 
+/***/ 220:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+const core_1 = __webpack_require__(3);
+const common_1 = __webpack_require__(25);
+const message_bar_component_1 = __webpack_require__(704);
+const set_message_service_1 = __webpack_require__(53);
+const animations_1 = __webpack_require__(707);
+let MessageBarModule = class MessageBarModule {
+};
+MessageBarModule = __decorate([
+    core_1.NgModule({
+        imports: [
+            common_1.CommonModule,
+            animations_1.BrowserAnimationsModule
+        ],
+        declarations: [
+            message_bar_component_1.MessagebarComponent
+        ],
+        exports: [
+            message_bar_component_1.MessagebarComponent
+        ],
+        providers: [
+            set_message_service_1.SetMessageService,
+        ]
+    })
+], MessageBarModule);
+exports.MessageBarModule = MessageBarModule;
+
+
+/***/ }),
+
+/***/ 221:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+const core_1 = __webpack_require__(3);
+const common_1 = __webpack_require__(25);
+const sidebar_cta_component_1 = __webpack_require__(709);
+const service_model_manager_service_1 = __webpack_require__(28);
+const permission_services_1 = __webpack_require__(46);
+const account_services_1 = __webpack_require__(54);
+const user_services_1 = __webpack_require__(62);
+const image_services_1 = __webpack_require__(61);
+let SidebarCtaModule = class SidebarCtaModule {
+};
+SidebarCtaModule = __decorate([
+    core_1.NgModule({
+        imports: [
+            common_1.CommonModule
+        ],
+        declarations: [
+            sidebar_cta_component_1.SidebarCtaComponent
+        ],
+        exports: [
+            sidebar_cta_component_1.SidebarCtaComponent
+        ],
+        providers: [
+            service_model_manager_service_1.ServiceModelManagerService,
+            permission_services_1.PermissionServices,
+            account_services_1.AccountServices,
+            user_services_1.UserServices,
+            image_services_1.ImageServices,
+        ]
+    })
+], SidebarCtaModule);
+exports.SidebarCtaModule = SidebarCtaModule;
+
+
+/***/ }),
+
+/***/ 222:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+const core_1 = __webpack_require__(3);
+const common_1 = __webpack_require__(25);
+const form_submission_component_1 = __webpack_require__(712);
+const service_model_manager_service_1 = __webpack_require__(28);
+const image_services_1 = __webpack_require__(61);
+const user_services_1 = __webpack_require__(62);
+const account_services_1 = __webpack_require__(54);
+const permission_services_1 = __webpack_require__(46);
+const forms_1 = __webpack_require__(103);
+let FormSubmissionModule = class FormSubmissionModule {
+};
+FormSubmissionModule = __decorate([
+    core_1.NgModule({
+        imports: [
+            common_1.CommonModule,
+            forms_1.FormsModule
+        ],
+        declarations: [
+            form_submission_component_1.FormSubmissionComponent
+        ],
+        exports: [
+            form_submission_component_1.FormSubmissionComponent
+        ],
+        providers: [
+            service_model_manager_service_1.ServiceModelManagerService,
+            image_services_1.ImageServices,
+            user_services_1.UserServices,
+            account_services_1.AccountServices,
+            permission_services_1.PermissionServices
+        ]
+    })
+], FormSubmissionModule);
+exports.FormSubmissionModule = FormSubmissionModule;
+
+
+/***/ }),
+
+/***/ 223:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+const core_1 = __webpack_require__(3);
+const image_services_1 = __webpack_require__(61);
+const authentication_service_1 = __webpack_require__(16);
+const service_model_manager_service_1 = __webpack_require__(28);
+const router_1 = __webpack_require__(20);
+let ImagesComponent = class ImagesComponent {
+    constructor(formManager, activatedRoute, activeUser, imageService) {
+        this.formManager = formManager;
+        this.activatedRoute = activatedRoute;
+        this.activeUser = activeUser;
+        this.imageService = imageService;
+        this.currentView = new Array();
+        this.years = new Array();
+        this.months = new Array();
+        this.activePeriod = new Object();
+    }
+    ngOnInit() {
+        this.formManager.setService(this.activatedRoute.snapshot.url[0].path);
+        this.imageService.getAll()
+            .then((response) => {
+            let array = [];
+            this.imageService.images.forEach((year, tab) => {
+                if (year) {
+                    array.push(tab);
+                }
+            });
+            this.years = array.reverse();
+            this.setActivePeriod();
+        });
+    }
+    selectPeriod(x) {
+        this.setActivePeriod(x);
+    }
+    setActivePeriod(x) {
+        this.activePeriod['year'] = (!x && x != 0) ? this.imageService.images.length - 1 : x > 11 ? x : this.activePeriod['year'];
+        this.months = this.imageService.images[this.activePeriod['year']];
+        this.activePeriod['month'] = ((!x && x != 0) || x > 11) ? this.months.length - 1 : this.activePeriod['month'] = x;
+        this.currentView = this.months[this.activePeriod['month']];
+    }
+};
+ImagesComponent = __decorate([
+    core_1.Component({
+        selector: 'app-images',
+        template: __webpack_require__(716),
+        styles: [__webpack_require__(717)],
+        encapsulation: core_1.ViewEncapsulation.None
+    }),
+    __metadata("design:paramtypes", [service_model_manager_service_1.ServiceModelManagerService, router_1.ActivatedRoute, authentication_service_1.AuthenticationService, image_services_1.ImageServices])
+], ImagesComponent);
+exports.ImagesComponent = ImagesComponent;
+
+
+/***/ }),
+
+/***/ 224:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+const core_1 = __webpack_require__(3);
+const authentication_service_1 = __webpack_require__(16);
+const service_model_manager_service_1 = __webpack_require__(28);
+const router_1 = __webpack_require__(20);
+let VideosComponent = class VideosComponent {
+    constructor(formManager, activeUser, activatedRoute) {
+        this.formManager = formManager;
+        this.activeUser = activeUser;
+        this.activatedRoute = activatedRoute;
+    }
+    ngOnInit() {
+        console.log('events comp init', this.activeUser.isPermitted);
+        this.formManager.setService(this.activatedRoute.snapshot.url[0].path);
+    }
+};
+VideosComponent = __decorate([
+    core_1.Component({
+        selector: 'app-events',
+        template: __webpack_require__(718),
+        encapsulation: core_1.ViewEncapsulation.None
+    }),
+    __metadata("design:paramtypes", [service_model_manager_service_1.ServiceModelManagerService, authentication_service_1.AuthenticationService, router_1.ActivatedRoute])
+], VideosComponent);
+exports.VideosComponent = VideosComponent;
+
+
+/***/ }),
+
+/***/ 225:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+const core_1 = __webpack_require__(3);
+const authentication_service_1 = __webpack_require__(16);
+const set_message_service_1 = __webpack_require__(53);
+const service_model_manager_service_1 = __webpack_require__(28);
+const image_services_1 = __webpack_require__(61);
+let UserDomainComponent = class UserDomainComponent {
+    constructor(activeUser, setMessage, formManager, images) {
+        this.activeUser = activeUser;
+        this.setMessage = setMessage;
+        this.formManager = formManager;
+        this.images = images;
+    }
+    ngOnInit() {
+        this.images.getAll();
+    }
+    ngDoCheck() {
+        if (this.formManager.getService()) {
+            this.recordModel = this.formManager.getRecordModel();
+        }
+    }
+    getLatest() {
+        console.log('get latest');
+    }
+    getList() {
+        console.log('get list');
+    }
+};
+UserDomainComponent = __decorate([
+    core_1.Component({
+        selector: 'app-user-domain',
+        template: __webpack_require__(719),
+        styles: [__webpack_require__(720)],
+        encapsulation: core_1.ViewEncapsulation.None
+    }),
+    __metadata("design:paramtypes", [authentication_service_1.AuthenticationService, set_message_service_1.SetMessageService, service_model_manager_service_1.ServiceModelManagerService, image_services_1.ImageServices])
+], UserDomainComponent);
+exports.UserDomainComponent = UserDomainComponent;
+
+
+/***/ }),
+
 /***/ 28:
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -19116,7 +19116,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_operator_filter___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_rxjs_operator_filter__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_rxjs_operator_map__ = __webpack_require__(71);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_rxjs_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_rxjs_operator_map__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__angular_common__ = __webpack_require__(24);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__angular_common__ = __webpack_require__(25);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_rxjs_Observable__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_rxjs_Observable___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7_rxjs_Observable__);
 
@@ -21848,8 +21848,8 @@ if(content.locals) module.exports = content.locals;
 if(false) {
 	// When the styles change, update the <style> tags
 	if(!content.locals) {
-		module.hot.accept("!!../css-loader/index.js!../resolve-url-loader/index.js!../sass-loader/lib/loader.js?sourceMap!./lib/bootstrap.styles.loader.js?{\"bootstrapVersion\":3,\"useCustomIconFontPath\":false,\"extractStyles\":false,\"styleLoaders\":[\"style\",\"css\",\"sass\"],\"styles\":[\"mixins\",\"normalize\",\"print\",\"glyphicons\",\"scaffolding\",\"type\",\"code\",\"grid\",\"tables\",\"forms\",\"buttons\",\"component-animations\",\"dropdowns\",\"button-groups\",\"input-groups\",\"navs\",\"navbar\",\"breadcrumbs\",\"pagination\",\"pager\",\"labels\",\"badges\",\"jumbotron\",\"thumbnails\",\"alerts\",\"progress-bars\",\"media\",\"list-group\",\"panels\",\"wells\",\"responsive-embed\",\"close\",\"modals\",\"tooltip\",\"popovers\",\"carousel\",\"utilities\",\"responsive-utilities\"],\"scripts\":[\"transition\",\"alert\",\"button\",\"carousel\",\"collapse\",\"dropdown\",\"modal\",\"tooltip\",\"popover\",\"scrollspy\",\"tab\",\"affix\"],\"configFilePath\":\"/Users/allannielsen/Sites/22may2018/node_modules/bootstrap-loader/.bootstraprc-3-default\",\"bootstrapPath\":\"/Users/allannielsen/Sites/22may2018/node_modules/bootstrap-sass\",\"bootstrapRelPath\":\"../bootstrap-sass\"}!./no-op.js", function() {
-			var newContent = require("!!../css-loader/index.js!../resolve-url-loader/index.js!../sass-loader/lib/loader.js?sourceMap!./lib/bootstrap.styles.loader.js?{\"bootstrapVersion\":3,\"useCustomIconFontPath\":false,\"extractStyles\":false,\"styleLoaders\":[\"style\",\"css\",\"sass\"],\"styles\":[\"mixins\",\"normalize\",\"print\",\"glyphicons\",\"scaffolding\",\"type\",\"code\",\"grid\",\"tables\",\"forms\",\"buttons\",\"component-animations\",\"dropdowns\",\"button-groups\",\"input-groups\",\"navs\",\"navbar\",\"breadcrumbs\",\"pagination\",\"pager\",\"labels\",\"badges\",\"jumbotron\",\"thumbnails\",\"alerts\",\"progress-bars\",\"media\",\"list-group\",\"panels\",\"wells\",\"responsive-embed\",\"close\",\"modals\",\"tooltip\",\"popovers\",\"carousel\",\"utilities\",\"responsive-utilities\"],\"scripts\":[\"transition\",\"alert\",\"button\",\"carousel\",\"collapse\",\"dropdown\",\"modal\",\"tooltip\",\"popover\",\"scrollspy\",\"tab\",\"affix\"],\"configFilePath\":\"/Users/allannielsen/Sites/22may2018/node_modules/bootstrap-loader/.bootstraprc-3-default\",\"bootstrapPath\":\"/Users/allannielsen/Sites/22may2018/node_modules/bootstrap-sass\",\"bootstrapRelPath\":\"../bootstrap-sass\"}!./no-op.js");
+		module.hot.accept("!!../css-loader/index.js!../resolve-url-loader/index.js!../sass-loader/lib/loader.js?sourceMap!./lib/bootstrap.styles.loader.js?{\"bootstrapVersion\":3,\"useCustomIconFontPath\":false,\"extractStyles\":false,\"styleLoaders\":[\"style\",\"css\",\"sass\"],\"styles\":[\"mixins\",\"normalize\",\"print\",\"glyphicons\",\"scaffolding\",\"type\",\"code\",\"grid\",\"tables\",\"forms\",\"buttons\",\"component-animations\",\"dropdowns\",\"button-groups\",\"input-groups\",\"navs\",\"navbar\",\"breadcrumbs\",\"pagination\",\"pager\",\"labels\",\"badges\",\"jumbotron\",\"thumbnails\",\"alerts\",\"progress-bars\",\"media\",\"list-group\",\"panels\",\"wells\",\"responsive-embed\",\"close\",\"modals\",\"tooltip\",\"popovers\",\"carousel\",\"utilities\",\"responsive-utilities\"],\"scripts\":[\"transition\",\"alert\",\"button\",\"carousel\",\"collapse\",\"dropdown\",\"modal\",\"tooltip\",\"popover\",\"scrollspy\",\"tab\",\"affix\"],\"configFilePath\":\"/Users/allannielsen/WebstormProjects/jacnweb-ng4-refactor/node_modules/bootstrap-loader/.bootstraprc-3-default\",\"bootstrapPath\":\"/Users/allannielsen/WebstormProjects/jacnweb-ng4-refactor/node_modules/bootstrap-sass\",\"bootstrapRelPath\":\"../bootstrap-sass\"}!./no-op.js", function() {
+			var newContent = require("!!../css-loader/index.js!../resolve-url-loader/index.js!../sass-loader/lib/loader.js?sourceMap!./lib/bootstrap.styles.loader.js?{\"bootstrapVersion\":3,\"useCustomIconFontPath\":false,\"extractStyles\":false,\"styleLoaders\":[\"style\",\"css\",\"sass\"],\"styles\":[\"mixins\",\"normalize\",\"print\",\"glyphicons\",\"scaffolding\",\"type\",\"code\",\"grid\",\"tables\",\"forms\",\"buttons\",\"component-animations\",\"dropdowns\",\"button-groups\",\"input-groups\",\"navs\",\"navbar\",\"breadcrumbs\",\"pagination\",\"pager\",\"labels\",\"badges\",\"jumbotron\",\"thumbnails\",\"alerts\",\"progress-bars\",\"media\",\"list-group\",\"panels\",\"wells\",\"responsive-embed\",\"close\",\"modals\",\"tooltip\",\"popovers\",\"carousel\",\"utilities\",\"responsive-utilities\"],\"scripts\":[\"transition\",\"alert\",\"button\",\"carousel\",\"collapse\",\"dropdown\",\"modal\",\"tooltip\",\"popover\",\"scrollspy\",\"tab\",\"affix\"],\"configFilePath\":\"/Users/allannielsen/WebstormProjects/jacnweb-ng4-refactor/node_modules/bootstrap-loader/.bootstraprc-3-default\",\"bootstrapPath\":\"/Users/allannielsen/WebstormProjects/jacnweb-ng4-refactor/node_modules/bootstrap-sass\",\"bootstrapRelPath\":\"../bootstrap-sass\"}!./no-op.js");
 			if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
 			update(newContent);
 		});
@@ -22022,7 +22022,7 @@ __webpack_require__ (673);
 /***/ (function(module, exports, __webpack_require__) {
 
 /*** IMPORTS FROM imports-loader ***/
-var jQuery = __webpack_require__(25);
+var jQuery = __webpack_require__(22);
 
 /* ========================================================================
  * Bootstrap: transition.js v3.3.7
@@ -22092,7 +22092,7 @@ var jQuery = __webpack_require__(25);
 /***/ (function(module, exports, __webpack_require__) {
 
 /*** IMPORTS FROM imports-loader ***/
-var jQuery = __webpack_require__(25);
+var jQuery = __webpack_require__(22);
 
 /* ========================================================================
  * Bootstrap: alert.js v3.3.7
@@ -22197,7 +22197,7 @@ var jQuery = __webpack_require__(25);
 /***/ (function(module, exports, __webpack_require__) {
 
 /*** IMPORTS FROM imports-loader ***/
-var jQuery = __webpack_require__(25);
+var jQuery = __webpack_require__(22);
 
 /* ========================================================================
  * Bootstrap: button.js v3.3.7
@@ -22333,7 +22333,7 @@ var jQuery = __webpack_require__(25);
 /***/ (function(module, exports, __webpack_require__) {
 
 /*** IMPORTS FROM imports-loader ***/
-var jQuery = __webpack_require__(25);
+var jQuery = __webpack_require__(22);
 
 /* ========================================================================
  * Bootstrap: carousel.js v3.3.7
@@ -22581,7 +22581,7 @@ var jQuery = __webpack_require__(25);
 /***/ (function(module, exports, __webpack_require__) {
 
 /*** IMPORTS FROM imports-loader ***/
-var jQuery = __webpack_require__(25);
+var jQuery = __webpack_require__(22);
 
 /* ========================================================================
  * Bootstrap: collapse.js v3.3.7
@@ -22804,7 +22804,7 @@ var jQuery = __webpack_require__(25);
 /***/ (function(module, exports, __webpack_require__) {
 
 /*** IMPORTS FROM imports-loader ***/
-var jQuery = __webpack_require__(25);
+var jQuery = __webpack_require__(22);
 
 /* ========================================================================
  * Bootstrap: dropdown.js v3.3.7
@@ -22980,7 +22980,7 @@ var jQuery = __webpack_require__(25);
 /***/ (function(module, exports, __webpack_require__) {
 
 /*** IMPORTS FROM imports-loader ***/
-var jQuery = __webpack_require__(25);
+var jQuery = __webpack_require__(22);
 
 /* ========================================================================
  * Bootstrap: modal.js v3.3.7
@@ -23330,7 +23330,7 @@ var jQuery = __webpack_require__(25);
 /***/ (function(module, exports, __webpack_require__) {
 
 /*** IMPORTS FROM imports-loader ***/
-var jQuery = __webpack_require__(25);
+var jQuery = __webpack_require__(22);
 
 /* ========================================================================
  * Bootstrap: tooltip.js v3.3.7
@@ -23861,7 +23861,7 @@ var jQuery = __webpack_require__(25);
 /***/ (function(module, exports, __webpack_require__) {
 
 /*** IMPORTS FROM imports-loader ***/
-var jQuery = __webpack_require__(25);
+var jQuery = __webpack_require__(22);
 
 /* ========================================================================
  * Bootstrap: popover.js v3.3.7
@@ -23980,7 +23980,7 @@ var jQuery = __webpack_require__(25);
 /***/ (function(module, exports, __webpack_require__) {
 
 /*** IMPORTS FROM imports-loader ***/
-var jQuery = __webpack_require__(25);
+var jQuery = __webpack_require__(22);
 
 /* ========================================================================
  * Bootstrap: scrollspy.js v3.3.7
@@ -24163,7 +24163,7 @@ var jQuery = __webpack_require__(25);
 /***/ (function(module, exports, __webpack_require__) {
 
 /*** IMPORTS FROM imports-loader ***/
-var jQuery = __webpack_require__(25);
+var jQuery = __webpack_require__(22);
 
 /* ========================================================================
  * Bootstrap: tab.js v3.3.7
@@ -24329,7 +24329,7 @@ var jQuery = __webpack_require__(25);
 /***/ (function(module, exports, __webpack_require__) {
 
 /*** IMPORTS FROM imports-loader ***/
-var jQuery = __webpack_require__(25);
+var jQuery = __webpack_require__(22);
 
 /* ========================================================================
  * Bootstrap: affix.js v3.3.7
@@ -24533,7 +24533,7 @@ const app_component_1 = __webpack_require__(676);
 const platform_browser_1 = __webpack_require__(60);
 const forms_1 = __webpack_require__(103);
 const http_2 = __webpack_require__(182);
-const common_1 = __webpack_require__(24);
+const common_1 = __webpack_require__(25);
 const app_routing_1 = __webpack_require__(679);
 const public_module_1 = __webpack_require__(680);
 const private_module_1 = __webpack_require__(688);
@@ -24686,7 +24686,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 const core_1 = __webpack_require__(3);
-const common_1 = __webpack_require__(24);
+const common_1 = __webpack_require__(25);
 const about_component_1 = __webpack_require__(211);
 const contact_component_1 = __webpack_require__(212);
 const work_component_1 = __webpack_require__(213);
@@ -24826,7 +24826,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 const core_1 = __webpack_require__(3);
-const common_1 = __webpack_require__(24);
+const common_1 = __webpack_require__(25);
 const private_routing_module_1 = __webpack_require__(689);
 const image_services_1 = __webpack_require__(61);
 const http_interceptors_1 = __webpack_require__(690);
@@ -24962,7 +24962,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 const core_1 = __webpack_require__(3);
-const common_1 = __webpack_require__(24);
+const common_1 = __webpack_require__(25);
 const admin_domain_routing_module_1 = __webpack_require__(693);
 const admin_domain_component_1 = __webpack_require__(217);
 const users_component_1 = __webpack_require__(215);
@@ -31424,7 +31424,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 const core_1 = __webpack_require__(3);
-const common_1 = __webpack_require__(24);
+const common_1 = __webpack_require__(25);
 const user_domain_routing_module_1 = __webpack_require__(715);
 const videos_component_1 = __webpack_require__(224);
 const authentication_guard_service_1 = __webpack_require__(83);
@@ -31606,11 +31606,15 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 const core_1 = __webpack_require__(3);
 const image_services_1 = __webpack_require__(61);
+const $ = __webpack_require__(22);
 let AssetviewerComponent = class AssetviewerComponent {
     constructor(imageService) {
         this.imageService = imageService;
     }
     ngOnInit() { }
+    cancel() {
+        $('.assetviewer-modal').modal('hide');
+    }
 };
 AssetviewerComponent = __decorate([
     core_1.Component({
@@ -31629,14 +31633,14 @@ exports.AssetviewerComponent = AssetviewerComponent;
 /***/ 723:
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"modal fade assetviewer-modal\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"myLargeModalLabel\"><div class=\"modal-dialog modal-lg\" role=\"document\"></div><div class=\"modal-content\"><ul><li class=\"previous\">prev</li><li class=\"next\">next</li></ul><img src=\"https://d2gne97vdumgn3.cloudfront.net/api/file/Rx1s76VjTAO1Qc4GY7jY\"></div></div>"
+module.exports = "<div class=\"modal fade assetviewer-modal\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"myLargeModalLabel\"><div class=\"modal-dialog modal-lg\" role=\"document\"></div><div class=\"modal-content\"><div class=\"button-close\"><span class=\"glyphicon glyphicon-remove\" (click)=\"this.cancel()\" aria-hidden=\"true\"></span></div><ul><li class=\"button-left\">prev</li><li class=\"button-right\">next</li></ul><img src=\"https://d2gne97vdumgn3.cloudfront.net/api/file/Rx1s76VjTAO1Qc4GY7jY\"></div></div>"
 
 /***/ }),
 
 /***/ 724:
 /***/ (function(module, exports) {
 
-module.exports = ".assetviewer-modal {\n  margin: auto;\n  max-width: 775px; }\n\n.assetviewer-modal img {\n  width: 100%;\n  border: 5px solid lightgray; }\n\n.assetviewer-modal ul {\n  left: 0px;\n  width: 75px;\n  top: 60px;\n  position: absolute;\n  padding: 0;\n  display: inline-flex;\n  list-style: none; }\n\n.assetviewer-modal li {\n  color: white;\n  background-color: lightgrey;\n  text-align: center;\n  border: 1px solid black;\n  opacity: .5; }\n\n.assetviewer-modal li.previous {\n  border-left: none;\n  width: 100%; }\n\n.assetviewer-modal li.next {\n  border-right: none;\n  position: absolute;\n  left: 698px;\n  width: 75px; }\n\n.assetviewer-modal li.next:hover,\n.assetviewer-modal li.previous:hover {\n  opacity: .9; }\n"
+module.exports = ".assetviewer-modal {\n  margin: auto;\n  max-width: 775px; }\n\n.assetviewer-modal .button-close {\n  color: gray;\n  opacity: .3;\n  position: absolute;\n  top: 5px;\n  left: 753px; }\n\n.assetviewer-modal img {\n  width: 100%;\n  border: 5px solid lightgray; }\n\n.assetviewer-modal ul {\n  left: 5px;\n  width: 75px;\n  top: 60px;\n  position: absolute;\n  padding: 0;\n  display: inline-flex;\n  list-style: none; }\n\n.assetviewer-modal li {\n  text-transform: uppercase;\n  color: white;\n  background-color: gray;\n  text-align: center;\n  opacity: .3; }\n\n.assetviewer-modal li.button-left {\n  border-left: none;\n  border-radius: 0 4px 4px 0;\n  width: 100%; }\n\n.assetviewer-modal li.button-right {\n  border-right: none;\n  border-radius: 4px 0 0 4px;\n  position: absolute;\n  left: 688px;\n  width: 75px; }\n\n.assetviewer-modal li.button-left:hover,\n.assetviewer-modal li.button-right:hover {\n  cursor: pointer;\n  background-color: lightgray;\n  opacity: 1;\n  color: black; }\n\n.assetviewer-modal .button-close:hover {\n  cursor: pointer;\n  opacity: 1;\n  color: black; }\n"
 
 /***/ }),
 
@@ -31661,7 +31665,7 @@ const login_model_1 = __webpack_require__(726);
 const authentication_service_1 = __webpack_require__(16);
 const permission_services_1 = __webpack_require__(46);
 const error_parser_1 = __webpack_require__(84);
-const $ = __webpack_require__(25);
+const $ = __webpack_require__(22);
 let LoginComponent = class LoginComponent {
     constructor(http, router, authenticator, permissionService) {
         this.http = http;
@@ -32043,4 +32047,4 @@ exports.ErrorParser = ErrorParser;
 /***/ })
 
 },[651]);
-//# sourceMappingURL=app.c41161a0122ef9288521.js.map
+//# sourceMappingURL=app.9e47c58d7b69ff8f2253.js.map

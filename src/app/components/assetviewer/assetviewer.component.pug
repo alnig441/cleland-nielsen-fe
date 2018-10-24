@@ -1,7 +1,9 @@
 div(class="modal fade assetviewer-modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel")
     div(class="modal-dialog modal-lg" role="document")
     div(class="modal-content")
+        div(class='button-close')
+            span((click)="this.cancel()" class="glyphicon glyphicon-remove" aria-hidden="true")
         ul
-            li(class='previous') prev
-            li(class='next') next
+            li(class='button-left') prev
+            li(class='button-right') next
         img(src='https://d2gne97vdumgn3.cloudfront.net/api/file/Rx1s76VjTAO1Qc4GY7jY')
