@@ -61,7 +61,7 @@ export class ImagesComponent implements OnInit, DoCheck {
     }
 
     setImageInfo(index?: any) : void {
-        this.imageInformation = index ? this.currentView[index] : null;
+        this.imageInformation = (index || index == 0) ? this.currentView[index] : null;
     }
 
     openModal(index: any):void {

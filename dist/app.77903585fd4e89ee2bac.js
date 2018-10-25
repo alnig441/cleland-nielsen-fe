@@ -18877,7 +18877,7 @@ let ImagesComponent = class ImagesComponent {
         this.currentView = this.months[this.activePeriod['month']];
     }
     setImageInfo(index) {
-        this.imageInformation = index ? this.currentView[index] : null;
+        this.imageInformation = (index || index == 0) ? this.currentView[index] : null;
     }
     openModal(index) {
         this.activePeriod['selected'] = index;
@@ -32067,4 +32067,4 @@ exports.ErrorParser = ErrorParser;
 /***/ })
 
 },[651]);
-//# sourceMappingURL=app.7dabc7618ba9ee165c85.js.map
+//# sourceMappingURL=app.77903585fd4e89ee2bac.js.map
