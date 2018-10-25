@@ -5,6 +5,8 @@ import { ImageModel } from "../../../../models/image.model";
 import { ServiceModelManagerService } from "../../../../services/service-model-manager.service";
 import { ActivatedRoute } from "@angular/router";
 
+const $ = require('jquery');
+
 @Component({
     selector: 'app-images',
     template: require('./images.component.pug'),
@@ -47,5 +49,31 @@ export class ImagesComponent implements OnInit {
         this.months = this.imageService.images[this.activePeriod['year']] as any;
         this.activePeriod['month'] = ((!x && x != 0) || x > 11) ? this.months.length -1 : this.activePeriod['month'] = x ;
         this.currentView = this.months[this.activePeriod['month']] as ImageModel[];
+    }
+
+    openModal(index: any):void {
+        this.activePeriod['selected'] = index;
+        $('.assetviewer-modal').modal('show');
+    }
+
+    cancelModal(): void {
+        $('.assetviewer-modal').modal('hide');
+    }
+
+    goToImage(step: string): void {
+
+        var length = this.imageService.images[this.activePeriod['year']][this.activePeriod['month']].length;
+
+        switch(step) {
+            case 'next':
+                this.activePeriod['selected'] = this.activePeriod['selected'] == length - 1 ? 0 : this.activePeriod['selected'] + 1;
+                break
+            case 'previous':
+                this.activePeriod['selected'] = this.activePeriod['selected'] == 0 ? length - 1 : this.activePeriod['selected'] - 1;
+                break
+        }
+
+        console.log('target: ', this.activePeriod);
+
     }
 }
