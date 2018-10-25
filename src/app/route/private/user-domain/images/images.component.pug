@@ -1,4 +1,11 @@
 span(*ngIf="!this.imageService.message.failure")
+    div(*infobox='this.imageInformation' class='infobox')
+        //ng-container(*ngFor='')
+        p what: {{this.imageInformation.event_en}} {{this.imageInformation.file}}
+        p where: {{this.imageInformation.city}}
+        P when: {{this.imageInformation.year}}
+        p who: {{this.imageInformation.names}}
+
     div
         div(*ngFor='let month of this.months as months; index as i' class='month {{i | monthTransform}}', [ngClass]="{'active': i == this.activePeriod.month}")
             a(*ngIf="month != null", (click)='selectPeriod(i)') {{i | monthTransform}}
@@ -6,10 +13,9 @@ span(*ngIf="!this.imageService.message.failure")
             ul(class='year')
                 li(*ngFor='let year of this.years as years; index as m', [ngClass]="{'active': year == this.activePeriod.year}")
                     a((click)='selectPeriod(year)') {{ year }}
-            div(*ngFor='let image of this.currentView as images; index as j' class='image-container')
+            div(*ngFor='let image of this.currentView as images; index as j' class='image-container', (mouseenter)='this.setImageInfo(j)', (mouseleave)='this.setImageInfo()')
                 a(*ngIf='j < 6' class='thumbnail {{image.year}}', data-toggle='modal' data-target-not='.assetviewer-modal')
                   img((click)='this.openModal(j)' src='https://d2gne97vdumgn3.cloudfront.net/api/file/Rx1s76VjTAO1Qc4GY7jY')
-
 
 div(class="modal fade assetviewer-modal" tabindex="-1" role="dialog" aria-labelledby="assetviewweModal")
     div(class="modal-dialog modal-lg" role="document")
@@ -20,3 +26,4 @@ div(class="modal fade assetviewer-modal" tabindex="-1" role="dialog" aria-labell
             li((click)='this.goToImage("previous")' class='button-left') prev
             li((click)='this.goToImage("next")' class='button-right') next
         img(src='https://d2gne97vdumgn3.cloudfront.net/api/file/Rx1s76VjTAO1Qc4GY7jY')
+

@@ -14,13 +14,14 @@ const $ = require('jquery');
     encapsulation: ViewEncapsulation.None
 })
 
-export class ImagesComponent implements OnInit {
+export class ImagesComponent implements OnInit, DoCheck {
 
     private imageForm: ImageModel;
     private currentView: ImageModel[] = new Array();
     private years: any[] = new Array();
     private months: any[] = new Array();
     private activePeriod: object = new Object();
+    private imageInformation : ImageModel;
 
     constructor(private formManager: ServiceModelManagerService, private activatedRoute: ActivatedRoute, private activeUser: AuthenticationService, private imageService: ImageServices){}
 
@@ -40,6 +41,14 @@ export class ImagesComponent implements OnInit {
             });
     }
 
+    ngDoCheck(): void {
+        // if(this.condition){
+        //     console.log('mouseenter works');
+        // }else{
+        //     console.log('mouseleave works');
+        // }
+    }
+
     selectPeriod(x: any):void {
         this.setActivePeriod(x);
     }
@@ -49,6 +58,10 @@ export class ImagesComponent implements OnInit {
         this.months = this.imageService.images[this.activePeriod['year']] as any;
         this.activePeriod['month'] = ((!x && x != 0) || x > 11) ? this.months.length -1 : this.activePeriod['month'] = x ;
         this.currentView = this.months[this.activePeriod['month']] as ImageModel[];
+    }
+
+    setImageInfo(index?: any) : void {
+        this.imageInformation = index ? this.currentView[index] : null;
     }
 
     openModal(index: any):void {

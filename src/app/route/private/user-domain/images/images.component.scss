@@ -195,3 +195,17 @@ app-images {
   opacity: 1;
   color: black;
 }
+
+.infobox {
+  position: fixed;
+  z-index: 100;
+  left: 1000px;
+  bottom: 25px;
+  width: 230px;
+  text-align: left;
+  background: black;
+  color: white;
+  opacity: .2;
+  padding: 10px;
+  border-radius: 5px;
+}

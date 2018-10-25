@@ -9,6 +9,7 @@ import { MessageBarModule } from "../../../modules/message-bar/message-bar.modul
 import { SidebarCtaModule } from "../../../modules/sidebar-cta/sidebar-cta.module";
 import { FormSubmissionModule } from "../../../modules/form-submission/form-submission.module";
 import { MonthTransform } from "../../../pipes/month.transform";
+import { InfoboxDirective } from "../../../directives/infobox.directive";
 
 @NgModule({
     imports: [
@@ -22,7 +23,8 @@ import { MonthTransform } from "../../../pipes/month.transform";
         UserDomainComponent,
         ImagesComponent,
         VideosComponent,
-        MonthTransform
+        MonthTransform,
+        InfoboxDirective
     ],
     exports: [ MonthTransform ],
     providers: [ AuthenticationGuardService ]
