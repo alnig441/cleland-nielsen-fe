@@ -132,17 +132,17 @@ app-images {
 }
 
 .paginator {
+  padding: 0px;
   display: inline-flex;
   list-style: none;
   position: absolute;
   top: 49%;
-  left: 0px;
+  left: -30px;
 }
 
 .paginator .forward {
   position: absolute;
-  left: 677px;
-  padding-left: 40px;
+  left: 820px;
 }
 
 .paginator .glyphicon {
