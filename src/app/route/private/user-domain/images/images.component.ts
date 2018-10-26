@@ -75,9 +75,15 @@ export class ImagesComponent implements OnInit, DoCheck {
         this.currentViewSubset = next ? this.currentView.slice(this.currentPage * 6, this.currentPage * 6 + 6) : this.currentView.slice(0, 6);
     }
 
-    openModal(index: any):void {
-        this.activePeriod['selected'] = index;
-        $('.assetviewer-modal').modal('show');
+    openModal(imageId: any):void {
+
+        this.currentView.forEach((image, index) => {
+            if(image['id'] == imageId){
+                this.activePeriod['selected'] = index;
+                $('.assetviewer-modal').modal('show');
+            };
+        })
+
     }
 
     cancelModal(): void {
@@ -97,7 +103,8 @@ export class ImagesComponent implements OnInit, DoCheck {
                 break
         }
 
-        console.log('target: ', this.activePeriod);
+
+        console.log('target: ', this.currentView[this.activePeriod['selected']]['id']);
 
     }
 }
