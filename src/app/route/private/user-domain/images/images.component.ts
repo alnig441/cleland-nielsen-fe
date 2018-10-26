@@ -18,13 +18,13 @@ export class ImagesComponent implements OnInit, DoCheck {
 
     private imageForm: ImageModel;
     private currentView: ImageModel[] = new Array();
+    private currentViewSubset: ImageModel[];
+    private imageInformation : ImageModel;
     private years: any[] = new Array();
     private months: any[] = new Array();
     private activePeriod: object = new Object();
-    private imageInformation : ImageModel;
     private currentPage: number;
     private lastPage: number;
-    private subset: ImageModel[];
 
     constructor(private formManager: ServiceModelManagerService, private activatedRoute: ActivatedRoute, private activeUser: AuthenticationService, private imageService: ImageServices){}
 
@@ -42,7 +42,7 @@ export class ImagesComponent implements OnInit, DoCheck {
                 this.years = array.reverse();
 
                 this.setActivePeriod();
-                this.setSubSet();
+                this.setCurrentViewSubset();
             });
     }
 
@@ -59,29 +59,20 @@ export class ImagesComponent implements OnInit, DoCheck {
         this.activePeriod['month'] = ((!x && x != 0) || x > 11) ? this.months.length -1 : this.activePeriod['month'] = x ;
         this.currentView = this.months[this.activePeriod['month']] as ImageModel[];
         this.lastPage = Math.ceil(this.currentView.length / 6) - 1;
-        // this.subset = this.currentView.slice(this.currentPage * 6, this.currentPage * 6 + 6);
-        this.setSubSet();
+        this.setCurrentViewSubset();
     }
 
     turnPage(direction: string): void {
-        console.log('turning page ', direction);
-        if(direction == 'forward' && this.currentPage < this.lastPage){
-            this.currentPage++;
-        } else if(direction == 'rewind' && this.currentPage > 0) {
-            this.currentPage--;
-        }
-
-        this.setSubSet(direction);
-        console.log('subset: ', this.subset);
+        direction == 'forward' ? (this.currentPage < this.lastPage ? this.currentPage++ : null) : (this.currentPage > 0 ? this.currentPage--: null);
+        this.setCurrentViewSubset(direction);
     }
 
     setImageInfo(index?: any) : void {
-        this.imageInformation = (index || index == 0) ? this.subset[index] : null;
+        this.imageInformation = (index || index == 0) ? this.currentViewSubset[index] : null;
     }
 
-    setSubSet(next?: string) : void {
-        this.subset = next ? this.currentView.slice(this.currentPage * 6, this.currentPage * 6 + 6) : this.currentView.slice(0, 6);
-        console.log('settng subseet: ', next, this.subset, this.currentPage);
+    setCurrentViewSubset(next?: string) : void {
+        this.currentViewSubset = next ? this.currentView.slice(this.currentPage * 6, this.currentPage * 6 + 6) : this.currentView.slice(0, 6);
     }
 
     openModal(index: any):void {

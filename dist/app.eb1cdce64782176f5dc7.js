@@ -18859,7 +18859,7 @@ let ImagesComponent = class ImagesComponent {
             });
             this.years = array.reverse();
             this.setActivePeriod();
-            this.setSubSet();
+            this.setCurrentViewSubset();
         });
     }
     ngDoCheck() {
@@ -18873,26 +18873,17 @@ let ImagesComponent = class ImagesComponent {
         this.activePeriod['month'] = ((!x && x != 0) || x > 11) ? this.months.length - 1 : this.activePeriod['month'] = x;
         this.currentView = this.months[this.activePeriod['month']];
         this.lastPage = Math.ceil(this.currentView.length / 6) - 1;
-        // this.subset = this.currentView.slice(this.currentPage * 6, this.currentPage * 6 + 6);
-        this.setSubSet();
+        this.setCurrentViewSubset();
     }
     turnPage(direction) {
-        console.log('turning page ', direction);
-        if (direction == 'forward' && this.currentPage < this.lastPage) {
-            this.currentPage++;
-        }
-        else if (direction == 'rewind' && this.currentPage > 0) {
-            this.currentPage--;
-        }
-        this.setSubSet(direction);
-        console.log('subset: ', this.subset);
+        direction == 'forward' ? (this.currentPage < this.lastPage ? this.currentPage++ : null) : (this.currentPage > 0 ? this.currentPage-- : null);
+        this.setCurrentViewSubset(direction);
     }
     setImageInfo(index) {
-        this.imageInformation = (index || index == 0) ? this.subset[index] : null;
+        this.imageInformation = (index || index == 0) ? this.currentViewSubset[index] : null;
     }
-    setSubSet(next) {
-        this.subset = next ? this.currentView.slice(this.currentPage * 6, this.currentPage * 6 + 6) : this.currentView.slice(0, 6);
-        console.log('settng subseet: ', next, this.subset, this.currentPage);
+    setCurrentViewSubset(next) {
+        this.currentViewSubset = next ? this.currentView.slice(this.currentPage * 6, this.currentPage * 6 + 6) : this.currentView.slice(0, 6);
     }
     openModal(index) {
         this.activePeriod['selected'] = index;
@@ -31447,7 +31438,7 @@ exports.UserDomainRoutingModule = UserDomainRoutingModule;
 /***/ 716:
 /***/ (function(module, exports) {
 
-module.exports = "<span *ngIf=\"!this.imageService.message.failure\"><div class=\"infobox row\" *infobox=\"this.imageInformation\"><ng-container *ngFor=\"let info of this.imageInformation['keys']; index as i\"><div class=\"info-key col-sm-4\"><p>{{ info[0] | keyTransform }}:</p></div><div class=\"info-value col-sm-8\"><p *ngFor=\"let value of info[1]; index as k;\"><ng-container>{{ value | valueTransform }}</ng-container></p></div></ng-container></div><div><div class=\"month {{i | monthTransform}}\" *ngFor=\"let month of this.months as months; index as i\" [ngClass]=\"{'active': i == this.activePeriod.month}\"><a *ngIf=\"month != null\" (click)=\"selectPeriod(i)\">{{i | monthTransform}}</a></div><div class=\"reel-container {{ year }}\"><ul class=\"year\"><li *ngFor=\"let year of this.years as years; index as m\" [ngClass]=\"{'active': year == this.activePeriod.year}\"><a (click)=\"selectPeriod(year)\">{{ year }}</a></li></ul><ul class=\"paginator\" *ngIf=\"this.currentView.length &gt; 6\"><li class=\"rewind\" *ngIf=\"this.currentPage &gt; 0\" (click)=\"this.turnPage('rewind')\"><span class=\"glyphicon glyphicon-triangle-left\"></span></li><li class=\"forward\" *ngIf=\"this.currentPage != this.lastPage\" (click)=\"this.turnPage('forward')\"><span class=\"glyphicon glyphicon-triangle-right\"></span></li></ul><div class=\"image-container\" *ngFor=\"let image of this.subset as images; index as j\" (mouseenter)=\"this.setImageInfo(j)\" (mouseleave)=\"this.setImageInfo()\"><a class=\"thumbnail {{image.year}}\" *ngIf=\"j &lt; 6\" data-toggle=\"modal\" data-target-not=\".assetviewer-modal\" id=\"{{image.id}}\"><img (click)=\"this.openModal(j)\" src=\"https://d2gne97vdumgn3.cloudfront.net/api/file/Rx1s76VjTAO1Qc4GY7jY\"></a></div></div></div></span><div class=\"modal fade assetviewer-modal\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"assetviewerModal\"><div class=\"modal-dialog modal-lg\" role=\"document\"></div><div class=\"modal-content\"><div class=\"button-close\"><span class=\"glyphicon glyphicon-remove\" (click)=\"this.cancelModal()\" aria-hidden=\"true\"></span></div><ul><li class=\"button-left\" (click)=\"this.goToImage(&quot;previous&quot;)\">prev</li><li class=\"button-right\" (click)=\"this.goToImage(&quot;next&quot;)\">next</li></ul><img src=\"https://d2gne97vdumgn3.cloudfront.net/api/file/Rx1s76VjTAO1Qc4GY7jY\"></div></div>"
+module.exports = "<span *ngIf=\"!this.imageService.message.failure\"><div class=\"infobox row\" *infobox=\"this.imageInformation\"><ng-container *ngFor=\"let info of this.imageInformation['keys']; index as i\"><div class=\"info-key col-sm-4\"><p>{{ info[0] | keyTransform }}:</p></div><div class=\"info-value col-sm-8\"><p *ngFor=\"let value of info[1]; index as k;\"><ng-container>{{ value | valueTransform }}</ng-container></p></div></ng-container></div><div><div class=\"month {{i | monthTransform}}\" *ngFor=\"let month of this.months as months; index as i\" [ngClass]=\"{'active': i == this.activePeriod.month}\"><a *ngIf=\"month != null\" (click)=\"selectPeriod(i)\">{{i | monthTransform}}</a></div><div class=\"reel-container {{ year }}\"><ul class=\"year\"><li *ngFor=\"let year of this.years as years; index as m\" [ngClass]=\"{'active': year == this.activePeriod.year}\"><a (click)=\"selectPeriod(year)\">{{ year }}</a></li></ul><ul class=\"paginator\" *ngIf=\"this.currentView.length &gt; 6\"><li class=\"rewind\" *ngIf=\"this.currentPage &gt; 0\" (click)=\"this.turnPage('rewind')\"><span class=\"glyphicon glyphicon-triangle-left\"></span></li><li class=\"forward\" *ngIf=\"this.currentPage != this.lastPage\" (click)=\"this.turnPage('forward')\"><span class=\"glyphicon glyphicon-triangle-right\"></span></li></ul><div class=\"image-container\" *ngFor=\"let image of this.currentViewSubset as images; index as j\" (mouseenter)=\"this.setImageInfo(j)\" (mouseleave)=\"this.setImageInfo()\"><a class=\"thumbnail {{image.year}}\" *ngIf=\"j &lt; 6\" data-toggle=\"modal\" data-target-not=\".assetviewer-modal\" id=\"{{image.id}}\"><img (click)=\"this.openModal(j)\" src=\"https://d2gne97vdumgn3.cloudfront.net/api/file/Rx1s76VjTAO1Qc4GY7jY\"></a></div></div></div></span><div class=\"modal fade assetviewer-modal\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"assetviewerModal\"><div class=\"modal-dialog modal-lg\" role=\"document\"></div><div class=\"modal-content\"><div class=\"button-close\"><span class=\"glyphicon glyphicon-remove\" (click)=\"this.cancelModal()\" aria-hidden=\"true\"></span></div><ul><li class=\"button-left\" (click)=\"this.goToImage(&quot;previous&quot;)\">prev</li><li class=\"button-right\" (click)=\"this.goToImage(&quot;next&quot;)\">next</li></ul><img src=\"https://d2gne97vdumgn3.cloudfront.net/api/file/Rx1s76VjTAO1Qc4GY7jY\"></div></div>"
 
 /***/ }),
 
@@ -32168,4 +32159,4 @@ exports.ErrorParser = ErrorParser;
 /***/ })
 
 },[651]);
-//# sourceMappingURL=app.ede74737673a7a75ffde.js.map
+//# sourceMappingURL=app.eb1cdce64782176f5dc7.js.map
