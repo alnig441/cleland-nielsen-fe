@@ -8,6 +8,8 @@ export class ModalImageDirective {
 
     @Input() set modalImage(condition: boolean) {
 
+        console.log('condition: ', condition)
+
         if(condition){
             this.viewContainer.createEmbeddedView(this.templateRef);
 

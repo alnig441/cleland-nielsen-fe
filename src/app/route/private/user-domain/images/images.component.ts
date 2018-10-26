@@ -77,6 +77,8 @@ export class ImagesComponent implements OnInit, DoCheck {
 
     openModal(imageId: any):void {
 
+        console.log('image id: ', imageId)
+
         this.currentView.forEach((image, index) => {
             if(image['id'] == imageId){
                 this.activePeriod['selected'] = index;
