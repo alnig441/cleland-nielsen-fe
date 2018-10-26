@@ -42,11 +42,6 @@ export class ImagesComponent implements OnInit, DoCheck {
     }
 
     ngDoCheck(): void {
-        // if(this.condition){
-        //     console.log('mouseenter works');
-        // }else{
-        //     console.log('mouseleave works');
-        // }
     }
 
     selectPeriod(x: any):void {
@@ -58,6 +53,10 @@ export class ImagesComponent implements OnInit, DoCheck {
         this.months = this.imageService.images[this.activePeriod['year']] as any;
         this.activePeriod['month'] = ((!x && x != 0) || x > 11) ? this.months.length -1 : this.activePeriod['month'] = x ;
         this.currentView = this.months[this.activePeriod['month']] as ImageModel[];
+    }
+
+    turnPage(direction: string): void {
+        console.log('turning page ', direction);
     }
 
     setImageInfo(index?: any) : void {

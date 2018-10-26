@@ -131,6 +131,33 @@ app-images {
   cursor: text;
 }
 
+.paginator {
+  display: inline-flex;
+  list-style: none;
+  position: absolute;
+  top: 49%;
+  left: 0px;
+}
+
+.paginator .forward {
+  position: absolute;
+  left: 677px;
+  padding-left: 40px;
+}
+
+.paginator .glyphicon {
+  border: 1px solid;
+  padding: 3px;
+  border-radius: 4px;
+  color: gray;
+  font-size: xx-large;
+}
+
+.paginator .glyphicon:hover {
+  cursor: pointer;
+  color: black;
+}
+
 /* assetviewer modal */
 .assetviewer-modal {
   margin:auto;
@@ -208,4 +235,13 @@ app-images {
   opacity: .2;
   padding: 10px;
   border-radius: 5px;
+}
+
+.infobox p {
+  padding: 0px;
+  margin: 0px;
+}
+
+.infobox .info-key {
+  text-transform: uppercase;
 }

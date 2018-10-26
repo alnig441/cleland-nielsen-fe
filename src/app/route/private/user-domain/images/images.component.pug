@@ -1,10 +1,11 @@
 span(*ngIf="!this.imageService.message.failure")
-    div(*infobox='this.imageInformation' class='infobox')
-        //ng-container(*ngFor='')
-        p what: {{this.imageInformation.event_en}} {{this.imageInformation.file}}
-        p where: {{this.imageInformation.city}}
-        P when: {{this.imageInformation.year}}
-        p who: {{this.imageInformation.names}}
+    div(*infobox='this.imageInformation' class='infobox row')
+        ng-container(*ngFor="let info of this.imageInformation['keys']; index as i")
+            div(class='info-key col-sm-4')
+                p() {{ info[0] | keyTransform }}:
+            div(class='info-value col-sm-8')
+                p(*ngFor="let value of info[1]; index as k;")
+                    ng-container {{ value | valueTransform }}
 
     div
         div(*ngFor='let month of this.months as months; index as i' class='month {{i | monthTransform}}', [ngClass]="{'active': i == this.activePeriod.month}")
@@ -13,6 +14,11 @@ span(*ngIf="!this.imageService.message.failure")
             ul(class='year')
                 li(*ngFor='let year of this.years as years; index as m', [ngClass]="{'active': year == this.activePeriod.year}")
                     a((click)='selectPeriod(year)') {{ year }}
+            ul(class='paginator')
+                li((click)="this.turnPage('rewind')" class='rewind')
+                    span(class='glyphicon glyphicon-triangle-left')
+                li((click)="this.turnPage('forward')" class='forward')
+                    span(class='glyphicon glyphicon-triangle-right')
             div(*ngFor='let image of this.currentView as images; index as j' class='image-container', (mouseenter)='this.setImageInfo(j)', (mouseleave)='this.setImageInfo()')
                 a(*ngIf='j < 6' class='thumbnail {{image.year}}', data-toggle='modal' data-target-not='.assetviewer-modal')
                   img((click)='this.openModal(j)' src='https://d2gne97vdumgn3.cloudfront.net/api/file/Rx1s76VjTAO1Qc4GY7jY')

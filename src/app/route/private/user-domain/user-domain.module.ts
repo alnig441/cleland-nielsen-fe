@@ -10,6 +10,8 @@ import { SidebarCtaModule } from "../../../modules/sidebar-cta/sidebar-cta.modul
 import { FormSubmissionModule } from "../../../modules/form-submission/form-submission.module";
 import { MonthTransform } from "../../../pipes/month.transform";
 import { InfoboxDirective } from "../../../directives/infobox.directive";
+import {KeyTransform} from "../../../pipes/key.transform";
+import {ValueTransform} from "../../../pipes/value.transform";
 
 @NgModule({
     imports: [
@@ -24,9 +26,11 @@ import { InfoboxDirective } from "../../../directives/infobox.directive";
         ImagesComponent,
         VideosComponent,
         MonthTransform,
+        KeyTransform,
+        ValueTransform,
         InfoboxDirective
     ],
-    exports: [ MonthTransform ],
+    exports: [ MonthTransform, KeyTransform ],
     providers: [ AuthenticationGuardService ]
 })
 
