@@ -18864,14 +18864,12 @@ let ImagesComponent = class ImagesComponent {
     }
     ngDoCheck() {
     }
-    selectPeriod(x) {
-        this.setActivePeriod(x);
-    }
     setActivePeriod(x) {
         this.activePeriod['year'] = (!x && x != 0) ? this.imageService.images.length - 1 : x > 11 ? x : this.activePeriod['year'];
         this.months = this.imageService.images[this.activePeriod['year']];
         this.activePeriod['month'] = ((!x && x != 0) || x > 11) ? this.months.length - 1 : this.activePeriod['month'] = x;
         this.currentView = this.months[this.activePeriod['month']];
+        this.currentPage = 0;
         this.lastPage = Math.ceil(this.currentView.length / 6) - 1;
         this.setCurrentViewSubset();
     }
@@ -18886,7 +18884,6 @@ let ImagesComponent = class ImagesComponent {
         this.currentViewSubset = next ? this.currentView.slice(this.currentPage * 6, this.currentPage * 6 + 6) : this.currentView.slice(0, 6);
     }
     openModal(imageId) {
-        console.log('image id: ', imageId);
         this.currentView.forEach((image, index) => {
             if (image['id'] == imageId) {
                 this.activePeriod['selected'] = index;
@@ -18908,7 +18905,6 @@ let ImagesComponent = class ImagesComponent {
                 this.activePeriod['selected'] = this.activePeriod['selected'] == 0 ? length - 1 : this.activePeriod['selected'] - 1;
                 break;
         }
-        console.log('target: ', this.currentView[this.activePeriod['selected']]['id']);
     }
 };
 ImagesComponent = __decorate([
@@ -31446,7 +31442,7 @@ exports.UserDomainRoutingModule = UserDomainRoutingModule;
 /***/ 716:
 /***/ (function(module, exports) {
 
-module.exports = "<span *ngIf=\"!this.imageService.message.failure\"><div class=\"infobox row\" *infobox=\"this.imageInformation\"><ng-container *ngFor=\"let info of this.imageInformation['keys']; index as i\"><div class=\"info-key col-sm-4\"><p>{{ info[0] | keyTransform }}:</p></div><div class=\"info-value col-sm-8\"><p *ngFor=\"let value of info[1]; index as k;\"><ng-container>{{ value | valueTransform }}</ng-container></p></div></ng-container></div><div><div class=\"month {{i | monthTransform}}\" *ngFor=\"let month of this.months as months; index as i\" [ngClass]=\"{'active': i == this.activePeriod.month}\"><a *ngIf=\"month != null\" (click)=\"selectPeriod(i)\">{{i | monthTransform}}</a></div><div class=\"reel-container {{ year }}\"><ul class=\"year\"><li *ngFor=\"let year of this.years as years; index as m\" [ngClass]=\"{'active': year == this.activePeriod.year}\"><a (click)=\"selectPeriod(year)\">{{ year }}</a></li></ul><ul class=\"paginator\" *ngIf=\"this.currentView.length &gt; 6\"><li class=\"rewind\" *ngIf=\"this.currentPage &gt; 0\" (click)=\"this.turnPage('rewind')\"><span class=\"glyphicon glyphicon-triangle-left\"></span></li><li class=\"forward\" *ngIf=\"this.currentPage != this.lastPage\" (click)=\"this.turnPage('forward')\"><span class=\"glyphicon glyphicon-triangle-right\"></span></li></ul><div class=\"image-container\" *ngFor=\"let image of this.currentViewSubset as images; index as j\" (mouseenter)=\"this.setImageInfo(j)\" (mouseleave)=\"this.setImageInfo()\"><a class=\"thumbnail {{image.year}}\" *ngIf=\"j &lt; 6\" data-toggle=\"modal\" data-target-not=\".assetviewer-modal\" id=\"{{image.id}}\"><img (click)=\"this.openModal(image.id)\" src=\"https://d2gne97vdumgn3.cloudfront.net/api/file/Rx1s76VjTAO1Qc4GY7jY\"></a></div></div></div></span><div class=\"modal fade assetviewer-modal\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"assetviewerModal\"><div class=\"modal-dialog modal-lg\" role=\"document\"></div><div class=\"modal-content\"><div class=\"button-close\"><span class=\"glyphicon glyphicon-remove\" (click)=\"this.cancelModal()\" aria-hidden=\"true\"></span></div><ul><li class=\"button-left\" (click)=\"this.goToImage(&quot;previous&quot;)\">prev</li><li class=\"button-right\" (click)=\"this.goToImage(&quot;next&quot;)\">next</li></ul><img *modalImage=\"this.activePeriod['selected'] || this.activePeriod['selected'] == 0\" src=\"https://d2gne97vdumgn3.cloudfront.net/api/file/Rx1s76VjTAO1Qc4GY7jY\" id=\"{{this.currentView[this.activePeriod['selected']]['id']}}\"></div></div>"
+module.exports = "<span *ngIf=\"!this.imageService.message.failure\"><div class=\"infobox row\" *infobox=\"this.imageInformation\"><ng-container *ngFor=\"let info of this.imageInformation['keys']; index as i\"><div class=\"info-key col-sm-4\"><p>{{ info[0] | keyTransform }}:</p></div><div class=\"info-value col-sm-8\"><p *ngFor=\"let value of info[1]; index as k;\"><ng-container>{{ value | valueTransform }}</ng-container></p></div></ng-container></div><div><div class=\"month {{i | monthTransform}}\" *ngFor=\"let month of this.months as months; index as i\" [ngClass]=\"{'active': i == this.activePeriod.month}\"><a *ngIf=\"month != null\" (click)=\"setActivePeriod(i)\">{{i | monthTransform}}</a></div><div class=\"reel-container {{ year }}\"><ul class=\"year\"><li *ngFor=\"let year of this.years as years; index as m\" [ngClass]=\"{'active': year == this.activePeriod.year}\"><a (click)=\"setActivePeriod(year)\">{{ year }}</a></li></ul><ul class=\"paginator\" *ngIf=\"this.currentView.length &gt; 6\"><li class=\"rewind\" *ngIf=\"this.currentPage &gt; 0\" (click)=\"this.turnPage('rewind')\"><span class=\"glyphicon glyphicon-triangle-left\"></span></li><li class=\"forward\" *ngIf=\"this.currentPage != this.lastPage\" (click)=\"this.turnPage('forward')\"><span class=\"glyphicon glyphicon-triangle-right\"></span></li></ul><div class=\"image-container\" *ngFor=\"let image of this.currentViewSubset as images; index as j\" (mouseenter)=\"this.setImageInfo(j)\" (mouseleave)=\"this.setImageInfo()\"><a class=\"thumbnail {{image.year}}\" *ngIf=\"j &lt; 6\" data-toggle=\"modal\" data-target-not=\".assetviewer-modal\" id=\"{{image.id}}\"><img (click)=\"this.openModal(image.id)\" src=\"https://d2gne97vdumgn3.cloudfront.net/api/file/Rx1s76VjTAO1Qc4GY7jY\"></a></div></div></div></span><div class=\"modal fade assetviewer-modal\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"assetviewerModal\"><div class=\"modal-dialog modal-lg\" role=\"document\"></div><div class=\"modal-content\"><div class=\"button-close\"><span class=\"glyphicon glyphicon-remove\" (click)=\"this.cancelModal()\" aria-hidden=\"true\"></span></div><ul><li class=\"button-left\" (click)=\"this.goToImage(&quot;previous&quot;)\">prev</li><li class=\"button-right\" (click)=\"this.goToImage(&quot;next&quot;)\">next</li></ul><img *modalImage=\"this.activePeriod['selected'] || this.activePeriod['selected'] == 0\" src=\"https://d2gne97vdumgn3.cloudfront.net/api/file/Rx1s76VjTAO1Qc4GY7jY\" id=\"{{this.currentView[this.activePeriod['selected']]['id']}}\"></div></div>"
 
 /***/ }),
 
@@ -31785,7 +31781,6 @@ let ModalImageDirective = class ModalImageDirective {
         this.viewContainer = viewContainer;
     }
     set modalImage(condition) {
-        console.log('condition: ', condition);
         if (condition) {
             this.viewContainer.createEmbeddedView(this.templateRef);
             if (this.viewContainer.length > 1) {
@@ -32214,4 +32209,4 @@ exports.ErrorParser = ErrorParser;
 /***/ })
 
 },[651]);
-//# sourceMappingURL=app.214d82329a187eb19c23.js.map
+//# sourceMappingURL=app.107f21129fef66330161.js.map

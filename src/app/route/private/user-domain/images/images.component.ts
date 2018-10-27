@@ -40,7 +40,6 @@ export class ImagesComponent implements OnInit, DoCheck {
                     }
                 })
                 this.years = array.reverse();
-
                 this.setActivePeriod();
                 this.setCurrentViewSubset();
             });
@@ -49,15 +48,14 @@ export class ImagesComponent implements OnInit, DoCheck {
     ngDoCheck(): void {
     }
 
-    selectPeriod(x: any):void {
-        this.setActivePeriod(x);
-    }
-
     setActivePeriod(x?: any): void {
         this.activePeriod['year'] = (!x && x !=0) ? this.imageService.images.length - 1 : x > 11 ? x : this.activePeriod['year'];
         this.months = this.imageService.images[this.activePeriod['year']] as any;
+
         this.activePeriod['month'] = ((!x && x != 0) || x > 11) ? this.months.length -1 : this.activePeriod['month'] = x ;
         this.currentView = this.months[this.activePeriod['month']] as ImageModel[];
+
+        this.currentPage = 0;
         this.lastPage = Math.ceil(this.currentView.length / 6) - 1;
         this.setCurrentViewSubset();
     }
@@ -76,16 +74,12 @@ export class ImagesComponent implements OnInit, DoCheck {
     }
 
     openModal(imageId: any):void {
-
-        console.log('image id: ', imageId)
-
         this.currentView.forEach((image, index) => {
             if(image['id'] == imageId){
                 this.activePeriod['selected'] = index;
                 $('.assetviewer-modal').modal('show');
             };
         })
-
     }
 
     cancelModal(): void {
@@ -93,9 +87,7 @@ export class ImagesComponent implements OnInit, DoCheck {
     }
 
     goToImage(step: string): void {
-
         var length = this.imageService.images[this.activePeriod['year']][this.activePeriod['month']].length;
-
         switch(step) {
             case 'next':
                 this.activePeriod['selected'] = this.activePeriod['selected'] == length - 1 ? 0 : this.activePeriod['selected'] + 1;
@@ -104,9 +96,5 @@ export class ImagesComponent implements OnInit, DoCheck {
                 this.activePeriod['selected'] = this.activePeriod['selected'] == 0 ? length - 1 : this.activePeriod['selected'] - 1;
                 break
         }
-
-
-        console.log('target: ', this.currentView[this.activePeriod['selected']]['id']);
-
     }
 }

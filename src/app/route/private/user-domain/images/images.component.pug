@@ -9,11 +9,11 @@ span(*ngIf="!this.imageService.message.failure")
 
     div
         div(*ngFor='let month of this.months as months; index as i' class='month {{i | monthTransform}}', [ngClass]="{'active': i == this.activePeriod.month}")
-            a(*ngIf="month != null", (click)='selectPeriod(i)') {{i | monthTransform}}
+            a(*ngIf="month != null", (click)='setActivePeriod(i)') {{i | monthTransform}}
         div( class='reel-container {{ year }}')
             ul(class='year')
                 li(*ngFor='let year of this.years as years; index as m', [ngClass]="{'active': year == this.activePeriod.year}")
-                    a((click)='selectPeriod(year)') {{ year }}
+                    a((click)='setActivePeriod(year)') {{ year }}
             ul(*ngIf="this.currentView.length > 6" class='paginator')
                 li(*ngIf='this.currentPage > 0', (click)="this.turnPage('rewind')" class='rewind')
                     span(class='glyphicon glyphicon-triangle-left')
