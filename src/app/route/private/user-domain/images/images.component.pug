@@ -20,8 +20,11 @@ span(*ngIf="!this.imageService.message.failure")
                 li(*ngIf="this.currentPage != this.lastPage", (click)="this.turnAlbumPage('forward')" class='forward')
                     span(class='glyphicon glyphicon-triangle-right')
             div(*ngFor='let image of this.albumViewSubset as images; index as j' class='image-container', (mouseenter)='this.setImageInfo(j)', (mouseleave)='this.setImageInfo()')
-                a(*ngIf='j < 6' class='thumbnail {{image.year}}', data-toggle='modal' data-target-not='.assetviewer-modal' id="{{image.id}}")
-                  img((click)='this.openModal(image.id)' src='https://d2gne97vdumgn3.cloudfront.net/api/file/Rx1s76VjTAO1Qc4GY7jY')
+                div(*ngIf='j < 6' data-toggle='modal' class="thumbnail" data-target-not='.assetviewer-modal' id="{{image.id}}" )
+                    img((click)='this.openModal(image.id)' src="photos/{{image.file}}")
+                    div(class='caption')
+                        p {{image.day}}&nbsp;{{image.month | monthTransform}}
+
 
 div(class="modal fade assetviewer-modal" tabindex="-1" role="dialog" aria-labelledby="assetviewerModal")
     div(class="modal-dialog modal-lg" role="document")
@@ -31,5 +34,5 @@ div(class="modal fade assetviewer-modal" tabindex="-1" role="dialog" aria-labell
         ul
             li((click)='this.flipThroughImages("previous")' class='button-left') prev
             li((click)='this.flipThroughImages("next")' class='button-right') next
-        img(*modalImage="this.albumViewSelector['selectedIndex'] || this.albumViewSelector['selectedIndex'] == 0" src='https://d2gne97vdumgn3.cloudfront.net/api/file/Rx1s76VjTAO1Qc4GY7jY' id="{{this.albumView[this.albumViewSelector['selectedIndex']]['id']}}")
+        img(*modalImage="this.albumViewSelector['selectedIndex'] || this.albumViewSelector['selectedIndex'] == 0" src="photos/{{this.albumView[this.albumViewSelector['selectedIndex']]['file']}}" id="{{this.albumView[this.albumViewSelector['selectedIndex']]['id']}}")
 

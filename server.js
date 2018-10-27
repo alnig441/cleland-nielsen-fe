@@ -31,6 +31,7 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(express.static(__dirname + '/dist'));
+app.use('/photos', express.static("/Volumes/media/Photos/James"))
 
 /* routes setup */
 app.use('/login', authenticate);
