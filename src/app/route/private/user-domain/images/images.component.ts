@@ -17,12 +17,12 @@ const $ = require('jquery');
 export class ImagesComponent implements OnInit, DoCheck {
 
     private imageForm: ImageModel;
-    private currentView: ImageModel[] = new Array();
-    private currentViewSubset: ImageModel[];
+    private albumViewSelector: object = new Object();
+    private albumView: ImageModel[] = new Array();
+    private albumViewSubset: ImageModel[];
     private imageInformation : ImageModel;
     private years: any[] = new Array();
     private months: any[] = new Array();
-    private activePeriod: object = new Object();
     private currentPage: number;
     private lastPage: number;
 
@@ -40,43 +40,43 @@ export class ImagesComponent implements OnInit, DoCheck {
                     }
                 })
                 this.years = array.reverse();
-                this.setActivePeriod();
-                this.setCurrentViewSubset();
+                this.setAlbumView();
+                this.setAlbumViewSubset();
             });
     }
 
     ngDoCheck(): void {
     }
 
-    setActivePeriod(x?: any): void {
-        this.activePeriod['year'] = (!x && x !=0) ? this.imageService.images.length - 1 : x > 11 ? x : this.activePeriod['year'];
-        this.months = this.imageService.images[this.activePeriod['year']] as any;
+    setAlbumView(x?: any): void {
+        this.albumViewSelector['year'] = (!x && x !=0) ? this.imageService.images.length - 1 : x > 11 ? x : this.albumViewSelector['year'];
+        this.months = this.imageService.images[this.albumViewSelector['year']] as any;
 
-        this.activePeriod['month'] = ((!x && x != 0) || x > 11) ? this.months.length -1 : this.activePeriod['month'] = x ;
-        this.currentView = this.months[this.activePeriod['month']] as ImageModel[];
+        this.albumViewSelector['month'] = ((!x && x != 0) || x > 11) ? this.months.length -1 : this.albumViewSelector['month'] = x ;
+        this.albumView = this.months[this.albumViewSelector['month']] as ImageModel[];
 
         this.currentPage = 0;
-        this.lastPage = Math.ceil(this.currentView.length / 6) - 1;
-        this.setCurrentViewSubset();
+        this.lastPage = Math.ceil(this.albumView.length / 6) - 1;
+        this.setAlbumViewSubset();
     }
 
-    turnPage(direction: string): void {
+    turnAlbumPage(direction: string): void {
         direction == 'forward' ? (this.currentPage < this.lastPage ? this.currentPage++ : null) : (this.currentPage > 0 ? this.currentPage--: null);
-        this.setCurrentViewSubset(direction);
+        this.setAlbumViewSubset(direction);
     }
 
     setImageInfo(index?: any) : void {
-        this.imageInformation = (index || index == 0) ? this.currentViewSubset[index] : null;
+        this.imageInformation = (index || index == 0) ? this.albumViewSubset[index] : null;
     }
 
-    setCurrentViewSubset(next?: string) : void {
-        this.currentViewSubset = next ? this.currentView.slice(this.currentPage * 6, this.currentPage * 6 + 6) : this.currentView.slice(0, 6);
+    setAlbumViewSubset(next?: string) : void {
+        this.albumViewSubset = next ? this.albumView.slice(this.currentPage * 6, this.currentPage * 6 + 6) : this.albumView.slice(0, 6);
     }
 
     openModal(imageId: any):void {
-        this.currentView.forEach((image, index) => {
+        this.albumView.forEach((image, index) => {
             if(image['id'] == imageId){
-                this.activePeriod['selected'] = index;
+                this.albumViewSelector['selectedIndex'] = index;
                 $('.assetviewer-modal').modal('show');
             };
         })
@@ -86,14 +86,14 @@ export class ImagesComponent implements OnInit, DoCheck {
         $('.assetviewer-modal').modal('hide');
     }
 
-    goToImage(step: string): void {
-        var length = this.imageService.images[this.activePeriod['year']][this.activePeriod['month']].length;
+    flipThroughImages(step: string): void {
+        var length = this.imageService.images[this.albumViewSelector['year']][this.albumViewSelector['month']].length;
         switch(step) {
             case 'next':
-                this.activePeriod['selected'] = this.activePeriod['selected'] == length - 1 ? 0 : this.activePeriod['selected'] + 1;
+                this.albumViewSelector['selectedIndex'] = this.albumViewSelector['selectedIndex'] == length - 1 ? 0 : this.albumViewSelector['selectedIndex'] + 1;
                 break
             case 'previous':
-                this.activePeriod['selected'] = this.activePeriod['selected'] == 0 ? length - 1 : this.activePeriod['selected'] - 1;
+                this.albumViewSelector['selectedIndex'] = this.albumViewSelector['selectedIndex'] == 0 ? length - 1 : this.albumViewSelector['selectedIndex'] - 1;
                 break
         }
     }

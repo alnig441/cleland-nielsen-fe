@@ -8,18 +8,18 @@ span(*ngIf="!this.imageService.message.failure")
                     ng-container {{ value | valueTransform }}
 
     div
-        div(*ngFor='let month of this.months as months; index as i' class='month {{i | monthTransform}}', [ngClass]="{'active': i == this.activePeriod.month}")
-            a(*ngIf="month != null", (click)='setActivePeriod(i)') {{i | monthTransform}}
+        div(*ngFor='let month of this.months as months; index as i' class='month {{i | monthTransform}}', [ngClass]="{'active': i == this.albumViewSelector.month}")
+            a(*ngIf="month != null", (click)='setAlbumView(i)') {{i | monthTransform}}
         div( class='reel-container {{ year }}')
             ul(class='year')
-                li(*ngFor='let year of this.years as years; index as m', [ngClass]="{'active': year == this.activePeriod.year}")
-                    a((click)='setActivePeriod(year)') {{ year }}
-            ul(*ngIf="this.currentView.length > 6" class='paginator')
-                li(*ngIf='this.currentPage > 0', (click)="this.turnPage('rewind')" class='rewind')
+                li(*ngFor='let year of this.years as years; index as m', [ngClass]="{'active': year == this.albumViewSelector.year}")
+                    a((click)='setAlbumView(year)') {{ year }}
+            ul(*ngIf="this.albumView.length > 6" class='paginator')
+                li(*ngIf='this.currentPage > 0', (click)="this.turnAlbumPage('rewind')" class='rewind')
                     span(class='glyphicon glyphicon-triangle-left')
-                li(*ngIf="this.currentPage != this.lastPage", (click)="this.turnPage('forward')" class='forward')
+                li(*ngIf="this.currentPage != this.lastPage", (click)="this.turnAlbumPage('forward')" class='forward')
                     span(class='glyphicon glyphicon-triangle-right')
-            div(*ngFor='let image of this.currentViewSubset as images; index as j' class='image-container', (mouseenter)='this.setImageInfo(j)', (mouseleave)='this.setImageInfo()')
+            div(*ngFor='let image of this.albumViewSubset as images; index as j' class='image-container', (mouseenter)='this.setImageInfo(j)', (mouseleave)='this.setImageInfo()')
                 a(*ngIf='j < 6' class='thumbnail {{image.year}}', data-toggle='modal' data-target-not='.assetviewer-modal' id="{{image.id}}")
                   img((click)='this.openModal(image.id)' src='https://d2gne97vdumgn3.cloudfront.net/api/file/Rx1s76VjTAO1Qc4GY7jY')
 
@@ -29,7 +29,7 @@ div(class="modal fade assetviewer-modal" tabindex="-1" role="dialog" aria-labell
         div(class='button-close')
             span((click)="this.cancelModal()" class="glyphicon glyphicon-remove" aria-hidden="true")
         ul
-            li((click)='this.goToImage("previous")' class='button-left') prev
-            li((click)='this.goToImage("next")' class='button-right') next
-        img(*modalImage="this.activePeriod['selected'] || this.activePeriod['selected'] == 0" src='https://d2gne97vdumgn3.cloudfront.net/api/file/Rx1s76VjTAO1Qc4GY7jY' id="{{this.currentView[this.activePeriod['selected']]['id']}}")
+            li((click)='this.flipThroughImages("previous")' class='button-left') prev
+            li((click)='this.flipThroughImages("next")' class='button-right') next
+        img(*modalImage="this.albumViewSelector['selectedIndex'] || this.albumViewSelector['selectedIndex'] == 0" src='https://d2gne97vdumgn3.cloudfront.net/api/file/Rx1s76VjTAO1Qc4GY7jY' id="{{this.albumView[this.albumViewSelector['selectedIndex']]['id']}}")
 
