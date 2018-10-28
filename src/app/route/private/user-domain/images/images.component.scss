@@ -40,7 +40,7 @@ app-images {
 
 .reel-container {
   border-top: 1px solid;
-  background-image: linear-gradient(to right, white ,#777777, white);
+  background-image: linear-gradient(to right, white ,lightgray, lightgray, white);
   text-align: center;
   opacity: .95;
   border-radius: 3px 0 0 0;
@@ -48,7 +48,6 @@ app-images {
 
 .image-container {
   width: 40%;
-  margin: 10px;
   display: inline-block;
 }
 
@@ -76,6 +75,7 @@ app-images {
   padding:0px 5px;
 }
 
+
 .month a:hover {
   background-color: white;
   color: black;
@@ -83,25 +83,24 @@ app-images {
   border-bottom: 0px;
 }
 
-//.month.active hover {
-//  border-bottom: 1px solid black;
-//}
-
 .month.active a:hover {
   font-style: normal;
-  //cursor: text;
   border-bottom: 1px solid black;
 }
 
 .thumbnail {
-  //display: inline-flex;
-  margin: 2px;
+  border: none;
+  margin: 10px;
 }
 
-.thumbnail,
 .thumbnail > img {
   filter: grayscale(100%);
-  height: 200px;
+  //height: 200px;
+}
+
+.thumbnail p {
+  margin: 0;
+  padding: 0;
 }
 
 .thumbnail:hover,
@@ -119,7 +118,6 @@ app-images {
   position: relative;
   background-color: white;
   color: black;
-  z-index: -5;
   border-radius: 0 0 4px 4px
 }
 
@@ -168,13 +166,14 @@ app-images {
   border: 1px solid;
   padding: 3px;
   border-radius: 4px;
-  color: gray;
+  color: #000;
   font-size: xx-large;
+  opacity: .5;
 }
 
 .paginator .glyphicon:hover {
   cursor: pointer;
-  color: black;
+  opacity: 1;
 }
 
 /* assetviewer modal */

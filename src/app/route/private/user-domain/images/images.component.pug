@@ -10,7 +10,7 @@ span(*ngIf="!this.imageService.message.failure")
     div
         div(*ngFor='let month of this.months as months; index as i' class='month {{i | monthTransform}}', [ngClass]="{'active': i == this.albumViewSelector.month}")
             a(*ngIf="month != null", (click)='setAlbumView(i)') {{i | monthTransform}}
-        div( class='reel-container {{ year }}')
+        div(class='reel-container {{ year }}')
             ul(class='year')
                 li(*ngFor='let year of this.years as years; index as m', [ngClass]="{'active': year == this.albumViewSelector.year}")
                     a((click)='setAlbumView(year)') {{ year }}
@@ -19,9 +19,9 @@ span(*ngIf="!this.imageService.message.failure")
                     span(class='glyphicon glyphicon-triangle-left')
                 li(*ngIf="this.currentPage != this.lastPage", (click)="this.turnAlbumPage('forward')" class='forward')
                     span(class='glyphicon glyphicon-triangle-right')
-            div(*ngFor='let image of this.albumViewSubset as images; index as j' class='image-container', (mouseenter)='this.setImageInfo(j)', (mouseleave)='this.setImageInfo()')
+            div(*ngFor='let image of this.albumViewSubset as images; index as j' class='image-container')
                 div(*ngIf='j < 6' data-toggle='modal' class="thumbnail" data-target-not='.assetviewer-modal' id="{{image.id}}" )
-                    img((click)='this.openModal(image.id)' src="photos/{{image.file}}")
+                    img((click)='this.openModal(image.id)' src="photos/{{image.file}}", (mouseenter)='this.setImageInfo(j)', (mouseleave)='this.setImageInfo()')
                     div(class='caption')
                         p {{image.day}}&nbsp;{{image.month | monthTransform}}
 
