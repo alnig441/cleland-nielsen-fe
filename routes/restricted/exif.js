@@ -28,14 +28,10 @@ exif = {
 
 
     convertCoordinates: function (data) {
-
-        console.log('data: ', data);
-
         let isNegative = data.reference.toLowerCase() == 's' || data.reference.toLowerCase() == 'w';
         let conversion;
 
         data.coordinate.forEach((elem, ind) => {
-            console.log('elem: ', elem, typeof elem)
             switch (ind) {
                 case 0:
                     conversion = elem;
