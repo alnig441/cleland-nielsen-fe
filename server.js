@@ -8,13 +8,15 @@ const app = express();
 const bodyParser = require('body-parser');
 const passport = require('passport');
 const dbInit = process.env.DB_INIT ? process.env.DB_INIT : false;
+const fs = require('fs');
+
+const jimp = require('jimp');
 
 require('./routes/authenticate/passport');
 
 if(dbInit){
     require('./dbInit');
 }
-
 
 /* pull in all app server routes */
 const authenticate = require('./routes/authenticate/authentication'),
@@ -31,7 +33,8 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(express.static(__dirname + '/dist'));
-app.use('/photos', express.static("/Volumes/media/Photos/James"))
+app.use('/photos', express.static("/Volumes/media/Photos/James"));
+app.use('/new_photos', express.static("/Volumes/media/Photos/temp"));
 
 /* routes setup */
 app.use('/login', authenticate);
@@ -54,7 +57,46 @@ app.listen(port, hostName, function onStart(err) {
     console.info('==> 🌎 Listening on port %s. Open up http://'+hostName+':%s/ in your browser.', port, port);
 });
 
-// cron.schedule('* * * * *', () => {
-//     console.log('running task every minute');
-// });
+cron.schedule('* * * * *', () => {
+    console.log('running task every minute');
+    const url = '/Volumes/media/Photos/temp/';
+
+    fs.readdir(url, (err, result) => {
+
+        if(err){
+            console.log('error ', err);
+        } else{
+
+            console.log(result);
+
+            result.forEach((file) => {
+
+                let splitFile = file.split('.');
+                splitFile.pop();
+                let name = splitFile.join('.');
+
+                if (!file.match(new RegExp(/._/)) || !file.match(new RegExp(/../))) {
+
+                    jimp.read(`${url}${file}`)
+                        .then((image) => {
+                            image.resize(280, jimp.AUTO);
+                            image.writeAsync(`${url}${name}.png`)
+                                .then(result => {
+                                    console.log('file write success; ', file, result);
+                                })
+                                .catch(err => {
+                                    console.log('error writing to target dir; ', err);
+                                })
+                        })
+                        .catch(err => {
+                            console.log('jimp error: ', file);
+                        })
+                }
+            })
+
+        }
+
+    })
+
+});
 
