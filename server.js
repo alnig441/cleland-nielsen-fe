@@ -9,8 +9,8 @@ const bodyParser = require('body-parser');
 const passport = require('passport');
 const dbInit = process.env.DB_INIT ? process.env.DB_INIT : false;
 const fs = require('fs');
-
 const jimp = require('jimp');
+const Exif = require('./routes/restricted/exif');
 
 require('./routes/authenticate/passport');
 
@@ -26,7 +26,6 @@ const authenticate = require('./routes/authenticate/authentication'),
     users = require('./routes/restricted/users'),
     events = require('./routes/restricted/events'),
     permissions = require('./routes/restricted/permissions');
-
 const cron = require('node-cron');
 
 app.use(logger('dev'));
@@ -61,10 +60,23 @@ cron.schedule('* * * * *', () => {
     console.log('running task every minute');
     const url = '/Volumes/media/Photos/temp/';
 
+    exif.getInfo('MVIMG_20180930_135746.jpg')
+        .then(result => {
+            console.log('exif result: ', result);
+            if(!result){
+                exif.getInfo('MVIMG_20180930_135746.jpg', true)
+                    .then(result => {
+                        console.log('result full search: ', result);
+                    })
+            } else{
+
+            }
+        })
+
     fs.readdir(url, (err, result) => {
 
         if(err){
-            console.log('error ', err);
+            console.log('readdir error ', err);
         } else{
 
             console.log(result);

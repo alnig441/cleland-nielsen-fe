@@ -21,7 +21,7 @@ span(*ngIf="!this.imageService.message.failure")
                     span(class='glyphicon glyphicon-triangle-right')
             div(*ngFor='let image of this.albumViewSubset as images; index as j' class='image-container')
                 div(*ngIf='j < 6' data-toggle='modal' class="thumbnail" data-target-not='.assetviewer-modal' id="{{image.id}}" )
-                    img((click)='this.openModal(image.id)' src="photos/{{image.file}}", (mouseenter)='this.setImageInfo(j)', (mouseleave)='this.setImageInfo()')
+                    img((click)='this.openModal(image.id)' src="photos/{{image.file | extTransform}}", (mouseenter)='this.setImageInfo(j)', (mouseleave)='this.setImageInfo()')
                     div(class='caption')
                         p {{image.day}}&nbsp;{{image.month | monthTransform}}
 

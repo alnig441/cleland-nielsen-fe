@@ -1,6 +1,8 @@
 const express = require('express'),
     router = express.Router();
 const passport = require('passport');
+const exif = require('fast-exif');
+
 
 const   { Client } = require('pg'),
         connectionString = process.env.MYDB || 'postgresql://allannielsen:1109721405@localhost:5432/jacn2014_ng4';

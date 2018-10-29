@@ -13,6 +13,7 @@ import { InfoboxDirective } from "../../../directives/infobox.directive";
 import {KeyTransform} from "../../../pipes/key.transform";
 import {ValueTransform} from "../../../pipes/value.transform";
 import {ModalImageDirective} from "../../../directives/modalImage.directive";
+import {ExtTransform} from "../../../pipes/ext.transform";
 
 @NgModule({
     imports: [
@@ -29,10 +30,11 @@ import {ModalImageDirective} from "../../../directives/modalImage.directive";
         MonthTransform,
         KeyTransform,
         ValueTransform,
+        ExtTransform,
         ModalImageDirective,
         InfoboxDirective
     ],
-    exports: [ MonthTransform, KeyTransform, ValueTransform ],
+    exports: [ MonthTransform, KeyTransform, ValueTransform, ExtTransform ],
     providers: [ AuthenticationGuardService ]
 })
 

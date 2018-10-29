@@ -32,6 +32,7 @@
         "bootstrap-loader": "^2.2.0",
         "core-js": "^2.4.1",
         "express": "^4.15.4",
+        "fast-exif": "^1.0.1",
         "font-awesome": "^4.7.0",
         "imagemin": "^6.0.0",
         "imagemin-jpegtran": "^5.0.2",
