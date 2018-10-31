@@ -11,6 +11,7 @@ const dbInit = process.env.DB_INIT ? process.env.DB_INIT : false;
 const fs = require('fs');
 const jimp = require('jimp');
 const Exif = require('./routes/restricted/exif');
+const { exec } = require('child_process');
 
 require('./routes/authenticate/passport');
 
@@ -32,8 +33,7 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(express.static(__dirname + '/dist'));
-app.use('/photos', express.static("/Volumes/media/Photos/James"));
-app.use('/new_photos', express.static("/Volumes/media/Photos/temp"));
+app.use('/photos', express.static("/Volumes/media/Photos"));
 
 /* routes setup */
 app.use('/login', authenticate);
@@ -56,59 +56,70 @@ app.listen(port, hostName, function onStart(err) {
     console.info('==> 🌎 Listening on port %s. Open up http://'+hostName+':%s/ in your browser.', port, port);
 });
 
-cron.schedule('* * * * *', () => {
+
+// var task = cron.schedule('* * * * *', () => {
     console.log('running task every minute');
-    const url = '/Volumes/media/Photos/temp/';
+    const destUrl = '/Volumes/media/Photos/photoapp/';
+    const srcUrl = 'src/images/Photos/';
 
-    exif.getInfo('MVIMG_20180930_135746.jpg')
-        .then(result => {
-            console.log('exif result: ', result);
-            if(!result){
-                exif.getInfo('MVIMG_20180930_135746.jpg', true)
-                    .then(result => {
-                        console.log('result full search: ', result);
-                    })
-            } else{
+    // exif.getInfo('MVIMG_20180930_135746.jpg')
+    //     .then(result => {
+    //         console.log('exif result: ', result);
+    //         if(!result){
+    //             exif.getInfo('MVIMG_20180930_135746.jpg', true)
+    //                 .then(result => {
+    //                     console.log('result full search: ', result);
+    //                 })
+    //         } else{
+    //
+    //         }
+    //     })
 
-            }
-        })
+var interval = setInterval(() => {
 
-    fs.readdir(url, (err, result) => {
+    fs.readdir(srcUrl, (err, result) => {
 
-        if(err){
+        if (err) {
             console.log('readdir error ', err);
-        } else{
+            task.stop();
+        }
+        if (result.length > 0) {
 
-            console.log(result);
+            let splitFile = result[0].split('.');
+            splitFile.pop();
+            let name = splitFile.join('.');
 
-            result.forEach((file) => {
-
-                let splitFile = file.split('.');
-                splitFile.pop();
-                let name = splitFile.join('.');
-
-                if (!file.match(new RegExp(/._/)) || !file.match(new RegExp(/../))) {
-
-                    jimp.read(`${url}${file}`)
-                        .then((image) => {
-                            image.resize(280, jimp.AUTO);
-                            image.writeAsync(`${url}${name}.png`)
-                                .then(result => {
-                                    console.log('file write success; ', file, result);
-                                })
-                                .catch(err => {
-                                    console.log('error writing to target dir; ', err);
-                                })
+            jimp.read(`${srcUrl}${result[0]}`)
+                .then((image) => {
+                    image.resize(280, jimp.AUTO);
+                    image.writeAsync(`${destUrl}${name}.png`)
+                        .then(res => {
+                            console.log('file write success; ', res, result[0]);
+                            exec('rm src/images/Photos/' + result[0], (err, stdout, stdin) => {
+                                if (!err) {
+                                    console.log('file removed', result[0]);
+                                }
+                            })
                         })
                         .catch(err => {
-                            console.log('jimp error: ', file);
+                            console.log('error writing to target dir; ', err);
+                            // task.stop();
                         })
-                }
-            })
+                })
+                .catch(err => {
+                    console.log('jimp error at file: ', result[0]);
+                    // task.stop();
+                })
 
+        } else {
+            // clearInterval(interval);
+            // task.stop();
         }
 
-    })
+        console.log('files remaining: ', result.length)
 
-});
+    })
+},10000)
+
+// });
 
