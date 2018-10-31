@@ -85,6 +85,9 @@ var interval = setInterval(() => {
         }
         if (result.length > 0) {
 
+            let splitOnSpace = result[0].split(' ');
+            splitOnSpace = splitOnSpace.join('\\ ');
+
             let splitFile = result[0].split('.');
             splitFile.pop();
             let name = splitFile.join('.');
@@ -95,9 +98,14 @@ var interval = setInterval(() => {
                     image.writeAsync(`${destUrl}${name}.png`)
                         .then(res => {
                             console.log('file write success; ', res, result[0]);
-                            exec('rm src/images/Photos/' + result[0], (err, stdout, stdin) => {
+
+                            let file = result[0].split(' ').length > 0 ? splitOnSpace : result[0]
+
+                            exec('rm src/images/Photos/' + file, (err, stdout, stdin) => {
                                 if (!err) {
-                                    console.log('file removed', result[0]);
+                                    console.log('file removed', file);
+                                } else {
+                                    console.log(stdout, stdin);
                                 }
                             })
                         })
@@ -112,7 +120,7 @@ var interval = setInterval(() => {
                 })
 
         } else {
-            // clearInterval(interval);
+            clearInterval(interval);
             // task.stop();
         }
 
