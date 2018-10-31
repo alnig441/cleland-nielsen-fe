@@ -49,6 +49,7 @@ app-images {
 .image-container {
   width: 40%;
   display: inline-block;
+  text-align: left;
 }
 
 .reel {
@@ -95,15 +96,14 @@ app-images {
 
 .thumbnail > img {
   filter: grayscale(100%);
-  //height: 200px;
 }
 
 .thumbnail p {
+  text-align: center;
   margin: 0;
   padding: 0;
 }
 
-.thumbnail:hover,
 .thumbnail > img:hover {
   cursor: pointer;
   border: none;
@@ -112,6 +112,7 @@ app-images {
 }
 
 .thumbnail .caption {
+  max-height: 30px;
   font-size: x-small;
   padding: 5px 0 0 0 !important;
   top: -6px;
@@ -121,7 +122,6 @@ app-images {
   border-radius: 0 0 4px 4px
 }
 
-/* TO DO */
 .month.active a {
   color: black;
   padding-top: 10px;
@@ -176,7 +176,6 @@ app-images {
   opacity: 1;
 }
 
-/* assetviewer modal */
 .assetviewer-modal {
   margin:auto;
   max-width: 775px;
@@ -242,21 +241,20 @@ app-images {
 }
 
 .infobox {
-  position: fixed;
-  z-index: 100;
-  left: 1000px;
-  bottom: 25px;
+  position: absolute;
+  z-index: 1;
   width: 230px;
   text-align: left;
-  background: black;
-  color: white;
-  opacity: .2;
-  padding: 10px;
+  background: white;
+  color: black;
+  opacity: .8;
   border-radius: 5px;
+  padding: 5px 0px;
+  margin: 40px;
 }
 
 .infobox p {
-  padding: 0px;
+  font-size: x-small;
   margin: 0px;
 }
 

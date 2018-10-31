@@ -1,11 +1,11 @@
 span(*ngIf="!this.imageService.message.failure")
-    div(*infobox='this.imageInformation' class='infobox row')
-        ng-container(*ngFor="let info of this.imageInformation['keys']; index as i")
-            div(class='info-key col-sm-4')
-                p() {{ info[0] | keyTransform }}:
-            div(class='info-value col-sm-8')
-                p(*ngFor="let value of info[1]; index as k;")
-                    ng-container {{ value | valueTransform }}
+    //div(*infobox='this.imageInformation' class='infobox row')
+    //    ng-container(*ngFor="let info of this.imageInformation['keys']; index as i")
+    //        div(class='info-key col-sm-4')
+    //            p() {{ info[0] | keyTransform }}:
+    //        div(class='info-value col-sm-8')
+    //            p(*ngFor="let value of info[1]; index as k;")
+    //                ng-container {{ value | valueTransform }}
 
     div
         div(*ngFor='let month of this.months as months; index as i' class='month {{i | monthTransform}}', [ngClass]="{'active': i == this.albumViewSelector.month}")
@@ -20,10 +20,21 @@ span(*ngIf="!this.imageService.message.failure")
                 li(*ngIf="this.currentPage != this.lastPage", (click)="this.turnAlbumPage('forward')" class='forward')
                     span(class='glyphicon glyphicon-triangle-right')
             div(*ngFor='let image of this.albumViewSubset as images; index as j' class='image-container')
+
+                span(*infobox='this.imageInformation[j]' class='infobox row')
+                    ng-container(*ngFor="let info of this.imageInformation[j]['keys']; index as i")
+                        div(class='info-key col-sm-4')
+                            p() {{ info[0] | keyTransform }}:
+                        div(class='info-value col-sm-8')
+                            p(*ngFor="let value of info[1]; index as k;")
+                                ng-container {{ value | valueTransform }}
+
                 div(*ngIf='j < 6' data-toggle='modal' class="thumbnail" data-target-not='.assetviewer-modal' id="{{image.id}}" )
-                    img((click)='this.openModal(image.id)' src="photos/{{image.file | extTransform}}", (mouseenter)='this.setImageInfo(j)', (mouseleave)='this.setImageInfo()')
+                    img((click)='this.openModal(image.id)' src="photos/photoapp/{{image.file | extTransform}}", (mouseenter)='this.setImageInfo(j)', (mouseleave)='this.setImageInfo()')
                     div(class='caption')
+                        p {{this.currentPage * 6 + j + 1}} of {{this.albumView.length}}
                         p {{image.day}}&nbsp;{{image.month | monthTransform}}
+
 
 
 div(class="modal fade assetviewer-modal" tabindex="-1" role="dialog" aria-labelledby="assetviewerModal")
@@ -34,5 +45,5 @@ div(class="modal fade assetviewer-modal" tabindex="-1" role="dialog" aria-labell
         ul
             li((click)='this.flipThroughImages("previous")' class='button-left') prev
             li((click)='this.flipThroughImages("next")' class='button-right') next
-        img(*modalImage="this.albumViewSelector['selectedIndex'] || this.albumViewSelector['selectedIndex'] == 0" src="photos/{{this.albumView[this.albumViewSelector['selectedIndex']]['file']}}" id="{{this.albumView[this.albumViewSelector['selectedIndex']]['id']}}")
+        img(*modalImage="this.albumViewSelector['selectedIndex'] || this.albumViewSelector['selectedIndex'] == 0" src="photos/James/{{this.albumView[this.albumViewSelector['selectedIndex']]['file']}}" id="{{this.albumView[this.albumViewSelector['selectedIndex']]['id']}}")
 

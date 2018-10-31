@@ -20,7 +20,8 @@ export class ImagesComponent implements OnInit, DoCheck {
     private albumViewSelector: object = new Object();
     private albumView: ImageModel[] = new Array();
     private albumViewSubset: ImageModel[];
-    private imageInformation : ImageModel;
+    // private imageInformation : ImageModel;
+    private imageInformation: any[] = new Array();
     private years: any[] = new Array();
     private months: any[] = new Array();
     private currentPage: number;
@@ -66,7 +67,42 @@ export class ImagesComponent implements OnInit, DoCheck {
     }
 
     setImageInfo(index?: any) : void {
-        this.imageInformation = (index || index == 0) ? this.albumViewSubset[index] : null;
+
+        var image  = (index || index == 0) ? this.albumViewSubset[index] : null;
+        // this.imageInformation  = (index || index == 0) ? this.albumViewSubset[index] : null;
+        // this.imageInformation[index] = (index || index == 0) ? this.albumViewSubset[index]: this.imageInformation.pop();
+
+        index == 'undefined' ? this.imageInformation.pop(): null;
+
+        console.log('image info: ', index, this.imageInformation);
+
+        switch(index){
+            case 0:
+                this.imageInformation[1] = image;
+                break;
+            case 1:
+                this.imageInformation[0] = image;
+                break;
+            case 2:
+                this.imageInformation[3] = image;
+                break;
+            case 3:
+                this.imageInformation[2] = image;
+                break;
+            case 4:
+                this.imageInformation[5] = image;
+                break;
+            case 5:
+                this.imageInformation[4] = image;
+                break;
+            default:
+                this.imageInformation.forEach((elem, index) => {
+                    console.log('index lala: ', index);
+                    this.imageInformation[index] = null;
+                })
+                // this.imageInformation = null;
+                break;
+        }
     }
 
     setAlbumViewSubset(next?: string) : void {
