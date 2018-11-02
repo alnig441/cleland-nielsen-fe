@@ -10,8 +10,11 @@ const passport = require('passport');
 const dbInit = process.env.DB_INIT ? process.env.DB_INIT : false;
 const fs = require('fs');
 const jimp = require('jimp');
-const Exif = require('./routes/restricted/exif');
 const { exec } = require('child_process');
+const cron = require('node-cron');
+const Exif = require('./routes/restricted/exif');
+const photoApp = require('./routes/restricted/photoapp_files');
+const dto = require('./routes/restricted/test');
 
 require('./routes/authenticate/passport');
 
@@ -27,7 +30,6 @@ const authenticate = require('./routes/authenticate/authentication'),
     users = require('./routes/restricted/users'),
     events = require('./routes/restricted/events'),
     permissions = require('./routes/restricted/permissions');
-const cron = require('node-cron');
 
 app.use(logger('dev'));
 app.use(bodyParser.json());
@@ -56,78 +58,28 @@ app.listen(port, hostName, function onStart(err) {
     console.info('==> 🌎 Listening on port %s. Open up http://'+hostName+':%s/ in your browser.', port, port);
 });
 
+var DTO = new dto('penis');
+console.log(DTO);
+DTO.on('setting_argument',(res) => {
+    console.log('hello res: ', res);
+})
+DTO.setArgument('kugler');
 
-// var task = cron.schedule('* * * * *', () => {
-    console.log('running task every minute');
-    const destUrl = '/Volumes/media/Photos/photoapp/';
-    const srcUrl = 'src/images/Photos/';
-
-    // exif.getInfo('MVIMG_20180930_135746.jpg')
-    //     .then(result => {
-    //         console.log('exif result: ', result);
-    //         if(!result){
-    //             exif.getInfo('MVIMG_20180930_135746.jpg', true)
-    //                 .then(result => {
-    //                     console.log('result full search: ', result);
-    //                 })
-    //         } else{
-    //
-    //         }
-    //     })
-
-var interval = setInterval(() => {
-
-    fs.readdir(srcUrl, (err, result) => {
-
-        if (err) {
-            console.log('readdir error ', err);
-            task.stop();
-        }
-        if (result.length > 0) {
-
-            let splitOnSpace = result[0].split(' ');
-            splitOnSpace = splitOnSpace.join('\\ ');
-
-            let splitFile = result[0].split('.');
-            splitFile.pop();
-            let name = splitFile.join('.');
-
-            jimp.read(`${srcUrl}${result[0]}`)
-                .then((image) => {
-                    image.resize(280, jimp.AUTO);
-                    image.writeAsync(`${destUrl}${name}.png`)
-                        .then(res => {
-                            console.log('file write success; ', res, result[0]);
-
-                            let file = result[0].split(' ').length > 0 ? splitOnSpace : result[0]
-
-                            exec('rm src/images/Photos/' + file, (err, stdout, stdin) => {
-                                if (!err) {
-                                    console.log('file removed', file);
-                                } else {
-                                    console.log(stdout, stdin);
-                                }
-                            })
-                        })
-                        .catch(err => {
-                            console.log('error writing to target dir; ', err);
-                            // task.stop();
-                        })
-                })
-                .catch(err => {
-                    console.log('jimp error at file: ', result[0]);
-                    // task.stop();
-                })
-
-        } else {
-            clearInterval(interval);
-            // task.stop();
-        }
-
-        console.log('files remaining: ', result.length)
-
-    })
-},10000)
-
-// });
+// cron.schedule('* * * * *', () => {
+//
+//
+//     let images = [];
+//
+//     photoApp.getFiles((err,res) => {
+//         console.log('what is next: ', err, res);
+//         if(res){
+//             images = res;
+//             console.log('running conversion');
+//             Exif.generateDTO(images, (err, res) => {
+//                 console.log('FISKEFARS ', err, res);
+//             });
+//             // photoApp.convertFiles();
+//         }
+//     })
+// })
 
