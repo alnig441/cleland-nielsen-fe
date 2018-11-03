@@ -14,7 +14,9 @@ const { exec } = require('child_process');
 const cron = require('node-cron');
 const Exif = require('./routes/restricted/exif');
 const photoApp = require('./routes/restricted/photoapp_files');
-const dto = require('./routes/restricted/test');
+
+const DTOBuilder = require('./routes/restricted/dtoBuilder');
+const imageDto = new DTOBuilder('/Volumes/media/Photos/photoapptemp/');
 
 require('./routes/authenticate/passport');
 
@@ -58,28 +60,23 @@ app.listen(port, hostName, function onStart(err) {
     console.info('==> 🌎 Listening on port %s. Open up http://'+hostName+':%s/ in your browser.', port, port);
 });
 
-var DTO = new dto('penis');
-console.log(DTO);
-DTO.on('setting_argument',(res) => {
-    console.log('hello res: ', res);
-})
-DTO.setArgument('kugler');
 
-// cron.schedule('* * * * *', () => {
-//
-//
-//     let images = [];
-//
-//     photoApp.getFiles((err,res) => {
-//         console.log('what is next: ', err, res);
-//         if(res){
-//             images = res;
-//             console.log('running conversion');
-//             Exif.generateDTO(images, (err, res) => {
-//                 console.log('FISKEFARS ', err, res);
-//             });
-//             // photoApp.convertFiles();
-//         }
-//     })
-// })
+cron.schedule('* * * * *', () => {
+
+    imageDto.on('done', (res) => {
+        console.log('dto gen done: ', res)
+    })
+
+    let images = [];
+
+    photoApp.getFiles((err,res) => {
+        if(res){
+            images = res;
+            imageDto.loadFiles(images);
+            imageDto.generateDto();
+
+            // photoApp.convertFiles();
+        }
+    })
+})
 
