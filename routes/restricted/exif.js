@@ -4,57 +4,22 @@ const baseUrl = '/Volumes/media/Photos/photoapptemp/';
 const https = require('https');
 const events = require('events');
 
-
-let DTO = [];
-let images = [];
-let index = 0;
-
-
-function next(err, res) {
-
-    if(res){
-        if(index == images.length - 1){
-            index = 0;
-            images = [];
-        }else{
-            index++;
-            DTO.push(res);
-            exif.getInfo(images[index], next)
-
-        }
-    }
-
-    if(err){
-        console.log(err);
-
-    }
-
-}
-
 exif = {
-
-    generateDTO: function (files, callback){
-
-      if(files) {
-          images = files;
-          this.getInfo(files[index], next);
-      }
-
-    },
 
     getInfo: function(file, callback){
 
-        console.log('getting exif: ', file);
+        // console.log('getting exif: ', file);
 
         fastExif.read(baseUrl + file, callback)
             .then(result => {
 
-                console.log('exif ', result.exif.DateTimeOriginal, file)
+                // console.log('exif ', result.exif.DateTimeOriginal, file)
 
                 let exifObj = {
+                    file: file,
                     latitude: null,
                     longitude: null,
-                    created: null
+                    created: null,
                 };
 
                 if(result.gps){
@@ -70,31 +35,6 @@ exif = {
                 console.log('exif error: ', err)
                 callback(err)
             }, callback)
-
-    },
-
-
-    reverseGeoCode: function(lat,lng,cb){
-
-      https.get('https://maps.googleapis.com/maps/api/geocode/json?latlng=40.714224,-73.961452&key=AIzaSyDbwTih6bX4Z88dKO-ob8HTJf2crU7WCKM', (result)=> {
-
-          var payload = '';
-
-          result.on('data', (data) => {
-              payload += data;
-          })
-
-          result.on('end', () => {
-              let location =  JSON.parse(payload);
-
-              if(location.status == 'OK'){
-                  location.results[0].address_components.forEach((element) => {
-                      console.log('types: ',element.types);
-                  })
-              }
-          })
-
-      })
 
     },
 

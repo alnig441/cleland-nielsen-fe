@@ -63,20 +63,19 @@ app.listen(port, hostName, function onStart(err) {
 
 cron.schedule('* * * * *', () => {
 
-    imageDto.on('done', (res) => {
-        console.log('dto gen done: ', res)
-    })
+    imageDto.on('done', listenerCb);
 
-    let images = [];
-
-    photoApp.getFiles((err,res) => {
-        if(res){
-            images = res;
-            imageDto.loadFiles(images);
-            imageDto.generateDto();
-
+    photoApp.getFiles((err,files) => {
+        if(files){
+            imageDto.generateDto(files);
             // photoApp.convertFiles();
         }
     })
+
+    function listenerCb(DTO) {
+        console.log('DTO received: ', DTO.length);
+        imageDto.removeListener('done', listenerCb);
+    }
+
 })
 
