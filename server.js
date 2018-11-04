@@ -12,10 +12,10 @@ const fs = require('fs');
 const jimp = require('jimp');
 const { exec } = require('child_process');
 const cron = require('node-cron');
-const Exif = require('./routes/restricted/exif');
-const photoApp = require('./routes/restricted/photoapp_files');
+const Exif = require('./app_modules/exif');
+const photoApp = require('./app_modules/photoapp_files');
 
-const DTOBuilder = require('./routes/restricted/dtoBuilder');
+const DTOBuilder = require('./app_modules/dtoBuilder');
 const imageDto = new DTOBuilder('/Volumes/media/Photos/photoapptemp/');
 
 require('./routes/authenticate/passport');
@@ -68,12 +68,18 @@ cron.schedule('* * * * *', () => {
     photoApp.getFiles((err,files) => {
         if(files){
             imageDto.generateDto(files);
-            // photoApp.convertFiles();
+        }
+        else{
+            imageDto.removeListener('done', listenerCb);
         }
     })
 
     function listenerCb(DTO) {
         console.log('DTO received: ', DTO.length);
+
+        // send dto to database
+        // photoApp.convertFiles();
+
         imageDto.removeListener('done', listenerCb);
     }
 

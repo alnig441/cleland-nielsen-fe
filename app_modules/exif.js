@@ -2,7 +2,6 @@ const fastExif = require('fast-exif');
 // const baseUrl = 'src/images/';
 const baseUrl = '/Volumes/media/Photos/photoapptemp/';
 const https = require('https');
-const events = require('events');
 
 exif = {
 
