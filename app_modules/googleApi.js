@@ -1,16 +1,18 @@
 const https = require('https');
-
 const key = 'AIzaSyDbwTih6bX4Z88dKO-ob8HTJf2crU7WCKM';
-const api = 'https://maps.googleapis.com/maps/api/geocode/json?';
+const geocodeApi = 'https://maps.googleapis.com/maps/api/geocode/json?';
+const timeZoneApi = 'https://maps.googleapis.com/maps/api/timezone/json?';
 
 
 google = {
 
+    test: function(coordinates){
+        console.log('timestamp: ', coordinates);
+    },
+
     reverseGeoCode: function(coordinates,cb){
 
-            // console.log('incoming coordinates: ', coordinates);
-
-            let dto = {
+        let dto = {
             file: coordinates.file,
             created: coordinates.created,
             day: null,
@@ -23,7 +25,7 @@ google = {
 
 
         if(coordinates.latitude){
-                https.get(`${api}latlng=${coordinates.latitude},${coordinates.longitude}&key=${key}`, (result)=> {
+                https.get(`${geocodeApi}latlng=${coordinates.latitude},${coordinates.longitude}&key=${key}`, (result)=> {
 
                     var payload = '';
 
@@ -52,6 +54,8 @@ google = {
 
                                 })
                             })
+                            google.test(coordinates)
+                            this.test(coordinates)
                         }
                         cb(null, dto)
                     }, cb)
@@ -63,6 +67,6 @@ google = {
 
     }
 
-}
+};
 
 module.exports = google;

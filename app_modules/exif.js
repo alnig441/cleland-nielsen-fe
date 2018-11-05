@@ -1,5 +1,4 @@
 const fastExif = require('fast-exif');
-// const baseUrl = 'src/images/';
 const baseUrl = '/Volumes/media/Photos/photoapptemp/';
 const https = require('https');
 
@@ -7,12 +6,8 @@ exif = {
 
     getInfo: function(file, callback){
 
-        // console.log('getting exif: ', file);
-
         fastExif.read(baseUrl + file, callback)
             .then(result => {
-
-                // console.log('exif ', result.exif.DateTimeOriginal, file)
 
                 let exifObj = {
                     file: file,
@@ -36,7 +31,6 @@ exif = {
             }, callback)
 
     },
-
 
     convertCoordinates: function (data) {
         let isNegative = data.reference.toLowerCase() == 's' || data.reference.toLowerCase() == 'w';

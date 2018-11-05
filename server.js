@@ -8,11 +8,7 @@ const app = express();
 const bodyParser = require('body-parser');
 const passport = require('passport');
 const dbInit = process.env.DB_INIT ? process.env.DB_INIT : false;
-const fs = require('fs');
-const jimp = require('jimp');
-const { exec } = require('child_process');
 const cron = require('node-cron');
-const Exif = require('./app_modules/exif');
 const photoApp = require('./app_modules/photoapp_files');
 
 const DTOBuilder = require('./app_modules/dtoBuilder');
@@ -66,6 +62,7 @@ cron.schedule('* * * * *', () => {
     imageDto.on('done', listenerCb);
 
     photoApp.getFiles((err,files) => {
+
         if(files){
             imageDto.generateDto(files);
         }
@@ -75,7 +72,7 @@ cron.schedule('* * * * *', () => {
     })
 
     function listenerCb(DTO) {
-        console.log('DTO received: ', DTO.length);
+        console.log('DTO received: ', DTO);
 
         // send dto to database
         // photoApp.convertFiles();

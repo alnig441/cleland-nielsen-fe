@@ -1,6 +1,6 @@
 const events = require('events');
 const exif = require('./exif');
-const google = require('./googleApi');
+const google = require('./google');
 
 
 function dtoBuilder(srcUrl) {
@@ -12,9 +12,11 @@ function dtoBuilder(srcUrl) {
     this.dto = [];
     this.index = 0;
 
-    this.reverseGeocode = google.reverseGeoCode;
     this.getExif = exif.getInfo;
     this.convertCoordinates = exif.convertCoordinates;
+    this.getOffset = google.getOffset;
+    this.reverseGeocode = google.reverseGeoCode;
+
 
     this.next = (err, coords) => {
         if(err){
