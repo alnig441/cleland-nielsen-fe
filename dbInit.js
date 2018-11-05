@@ -25,7 +25,7 @@ client.connect()
 //     })
 
 client.query('CREATE TABLE images (' +
-    'id integer primary key,' +
+    'id serial primary key,' +
     'created timestamp without time zone,' +
     'meta text[],' +
     'year integer,' +
@@ -47,7 +47,7 @@ client.query('CREATE TABLE images (' +
     })
 
 client.query('CREATE TABLE events (' +
-    'img_id integer not null primary key,' +
+    'img_id serial not null primary key,' +
     'event_da text not null,' +
     'event_en text not null,' +
     'updated timestamp without time zone);')

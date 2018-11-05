@@ -24,14 +24,18 @@ function dtoBuilder(srcUrl) {
         }
         if(coords && this.index < this.files.length - 1){
             this.reverseGeocode(coords, (err,res) => {
-                this.dto.push(res);
+                if(res){
+                    this.dto.push(res);
+                }
                 this.index++;
                 this.getExif(this.files[this.index], this.next);
             })
 
         }else{
             this.reverseGeocode(coords, (err,res) => {
-                this.dto.push(res);
+                if(res){
+                    this.dto.push(res);
+                }
                 this.emit('done', this.dto);
                 this.index = 0;
                 this.files = [];

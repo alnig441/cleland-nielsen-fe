@@ -16,19 +16,25 @@ exif = {
                     created: null,
                 };
 
-                if(result.gps){
-                    exifObj.latitude = this.convertCoordinates({coordinate: result.gps.GPSLatitude , reference: result.gps.GPSLatitudeRef});
-                    exifObj.longitude = this.convertCoordinates({coordinate: result.gps.GPSLongitude, reference: result.gps.GPSLongitudeRef});
+                if (result.gps) {
+                    exifObj.latitude = this.convertCoordinates({
+                        coordinate: result.gps.GPSLatitude,
+                        reference: result.gps.GPSLatitudeRef
+                    });
+                    exifObj.longitude = this.convertCoordinates({
+                        coordinate: result.gps.GPSLongitude,
+                        reference: result.gps.GPSLongitudeRef
+                    });
                 }
 
                 exifObj.created = result.exif.DateTimeOriginal;
 
                 callback(null, exifObj);
-            }, callback)
+            })
             .catch(err => {
                 console.log('exif error: ', err)
                 callback(err)
-            }, callback)
+            })
 
     },
 

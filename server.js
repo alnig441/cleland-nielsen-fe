@@ -72,7 +72,33 @@ cron.schedule('* * * * *', () => {
     })
 
     function listenerCb(DTO) {
-        console.log('DTO received: ', DTO);
+        let keys = Object.keys(DTO[0]);
+        let keyString = '(' + keys.join() + ')';
+        let values = [];
+
+        DTO.forEach((image) => {
+            let tempArray = [];
+            let valueString;
+            for(let key in image){
+                if(typeof image[key] != 'number' && image[key] != null){
+                    let value;
+                    let tempString = image[key].toString();
+                    tempString = tempString.replace(/'/g, "''");
+
+                    key == 'created' ? value = "'" + tempString.slice(0,25) + "'": value = "'" + tempString + "'";
+
+                    tempArray.push(value);
+                }else{
+                    image[key] == null ? tempArray.push('null') : tempArray.push(image[key]);
+                }
+            }
+            valueString = '(' + tempArray.join() + ')';
+            values.push(valueString);
+        })
+
+        let valueString = values.join();
+
+        console.log('values: ', valueString, '\nkeys: ', keyString);
 
         // send dto to database
         // photoApp.convertFiles();

@@ -7,16 +7,27 @@ google = {
 
     reverseGeoCode: function (coordinates, cb) {
 
+
+        // console.log('reverseGeo: ', coordinates);
+
         let dto = {
             file: coordinates.file,
             created: coordinates.created,
             day: null,
             month: null,
             year: null,
-            country: null,
-            state: null,
-            city: null
+            country: '',
+            state: '',
+            city: ''
         };
+
+        function timestampCb(err, timestamp) {
+            if(timestamp){
+                for(var prop in timestamp){
+                    dto[prop] = timestamp[prop];
+                }
+            }
+        }
 
 
         if(coordinates.latitude){
@@ -28,14 +39,19 @@ google = {
                     payload += data;
                 })
 
-                result.on('end', () => {
-                    let location =  JSON.parse(payload);
+                result.on('error', (err) => {
+                    console.log('reverse geocode api error: ', err);
+                    cb(err);
+                })
 
-                    if(location.status == 'OK'){
+                result.on('end', () => {
+                    let location = JSON.parse(payload);
+
+                    if (location.status == 'OK') {
                         location.results[0].address_components.forEach((element) => {
                             element.types.find((type) => {
                                 let value = element.long_name;
-                                switch(type) {
+                                switch (type) {
                                     case 'country':
                                         dto.country = value;
                                         break;
@@ -50,17 +66,13 @@ google = {
                             })
                         })
                     }
-                    if(coordinates)
-                    this.getOffset(coordinates, (err, timestamp) => {
-                        console.log('timestamp: ', new Date(timestamp.created), coordinates.created, timestamp.hour)
-                        console.log('utc: ', timestamp.utc);
-                    })
-                    cb(null, dto)
-                }, cb)
+                    this.getOffset(coordinates, timestampCb);
 
+                    cb(null, dto)
+                })
             })
         } else {
-            cb(null, dto)
+            cb(null,dto);
         }
     },
 
@@ -72,7 +84,6 @@ google = {
 
             let timestamp = Date.parse(coordinates.created);
             let timeObj = {};
-            // timestamp = timestamp.toString().slice(0,10);
 
             https.get(`${timeZoneApi}location=${coordinates.latitude},${coordinates.longitude}&timestamp=${timestamp.toString().slice(0,10)}&key=${key}`, (result) => {
                 let payload = '';
@@ -82,35 +93,27 @@ google = {
                 })
 
                 result.on('error', (err) => {
-                    console.log('timezone api error',err)
+                    console.log('timezone api error',err);
+                    cb(err);
                 })
 
                 result.on('end', () => {
                     let body = JSON.parse(payload);
-                    // console.log('timezone api payload: ', payload)
 
                     if(body.status == 'OK'){
+
                         let offset = (body.rawOffset + body.dstOffset) * 1000;
-                        let timestampAdjusted = new Date(Date.parse(coordinates.created) + offset);
-                        let x = coordinates.created;
-                        let utc = new Date(Date.UTC(x.getFullYear(), x.getMonth(), x.getDate(), x.getHours(), x.getMinutes(), x.getSeconds()))
+                        let actualLocalTime = new Date(timestamp + offset);
 
-                        // console.log('adjusted:', timestampAdjusted, offset, coordinates.created)
-
-                        timeObj.created = timestampAdjusted;
-                        timeObj.year = coordinates.created.getUTCFullYear().toString();
-                        timeObj.month = coordinates.created.getUTCMonth().toString();
-                        timeObj.day = coordinates.created.getUTCDate().toString();
-                        timeObj.hour = coordinates.created.getHours().toString();
-                        timeObj.utc = utc;
-
+                        timeObj.created = actualLocalTime;
+                        timeObj.year = actualLocalTime.getUTCFullYear();
+                        timeObj.month = actualLocalTime.getUTCMonth();
+                        timeObj.day = actualLocalTime.getUTCDate();
                     }
 
                     cb(null ,timeObj)
                 })
             })
-
-            // cb(null, timestamp)
 
         }
 
