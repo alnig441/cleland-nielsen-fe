@@ -32,12 +32,14 @@ client.query('CREATE TABLE images (' +
     'month integer,' +
     'day integer,' +
     'file character varying unique not null,' +
-    'storage character varying,' +
+    // 'storage character varying,' +
     'occasion text,' +
     'country text,' +
     'state text,' +
     'city text,' +
-    'names text[]);')
+    'names text[])' +
+    'event_da text' +
+    'event_en text;')
     .then(() => {
         console.log('images SUCCESS')
     })
@@ -46,18 +48,18 @@ client.query('CREATE TABLE images (' +
         client.end();
     })
 
-client.query('CREATE TABLE events (' +
-    'img_id serial not null primary key,' +
-    'event_da text not null,' +
-    'event_en text not null,' +
-    'updated timestamp without time zone);')
-    .then(() => {
-        console.log('events SUCCESS');
-    })
-    .catch(err => {
-        console.log('error creating events table: ', err);
-        client.end();
-    })
+// client.query('CREATE TABLE events (' +
+//     'img_id serial not null primary key,' +
+//     'event_da text not null,' +
+//     'event_en text not null,' +
+//     'updated timestamp without time zone);')
+//     .then(() => {
+//         console.log('events SUCCESS');
+//     })
+//     .catch(err => {
+//         console.log('error creating events table: ', err);
+//         client.end();
+//     })
 
 client.query('CREATE TABLE permissions (' +
     'permission_id uuid not null primary key, ' +

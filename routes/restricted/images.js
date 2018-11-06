@@ -25,6 +25,7 @@ const mockImages = [
 ]
 
 
+
 router.get('/', (req, res, next) => {
 
     console.log('images get:');

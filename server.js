@@ -9,10 +9,9 @@ const bodyParser = require('body-parser');
 const passport = require('passport');
 const dbInit = process.env.DB_INIT ? process.env.DB_INIT : false;
 const cron = require('node-cron');
-const photoApp = require('./app_modules/photoapp_files');
 
-const DTOBuilder = require('./app_modules/dtoBuilder');
-const imageDto = new DTOBuilder('/Volumes/media/Photos/photoapptemp/');
+const jobHandler = require('./app_modules/jobHandler');
+const photoAppJob = new jobHandler('/Volumes/media/Photos/photoapptemp/');
 
 require('./routes/authenticate/passport');
 
@@ -44,6 +43,8 @@ app.use('/accountsDb', passport.authenticate('jwt', {session: false}), accounts)
 app.use('/usersDb', passport.authenticate('jwt', {session: false}),users);
 app.use('/eventsDb', passport.authenticate('jwt', {session: false}), events);
 app.use('/permissionsDb', passport.authenticate('jwt', {session: false}), permissions);
+app.use('/batchLoadImages', images);
+
 
 app.get('*', function response(req, res) {
     res.sendFile(path.join(__dirname, 'dist/index.html'));
@@ -59,51 +60,46 @@ app.listen(port, hostName, function onStart(err) {
 
 cron.schedule('* * * * *', () => {
 
-    imageDto.on('done', listenerCb);
+    console.log('cron job started at: ', new Date())
 
-    photoApp.getFiles((err,files) => {
+    photoAppJob.on('dto_done', listenDtoDone);
+    photoAppJob.on('conversion_done', listenConversionDone);
+    photoAppJob.on('db_load_done', listenDbLoadDone);
+    photoAppJob.on('empty', listenEmpty);
+    photoAppJob.on('end', listenEnd);
+    photoAppJob.on('error', listenError);
 
-        if(files){
-            imageDto.generateDto(files);
+    photoAppJob.generateDto();
+
+    function listenDtoDone(DTO) {
+        console.log('dto generation done')
+        if(DTO){
+            photoAppJob.loadImages(DTO);
         }
-        else{
-            imageDto.removeListener('done', listenerCb);
-        }
-    })
+    }
 
-    function listenerCb(DTO) {
-        let keys = Object.keys(DTO[0]);
-        let keyString = '(' + keys.join() + ')';
-        let values = [];
+    function listenDbLoadDone(loadedImages) {
+        console.log('db load done ', loadedImages);
+        photoAppJob.convertFilesToPng(loadedImages);
+    }
 
-        DTO.forEach((image) => {
-            let tempArray = [];
-            let valueString;
-            for(let key in image){
-                if(typeof image[key] != 'number' && image[key] != null){
-                    let value;
-                    let tempString = image[key].toString();
-                    tempString = tempString.replace(/'/g, "''");
+    function listenConversionDone(res) {
+        console.log('file conversion and move done', res);
+        photoAppJob.removeAllListeners();
+    }
 
-                    key == 'created' ? value = "'" + tempString.slice(0,25) + "'": value = "'" + tempString + "'";
+    function listenEmpty(res) {
+        console.log('no new image files');
+        photoAppJob.removeAllListeners();
+    }
 
-                    tempArray.push(value);
-                }else{
-                    image[key] == null ? tempArray.push('null') : tempArray.push(image[key]);
-                }
-            }
-            valueString = '(' + tempArray.join() + ')';
-            values.push(valueString);
-        })
+    function listenEnd(res) {
+        console.log('end emitted ', res);
+    }
 
-        let valueString = values.join();
-
-        console.log('values: ', valueString, '\nkeys: ', keyString);
-
-        // send dto to database
-        // photoApp.convertFiles();
-
-        imageDto.removeListener('done', listenerCb);
+    function listenError(err) {
+        console.log('error emitted: ', err);
+        photoAppJob.removeAllListeners();
     }
 
 })

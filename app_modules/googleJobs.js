@@ -7,9 +7,6 @@ google = {
 
     reverseGeoCode: function (coordinates, cb) {
 
-
-        // console.log('reverseGeo: ', coordinates);
-
         let dto = {
             file: coordinates.file,
             created: coordinates.created,
@@ -77,8 +74,6 @@ google = {
     },
 
     getOffset: function(coordinates, cb) {
-
-        // console.log('getOffset: ', coordinates);
 
         if(coordinates){
 
