@@ -75,7 +75,7 @@ jobHandler.prototype.generateDto = function () {
             this.files = res;
             this.getExif(this.files[this.index], this.generateNext);
         }else {
-            this.emit('empty');
+            this.emit('empty', `${this.srcUrl} empty`);
         }
     })
 
@@ -103,7 +103,7 @@ jobHandler.prototype.convertFilesToPng = function() {
     if(this.processedImages.length > 0){
         this.convertFiles(this.processedImages[this.index], this.convertNext);
     } else {
-        this.emit('end')
+        this.emit('empty', `no files to convert`)
     }
 
     return this;

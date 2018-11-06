@@ -58,7 +58,7 @@ app.listen(port, hostName, function onStart(err) {
 });
 
 
-cron.schedule('* * * * *', () => {
+cron.schedule('0 22 * * *', () => {
 
     console.log('cron job started at: ', new Date())
 
@@ -66,39 +66,34 @@ cron.schedule('* * * * *', () => {
     photoAppJob.on('conversion_done', listenConversionDone);
     photoAppJob.on('db_load_done', listenDbLoadDone);
     photoAppJob.on('empty', listenEmpty);
-    photoAppJob.on('end', listenEnd);
     photoAppJob.on('error', listenError);
 
     photoAppJob.generateDto();
 
     function listenDtoDone(DTO) {
-        console.log('dto generation done')
+        console.log(`job generate DTO complete - DTO generated for ${DTO.length} new images`)
         if(DTO){
             photoAppJob.loadImages(DTO);
         }
     }
 
     function listenDbLoadDone(loadedImages) {
-        console.log('db load done ', loadedImages);
-        photoAppJob.convertFilesToPng(loadedImages);
+        console.log(`job load db complete - ${loadedImages.length} new images loaded into images table`);
+        photoAppJob.convertFilesToPng();
     }
 
-    function listenConversionDone(res) {
-        console.log('file conversion and move done', res);
+    function listenConversionDone(processedFiles) {
+        console.log(`job file conversion / cron schedule completed - ${processedFiles.length} files converted and moved`);
         photoAppJob.removeAllListeners();
     }
 
     function listenEmpty(res) {
-        console.log('no new image files');
+        console.log(`cron schedule terminated - ${res}`);
         photoAppJob.removeAllListeners();
     }
 
-    function listenEnd(res) {
-        console.log('end emitted ', res);
-    }
-
     function listenError(err) {
-        console.log('error emitted: ', err);
+        console.log('cron schedule terminated - error emitted: ', err);
         photoAppJob.removeAllListeners();
     }
 
