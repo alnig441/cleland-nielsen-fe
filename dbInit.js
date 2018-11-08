@@ -37,9 +37,9 @@ client.query('CREATE TABLE images (' +
     'country text,' +
     'state text,' +
     'city text,' +
-    'names text[])' +
-    'event_da text' +
-    'event_en text;')
+    'names text[],' +
+    'event_da text,' +
+    'event_en text);')
     .then(() => {
         console.log('images SUCCESS')
     })
