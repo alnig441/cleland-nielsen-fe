@@ -4,7 +4,7 @@ const { Client } = require('pg'),
 const bcrypt = require('bcrypt'),
     saltRounds = 10;
 
-const defaultPassword = 'jacn2014';
+const defaultPassword = process.env.DEFAULT_PW;
 
 let client = new Client({ connectionString: connectionString });
 
@@ -32,7 +32,6 @@ client.query('CREATE TABLE images (' +
     'month integer,' +
     'day integer,' +
     'file character varying unique not null,' +
-    // 'storage character varying,' +
     'occasion text,' +
     'country text,' +
     'state text,' +

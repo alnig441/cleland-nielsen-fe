@@ -1,5 +1,5 @@
 const https = require('https');
-const key = 'AIzaSyDbwTih6bX4Z88dKO-ob8HTJf2crU7WCKM';
+const key = process.env.API_KEY;
 const geocodeApi = 'https://maps.googleapis.com/maps/api/geocode/json?';
 const timeZoneApi = 'https://maps.googleapis.com/maps/api/timezone/json?';
 

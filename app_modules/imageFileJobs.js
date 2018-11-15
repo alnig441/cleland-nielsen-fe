@@ -7,13 +7,11 @@ const { exec } = require('child_process');
 /* TODO : SET PROPER URLS */
 
 /* source directory*/
-const photoapptemp = '/Volumes/media/Photos/photoapptemp/';
-// const photoapp = '/Volumes/media/Photos/photoapp/';
-const photoapp = 'src/images/Photos/';
+const photoapptemp = process.env.IMG_SRC || '/Volumes/media/Photos/photoapptemp/';
+const photoapp = process.env.IMG_DEST_PNG || 'src/images/Photos/';
 
 /* destination directory */
-const james = 'src/images/';
-// const james = '/Volumes/media/Photos/James/';
+const james = process.env.IMG_DEST_JPG || 'src/images/';
 
 let files;
 let index;

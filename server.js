@@ -1,4 +1,5 @@
 /* configuration of express server to run production environment */
+const env = require('dotenv').config();
 const path = require('path');
 const express = require('express');
 const logger = require('morgan');
@@ -14,6 +15,8 @@ const jobHandler = require('./app_modules/jobHandler');
 const photoAppJob = new jobHandler('/Volumes/media/Photos/photoapptemp/');
 
 require('./routes/authenticate/passport');
+
+console.log(env);
 
 if(dbInit){
     require('./dbInit');
