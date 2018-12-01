@@ -8,7 +8,7 @@
         "url": "https://github.com/Plum-Crazy/angular-seed"
     },
     "scripts": {
-        "start": "node server",
+        "start": "node --require dotenv/config server",
         "webpack": "webpack-dev-server --inline --config config/webpack.dev.js --progress --port 3000",
         "test": "karma start config/karma.conf.js",
         "lint": "tslint -c config/tslint.json \"src/app/**/*.ts\"",

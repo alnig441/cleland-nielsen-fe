@@ -1,5 +1,5 @@
 /* configuration of express server to run production environment */
-const env = require('dotenv').config();
+// const env = require('dotenv').config();
 const path = require('path');
 const express = require('express');
 const logger = require('morgan');
@@ -8,7 +8,6 @@ const port = process.env.NODE_ENV === "production" ? process.env.PORT: "3000";
 const app = express();
 const bodyParser = require('body-parser');
 const passport = require('passport');
-const dbInit = process.env.DB_INIT ? process.env.DB_INIT : false;
 const cron = require('node-cron');
 
 const jobHandler = require('./app_modules/jobHandler');
@@ -16,9 +15,7 @@ const photoAppJob = new jobHandler('/Volumes/media/Photos/photoapptemp/');
 
 require('./routes/authenticate/passport');
 
-console.log(env);
-
-if(dbInit){
+if(process.env.DB_INIT){
     require('./dbInit');
 }
 
