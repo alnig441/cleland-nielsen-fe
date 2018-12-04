@@ -1,5 +1,5 @@
 const { Client } = require('pg'),
-    connectionString = process.env.MYDB || 'postgresql://allannielsen:1109721405@localhost:5432/jacn2014_ng4';
+    connectionString = process.env.MYDB;
 
 const bcrypt = require('bcrypt'),
     saltRounds = 10;
@@ -10,20 +10,6 @@ let client = new Client({ connectionString: connectionString });
 
 client.connect()
 
-
-// client.query(`select tablename from pg_tables where schemaname='public' and tablename='images';`)
-//     .then(result => {
-//         if(result.rows.length > 0){
-//             console.log('table exists: ', result.rows);
-//         } else {
-//             console.log('pish!');
-//         }
-//     })
-//     .catch(err => {
-//         console.log('error getting table: ', err);
-//         client.end();
-//     })
-
 client.query('CREATE TABLE images (' +
     'id serial primary key,' +
     'created timestamp without time zone,' +
@@ -31,12 +17,12 @@ client.query('CREATE TABLE images (' +
     'year integer,' +
     'month integer,' +
     'day integer,' +
-    'file character varying unique not null,' +
     'occasion text,' +
     'country text,' +
     'state text,' +
     'city text,' +
     'names text[],' +
+    'file character varying unique not null,' +
     'event_da text,' +
     'event_en text);')
     .then(() => {
@@ -46,19 +32,6 @@ client.query('CREATE TABLE images (' +
         console.log('error creating images table: ', err);
         client.end();
     })
-
-// client.query('CREATE TABLE events (' +
-//     'img_id serial not null primary key,' +
-//     'event_da text not null,' +
-//     'event_en text not null,' +
-//     'updated timestamp without time zone);')
-//     .then(() => {
-//         console.log('events SUCCESS');
-//     })
-//     .catch(err => {
-//         console.log('error creating events table: ', err);
-//         client.end();
-//     })
 
 client.query('CREATE TABLE permissions (' +
     'permission_id uuid not null primary key, ' +
