@@ -7,11 +7,11 @@ const { exec } = require('child_process');
 /* TODO : SET PROPER URLS */
 
 /* source directory*/
-const photoapptemp = process.env.IMG_SRC || '/Volumes/media/Photos/photoapptemp/';
-const photoapp = process.env.IMG_DEST_PNG || 'src/images/Photos/';
+const photoapptemp = process.env.PHOTOS_MOUNT_POINT + '/photoapptemp/';
+const photoapp = process.env.NODE_ENV == 'production' ? process.env.PHOTOS_MOUNT_POINT + '/photoapp/' : 'src/images/Photos';
 
 /* destination directory */
-const james = process.env.IMG_DEST_JPG || 'src/images/';
+const james = process.env.NODE_ENV == 'production' ? process.env.PHOTOS_MOUNT_POINT + '/James/' : 'src/images';
 
 let files;
 let index;
@@ -30,7 +30,7 @@ photoAppTemp = {
                     client.end()
                 })
                 .catch(err => {
-                    cb(err);
+                    cb({code: err.code, detail: err.detail});
                     client.end()
                 })
 

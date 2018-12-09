@@ -12,7 +12,7 @@ const cron = require('node-cron');
 
 
 const jobHandler = require('./app_modules/jobHandler');
-const photoAppJob = new jobHandler('/Volumes/media/Photos/photoapptemp/');
+const photoAppJob = new jobHandler('/photoapptemp/');
 
 require('./routes/authenticate/passport');
 
@@ -30,7 +30,7 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(express.static(__dirname + '/dist'));
-app.use('/photos', express.static(process.env.PHOTOS));
+app.use('/photos', express.static(process.env.PHOTOS_MOUNT_POINT));
 
 /* routes setup */
 app.use('/login', authenticate);
@@ -56,7 +56,7 @@ app.listen(port, hostName, function onStart(err) {
 });
 
 
-cron.schedule('0 22 * * *', () => {
+cron.schedule('* * * * *', () => {
 
     console.log('cron job started at: ', new Date())
 
