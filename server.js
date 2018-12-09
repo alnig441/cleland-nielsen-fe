@@ -1,7 +1,5 @@
 /* configuration of express server to run production environment */
 // const env = require('dotenv').config();
-const { Client } = require('pg');
-const connectionString = 'postgresql://localhost:5432/postgres';
 const path = require('path');
 const express = require('express');
 const logger = require('morgan');
@@ -18,21 +16,6 @@ const photoAppJob = new jobHandler('/Volumes/media/Photos/photoapptemp/');
 
 require('./routes/authenticate/passport');
 
-let client = new Client({ connectionString: connectionString });
-client.connect()
-
-client.query(`SELECT * from pg_database where datname='jacn2014_ng4';`)
-    .then(result => {
-        if(!result.rows[0]){
-            require('./dbInit');
-        }
-        client.end();
-    })
-    .catch(err => {
-        console.log(err);
-        client.end();
-    })
-
 
 /* pull in all app server routes */
 const authenticate = require('./routes/authenticate/authentication'),
@@ -47,7 +30,7 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(express.static(__dirname + '/dist'));
-app.use('/photos', express.static("/Volumes/media/Photos"));
+app.use('/photos', express.static(process.env.PHOTOS));
 
 /* routes setup */
 app.use('/login', authenticate);
