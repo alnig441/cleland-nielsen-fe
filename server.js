@@ -1,5 +1,4 @@
 /* configuration of express server to run production environment */
-// const env = require('dotenv').config();
 const path = require('path');
 const express = require('express');
 const logger = require('morgan');
@@ -56,7 +55,7 @@ app.listen(port, hostName, function onStart(err) {
 });
 
 
-cron.schedule('* * * * *', () => {
+cron.schedule(process.env.SCHEDULE, () => {
 
     console.log('cron job started at: ', new Date())
 
