@@ -19,8 +19,6 @@ google = {
         };
 
         function timestampCb(err, timestamp) {
-
-            console.log('return obj: ',  timestamp);
             if(timestamp){
                 for(var prop in timestamp){
                     dto[prop] = timestamp[prop];
