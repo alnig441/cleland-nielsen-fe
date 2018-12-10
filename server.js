@@ -9,7 +9,6 @@ const bodyParser = require('body-parser');
 const passport = require('passport');
 const cron = require('node-cron');
 
-
 const jobHandler = require('./app_modules/jobHandler');
 const photoAppJob = new jobHandler('/photoapptemp/');
 

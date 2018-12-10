@@ -5,30 +5,9 @@ const exif = require('fast-exif');
 
 
 const   { Client } = require('pg'),
-        connectionString = process.env.MYDB || 'postgresql://allannielsen:1109721405@localhost:5432/jacn2014_ng4';
-
-const mockImages = [
-    {
-        id: 1,
-        event_en: 'this would be the associated event, if any..',
-        created: 'date the picture was taken goes here',
-        meta: ['some','meta', 'here'],
-        file: 'path/to/image'
-    },
-    {
-        id: 2,
-        event_en: 'this would be the associated event, if any..',
-        created: 'date the picture was taken goes here',
-        meta: ['some','meta', 'here'],
-        file: 'path/to/image'
-    }
-]
-
-
+        connectionString = process.env.MYDB;
 
 router.get('/', (req, res, next) => {
-
-    console.log('images get:');
 
     const client = new Client({
         connectionString: connectionString
@@ -48,6 +27,7 @@ router.get('/', (req, res, next) => {
                             }
                         })
                     })
+                    console.log('array: ', arr[2017]);
                     res.send(arr);
                 })
         })

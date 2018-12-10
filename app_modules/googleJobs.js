@@ -19,10 +19,13 @@ google = {
         };
 
         function timestampCb(err, timestamp) {
+
+            console.log('return obj: ',  timestamp);
             if(timestamp){
                 for(var prop in timestamp){
                     dto[prop] = timestamp[prop];
                 }
+                cb(null, dto);
             }
         }
 
@@ -65,7 +68,6 @@ google = {
                     }
                     this.getOffset(coordinates, timestampCb);
 
-                    cb(null, dto)
                 })
             })
         } else {
