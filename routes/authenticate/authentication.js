@@ -3,7 +3,6 @@ const router = express.Router();
 const jwt = require('jsonwebtoken');
 const passport = require('passport');
 const jwtSecret = process.env.JWT_SECRET || 'some_secret_word';
-const uuidv4 = require('uuid/v4')
 
 /* LOGIN ROUTE */
 

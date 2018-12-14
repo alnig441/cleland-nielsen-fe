@@ -4,3 +4,4 @@ src/images/
 src/.DS_Store
 dist/
 .env
+.gitignore
