@@ -1,5 +1,5 @@
 const { Client } = require('pg'),
-    connectionString = process.env.MYDB;
+    connectionString = process.env.MYDB_INIT ? process.env.MYDB_INIT: process.env.MYDB;
 
 const bcrypt = require('bcrypt'),
     saltRounds = 10;
