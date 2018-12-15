@@ -1,4 +1,7 @@
 /* configuration of express server to run production environment */
+const http = require('http');
+const https = require('https');
+const fs = require('fs');
 const path = require('path');
 const express = require('express');
 const logger = require('morgan');
@@ -8,6 +11,17 @@ const app = express();
 const bodyParser = require('body-parser');
 const passport = require('passport');
 const cron = require('node-cron');
+
+//set up server credentials for letsencrypt
+// const credentials = {
+//     ca      : fs.readFileSync(process.env.CA),
+//     cert    : fs.readFileSync(process.env.CERT),
+//     key     : fs.readFileSync(process.env.KEY)
+// }
+
+//set up servers
+// const httpsServer = https.createServer(credentials,app)
+const httpServer = http.createServer(app);
 
 const jobHandler = require('./app_modules/jobHandler');
 const photoAppJob = new jobHandler('/photoapptemp/');
@@ -28,6 +42,10 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(express.static(__dirname + '/dist'));
+
+//serve letsencrypt credentials
+// app.use(express.static(__dirname + '/letsencrypt', { dotfiles: 'allow'}));
+
 app.use('/photos', express.static(process.env.PHOTOS_MOUNT_POINT));
 
 /* routes setup */
@@ -46,13 +64,19 @@ app.get('*', function response(req, res) {
     res.sendFile(path.join(__dirname, 'dist/index.html'));
 });
 
-app.listen(port, hostName, function onStart(err) {
+httpServer.listen(port, hostName, function onStart(err)  {
     if (err) {
-        console.log('show me error', err);
+        console.log('show me error: ', err);
     }
     console.info('==> 🌎 Listening on port %s. Open up http://'+hostName+':%s/ in your browser.', port, port);
-});
+})
 
+// httpsServer.listen(443, hostName, function onStart(err) {
+//     if (err) {
+//         console.log('show me error - https: ', err);
+//     }
+//     console.info('==> 🌎 Listening on port %s. Open up http://'+hostName+':%s/ in your browser.', port, port);
+// })
 
 cron.schedule(process.env.SCHEDULE, () => {
 
