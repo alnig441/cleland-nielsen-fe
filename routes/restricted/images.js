@@ -27,7 +27,6 @@ router.get('/', (req, res, next) => {
                             }
                         })
                     })
-                    console.log('array: ', arr[2017]);
                     res.send(arr);
                 })
         })
