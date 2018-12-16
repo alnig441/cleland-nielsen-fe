@@ -1,33 +1,16 @@
 /* configuration of express server to run production environment */
-const http = require('http');
-const https = require('https');
-const fs = require('fs');
 const path = require('path');
 const express = require('express');
 const logger = require('morgan');
-const hostName = process.env.NODE_ENV === 'production' ? "0.0.0.0": "localhost";
-const port = process.env.NODE_ENV === "production" ? process.env.PORT: "3000";
 const app = express();
 const bodyParser = require('body-parser');
 const passport = require('passport');
 const cron = require('node-cron');
 
-//set up server credentials for letsencrypt
-// const credentials = {
-//     ca      : fs.readFileSync(process.env.CA),
-//     cert    : fs.readFileSync(process.env.CERT),
-//     key     : fs.readFileSync(process.env.KEY)
-// }
-
-//set up servers
-// const httpsServer = https.createServer(credentials,app)
-const httpServer = http.createServer(app);
-
 const jobHandler = require('./app_modules/jobHandler');
 const photoAppJob = new jobHandler('/photoapptemp/');
 
 require('./routes/authenticate/passport');
-
 
 /* pull in all app server routes */
 const authenticate = require('./routes/authenticate/authentication'),
@@ -42,7 +25,6 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(express.static(__dirname + '/dist'));
-
 //serve letsencrypt credentials
 // app.use(express.static(__dirname + '/letsencrypt', { dotfiles: 'allow'}));
 
@@ -62,20 +44,6 @@ app.use('/permissionsDb', passport.authenticate('jwt', {session: false}), permis
 app.get('*', function response(req, res) {
     res.sendFile(path.join(__dirname, 'dist/index.html'));
 });
-
-httpServer.listen(port, hostName, function onStart(err)  {
-    if (err) {
-        console.log('show me error: ', err);
-    }
-    console.info('==> 🌎 Listening on port %s. Open up http://'+hostName+':%s/ in your browser.', port, port);
-})
-
-// httpsServer.listen(443, hostName, function onStart(err) {
-//     if (err) {
-//         console.log('show me error - https: ', err);
-//     }
-//     console.info('==> 🌎 Listening on port %s. Open up http://'+hostName+':%s/ in your browser.', port, port);
-// })
 
 cron.schedule(process.env.SCHEDULE, () => {
 
@@ -118,3 +86,4 @@ cron.schedule(process.env.SCHEDULE, () => {
 
 })
 
+module.exports = app;
