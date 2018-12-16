@@ -26,7 +26,7 @@ span(*ngIf="!this.imageService.message.failure")
                         div(class='info-key col-sm-4')
                             p() {{ info[0] | keyTransform }}:
                         div(class='info-value col-sm-8')
-                            p(*ngFor="let value of info[1]; index as k;")
+                            p(*ngFor="let value of info[1]; index as k")
                                 ng-container {{ value | valueTransform }}
 
                 div(*ngIf='j < 6' data-toggle='modal' class="thumbnail" data-target-not='.assetviewer-modal' id="{{image.id}}" )

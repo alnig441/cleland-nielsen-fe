@@ -11,8 +11,6 @@ export class ExtTransform implements PipeTransform {
             temp.pop();
             temp.push('png');
 
-            console.log('returning ', temp.join('.'));
-
             return temp.join('.');
         }
     }

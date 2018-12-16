@@ -20,7 +20,6 @@ export class ImagesComponent implements OnInit, DoCheck {
     private albumViewSelector: object = new Object();
     private albumView: ImageModel[] = new Array();
     private albumViewSubset: ImageModel[];
-    // private imageInformation : ImageModel;
     private imageInformation: any[] = new Array();
     private years: any[] = new Array();
     private months: any[] = new Array();
@@ -69,12 +68,7 @@ export class ImagesComponent implements OnInit, DoCheck {
     setImageInfo(index?: any) : void {
 
         var image  = (index || index == 0) ? this.albumViewSubset[index] : null;
-        // this.imageInformation  = (index || index == 0) ? this.albumViewSubset[index] : null;
-        // this.imageInformation[index] = (index || index == 0) ? this.albumViewSubset[index]: this.imageInformation.pop();
-
         index == 'undefined' ? this.imageInformation.pop(): null;
-
-        console.log('image info: ', index, this.imageInformation);
 
         switch(index){
             case 0:
@@ -97,10 +91,8 @@ export class ImagesComponent implements OnInit, DoCheck {
                 break;
             default:
                 this.imageInformation.forEach((elem, index) => {
-                    console.log('index lala: ', index);
                     this.imageInformation[index] = null;
                 })
-                // this.imageInformation = null;
                 break;
         }
     }

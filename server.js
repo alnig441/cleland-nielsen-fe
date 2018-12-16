@@ -57,8 +57,7 @@ app.use('/accountsDb', passport.authenticate('jwt', {session: false}), accounts)
 app.use('/usersDb', passport.authenticate('jwt', {session: false}),users);
 app.use('/eventsDb', passport.authenticate('jwt', {session: false}), events);
 app.use('/permissionsDb', passport.authenticate('jwt', {session: false}), permissions);
-app.use('/batchLoadImages', images);
-
+// app.use('/batchLoadImages', images);
 
 app.get('*', function response(req, res) {
     res.sendFile(path.join(__dirname, 'dist/index.html'));
