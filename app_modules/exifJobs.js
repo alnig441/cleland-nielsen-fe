@@ -16,7 +16,7 @@ exif = {
                     created: null,
                 };
 
-                if (result.gps) {
+                if (result.gps && result.gps.GPSLatitude) {
                     exifObj.latitude = this.convertCoordinates({
                         coordinate: result.gps.GPSLatitude,
                         reference: result.gps.GPSLatitudeRef
@@ -32,6 +32,7 @@ exif = {
                 callback(null, exifObj);
             })
             .catch(err => {
+
                 console.log('exif error: ', err)
                 callback(err)
             })
