@@ -8,7 +8,7 @@ const passport = require('passport');
 const cron = require('node-cron');
 
 const jobHandler = require('./app_modules/jobHandler');
-const photoAppJob = new jobHandler('/photoapptemp/');
+var photoAppJob;
 
 require('./routes/authenticate/passport');
 
@@ -47,6 +47,7 @@ app.get('*', function response(req, res) {
 
 cron.schedule(process.env.SCHEDULE, () => {
 
+    photoAppJob = new jobHandler('/photoapptemp/');
     console.log('cron job started at: ', new Date())
 
     photoAppJob.on('dto_done', listenDtoDone);

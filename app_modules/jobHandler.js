@@ -56,7 +56,7 @@ function jobHandler(srcUrl) {
             this.emit('conversion_done', this.processedImages);
             this.processedImages = [];
         } else{
-            this.convertFilesToPng(this.processedImages[this.index], this.convertNext)
+            this.convertFiles(this.processedImages[this.index], this.convertNext)
         }
     };
 

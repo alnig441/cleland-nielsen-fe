@@ -8,7 +8,7 @@ const { exec } = require('child_process');
 
 /* source directory*/
 const photoapptemp = process.env.PHOTOS_MOUNT_POINT + '/photoapptemp/';
-const photoapp = process.env.NODE_ENV == 'production' ? process.env.PHOTOS_MOUNT_POINT + '/photoapp/' : 'src/images/Photos';
+const photoapp = process.env.NODE_ENV == 'production' ? process.env.PHOTOS_MOUNT_POINT + '/photoapp/' : 'src/images/Photos/';
 
 /* destination directory */
 const james = process.env.NODE_ENV == 'production' ? process.env.PHOTOS_MOUNT_POINT + '/James/' : 'src/images';
@@ -89,8 +89,7 @@ photoAppTemp = {
     },
 
     convertAndMoveFiles: function(file, callback) {
-
-        let png = file.replace(/jp?g/, 'png')
+        let png = file.replace(/jp?g/, 'png');
 
         jimp.read(`${photoapptemp}${file}`)
             .then((image) => {
