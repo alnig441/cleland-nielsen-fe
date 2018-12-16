@@ -10,28 +10,18 @@ export class InfoboxDirective {
 
     @Input() set infobox(condition: boolean){
 
-        console.log('condition ', condition);
-
         if(condition) {
-            // var index = Object.keys(condition);
 
             condition['keys'] = new Array();
 
-            console.log('condition: ', condition);
-
             Object.keys(condition).forEach(key => {
                 var key_value = new Array()
-                if(key == 'names' || key == 'city' || key == 'event_da' || key == 'event_en'){
-                    if(key == 'city') {
-                        if(condition['country'] == 'United States') {
-                            key_value = [key, [condition[key], condition['state'], condition['country']]];
-                        } else {
-                            key_value = [key, [condition[key], condition['country']]];
-                        }
+                if ((key == 'names' || key == 'city' || key == 'event_da' || key == 'event_en') && condition[key]){
+                    if (key == 'city') {
+                        key_value = condition['country'] == 'United States' ?  [key, [condition[key], condition['state'], condition['country']]] : [key, [condition[key], condition['country']]] ;
                     } else {
-                        key_value = [key, condition[key]];
+                        key_value = Array.isArray(condition[key]) ? [key, condition[key]] : [key, [condition[key]]];
                     }
-
 
                     condition['keys'].push(key_value);
                 }
