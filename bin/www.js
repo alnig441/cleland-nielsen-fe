@@ -5,8 +5,7 @@ const fs = require('fs');
 const port = process.env.NODE_ENV === "production" ? process.env.PORT: "3000";
 const hostName = process.env.NODE_ENV === 'production' ? "0.0.0.0": "localhost";
 
-if (process.env.NODE_ENV == 'production') {
-
+if (process.env.LE_FOLDER) {
     const credentials = {
         ca      : fs.readFileSync(process.env.CA),
         cert    : fs.readFileSync(process.env.CERT),
