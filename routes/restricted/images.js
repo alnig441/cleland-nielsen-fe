@@ -23,7 +23,7 @@ router.get('/', (req, res, next) => {
                         arr[current.year] = [];
                         images.rows.forEach(image => {
                             if(image.year == current.year){
-                                arr[current.year][image.month] ? arr[current.year][image.month].push(image) : arr[current.year][image.month] = [];
+                                arr[current.year][image.month] ? arr[current.year][image.month].push(image) : arr[current.year][image.month] = [image];
                             }
                         })
                     })
