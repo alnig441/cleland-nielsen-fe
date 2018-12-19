@@ -25,10 +25,9 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(express.static(__dirname + '/dist'));
-//serve letsencrypt credentials
-// app.use(express.static(__dirname + '/letsencrypt', { dotfiles: 'allow'}));
-
 app.use('/photos', express.static(process.env.PHOTOS_MOUNT_POINT));
+//serve letsencrypt credentials
+app.use(express.static(__dirname + '/letsencrypt', { dotfiles: 'allow'}));
 
 /* routes setup */
 app.use('/login', authenticate);
