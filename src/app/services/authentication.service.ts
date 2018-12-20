@@ -1,5 +1,6 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
+import { Router } from "@angular/router";
 import { LoginModel } from "../models/login.model";
 import "rxjs/add/operator/toPromise";
 
@@ -13,7 +14,7 @@ export class AuthenticationService {
 
     redirectUrl: string;
 
-    constructor(private http: HttpClient) {}
+    constructor(private http: HttpClient, private router: Router ) {}
 
     login(form: LoginModel) {
 
@@ -40,5 +41,6 @@ export class AuthenticationService {
         this.isLoggedIn = false;
         this.isPermitted = {};
         this.redirectUrl = "/home";
+        this.router.navigate([this.redirectUrl]);
     }
 }
