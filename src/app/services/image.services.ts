@@ -29,7 +29,10 @@ export class ImageServices {
 
                     return Promise.resolve('success');
                 })
-                .catch(this.errorParser.handleError);
+                .catch(this.errorParser.handleError)
+                .catch((error: any) => {
+                    this.message.set(error);
+            });
         }
 
     }
@@ -44,7 +47,10 @@ export class ImageServices {
                 .then(res => {
                     return Promise.resolve(res);
                 })
-                .catch(this.errorParser.handleError);
+                .catch(this.errorParser.handleError)
+                .catch((error: any) => {
+                    this.message.set(error)
+                })
         }
     }
 
