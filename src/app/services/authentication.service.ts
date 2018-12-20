@@ -8,6 +8,7 @@ import "rxjs/add/operator/toPromise";
 
 export class AuthenticationService {
 
+    activityTimer : any;
     isLoggedIn = false;
     isAdmin = false;
     isPermitted = {};
@@ -28,12 +29,25 @@ export class AuthenticationService {
                     this.isLoggedIn = true;
                     this.isAdmin = activeUser.userParameters.administrator ? true : false;
                 }
-
+                this.setActivityTimer();
                 return activeUser;
             })
 
     }
 
+    setActivityTimer(): void {
+        this.activityTimer = 0;
+
+        var timer = setInterval(() => {
+            this.activityTimer ++;
+            if (this.activityTimer == 600) {
+                this.logout();
+                this.activityTimer = 0;
+                clearInterval(timer);
+            }
+
+        }, 1000)
+    }
 
     public logout(): void {
         localStorage.removeItem('token');

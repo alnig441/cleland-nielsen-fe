@@ -19,33 +19,27 @@ export class AppComponent implements OnInit {
 
     @HostListener('window:mousemove', ['$event'])
     moveEvent(event: any) {
-
-        if (this.user.isLoggedIn) {
-            console.log('mouse moved detected: ', event);
-        }
+        this.resetActivityTimer()
     }
 
     @HostListener('window:scroll', ['$event'])
     scrollEvent(event: any) {
-
-        if (this.user.isLoggedIn) {
-            console.log('scroll detected: ', event);
-        }
+        this.resetActivityTimer()
     }
 
     @HostListener('window:keypress', ['$event'])
     pressEvent(event: any) {
-
-        if (this.user.isLoggedIn) {
-            console.log('key press detected: ', event);
-        }
+        this.resetActivityTimer()
     }
 
     @HostListener('window:click', ['$event'])
     clickEvent(event: any) {
+        this.resetActivityTimer()
+    }
 
+    resetActivityTimer(): void {
         if (this.user.isLoggedIn) {
-            console.log('click detected: ', event);
+            this.user.activityTimer = 0;
         }
     }
 }
