@@ -1,5 +1,4 @@
 import { Injectable } from "@angular/core";
-import { Router } from "@angular/router";
 import { AuthenticationService } from "./authentication.service";
 
 @Injectable()
@@ -11,7 +10,6 @@ export class SetMessageService {
     private responseState : string = 'hidden';
 
     constructor(
-        private router: Router,
         private activeUser: AuthenticationService) {}
 
     set(message?: any): any {
@@ -29,7 +27,6 @@ export class SetMessageService {
             this.responseState = 'hidden';
             if(message.forceLogout){
                 this.activeUser.logout();
-                this.router.navigate(['/login'])
             }
         },3000)
     }
