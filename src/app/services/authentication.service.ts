@@ -3,6 +3,7 @@ import { HttpClient } from "@angular/common/http";
 import { Router } from "@angular/router";
 import { LoginModel } from "../models/login.model";
 import "rxjs/add/operator/toPromise";
+import {SetMessageService} from "./set-message.service";
 
 @Injectable()
 
@@ -15,7 +16,11 @@ export class AuthenticationService {
 
     redirectUrl: string;
 
-    constructor(private http: HttpClient, private router: Router ) {}
+    constructor(
+        private http: HttpClient,
+        private router: Router,
+        private message: SetMessageService
+    ) {}
 
     login(form: LoginModel) {
 
@@ -40,6 +45,11 @@ export class AuthenticationService {
 
         var timer = setInterval(() => {
             this.activityTimer ++;
+
+            if (this.activityTimer == 10) {
+                this.message.set({ status: 300, message: 'logging out in 10 secs', forceLogout: true })
+            }
+
             if (this.activityTimer == 600) {
                 this.logout();
                 this.activityTimer = 0;
