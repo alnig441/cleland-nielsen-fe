@@ -26,8 +26,7 @@ import { AuthenticationService } from "../../services/authentication.service";
 export class MessagebarComponent implements OnInit, DoCheck {
 
     state: string;
-    message: {};
-    timeout: any;
+    message: { status: any };
 
     constructor(
         private messageService: SetMessageService,
@@ -54,14 +53,14 @@ export class MessagebarComponent implements OnInit, DoCheck {
 
     onEnd(event?:any): void {
         if (event.fromState == 'visible' && event.phaseName == 'done'){
-            if (this.messageService.getForceLogout()) {
+            if (this.messageService.getForceLogout() || this.message.status == 401) {
                 this.activeUser.logout();
             }
         }
     }
 
-    cancelLogout(): void {
-        console.log('cancelling logout');
+    cancel(): void {
+        console.log('cancelling logout', this.message);
         this.messageService.cancel();
     }
 

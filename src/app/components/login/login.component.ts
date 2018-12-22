@@ -20,10 +20,14 @@ export class LoginComponent implements OnInit {
     errorParser = new ErrorParser();
     loginModel = new LoginModel('', '');
 
-    constructor(private http: HttpClient, private router: Router, private authenticator: AuthenticationService, private permissionService: PermissionServices){}
+    constructor(
+        private http: HttpClient,
+        private router: Router,
+        private authenticator: AuthenticationService,
+        private permissionService: PermissionServices
+    ){}
 
     public ngOnInit():void {
-        // console.log('login component initialised');
     }
 
     onSubmit(): void {
