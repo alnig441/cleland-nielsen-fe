@@ -3,7 +3,7 @@ import { HttpClient } from "@angular/common/http";
 import { Router } from "@angular/router";
 import { LoginModel } from "../models/login.model";
 import "rxjs/add/operator/toPromise";
-import {SetMessageService} from "./set-message.service";
+import { SetMessageService } from "./set-message.service";
 
 @Injectable()
 
@@ -13,13 +13,14 @@ export class AuthenticationService {
     isLoggedIn = false;
     isAdmin = false;
     isPermitted = {};
+    timer: any;
 
     redirectUrl: string;
 
     constructor(
         private http: HttpClient,
         private router: Router,
-        private message: SetMessageService
+        private message: SetMessageService,
     ) {}
 
     login(form: LoginModel) {
@@ -43,17 +44,11 @@ export class AuthenticationService {
     setActivityTimer(): void {
         this.activityTimer = 0;
 
-        var timer = setInterval(() => {
+        this.timer = setInterval(() => {
             this.activityTimer ++;
 
-            if (this.activityTimer == 10) {
-                this.message.set({ status: 300, message: 'logging out in 10 secs', forceLogout: true })
-            }
-
-            if (this.activityTimer == 600) {
-                this.logout();
-                this.activityTimer = 0;
-                clearInterval(timer);
+            if (this.activityTimer == 7) {
+                this.message.set({ status: 300, message: 'Logging out in 10 secs. Press cancel to continue.', forceLogout: true })
             }
 
         }, 1000)
@@ -61,10 +56,11 @@ export class AuthenticationService {
 
     public logout(): void {
         localStorage.removeItem('token');
+        clearInterval(this.timer);
+        this.activityTimer = 0;
         this.isAdmin = false;
         this.isLoggedIn = false;
         this.isPermitted = {};
-        this.redirectUrl = "/home";
-        this.router.navigate([this.redirectUrl]);
+        this.router.navigate(["/home"]);
     }
 }

@@ -1,6 +1,6 @@
-import { Component, DoCheck, OnInit, OnDestroy, ViewEncapsulation, Output, EventEmitter, ElementRef } from "@angular/core";
+import { Component, DoCheck, OnInit, ViewEncapsulation } from "@angular/core";
 import { SetMessageService } from "../../services/set-message.service";
-import { state, style, animate, transition, trigger, AnimationEvent } from "@angular/animations";
+import { state, style, animate, transition, trigger } from "@angular/animations";
 import { AuthenticationService } from "../../services/authentication.service";
 
 @Component({
@@ -32,31 +32,37 @@ export class MessagebarComponent implements OnInit, DoCheck {
     constructor(
         private messageService: SetMessageService,
         private activeUser: AuthenticationService,
-        private element: ElementRef
     ){}
 
     ngOnInit(): void {
-        this.state = this.messageService.getResponseState();
-        this.message = this.messageService.getResponse();
+        this.messageService.clear();
+        this.state = this.messageService.getState();
+        this.message = this.messageService.get();
     }
 
     ngDoCheck(): void {
-        this.state = this.messageService.getResponseState();
-        this.message = this.messageService.getResponse();
+        this.state = this.messageService.getState();
+        this.message = this.messageService.get();
 
     }
 
     onBegin(event?:any): void {
-        console.log('on begin', event);
+        if (event.fromState == 'hidden' && event.phaseName == 'start'){
+            console.log('animation on start')
+        }
     }
 
     onEnd(event?:any): void {
-        console.log('on end', event);
+        if (event.fromState == 'visible' && event.phaseName == 'done'){
+            if (this.messageService.getForceLogout()) {
+                this.activeUser.logout();
+            }
+        }
     }
 
     cancelLogout(): void {
         console.log('cancelling logout');
-        this.messageService.cancelForceLogout();
+        this.messageService.cancel();
     }
 
 }

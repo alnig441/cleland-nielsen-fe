@@ -1,3 +1,5 @@
-div(*ngIf="this.message", [@message]="state", class="panel panel-{{this.message.type}} message-panel", (@message.start)="this.onBegin($event)", (@message.done)="this.onEnd($event)")
+div([@message]="state", class="panel panel-{{this.message.type}} message-panel", (@message.start)="this.onBegin($event)", (@message.done)="this.onEnd($event)")
     div(class="panel-heading") status: {{ this.message.status }}
-    div((click)="this.onload()" class="panel-body") message: {{ this.message.message }}
+    div(class="panel-body") message: {{ this.message.message }}
+    div(class="panel-footer")
+        button((click)="this.cancelLogout()" type="submit" class="btn btn-default") Cancel

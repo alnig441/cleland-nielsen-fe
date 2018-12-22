@@ -4,48 +4,48 @@ import { Injectable } from "@angular/core";
 
 export class SetMessageService {
     
-    private response: any = {};
-    private responseState : string = 'hidden';
+    private message: any = {};
+    private state : string = 'hidden';
     private forceLogout: boolean = false;
 
     constructor(
     ) {}
 
     set(message?: any): any {
+        this.message = {}
 
-        this.response = message;
-        this.responseState = 'visible';
+        this.message = message;
+        this.state = 'visible';
         this.forceLogout = message.forceLogout ? message.forceLogout : false;
 
         let httpStatus = parseInt(message.status) ? parseInt(message.status): null;
-        this.response.type = httpStatus == null ? 'info': httpStatus < 300 ? 'success': httpStatus < 400 ? 'warning' : 'danger';
+        this.message.type = httpStatus == null ? 'info': httpStatus < 300 ? 'success': httpStatus < 400 ? 'warning' : 'danger';
 
         setTimeout(() => {
-            this.responseState = 'hidden';
-        },3000)
+            this.state = 'hidden';
+        },10000)
 
     }
 
-    cancelForceLogout(): void {
-        this.forceLogout = false;
+    get(): any {
+        return this.message;
     }
 
-    getResponseState(): string {
-        return this.responseState;
+    getState(): string {
+        return this.state;
     }
 
     getForceLogout(): boolean {
         return this.forceLogout;
     }
 
-    getResponse(): any {
-        return this.response;
+    cancel(): void {
+        this.forceLogout = false;
+        this.state = 'hidden';
     }
 
-    reset(): any {
-        this.response = {};
-        this.responseState = 'hidden';
-        this.forceLogout = false;
+    clear(): any {
+        this.message = {};
     }
 
 }
