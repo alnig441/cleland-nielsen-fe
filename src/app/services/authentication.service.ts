@@ -61,6 +61,7 @@ export class AuthenticationService {
         this.isAdmin = false;
         this.isLoggedIn = false;
         this.isPermitted = {};
-        this.router.navigate(["/home"]);
+        this.redirectUrl = "/home";
+        this.router.navigate([this.redirectUrl]);
     }
 }
