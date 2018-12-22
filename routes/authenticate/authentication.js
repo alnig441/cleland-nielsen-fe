@@ -39,7 +39,7 @@ router.post('/', (req, res, next) => {
                 sub: user.user_id,
                 language: user.language,
                 admin: user.account_name === 'administrator' ? true : false
-            }, jwtSecret, { expiresIn: "1d"});
+            }, jwtSecret, { expiresIn: "7d"});
             return res.json({token, userParameters});
 
         });
