@@ -89,7 +89,7 @@ photoAppTemp = {
     },
 
     convertAndMoveFiles: function(file, callback) {
-        let png = file.replace(/jp?g/, 'png');
+        let png = file.replace(/jp?g/i, 'png');
 
         jimp.read(`${photoapptemp}${file}`)
             .then((image) => {

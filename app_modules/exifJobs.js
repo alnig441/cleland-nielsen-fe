@@ -1,5 +1,5 @@
 const fastExif = require('fast-exif');
-const baseUrl = process.env.PHOTOS_MOUNT_POINT + '/photoapptemp/';
+const baseUrl = process.env.NODE_ENV == 'development' ? 'images/Photos/test/' : process.env.PHOTOS_MOUNT_POINT + '/photoapptemp/';
 const https = require('https');
 
 exif = {
