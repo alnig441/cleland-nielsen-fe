@@ -7,9 +7,10 @@ import { Component, OnInit, ViewEncapsulation } from "@angular/core";
 
 export class WorkComponent implements OnInit {
 
-    constructor() {}
+    constructor(
+
+    ) {}
 
     ngOnInit(): void {
-        console.log('work component initialised');
     }
 }

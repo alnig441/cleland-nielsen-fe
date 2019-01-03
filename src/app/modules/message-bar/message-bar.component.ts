@@ -47,7 +47,6 @@ export class MessagebarComponent implements OnInit, DoCheck {
 
     onBegin(event?:any): void {
         if (event.fromState == 'hidden' && event.phaseName == 'start'){
-            console.log('animation on start')
         }
     }
 
@@ -60,7 +59,6 @@ export class MessagebarComponent implements OnInit, DoCheck {
     }
 
     cancel(): void {
-        console.log('cancelling logout', this.message);
         this.messageService.cancel();
     }
 

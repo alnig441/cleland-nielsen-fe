@@ -17,7 +17,13 @@ export class UsersComponent implements OnInit {
     userUpdated: boolean = false;
     doEdit = {};
 
-    constructor(private formManager: ServiceModelManagerService, private activatedRoute: ActivatedRoute, private activeUser: AuthenticationService, private accountService: AccountServices, private userService: UserServices) {}
+    constructor(
+        private formManager: ServiceModelManagerService,
+        private activatedRoute: ActivatedRoute,
+        private activeUser: AuthenticationService,
+        private accountService: AccountServices,
+        private userService: UserServices
+    ) {}
 
     ngOnInit(): void {
         this.formManager.setService(this.activatedRoute.snapshot.url[0].path);
@@ -38,7 +44,6 @@ export class UsersComponent implements OnInit {
     }
 
     delete(user_id: string): void {
-        console.log(`deleting user ${user_id}`)
         this.userService.deleteRecord(user_id)
     }
 }

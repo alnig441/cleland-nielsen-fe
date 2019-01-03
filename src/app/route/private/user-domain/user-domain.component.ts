@@ -15,7 +15,12 @@ export class UserDomainComponent implements OnInit, DoCheck {
 
     private recordModel: any;
 
-    constructor(private activeUser: AuthenticationService, private setMessage: SetMessageService, private formManager: ServiceModelManagerService, private images: ImageServices){}
+    constructor(
+        private activeUser: AuthenticationService,
+        private setMessage: SetMessageService,
+        private formManager: ServiceModelManagerService,
+        private images: ImageServices
+    ){}
 
     ngOnInit(): void {
         this.images.getAll();
@@ -28,10 +33,8 @@ export class UserDomainComponent implements OnInit, DoCheck {
     }
 
     getLatest() {
-        console.log('get latest');
     }
 
     getList() {
-        console.log('get list');
     }
 }

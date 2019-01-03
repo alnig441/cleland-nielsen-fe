@@ -24,7 +24,12 @@ export class GlobalnavComponent implements OnInit {
             { name: 'permissions',  permission: 'to_view_permissions'}
     ]
 
-    constructor(private http: HttpClient, private router: Router, private activatedRoute: ActivatedRoute, private activeUser: AuthenticationService) {}
+    constructor(
+        private http: HttpClient,
+        private router: Router,
+        private activatedRoute: ActivatedRoute,
+        private activeUser: AuthenticationService
+    ) {}
 
     ngOnInit(): void {
     }

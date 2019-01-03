@@ -8,10 +8,11 @@ import { HttpClient } from "@angular/common/http";
 })
 export class HomeComponent implements OnInit {
 
-    constructor(private http: HttpClient) {}
+    constructor(
+        private http: HttpClient
+    ) {}
 
     public ngOnInit(): void {
-        // console.log('home component initialised\nLocalStorage: ', localStorage);
     }
 }
 

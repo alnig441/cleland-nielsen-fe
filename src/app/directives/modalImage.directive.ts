@@ -4,7 +4,10 @@ import { Directive, Input, TemplateRef, ViewContainerRef } from "@angular/core";
 
 export class ModalImageDirective {
 
-    constructor(private  templateRef: TemplateRef<any>, private viewContainer: ViewContainerRef){}
+    constructor(
+        private templateRef: TemplateRef<any>,
+        private viewContainer: ViewContainerRef
+    ){}
 
     @Input() set modalImage(condition: boolean) {
 

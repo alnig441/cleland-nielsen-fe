@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewEncapsulation } from "@angular/core";
 import { AuthenticationService } from "../../../../services/authentication.service";
-import {ServiceModelManagerService} from "../../../../services/service-model-manager.service";
-import {ActivatedRoute} from "@angular/router";
+import { ServiceModelManagerService } from "../../../../services/service-model-manager.service";
+import { ActivatedRoute } from "@angular/router";
 
 @Component({
     selector: 'app-events',
@@ -11,7 +11,11 @@ import {ActivatedRoute} from "@angular/router";
 
 export class VideosComponent implements OnInit {
 
-    constructor(private formManager: ServiceModelManagerService, private activeUser: AuthenticationService, private activatedRoute: ActivatedRoute){}
+    constructor(
+        private formManager: ServiceModelManagerService,
+        private activeUser: AuthenticationService,
+        private activatedRoute: ActivatedRoute
+    ){}
 
     ngOnInit(): void {
         this.formManager.setService(this.activatedRoute.snapshot.url[0].path);

@@ -18,7 +18,13 @@ export class FormSubmissionComponent implements OnInit, DoCheck {
 
     recordModel: any;
 
-    constructor(private formManager: ServiceModelManagerService, private users: UserServices, private accounts: AccountServices, private permissions: PermissionServices, private activeUser: AuthenticationService) {}
+    constructor(
+        private formManager: ServiceModelManagerService,
+        private users: UserServices,
+        private accounts: AccountServices,
+        private permissions: PermissionServices,
+        private activeUser: AuthenticationService
+    ) {}
 
     ngOnInit(): void {
         this.recordModel = {};
@@ -31,7 +37,6 @@ export class FormSubmissionComponent implements OnInit, DoCheck {
     }
 
     onSubmit(): void {
-        console.log(`adding ${this.formManager.getService()} record `, this.recordModel);
         this[this.formManager.getService()].addRecord(this.recordModel)
             .then(()=> {
                 this.formManager.initializeRecordModel();

@@ -18,7 +18,14 @@ export class AdminDomainComponent implements OnInit, DoCheck {
 
     private recordModel: any;
 
-    constructor( private formManager: ServiceModelManagerService, private activeUser: AuthenticationService, private users: UserServices, private accounts: AccountServices, private permissions: PermissionServices, private http: HttpClient) {}
+    constructor(
+        private formManager: ServiceModelManagerService,
+        private activeUser: AuthenticationService,
+        private users: UserServices,
+        private accounts: AccountServices,
+        private permissions: PermissionServices,
+        private http: HttpClient
+    ) {}
 
     ngOnInit(): void {
         this.permissions.getAll()
@@ -33,11 +40,9 @@ export class AdminDomainComponent implements OnInit, DoCheck {
     }
 
     filter(): void{
-        console.log(`getting list for ${this.formManager.getService()}`);
     }
 
     onSubmit(): void {
-        console.log(`adding ${this.formManager.getService()} record `, this.recordModel);
         this[this.formManager.getService()].addRecord(this.recordModel);
         this.recordModel = this.formManager.getRecordModel();
     }

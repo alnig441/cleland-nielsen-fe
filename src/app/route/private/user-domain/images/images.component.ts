@@ -26,7 +26,12 @@ export class ImagesComponent implements OnInit, DoCheck {
     private currentPage: number;
     private lastPage: number;
 
-    constructor(private formManager: ServiceModelManagerService, private activatedRoute: ActivatedRoute, private activeUser: AuthenticationService, private imageService: ImageServices){}
+    constructor(
+        private formManager: ServiceModelManagerService,
+        private activatedRoute: ActivatedRoute,
+        private activeUser: AuthenticationService,
+        private imageService: ImageServices
+    ){}
 
     ngOnInit(): void {
         this.currentPage = 0;

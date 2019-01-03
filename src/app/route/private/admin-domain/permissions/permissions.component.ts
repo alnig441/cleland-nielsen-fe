@@ -15,14 +15,18 @@ export class PermissionsComponent implements OnInit {
 
     private permissionForm: PermissionModel = new PermissionModel('uuid_generate_v4()');
 
-    constructor( private permissionService: PermissionServices, private formManager: ServiceModelManagerService, private activatedRoute: ActivatedRoute, private activeUser: AuthenticationService){}
+    constructor(
+        private permissionService: PermissionServices,
+        private formManager: ServiceModelManagerService,
+        private activatedRoute: ActivatedRoute,
+        private activeUser: AuthenticationService
+    ){}
 
     ngOnInit(): void {
         this.formManager.setService(this.activatedRoute.snapshot.url[0].path);
     }
 
     delete(permission_id: string): void {
-        console.log('deleting permission: ', permission_id);
         this.permissionService.deleteRecord(permission_id);
     }
 }

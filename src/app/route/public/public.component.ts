@@ -8,9 +8,10 @@
 
 export class PublicComponent implements OnInit {
 
-    constructor(){}
+    constructor(
+
+    ){}
 
     ngOnInit():void {
-        console.log('public compo init');
     }
 }

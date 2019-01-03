@@ -10,10 +10,10 @@ import { SidebarCtaModule } from "../../../modules/sidebar-cta/sidebar-cta.modul
 import { FormSubmissionModule } from "../../../modules/form-submission/form-submission.module";
 import { MonthTransform } from "../../../pipes/month.transform";
 import { InfoboxDirective } from "../../../directives/infobox.directive";
-import {KeyTransform} from "../../../pipes/key.transform";
-import {ValueTransform} from "../../../pipes/value.transform";
-import {ModalImageDirective} from "../../../directives/modalImage.directive";
-import {ExtTransform} from "../../../pipes/ext.transform";
+import { KeyTransform } from "../../../pipes/key.transform";
+import { ValueTransform } from "../../../pipes/value.transform";
+import { ModalImageDirective } from "../../../directives/modalImage.directive";
+import { ExtTransform } from "../../../pipes/ext.transform";
 
 @NgModule({
     imports: [

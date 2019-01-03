@@ -6,7 +6,10 @@ export class InfoboxDirective {
 
     private test = 'hello';
 
-    constructor(private templateRef: TemplateRef<any>, private viewContainer: ViewContainerRef){}
+    constructor(
+        private templateRef: TemplateRef<any>,
+        private viewContainer: ViewContainerRef
+    ){}
 
     @Input() set infobox(condition: boolean){
 

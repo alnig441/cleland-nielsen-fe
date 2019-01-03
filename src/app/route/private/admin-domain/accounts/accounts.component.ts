@@ -20,7 +20,13 @@ export class AccountsComponent implements OnInit {
     tempPlaceholder: string = 'add permission';
     accountUpdated: boolean = false;
 
-    constructor(private formManager: ServiceModelManagerService, private activatedRoute: ActivatedRoute, private activeUser: AuthenticationService, private accountService: AccountServices, private permissionService: PermissionServices){}
+    constructor(
+        private formManager: ServiceModelManagerService,
+        private activatedRoute: ActivatedRoute,
+        private activeUser: AuthenticationService,
+        private accountService: AccountServices,
+        private permissionService: PermissionServices
+    ){}
 
     ngOnInit(): void {
         this.formManager.setService(this.activatedRoute.snapshot.url[0].path);
