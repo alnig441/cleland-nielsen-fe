@@ -71,35 +71,16 @@ export class ImagesComponent implements OnInit, DoCheck {
     }
 
     setImageInfo(index?: any) : void {
-
         var image  = (index || index == 0) ? this.albumViewSubset[index] : null;
-        index == 'undefined' ? this.imageInformation.pop(): null;
 
-        switch(index){
-            case 0:
-                this.imageInformation[1] = image;
-                break;
-            case 1:
-                this.imageInformation[0] = image;
-                break;
-            case 2:
-                this.imageInformation[3] = image;
-                break;
-            case 3:
-                this.imageInformation[2] = image;
-                break;
-            case 4:
-                this.imageInformation[5] = image;
-                break;
-            case 5:
-                this.imageInformation[4] = image;
+        switch (index) {
+            case undefined:
+                this.imageInformation.pop();
                 break;
             default:
-                this.imageInformation.forEach((elem, index) => {
-                    this.imageInformation[index] = null;
-                })
-                break;
+                this.imageInformation[index] = image;
         }
+
     }
 
     setAlbumViewSubset(next?: string) : void {
