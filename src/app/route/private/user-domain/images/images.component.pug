@@ -31,9 +31,17 @@ span(*ngIf="!this.imageService.message.failure")
 
                 div(*ngIf='j < 6' data-toggle='modal' class="thumbnail" data-target-not='.assetviewer-modal' id="{{image.id}}" )
                     img((click)='this.openModal(image.id)' src="photos/photoapp/{{image.file | extTransform}}")
-                    div(class='caption', (mouseenter)='this.setImageInfo(j)', (mouseleave)='this.setImageInfo()')
-                        p {{this.currentPage * 6 + j + 1}} of {{this.albumView.length}}
-                        p {{image.day}}&nbsp;{{image.month | monthTransform}}
+                    div(class='caption')
+                        table
+                            tr
+                                td
+                                    p {{image.day}}&nbsp;{{image.month | monthTransform}}
+                                td
+                                    p((mouseenter)="this.setImageInfo(j)", (mouseleave)="this.setImageInfo()")
+                                        span(class="glyphicon glyphicon-info-sign" aria-hidden="true")
+                                td
+                                    p {{this.currentPage * 6 + j + 1}} of {{this.albumView.length}}
+
 
 
 

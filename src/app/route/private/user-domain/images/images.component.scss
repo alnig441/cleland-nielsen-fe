@@ -99,9 +99,8 @@ app-images {
 }
 
 .thumbnail p {
-  text-align: center;
   margin: 0;
-  padding: 0;
+  padding: 0px 5px;
 }
 
 .thumbnail > img:hover {
@@ -120,6 +119,24 @@ app-images {
   background-color: white;
   color: black;
   border-radius: 0 0 4px 4px
+}
+
+.thumbnail .caption table {
+  table-layout: fixed;
+  width: 100%;
+}
+
+.thumbnail .caption table td:first-child {
+  text-align: left;
+}
+
+.thumbnail .caption table td:nth-child(2) {
+  text-align: center;
+  cursor: help;
+}
+
+.thumbnail .caption table td:last-child {
+  text-align: right;
 }
 
 .month.active a {
