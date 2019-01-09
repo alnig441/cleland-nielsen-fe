@@ -3,7 +3,7 @@ const key = process.env.API_KEY;
 const geocodeApi = 'https://maps.googleapis.com/maps/api/geocode/json?';
 const timeZoneApi = 'https://maps.googleapis.com/maps/api/timezone/json?';
 
-google = {
+googleJobs = {
 
     reverseGeoCode: function (coordinates, cb) {
 
@@ -116,4 +116,4 @@ google = {
 
 }
 
-module.exports = google;
+module.exports = googleJobs;

@@ -2,7 +2,7 @@ const fastExif = require('fast-exif');
 const baseUrl = process.env.NODE_ENV == 'development' ? 'images/Photos/test/' : process.env.PHOTOS_MOUNT_POINT + '/photoapptemp/';
 const https = require('https');
 
-exif = {
+exifJobs = {
 
     getInfo: function(file, callback){
 
@@ -62,4 +62,4 @@ exif = {
 
 }
 
-module.exports = exif;
+module.exports = exifJobs;

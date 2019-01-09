@@ -18,7 +18,7 @@ const james = process.env.NODE_ENV == 'production' ? process.env.PHOTOS_MOUNT_PO
 let files;
 let index;
 
-photoAppTemp = {
+imageFileJobs = {
 
     loadDb: function(DTO, cb) {
 
@@ -152,4 +152,4 @@ photoAppTemp = {
 
 }
 
-module.exports = photoAppTemp
+module.exports = imageFileJobs;
