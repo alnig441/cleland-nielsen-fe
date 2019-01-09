@@ -3,6 +3,8 @@ const connectionString =  process.env.MYDB || 'postgresql://allannielsen:1109721
 const jimp = require('jimp');
 const fs = require('fs');
 const { exec } = require('child_process');
+const jo = require('jpeg-autorotate');
+const options = { quality: 100 };
 
 /* TODO : SET PROPER URLS */
 
@@ -11,7 +13,7 @@ const photoapptemp = process.env.NODE_ENV == 'development' ? 'images/Photos/test
 const photoapp = process.env.NODE_ENV == 'production' ? process.env.PHOTOS_MOUNT_POINT + '/photoapp/' : 'images/Photos/';
 
 /* destination directory */
-const james = process.env.NODE_ENV == 'production' ? process.env.PHOTOS_MOUNT_POINT + '/James/' : 'images';
+const james = process.env.NODE_ENV == 'production' ? process.env.PHOTOS_MOUNT_POINT + '/James/' : 'images/';
 
 let files;
 let index;
@@ -33,7 +35,6 @@ photoAppTemp = {
                     cb({code: err.code, detail: err.detail});
                     client.end()
                 })
-
         });
 
 
@@ -91,34 +92,57 @@ photoAppTemp = {
     convertAndMoveFiles: function(file, callback) {
         let png = file.replace(/jp?g/i, 'png');
 
-        jimp.read(`${photoapptemp}${file}`)
-            .then((image) => {
-                image.resize(280, jimp.AUTO);
-                image.writeAsync(`${photoapp}${png}`)
-                    .then((result) => {
-                        move(file, (err, res) => {
-                            if(!err){
-                                callback(null,`${file} converted and moved`);
-                            }
-                        });
-                    })
+        jo.rotate(`${photoapptemp}${file}`, options, (error, buffer) => {
+            let wasRotated = error ? false : true;
+
+            if (!error) {
+                save(buffer)
                     .catch(err => {
-                        console.log(err);
                         callback(err);
                     })
-            }, callback)
-            .catch(err => {
-                callback(err);
-            }, callback)
+            }
 
-        function move(file, callback) {
+            convert(buffer)
+                .then(
+                    move(file, wasRotated, (err, res) => {
+                        err ? callback(err) : callback(null,`${file} converted and moved`);
+                    })
+                )
+                .catch(err => {
+                    callback(err);
+                })
+        })
+
+        function save(buffer, cb) {
+            return jimp.read(buffer)
+                .then(image => {
+                    image.writeAsync(`${james}${file}`)
+                })
+        }
+
+        function convert(buffer, cb) {
+            return jimp.read(buffer)
+                .then(image => {
+                    image.resize(280, jimp.AUTO);
+                    image.writeAsync(`${photoapp}${png}`)
+                })
+        }
+
+        function move(file, wasRotated, callback) {
 
             let split = file.split(' ');
             let joined = split.join('\\ ');
 
-            exec(`mv ${photoapptemp}${joined} ${james}`, (err, stdout, stdin) => {
+            let execStr =
+                wasRotated ?
+                `mv ${photoapptemp}${joined} ${james}${joined.replace(/jp?g/i, 'original.jpg')}`:
+                `mv ${photoapptemp}${joined} ${james}`;
+
+            exec(execStr, (err, stdout, stdin) => {
                 if(!err){
                     callback(null,true);
+                } else {
+                    callback(err);
                 }
             })
 
