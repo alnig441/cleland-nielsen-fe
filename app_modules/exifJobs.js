@@ -29,18 +29,21 @@ exifJobs = {
                         });
                     }
 
-                    exifObj.created = result.exif.DateTimeOriginal;
+                    exifObj.created =
+                        result.exif.DateTimeOriginal ?
+                        result.exif.DateTimeOriginal :
+                        exifObj = null;
+
 
                     callback(null, exifObj);
 
                 } else {
-                    callback(`No EXIF information for file: ${file}`)
+                    callback(null,null)
                 }
 
 
             })
             .catch(err => {
-
                 console.log('exif error: ', err)
                 callback(err)
             })
