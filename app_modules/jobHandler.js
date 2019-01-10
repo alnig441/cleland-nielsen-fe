@@ -28,22 +28,27 @@ function jobHandler(srcUrl) {
             this.emit('error', err);
         }
 
-        if(coords){
+        if (coords){
             this.reverseGeocode(coords, (err,res) => {
                 if(res){
                     this.processedImages.push(res.file);
                     this.dto.push(res);
                 }
-                if(this.index == this.files.length ){
-                    this.emit('dto_done', this.dto)
-                }else{
-                    this.getExif(this.files[this.index], this.generateNext)
-                }
+                this.procede();
             })
 
+        } else {
+            this.procede();
         }
-
     };
+
+    this.procede = () => {
+        if (this.index == this.files.length) {
+            this.emit('dto_done', this.dto);
+        } else {
+            this.getExif(this.files[this.index], this.generateNext)
+        }
+    }
 
     this.convertNext = (err, res) => {
         this.index++;
