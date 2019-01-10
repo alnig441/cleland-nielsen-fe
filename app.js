@@ -59,8 +59,11 @@ cron.schedule(process.env.SCHEDULE, () => {
 
     function listenDtoDone(DTO) {
         console.log(`job generate DTO complete - DTO generated for ${DTO.length} new images`)
-        if(DTO){
+        if(DTO && DTO.length > 0){
             photoAppJob.loadImages(DTO);
+        } else {
+            console.log(`cron schedule terminated`);
+            photoAppJob.removeAllListeners();
         }
     }
 
