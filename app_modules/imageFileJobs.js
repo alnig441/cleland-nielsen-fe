@@ -97,6 +97,9 @@ imageFileJobs = {
 
             if (!error) {
                 save(buffer)
+                    .then(() => {
+                        return null;
+                    })
                     .catch(err => {
                         callback(err);
                     })
