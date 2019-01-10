@@ -9,27 +9,35 @@ exifJobs = {
         fastExif.read(baseUrl + file, callback)
             .then(result => {
 
-                let exifObj = {
-                    file: file,
-                    latitude: null,
-                    longitude: null,
-                    created: null,
-                };
+                if (result) {
 
-                if (result.gps && result.gps.GPSLatitude) {
-                    exifObj.latitude = this.convertCoordinates({
-                        coordinate: result.gps.GPSLatitude,
-                        reference: result.gps.GPSLatitudeRef
-                    });
-                    exifObj.longitude = this.convertCoordinates({
-                        coordinate: result.gps.GPSLongitude,
-                        reference: result.gps.GPSLongitudeRef
-                    });
+                    let exifObj = {
+                        file: file,
+                        latitude: null,
+                        longitude: null,
+                        created: null,
+                    };
+
+                    if (result.gps && result.gps.GPSLatitude) {
+                        exifObj.latitude = this.convertCoordinates({
+                            coordinate: result.gps.GPSLatitude,
+                            reference: result.gps.GPSLatitudeRef
+                        });
+                        exifObj.longitude = this.convertCoordinates({
+                            coordinate: result.gps.GPSLongitude,
+                            reference: result.gps.GPSLongitudeRef
+                        });
+                    }
+
+                    exifObj.created = result.exif.DateTimeOriginal;
+
+                    callback(null, exifObj);
+
+                } else {
+                    callback(`No EXIF information for file: ${file}`)
                 }
 
-                exifObj.created = result.exif.DateTimeOriginal;
 
-                callback(null, exifObj);
             })
             .catch(err => {
 
