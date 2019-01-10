@@ -2,6 +2,7 @@ const events = require('events');
 const exif = require('./exifJobs');
 const google = require('./googleJobs');
 const imageFiles = require('./imageFileJobs');
+const fs = require('fs');
 
 function jobHandler(srcUrl) {
 
@@ -38,6 +39,11 @@ function jobHandler(srcUrl) {
             })
 
         } else {
+            let logMessage = `\n${new Date()}: INFO: File ${this.files[this.index - 1]} excluded - no EXIF data`;
+            fs.appendFile('.photoapp.log', logMessage, (err) => {
+                return null;
+            });
+
             this.procede();
         }
     };
@@ -48,7 +54,7 @@ function jobHandler(srcUrl) {
         } else {
             this.getExif(this.files[this.index], this.generateNext)
         }
-    }
+    };
 
     this.convertNext = (err, res) => {
         this.index++;

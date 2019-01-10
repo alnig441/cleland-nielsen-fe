@@ -6,6 +6,7 @@ const app = express();
 const bodyParser = require('body-parser');
 const passport = require('passport');
 const cron = require('node-cron');
+const fs = require('fs');
 
 const jobHandler = require('./app_modules/jobHandler');
 var photoAppJob;
@@ -46,6 +47,12 @@ app.get('*', function response(req, res) {
 
 cron.schedule(process.env.SCHEDULE, () => {
 
+    const logFile = '.photoapp.log';
+
+    fs.writeFile(logFile, `LOG OPENED: ${new Date()}`, (err) => {
+        return null;
+    });
+
     photoAppJob = new jobHandler('/photoapptemp/');
     console.log('cron job started at: ', new Date())
 
@@ -64,6 +71,8 @@ cron.schedule(process.env.SCHEDULE, () => {
         } else {
             console.log(`cron schedule terminated`);
             photoAppJob.removeAllListeners();
+            let logMessage = `\n${new Date()}: INFO: CRON Schedule Terminated: Empty DTO`;
+            writeToLog(logMessage);
         }
     }
 
@@ -75,6 +84,8 @@ cron.schedule(process.env.SCHEDULE, () => {
     function listenConversionDone(processedFiles) {
         console.log(`job file conversion / cron schedule completed - ${processedFiles.length} files converted and moved`);
         photoAppJob.removeAllListeners();
+        let logMessage = `\n${new Date()}: SUCCESS: CRON Schedule Completed: ${processedFiles.length} files converted and moved`;
+        writeToLog(logMessage);
     }
 
     function listenEmpty(res) {
@@ -85,7 +96,16 @@ cron.schedule(process.env.SCHEDULE, () => {
     function listenError(err) {
         console.log('cron schedule terminated - error emitted: ', err);
         photoAppJob.removeAllListeners();
+        let logMessage = `\n${new Date()}: ERROR: CRON Schedule Terminated: ${err.code} - ${err.detail}`;
+        writeToLog(logMessage);
     }
+
+    function writeToLog(message) {
+        fs.appendFile(logFile, message, (err) => {
+            return null;
+        })
+    }
+
 
 })
 
