@@ -23,16 +23,6 @@ if (httpsPort) {
 
     })
 
-    const httpServer = http.createServer(app);
-
-    httpServer.listen(80, hostName, function onStart(err) => {
-      if (err) {
-        console.log('show me error - http', err);
-      }
-      console.info(`==> 🌎 Listening on port ${port}. Open up http://${hostName}:${port}/ in your browser.`);
-
-    })
-
 } else {
     const httpServer = http.createServer(app);
 
