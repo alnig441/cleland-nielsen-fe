@@ -45,68 +45,70 @@ app.get('*', function response(req, res) {
     res.sendFile(path.join(__dirname, 'dist/index.html'));
 });
 
-cron.schedule(process.env.SCHEDULE, () => {
+if (process.env.SCHEDULE) {
+  cron.schedule(process.env.SCHEDULE, () => {
 
-    const logFile = '.photoapp.log';
+      const logFile = '.photoapp.log';
 
-    fs.writeFile(logFile, `LOG OPENED: ${new Date()}`, (err) => {
-        return null;
-    });
+      fs.writeFile(logFile, `LOG OPENED: ${new Date()}`, (err) => {
+          return null;
+      });
 
-    photoAppJob = new jobHandler('/photoapptemp/');
-    console.log('cron job started at: ', new Date())
+      photoAppJob = new jobHandler('/photoapptemp/');
+      console.log('cron job started at: ', new Date())
 
-    photoAppJob.on('dto_done', listenDtoDone);
-    photoAppJob.on('conversion_done', listenConversionDone);
-    photoAppJob.on('db_load_done', listenDbLoadDone);
-    photoAppJob.on('empty', listenEmpty);
-    photoAppJob.on('error', listenError);
+      photoAppJob.on('dto_done', listenDtoDone);
+      photoAppJob.on('conversion_done', listenConversionDone);
+      photoAppJob.on('db_load_done', listenDbLoadDone);
+      photoAppJob.on('empty', listenEmpty);
+      photoAppJob.on('error', listenError);
 
-    photoAppJob.generateDto();
+      photoAppJob.generateDto();
 
-    function listenDtoDone(DTO) {
-        console.log(`job generate DTO complete - DTO generated for ${DTO.length} new images`)
-        if(DTO && DTO.length > 0){
-            photoAppJob.loadImages(DTO);
-        } else {
-            console.log(`cron schedule terminated`);
-            photoAppJob.removeAllListeners();
-            let logMessage = `\n${new Date()}: INFO: CRON Schedule Terminated: Empty DTO`;
-            writeToLog(logMessage);
-        }
-    }
+      function listenDtoDone(DTO) {
+          console.log(`job generate DTO complete - DTO generated for ${DTO.length} new images`)
+          if(DTO && DTO.length > 0){
+              photoAppJob.loadImages(DTO);
+          } else {
+              console.log(`cron schedule terminated`);
+              photoAppJob.removeAllListeners();
+              let logMessage = `\n${new Date()}: INFO: CRON Schedule Terminated: Empty DTO`;
+              writeToLog(logMessage);
+          }
+      }
 
-    function listenDbLoadDone(loadedImages) {
-        console.log(`job load db complete - ${loadedImages.length} new images loaded into images table`);
-        photoAppJob.convertFilesToPng();
-    }
+      function listenDbLoadDone(loadedImages) {
+          console.log(`job load db complete - ${loadedImages.length} new images loaded into images table`);
+          photoAppJob.convertFilesToPng();
+      }
 
-    function listenConversionDone(processedFiles) {
-        console.log(`job file conversion / cron schedule completed - ${processedFiles.length} files converted and moved`);
-        photoAppJob.removeAllListeners();
-        let logMessage = `\n${new Date()}: SUCCESS: CRON Schedule Completed: ${processedFiles.length} files converted and moved`;
-        writeToLog(logMessage);
-    }
+      function listenConversionDone(processedFiles) {
+          console.log(`job file conversion / cron schedule completed - ${processedFiles.length} files converted and moved`);
+          photoAppJob.removeAllListeners();
+          let logMessage = `\n${new Date()}: SUCCESS: CRON Schedule Completed: ${processedFiles.length} files converted and moved`;
+          writeToLog(logMessage);
+      }
 
-    function listenEmpty(res) {
-        console.log(`cron schedule terminated - ${res}`);
-        photoAppJob.removeAllListeners();
-    }
+      function listenEmpty(res) {
+          console.log(`cron schedule terminated - ${res}`);
+          photoAppJob.removeAllListeners();
+      }
 
-    function listenError(err) {
-        console.log('cron schedule terminated - error emitted: ', err);
-        photoAppJob.removeAllListeners();
-        let logMessage = `\n${new Date()}: ERROR: CRON Schedule Terminated: ${err.code} - ${err.detail}`;
-        writeToLog(logMessage);
-    }
+      function listenError(err) {
+          console.log('cron schedule terminated - error emitted: ', err);
+          photoAppJob.removeAllListeners();
+          let logMessage = `\n${new Date()}: ERROR: CRON Schedule Terminated: ${err.code} - ${err.detail}`;
+          writeToLog(logMessage);
+      }
 
-    function writeToLog(message) {
-        fs.appendFile(logFile, message, (err) => {
-            return null;
-        })
-    }
+      function writeToLog(message) {
+          fs.appendFile(logFile, message, (err) => {
+              return null;
+          })
+      }
 
 
-})
+  })
+}
 
 module.exports = app;
