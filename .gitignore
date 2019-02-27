@@ -6,3 +6,4 @@ dist/
 .env
 .gitignore
 .photoapp.log
+.DS_Store

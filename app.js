@@ -20,7 +20,9 @@ const authenticate = require('./routes/authenticate/authentication'),
     accounts = require('./routes/restricted/accounts'),
     users = require('./routes/restricted/users'),
     events = require('./routes/restricted/events'),
-    permissions = require('./routes/restricted/permissions');
+    permissions = require('./routes/restricted/permissions'),
+    mongo_api = require('./routes/restricted/mongo_api');
+
 
 app.use(logger('dev'));
 app.use(bodyParser.json());
@@ -39,6 +41,7 @@ app.use('/accountsDb', passport.authenticate('jwt', {session: false}), accounts)
 app.use('/usersDb', passport.authenticate('jwt', {session: false}),users);
 app.use('/eventsDb', passport.authenticate('jwt', {session: false}), events);
 app.use('/permissionsDb', passport.authenticate('jwt', {session: false}), permissions);
+app.use('/api', passport.authenticate('jwt', {session: false}), mongo_api);
 // app.use('/batchLoadImages', images);
 
 app.get('*', function response(req, res) {
