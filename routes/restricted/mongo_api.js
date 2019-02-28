@@ -9,7 +9,9 @@ router.get('/Search/Photos', (req, res, next) => {
   api.get({
     url: `${process.env.MONGO_API_BASE_URL}Search/Photos`,
     headers: {
-      'Authorization': basic_auth
+      'Authorization': basic_auth,
+      'Content-Type': 'application/json',
+      'Accept': 'application/json'
     }
   }, (err, result, body) => {
     console.log('any response: ', body);
