@@ -1,38 +1,62 @@
 const express = require('express'),
     router = express.Router();
-
 const api = require('request');
+
 const basic_auth = `Basic  ${new Buffer(process.env.MONGO_API_USER + ':' + process.env.MONGO_API_PW).toString('base64')}`
 const headers = {
   'Authorization': basic_auth,
-  'Content-Type': 'application/json',
   'Accept': 'application/json'
 };
+const options = {
+  baseUrl: process.NODE_ENV == 'production' ? process.env.MONGO_API_BASE_URL : 'http://localhost:4000/api/',
+  headers: headers,
+  json: true,
+  followAllRedirects: true
+}
 
-router.get('/Search/Photos?', (req, res, next) => {
 
-  let params = stringifyParams(req.query);
-
-  api.get({
-    url: `${process.env.MONGO_API_BASE_URL}Search/Photos?${params}`,
-    headers: headers
-  }, (err, result, body) => {
-    console.log('any response: ', body);
-    res.send(body);
+router.route('/')
+  .get((req, res, next) => {
+    options.uri = 'Search/Photos?';
+    options.qs = req.query;
+    api.get(options, (err, result, body) => {
+      res.send(body);
+    })
+  })
+  .put((req, res, next) => {
+    res.send('put')
+  })
+  .post((req, res, next) => {
+    res.send('post')
+  })
+  .delete((req, res, next) => {
+    res.send('delete')
   })
 
-})
-
-router.get('/SearchById/:_id?/Photos', (req, res, next) => {
-  let _id = req.params._id ? req.params._id : req.query._id;
-
-  api.get({
-    url: `${process.env.MONGO_API_BASE_URL}Search/${_id}/Photos`,
-    header: headers
-  }, ( error, result, body) => {
-    res.send(body);
+router.route('/:_id?')
+  .get((req, res, next) => {
+    options.uri = `SearchById/${req.params._id}/Photos`;
+    api.get(options, (error, result, body) => {
+      res.send(body);
+    })
   })
-})
+  .put((req, res, next) => {
+    res.send('put')
+  })
+  .post((req, res, next) => {
+    options.uri = `UpdateById/${req.params._id}/Photos`;
+    options.body = req.body;
+    console.log('options: ', options)
+    api.post(options, (error, result, body) => {
+      res.send(body);
+    })
+  })
+  .delete((req, res, next) => {
+    options.uri = `RemoveById/${req.params._id}/Photos`;
+    api.delete(options, (error, result, body) => {
+      res.send(body);
+    })
+  })
 
 function stringifyParams ( params ) {
   let keys = Object.keys(params);
