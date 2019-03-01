@@ -1,7 +1,9 @@
 import { Component, OnInit, ViewEncapsulation, DoCheck } from "@angular/core";
 import { ImageServices } from "../../../../services/image.services";
+import { MongoImageServices } from "../../../../services/mongoImage.services";
 import { AuthenticationService } from "../../../../services/authentication.service";
 import { ImageModel } from "../../../../models/image.model";
+import { MongoImageModel } from "../../../../models/mongoImage.model";
 import { ServiceModelManagerService } from "../../../../services/service-model-manager.service";
 import { ActivatedRoute } from "@angular/router";
 
@@ -26,11 +28,15 @@ export class ImagesComponent implements OnInit, DoCheck {
     private currentPage: number;
     private lastPage: number;
 
+    private mongoYears: any[] = new Array();
+    private mongoMonths: any[] = new Array();
+
     constructor(
         private formManager: ServiceModelManagerService,
         private activatedRoute: ActivatedRoute,
         private activeUser: AuthenticationService,
-        private imageService: ImageServices
+        private imageService: ImageServices,
+        private mongoImageService: MongoImageServices
     ){}
 
     ngOnInit(): void {
@@ -48,6 +54,17 @@ export class ImagesComponent implements OnInit, DoCheck {
                 this.setAlbumView();
                 this.setAlbumViewSubset();
             });
+
+        this.mongoImageService.generateTabs()
+            .then((body: any) => {
+              console.log(body);
+              this.mongoYears = body.reverse();
+              this.mongoImageService.generateTabs(body[body.length -1].toString())
+                  .then((body: any) => {
+                    console.log(body);
+                    this.mongoMonths = body;
+                  })
+            })
     }
 
     ngDoCheck(): void {
