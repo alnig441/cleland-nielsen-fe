@@ -14,24 +14,13 @@ const options = {
   followAllRedirects: true
 }
 
-
-router.route('/')
-  .get((req, res, next) => {
+router.get('/', (req, res, next) => {
     options.uri = 'Search/Photos?';
     options.qs = req.query;
     api.get(options, (err, result, body) => {
       res.send(body);
     })
-  })
-  .put((req, res, next) => {
-    res.send('put')
-  })
-  .post((req, res, next) => {
-    res.send('post')
-  })
-  .delete((req, res, next) => {
-    res.send('delete')
-  })
+})
 
 router.get('/generate_tabs?', (req, res, next) => {
   options.uri = req.query.year ? `Distinct/${req.query.year}/Photos` : 'Distinct/Photos';
@@ -50,9 +39,6 @@ router.route('/:_id?')
     api.get(options, (error, result, body) => {
       res.send(body);
     })
-  })
-  .put((req, res, next) => {
-    res.send('put')
   })
   .post((req, res, next) => {
     options.uri = `UpdateById/${req.params._id}/Photos`;
