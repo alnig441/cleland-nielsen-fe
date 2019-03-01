@@ -19,7 +19,6 @@ export class MongoImageServices {
   constructor(private message: SetMessageService, private http: HttpClient, private activeUser: AuthenticationService) {}
 
   generateTabs(year?: any): Promise<any> {
-    console.log('generateTabs ', year, typeof year);
     if(!this.activeUser.isPermitted['to_view_images']){
         this.message.set({ status: 405, message: 'insufficient permissions'});
     }
@@ -27,18 +26,43 @@ export class MongoImageServices {
       let params = new HttpParams();
       params = year ? params.append('year', year): params;
 
-      console.log('show me params: ', year, params.toString(), params.keys());
-      // let endpoint = year ? `/generate_tabs?year=${year}` : '/generate_tabs';
-          return this.http.get(this.baseUrl + '/generate_tabs?', { params : params , observe: 'body'})
-        // return this.http.get(this.baseUrl + endpoint, { observe: 'body'})
-            .toPromise()
-            .then((res : any) => {
-                return Promise.resolve(res);
-            })
-            .catch(this.errorParser.handleError)
-            .catch((error: any) => {
-                this.message.set(error)
-            })
+      return this.http.get(this.baseUrl + '/generate_tabs?', { params : params , observe: 'body'})
+        .toPromise()
+        .then((res : any) => {
+            return Promise.resolve(res);
+        })
+        .catch(this.errorParser.handleError)
+        .catch((error: any) => {
+            this.message.set(error)
+        })
     }
   }
+
+  search(form: MongoImageModel, page?: any, doAnd?: boolean): Promise<any> {
+    if(!this.activeUser.isPermitted['to_view_images']){
+        this.message.set({ status: 405, message: 'insufficient permissions'});
+    }
+    else{
+      let params = new HttpParams({ fromString: 'doAnd' });
+      let keys = Object.keys(form);
+      keys.forEach( key => {
+        if ( form[key] ){
+          params = params.append(key, form[key]);
+        }
+      })
+      params = page ? params.append('page', page) : params;
+      params = doAnd ? params.set('doAnd', 'yes') : params;
+
+      return this.http.get(this.baseUrl + '/', { params : params , observe: 'body'})
+        .toPromise()
+        .then((res : any) => {
+            return Promise.resolve(res);
+        })
+        .catch(this.errorParser.handleError)
+        .catch((error: any) => {
+            this.message.set(error)
+        })
+    }
+  }
+
 }

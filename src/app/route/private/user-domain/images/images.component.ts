@@ -30,6 +30,10 @@ export class ImagesComponent implements OnInit, DoCheck {
 
     private mongoYears: any[] = new Array();
     private mongoMonths: any[] = new Array();
+    private doAnd: boolean = false;
+    private pages: number;
+    private total: number;
+    private docs: any[] = new Array();
 
     constructor(
         private formManager: ServiceModelManagerService,
@@ -56,13 +60,26 @@ export class ImagesComponent implements OnInit, DoCheck {
             });
 
         this.mongoImageService.generateTabs()
-            .then((body: any) => {
-              console.log(body);
-              this.mongoYears = body.reverse();
-              this.mongoImageService.generateTabs(body[body.length -1].toString())
-                  .then((body: any) => {
-                    console.log(body);
-                    this.mongoMonths = body;
+            .then((years: any) => {
+              console.log(years);
+              this.mongoYears = years.reverse();
+
+              this.mongoImageService.generateTabs(this.mongoYears[0].toString())
+                  .then((months: any) => {
+                    console.log(months);
+                    this.mongoMonths = months;
+                    let query = new MongoImageModel();
+                    query.year = this.mongoYears[0];
+                    query.month = this.mongoMonths[this.mongoMonths.length -1];
+                    let page = 1;
+
+                    this.mongoImageService.search(query, page, true)
+                        .then((result: any) => {
+                          console.log(result);
+                          this.pages = result.pages;
+                          this.total = result.total;
+                          this.docs = result.docs;
+                        })
                   })
             })
     }
