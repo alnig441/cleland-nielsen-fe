@@ -3,6 +3,7 @@ import { UserModel } from "../models/user.model";
 import { AccountModel } from "../models/account.model";
 import { PermissionModel } from "../models/permission.model";
 import { ImageModel } from "../models/image.model";
+import { MongoImageModel } from "../models/mongoImage.model";
 
 @Injectable()
 
@@ -42,7 +43,7 @@ export class ServiceModelManagerService {
     }
 
     getRecordModel(): any {
-        return this.recordModel; 
+        return this.recordModel;
     }
 
     initializeRecordModel(service?: string) {
