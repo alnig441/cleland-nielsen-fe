@@ -33,6 +33,17 @@ router.route('/')
     res.send('delete')
   })
 
+router.get('/generate_tabs?', (req, res, next) => {
+  options.uri = req.query.year ? `Distinct/${req.query.year}/Photos` : 'Distinct/Photos';
+  api.get(options, (error, result, body) => {
+    body = body.filter( element => {
+      return element != null;
+    })
+    req.query.year ? null : body.sort()  ;
+    res.send(body);
+  })
+})
+
 router.route('/:_id?')
   .get((req, res, next) => {
     options.uri = `SearchById/${req.params._id}/Photos`;
@@ -46,7 +57,6 @@ router.route('/:_id?')
   .post((req, res, next) => {
     options.uri = `UpdateById/${req.params._id}/Photos`;
     options.body = req.body;
-    console.log('options: ', options)
     api.post(options, (error, result, body) => {
       res.send(body);
     })
@@ -58,16 +68,4 @@ router.route('/:_id?')
     })
   })
 
-function stringifyParams ( params ) {
-  let keys = Object.keys(params);
-  let string = '';
-  keys.forEach( (element, index) => {
-    if ( element ) {
-      index < keys.length - 1 ?
-        string += `${element}=${params[element]}&` :
-        string += `${element}=${params[element]}` ;
-    }
-  })
-  return string;
-}
 module.exports = router;
