@@ -23,13 +23,11 @@ export class ImagesComponent implements OnInit, DoCheck {
     private albumView: ImageModel[] = new Array();
     private albumViewSubset: ImageModel[];
     private imageInformation: any[] = new Array();
-    private years: any[] = new Array();
-    private months: any[] = new Array();
+    private years: number[] = new Array();
+    private months: number[] = new Array();
     private currentPage: number;
     private lastPage: number;
 
-    private mongoYears: any[] = new Array();
-    private mongoMonths: any[] = new Array();
     private doAnd: boolean = false;
     private pages: number;
     private total: number;
@@ -44,41 +42,24 @@ export class ImagesComponent implements OnInit, DoCheck {
     ){}
 
     ngOnInit(): void {
-        this.currentPage = 0;
-        this.formManager.setService(this.activatedRoute.snapshot.url[0].path);
-        this.imageService.getAll()
-            .then((response) => {
-                let array: any[] = [];
-                this.imageService.images.forEach((year, tab) => {
-                    if(year){
-                        array.push(tab);
-                    }
-                })
-                this.years = array.reverse();
-                this.setAlbumView();
-                this.setAlbumViewSubset();
-            });
+      console.log('onInit: ',this.albumViewSelector,this.months,this.years );
+      this.currentPage = 1;
 
         this.mongoImageService.generateTabs()
-            .then((years: any) => {
-              console.log(years);
-              this.mongoYears = years.reverse();
+            .then((years: number[]) => {
+              this.years = years.reverse();
 
-              this.mongoImageService.generateTabs(this.mongoYears[0].toString())
-                  .then((months: any) => {
-                    console.log(months);
-                    this.mongoMonths = months;
-                    let query = new MongoImageModel();
-                    query.year = this.mongoYears[0];
-                    query.month = this.mongoMonths[this.mongoMonths.length -1];
-                    let page = 1;
+              this.mongoImageService.generateTabs(this.years[0])
+                  .then((months: number[]) => {
+                    this.months = months;
+                    let query = new MongoImageModel( null, this.years[0], this.months[this.months.length - 1] );
 
-                    this.mongoImageService.search(query, page, true)
+                    this.mongoImageService.search(query, this.currentPage, true)
                         .then((result: any) => {
-                          console.log(result);
                           this.pages = result.pages;
                           this.total = result.total;
                           this.docs = result.docs;
+                          this.setAlbumView();
                         })
                   })
             })
@@ -87,16 +68,39 @@ export class ImagesComponent implements OnInit, DoCheck {
     ngDoCheck(): void {
     }
 
-    setAlbumView(x?: any): void {
-        this.albumViewSelector['year'] = (!x && x !=0) ? this.imageService.images.length - 1 : x > 11 ? x : this.albumViewSelector['year'];
-        this.months = this.imageService.images[this.albumViewSelector['year']] as any;
+    setAlbumView(selector?: any): void {
+      console.log('selector: ', selector, '\nmonths: ', this.months, '\nyears: ', this.years);
 
-        this.albumViewSelector['month'] = ((!x && x != 0) || x > 11) ? this.months.length -1 : this.albumViewSelector['month'] = x ;
-        this.albumView = this.months[this.albumViewSelector['month']] as ImageModel[];
+        if ( !selector && selector != 0) {
+          this.albumViewSelector['year'] = this.years[0];
+          this.albumViewSelector['month'] = this.months[this.months.length -1];
+        }
 
-        this.currentPage = 0;
-        this.lastPage = Math.ceil(this.albumView.length / 6) - 1;
-        this.setAlbumViewSubset();
+        else if ( selector > 11) {
+          this.albumViewSelector['year'] = selector;
+          this.mongoImageService.generateTabs(selector)
+            .then( months => {
+              this.months = months;
+              this.albumViewSelector['month'] = this.months[this.months.length -1];
+            })
+        }
+
+        else {
+          this.currentPage = 1;
+          this.doAnd = true;
+          let query = new MongoImageModel( null, this.albumViewSelector['year'], selector );
+          this.albumViewSelector['month'] = selector;
+          console.log(query);
+          this.mongoImageService.search( query, this.currentPage, this.doAnd)
+            .then( (body:any) => {
+              this.pages = body.pages;
+              this.total = body.total;
+              this.docs = body.docs;
+            })
+        }
+        // this.currentPage = 0;
+        // this.lastPage = Math.ceil(this.albumView.length / 6) - 1;
+        // this.setAlbumViewSubset();
     }
 
     turnAlbumPage(direction: string): void {
