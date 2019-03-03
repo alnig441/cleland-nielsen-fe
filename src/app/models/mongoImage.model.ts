@@ -1,9 +1,9 @@
 export class MongoImageModel {
     constructor(
         public created?: string,
-        public year?: string,
-        public month?: string,
-        public day?: string,
+        public year?: number,
+        public month?: number,
+        public day?: number,
         public country?: string,
         public state?: string,
         public city?: string,
