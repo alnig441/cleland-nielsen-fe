@@ -7,23 +7,29 @@ const headers = {
   'Authorization': basic_auth,
   'Accept': 'application/json'
 };
-const options = {
-  baseUrl: process.NODE_ENV == 'production' ? process.env.MONGO_API_BASE_URL : 'http://localhost:4000/api/',
-  headers: headers,
-  json: true,
-  followAllRedirects: true
+const Options = function (object) {
+  let options = {
+    baseUrl: process.NODE_ENV == 'production' ? process.env.MONGO_API_BASE_URL : 'http://localhost:4000/api/',
+    headers: headers,
+    json: true,
+    followAllRedirects: true
+  }
+  object.uri ? options.uri = object.uri : null;
+  object.qs ? options.qs = object.qs : null;
+  object.body ? options.body = object.body : null;
+  return options;
 }
 
 router.get('/', (req, res, next) => {
-    options.uri = 'Search/Photos?';
-    options.qs = req.query;
-    api.get(options, (err, result, body) => {
-      res.send(body);
-    })
+  let options = new Options({uri :'Search/Photos?', qs: req.query });
+  api.get(options, (err, result, body) => {
+    res.send(body);
+  })
 })
 
 router.get('/generate_tabs?', (req, res, next) => {
-  options.uri = req.query.year ? `Distinct/${req.query.year}/Photos` : 'Distinct/Photos';
+  let uri = req.query.year ? `Distinct/${req.query.year}/Photos` : 'Distinct/Photos';
+  let options = new Options({ uri: uri });
   api.get(options, (error, result, body) => {
     body = body.filter( element => {
       return element != null;
@@ -35,20 +41,22 @@ router.get('/generate_tabs?', (req, res, next) => {
 
 router.route('/:_id?')
   .get((req, res, next) => {
-    options.uri = `SearchById/${req.params._id}/Photos`;
+    let options = new Options({ uri: `SearchById/${req.params._id}/Photos` });
+    console.log('options: ', options);
     api.get(options, (error, result, body) => {
       res.send(body);
     })
   })
   .post((req, res, next) => {
-    options.uri = `UpdateById/${req.params._id}/Photos`;
-    options.body = req.body;
+    let options = new Options({ uri: `UpdateById/${req.params._id}/Photos`, body: req.body });
+    console.log('options: ', options);
     api.post(options, (error, result, body) => {
       res.send(body);
     })
   })
   .delete((req, res, next) => {
-    options.uri = `RemoveById/${req.params._id}/Photos`;
+    let options = new Options({ uri: `RemoveById/${req.params._id}/Photos` });
+    console.log('options: ', options);
     api.delete(options, (error, result, body) => {
       res.send(body);
     })
