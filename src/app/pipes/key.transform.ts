@@ -12,7 +12,7 @@ export class KeyTransform implements PipeTransform {
             event_da: 'what',
             event_en: 'what',
             city: 'where',
-            data: 'when',
+            date: 'when',
         }
         return keys[key] ? keys[key]: null;
     }
