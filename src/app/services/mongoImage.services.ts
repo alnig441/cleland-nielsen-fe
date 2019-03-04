@@ -22,17 +22,12 @@ export class MongoImageServices {
   ) {}
 
   generateTabs(year?: number): Promise<any> {
-
-    console.log('generate_tabs incoming: ', year);
-
     if(!this.activeUser.isPermitted['to_view_images']){
         this.message.set({ status: 405, message: 'insufficient permissions'});
     }
     else{
       let params = new HttpParams();
       params = year ? params.append('year', year.toString()): params;
-
-      console.log('params: ', params);
 
       return this.http.get(this.baseUrl + '/generate_tabs?', { params : params , observe: 'body'})
         .toPromise()
