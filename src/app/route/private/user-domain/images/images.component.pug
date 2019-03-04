@@ -1,46 +1,45 @@
-span(*ngIf="!this.imageService.message.failure")
-    //div(*infobox='this.imageInformation' class='infobox row')
-    //    ng-container(*ngFor="let info of this.imageInformation['keys']; index as i")
-    //        div(class='info-key col-sm-4')
-    //            p() {{ info[0] | keyTransform }}:
-    //        div(class='info-value col-sm-8')
-    //            p(*ngFor="let value of info[1]; index as k;")
-    //                ng-container {{ value | valueTransform }}
-
+span(*ngIf="!this.mongoImageService.message.failure")
     div
-        div(*ngFor='let month of this.months as months; index as i' class='month {{i | monthTransform}}', [ngClass]="{'active': i == this.albumViewSelector.month}")
-            a(*ngIf="month != null", (click)='setAlbumView(i)') {{i | monthTransform}}
+        div(*ngFor='let month of this.months as months; index as i' class='month {{month | monthTransform}}', [ngClass]="{'active': month == this.albumViewSelector.month}")
+            a(*ngIf="month != null", (click)='setAlbumView(month)') {{month | monthTransform}}
         div(class='reel-container {{ year }}')
             ul(class='year')
                 li(*ngFor='let year of this.years as years; index as m', [ngClass]="{'active': year == this.albumViewSelector.year}")
                     a((click)='setAlbumView(year)') {{ year }}
-            ul(*ngIf="this.albumView.length > 6" class='paginator')
-                li(*ngIf='this.currentPage > 0', (click)="this.turnAlbumPage('rewind')" class='rewind')
+            ul(*ngIf="this.pages > 1" class='paginator')
+                li(*ngIf='this.currentPage > 1', (click)="this.turnAlbumPage('rewind')" class='rewind')
                     span(class='glyphicon glyphicon-triangle-left')
-                li(*ngIf="this.currentPage != this.lastPage", (click)="this.turnAlbumPage('forward')" class='forward')
+                li(*ngIf="this.currentPage != this.pages", (click)="this.turnAlbumPage('forward')" class='forward')
                     span(class='glyphicon glyphicon-triangle-right')
-            div(*ngFor='let image of this.albumViewSubset as images; index as j' class='image-container')
+                      
+            div(*ngFor='let document of this.documents as documents; index as j' class='image-container')
+                span(*infobox='this.showImageInformation[j]' class='infobox row')
+                  ng-container
+                    div(class='info-key col-sm-4')
+                      p Who:
+                      p Where:
+                    div(class='info-value col-sm-8')
+                      p {{document.meta.names}}
+                      p {{document.location.city}}, {{document.location.state}}, {{document.location.country}}
+                    //- ng-container(*ngFor="let info of this.imageInformation[j]['keys']; index as i")
+                //-         div(class='info-key col-sm-4')
+                //-             p() {{ info[0] | keyTransform }}:
+                //-         div(class='info-value col-sm-8')
+                //-             p(*ngFor="let value of info[1]; index as k")
+                //-                 ng-container {{ value | valueTransform }}
 
-                span(*infobox='this.imageInformation[j]' class='infobox row')
-                    ng-container(*ngFor="let info of this.imageInformation[j]['keys']; index as i")
-                        div(class='info-key col-sm-4')
-                            p() {{ info[0] | keyTransform }}:
-                        div(class='info-value col-sm-8')
-                            p(*ngFor="let value of info[1]; index as k")
-                                ng-container {{ value | valueTransform }}
-
-                div(*ngIf='j < 6' data-toggle='modal' class="thumbnail" data-target-not='.assetviewer-modal' id="{{image.id}}" )
-                    img((click)='this.openModal(image.id)' src="photos/photoapp/{{image.file | extTransform}}")
+                div(*ngIf='j < 6' data-toggle='modal' class="thumbnail" data-target-not='.assetviewer-modal' id="{{document._id}}" )
+                    img((click)='this.openModal(document._id)' src="photos/photoapp/{{document.image.fileName | extTransform}}")
                     div(class='caption')
                         table
                             tr
                                 td
-                                    p {{image.day}}&nbsp;{{image.month | monthTransform}}
+                                    p {{document.date.day}}&nbsp;{{document.date.month | monthTransform}}
                                 td
                                     p((mouseenter)="this.setImageInfo(j)", (mouseleave)="this.setImageInfo()")
                                         span(class="glyphicon glyphicon-info-sign" aria-hidden="true")
                                 td
-                                    p {{this.currentPage * 6 + j + 1}} of {{this.albumView.length}}
+                                    p {{(j + 1) + ((this.currentPage - 1) * 6)}} of {{this.total}}
 
 
 
@@ -53,5 +52,4 @@ div(class="modal fade assetviewer-modal" tabindex="-1" role="dialog" aria-labell
         ul
             li((click)='this.flipThroughImages("previous")' class='button-left') prev
             li((click)='this.flipThroughImages("next")' class='button-right') next
-        img(*modalImage="this.albumViewSelector['selectedIndex'] || this.albumViewSelector['selectedIndex'] == 0" src="photos/James/{{this.albumView[this.albumViewSelector['selectedIndex']]['file']}}" id="{{this.albumView[this.albumViewSelector['selectedIndex']]['id']}}")
-
+        img(*modalImage="this.albumViewSelector['selectedIndex'] || this.albumViewSelector['selectedIndex'] == 0" src="photos/James/{{this.documents[this.albumViewSelector['selectedIndex']]['image']['fileName']}}" id="{{this.documents[this.albumViewSelector['selectedIndex']]['_id']}}")
