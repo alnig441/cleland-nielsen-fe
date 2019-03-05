@@ -16,19 +16,12 @@ span(*ngIf="!this.mongoImageService.message.failure")
                 span(*infobox='this.showImageInformation[j]' class='infobox row')
                   ng-container
                     div(class='info-key col-sm-4')
-                      p Who:
+                      p(*ngIf='document.who') Who:
                       p Where:
                     div(class='info-value col-sm-8')
-                      p {{document.meta.names}}
-                      p {{document.location.city}}, {{document.location.state}}, {{document.location.country}}
-                    //- ng-container(*ngFor="let info of this.imageInformation[j]['keys']; index as i")
-                //-         div(class='info-key col-sm-4')
-                //-             p() {{ info[0] | keyTransform }}:
-                //-         div(class='info-value col-sm-8')
-                //-             p(*ngFor="let value of info[1]; index as k")
-                //-                 ng-container {{ value | valueTransform }}
-
-                div(*ngIf='j < 6' data-toggle='modal' class="thumbnail" data-target-not='.assetviewer-modal' id="{{document._id}}" )
+                      p {{document.who}}
+                      p {{document.where}}
+                div(data-toggle='modal' class="thumbnail" data-target-not='.assetviewer-modal' id="{{document._id}}")
                     img((click)='this.openModal(document._id)' src="photos/photoapp/{{document.image.fileName | extTransform}}")
                     div(class='caption')
                         table

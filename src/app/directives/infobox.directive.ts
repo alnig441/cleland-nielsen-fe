@@ -13,24 +13,18 @@ export class InfoboxDirective {
 
         if(condition) {
 
-            condition['keys'] = new Array();
+            condition['who'] = condition['meta']['names'].length > 0 ?
+              condition['meta']['names'].toString().replace(/,/g, ', '):
+              null;
 
-            Object.keys(condition).forEach(key => {
-                var key_value = new Array()
-                if ((key == 'names' || key == 'city' || key == 'event_da' || key == 'event_en') && condition[key]){
-                    if (key == 'city') {
-                        key_value = condition['country'] == 'United States' ?
-                            [key, [condition[key], condition['state'], condition['country']]]:
-                            [key, [condition[key], condition['country']]];
-                    } else {
-                        key_value = Array.isArray(condition[key]) ?
-                            [key, condition[key]]:
-                            [key, [condition[key]]];
-                    }
+            condition['meta']['venue'] ?
+              condition['location']['country'] == 'United States' ?
+                condition['where'] =`${condition['meta']['venue']}, ${condition['location']['city']}, ${condition['location']['state']}`:
+                condition['where'] =`${condition['meta']['venue']}, ${condition['location']['city']}, ${condition['location']['country']}`:
+              condition['location']['country'] == 'United States' ?
+                condition['where'] = `${condition['location']['city']}, ${condition['location']['state']}`:
+                condition['where'] = `${condition['location']['city']}, ${condition['location']['country']}`;
 
-                    condition['keys'].push(key_value);
-                }
-            })
             this.viewContainer.createEmbeddedView(this.templateRef);
         } else {
             this.viewContainer.clear();
