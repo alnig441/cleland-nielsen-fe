@@ -14,6 +14,7 @@ export class AuthenticationService {
     isAdmin = false;
     isPermitted = {};
     timer: any;
+    language: string;
 
     redirectUrl: string;
 
@@ -34,6 +35,7 @@ export class AuthenticationService {
                     localStorage.setItem('token', activeUser.token);
                     this.isLoggedIn = true;
                     this.isAdmin = activeUser.userParameters.administrator ? true : false;
+                    this.language = activeUser.userParameters.language ? activeUser.userParameters.language : 'english';
                 }
                 this.setActivityTimer();
                 return activeUser;

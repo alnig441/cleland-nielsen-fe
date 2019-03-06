@@ -14,6 +14,7 @@ import { KeyTransform } from "../../../pipes/key.transform";
 import { ValueTransform } from "../../../pipes/value.transform";
 import { ModalImageDirective } from "../../../directives/modalImage.directive";
 import { ExtTransform } from "../../../pipes/ext.transform";
+import { BtnTransform } from "../../../pipes/btn.transform";
 
 @NgModule({
     imports: [
@@ -31,6 +32,7 @@ import { ExtTransform } from "../../../pipes/ext.transform";
         KeyTransform,
         ValueTransform,
         ExtTransform,
+        BtnTransform,
         ModalImageDirective,
         InfoboxDirective
     ],

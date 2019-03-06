@@ -205,19 +205,48 @@ app-images {
   position: relative;
   text-align: center;
 }
-//
-// .assetviewer-modal .button-close {
-//   color: gray;
-//   opacity: .3;
-//   position: absolute;
-//   top: 5px;
-//   left: 753px;
-// }
-//
+
+.modal-image-overlay-positioner {
+  position: relative;
+}
+
 .modal-image {
   // width: 100%;
   border: 5px solid lightgray;
   max-height: 900px;
+}
+
+.modal-image-overlay {
+  display: block;
+  list-style: none;
+  color: white;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  padding: 0px;
+  margin: 0px;
+}
+
+.modal-image-overlay li {
+  text-transform: uppercase;
+  color: white;
+  background-color: gray;
+  text-align: center;
+  opacity: .3;
+}
+
+.modal-image-overlay li {
+  position: absolute;
+  width: 100px;
+}
+
+.modal-image-overlay li.button-left {
+  left: 5px;
+}
+
+.modal-image-overlay li.button-right {
+  right: 5px;
 }
 //
 // .assetviewer-modal ul {
@@ -238,27 +267,26 @@ app-images {
 //   opacity: .3;
 // }
 //
-// .assetviewer-modal li.button-left {
-//   border-left: none;
-//   border-radius: 0 4px 4px 0;
-//   width: 100%;
-// }
+.modal-image-overlay li.button-left {
+  border-left: none;
+  border-radius: 0 4px 4px 0;
+  // width: 100%;
+}
+
+.modal-image-overlay li.button-right {
+  border-right: none;
+  border-radius: 4px 0 0 4px;
+  // left: 688px;
+  // width: 75px;
+}
 //
-// .assetviewer-modal li.button-right {
-//   border-right: none;
-//   border-radius: 4px 0 0 4px;
-//   position: absolute;
-//   left: 688px;
-//   width: 75px;
-// }
-//
-// .assetviewer-modal li.button-left:hover,
-// .assetviewer-modal li.button-right:hover {
-//   cursor: pointer;
-//   background-color: lightgray;
-//   opacity: 1;
-//   color: black;
-// }
+.modal-image-overlay li.button-left:hover,
+.modal-image-overlay li.button-right:hover {
+  cursor: pointer;
+  background-color: lightgray;
+  opacity: 1;
+  color: black;
+}
 //
 // .assetviewer-modal .button-close:hover {
 //   cursor: pointer;
