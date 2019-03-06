@@ -195,67 +195,76 @@ app-images {
 
 .assetviewer-modal {
   margin:auto;
-  max-width: 775px;
 }
 
-.assetviewer-modal .button-close {
-  color: gray;
-  opacity: .3;
-  position: absolute;
-  top: 5px;
-  left: 753px;
+.modal {
+  top: 10px;
 }
 
-.assetviewer-modal img {
-  width: 100%;
-  border: 5px solid lightgray;
-}
-
-.assetviewer-modal ul {
-  left: 5px;
-  width: 75px;
-  top: 60px;
-  position: absolute;
-  padding: 0;
-  display: inline-flex;
-  list-style: none;
-}
-
-.assetviewer-modal li {
-  text-transform: uppercase;
-  color: white;
-  background-color: gray;
+.modal-image-container {
+  position: relative;
   text-align: center;
-  opacity: .3;
 }
-
-.assetviewer-modal li.button-left {
-  border-left: none;
-  border-radius: 0 4px 4px 0;
-  width: 100%;
+//
+// .assetviewer-modal .button-close {
+//   color: gray;
+//   opacity: .3;
+//   position: absolute;
+//   top: 5px;
+//   left: 753px;
+// }
+//
+.modal-image {
+  // width: 100%;
+  border: 5px solid lightgray;
+  max-height: 900px;
 }
-
-.assetviewer-modal li.button-right {
-  border-right: none;
-  border-radius: 4px 0 0 4px;
-  position: absolute;
-  left: 688px;
-  width: 75px;
-}
-
-.assetviewer-modal li.button-left:hover,
-.assetviewer-modal li.button-right:hover {
-  cursor: pointer;
-  background-color: lightgray;
-  opacity: 1;
-  color: black;
-}
-
-.assetviewer-modal .button-close:hover {
-  cursor: pointer;
-  opacity: 1;
-  color: black;
-}
+//
+// .assetviewer-modal ul {
+//   left: 5px;
+//   width: 75px;
+//   top: 60px;
+//   position: absolute;
+//   padding: 0;
+//   display: inline-flex;
+//   list-style: none;
+// }
+//
+// .assetviewer-modal li {
+//   text-transform: uppercase;
+//   color: white;
+//   background-color: gray;
+//   text-align: center;
+//   opacity: .3;
+// }
+//
+// .assetviewer-modal li.button-left {
+//   border-left: none;
+//   border-radius: 0 4px 4px 0;
+//   width: 100%;
+// }
+//
+// .assetviewer-modal li.button-right {
+//   border-right: none;
+//   border-radius: 4px 0 0 4px;
+//   position: absolute;
+//   left: 688px;
+//   width: 75px;
+// }
+//
+// .assetviewer-modal li.button-left:hover,
+// .assetviewer-modal li.button-right:hover {
+//   cursor: pointer;
+//   background-color: lightgray;
+//   opacity: 1;
+//   color: black;
+// }
+//
+// .assetviewer-modal .button-close:hover {
+//   cursor: pointer;
+//   opacity: 1;
+//   color: black;
+// }
 
 .infobox {
   position: absolute;
