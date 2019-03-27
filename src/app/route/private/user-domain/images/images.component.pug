@@ -42,3 +42,6 @@ div(class='modal fade assetviewer-modal' tabindex='1' role='dialog' aria-labelle
       ul(class="modal-image-overlay")
         li((click)="this.flipThroughImages('previous')" class="button-left") {{ { name: 'rwd', language: this.activeUser.language } | btnTransform }}
         li((click)="this.flipThroughImages('next')" class="button-right") {{ { name: 'fwd', language: this.activeUser.language } | btnTransform}}
+      ul(class="modal-image-overlay-2")
+        li(onclick="window.print(); return null;" class="button-left") {{ { name: 'print', language: this.activeUser.language } | btnTransform }}
+        li(class="button-right") {{ { name: 'close', language: this.activeUser.language } | btnTransform }}

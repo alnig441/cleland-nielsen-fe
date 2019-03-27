@@ -211,9 +211,40 @@ app-images {
 }
 
 .modal-image {
-  // width: 100%;
   border: 5px solid lightgray;
-  max-height: 900px;
+  // max-height: 900px;
+}
+
+@media screen and (min-height: 768px) {
+  .modal-image {
+    max-height: 748px;
+  }
+}
+
+@media screen and (min-height: 900px) {
+  .modal-image {
+    max-height: 880px;
+  }
+}
+
+@media screen and (min-height: 1080px) {
+  .modal-image {
+    max-height: 1060px;
+  }
+}
+
+@media print {
+  // .modal-image-overlay,
+  // .modal-image-overlay-2,
+  // .modal-image-overlay-positioner {
+  //   display: none;
+  // }
+  .modal-image {
+    border: none;
+  }
+  li {
+    display: none;
+  }
 }
 
 .modal-image-overlay {
@@ -228,7 +259,20 @@ app-images {
   margin: 0px;
 }
 
-.modal-image-overlay li {
+.modal-image-overlay-2 {
+  display: block;
+  list-style: none;
+  color: white;
+  position: absolute;
+  top: 25px;
+  left: 0px;
+  width: 100%;
+  padding: 0px;
+  margin: 0px;
+}
+
+.modal-image-overlay li,
+.modal-image-overlay-2 li {
   text-transform: uppercase;
   color: white;
   background-color: gray;
@@ -236,63 +280,43 @@ app-images {
   opacity: .3;
 }
 
-.modal-image-overlay li {
+.modal-image-overlay li,
+.modal-image-overlay-2 li {
   position: absolute;
   width: 100px;
 }
 
-.modal-image-overlay li.button-left {
+.modal-image-overlay li.button-left,
+.modal-image-overlay-2 li.button-left {
   left: 5px;
 }
 
-.modal-image-overlay li.button-right {
+.modal-image-overlay li.button-right,
+.modal-image-overlay-2 li.button-right {
   right: 5px;
 }
-//
-// .assetviewer-modal ul {
-//   left: 5px;
-//   width: 75px;
-//   top: 60px;
-//   position: absolute;
-//   padding: 0;
-//   display: inline-flex;
-//   list-style: none;
-// }
-//
-// .assetviewer-modal li {
-//   text-transform: uppercase;
-//   color: white;
-//   background-color: gray;
-//   text-align: center;
-//   opacity: .3;
-// }
-//
-.modal-image-overlay li.button-left {
+
+.modal-image-overlay li.button-left,
+.modal-image-overlay-2 li.button-left {
   border-left: none;
   border-radius: 0 4px 4px 0;
-  // width: 100%;
 }
 
-.modal-image-overlay li.button-right {
+.modal-image-overlay li.button-right,
+.modal-image-overlay-2 li.button-right {
   border-right: none;
   border-radius: 4px 0 0 4px;
-  // left: 688px;
-  // width: 75px;
 }
-//
+
 .modal-image-overlay li.button-left:hover,
-.modal-image-overlay li.button-right:hover {
+.modal-image-overlay li.button-right:hover,
+.modal-image-overlay-2 li.button-left:hover,
+.modal-image-overlay-2 li.button-right:hover {
   cursor: pointer;
   background-color: lightgray;
   opacity: 1;
   color: black;
 }
-//
-// .assetviewer-modal .button-close:hover {
-//   cursor: pointer;
-//   opacity: 1;
-//   color: black;
-// }
 
 .infobox {
   position: absolute;

@@ -49,7 +49,7 @@ export class MongoImageServices {
       let params = new HttpParams({ fromString: 'doAnd' });
       let keys = Object.keys(form);
       keys.forEach( key => {
-        if ( form[key] ){
+        if ( form[key] || ( typeof form[key] == 'number' && form[key] == 0 ) ){
           params = params.append(key, form[key]);
         }
       })

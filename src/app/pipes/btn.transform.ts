@@ -13,6 +13,12 @@ export class BtnTransform implements PipeTransform {
             case 'rwd':
               button = button.language.toLowerCase() == 'english' ? 'previous' : 'tilbage';
               return button;
+            case 'close':
+              button = button.language.toLowerCase() == 'english' ? 'close' : 'luk';
+              return button;
+            case 'print':
+              button = button.language.toLowerCase() == 'english' ? 'print' : 'udskriv';
+              return button;
             default:
               return button;
           }
