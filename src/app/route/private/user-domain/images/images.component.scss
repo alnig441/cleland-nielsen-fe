@@ -254,20 +254,25 @@ app-images {
   margin: 0px;
 }
 
-.modal-image-overlay-2 {
-  display: block;
-  list-style: none;
-  color: white;
-  position: absolute;
-  top: 25px;
-  left: 0px;
-  width: 100%;
+
+.modal-image-overlay-menu {
   padding: 0px;
   margin: 0px;
+  vertical-align: middle;
+  list-style: none;
+  position: absolute;
+  left: 0px;
+  top: 100px;
+}
+
+.modal-image-overlay-menu li {
+  vertical-align: middle;
+  padding-right: 5px;
+  margin-bottom: 5px;
 }
 
 .modal-image-overlay li,
-.modal-image-overlay-2 li {
+.modal-image-overlay-menu li {
   text-transform: uppercase;
   color: white;
   background-color: gray;
@@ -275,42 +280,49 @@ app-images {
   opacity: .3;
 }
 
-.modal-image-overlay li,
-.modal-image-overlay-2 li {
+.modal-image-overlay li {
   position: absolute;
   width: 100px;
 }
 
-.modal-image-overlay li.button-left,
-.modal-image-overlay-2 li.button-left {
+.modal-image-overlay li.button-left {
   left: 5px;
 }
 
-.modal-image-overlay li.button-right,
-.modal-image-overlay-2 li.button-right {
+.modal-image-overlay li.button-right {
   right: 5px;
 }
 
 .modal-image-overlay li.button-left,
-.modal-image-overlay-2 li.button-left {
+.modal-image-overlay-menu li.button-left {
   border-left: none;
   border-radius: 0 4px 4px 0;
 }
 
-.modal-image-overlay li.button-right,
-.modal-image-overlay-2 li.button-right {
+.modal-image-overlay li.button-right {
   border-right: none;
   border-radius: 4px 0 0 4px;
 }
 
 .modal-image-overlay li.button-left:hover,
 .modal-image-overlay li.button-right:hover,
-.modal-image-overlay-2 li.button-left:hover,
-.modal-image-overlay-2 li.button-right:hover {
+.modal-image-overlay-menu li.button-left:hover,
+{
   cursor: pointer;
   background-color: lightgray;
   opacity: 1;
   color: black;
+}
+
+.button-left .glyphicon {
+  vertical-align: middle;
+  float: left;
+  padding-left: 5px;
+}
+
+.button-right .glyphicon {
+  float: right;
+  padding-right: 5px;
 }
 
 .infobox {

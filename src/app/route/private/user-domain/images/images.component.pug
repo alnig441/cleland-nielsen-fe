@@ -40,8 +40,19 @@ div(class='modal fade assetviewer-modal' tabindex='1' role='dialog' aria-labelle
     span(class='modal-image-overlay-positioner')
       img(*modalImage="this.albumViewSelector['selectedIndex'] || this.albumViewSelector['selectedIndex'] == 0" class="modal-image" src="photos/James/{{this.documents[this.albumViewSelector['selectedIndex']]['image']['fileName']}}" id="{{this.documents[this.albumViewSelector['selectedIndex']]['_id']}}")
       ul(class="modal-image-overlay")
-        li((click)="this.flipThroughImages('previous')" class="button-left") {{ { name: 'rwd', language: this.activeUser.language } | btnTransform }}
-        li((click)="this.flipThroughImages('next')" class="button-right") {{ { name: 'fwd', language: this.activeUser.language } | btnTransform}}
-      ul(class="modal-image-overlay-2")
-        li(onclick="window.print(); return null;" class="button-left") {{ { name: 'print', language: this.activeUser.language } | btnTransform }}
-        li(class="button-right") {{ { name: 'close', language: this.activeUser.language } | btnTransform }}
+        li((click)="this.flipThroughImages('previous')" class="button-left")
+          span(class="glyphicon glyphicon-step-backward") &nbsp; 
+          | {{ { name: 'rwd', language: this.activeUser.language } | btnTransform }}
+        li((click)="this.flipThroughImages('next')" class="button-right") 
+          | {{ { name: 'fwd', language: this.activeUser.language } | btnTransform}} 
+          | &nbsp;
+          span(class="glyphicon glyphicon-step-forward")
+      ul(class="modal-image-overlay-menu")
+        li(onclick="window.print(); return null;" class='button-left')
+          span(class='glyphicon glyphicon-print') &nbsp;
+          | {{ { name: 'print', language: this.activeUser.language } | btnTransform }}
+        li(class='button-left')
+          span(class='glyphicon glyphicon-remove') &nbsp;
+          | {{ { name: 'close', language: this.activeUser.language } | btnTransform }}
+      
+          
