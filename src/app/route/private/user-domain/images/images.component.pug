@@ -51,7 +51,7 @@ div(class='modal fade assetviewer-modal' tabindex='1' role='dialog' aria-labelle
         li(onclick="window.print(); return null;" class='button-left')
           span(class='glyphicon glyphicon-print') &nbsp;
           | {{ { name: 'print', language: this.activeUser.language } | btnTransform }}
-        li(class='button-left')
+        li((click)="this.cancelModal()" class='button-left')
           span(class='glyphicon glyphicon-remove') &nbsp;
           | {{ { name: 'close', language: this.activeUser.language } | btnTransform }}
       
