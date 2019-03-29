@@ -2,9 +2,9 @@ const app = require('../app');
 const https = require('https');
 const http = require('http');
 const fs = require('fs');
-const port = process.env.NODE_ENV === "production" ? process.env.PORT: "3000";
+const port = process.env.NODE_ENV === "development" ? "3000" : process.env.PORT ;
 const httpsPort = process.env.HTTPS_PORT;
-const hostName = process.env.NODE_ENV === 'production' ? "0.0.0.0": "localhost";
+const hostName = process.env.NODE_ENV === 'development' ? "localhost" : "0.0.0.0" ;
 
 if (httpsPort) {
     const credentials = {
