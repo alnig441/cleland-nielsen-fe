@@ -1,6 +1,6 @@
 webpackJsonp([1],{
 
-/***/ 103:
+/***/ 102:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -80,7 +80,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_observable_forkJoin__ = __webpack_require__(191);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_observable_forkJoin___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs_observable_forkJoin__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_observable_fromPromise__ = __webpack_require__(132);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_observable_fromPromise__ = __webpack_require__(131);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_observable_fromPromise___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_rxjs_observable_fromPromise__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_operator_map__ = __webpack_require__(71);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_rxjs_operator_map__);
@@ -6253,7 +6253,7 @@ exports.AuthenticationService = AuthenticationService;
 
 /***/ }),
 
-/***/ 138:
+/***/ 137:
 /***/ (function(module, exports, __webpack_require__) {
 
 /*
@@ -6613,7 +6613,7 @@ function updateLink (link, options, obj) {
 
 /***/ }),
 
-/***/ 139:
+/***/ 138:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -7933,6 +7933,131 @@ var ɵPRE_STYLE = '!';
  */
 
 //# sourceMappingURL=animations.es5.js.map
+
+
+/***/ }),
+
+/***/ 139:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+const core_1 = __webpack_require__(2);
+const http_1 = __webpack_require__(28);
+__webpack_require__(61);
+const error_parser_1 = __webpack_require__(72);
+const authentication_service_1 = __webpack_require__(13);
+const set_message_service_1 = __webpack_require__(39);
+let ImageServices = class ImageServices {
+    constructor(message, http, activeUser) {
+        this.message = message;
+        this.http = http;
+        this.activeUser = activeUser;
+        this.errorParser = new error_parser_1.ErrorParser();
+        this.images = new Array();
+        this.imagesUpdated = false;
+        this.baseUrl = '/imagesDb';
+    }
+    getAll() {
+        if (!this.activeUser.isPermitted['to_view_images']) {
+            this.message.set({ status: 405, message: 'insufficient permissions' });
+        }
+        else {
+            return this.http.get(this.baseUrl, { observe: "response" })
+                .toPromise()
+                .then(res => {
+                this.images = res.body;
+                this.imagesUpdated = true;
+                return Promise.resolve('success');
+            })
+                .catch(this.errorParser.handleError)
+                .catch((error) => {
+                this.message.set(error);
+            });
+        }
+    }
+    getTabInfo() {
+        if (!this.activeUser.isPermitted['to_view_images']) {
+            this.message.set({ status: 405, message: 'insufficient permissions' });
+        }
+        else {
+            return this.http.get(this.baseUrl + '/tabs', { observe: "response" })
+                .toPromise()
+                .then(res => {
+                return Promise.resolve(res);
+            })
+                .catch(this.errorParser.handleError)
+                .catch((error) => {
+                this.message.set(error);
+            });
+        }
+    }
+    getOne() {
+        if (!this.activeUser.isPermitted['to_view_images']) {
+            this.message.set({ status: 405, message: 'insufficient permissions' });
+        }
+        return Promise.reject({ status: '', message: 'method not yet defined' })
+            .catch((result) => {
+            this.message.set(result);
+        });
+    }
+    getLatest() {
+        if (!this.activeUser.isPermitted['to_view_images']) {
+            this.message.set({ status: 405, message: 'insufficient permissions' });
+        }
+        return Promise.reject({ status: '', message: 'method not yet defined' })
+            .catch((result) => {
+            this.message.set(result);
+        });
+    }
+    getList() {
+        if (!this.activeUser.isPermitted['to_view_images']) {
+            this.message.set({ status: 405, message: 'insufficient permissions' });
+        }
+        return Promise.reject({ status: '', message: 'method not yet defined' })
+            .catch((result) => {
+            this.message.set(result);
+        });
+    }
+    addRecord() {
+        if (!this.activeUser.isPermitted['to_add_images']) {
+            this.message.set({ status: 405, message: 'insufficient permissions' });
+        }
+        else {
+            return Promise.reject({ status: '', message: 'method not yet defined' });
+        }
+    }
+    deleteRecord() {
+        if (!this.activeUser.isPermitted['to_delete_images']) {
+            this.message.set({ status: 405, message: 'insufficient permissions' });
+        }
+        else {
+            return Promise.reject({ status: '', message: 'method not yet defined' });
+        }
+    }
+    editRecord() {
+        if (!this.activeUser.isPermitted['to_edit_images']) {
+            this.message.set({ status: 405, message: 'insufficient permissions' });
+        }
+        else {
+            return Promise.reject({ status: '', message: 'method not yet defined' });
+        }
+    }
+};
+ImageServices = __decorate([
+    core_1.Injectable(),
+    __metadata("design:paramtypes", [set_message_service_1.SetMessageService, http_1.HttpClient, authentication_service_1.AuthenticationService])
+], ImageServices);
+exports.ImageServices = ImageServices;
 
 
 /***/ }),
@@ -18898,7 +19023,7 @@ const service_model_manager_service_1 = __webpack_require__(29);
 const permission_services_1 = __webpack_require__(47);
 const account_services_1 = __webpack_require__(54);
 const user_services_1 = __webpack_require__(62);
-const image_services_1 = __webpack_require__(84);
+const image_services_1 = __webpack_require__(139);
 let SidebarCtaModule = class SidebarCtaModule {
 };
 SidebarCtaModule = __decorate([
@@ -18941,11 +19066,11 @@ const core_1 = __webpack_require__(2);
 const common_1 = __webpack_require__(25);
 const form_submission_component_1 = __webpack_require__(712);
 const service_model_manager_service_1 = __webpack_require__(29);
-const image_services_1 = __webpack_require__(84);
+const image_services_1 = __webpack_require__(139);
 const user_services_1 = __webpack_require__(62);
 const account_services_1 = __webpack_require__(54);
 const permission_services_1 = __webpack_require__(47);
-const forms_1 = __webpack_require__(103);
+const forms_1 = __webpack_require__(102);
 let FormSubmissionModule = class FormSubmissionModule {
 };
 FormSubmissionModule = __decorate([
@@ -19184,17 +19309,13 @@ const core_1 = __webpack_require__(2);
 const authentication_service_1 = __webpack_require__(13);
 const set_message_service_1 = __webpack_require__(39);
 const service_model_manager_service_1 = __webpack_require__(29);
-const image_services_1 = __webpack_require__(84);
 let UserDomainComponent = class UserDomainComponent {
-    constructor(activeUser, setMessage, formManager, images) {
+    constructor(activeUser, setMessage, formManager) {
         this.activeUser = activeUser;
         this.setMessage = setMessage;
         this.formManager = formManager;
-        this.images = images;
     }
-    ngOnInit() {
-        this.images.getAll();
-    }
+    ngOnInit() { }
     ngDoCheck() {
         if (this.formManager.getService()) {
             this.recordModel = this.formManager.getRecordModel();
@@ -19214,8 +19335,7 @@ UserDomainComponent = __decorate([
     }),
     __metadata("design:paramtypes", [authentication_service_1.AuthenticationService,
         set_message_service_1.SetMessageService,
-        service_model_manager_service_1.ServiceModelManagerService,
-        image_services_1.ImageServices])
+        service_model_manager_service_1.ServiceModelManagerService])
 ], UserDomainComponent);
 exports.UserDomainComponent = UserDomainComponent;
 
@@ -19259,11 +19379,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵf", function() { return XSRF_HEADER_NAME; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_tslib__ = __webpack_require__(33);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_observable_of__ = __webpack_require__(129);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_observable_of__ = __webpack_require__(128);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_observable_of___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs_observable_of__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_operator_concatMap__ = __webpack_require__(130);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_operator_concatMap__ = __webpack_require__(129);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_operator_concatMap___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_rxjs_operator_concatMap__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_operator_filter__ = __webpack_require__(99);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_operator_filter__ = __webpack_require__(98);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_operator_filter___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_rxjs_operator_filter__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_rxjs_operator_map__ = __webpack_require__(71);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_rxjs_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_rxjs_operator_map__);
@@ -21967,7 +22087,7 @@ var transform;
 var options = {}
 options.transform = transform
 // add the styles to the DOM
-var update = __webpack_require__(138)(content, options);
+var update = __webpack_require__(137)(content, options);
 if(content.locals) module.exports = content.locals;
 // Hot Module Replacement
 if(false) {
@@ -24656,7 +24776,7 @@ const core_1 = __webpack_require__(2);
 const http_1 = __webpack_require__(28);
 const app_component_1 = __webpack_require__(677);
 const platform_browser_1 = __webpack_require__(60);
-const forms_1 = __webpack_require__(103);
+const forms_1 = __webpack_require__(102);
 const http_2 = __webpack_require__(182);
 const common_1 = __webpack_require__(25);
 const app_routing_1 = __webpack_require__(680);
@@ -24989,11 +25109,10 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 const core_1 = __webpack_require__(2);
 const common_1 = __webpack_require__(25);
 const private_routing_module_1 = __webpack_require__(689);
-const image_services_1 = __webpack_require__(84);
 const mongoImage_services_1 = __webpack_require__(215);
 const http_interceptors_1 = __webpack_require__(690);
 const user_services_1 = __webpack_require__(62);
-const forms_1 = __webpack_require__(103);
+const forms_1 = __webpack_require__(102);
 const account_services_1 = __webpack_require__(54);
 const permission_services_1 = __webpack_require__(47);
 const set_message_service_1 = __webpack_require__(39);
@@ -25017,7 +25136,6 @@ PrivateModule = __decorate([
             permission_services_1.PermissionServices,
             account_services_1.AccountServices,
             user_services_1.UserServices,
-            image_services_1.ImageServices,
             mongoImage_services_1.MongoImageServices,
             set_message_service_1.SetMessageService,
             service_model_manager_service_1.ServiceModelManagerService,
@@ -25131,7 +25249,7 @@ const admin_domain_component_1 = __webpack_require__(218);
 const users_component_1 = __webpack_require__(216);
 const accounts_component_1 = __webpack_require__(219);
 const permissions_component_1 = __webpack_require__(220);
-const forms_1 = __webpack_require__(103);
+const forms_1 = __webpack_require__(102);
 const uuid_transform_1 = __webpack_require__(703);
 const message_bar_module_1 = __webpack_require__(221);
 const sidebar_cta_module_1 = __webpack_require__(222);
@@ -25396,7 +25514,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 const core_1 = __webpack_require__(2);
 const set_message_service_1 = __webpack_require__(39);
-const animations_1 = __webpack_require__(139);
+const animations_1 = __webpack_require__(138);
 const authentication_service_1 = __webpack_require__(13);
 let MessagebarComponent = class MessagebarComponent {
     constructor(messageService, activeUser) {
@@ -25490,7 +25608,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_tslib__ = __webpack_require__(33);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_platform_browser__ = __webpack_require__(60);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_animations__ = __webpack_require__(139);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_animations__ = __webpack_require__(138);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__angular_animations_browser__ = __webpack_require__(708);
 
 /**
@@ -26252,7 +26370,7 @@ NoopAnimationsModule.ctorParameters = function () { return []; };
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "g", function() { return supportsWebAnimations; });
 /* unused harmony export ɵWebAnimationsPlayer */
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_tslib__ = __webpack_require__(33);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_animations__ = __webpack_require__(139);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_animations__ = __webpack_require__(138);
 
 /**
  * @license Angular v4.3.6
@@ -31466,7 +31584,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 const core_1 = __webpack_require__(2);
-const image_services_1 = __webpack_require__(84);
+const image_services_1 = __webpack_require__(139);
 const user_services_1 = __webpack_require__(62);
 const account_services_1 = __webpack_require__(54);
 const permission_services_1 = __webpack_require__(47);
@@ -32293,7 +32411,7 @@ var transform;
 var options = {}
 options.transform = transform
 // add the styles to the DOM
-var update = __webpack_require__(138)(content, options);
+var update = __webpack_require__(137)(content, options);
 if(content.locals) module.exports = content.locals;
 // Hot Module Replacement
 if(false) {
@@ -32332,7 +32450,7 @@ var transform;
 var options = {}
 options.transform = transform
 // add the styles to the DOM
-var update = __webpack_require__(138)(content, options);
+var update = __webpack_require__(137)(content, options);
 if(content.locals) module.exports = content.locals;
 // Hot Module Replacement
 if(false) {
@@ -32456,132 +32574,7 @@ AuthenticationGuardService = __decorate([
 exports.AuthenticationGuardService = AuthenticationGuardService;
 
 
-/***/ }),
-
-/***/ 84:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-const core_1 = __webpack_require__(2);
-const http_1 = __webpack_require__(28);
-__webpack_require__(61);
-const error_parser_1 = __webpack_require__(72);
-const authentication_service_1 = __webpack_require__(13);
-const set_message_service_1 = __webpack_require__(39);
-let ImageServices = class ImageServices {
-    constructor(message, http, activeUser) {
-        this.message = message;
-        this.http = http;
-        this.activeUser = activeUser;
-        this.errorParser = new error_parser_1.ErrorParser();
-        this.images = new Array();
-        this.imagesUpdated = false;
-        this.baseUrl = '/imagesDb';
-    }
-    getAll() {
-        if (!this.activeUser.isPermitted['to_view_images']) {
-            this.message.set({ status: 405, message: 'insufficient permissions' });
-        }
-        else {
-            return this.http.get(this.baseUrl, { observe: "response" })
-                .toPromise()
-                .then(res => {
-                this.images = res.body;
-                this.imagesUpdated = true;
-                return Promise.resolve('success');
-            })
-                .catch(this.errorParser.handleError)
-                .catch((error) => {
-                this.message.set(error);
-            });
-        }
-    }
-    getTabInfo() {
-        if (!this.activeUser.isPermitted['to_view_images']) {
-            this.message.set({ status: 405, message: 'insufficient permissions' });
-        }
-        else {
-            return this.http.get(this.baseUrl + '/tabs', { observe: "response" })
-                .toPromise()
-                .then(res => {
-                return Promise.resolve(res);
-            })
-                .catch(this.errorParser.handleError)
-                .catch((error) => {
-                this.message.set(error);
-            });
-        }
-    }
-    getOne() {
-        if (!this.activeUser.isPermitted['to_view_images']) {
-            this.message.set({ status: 405, message: 'insufficient permissions' });
-        }
-        return Promise.reject({ status: '', message: 'method not yet defined' })
-            .catch((result) => {
-            this.message.set(result);
-        });
-    }
-    getLatest() {
-        if (!this.activeUser.isPermitted['to_view_images']) {
-            this.message.set({ status: 405, message: 'insufficient permissions' });
-        }
-        return Promise.reject({ status: '', message: 'method not yet defined' })
-            .catch((result) => {
-            this.message.set(result);
-        });
-    }
-    getList() {
-        if (!this.activeUser.isPermitted['to_view_images']) {
-            this.message.set({ status: 405, message: 'insufficient permissions' });
-        }
-        return Promise.reject({ status: '', message: 'method not yet defined' })
-            .catch((result) => {
-            this.message.set(result);
-        });
-    }
-    addRecord() {
-        if (!this.activeUser.isPermitted['to_add_images']) {
-            this.message.set({ status: 405, message: 'insufficient permissions' });
-        }
-        else {
-            return Promise.reject({ status: '', message: 'method not yet defined' });
-        }
-    }
-    deleteRecord() {
-        if (!this.activeUser.isPermitted['to_delete_images']) {
-            this.message.set({ status: 405, message: 'insufficient permissions' });
-        }
-        else {
-            return Promise.reject({ status: '', message: 'method not yet defined' });
-        }
-    }
-    editRecord() {
-        if (!this.activeUser.isPermitted['to_edit_images']) {
-            this.message.set({ status: 405, message: 'insufficient permissions' });
-        }
-        else {
-            return Promise.reject({ status: '', message: 'method not yet defined' });
-        }
-    }
-};
-ImageServices = __decorate([
-    core_1.Injectable(),
-    __metadata("design:paramtypes", [set_message_service_1.SetMessageService, http_1.HttpClient, authentication_service_1.AuthenticationService])
-], ImageServices);
-exports.ImageServices = ImageServices;
-
-
 /***/ })
 
 },[652]);
-//# sourceMappingURL=app.884c1c2e71c36c803f88.js.map
+//# sourceMappingURL=app.36b6d0658370a35df4bd.js.map

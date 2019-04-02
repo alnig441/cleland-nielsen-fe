@@ -5,7 +5,7 @@ import { AccountServices } from "../../../services/account.services";
 import { PermissionServices } from "../../../services/permission.services";
 import { ServiceModelManagerService } from "../../../services/service-model-manager.service";
 import { AuthenticationService } from "../../../services/authentication.service";
-import {SetMessageService} from "../../../services/set-message.service";
+import { SetMessageService } from "../../../services/set-message.service";
 
 @Component({
     selector: 'app-admin-domain',
