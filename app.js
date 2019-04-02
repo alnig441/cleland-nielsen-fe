@@ -11,7 +11,6 @@ require('./routes/authenticate/passport');
 /* pull in all app server routes */
 const authenticate = require('./routes/authenticate/authentication'),
     logout = require('./routes/logout'),
-    images = require('./routes/restricted/images'),
     accounts = require('./routes/restricted/accounts'),
     users = require('./routes/restricted/users'),
     permissions = require('./routes/restricted/permissions'),
@@ -29,8 +28,6 @@ app.use(express.static(__dirname + '/letsencrypt', { dotfiles: 'allow'}));
 /* routes setup */
 app.use('/login', authenticate);
 app.use('/logout', logout);
-app.use('/imagesDb', passport.authenticate('jwt', {session: false}), images);
-app.use('/imagesDb/latest', passport.authenticate('jwt', {session: false}), images);
 app.use('/accountsDb', passport.authenticate('jwt', {session: false}), accounts);
 app.use('/usersDb', passport.authenticate('jwt', {session: false}),users);
 app.use('/permissionsDb', passport.authenticate('jwt', {session: false}), permissions);
