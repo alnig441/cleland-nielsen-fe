@@ -215,6 +215,12 @@ app-images {
   // max-height: 900px;
 }
 
+@media screen and (min-height: 600px) {
+  .modal-image {
+    max-height: 580px;
+  }
+}
+
 @media screen and (min-height: 768px) {
   .modal-image {
     max-height: 748px;
