@@ -15,7 +15,7 @@
         "pretest": "npm run lint",
         "build": "rimraf dist && webpack --config config/webpack.prod.js --progress --profile --bail",
         "postinstall": "npm run build",
-        "deploy": "node --require dotenv/config deploy/test && node --require dotenv/config deploy/test2 && node --require dotenv/config deploy/test3",
+        "deploy": "node --require dotenv/config deploy/dbInit",
         "inspect": "node --inspect server"
     },
     "dependencies": {
