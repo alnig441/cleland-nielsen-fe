@@ -5,7 +5,6 @@ import { ServiceModelManagerService } from "../../services/service-model-manager
 import { PermissionServices } from "../../services/permission.services";
 import { AccountServices } from "../../services/account.services";
 import { UserServices } from "../../services/user.services";
-import { ImageServices } from "../../services/image.services";
 
 @NgModule({
     imports: [
@@ -22,7 +21,6 @@ import { ImageServices } from "../../services/image.services";
         PermissionServices,
         AccountServices,
         UserServices,
-        ImageServices,
     ]
 })
 

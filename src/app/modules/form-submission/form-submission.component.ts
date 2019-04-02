@@ -1,6 +1,4 @@
-import {
-    Component, OnInit, ViewEncapsulation, DoCheck
-} from "@angular/core";
+import { Component, OnInit, ViewEncapsulation, DoCheck } from "@angular/core";
 import { AuthenticationService } from "../../services/authentication.service";
 import { UserServices } from "../../services/user.services";
 import { AccountServices } from "../../services/account.services";
