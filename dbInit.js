@@ -26,7 +26,8 @@ client.query('CREATE TABLE images (' +
     'event_da text,' +
     'event_en text);')
     .then(() => {
-        console.log('images SUCCESS')
+        console.log('images SUCCESS');
+        client.end();
     })
     .catch(err => {
         console.log('error creating images table: ', err);
@@ -38,6 +39,7 @@ client.query('CREATE TABLE permissions (' +
     'permission_name character varying unique not null);')
     .then(() => {
         console.log('permissions SUCCESS');
+        client.end();
     })
     .catch(err => {
         console.log('error creating permissions table: ', err);
@@ -50,6 +52,7 @@ client.query('CREATE TABLE accounts (' +
     'account_permissions uuid[]);')
     .then(() => {
         console.log('accounts SUCCESS');
+        client.end();
     })
     .catch((err) => {
         console.log('error creating accounts table: ', err.error);
@@ -64,6 +67,7 @@ client.query('CREATE TABLE users (' +
     'language character varying);')
     .then(res => {
         console.log('users SUCCESS');
+        client.end();
     })
     .catch(err => {
         console.log('error creating users table: ', err);
@@ -93,6 +97,7 @@ client.query(`INSERT INTO permissions VALUES
 (uuid_generate_v4(), 'to_delete_permissions')`)
     .then(() => {
         console.log('permissions added');
+        client.end();
     })
     .catch(err => {
         console.log('adding permissions failed: ', err);
@@ -103,6 +108,7 @@ client.query(`INSERT INTO accounts VALUES
 (uuid_generate_v4(), 'administrator', (select array(select permission_id::uuid from permissions)))`)
     .then(() => {
         console.log('accounts added');
+        client.end();
     })
     .catch(err => {
         console.log('adding accounts failed: ', err);
@@ -131,5 +137,3 @@ bcrypt.hash('jacn2014', saltRounds)
         console.log('hash error: ', err);
         client.end();
     })
-
-
