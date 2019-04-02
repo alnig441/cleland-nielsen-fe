@@ -21,7 +21,7 @@ passport.use(new localStrategy({
     const client = new Client({
         connectionString: connectionString,
     })
-    client.connect()
+    client.connect();
 
     return client.query(`SELECT * FROM users as a INNER JOIN accounts as b ON a.account_type::uuid = b.account_id where a.user_name='${username}'`)
         .then(result => {
@@ -35,10 +35,12 @@ passport.use(new localStrategy({
                     else {
                         return cb({message: 'invalid password'})
                     }
+                    client.end();
                 })
         })
         .catch(err => {
             return cb({message: 'user name does not exist'})
+            client.end();
         })
 
 }));
@@ -59,13 +61,13 @@ passport.use(new JWTStrategy({
         return client.query(`SELECT * FROM users where user_id='${jwtPayload.sub}'`)
             .then(result => {
                 let user = result.rows;
-                return cb(null, user)
+                return cb(null, user);
+                client.end();
             })
             .catch(err => {
                 return cb (err);
+                client.end();
             })
 
-
-        client.end();
     }
 ));
