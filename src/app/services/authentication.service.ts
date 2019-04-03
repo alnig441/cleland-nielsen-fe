@@ -1,9 +1,10 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
+import "rxjs/add/operator/toPromise";
 import { Router } from "@angular/router";
 import { LoginModel } from "../models/login.model";
-import "rxjs/add/operator/toPromise";
 import { SetMessageService } from "./set-message.service";
+
 
 @Injectable()
 
@@ -24,24 +25,27 @@ export class AuthenticationService {
         private message: SetMessageService,
     ) {}
 
-    login(form: LoginModel) {
+    login(form: LoginModel): Promise<any> {
 
-        this.redirectUrl = "/private/user-domain"
+      this.redirectUrl = '/private/user-domain';
 
-        return this.http.post<any>('/login', form)
-            .map(activeUser => {
-
-                if(activeUser && activeUser.token){
-                    localStorage.setItem('token', activeUser.token);
-                    this.isLoggedIn = true;
-                    this.isAdmin = activeUser.userParameters.administrator ? true : false;
-                    this.language = activeUser.userParameters.language ? activeUser.userParameters.language : 'english';
-                }
-                this.setActivityTimer();
-                return activeUser;
-            })
-
+      return this.http.post('/login', form, { observe: "body"})
+        .toPromise()
+        .then(activeUser => {
+          if (activeUser && activeUser['token']) {
+            localStorage.setItem('token', activeUser['token']);
+            this.isLoggedIn = true;
+            this.isAdmin = activeUser['userParameters']['administrator'] ? true : false;
+            this.language = activeUser['userParameters']['language'] ? activeUser['userParameters']['language'] : 'english' ;
+          }
+          this.setActivityTimer();
+          return activeUser;
+        })
+        .catch((error) => {
+          throw error;
+        })
     }
+
 
     setActivityTimer(): void {
         this.activityTimer = 0;

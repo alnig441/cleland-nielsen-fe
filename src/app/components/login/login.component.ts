@@ -19,6 +19,7 @@ export class LoginComponent implements OnInit {
 
     errorParser = new ErrorParser();
     loginModel = new LoginModel('', '');
+    message: string;
 
     constructor(
         private http: HttpClient,
@@ -32,33 +33,36 @@ export class LoginComponent implements OnInit {
 
     onSubmit(): void {
 
-        this.authenticator.login(this.loginModel).subscribe((user : any) => {
+      this.authenticator.login(this.loginModel)
+        .then((user: any) => {
+          if(this.authenticator.isLoggedIn) {
 
-            if(this.authenticator.isLoggedIn) {
+            $('#loginModal').modal('hide');
 
-                $('#loginModal').modal('hide');
+            this.http.get('/permissionsDb', {observe: "response"})
+              .toPromise()
+              .then((result: any) => {
+                  user.userParameters.permissions.forEach((uuid: string) => {
+                      result.body.find((permit: any) => {
+                          return permit.permission_id === uuid ? this.authenticator.isPermitted[permit.permission_name] = true: null;
+                      })
+                  })
+              })
+              .then(() => {
+                  let navigationExtras : NavigationExtras = {
+                      queryParamsHandling: 'preserve',
+                      preserveFragment: true
+                  };
 
-                this.http.get('/permissionsDb', {observe: "response"})
-                    .toPromise()
-                    .then((result: any) => {
-                        user.userParameters.permissions.forEach((uuid: string) => {
-                            result.body.find((permit: any) => {
-                                return permit.permission_id === uuid ? this.authenticator.isPermitted[permit.permission_name] = true: null;
-                            })
-                        })
-                    })
-                    .then(() => {
-                        let navigationExtras : NavigationExtras = {
-                            queryParamsHandling: 'preserve',
-                            preserveFragment: true
-                        };
-
-                        this.router.navigate([this.authenticator.redirectUrl],navigationExtras);
-                    })
-                    .catch(this.errorParser.handleError)
-                    .catch(error => console.log(error));
-            }
-
+                  this.router.navigate([this.authenticator.redirectUrl],navigationExtras);
+              })
+              .catch(this.errorParser.handleError)
+              .catch(error => console.log(error));
+          }
+        })
+        .catch(this.errorParser.handleError)
+        .catch((error: any) => {
+          this.message = error.message;
         })
 
     }
