@@ -63,6 +63,10 @@ export class LoginComponent implements OnInit {
         .catch(this.errorParser.handleError)
         .catch((error: any) => {
           this.message = error.message;
+          let x = setTimeout(() => {
+            this.message = undefined;
+            clearTimeout(x);
+          },2500)
         })
 
     }
