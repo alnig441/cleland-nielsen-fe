@@ -7880,8 +7880,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 const core_1 = __webpack_require__(2);
 const http_1 = __webpack_require__(33);
-const router_1 = __webpack_require__(20);
 __webpack_require__(71);
+const router_1 = __webpack_require__(20);
 const set_message_service_1 = __webpack_require__(46);
 let AuthenticationService = class AuthenticationService {
     constructor(http, router, message) {
@@ -7893,17 +7893,21 @@ let AuthenticationService = class AuthenticationService {
         this.isPermitted = {};
     }
     login(form) {
-        this.redirectUrl = "/private/user-domain";
-        return this.http.post('/login', form)
-            .map(activeUser => {
-            if (activeUser && activeUser.token) {
-                localStorage.setItem('token', activeUser.token);
+        this.redirectUrl = '/private/user-domain';
+        return this.http.post('/login', form, { observe: "body" })
+            .toPromise()
+            .then(activeUser => {
+            if (activeUser && activeUser['token']) {
+                localStorage.setItem('token', activeUser['token']);
                 this.isLoggedIn = true;
-                this.isAdmin = activeUser.userParameters.administrator ? true : false;
-                this.language = activeUser.userParameters.language ? activeUser.userParameters.language : 'english';
+                this.isAdmin = activeUser['userParameters']['administrator'] ? true : false;
+                this.language = activeUser['userParameters']['language'] ? activeUser['userParameters']['language'] : 'english';
             }
             this.setActivityTimer();
             return activeUser;
+        })
+            .catch((error) => {
+            throw error;
         });
     }
     setActivityTimer() {
@@ -32072,7 +32076,8 @@ let LoginComponent = class LoginComponent {
     ngOnInit() {
     }
     onSubmit() {
-        this.authenticator.login(this.loginModel).subscribe((user) => {
+        this.authenticator.login(this.loginModel)
+            .then((user) => {
             if (this.authenticator.isLoggedIn) {
                 $('#loginModal').modal('hide');
                 this.http.get('/permissionsDb', { observe: "response" })
@@ -32094,6 +32099,14 @@ let LoginComponent = class LoginComponent {
                     .catch(this.errorParser.handleError)
                     .catch(error => console.log(error));
             }
+        })
+            .catch(this.errorParser.handleError)
+            .catch((error) => {
+            this.message = error.message;
+            let x = setTimeout(() => {
+                this.message = undefined;
+                clearTimeout(x);
+            }, 2500);
         });
     }
     onCancel() {
@@ -32138,7 +32151,7 @@ exports.LoginModel = LoginModel;
 /***/ 730:
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"modal fade\" id=\"loginModal\" tabindex=\"-1\" role=\"dialog\"><div class=\"modal-dialog modal-sm\" role=\"document\"><div class=\"modal-content\"><form (ngSubmit)=\"onSubmit()\" #loginForm=\"ngForm\"><div class=\"modal-header\"><h4>Login Dialog</h4></div><div class=\"modal-body\"><div class=\"form-group\"><div class=\"input-group\"><span class=\"input-group-addon\">Username</span><input class=\"form-control\" type=\"email\" id=\"userName\" placeholder=\"Enter User Name\" required [(ngModel)]=\"loginModel.username\" name=\"username\" #username=\"ngModel\"></div></div><div class=\"alert alert-danger\" [hidden]=\"username.valid || username.pristine\">User ID Required</div><div class=\"form-group\"><div class=\"input-group\"><span class=\"input-group-addon\">Password</span><input class=\"form-control\" type=\"password\" id=\"password\" placeholder=\"Password\" required [(ngModel)]=\"loginModel.password\" name=\"password\" #password=\"ngModel\"></div></div><div class=\"alert alert-danger\" [hidden]=\"password.valid || password.pristine\">Password Required</div></div><div class=\"modal-footer\"><button class=\"btn btn-secondary\" type=\"button\" data-dismiss=\"modal\" (click)=\"onCancel()\">Cancel</button><button class=\"btn btn-primary\" type=\"submit\">Login</button></div></form></div></div></div>"
+module.exports = "<div class=\"modal fade\" id=\"loginModal\" tabindex=\"-1\" role=\"dialog\"><div class=\"modal-dialog modal-sm\" role=\"document\"><div class=\"modal-content\"><form (ngSubmit)=\"onSubmit()\" #loginForm=\"ngForm\"><div class=\"modal-header\"><h4>Login Dialog</h4><div class=\"alert alert-warning\" [hidden]=\"!this.message\">{{ this.message }}</div></div><div class=\"modal-body\"><div class=\"form-group\"><div class=\"input-group\"><span class=\"input-group-addon\">Username</span><input class=\"form-control\" type=\"email\" id=\"userName\" placeholder=\"Enter User Name\" required [(ngModel)]=\"loginModel.username\" name=\"username\" #username=\"ngModel\"></div></div><div class=\"alert alert-danger\" [hidden]=\"username.valid || username.pristine\">User ID Required</div><div class=\"form-group\"><div class=\"input-group\"><span class=\"input-group-addon\">Password</span><input class=\"form-control\" type=\"password\" id=\"password\" placeholder=\"Password\" required [(ngModel)]=\"loginModel.password\" name=\"password\" #password=\"ngModel\"></div></div><div class=\"alert alert-danger\" [hidden]=\"password.valid || password.pristine\">Password Required</div></div><div class=\"modal-footer\"><button class=\"btn btn-secondary\" type=\"button\" data-dismiss=\"modal\" (click)=\"onCancel()\">Cancel</button><button class=\"btn btn-primary\" type=\"submit\">Login</button></div></form></div></div></div>"
 
 /***/ }),
 
@@ -32445,4 +32458,4 @@ exports.ErrorParser = ErrorParser;
 /***/ })
 
 },[651]);
-//# sourceMappingURL=app.e5e1f7be88abbffeb580.js.map
+//# sourceMappingURL=app.3bb9ae9beae37d6a6a72.js.map
