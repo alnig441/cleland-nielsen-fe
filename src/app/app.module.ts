@@ -15,6 +15,7 @@ import { GlobalnavComponent } from "./components/globalnav/globalnav.component";
 import { AppLoadModule } from "./load/app-load.module";
 import { AuthenticationService } from "./services/authentication.service";
 
+import { MenuTransform } from "./pipes/menu.transform";
 
 @NgModule({
     imports: [
@@ -32,6 +33,10 @@ import { AuthenticationService } from "./services/authentication.service";
         AppComponent,
         GlobalnavComponent,
         LoginComponent,
+        MenuTransform
+    ],
+    exports: [
+      MenuTransform
     ],
     providers: [
         AuthenticationService
