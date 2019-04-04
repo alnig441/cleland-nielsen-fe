@@ -20,7 +20,7 @@ export class BtnTransform implements PipeTransform {
               button = button.language.toLowerCase() == 'english' ? 'print' : 'udskriv';
               return button;
             default:
-              return button;
+              return button.name;
           }
         } else {
           return button;
