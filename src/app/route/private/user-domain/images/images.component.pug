@@ -27,7 +27,7 @@ span(*ngIf="!this.mongoImageService.message.failure")
                         table
                             tr
                                 td
-                                    p {{document.date.day}}&nbsp;{{ { name: document.date.month, language: this.activeUser.language } | monthTransform}}
+                                    p {{ {name: document.date.day, language: this.activeUser.language } | dayTransform }}&nbsp;{{ { name: document.date.month, language: this.activeUser.language } | monthTransform}}
                                 td
                                     p((mouseenter)="this.setImageInfo(j)", (mouseleave)="this.setImageInfo()")
                                         span(class="glyphicon glyphicon-info-sign" aria-hidden="true")

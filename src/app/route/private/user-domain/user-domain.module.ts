@@ -15,6 +15,7 @@ import { ValueTransform } from "../../../pipes/value.transform";
 import { ModalImageDirective } from "../../../directives/modalImage.directive";
 import { ExtTransform } from "../../../pipes/ext.transform";
 import { BtnTransform } from "../../../pipes/btn.transform";
+import { DayTransform } from "../../../pipes/day.transform";
 
 @NgModule({
     imports: [
@@ -33,10 +34,11 @@ import { BtnTransform } from "../../../pipes/btn.transform";
         ValueTransform,
         ExtTransform,
         BtnTransform,
+        DayTransform,
         ModalImageDirective,
         InfoboxDirective
     ],
-    exports: [ MonthTransform, KeyTransform, ValueTransform, ExtTransform ],
+    exports: [ MonthTransform, KeyTransform, ValueTransform, ExtTransform, BtnTransform, DayTransform ],
     providers: [ AuthenticationGuardService ]
 })
 
