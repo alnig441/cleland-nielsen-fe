@@ -40,8 +40,20 @@ div(class='modal fade editor-modal' tabindex='-1' role='dialog' aria-labelledby=
   div(class='modal-dialog')
     div(class='modal-content')
       div(class='modal-header')
+        h4(class='modal-title') asset editor
       div(class='modal-body')
-      div(class='modal-footer')
+        div(class='row')
+          div(class='col-md-6')
+            div(*ngFor='let document of this.documents as documents' class='input-group')
+              span(class='input-group-addon')
+                input(type='checkbox' aria-label='filename' value='{{ document._id }}')
+              p(class='form-control') {{ document.image.fileName }}
+          div(class='col-md-6')
+            form
+              div(class='form-group')
+                label(for='test') test
+                input(type='text' class='form-control' id='test' placeholder='test')
+              button(type='submit' class='btn btn-default') submit
 
 div(class='modal fade assetviewer-modal' tabindex='1' role='dialog' aria-labelledby='assetviewerModal')
   div(class='modal-image-container')
