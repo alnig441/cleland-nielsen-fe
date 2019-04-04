@@ -1,7 +1,7 @@
 span(*ngIf="!this.mongoImageService.message.failure")
     div
         div(*ngFor='let month of this.months as months; index as i' class='month {{month | monthTransform}}', [ngClass]="{'active': month == this.albumViewSelector.month}")
-            a(*ngIf="month != null", (click)='setAlbumView(month)') {{month | monthTransform}}
+            a(*ngIf="month != null", (click)='setAlbumView(month)') {{ { name: month, language: this.activeUser.language } | monthTransform }}
         div(class='reel-container {{ year }}')
             ul(class='year')
                 li(*ngFor='let year of this.years as years; index as m', [ngClass]="{'active': year == this.albumViewSelector.year}")
@@ -27,7 +27,7 @@ span(*ngIf="!this.mongoImageService.message.failure")
                         table
                             tr
                                 td
-                                    p {{document.date.day}}&nbsp;{{document.date.month | monthTransform}}
+                                    p {{document.date.day}}&nbsp;{{ { name: document.date.month, language: this.activeUser.language } | monthTransform}}
                                 td
                                     p((mouseenter)="this.setImageInfo(j)", (mouseleave)="this.setImageInfo()")
                                         span(class="glyphicon glyphicon-info-sign" aria-hidden="true")
