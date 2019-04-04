@@ -15,8 +15,10 @@ div
                         a(*ngIf="this.activeUser.isPermitted[link.permission]", routerLink="{{link.name}}" routerLinkActive="active") {{link.name}}
                             span(class="sr-only" current)
                     li(*ngIf="!this.activeUser.isLoggedIn" class="")
-                        a(*ngIf="!link.permission", routerLink="{{link.name}}" routerLinkActive="active") {{link.name}}
+                        a(*ngIf="!link.permission", routerLink="{{link.name}}" routerLinkActive="active") {{link.name}} 
                 ul(class="nav navbar-nav navbar-right")
-                    li
-                        p(*ngIf='!this.activeUser.isLoggedIn', type='button' data-target="#loginModal", class="btn btn-info" data-toggle="modal") Login
-                        p(*ngIf='this.activeUser.isLoggedIn', class="btn btn-warning",  (click)='logout()') Logout
+                    li  
+                      p(*ngIf='!this.activeUser.isLoggedIn' data-target="#loginModal", class='btn btn-info', data-toggle="modal", type="button")
+                        span(class='glyphicon glyphicon-log-in', aria-hidden='true')
+                      p(*ngIf='this.activeUser.isLoggedIn', class="btn btn-warning",  (click)='logout()')
+                        span(class="glyphicon glyphicon-log-out", aria-hidden="true")
