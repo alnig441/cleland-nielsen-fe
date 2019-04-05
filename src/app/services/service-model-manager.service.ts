@@ -62,7 +62,7 @@ export class ServiceModelManagerService {
                 this.recordModel = new PermissionModel('uuid_generate_v4()');
                 break;
             case 'images':
-                this.recordModel = new ImageModel();
+                this.recordModel = new MongoImageModel();
                 break;
             default:
                 this.recordModel = '';

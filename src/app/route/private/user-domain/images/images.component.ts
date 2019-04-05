@@ -34,6 +34,8 @@ export class ImagesComponent implements OnInit, DoCheck {
     ){}
 
     ngOnInit(): void {
+      this.formManager.setService(this.activatedRoute.snapshot.url[0].path);
+
       this.currentPage = 1;
 
       this.mongoImageService.generateTabs()
