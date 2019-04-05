@@ -10,6 +10,12 @@ app-images {
   margin-right: 2px;
 }
 
+#image-editor .row {
+  border-radius: 10px;
+  border: 1px solid lightgray;
+  background: whitesmoke;
+}
+
 #image-editor .input-group-addon {
   width:auto;
 }

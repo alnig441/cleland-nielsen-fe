@@ -43,18 +43,18 @@ span(*ngIf="!this.mongoImageService.message.failure")
 div(*imageEditor='this.editImages' id='image-editor')
   div(class='row')
     div(*ngFor='let document of this.editImages as documents; index as i' class='col-md-6')
-      label(for='{{ i }}') select image
+      label(for='{{ i }}') image# {{ i + 1 }}
       div()
         span(class='input-group-addon')
           input(id='{{ i }}' type='checkbox' aria-label='fileId' value='{{ document._id }}')
-        p(class='form-control') image# {{ i }}
+        p(class='form-control') {{ document.image.fileName }}
     div(class='col-md-6')
       span(*ngFor='let property of this.editImages.form as properties')
         div(*ngIf='property == "names" || property == "keywords" || property == "venue" || property == "occasion" || property =="en" || property == "da"' class='form-group')
           label(for='{{ property }}') {{ property }}
           input(id='{{ property }}' type='text' class='form-control' placeholder='{{ property }}')
-  button((click)='this.clearEditor()' type='submit') cancel
-  button(type='submit') submit
+    button((click)='this.clearEditor()' type='submit') cancel
+    button(type='submit') submit
 
 div(class='modal fade editor-modal' tabindex='-1' role='dialog' aria-labelledby='editorModal')
   div(class='modal-dialog')
