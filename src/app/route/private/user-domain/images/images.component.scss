@@ -10,6 +10,14 @@ app-images {
   margin-right: 2px;
 }
 
+#image-editor .input-group-addon {
+  width:auto;
+}
+
+#image-editor .form-control {
+  display: table-cell;
+}
+
 .editor-modal ul {
   list-style: none;
   text-align: left;

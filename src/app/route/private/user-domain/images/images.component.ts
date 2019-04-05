@@ -25,6 +25,7 @@ export class ImagesComponent implements OnInit, DoCheck {
     private pages: number;
     private total: number;
     private documents: any[] = new Array();
+    private editImages: any[];
 
     constructor(
         private formManager: ServiceModelManagerService,
@@ -115,6 +116,15 @@ export class ImagesComponent implements OnInit, DoCheck {
 
     setImageInfo(index?: any) : void {
       index || index == 0 ? this.showImageInformation[index] = this.documents[index] : this.showImageInformation = new Array();
+    }
+
+    openEditor() : void {
+      this.editImages = this.documents;
+    }
+
+    clearEditor() : void {
+      console.log('clear editor')
+      this.editImages = new Array();
     }
 
     openModal(imageId: any):void {
