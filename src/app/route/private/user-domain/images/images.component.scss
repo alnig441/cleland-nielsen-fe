@@ -3,12 +3,11 @@ app-images {
   text-align: right;
 }
 
-.edit-button {
-  position: fixed;
-  top: 80px;
-  background: transparent;
-  transform: rotateY(180deg);
-  border: none;
+.image-menu .btn {
+  position: relative;
+  bottom: 5px;
+  float: left;
+  margin-right: 2px;
 }
 
 .editor-modal ul {
