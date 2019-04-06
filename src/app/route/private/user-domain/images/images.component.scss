@@ -10,10 +10,17 @@ app-images {
   margin-right: 2px;
 }
 
+#image-editor {
+  border: darkgray;
+  position: fixed;
+  top: 250px;
+  left: 150px;
+  width: 500px;
+}
+
 #image-editor .row {
   border-radius: 10px;
-  border: 1px solid lightgray;
-  background: whitesmoke;
+  border: 1px solid darkgray;
 }
 
 #image-editor .input-group-addon {
@@ -21,7 +28,24 @@ app-images {
 }
 
 #image-editor .form-control {
+  border: 1px solid darkgray;
   display: table-cell;
+}
+
+#image-editor .buttons {
+  margin: 0 0 15px;
+  padding: 0 15px;
+}
+
+#image-editor .background {
+  position: absolute;
+  top: 0;
+  width: 530px;
+  height: 100%;
+  padding: 0 15px;
+  background: black;
+  opacity: 0.3;
+  z-index: -1;
 }
 
 .editor-modal ul {
