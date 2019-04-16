@@ -127,26 +127,6 @@ export class ImagesComponent implements OnInit, DoCheck {
       this.editImages = new Array();
     }
 
-    moveEditor(event: any): void {
-      let elmnt = document.getElementById('image-editor');
-      // console.log('moving editor...', elmnt);
-
-      dragElement(elmnt);
-
-      function dragElement(elmnt: any) {
-        let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
-        elmnt.onmousedown = dragMouseDown;
-      }
-
-      function dragMouseDown(e: any) {
-        e = e || window.event;
-        e.preventDefault();
-
-        console.log('e? ', e);
-      }
-
-    }
-
     openModal(imageId: any):void {
         this.documents.forEach((document, index) => {
             if(document['_id'] == imageId){
