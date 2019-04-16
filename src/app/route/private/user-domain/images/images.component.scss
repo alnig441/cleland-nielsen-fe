@@ -10,6 +10,14 @@ app-images {
   margin-right: 2px;
 }
 
+#drag-area {
+  text-align: center;
+}
+
+#drag-area:hover {
+  cursor: move;
+}
+
 #image-editor {
   border: darkgray;
   position: fixed;

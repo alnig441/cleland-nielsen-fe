@@ -40,8 +40,10 @@ span(*ngIf="!this.mongoImageService.message.failure")
                                   p {{(j + 1) + ((this.currentPage - 1) * 6)}} of {{this.total}}
                                   
                                   
-div(*imageEditor='this.editImages' id='image-editor',onmousedown, onmouseup, onmousemove)
-  div(class='row' draggable='true')
+div(*imageEditor='this.editImages' id='image-editor')
+  div(class='row')
+    div(class='col-md-12' id="drag-area" onmousedown onmousemove onmouseup)
+      span(class="glyphicon glyphicon-transfer")
     div(*ngFor='let document of this.editImages as documents; index as i' class='col-md-6')
       label(for='{{ i }}') image# {{ i + 1 }}
       div(class='image-list')
