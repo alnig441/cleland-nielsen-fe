@@ -1,9 +1,9 @@
 span(*ngIf="!this.mongoImageService.message.failure")
-    div
+    div()
       div(class='image-menu')
-        p((click)='this.openEditor()' type='button' class='btn btn-info btn-xs')
+        p(type='button' class='btn btn-info btn-xs')
           span(class='glyphicon glyphicon-search' aria-hidden='true')
-        p(*ngIf='this.activeUser.isAdmin' type='button' data-toggle='modal' class='btn btn-info btn-xs' data-target='.editor-modal')
+        p(*ngIf='this.activeUser.isAdmin', (click)='this.openEditor()' type='button' class='btn btn-info btn-xs')
           span(class='glyphicon glyphicon-pencil' aria-hidden='true')
       div(*ngFor='let month of this.months as months; index as i' class='month {{month | monthTransform}}', [ngClass]="{'active': month == this.albumViewSelector.month}")
           a(*ngIf="month != null", (click)='setAlbumView(month)') {{ { name: month, language: this.activeUser.language } | monthTransform }}
@@ -40,8 +40,8 @@ span(*ngIf="!this.mongoImageService.message.failure")
                                   p {{(j + 1) + ((this.currentPage - 1) * 6)}} of {{this.total}}
                                   
                                   
-div(*imageEditor='this.editImages' id='image-editor')
-  div(class='row')
+div(*imageEditor='this.editImages' id='image-editor',onmousedown, onmouseup, onmousemove)
+  div(class='row' draggable='true')
     div(*ngFor='let document of this.editImages as documents; index as i' class='col-md-6')
       label(for='{{ i }}') image# {{ i + 1 }}
       div(class='image-list')
@@ -54,30 +54,10 @@ div(*imageEditor='this.editImages' id='image-editor')
           label(for='{{ property }}') {{ property }}
           input(id='{{ property }}' type='text' class='form-control' placeholder='{{ property }}')
     div(class='buttons')
-      button((click)='this.clearEditor()' type='submit') cancel
-      button(type='submit') submit
+      p((click)='this.clearEditor()' type='button' class='btn btn-warning') cancel
+      p(type='button' class='btn btn-info') submit
   div(class='row background')
 
-div(class='modal fade editor-modal' tabindex='-1' role='dialog' aria-labelledby='editorModal')
-  div(class='modal-dialog')
-    div(class='modal-content')
-      div(class='modal-header')
-        h4(class='modal-title') asset editor
-      div(class='modal-body')
-        div(class='row')
-          div(class='col-md-6')
-            form
-              div(*ngFor='let document of this.documents as documents' class='input-group')
-                span(class='input-group-addon')
-                  input(type='checkbox' aria-label='filename' value='{{ document._id }}')
-                p(class='form-control') {{ document.image.fileName }}
-          div(class='col-md-6')
-            form
-              div(*ngFor="let property of this.formManager.getProperties() as properties" class='form-group')
-                span(*ngIf="property == 'names' || property == 'keywords' || property == 'occasion' || property =='venue' || property == 'en' || property == 'da'")
-                  span(class="input-group-addon" id="basic-addon3") {{ property }}
-                  input(type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3")
-              button(type='submit' class='btn btn-default') submit
 
 div(class='modal fade assetviewer-modal' tabindex='1' role='dialog' aria-labelledby='assetviewerModal')
   div(class='modal-image-container')
