@@ -6,18 +6,27 @@ export class BtnTransform implements PipeTransform {
 
     transform(button?: any) {
         if(button){
-          switch(button.name.toLowerCase()) {
+          let name = button.name.toLowerCase();
+          let language = button.language.toLowerCase();
+
+          switch(name) {
             case 'fwd':
-              button = button.language.toLowerCase() == 'english' ? 'next' : 'frem';
+              button = language == 'english' ? 'next' : 'frem';
               return button;
             case 'rwd':
-              button = button.language.toLowerCase() == 'english' ? 'previous' : 'tilbage';
+              button = language == 'english' ? 'previous' : 'tilbage';
               return button;
             case 'close':
-              button = button.language.toLowerCase() == 'english' ? 'close' : 'luk';
+              button = language == 'english' ? name : 'luk';
               return button;
             case 'print':
-              button = button.language.toLowerCase() == 'english' ? 'print' : 'udskriv';
+              button = language == 'english' ? name : 'udskriv';
+              return button;
+            case 'cancel':
+              button = language == 'english' ? name : 'afslut';
+              return button;
+            case 'submit':
+              button = language == 'english' ? name : 'udfør';
               return button;
             default:
               return button.name;
