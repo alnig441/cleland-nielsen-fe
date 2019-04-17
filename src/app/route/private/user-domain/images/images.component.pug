@@ -42,22 +42,24 @@ span(*ngIf="!this.mongoImageService.message.failure")
                                   
 div(*imageEditor='this.editImages' id='image-editor')
   div(class='row')
-    div(class='col-md-12' id="drag-area" onmousedown onmousemove onmouseup)
-      span(class="glyphicon glyphicon-transfer")
-    div(*ngFor='let document of this.editImages as documents; index as i' class='col-md-6')
-      label(for='{{ i }}') image# {{ i + 1 }}
-      div(class='image-list')
-        span(class='input-group-addon')
-          input(id='{{ i }}' type='checkbox' aria-label='fileId' value='{{ document._id }}')
-        p(class='form-control') {{ document.image.fileName }}
-    div(class='col-md-6')
-      span(*ngFor='let property of this.editImages.form as properties')
-        div(*ngIf='property == "names" || property == "keywords" || property == "venue" || property == "occasion" || property =="en" || property == "da"' class='form-group')
-          label(for='{{ property }}') {{ property }}
-          input(id='{{ property }}' type='text' class='form-control' placeholder='{{ property }}')
-    div(class='buttons')
-      p((click)='this.clearEditor()' type='button' class='btn btn-warning') cancel
-      p(type='button' class='btn btn-info') submit
+    form(#imageEditorForm='ngForm')
+      div(class='col-md-12' id="drag-area" onmousedown onmousemove onmouseup)
+        span(class="glyphicon glyphicon-transfer")
+      div(class='col-md-6')
+        span(*ngFor='let document of this.editImages as documents; index as i')
+          label(for='{{ i }}') image# {{ i + 1 }}
+          div(class='image-list')
+            span(class='input-group-addon')
+              input(class='checkbox' id='{{ i }}' type='checkbox' aria-label='fileId' value='{{ document._id }}',[(ngModel)]='imageList[i]', name='document.image.fileName')
+            p(class='form-control') {{ document.image.fileName }}
+      div(class='col-md-6')
+        span(*ngFor='let property of this.editImages.form as properties')
+          div(*ngIf='property == "names" || property == "keywords" || property == "venue" || property == "occasion" || property =="en" || property == "da"')
+            label(for='{{ property }}') {{ property }}
+            input(id='{{ property }}' type='text' class='form-control' placeholder='{{ property }}', [(ngModel)]='imageModel[property]', name='{{property}}')
+      div(class='buttons')
+        p((click)='this.clearEditor()' type='button' class='btn btn-warning') cancel
+        p((click)='this.onSubmit(e)' type='button' class='btn btn-info') submit
   div(class='row background')
 
 

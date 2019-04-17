@@ -51,6 +51,10 @@ app-images {
   padding: 0 15px;
 }
 
+#image-editor .btn {
+  margin: 10px 0 10px 10px;
+}
+
 #image-editor .background {
   position: absolute;
   top: 0;
@@ -60,20 +64,6 @@ app-images {
   background: steelblue;
   opacity: 0.5;
   z-index: -1;
-}
-
-.editor-modal ul {
-  list-style: none;
-  text-align: left;
-}
-
-.editor-modal .modal-header {
-  text-align: center;
-  text-transform: capitalize;
-}
-
-.editor-modal .input-group-addon {
-  width: 25px;
 }
 
 .year {
