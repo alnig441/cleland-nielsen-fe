@@ -1,5 +1,6 @@
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
+import { FormsModule } from "@angular/forms";
 import { UserDomainRoutingModule } from "./user-domain-routing.module";
 import { MessageBarModule } from "../../../modules/message-bar/message-bar.module";
 import { SidebarCtaModule } from "../../../modules/sidebar-cta/sidebar-cta.module";
@@ -25,6 +26,7 @@ import { AuthenticationGuardService } from "../../../services/authentication-gua
 @NgModule({
     imports: [
         CommonModule,
+        FormsModule,
         UserDomainRoutingModule,
         MessageBarModule,
         SidebarCtaModule,
