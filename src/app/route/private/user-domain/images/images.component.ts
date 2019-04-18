@@ -4,6 +4,8 @@ import { AuthenticationService } from "../../../../services/authentication.servi
 import { MongoImageModel } from "../../../../models/mongoImage.model";
 import { ServiceModelManagerService } from "../../../../services/service-model-manager.service";
 import { ActivatedRoute } from "@angular/router";
+import { SetMessageService } from "../../../../services/set-message.service";
+
 
 const $ = require('jquery');
 
@@ -26,12 +28,15 @@ export class ImagesComponent implements OnInit, DoCheck {
     private total: number;
     private documents: any[] = new Array();
     private editImages: any[];
+    private imageModel = new MongoImageModel();
+    private imageList: string[] = new Array(6);
 
     constructor(
         private formManager: ServiceModelManagerService,
         private activatedRoute: ActivatedRoute,
         private activeUser: AuthenticationService,
-        private mongoImageService: MongoImageServices
+        private mongoImageService: MongoImageServices,
+        private message: SetMessageService
     ){}
 
     ngOnInit(): void {
@@ -123,8 +128,37 @@ export class ImagesComponent implements OnInit, DoCheck {
     }
 
     clearEditor() : void {
-      console.log('clear editor')
       this.editImages = new Array();
+      this.imageList = new Array(6);
+      this.imageModel = new MongoImageModel();
+    }
+
+    onSubmit() {
+      let list = new Array();
+
+      this.imageList.forEach((element, index) => {
+        if (element) {
+          list.push(this.documents[index]['_id']);
+        }
+      })
+
+      if (list.length > 1) {
+        this.mongoImageService.updateMany(list, this.imageModel)
+          .then(res => {
+            console.log('result: ', res);
+            this.message.set({ status: 200, message: 'update success'})
+          })
+      }
+      else if (list.length == 1){
+        this.mongoImageService.updateOne(list[0], this.imageModel)
+          .then(res => {
+            console.log('result: ', res)
+            this.message.set({status: 200, message: 'update success'})
+          })
+      }
+
+      this.clearEditor();
+
     }
 
     openModal(imageId: any):void {
