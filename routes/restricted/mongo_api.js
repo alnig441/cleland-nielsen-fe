@@ -39,27 +39,33 @@ router.get('/generate_tabs?', (req, res, next) => {
   })
 })
 
+router.post('/update', (req, res, next) => {
+  let options = new Options({ uri: `Update/Photos`, body: req.body });
+  api.post(options, (error, result, body) => {
+    res.send(body);
+  })
+})
+
 router.route('/:_id?')
   .get((req, res, next) => {
     let options = new Options({ uri: `SearchById/${req.params._id}/Photos` });
-    console.log('options: ', options);
     api.get(options, (error, result, body) => {
       res.send(body);
     })
   })
   .post((req, res, next) => {
     let options = new Options({ uri: `UpdateById/${req.params._id}/Photos`, body: req.body });
-    console.log('options: ', options);
     api.post(options, (error, result, body) => {
       res.send(body);
     })
   })
   .delete((req, res, next) => {
     let options = new Options({ uri: `RemoveById/${req.params._id}/Photos` });
-    console.log('options: ', options);
     api.delete(options, (error, result, body) => {
       res.send(body);
     })
   })
+
+
 
 module.exports = router;
