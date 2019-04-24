@@ -3,6 +3,14 @@ app-images {
   text-align: right;
 }
 
+.image-main {
+  display: inline-block;
+}
+
+.image-menu {
+  position: fixed;
+}
+
 .image-menu .btn {
   position: relative;
   bottom: 5px;
@@ -10,6 +18,36 @@ app-images {
   margin-right: 2px;
 }
 
+.month {
+  display: inline-block;
+  margin-left: 3px;
+}
+
+.month a {
+  cursor: pointer;
+  color: white;
+  text-decoration: none;
+  background-color: black;
+  width: auto;
+  border: 1px solid black;
+  border-bottom: 1px solid #777777;
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+  padding:0px 5px;
+}
+
+
+.month a:hover {
+  background-color: white;
+  color: black;
+  font-style: italic;
+  border-bottom: 0px;
+}
+
+.month.active a:hover {
+  font-style: normal;
+  border-bottom: 1px solid black;
+}
 #drag-area {
   text-align: center;
 }
@@ -120,37 +158,6 @@ app-images {
   display: inline;
   border-top: 1px solid black;
   overflow: hidden;
-}
-
-.month {
-  display: inline-block;
-  margin-left: 3px;
-}
-
-.month a {
-  cursor: pointer;
-  color: white;
-  text-decoration: none;
-  background-color: black;
-  width: auto;
-  border: 1px solid black;
-  border-bottom: 1px solid #777777;
-  border-top-left-radius: 3px;
-  border-top-right-radius: 3px;
-  padding:0px 5px;
-}
-
-
-.month a:hover {
-  background-color: white;
-  color: black;
-  font-style: italic;
-  border-bottom: 0px;
-}
-
-.month.active a:hover {
-  font-style: normal;
-  border-bottom: 1px solid black;
 }
 
 .thumbnail {

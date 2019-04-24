@@ -1,43 +1,42 @@
-span(*ngIf="!this.mongoImageService.message.failure")
-    div()
-      div(class='image-menu')
-        p(type='button' class='btn btn-info btn-xs')
-          span(class='glyphicon glyphicon-search' aria-hidden='true')
-        p(*ngIf='this.activeUser.isAdmin', (click)='this.openEditor()' type='button' class='btn btn-info btn-xs')
-          span(class='glyphicon glyphicon-pencil' aria-hidden='true')
-      div(*ngFor='let month of this.months as months; index as i' class='month {{month | monthTransform}}', [ngClass]="{'active': month == this.albumViewSelector.month}")
-          a(*ngIf="month != null", (click)='setAlbumView(month)') {{ { name: month, language: this.activeUser.language } | monthTransform }}
-      div(class='reel-container {{ year }}')
-          ul(class='year')
-              li(*ngFor='let year of this.years as years; index as m', [ngClass]="{'active': year == this.albumViewSelector.year}")
-                  a((click)='setAlbumView(year)') {{ year }}
-          ul(*ngIf="this.pages > 1" class='paginator')
-              li(*ngIf='this.currentPage > 1', (click)="this.turnAlbumPage('rewind')" class='rewind')
-                  span(class='glyphicon glyphicon-triangle-left')
-              li(*ngIf="this.currentPage != this.pages", (click)="this.turnAlbumPage('forward')" class='forward')
-                  span(class='glyphicon glyphicon-triangle-right')
-                    
-          div(*ngFor='let document of this.documents as documents; index as j' class='image-container')
-              span(*infobox='this.showImageInformation[j]' class='infobox row')
-                ng-container
-                  div(class='info-key col-sm-4')
-                    p(*ngIf='document.who') Who:
-                    p Where:
-                  div(class='info-value col-sm-8')
-                    p {{document.who}}
-                    p {{document.where}}
-              div(data-toggle='modal' class="thumbnail" data-target-not='.assetviewer-modal' id="{{document._id}}")
-                  img((click)='this.openModal(document._id)' src="photos/photoapp/{{document.image.fileName | extTransform}}")
-                  div(class='caption')
-                      table
-                          tr
-                              td
-                                  p {{ {name: document.date.day, language: this.activeUser.language } | dayTransform }}&nbsp;{{ { name: document.date.month, language: this.activeUser.language } | monthTransform}}
-                              td
-                                  p((mouseenter)="this.setImageInfo(j)", (mouseleave)="this.setImageInfo()")
-                                      span(class="glyphicon glyphicon-info-sign" aria-hidden="true")
-                              td
-                                  p {{(j + 1) + ((this.currentPage - 1) * 6)}} of {{this.total}}
+span(*ngIf="!this.mongoImageService.message.failure" class='image-main')
+  div(class='image-menu')
+    p(type='button' class='btn btn-info btn-xs')
+      span(class='glyphicon glyphicon-search' aria-hidden='true')
+    p(*ngIf='this.activeUser.isAdmin', (click)='this.openEditor()' type='button' class='btn btn-info btn-xs')
+      span(class='glyphicon glyphicon-pencil' aria-hidden='true')
+  div(*ngFor='let month of this.months as months; index as i' class='month {{month | monthTransform}}', [ngClass]="{'active': month == this.albumViewSelector.month}")
+    a(*ngIf="month != null", (click)='setAlbumView(month)') {{ { name: month, language: this.activeUser.language } | monthTransform }}
+  div(class='reel-container {{ year }}')
+    ul(class='year')
+      li(*ngFor='let year of this.years as years; index as m', [ngClass]="{'active': year == this.albumViewSelector.year}")
+        a((click)='setAlbumView(year)') {{ year }}
+    ul(*ngIf="this.pages > 1" class='paginator')
+      li(*ngIf='this.currentPage > 1', (click)="this.turnAlbumPage('rewind')" class='rewind')
+        span(class='glyphicon glyphicon-triangle-left')
+      li(*ngIf="this.currentPage != this.pages", (click)="this.turnAlbumPage('forward')" class='forward')
+        span(class='glyphicon glyphicon-triangle-right')
+              
+    div(*ngFor='let document of this.documents as documents; index as j' class='image-container')
+      span(*infobox='this.showImageInformation[j]' class='infobox row')
+        ng-container
+          div(class='info-key col-sm-4')
+            p(*ngIf='document.who') Who:
+            p Where:
+          div(class='info-value col-sm-8')
+            p {{document.who}}
+            p {{document.where}}
+      div(data-toggle='modal' class="thumbnail" data-target-not='.assetviewer-modal' id="{{document._id}}")
+        img((click)='this.openModal(document._id)' src="photos/photoapp/{{document.image.fileName | extTransform}}")
+        div(class='caption')
+          table
+            tr
+              td
+                p {{ {name: document.date.day, language: this.activeUser.language } | dayTransform }}&nbsp;{{ { name: document.date.month, language: this.activeUser.language } | monthTransform}}
+              td
+                p((mouseenter)="this.setImageInfo(j)", (mouseleave)="this.setImageInfo()")
+                  span(class="glyphicon glyphicon-info-sign" aria-hidden="true")
+              td
+                p {{(j + 1) + ((this.currentPage - 1) * 6)}} of {{this.total}}
                                   
                                   
 div(*imageEditor='this.editImages' id='image-editor')
