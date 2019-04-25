@@ -8,7 +8,7 @@ app-images {
 }
 
 .image-menu {
-  position: fixed;
+  position: absolute;
 }
 
 .image-menu .btn {
@@ -57,10 +57,10 @@ app-images {
 }
 
 #image-editor {
-  border: darkgray;
+  border: steelblue;
   position: fixed;
-  top: 250px;
-  left: 150px;
+  top: 50px;
+  left: 50px;
   width: 500px;
 }
 
@@ -76,12 +76,22 @@ app-images {
 }
 
 #image-editor .input-group-addon {
+  background-color: steelblue;
+  border-radius: 4px 0 0 4px;
+  border: 1px solid steelblue;
+  border-right: none;
   width:auto;
 }
 
 #image-editor .form-control {
-  border: 1px solid darkgray;
+  border: 1px solid steelblue;
+  border-radius: 4px;
   display: table-cell;
+}
+
+#image-editor .image-list .form-control{
+  border-radius: 0 4px 4px 0;
+  border-left: none;
 }
 
 #image-editor .buttons {
