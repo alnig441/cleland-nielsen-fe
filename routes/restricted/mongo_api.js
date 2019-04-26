@@ -9,7 +9,7 @@ const headers = {
 };
 const Options = function (object) {
   let options = {
-    baseUrl: process.NODE_ENV != 'development' ? process.env.MONGO_API_BASE_URL : 'http://localhost:4000/api/',
+    baseUrl: process.env.NODE_ENV != 'development' ? process.env.MONGO_API_BASE_URL : 'http://localhost:4000/api/',
     headers: headers,
     json: true,
     followAllRedirects: true
