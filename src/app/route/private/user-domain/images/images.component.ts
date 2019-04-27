@@ -27,7 +27,7 @@ export class ImagesComponent implements OnInit, DoCheck {
     private pages: number;
     private total: number;
     private documents: any[] = new Array();
-    private editImages: any[];
+    private editImages: any[] = new Array();
     private imageModel = new MongoImageModel();
     private imageList: string[] = new Array(6);
 
@@ -147,6 +147,7 @@ export class ImagesComponent implements OnInit, DoCheck {
           .then(res => {
             console.log('result: ', res);
             this.message.set({ status: 200, message: 'update success'})
+            this.getDocs(this.setModel(this.albumViewSelector['year'], this.albumViewSelector['month']), this.currentPage, this.doAnd);
           })
       }
       else if (list.length == 1){
@@ -154,10 +155,45 @@ export class ImagesComponent implements OnInit, DoCheck {
           .then(res => {
             console.log('result: ', res)
             this.message.set({status: 200, message: 'update success'})
+            this.getDocs(this.setModel(this.albumViewSelector['year'], this.albumViewSelector['month']), this.currentPage, this.doAnd);
           })
       }
 
-      this.clearEditor();
+      this.imageList = new Array(6);
+      this.imageModel = new MongoImageModel();
+
+      // this.clearEditor();
+
+    }
+
+
+    onDelete() {
+      console.log('deleting images: ', this.imageList);
+
+      let list = new Array();
+
+      this.imageList.forEach((image, index) => {
+        if (image) {
+          list.push(this.documents[index]['_id']);
+        }
+      })
+
+      if (list.length > 1) {
+        this.mongoImageService.deleteMany(list)
+          .then((result: any) => {
+            console.log(result);
+            this.clearEditor();
+          })
+      }
+      else if (list.length == 1) {
+        this.mongoImageService.deleteOne(list[0])
+          .then((result: any) => {
+            console.log('result: ',result);
+            this.message.set({status: 200, message: 'photo deleted'});
+            this.getDocs(this.setModel(this.albumViewSelector['year'], this.albumViewSelector['month']), this.currentPage, this.doAnd);
+            this.clearEditor();
+          })
+      }
 
     }
 
