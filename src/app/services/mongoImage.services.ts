@@ -121,6 +121,16 @@ export class MongoImageServices {
     }
   }
 
+  deleteMany(_ids: string[]): Promise<any> {
+    if (!this.activeUser.isPermitted['to_delete_images']) {
+      this.message.set({ status: 405, message: 'insufficient permissions'});
+    }
+    else {
+      this.message.set({ status: 300, message: 'not yet implemented' });
+      return Promise.resolve({message: 'done'});
+    }
+  }
+
   deleteOne(_id: string): Promise<any> {
     if ( !this.activeUser.isPermitted['to_delete_images'] ){
       this.message.set({ status: 405, message: 'insufficient permissions'});
