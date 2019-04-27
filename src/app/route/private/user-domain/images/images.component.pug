@@ -36,8 +36,7 @@ span(*ngIf="!this.mongoImageService.message.failure" class='image-main')
                 p((mouseenter)="this.setImageInfo(j)", (mouseleave)="this.setImageInfo()")
                   span(class="glyphicon glyphicon-info-sign" aria-hidden="true")
               td
-                p {{(j + 1) + ((this.currentPage - 1) * 6)}} of {{this.total}}
-                                  
+                p {{(j + 1) + ((this.currentPage - 1) * 6)}} of {{this.total}}                 
                                   
 div(*imageEditor='this.editImages' id='image-editor')
   div(class='row')
@@ -57,8 +56,9 @@ div(*imageEditor='this.editImages' id='image-editor')
             label(for='{{ property }}') {{ property }}
             input(id='{{ property }}' type='text' class='form-control' placeholder='{{ property }}', [(ngModel)]='imageModel[property]', name='{{property}}')
       div(class='buttons')
+        p((click)='this.onDelete()' type='button' class='btn btn-danger') {{ {name: 'delete', language: this.activeUser.language} | btnTransform }}
         p((click)='this.clearEditor()' type='button' class='btn btn-warning') {{ {name: 'cancel', language: this.activeUser.language} | btnTransform }}
-        p((click)='this.onSubmit(e)' type='button' class='btn btn-info') {{ {name: 'submit', language: this.activeUser.language} | btnTransform }}
+        p((click)='this.onSubmit(e)' type='button' class='btn btn-info') {{ {name: 'update', language: this.activeUser.language} | btnTransform }}
   div(class='row background')
 
 

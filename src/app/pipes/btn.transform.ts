@@ -28,6 +28,12 @@ export class BtnTransform implements PipeTransform {
             case 'submit':
               button = language == 'english' ? name : 'udfør';
               return button;
+            case 'update':
+              button = language == 'english' ? name : 'opdater';
+              return button;
+            case 'delete':
+              button = language == 'english' ? name : 'slet';
+              return button;
             default:
               return button.name;
           }
