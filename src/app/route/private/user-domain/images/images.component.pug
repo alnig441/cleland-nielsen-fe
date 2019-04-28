@@ -55,6 +55,10 @@ div(*imageEditor='this.editImages' id='image-editor')
           div(*ngIf='property == "names" || property == "keywords" || property == "venue" || property == "occasion" || property =="en" || property == "da"')
             label(for='{{ property }}') {{ property }}
             input(id='{{ property }}' type='text' class='form-control' placeholder='{{ property }}', [(ngModel)]='imageModel[property]', name='{{property}}')
+      div(class='col-md-12')
+        div(class='select_all')
+          label(for='select_all') Select All
+          input(class='checkbox' id='select_all' type='checkbox' aria-label='select_all', placeholder='select all',[(ngModel)]='selectAll', name='selectAll')
       div(class='buttons')
         p((click)='this.onDelete()' type='button' class='btn btn-danger') {{ {name: 'delete', language: this.activeUser.language} | btnTransform }}
         p((click)='this.clearEditor()' type='button' class='btn btn-warning') {{ {name: 'cancel', language: this.activeUser.language} | btnTransform }}

@@ -30,6 +30,7 @@ export class ImagesComponent implements OnInit, DoCheck {
     private editImages: any[] = new Array();
     private imageModel = new MongoImageModel();
     private imageList: string[] = new Array(6);
+    private selectAll: boolean = false;
 
     constructor(
         private formManager: ServiceModelManagerService,
@@ -131,16 +132,26 @@ export class ImagesComponent implements OnInit, DoCheck {
       this.editImages = new Array();
       this.imageList = new Array(6);
       this.imageModel = new MongoImageModel();
+      this.selectAll = false;
     }
 
     onSubmit() {
       let list = new Array();
 
-      this.imageList.forEach((element, index) => {
-        if (element) {
-          list.push(this.documents[index]['_id']);
-        }
-      })
+      if (this.selectAll) {
+        this.documents.forEach(doc => {
+          list.push(doc['_id']);
+        })
+      }
+      else {
+        this.imageList.forEach((element, index) => {
+          if (element) {
+            list.push(this.documents[index]['_id']);
+          }
+        })
+      }
+
+      console.log('list: ', list, this.selectAll);
 
       if (list.length > 1) {
         this.mongoImageService.updateMany(list, this.imageModel)
@@ -161,22 +172,26 @@ export class ImagesComponent implements OnInit, DoCheck {
 
       this.imageList = new Array(6);
       this.imageModel = new MongoImageModel();
-
-      // this.clearEditor();
+      this.selectAll = false;
 
     }
 
 
     onDelete() {
-      console.log('deleting images: ', this.imageList);
-
       let list = new Array();
 
-      this.imageList.forEach((image, index) => {
-        if (image) {
-          list.push(this.documents[index]['_id']);
-        }
-      })
+      if (this.selectAll) {
+        this.documents.forEach(doc => {
+          list.push(doc['_id']);
+        })
+      }
+      else {
+        this.imageList.forEach((image, index) => {
+          if (image) {
+            list.push(this.documents[index]['_id']);
+          }
+        })
+      }
 
       if (list.length > 1) {
         this.mongoImageService.deleteMany(list)
