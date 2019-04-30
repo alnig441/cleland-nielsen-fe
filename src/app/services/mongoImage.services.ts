@@ -108,7 +108,6 @@ export class MongoImageServices {
     }
     else {
       let body = { form: form, _ids: _ids };
-      console.log('update many: ', form, _ids);
       return this.http.post(`${this.baseUrl}/update`, body, { observe: 'body' })
         .toPromise()
         .then((result: any) => {

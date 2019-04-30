@@ -2123,7 +2123,6 @@ let MongoImageServices = class MongoImageServices {
         }
         else {
             let body = { form: form, _ids: _ids };
-            console.log('update many: ', form, _ids);
             return this.http.post(`${this.baseUrl}/update`, body, { observe: 'body' })
                 .toPromise()
                 .then((result) => {
@@ -2133,6 +2132,15 @@ let MongoImageServices = class MongoImageServices {
                 .catch((error) => {
                 this.message.set(error);
             });
+        }
+    }
+    deleteMany(_ids) {
+        if (!this.activeUser.isPermitted['to_delete_images']) {
+            this.message.set({ status: 405, message: 'insufficient permissions' });
+        }
+        else {
+            this.message.set({ status: 300, message: 'not yet implemented' });
+            return Promise.resolve({ message: 'done' });
         }
     }
     deleteOne(_id) {
@@ -12875,31 +12883,41 @@ let ImagesComponent = class ImagesComponent {
         this.months = new Array();
         this.doAnd = false;
         this.documents = new Array();
+        this.editImages = new Array();
         this.imageModel = new mongoImage_model_1.MongoImageModel();
         this.imageList = new Array(6);
+        this.selectAll = false;
     }
     ngOnInit() {
         this.formManager.setService(this.activatedRoute.snapshot.url[0].path);
         this.currentPage = 1;
-        this.mongoImageService.generateTabs()
-            .then((years) => {
-            this.years = years.reverse();
-            this.albumViewSelector['year'] = this.years[0];
-            this.mongoImageService.generateTabs(this.years[0])
-                .then((months) => {
-                this.months = months;
-                this.albumViewSelector['month'] = this.months[this.months.length - 1];
-                let model = new mongoImage_model_1.MongoImageModel(null, this.years[0], this.months[this.months.length - 1]);
-                this.mongoImageService.search(model, this.currentPage, true)
-                    .then((result) => {
-                    this.pages = result.pages;
-                    this.total = result.total;
-                    this.documents = result.docs;
-                });
-            });
-        });
+        this.buildAlbum();
     }
     ngDoCheck() {
+    }
+    buildAlbum() {
+        this.mongoImageService.generateTabs()
+            .then((years) => {
+            if (years.length > 0) {
+                this.years = years.reverse();
+                this.albumViewSelector['year'] = this.years[0];
+                this.mongoImageService.generateTabs(this.years[0])
+                    .then((months) => {
+                    this.months = months;
+                    this.albumViewSelector['month'] = this.months[this.months.length - 1];
+                    let model = new mongoImage_model_1.MongoImageModel(null, this.years[0], this.months[this.months.length - 1]);
+                    this.mongoImageService.search(model, this.currentPage, true)
+                        .then((result) => {
+                        this.pages = result.pages;
+                        this.total = result.total;
+                        this.documents = result.docs;
+                    });
+                });
+            }
+            else {
+                this.message.set({ status: 200, message: 'db currently empty' });
+            }
+        });
     }
     setAlbumView(selector) {
         this.doAnd = true;
@@ -12956,29 +12974,58 @@ let ImagesComponent = class ImagesComponent {
         this.editImages = new Array();
         this.imageList = new Array(6);
         this.imageModel = new mongoImage_model_1.MongoImageModel();
+        this.selectAll = false;
     }
     onSubmit() {
-        let list = new Array();
-        this.imageList.forEach((element, index) => {
-            if (element) {
-                list.push(this.documents[index]['_id']);
-            }
-        });
+        let list = this.get_ids();
         if (list.length > 1) {
             this.mongoImageService.updateMany(list, this.imageModel)
                 .then(res => {
-                console.log('result: ', res);
                 this.message.set({ status: 200, message: 'update success' });
+                this.getDocs(this.setModel(this.albumViewSelector['year'], this.albumViewSelector['month']), this.currentPage, this.doAnd);
             });
         }
         else if (list.length == 1) {
             this.mongoImageService.updateOne(list[0], this.imageModel)
                 .then(res => {
-                console.log('result: ', res);
                 this.message.set({ status: 200, message: 'update success' });
+                this.getDocs(this.setModel(this.albumViewSelector['year'], this.albumViewSelector['month']), this.currentPage, this.doAnd);
             });
         }
-        this.clearEditor();
+        this.imageList = new Array(6);
+        this.imageModel = new mongoImage_model_1.MongoImageModel();
+        this.selectAll = false;
+    }
+    onDelete() {
+        let list = this.get_ids();
+        if (list.length > 1) {
+            this.mongoImageService.deleteMany(list)
+                .then((result) => {
+                console.log(result);
+                this.clearEditor();
+            });
+        }
+        else if (list.length == 1) {
+            this.mongoImageService.deleteOne(list[0])
+                .then((result) => {
+                this.message.set({ status: 200, message: 'photo deleted' });
+                this.documents.length > 1 ?
+                    this.getDocs(this.setModel(this.albumViewSelector['year'], this.albumViewSelector['month']), this.currentPage, this.doAnd) :
+                    this.buildAlbum();
+                this.clearEditor();
+            });
+        }
+    }
+    get_ids() {
+        let ids = new Array();
+        this.selectAll ?
+            this.documents.forEach(doc => {
+                ids.push(doc['_id']);
+            }) :
+            this.imageList.forEach((image, index) => {
+                ids.push(this.documents[index]['_id']);
+            });
+        return ids;
     }
     openModal(imageId) {
         this.documents.forEach((document, index) => {
@@ -25587,14 +25634,14 @@ exports.UserDomainRoutingModule = UserDomainRoutingModule;
 /***/ 715:
 /***/ (function(module, exports) {
 
-module.exports = "<span class=\"image-main\" *ngIf=\"!this.mongoImageService.message.failure\"><div class=\"image-menu\"><p class=\"btn btn-info btn-xs\" type=\"button\"><span class=\"glyphicon glyphicon-search\" aria-hidden=\"true\"></span></p><p class=\"btn btn-info btn-xs\" *ngIf=\"this.activeUser.isAdmin\" (click)=\"this.openEditor()\" type=\"button\"><span class=\"glyphicon glyphicon-pencil\" aria-hidden=\"true\"></span></p></div><div class=\"month {{month | monthTransform}}\" *ngFor=\"let month of this.months as months; index as i\" [ngClass]=\"{'active': month == this.albumViewSelector.month}\"><a *ngIf=\"month != null\" (click)=\"setAlbumView(month)\">{{ { name: month, language: this.activeUser.language } | monthTransform }}</a></div><div class=\"reel-container {{ year }}\"><ul class=\"year\"><li *ngFor=\"let year of this.years as years; index as m\" [ngClass]=\"{'active': year == this.albumViewSelector.year}\"><a (click)=\"setAlbumView(year)\">{{ year }}</a></li></ul><ul class=\"paginator\" *ngIf=\"this.pages &gt; 1\"><li class=\"rewind\" *ngIf=\"this.currentPage &gt; 1\" (click)=\"this.turnAlbumPage('rewind')\"><span class=\"glyphicon glyphicon-triangle-left\"></span></li><li class=\"forward\" *ngIf=\"this.currentPage != this.pages\" (click)=\"this.turnAlbumPage('forward')\"><span class=\"glyphicon glyphicon-triangle-right\"></span></li></ul><div class=\"image-container\" *ngFor=\"let document of this.documents as documents; index as j\"><span class=\"infobox row\" *infobox=\"this.showImageInformation[j]\"><ng-container><div class=\"info-key col-sm-4\"><p *ngIf=\"document.who\">Who:</p><p>Where:</p></div><div class=\"info-value col-sm-8\"><p>{{document.who}}</p><p>{{document.where}}</p></div></ng-container></span><div class=\"thumbnail\" data-toggle=\"modal\" data-target-not=\".assetviewer-modal\" id=\"{{document._id}}\"><img (click)=\"this.openModal(document._id)\" src=\"photos/photoapp/{{document.image.fileName | extTransform}}\"><div class=\"caption\"><table><tr><td><p>{{ {name: document.date.day, language: this.activeUser.language } | dayTransform }}&nbsp;{{ { name: document.date.month, language: this.activeUser.language } | monthTransform}}</p></td><td><p (mouseenter)=\"this.setImageInfo(j)\" (mouseleave)=\"this.setImageInfo()\"><span class=\"glyphicon glyphicon-info-sign\" aria-hidden=\"true\"></span></p></td><td><p>{{(j + 1) + ((this.currentPage - 1) * 6)}} of {{this.total}}</p></td></tr></table></div></div></div></div></span><div *imageEditor=\"this.editImages\" id=\"image-editor\"><div class=\"row\"><form #imageEditorForm=\"ngForm\"><div class=\"col-md-12\" id=\"drag-area\" onmousedown onmousemove onmouseup><span class=\"glyphicon glyphicon-transfer\"></span></div><div class=\"col-md-6\"><span *ngFor=\"let document of this.editImages as documents; index as i\"><label for=\"{{ i }}\">image# {{ i + 1 }}</label><div class=\"image-list\"><span class=\"input-group-addon\"><input class=\"checkbox\" id=\"{{ i }}\" type=\"checkbox\" aria-label=\"fileId\" value=\"{{ document._id }}\" [(ngModel)]=\"imageList[i]\" name=\"document.image.fileName\"></span><p class=\"form-control\">{{ document.image.fileName }}</p></div></span></div><div class=\"col-md-6\"><span *ngFor=\"let property of this.editImages.form as properties\"><div *ngIf=\"property == &quot;names&quot; || property == &quot;keywords&quot; || property == &quot;venue&quot; || property == &quot;occasion&quot; || property ==&quot;en&quot; || property == &quot;da&quot;\"><label for=\"{{ property }}\">{{ property }}</label><input class=\"form-control\" id=\"{{ property }}\" type=\"text\" placeholder=\"{{ property }}\" [(ngModel)]=\"imageModel[property]\" name=\"{{property}}\"></div></span></div><div class=\"buttons\"><p class=\"btn btn-warning\" (click)=\"this.clearEditor()\" type=\"button\">{{ {name: 'cancel', language: this.activeUser.language} | btnTransform }}</p><p class=\"btn btn-info\" (click)=\"this.onSubmit(e)\" type=\"button\">{{ {name: 'submit', language: this.activeUser.language} | btnTransform }}</p></div></form></div><div class=\"row background\"></div></div><div class=\"modal fade assetviewer-modal\" tabindex=\"1\" role=\"dialog\" aria-labelledby=\"assetviewerModal\"><div class=\"modal-image-container\"><span class=\"modal-image-overlay-positioner\"><img class=\"modal-image\" *modalImage=\"this.albumViewSelector['selectedIndex'] || this.albumViewSelector['selectedIndex'] == 0\" src=\"photos/James/{{this.documents[this.albumViewSelector['selectedIndex']]['image']['fileName']}}\" id=\"{{this.documents[this.albumViewSelector['selectedIndex']]['_id']}}\"><ul class=\"modal-image-overlay\"><li class=\"button-left\" (click)=\"this.flipThroughImages('previous')\"><span class=\"glyphicon glyphicon-step-backward\">&nbsp; </span>{{ { name: 'rwd', language: this.activeUser.language } | btnTransform }}</li><li class=\"button-right\" (click)=\"this.flipThroughImages('next')\"> {{ { name: 'fwd', language: this.activeUser.language } | btnTransform}} \n&nbsp;<span class=\"glyphicon glyphicon-step-forward\"></span></li></ul><ul class=\"modal-image-overlay-menu\"><li class=\"button-left\" onclick=\"window.print(); return null;\"><span class=\"glyphicon glyphicon-print\">&nbsp;</span>{{ { name: 'print', language: this.activeUser.language } | btnTransform }}</li><li class=\"button-left\" (click)=\"this.cancelModal()\"><span class=\"glyphicon glyphicon-remove\">&nbsp;</span>{{ { name: 'close', language: this.activeUser.language } | btnTransform }}</li></ul></span></div></div>"
+module.exports = "<span class=\"image-main\" *ngIf=\"!this.mongoImageService.message.failure\"><div class=\"image-menu\"><p class=\"btn btn-info btn-xs\" type=\"button\"><span class=\"glyphicon glyphicon-search\" aria-hidden=\"true\"></span></p><p class=\"btn btn-info btn-xs\" *ngIf=\"this.activeUser.isAdmin\" (click)=\"this.openEditor()\" type=\"button\"><span class=\"glyphicon glyphicon-pencil\" aria-hidden=\"true\"></span></p></div><div class=\"month {{month | monthTransform}}\" *ngFor=\"let month of this.months as months; index as i\" [ngClass]=\"{'active': month == this.albumViewSelector.month}\"><a *ngIf=\"month != null\" (click)=\"setAlbumView(month)\">{{ { name: month, language: this.activeUser.language } | monthTransform }}</a></div><div class=\"reel-container {{ year }}\"><ul class=\"year\"><li *ngFor=\"let year of this.years as years; index as m\" [ngClass]=\"{'active': year == this.albumViewSelector.year}\"><a (click)=\"setAlbumView(year)\">{{ year }}</a></li></ul><ul class=\"paginator\" *ngIf=\"this.pages &gt; 1\"><li class=\"rewind\" *ngIf=\"this.currentPage &gt; 1 &amp;&amp; this.editImages.length == 0\" (click)=\"this.turnAlbumPage('rewind')\"><span class=\"glyphicon glyphicon-triangle-left\"></span></li><li class=\"forward\" *ngIf=\"this.currentPage != this.pages &amp;&amp; this.editImages.length == 0\" (click)=\"this.turnAlbumPage('forward')\"><span class=\"glyphicon glyphicon-triangle-right\"></span></li></ul><div class=\"image-container\" *ngFor=\"let document of this.documents as documents; index as j\"><span class=\"infobox row\" *infobox=\"this.showImageInformation[j]\"><ng-container><div class=\"info-key col-sm-4\"><p *ngIf=\"document.who\">Who:</p><p>Where:</p></div><div class=\"info-value col-sm-8\"><p>{{document.who}}</p><p>{{document.where}}</p></div></ng-container></span><div class=\"thumbnail\" data-toggle=\"modal\" data-target-not=\".assetviewer-modal\" id=\"{{document._id}}\"><img (click)=\"this.openModal(document._id)\" src=\"photos/photoapp/{{document.image.fileName | extTransform}}\"><div class=\"caption\"><table><tr><td><p>{{ {name: document.date.day, language: this.activeUser.language } | dayTransform }}&nbsp;{{ { name: document.date.month, language: this.activeUser.language } | monthTransform}}</p></td><td><p (mouseenter)=\"this.setImageInfo(j)\" (mouseleave)=\"this.setImageInfo()\"><span class=\"glyphicon glyphicon-info-sign\" aria-hidden=\"true\"></span></p></td><td><p>{{(j + 1) + ((this.currentPage - 1) * 6)}} of {{this.total}}                 </p></td></tr></table></div></div></div></div></span><div *imageEditor=\"this.editImages\" id=\"image-editor\"><div class=\"row\"><form #imageEditorForm=\"ngForm\"><div class=\"col-md-12\" id=\"drag-area\" onmousedown onmousemove onmouseup><span class=\"glyphicon glyphicon-transfer\"></span></div><div class=\"col-md-6\"><span *ngFor=\"let document of this.editImages as documents; index as i\"><label for=\"{{ i }}\">image# {{ i + 1 }}</label><div class=\"image-list\"><span class=\"input-group-addon\"><input class=\"checkbox\" id=\"{{ i }}\" type=\"checkbox\" aria-label=\"fileId\" value=\"{{ document._id }}\" [(ngModel)]=\"imageList[i]\" name=\"document.image.fileName\"></span><p class=\"form-control\">{{ document.image.fileName }}</p></div></span></div><div class=\"col-md-6\"><span *ngFor=\"let property of this.editImages.form as properties\"><div *ngIf=\"property == &quot;names&quot; || property == &quot;keywords&quot; || property == &quot;venue&quot; || property == &quot;occasion&quot; || property ==&quot;en&quot; || property == &quot;da&quot;\"><label for=\"{{ property }}\">{{ property }}</label><input class=\"form-control\" id=\"{{ property }}\" type=\"text\" placeholder=\"{{ property }}\" [(ngModel)]=\"imageModel[property]\" name=\"{{property}}\"></div></span></div><div class=\"col-md-12\"><div class=\"select_all\"><label for=\"select_all\">Select All</label><input class=\"checkbox\" id=\"select_all\" type=\"checkbox\" aria-label=\"select_all\" placeholder=\"select all\" [(ngModel)]=\"selectAll\" name=\"selectAll\"></div></div><div class=\"buttons\"><p class=\"btn btn-danger\" (click)=\"this.onDelete()\" type=\"button\">{{ {name: 'delete', language: this.activeUser.language} | btnTransform }}</p><p class=\"btn btn-warning\" (click)=\"this.clearEditor()\" type=\"button\">{{ {name: 'cancel', language: this.activeUser.language} | btnTransform }}</p><p class=\"btn btn-info\" (click)=\"this.onSubmit(e)\" type=\"button\">{{ {name: 'update', language: this.activeUser.language} | btnTransform }}</p></div></form></div><div class=\"row background\"></div></div><div class=\"modal fade assetviewer-modal\" tabindex=\"1\" role=\"dialog\" aria-labelledby=\"assetviewerModal\"><div class=\"modal-image-container\"><span class=\"modal-image-overlay-positioner\"><img class=\"modal-image\" *modalImage=\"this.albumViewSelector['selectedIndex'] || this.albumViewSelector['selectedIndex'] == 0\" src=\"photos/James/{{this.documents[this.albumViewSelector['selectedIndex']]['image']['fileName']}}\" id=\"{{this.documents[this.albumViewSelector['selectedIndex']]['_id']}}\"><ul class=\"modal-image-overlay\"><li class=\"button-left\" (click)=\"this.flipThroughImages('previous')\"><span class=\"glyphicon glyphicon-step-backward\">&nbsp; </span>{{ { name: 'rwd', language: this.activeUser.language } | btnTransform }}</li><li class=\"button-right\" (click)=\"this.flipThroughImages('next')\"> {{ { name: 'fwd', language: this.activeUser.language } | btnTransform}} \n&nbsp;<span class=\"glyphicon glyphicon-step-forward\"></span></li></ul><ul class=\"modal-image-overlay-menu\"><li class=\"button-left\" onclick=\"window.print(); return null;\"><span class=\"glyphicon glyphicon-print\">&nbsp;</span>{{ { name: 'print', language: this.activeUser.language } | btnTransform }}</li><li class=\"button-left\" (click)=\"this.cancelModal()\"><span class=\"glyphicon glyphicon-remove\">&nbsp;</span>{{ { name: 'close', language: this.activeUser.language } | btnTransform }}</li></ul></span></div></div>"
 
 /***/ }),
 
 /***/ 716:
 /***/ (function(module, exports) {
 
-module.exports = "app-images {\n  background-color: whitesmoke;\n  text-align: right; }\n\n.image-main {\n  display: inline-block; }\n\n.image-menu {\n  position: absolute; }\n\n.image-menu .btn {\n  position: relative;\n  bottom: 5px;\n  float: left;\n  margin-right: 2px; }\n\n.month {\n  display: inline-block;\n  margin-left: 3px; }\n\n.month a {\n  cursor: pointer;\n  color: white;\n  text-decoration: none;\n  background-color: black;\n  width: auto;\n  border: 1px solid black;\n  border-bottom: 1px solid #777777;\n  border-top-left-radius: 3px;\n  border-top-right-radius: 3px;\n  padding: 0px 5px; }\n\n.month a:hover {\n  background-color: white;\n  color: black;\n  font-style: italic;\n  border-bottom: 0px; }\n\n.month.active a:hover {\n  font-style: normal;\n  border-bottom: 1px solid black; }\n\n#drag-area {\n  text-align: center; }\n\n#drag-area:hover {\n  cursor: move; }\n\n#image-editor {\n  border: steelblue;\n  position: fixed;\n  top: 50px;\n  left: 50px;\n  width: 500px; }\n\n#image-editor label {\n  color: white;\n  text-transform: capitalize;\n  font-weight: normal; }\n\n#image-editor .row {\n  border-radius: 10px;\n  border: 1px solid darkgray; }\n\n#image-editor .input-group-addon {\n  background-color: steelblue;\n  border-radius: 4px 0 0 4px;\n  border: 1px solid steelblue;\n  border-right: none;\n  width: auto; }\n\n#image-editor .form-control {\n  border: 1px solid steelblue;\n  border-radius: 4px;\n  display: table-cell; }\n\n#image-editor .image-list .form-control {\n  border-radius: 0 4px 4px 0;\n  border-left: none; }\n\n#image-editor .buttons {\n  margin: 0 0 15px;\n  padding: 0 15px; }\n\n#image-editor .btn {\n  margin: 10px 0 10px 10px;\n  color: #ffffff; }\n\n#image-editor .background {\n  position: absolute;\n  top: 0;\n  width: 530px;\n  height: 100%;\n  padding: 0 15px;\n  background: steelblue;\n  opacity: 0.5;\n  z-index: -1; }\n\n.year {\n  list-style-type: none;\n  padding: 0;\n  float: left;\n  position: absolute; }\n\n.year li {\n  border-top: 1px solid;\n  border-left: 1px solid;\n  border-radius: 3px 0 0 3px; }\n\n.year li:first-child {\n  border-top: none;\n  border-radius: 0; }\n\n.year li:last-child {\n  border-bottom: 1px solid; }\n\n.year a {\n  color: black;\n  text-decoration: none;\n  padding: 0px 15px;\n  cursor: pointer; }\n\n.year a:hover {\n  background-color: black;\n  border-radius: 3px;\n  color: white;\n  font-style: italic; }\n\n.reel-container {\n  border-top: 1px solid;\n  background-image: linear-gradient(to right, white, lightgray, lightgray, white);\n  text-align: center;\n  opacity: .95;\n  border-radius: 3px 0 0 0; }\n\n.image-container {\n  width: 40%;\n  display: inline-block;\n  text-align: left; }\n\n.reel {\n  display: inline;\n  border-top: 1px solid black;\n  overflow: hidden; }\n\n.thumbnail {\n  border: none;\n  margin: 10px; }\n\n.thumbnail > img {\n  filter: grayscale(100%); }\n\n.thumbnail p {\n  margin: 0;\n  padding: 0px 5px; }\n\n.thumbnail > img:hover {\n  cursor: pointer;\n  border: none;\n  text-decoration: none;\n  filter: none; }\n\n.thumbnail .caption {\n  max-height: 30px;\n  font-size: x-small;\n  padding: 5px 0 0 0 !important;\n  top: -6px;\n  position: relative;\n  background-color: white;\n  color: black;\n  border-radius: 0 0 4px 4px; }\n\n.thumbnail .caption table {\n  table-layout: fixed;\n  width: 100%; }\n\n.thumbnail .caption table td:first-child {\n  text-align: left; }\n\n.thumbnail .caption table td:nth-child(2) {\n  text-align: center;\n  cursor: help; }\n\n.thumbnail .caption table td:last-child {\n  text-align: right; }\n\n.month.active a {\n  color: black;\n  padding-top: 10px;\n  padding-bottom: 10px;\n  background-color: white;\n  z-index: 1;\n  position: relative;\n  border-radius: 4px; }\n\n.year li.active {\n  padding: 5px 0px; }\n\n.year li.active a {\n  border: 2px solid white;\n  border-radius: 5px;\n  background-color: black;\n  color: white; }\n\n.year li.active a {\n  font-style: normal;\n  cursor: text; }\n\n.paginator {\n  padding: 0px;\n  display: inline-flex;\n  list-style: none;\n  position: absolute;\n  top: 49%;\n  left: -30px; }\n\n.paginator .forward {\n  position: absolute;\n  left: 820px; }\n\n.paginator .glyphicon {\n  border: 1px solid;\n  padding: 3px;\n  border-radius: 4px;\n  color: #000;\n  font-size: xx-large;\n  opacity: .5; }\n\n.paginator .glyphicon:hover {\n  cursor: pointer;\n  opacity: 1; }\n\n.assetviewer-modal {\n  margin: auto; }\n\n.modal {\n  top: 10px; }\n\n.modal-image-container {\n  position: relative;\n  text-align: center; }\n\n.modal-image-overlay-positioner {\n  position: relative; }\n\n.modal-image {\n  border: 5px solid lightgray; }\n\n@media screen and (min-height: 600px) {\n  .modal-image {\n    max-height: 580px; } }\n\n@media screen and (min-height: 768px) {\n  .modal-image {\n    max-height: 748px; } }\n\n@media screen and (min-height: 900px) {\n  .modal-image {\n    max-height: 880px; } }\n\n@media screen and (min-height: 1080px) {\n  .modal-image {\n    max-height: 1060px; } }\n\n@media print {\n  .modal-image {\n    border: none; }\n  li {\n    display: none; } }\n\n.modal-image-overlay {\n  display: block;\n  list-style: none;\n  color: white;\n  position: absolute;\n  top: 0px;\n  left: 0px;\n  width: 100%;\n  padding: 0px;\n  margin: 0px; }\n\n.modal-image-overlay-menu {\n  padding-left: 5px;\n  margin: 0px;\n  vertical-align: middle;\n  list-style: none;\n  position: absolute;\n  left: 0px;\n  top: 100px; }\n\n.modal-image-overlay-menu li {\n  vertical-align: middle;\n  padding-right: 5px;\n  margin-bottom: 5px; }\n\n.modal-image-overlay li,\n.modal-image-overlay-menu li {\n  text-transform: uppercase;\n  color: white;\n  background-color: gray;\n  text-align: center;\n  opacity: .3; }\n\n.modal-image-overlay li {\n  position: absolute;\n  width: 100px; }\n\n.modal-image-overlay li.button-left {\n  left: 5px; }\n\n.modal-image-overlay li.button-right {\n  right: 5px; }\n\n.modal-image-overlay li.button-left,\n.modal-image-overlay-menu li.button-left {\n  border-left: none;\n  border-radius: 0 4px 4px 0; }\n\n.modal-image-overlay li.button-right {\n  border-right: none;\n  border-radius: 4px 0 0 4px; }\n\n.modal-image-overlay li.button-left:hover,\n.modal-image-overlay li.button-right:hover,\n.modal-image-overlay-menu li.button-left:hover {\n  cursor: pointer;\n  background-color: lightgray;\n  opacity: 1;\n  color: black; }\n\n.button-left .glyphicon {\n  vertical-align: middle;\n  float: left;\n  padding-left: 5px; }\n\n.button-right .glyphicon {\n  float: right;\n  padding-right: 5px; }\n\n.infobox {\n  position: absolute;\n  z-index: 1;\n  width: 230px;\n  text-align: left;\n  background: white;\n  color: black;\n  opacity: .8;\n  border-radius: 5px;\n  padding: 5px 0px;\n  margin: 40px; }\n\n.infobox p {\n  font-size: x-small;\n  margin: 0px; }\n\n.infobox .info-key {\n  text-transform: uppercase; }\n"
+module.exports = "app-images {\n  background-color: whitesmoke;\n  text-align: right; }\n\n.image-main {\n  display: inline-block; }\n\n.image-menu {\n  position: absolute; }\n\n.image-menu .btn {\n  position: relative;\n  bottom: 5px;\n  float: left;\n  margin-right: 2px; }\n\n.month {\n  display: inline-block;\n  margin-left: 3px; }\n\n.month a {\n  cursor: pointer;\n  color: white;\n  text-decoration: none;\n  background-color: black;\n  width: auto;\n  border: 1px solid black;\n  border-bottom: 1px solid #777777;\n  border-top-left-radius: 3px;\n  border-top-right-radius: 3px;\n  padding: 0px 5px; }\n\n.month a:hover {\n  background-color: white;\n  color: black;\n  font-style: italic;\n  border-bottom: 0px; }\n\n.month.active a:hover {\n  font-style: normal;\n  border-bottom: 1px solid black; }\n\n#drag-area {\n  text-align: center; }\n\n#drag-area:hover {\n  cursor: move; }\n\n#image-editor {\n  border: steelblue;\n  position: fixed;\n  top: 50px;\n  left: 50px;\n  width: 500px; }\n\n#image-editor label {\n  color: white;\n  text-transform: capitalize;\n  font-weight: normal; }\n\n#image-editor .row {\n  border-radius: 10px;\n  border: 1px solid darkgray; }\n\n#image-editor .input-group-addon {\n  background-color: steelblue;\n  border-radius: 4px 0 0 4px;\n  border: 1px solid steelblue;\n  border-right: none;\n  width: auto; }\n\n#image-editor .form-control {\n  border: 1px solid steelblue;\n  border-radius: 4px;\n  display: table-cell; }\n\n#image-editor .image-list .form-control {\n  border-radius: 0 4px 4px 0;\n  border-left: none; }\n\n#image-editor .select_all {\n  text-align: left;\n  margin: 10px; }\n\n#image-editor .buttons {\n  margin: 0 0 15px;\n  padding: 0 15px; }\n\n#image-editor .btn {\n  margin: 10px 0 10px 10px;\n  color: #ffffff; }\n\n#image-editor .btn-danger {\n  float: left;\n  margin: 10px 0 10px; }\n\n#image-editor .background {\n  position: absolute;\n  top: 0;\n  width: 530px;\n  height: 100%;\n  padding: 0 15px;\n  background: steelblue;\n  opacity: 0.5;\n  z-index: -1; }\n\n.year {\n  list-style-type: none;\n  padding: 0;\n  float: left;\n  position: absolute; }\n\n.year li {\n  border-top: 1px solid;\n  border-left: 1px solid;\n  border-radius: 3px 0 0 3px; }\n\n.year li:first-child {\n  border-top: none;\n  border-radius: 0; }\n\n.year li:last-child {\n  border-bottom: 1px solid; }\n\n.year a {\n  color: black;\n  text-decoration: none;\n  padding: 0px 15px;\n  cursor: pointer; }\n\n.year a:hover {\n  background-color: black;\n  border-radius: 3px;\n  color: white;\n  font-style: italic; }\n\n.reel-container {\n  border-top: 1px solid;\n  background-image: linear-gradient(to right, white, lightgray, lightgray, white);\n  text-align: center;\n  opacity: .95;\n  border-radius: 3px 0 0 0; }\n\n.image-container {\n  width: 40%;\n  display: inline-block;\n  text-align: left; }\n\n.reel {\n  display: inline;\n  border-top: 1px solid black;\n  overflow: hidden; }\n\n.thumbnail {\n  border: none;\n  margin: 10px; }\n\n.thumbnail > img {\n  filter: grayscale(100%); }\n\n.thumbnail p {\n  margin: 0;\n  padding: 0px 5px; }\n\n.thumbnail > img:hover {\n  cursor: pointer;\n  border: none;\n  text-decoration: none;\n  filter: none; }\n\n.thumbnail .caption {\n  max-height: 30px;\n  font-size: x-small;\n  padding: 5px 0 0 0 !important;\n  top: -6px;\n  position: relative;\n  background-color: white;\n  color: black;\n  border-radius: 0 0 4px 4px; }\n\n.thumbnail .caption table {\n  table-layout: fixed;\n  width: 100%; }\n\n.thumbnail .caption table td:first-child {\n  text-align: left; }\n\n.thumbnail .caption table td:nth-child(2) {\n  text-align: center;\n  cursor: help; }\n\n.thumbnail .caption table td:last-child {\n  text-align: right; }\n\n.month.active a {\n  color: black;\n  padding-top: 10px;\n  padding-bottom: 10px;\n  background-color: white;\n  z-index: 1;\n  position: relative;\n  border-radius: 4px; }\n\n.year li.active {\n  padding: 5px 0px; }\n\n.year li.active a {\n  border: 2px solid white;\n  border-radius: 5px;\n  background-color: black;\n  color: white; }\n\n.year li.active a {\n  font-style: normal;\n  cursor: text; }\n\n.paginator {\n  padding: 0px;\n  display: inline-flex;\n  list-style: none;\n  position: absolute;\n  top: 49%;\n  left: -30px; }\n\n.paginator .forward {\n  position: absolute;\n  left: 820px; }\n\n.paginator .glyphicon {\n  border: 1px solid;\n  padding: 3px;\n  border-radius: 4px;\n  color: #000;\n  font-size: xx-large;\n  opacity: .5; }\n\n.paginator .glyphicon:hover {\n  cursor: pointer;\n  opacity: 1; }\n\n.assetviewer-modal {\n  margin: auto; }\n\n.modal {\n  top: 10px; }\n\n.modal-image-container {\n  position: relative;\n  text-align: center; }\n\n.modal-image-overlay-positioner {\n  position: relative; }\n\n.modal-image {\n  border: 5px solid lightgray; }\n\n@media screen and (min-height: 600px) {\n  .modal-image {\n    max-height: 580px; } }\n\n@media screen and (min-height: 768px) {\n  .modal-image {\n    max-height: 748px; } }\n\n@media screen and (min-height: 900px) {\n  .modal-image {\n    max-height: 880px; } }\n\n@media screen and (min-height: 1080px) {\n  .modal-image {\n    max-height: 1060px; } }\n\n@media print {\n  .modal-image {\n    border: none; }\n  li {\n    display: none; } }\n\n.modal-image-overlay {\n  display: block;\n  list-style: none;\n  color: white;\n  position: absolute;\n  top: 0px;\n  left: 0px;\n  width: 100%;\n  padding: 0px;\n  margin: 0px; }\n\n.modal-image-overlay-menu {\n  padding-left: 5px;\n  margin: 0px;\n  vertical-align: middle;\n  list-style: none;\n  position: absolute;\n  left: 0px;\n  top: 100px; }\n\n.modal-image-overlay-menu li {\n  vertical-align: middle;\n  padding-right: 5px;\n  margin-bottom: 5px; }\n\n.modal-image-overlay li,\n.modal-image-overlay-menu li {\n  text-transform: uppercase;\n  color: white;\n  background-color: gray;\n  text-align: center;\n  opacity: .3; }\n\n.modal-image-overlay li {\n  position: absolute;\n  width: 100px; }\n\n.modal-image-overlay li.button-left {\n  left: 5px; }\n\n.modal-image-overlay li.button-right {\n  right: 5px; }\n\n.modal-image-overlay li.button-left,\n.modal-image-overlay-menu li.button-left {\n  border-left: none;\n  border-radius: 0 4px 4px 0; }\n\n.modal-image-overlay li.button-right {\n  border-right: none;\n  border-radius: 4px 0 0 4px; }\n\n.modal-image-overlay li.button-left:hover,\n.modal-image-overlay li.button-right:hover,\n.modal-image-overlay-menu li.button-left:hover {\n  cursor: pointer;\n  background-color: lightgray;\n  opacity: 1;\n  color: black; }\n\n.button-left .glyphicon {\n  vertical-align: middle;\n  float: left;\n  padding-left: 5px; }\n\n.button-right .glyphicon {\n  float: right;\n  padding-right: 5px; }\n\n.infobox {\n  position: absolute;\n  z-index: 1;\n  width: 230px;\n  text-align: left;\n  background: white;\n  color: black;\n  opacity: .8;\n  border-radius: 5px;\n  padding: 5px 0px;\n  margin: 40px; }\n\n.infobox p {\n  font-size: x-small;\n  margin: 0px; }\n\n.infobox .info-key {\n  text-transform: uppercase; }\n"
 
 /***/ }),
 
@@ -25789,6 +25836,12 @@ let BtnTransform = class BtnTransform {
                     return button;
                 case 'submit':
                     button = language == 'english' ? name : 'udfør';
+                    return button;
+                case 'update':
+                    button = language == 'english' ? name : 'opdater';
+                    return button;
+                case 'delete':
+                    button = language == 'english' ? name : 'slet';
                     return button;
                 default:
                     return button.name;
@@ -32668,4 +32721,4 @@ exports.ErrorParser = ErrorParser;
 /***/ })
 
 },[652]);
-//# sourceMappingURL=app.b9db03792eaaace7f4fc.js.map
+//# sourceMappingURL=app.159830fab191dd92fe51.js.map
