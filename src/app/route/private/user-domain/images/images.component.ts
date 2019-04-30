@@ -42,29 +42,36 @@ export class ImagesComponent implements OnInit, DoCheck {
 
     ngOnInit(): void {
       this.formManager.setService(this.activatedRoute.snapshot.url[0].path);
-
       this.currentPage = 1;
-
-      this.mongoImageService.generateTabs()
-          .then((years: number[]) => {
-            this.years = years.reverse();
-            this.albumViewSelector['year'] = this.years[0];
-            this.mongoImageService.generateTabs(this.years[0])
-                .then((months: number[]) => {
-                  this.months = months;
-                  this.albumViewSelector['month'] = this.months[this.months.length - 1];
-                  let model = new MongoImageModel( null, this.years[0], this.months[this.months.length - 1] );
-                  this.mongoImageService.search(model, this.currentPage, true)
-                      .then((result: any) => {
-                        this.pages = result.pages;
-                        this.total = result.total;
-                        this.documents = result.docs;
-                      })
-                })
-          })
+      this.buildAlbum();
     }
 
     ngDoCheck(): void {
+    }
+
+    buildAlbum() {
+      this.mongoImageService.generateTabs()
+          .then((years: number[]) => {
+            if (years.length > 0) {
+              this.years = years.reverse();
+              this.albumViewSelector['year'] = this.years[0];
+              this.mongoImageService.generateTabs(this.years[0])
+                  .then((months: number[]) => {
+                    this.months = months;
+                    this.albumViewSelector['month'] = this.months[this.months.length - 1];
+                    let model = new MongoImageModel( null, this.years[0], this.months[this.months.length - 1] );
+                    this.mongoImageService.search(model, this.currentPage, true)
+                        .then((result: any) => {
+                          this.pages = result.pages;
+                          this.total = result.total;
+                          this.documents = result.docs;
+                        })
+                  })
+            }
+            else {
+              this.message.set({ status: 200, message: 'db currently empty'})
+            }
+          })
     }
 
     setAlbumView(selector?: any): void {
@@ -151,12 +158,9 @@ export class ImagesComponent implements OnInit, DoCheck {
         })
       }
 
-      console.log('list: ', list, this.selectAll);
-
       if (list.length > 1) {
         this.mongoImageService.updateMany(list, this.imageModel)
           .then(res => {
-            console.log('result: ', res);
             this.message.set({ status: 200, message: 'update success'})
             this.getDocs(this.setModel(this.albumViewSelector['year'], this.albumViewSelector['month']), this.currentPage, this.doAnd);
           })
@@ -164,7 +168,6 @@ export class ImagesComponent implements OnInit, DoCheck {
       else if (list.length == 1){
         this.mongoImageService.updateOne(list[0], this.imageModel)
           .then(res => {
-            console.log('result: ', res)
             this.message.set({status: 200, message: 'update success'})
             this.getDocs(this.setModel(this.albumViewSelector['year'], this.albumViewSelector['month']), this.currentPage, this.doAnd);
           })
@@ -203,9 +206,10 @@ export class ImagesComponent implements OnInit, DoCheck {
       else if (list.length == 1) {
         this.mongoImageService.deleteOne(list[0])
           .then((result: any) => {
-            console.log('result: ',result);
             this.message.set({status: 200, message: 'photo deleted'});
-            this.getDocs(this.setModel(this.albumViewSelector['year'], this.albumViewSelector['month']), this.currentPage, this.doAnd);
+            this.documents.length > 1 ?
+              this.getDocs(this.setModel(this.albumViewSelector['year'], this.albumViewSelector['month']), this.currentPage, this.doAnd) :
+              this.buildAlbum();
             this.clearEditor();
           })
       }
