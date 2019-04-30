@@ -143,20 +143,7 @@ export class ImagesComponent implements OnInit, DoCheck {
     }
 
     onSubmit() {
-      let list = new Array();
-
-      if (this.selectAll) {
-        this.documents.forEach(doc => {
-          list.push(doc['_id']);
-        })
-      }
-      else {
-        this.imageList.forEach((element, index) => {
-          if (element) {
-            list.push(this.documents[index]['_id']);
-          }
-        })
-      }
+      let list = this.get_ids();
 
       if (list.length > 1) {
         this.mongoImageService.updateMany(list, this.imageModel)
@@ -180,21 +167,9 @@ export class ImagesComponent implements OnInit, DoCheck {
     }
 
 
-    onDelete() {
-      let list = new Array();
 
-      if (this.selectAll) {
-        this.documents.forEach(doc => {
-          list.push(doc['_id']);
-        })
-      }
-      else {
-        this.imageList.forEach((image, index) => {
-          if (image) {
-            list.push(this.documents[index]['_id']);
-          }
-        })
-      }
+    onDelete() {
+      let list = this.get_ids();
 
       if (list.length > 1) {
         this.mongoImageService.deleteMany(list)
@@ -214,6 +189,20 @@ export class ImagesComponent implements OnInit, DoCheck {
           })
       }
 
+    }
+
+    get_ids() {
+      let ids = new Array();
+
+      this.selectAll ?
+        this.documents.forEach(doc => {
+          ids.push(doc['_id']);
+        }) :
+        this.imageList.forEach((image, index) => {
+          ids.push(this.documents[index]['_id']);
+        }) ;
+
+      return ids;
     }
 
     openModal(imageId: any):void {
