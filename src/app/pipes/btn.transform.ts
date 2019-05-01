@@ -9,7 +9,7 @@ export class BtnTransform implements PipeTransform {
           let name = button.name.toLowerCase();
           let language = button.language.toLowerCase();
 
-          switch(name) {
+          switch(name.toLowerCase()) {
             case 'fwd':
               button = language == 'english' ? 'next' : 'frem';
               return button;
@@ -33,6 +33,18 @@ export class BtnTransform implements PipeTransform {
               return button;
             case 'delete':
               button = language == 'english' ? name : 'slet';
+              return button;
+            case 'who':
+              button = language == 'english' ? name : 'hvem';
+              return button;
+            case 'what':
+              button = language == 'english' ? name : 'hvad';
+              return button;
+            case 'where':
+              button = language == 'english' ? name : 'hvor';
+              return button;
+            case 'why':
+              button = language == 'english' ? name : 'hvorfor';
               return button;
             default:
               return button.name;
