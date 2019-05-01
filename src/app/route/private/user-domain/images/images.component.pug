@@ -19,12 +19,26 @@ span(*ngIf="!this.mongoImageService.message.failure" class='image-main')
     div(*ngFor='let document of this.documents as documents; index as j' class='image-container')
       span(*infobox='this.showImageInformation[j]' class='infobox row')
         ng-container
-          div(class='info-key col-sm-4')
-            p(*ngIf='document.who') Who:
-            p Where:
-          div(class='info-value col-sm-8')
-            p {{document.who}}
-            p {{document.where}}
+          div(class='row')
+            div(class='info-key col-sm-3')
+              p(*ngIf='document.who') {{ { name: 'Who', language: this.activeUser.language } | btnTransform }}
+            div(class='info-value col-sm-9')
+              p {{ document.who }}
+          div(class='row')
+            div(class='info-key col-sm-3')
+              p(*ngIf='document.what') {{ { name: 'what', language: this.activeUser.language } | btnTransform }}
+            div(class='info-value col-sm-9')
+              p {{ document.what }}
+          div(class='row')
+            div(class='info-key col-sm-3')
+              p {{ { name: "Where", language: this.activeUser.language } | btnTransform }}
+            div(class='info-value col-sm-9')
+              p {{ document.where }}
+          div(class='row')
+            div(class='info-key col-sm-3')  
+              p(*ngIf='document.why') {{ { name: 'why', language: this.activeUser.language } | btnTransform }}
+            div(class='info-value col-sm-9')
+              p {{ document.why }}
       div(data-toggle='modal' class="thumbnail" data-target-not='.assetviewer-modal' id="{{document._id}}")
         img((click)='this.openModal(document._id)' src="photos/photoapp/{{document.image.fileName | extTransform}}")
         div(class='caption')
