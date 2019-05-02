@@ -6,10 +6,10 @@ import { UsersComponent } from "./users/users.component";
 import { AccountsComponent } from "./accounts/accounts.component";
 import { PermissionsComponent } from "./permissions/permissions.component";
 import { FormsModule } from "@angular/forms";
-import { UuidTransformPipe } from "../../../pipes/uuid.transform";
 import { MessageBarModule } from "../../../modules/message-bar/message-bar.module";
 import { SidebarCtaModule } from "../../../modules/sidebar-cta/sidebar-cta.module";
 import { FormSubmissionModule } from "../../../modules/form-submission/form-submission.module";
+import { PipesModule } from "../../../pipes/pipes.module";
 
 @NgModule({
     imports: [
@@ -18,16 +18,17 @@ import { FormSubmissionModule } from "../../../modules/form-submission/form-subm
         AdminDomainRoutingModule,
         MessageBarModule,
         SidebarCtaModule,
-        FormSubmissionModule
+        FormSubmissionModule,
+        PipesModule
     ],
     declarations: [
         AdminDomainComponent,
         UsersComponent,
         AccountsComponent,
         PermissionsComponent,
-        UuidTransformPipe,
     ],
-    exports: [ UuidTransformPipe ],
+    exports: [
+    ],
     providers: []
 })
 

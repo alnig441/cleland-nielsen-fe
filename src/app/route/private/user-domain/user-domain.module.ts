@@ -5,16 +5,11 @@ import { UserDomainRoutingModule } from "./user-domain-routing.module";
 import { MessageBarModule } from "../../../modules/message-bar/message-bar.module";
 import { SidebarCtaModule } from "../../../modules/sidebar-cta/sidebar-cta.module";
 import { FormSubmissionModule } from "../../../modules/form-submission/form-submission.module";
+import { PipesModule } from "../../../pipes/pipes.module";
 
 import { VideosComponent } from "./videos/videos.component";
 import { ImagesComponent } from "./images/images.component";
 import { UserDomainComponent } from "./user-domain.component";
-
-import { MonthTransform } from "../../../pipes/month.transform";
-import { ValueTransform } from "../../../pipes/value.transform";
-import { ExtTransform } from "../../../pipes/ext.transform";
-import { LabelTransform } from "../../../pipes/label.transform";
-import { DayTransform } from "../../../pipes/day.transform";
 
 import { InfoboxDirective } from "../../../directives/infobox.directive";
 import { ModalImageDirective } from "../../../directives/modalImage.directive";
@@ -24,28 +19,27 @@ import { AuthenticationGuardService } from "../../../services/authentication-gua
 
 @NgModule({
     imports: [
-        CommonModule,
-        FormsModule,
-        UserDomainRoutingModule,
-        MessageBarModule,
-        SidebarCtaModule,
-        FormSubmissionModule,
+      CommonModule,
+      FormsModule,
+      UserDomainRoutingModule,
+      MessageBarModule,
+      SidebarCtaModule,
+      FormSubmissionModule,
+      PipesModule
     ],
     declarations: [
-        UserDomainComponent,
-        ImagesComponent,
-        VideosComponent,
-        MonthTransform,
-        ValueTransform,
-        ExtTransform,
-        LabelTransform,
-        DayTransform,
-        ModalImageDirective,
-        InfoboxDirective,
-        ImageEditorDirective
+      UserDomainComponent,
+      ImagesComponent,
+      VideosComponent,
+      ModalImageDirective,
+      InfoboxDirective,
+      ImageEditorDirective
     ],
-    exports: [ MonthTransform, ValueTransform, ExtTransform, LabelTransform, DayTransform ],
-    providers: [ AuthenticationGuardService ]
+    exports: [
+    ],
+    providers: [
+      AuthenticationGuardService
+    ]
 })
 
 export class UserDomainModule {}

@@ -9,13 +9,12 @@ import { CommonModule } from "@angular/common";
 import { AppRouting } from "./app.routing";
 import { PublicModule } from "./route/public/public.module";
 import { PrivateModule } from "./route/private/private.module";
+import { PipesModule } from "./pipes/pipes.module";
 
 import { LoginComponent } from "./components/login/login.component";
 import { GlobalnavComponent } from "./components/globalnav/globalnav.component";
 import { AppLoadModule } from "./load/app-load.module";
 import { AuthenticationService } from "./services/authentication.service";
-
-import { MenuTransform } from "./pipes/menu.transform";
 
 @NgModule({
     imports: [
@@ -26,17 +25,15 @@ import { MenuTransform } from "./pipes/menu.transform";
         CommonModule,
         PublicModule,
         PrivateModule,
+        PipesModule,
         AppRouting,
-        // AppLoadModule
     ],
     declarations: [
         AppComponent,
         GlobalnavComponent,
         LoginComponent,
-        MenuTransform
     ],
     exports: [
-      MenuTransform
     ],
     providers: [
         AuthenticationService
