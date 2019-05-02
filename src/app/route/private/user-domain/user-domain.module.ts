@@ -11,7 +11,6 @@ import { ImagesComponent } from "./images/images.component";
 import { UserDomainComponent } from "./user-domain.component";
 
 import { MonthTransform } from "../../../pipes/month.transform";
-import { KeyTransform } from "../../../pipes/key.transform";
 import { ValueTransform } from "../../../pipes/value.transform";
 import { ExtTransform } from "../../../pipes/ext.transform";
 import { BtnTransform } from "../../../pipes/btn.transform";
@@ -37,7 +36,6 @@ import { AuthenticationGuardService } from "../../../services/authentication-gua
         ImagesComponent,
         VideosComponent,
         MonthTransform,
-        KeyTransform,
         ValueTransform,
         ExtTransform,
         BtnTransform,
@@ -46,7 +44,7 @@ import { AuthenticationGuardService } from "../../../services/authentication-gua
         InfoboxDirective,
         ImageEditorDirective
     ],
-    exports: [ MonthTransform, KeyTransform, ValueTransform, ExtTransform, BtnTransform, DayTransform ],
+    exports: [ MonthTransform, ValueTransform, ExtTransform, BtnTransform, DayTransform ],
     providers: [ AuthenticationGuardService ]
 })
 
