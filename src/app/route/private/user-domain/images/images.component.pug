@@ -21,17 +21,17 @@ span(*ngIf="!this.mongoImageService.message.failure" class='image-main')
         ng-container
           div(class='row')
             div(class='info-key col-sm-3')
-              p(*ngIf='document.who') {{ { name: 'Who', language: this.activeUser.language } | btnTransform }}
-            div(class='info-value col-sm-9')
-              p {{ document.who }}
-          div(class='row')
-            div(class='info-key col-sm-3')
               p(*ngIf='document.what') {{ { name: 'what', language: this.activeUser.language } | btnTransform }}
             div(class='info-value col-sm-9')
               p {{ document.what }}
           div(class='row')
             div(class='info-key col-sm-3')
-              p {{ { name: "Where", language: this.activeUser.language } | btnTransform }}
+              p(*ngIf='document.who') {{ { name: 'who', language: this.activeUser.language } | btnTransform }}
+            div(class='info-value col-sm-9')
+              p {{ document.who }}
+          div(class='row')
+            div(class='info-key col-sm-3')
+              p(*ngIf='document.where') {{ { name: "Where", language: this.activeUser.language } | btnTransform }}
             div(class='info-value col-sm-9')
               p {{ document.where }}
           div(class='row')

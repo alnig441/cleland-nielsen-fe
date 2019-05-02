@@ -1,4 +1,5 @@
 import { Directive, Input, TemplateRef, ViewContainerRef } from "@angular/core";
+import { AuthenticationService } from "../services/authentication.service";
 
 @Directive({ selector: '[infobox]' })
 
@@ -6,26 +7,36 @@ export class InfoboxDirective {
 
     constructor(
         private templateRef: TemplateRef<any>,
-        private viewContainer: ViewContainerRef
+        private viewContainer: ViewContainerRef,
+        private activeUser: AuthenticationService
     ){}
 
     @Input() set infobox(condition: boolean){
 
         if(condition) {
+          condition['what'] = condition['meta']['event'] ?
+            this.activeUser.language == 'english' ?
+              condition['meta']['event']['en'] :
+              condition['meta']['event']['da'] :
+            null ;
 
-            condition['who'] = condition['meta']['names'].length > 0 ?
-              condition['meta']['names'].toString().replace(/,/g, ', '):
-              null;
+          condition['who'] = condition['meta']['names'].length > 0 ?
+            condition['meta']['names'].toString().replace(/,/g, ', '):
+            null ;
 
-            condition['meta']['venue'] ?
-              condition['location']['country'] == 'United States' ?
-                condition['where'] =`${condition['meta']['venue']}, ${condition['location']['city']}, ${condition['location']['state']}`:
-                condition['where'] =`${condition['meta']['venue']}, ${condition['location']['city']}, ${condition['location']['country']}`:
-              condition['location']['country'] == 'United States' ?
-                condition['where'] = `${condition['location']['city']}, ${condition['location']['state']}`:
-                condition['where'] = `${condition['location']['city']}, ${condition['location']['country']}`;
+          condition['where'] = condition['meta']['venue'] ?
+            condition['location']['country'] == 'United States' ?
+              `${condition['meta']['venue']}, ${condition['location']['city']}, ${condition['location']['state']}`:
+              `${condition['meta']['venue']}, ${condition['location']['city']}, ${condition['location']['country']}`:
+            condition['location']['country'] == 'United States' ?
+              `${condition['location']['city']}, ${condition['location']['state']}`:
+              `${condition['location']['city']}, ${condition['location']['country']}`;
 
-            this.viewContainer.createEmbeddedView(this.templateRef);
+          condition['why'] = condition['meta']['occasion'] ?
+            condition['meta']['occasion'] :
+            null ;
+
+          this.viewContainer.createEmbeddedView(this.templateRef);
         } else {
             this.viewContainer.clear();
         }
