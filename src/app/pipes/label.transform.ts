@@ -46,6 +46,21 @@ export class LabelTransform implements PipeTransform {
             case 'why':
               label = language == 'english' ? name : 'hvorfor';
               return label;
+            case 'images':
+              label = language == 'english' ? name : 'billeder';
+              return label;
+            case 'videos':
+              label = language == 'english' ? name : 'film';
+              return label;
+            case 'users':
+              label = language == 'english' ? name : 'brugere';
+              return label;
+            case 'accounts':
+              label = language == 'english' ? name : 'konti';
+              return label;
+            case 'permissions':
+              label = language == 'english' ? name : 'rettigheder';
+              return label;
             default:
               return label.name;
           }
