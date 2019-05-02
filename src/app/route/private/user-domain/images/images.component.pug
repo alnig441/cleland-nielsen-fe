@@ -21,22 +21,22 @@ span(*ngIf="!this.mongoImageService.message.failure" class='image-main')
         ng-container
           div(class='row')
             div(class='info-key col-sm-3')
-              p(*ngIf='document.what') {{ { name: 'what', language: this.activeUser.language } | btnTransform }}
+              p(*ngIf='document.what') {{ { name: 'what', language: this.activeUser.language } | labelTransform }}
             div(class='info-value col-sm-9')
               p {{ document.what }}
           div(class='row')
             div(class='info-key col-sm-3')
-              p(*ngIf='document.who') {{ { name: 'who', language: this.activeUser.language } | btnTransform }}
+              p(*ngIf='document.who') {{ { name: 'who', language: this.activeUser.language } | labelTransform }}
             div(class='info-value col-sm-9')
               p {{ document.who }}
           div(class='row')
             div(class='info-key col-sm-3')
-              p(*ngIf='document.where') {{ { name: "Where", language: this.activeUser.language } | btnTransform }}
+              p(*ngIf='document.where') {{ { name: "Where", language: this.activeUser.language } | labelTransform }}
             div(class='info-value col-sm-9')
               p {{ document.where }}
           div(class='row')
             div(class='info-key col-sm-3')  
-              p(*ngIf='document.why') {{ { name: 'why', language: this.activeUser.language } | btnTransform }}
+              p(*ngIf='document.why') {{ { name: 'why', language: this.activeUser.language } | labelTransform }}
             div(class='info-value col-sm-9')
               p {{ document.why }}
       div(data-toggle='modal' class="thumbnail" data-target-not='.assetviewer-modal' id="{{document._id}}")
@@ -74,9 +74,9 @@ div(*imageEditor='this.editImages' id='image-editor')
           label(for='select_all') Select All
           input(class='checkbox' id='select_all' type='checkbox' aria-label='select_all', placeholder='select all',[(ngModel)]='selectAll', name='selectAll')
       div(class='buttons')
-        p((click)='this.onDelete()' type='button' class='btn btn-danger') {{ {name: 'delete', language: this.activeUser.language} | btnTransform }}
-        p((click)='this.clearEditor()' type='button' class='btn btn-warning') {{ {name: 'cancel', language: this.activeUser.language} | btnTransform }}
-        p((click)='this.onSubmit(e)' type='button' class='btn btn-info') {{ {name: 'update', language: this.activeUser.language} | btnTransform }}
+        p((click)='this.onDelete()' type='button' class='btn btn-danger') {{ {name: 'delete', language: this.activeUser.language} | labelTransform }}
+        p((click)='this.clearEditor()' type='button' class='btn btn-warning') {{ {name: 'cancel', language: this.activeUser.language} | labelTransform }}
+        p((click)='this.onSubmit(e)' type='button' class='btn btn-info') {{ {name: 'update', language: this.activeUser.language} | labelTransform }}
   div(class='row background')
 
 
@@ -87,17 +87,17 @@ div(class='modal fade assetviewer-modal' tabindex='1' role='dialog' aria-labelle
       ul(class="modal-image-overlay")
         li((click)="this.flipThroughImages('previous')" class="button-left")
           span(class="glyphicon glyphicon-step-backward") &nbsp; 
-          | {{ { name: 'rwd', language: this.activeUser.language } | btnTransform }}
+          | {{ { name: 'rwd', language: this.activeUser.language } | labelTransform }}
         li((click)="this.flipThroughImages('next')" class="button-right") 
-          | {{ { name: 'fwd', language: this.activeUser.language } | btnTransform}} 
+          | {{ { name: 'fwd', language: this.activeUser.language } | labelTransform}} 
           | &nbsp;
           span(class="glyphicon glyphicon-step-forward")
       ul(class="modal-image-overlay-menu")
         li(onclick="window.print(); return null;" class='button-left')
           span(class='glyphicon glyphicon-print') &nbsp;
-          | {{ { name: 'print', language: this.activeUser.language } | btnTransform }}
+          | {{ { name: 'print', language: this.activeUser.language } | labelTransform }}
         li((click)="this.cancelModal()" class='button-left')
           span(class='glyphicon glyphicon-remove') &nbsp;
-          | {{ { name: 'close', language: this.activeUser.language } | btnTransform }}
+          | {{ { name: 'close', language: this.activeUser.language } | labelTransform }}
       
           

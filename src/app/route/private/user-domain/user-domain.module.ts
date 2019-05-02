@@ -13,7 +13,7 @@ import { UserDomainComponent } from "./user-domain.component";
 import { MonthTransform } from "../../../pipes/month.transform";
 import { ValueTransform } from "../../../pipes/value.transform";
 import { ExtTransform } from "../../../pipes/ext.transform";
-import { BtnTransform } from "../../../pipes/btn.transform";
+import { LabelTransform } from "../../../pipes/label.transform";
 import { DayTransform } from "../../../pipes/day.transform";
 
 import { InfoboxDirective } from "../../../directives/infobox.directive";
@@ -38,13 +38,13 @@ import { AuthenticationGuardService } from "../../../services/authentication-gua
         MonthTransform,
         ValueTransform,
         ExtTransform,
-        BtnTransform,
+        LabelTransform,
         DayTransform,
         ModalImageDirective,
         InfoboxDirective,
         ImageEditorDirective
     ],
-    exports: [ MonthTransform, ValueTransform, ExtTransform, BtnTransform, DayTransform ],
+    exports: [ MonthTransform, ValueTransform, ExtTransform, LabelTransform, DayTransform ],
     providers: [ AuthenticationGuardService ]
 })
 
