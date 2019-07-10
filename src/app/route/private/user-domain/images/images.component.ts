@@ -222,18 +222,21 @@ export class ImagesComponent implements OnInit, DoCheck {
     }
 
     flipThroughImages(step: string): void {
-        var length = this.documents.length;
-        switch(step) {
-            case 'next':
-                this.albumViewSelector['selectedIndex'] = this.albumViewSelector['selectedIndex'] == length - 1 ?
-                  0 :
-                  this.albumViewSelector['selectedIndex'] + 1;
-                break
-            case 'previous':
-                this.albumViewSelector['selectedIndex'] = this.albumViewSelector['selectedIndex'] == 0 ?
-                  length - 1 :
-                  this.albumViewSelector['selectedIndex'] - 1;
-                break
-        }
+      var length = this.documents.length;
+      var imageIndex = this.albumViewSelector['selectedIndex'];
+
+      switch(step) {
+          case 'next':
+              this.albumViewSelector['selectedIndex'] = imageIndex == length - 1 ?
+                0 :
+                this.albumViewSelector['selectedIndex'] + 1;
+              break
+          case 'previous':
+              this.albumViewSelector['selectedIndex'] = imageIndex == 0 ?
+                length - 1 :
+                this.albumViewSelector['selectedIndex'] - 1;
+              break
+      }
+      this.modalSource = 'photos/James/' + this.documents[this.albumViewSelector['selectedIndex']]['image']['fileName'];
     }
 }
