@@ -31,6 +31,7 @@ export class ImagesComponent implements OnInit, DoCheck {
     private imageModel = new MongoImageModel();
     private imageList: string[] = new Array(6);
     private selectAll: boolean = false;
+    private modalSource: string;
 
     constructor(
         private formManager: ServiceModelManagerService,
@@ -206,16 +207,18 @@ export class ImagesComponent implements OnInit, DoCheck {
     }
 
     openModal(imageId: any):void {
-        this.documents.forEach((document, index) => {
-            if(document['_id'] == imageId){
-                this.albumViewSelector['selectedIndex'] = index;
-                $('.assetviewer-modal').modal('show');
-            };
-        })
+      this.documents.forEach((document, index) => {
+        if(document['_id'] == imageId){
+          this.modalSource = 'photos/James/' + document['image']['fileName'];
+          this.albumViewSelector['selectedIndex'] = index;
+          $('.assetviewer-modal').modal('show');
+        };
+      })
     }
 
     cancelModal(): void {
         $('.assetviewer-modal').modal('hide');
+        this.modalSource = undefined;
     }
 
     flipThroughImages(step: string): void {
