@@ -16,6 +16,9 @@ export class LabelTransform implements PipeTransform {
             case 'rwd':
               label = language == 'english' ? 'previous' : 'tilbage';
               return label;
+            case 'save':
+              label = language == 'english' ? name : 'gem';
+              return label;
             case 'close':
               label = language == 'english' ? name : 'luk';
               return label;
