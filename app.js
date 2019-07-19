@@ -22,6 +22,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(express.static(__dirname + '/dist'));
 app.use('/photos', express.static(process.env.PHOTOS_MOUNT_POINT));
+app.use('/videos', express.static(process.env.VIDEOS_MOUNT_POINT));
 //serve letsencrypt credentials
 app.use(express.static(__dirname + '/letsencrypt', { dotfiles: 'allow'}));
 
