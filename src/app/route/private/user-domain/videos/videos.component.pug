@@ -1,6 +1,17 @@
-| hello from videos
-//.col-sm-2
-//    app-sidebar
-//.col-sm-8
-//    p events component
-//.col-sm-2
+span(*ngIf="!this.mongoVideoService.message.failure" class='image-main')
+  div(class='video-menu')
+    p(type='button' class='btn btn-info btn-xs')
+      span(class='glyphicon glyphicon-search' aria-hidden='true')
+    p(*ngIf='this.activeUser.isAdmin', (click)='this.openEditor()' type='button' class='btn btn-info btn-xs')
+      span(class='glyphicon glyphicon-pencil' aria-hidden='true')
+  div(*ngFor='let month of this.months as months; index as i' class='month {{month | monthTransform}}', [ngClass]="{'active': month == this.albumViewSelector.month}")
+    a(*ngIf="month != null", (click)='setAlbumView(month)') {{ { name: month, language: this.activeUser.language } | monthTransform }}
+  div(class='reel-container {{ year }}')
+    ul(class='year')
+      li(*ngFor='let year of this.years as years; index as m', [ngClass]="{'active': year == this.albumViewSelector.year}")
+        a((click)='setAlbumView(year)') {{ year }}
+    ul(*ngIf="this.pages > 1" class='paginator')
+      li(*ngIf='this.currentPage > 1 && this.editImages.length == 0', (click)="this.turnAlbumPage('rewind')" class='rewind')
+        span(class='glyphicon glyphicon-triangle-left')
+      li(*ngIf="this.currentPage != this.pages && this.editImages.length == 0", (click)="this.turnAlbumPage('forward')" class='forward')
+        span(class='glyphicon glyphicon-triangle-right')
