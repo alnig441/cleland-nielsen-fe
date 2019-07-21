@@ -20,15 +20,23 @@ const Options = function (object) {
   return options;
 }
 
-router.get('/', (req, res, next) => {
+router.get('/photos', (req, res, next) => {
+  console.log('params in /:', req.query)
   let options = new Options({uri :'Search/Photos?', qs: req.query });
   api.get(options, (err, result, body) => {
     res.send(body);
   })
 })
 
+router.get('/videos', (req, res, next) => {
+  let options = new Options({uri: 'Search/Videos?', qs: req.query});
+  api.get(options, (err, result, body) => {
+    res.send(body);
+  })
+})
+
 router.get('/generate_tabs?', (req, res, next) => {
-  let uri = req.query.year ? `Distinct/${req.query.year}/Photos` : 'Distinct/Photos';
+  let uri = req.query.year ? `Distinct/${req.query.year}/${req.query.endpoint}` : `Distinct/${req.query.endpoint}`;
   let options = new Options({ uri: uri });
   api.get(options, (error, result, body) => {
     body = body.filter( element => {
