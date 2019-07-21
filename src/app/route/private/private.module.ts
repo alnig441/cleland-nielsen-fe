@@ -2,6 +2,7 @@ import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { PrivateRoutingModule } from "./private-routing.module";
 import { MongoImageServices } from "../../services/mongoImage.services";
+import { MongoVideoServices } from "../../services/mongoVideo.services";
 import { httpInterceptorProviders } from "../../services/interceptors/http-interceptors";
 import { UserServices } from "../../services/user.services";
 import { FormsModule } from "@angular/forms";
@@ -29,6 +30,7 @@ import { ServiceModelManagerService } from "../../services/service-model-manager
         AccountServices,
         UserServices,
         MongoImageServices,
+        MongoVideoServices,
         SetMessageService,
         ServiceModelManagerService,
         httpInterceptorProviders,
