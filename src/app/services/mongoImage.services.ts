@@ -26,7 +26,8 @@ export class MongoImageServices {
         this.message.set({ status: 405, message: 'insufficient permissions'});
     }
     else{
-      let params = new HttpParams();
+      let params = new HttpParams({ fromString: 'endpoint'});
+      params = params.set('endpoint', 'Photos');
       params = year ? params.append('year', year.toString()): params;
 
       return this.http.get(this.baseUrl + '/generate_tabs?', { params : params , observe: 'body'})
@@ -56,7 +57,7 @@ export class MongoImageServices {
       params = page ? params.append('page', page.toString()) : params;
       params = doAnd ? params.set('doAnd', 'yes') : params;
 
-      return this.http.get(this.baseUrl + '/', { params : params , observe: 'body'})
+      return this.http.get(this.baseUrl + '/photos', { params : params , observe: 'body'})
         .toPromise()
         .then((res : any) => {
             return Promise.resolve(res);
