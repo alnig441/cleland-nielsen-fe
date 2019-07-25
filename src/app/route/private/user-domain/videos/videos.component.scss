@@ -1,0 +1,43 @@
+app-videos {
+  background-color: whitesmoke;
+  text-align: right;
+}
+
+.video-main {
+  display: inline-block;
+}
+
+.video-menu {
+  position: absolute;
+}
+
+.video-menu .btn {
+  position: relative;
+  bottom: 5px;
+  float: left;
+  margin-right: 2px;
+}
+
+.month {
+  display: inline-block;
+  margin-left: 3px;
+}
+
+.reel-container {
+  border-top: 1px solid;
+  background-image: linear-gradient(to right, white ,lightgray, lightgray, white);
+  text-align: center;
+  opacity: .95;
+  border-radius: 3px 0 0 0;
+}
+
+.video-list {
+  padding: none;
+  list-style: none;
+}
+
+.video-list li {
+  margin: auto;
+  text-align: center;
+  width: 630px;
+}
