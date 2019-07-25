@@ -16,8 +16,12 @@ span(*ngIf="!this.mongoVideoService.message.failure" class='video-main')
       li(*ngIf="this.currentPage != this.pages && this.editVideos.length == 0", (click)="this.turnAlbumPage('forward')" class='forward')
         span(class='glyphicon glyphicon-triangle-right')
 
-  div
-    ul(class='video-list')
-      li(*ngFor='let video of this.documents;' class='video-item')
-        a {{ video.location.city }}, {{ video.location.country }}
-          span(class="glyphicon glyphicon-play" aria-hidden="true")
+    div(class='video-list-container')
+      ul(class='video-list')
+        li(*ngFor='let video of this.documents;index as i;' class='video-item')
+          div(class='video-label')
+            p(*ngIf='video.meta.venue') {{ video.date.day}}/{{ video.date.month + 1 }} {{ video.meta.venue }}, {{ video.location.country }}
+            p(*ngIf='video.location.city') {{ video.date.day}}/{{ video.date.month + 1 }} {{ video.location.city }}, {{ video.location.country }}
+            p(*ngIf='!video.location.city && !video.meta.venue') {{ video.date.day}}/{{ video.date.month + 1 }} {{ video.location.country }}
+          button(class='btn btn-info btn-xs')
+            span(class="glyphicon glyphicon-play" aria-hidden="true")
