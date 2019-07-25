@@ -7,7 +7,7 @@ import { ActivatedRoute } from "@angular/router";
 import { SetMessageService } from "../../../../services/set-message.service";
 
 @Component({
-    selector: 'app-events',
+    selector: 'app-videos',
     template: require('./videos.component.pug'),
     styleUrls: ['./videos.component.scss'],
     encapsulation: ViewEncapsulation.None
@@ -101,12 +101,12 @@ export class VideosComponent implements OnInit {
   }
 
   getDocs ( model: MongoVideoModel, page: number, doAnd: boolean ) {
-    // this.mongoImageService.search( model, page, doAnd )
-    //   .then((body: any) => {
-    //     this.pages = body.pages;
-    //     this.total = body.total;
-    //     this.documents = body.docs;
-    //   })
+    this.mongoVideoService.search( model, page, doAnd )
+      .then((body: any) => {
+        this.pages = body.pages;
+        this.total = body.total;
+        this.documents = body.docs;
+      })
   }
 
   setModel ( year: number, month: number ) {
