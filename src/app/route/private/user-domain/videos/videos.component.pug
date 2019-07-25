@@ -1,4 +1,4 @@
-span(*ngIf="!this.mongoVideoService.message.failure" class='image-main')
+span(*ngIf="!this.mongoVideoService.message.failure" class='video-main')
   div(class='video-menu')
     p(type='button' class='btn btn-info btn-xs')
       span(class='glyphicon glyphicon-search' aria-hidden='true')
@@ -11,7 +11,13 @@ span(*ngIf="!this.mongoVideoService.message.failure" class='image-main')
       li(*ngFor='let year of this.years as years; index as m', [ngClass]="{'active': year == this.albumViewSelector.year}")
         a((click)='setAlbumView(year)') {{ year }}
     ul(*ngIf="this.pages > 1" class='paginator')
-      li(*ngIf='this.currentPage > 1 && this.editImages.length == 0', (click)="this.turnAlbumPage('rewind')" class='rewind')
+      li(*ngIf='this.currentPage > 1 && this.editVideos.length == 0', (click)="this.turnAlbumPage('rewind')" class='rewind')
         span(class='glyphicon glyphicon-triangle-left')
-      li(*ngIf="this.currentPage != this.pages && this.editImages.length == 0", (click)="this.turnAlbumPage('forward')" class='forward')
+      li(*ngIf="this.currentPage != this.pages && this.editVideos.length == 0", (click)="this.turnAlbumPage('forward')" class='forward')
         span(class='glyphicon glyphicon-triangle-right')
+
+  div
+    ul(class='video-list')
+      li(*ngFor='let video of this.documents;' class='video-item')
+        a {{ video.location.city }}, {{ video.location.country }}
+          span(class="glyphicon glyphicon-play" aria-hidden="true")
