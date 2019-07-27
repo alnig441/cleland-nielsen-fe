@@ -118,7 +118,7 @@ export class VideosComponent implements OnInit {
   openModal(videoId: any):void {
     this.documents.forEach((document, index) => {
       if(document['_id'] == videoId){
-        this.modalSource = 'photos/videos/' + document['video']['fileName'];
+        this.modalSource = 'videos/' + document['video']['fileName'];
         this.albumViewSelector['selectedIndex'] = index;
         $('.video-modal').modal('show');
       };
