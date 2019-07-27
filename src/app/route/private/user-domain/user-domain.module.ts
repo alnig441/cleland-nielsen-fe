@@ -13,6 +13,7 @@ import { UserDomainComponent } from "./user-domain.component";
 
 import { InfoboxDirective } from "../../../directives/infobox.directive";
 import { ModalImageDirective } from "../../../directives/modalImage.directive";
+import { ModalVideoDirective } from "../../../directives/modalVideo.directive";
 import { ImageEditorDirective } from "../../../directives/image-editor.directive";
 
 import { AuthenticationGuardService } from "../../../services/authentication-guard.service";
@@ -32,6 +33,7 @@ import { AuthenticationGuardService } from "../../../services/authentication-gua
       ImagesComponent,
       VideosComponent,
       ModalImageDirective,
+      ModalVideoDirective,
       InfoboxDirective,
       ImageEditorDirective
     ],
