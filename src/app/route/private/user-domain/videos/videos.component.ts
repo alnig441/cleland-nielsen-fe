@@ -6,6 +6,8 @@ import { MongoVideoModel } from "../../../../models/mongoVideo.model";
 import { ActivatedRoute } from "@angular/router";
 import { SetMessageService } from "../../../../services/set-message.service";
 
+const $ = require('jquery');
+
 @Component({
     selector: 'app-videos',
     template: require('./videos.component.pug'),
@@ -28,7 +30,7 @@ export class VideosComponent implements OnInit {
   private videoModel = new MongoVideoModel();
   // private videoList: string[] = new Array(6);
   private selectAll: boolean = false;
-  // private modalSource: string;
+  private modalSource: string;
 
   constructor(
     private formManager: ServiceModelManagerService,
@@ -111,6 +113,21 @@ export class VideosComponent implements OnInit {
 
   setModel ( year: number, month: number ) {
     return new MongoVideoModel( null, year, month );
+  }
+
+  openModal(videoId: any):void {
+    this.documents.forEach((document, index) => {
+      if(document['_id'] == videoId){
+        this.modalSource = 'photos/videos/' + document['video']['fileName'];
+        this.albumViewSelector['selectedIndex'] = index;
+        $('.video-modal').modal('show');
+      };
+    })
+  }
+
+  cancelModal(): void {
+      $('.video-modal').modal('hide');
+      this.modalSource = undefined;
   }
 
   openEditor() : void {
