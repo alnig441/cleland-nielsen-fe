@@ -22,10 +22,8 @@ export class MongoImageServices {
   ) {}
 
   generateTabs(year?: number): Promise<any> {
-    if(!this.activeUser.isPermitted['to_view_images']){
-        this.message.set({ status: 405, message: 'insufficient permissions'});
-    }
-    else{
+
+    if (this.activeUser.isAdmin || this.activeUser.isPermitted['to_view_images']) {
       let params = new HttpParams();
       params = year ? params.append('year', year.toString()): params;
 
@@ -38,14 +36,15 @@ export class MongoImageServices {
         .catch((error: any) => {
             this.message.set(error)
         })
+    } else {
+      this.message.set({ status: 405, message: 'insufficient permissions'});
     }
+    
   }
 
   search(form: MongoImageModel, page?: any, doAnd?: boolean): Promise<any> {
-    if(!this.activeUser.isPermitted['to_view_images']){
-        this.message.set({ status: 405, message: 'insufficient permissions'});
-    }
-    else{
+
+    if (this.activeUser.isAdmin || this.activeUser.isPermitted['to_view_images']) {
       let params = new HttpParams({ fromString: 'doAnd' });
       let keys = Object.keys(form);
       keys.forEach( key => {
@@ -65,14 +64,15 @@ export class MongoImageServices {
         .catch((error: any) => {
             this.message.set(error)
         })
+    } else {
+      this.message.set({ status: 405, message: 'insufficient permissions'});
     }
+
   }
 
   findOne(_id: string): Promise<any> {
-    if ( !this.activeUser.isPermitted['to_view_images'] ){
-      this.message.set({ status: 405, message: 'insufficient permissions'});
-    }
-    else {
+
+    if (this.activeUser.isAdmin || this.activeUser.isPermitted['to_view_images']) {
       return this.http.get(`${this.baseUrl}/${_id}`, { observe: 'body' })
         .toPromise()
         .then((res: any) => {
@@ -82,14 +82,15 @@ export class MongoImageServices {
         .catch((error: any) => {
           this.message.set(error);
         })
+    } else {
+      this.message.set({ status: 405, message: 'insufficient permissions'});
     }
+
   }
 
   updateOne(_id: string, form: MongoImageModel): Promise<any> {
-    if ( !this.activeUser.isPermitted['to_edit_images'] ){
-      this.message.set({ status: 405, message: 'insufficient permissions'});
-    }
-    else {
+
+    if (this.activeUser.isAdmin || this.activeUser.isPermitted['to_edit_images']) {
       return this.http.post(`${this.baseUrl}/${_id}`, form, { observe: 'body' })
         .toPromise()
         .then((res: any) => {
@@ -99,14 +100,15 @@ export class MongoImageServices {
         .catch((error: any) => {
           this.message.set(error);
         })
+    } else {
+      this.message.set({ status: 405, message: 'insufficient permissions'});
     }
+
   }
 
   updateMany(_ids: string[], form: MongoImageModel): Promise<any> {
-    if ( !this.activeUser.isPermitted['to_edit_images'] ) {
-      this.message.set({ status: 405, message: 'insufficient permissions'});
-    }
-    else {
+
+    if (this.activeUser.isAdmin || this.activeUser.isPermitted['to_edit_images']) {
       let body = { form: form, _ids: _ids };
       return this.http.post(`${this.baseUrl}/update`, body, { observe: 'body' })
         .toPromise()
@@ -117,24 +119,26 @@ export class MongoImageServices {
         .catch((error: any) =>{
           this.message.set(error);
         })
+    } else {
+      this.message.set({ status: 405, message: 'insufficient permissions'});
     }
+
   }
 
   deleteMany(_ids: string[]): Promise<any> {
-    if (!this.activeUser.isPermitted['to_delete_images']) {
-      this.message.set({ status: 405, message: 'insufficient permissions'});
-    }
-    else {
+
+    if (this.activeUser.isAdmin || this.activeUser.isPermitted['to_delete_images']) {
       this.message.set({ status: 300, message: 'not yet implemented' });
       return Promise.resolve({message: 'done'});
+    } else {
+      this.message.set({ status: 405, message: 'insufficient permissions'});
     }
+
   }
 
   deleteOne(_id: string): Promise<any> {
-    if ( !this.activeUser.isPermitted['to_delete_images'] ){
-      this.message.set({ status: 405, message: 'insufficient permissions'});
-    }
-    else {
+
+    if (this.activeUser.isAdmin || this.activeUser.isPermitted['to_delete_images']) {
       return this.http.delete(`${this.baseUrl}/${_id}`, { observe: 'body' })
         .toPromise()
         .then((res: any) => {
@@ -144,7 +148,10 @@ export class MongoImageServices {
         .catch((error: any) => {
           this.message.set(error);
         })
+    } else {
+      this.message.set({ status: 405, message: 'insufficient permissions'});
     }
+
   }
 
 }
