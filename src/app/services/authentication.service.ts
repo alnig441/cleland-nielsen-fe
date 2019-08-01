@@ -18,6 +18,7 @@ export class AuthenticationService {
     language: string;
 
     redirectUrl: string;
+    startPage: string;
 
     constructor(
         private http: HttpClient,
