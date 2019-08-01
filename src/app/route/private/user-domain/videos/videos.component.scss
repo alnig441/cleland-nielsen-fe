@@ -96,10 +96,11 @@ app-videos {
 }
 
 .video-list-container {
-
+  padding: 10px 0px;
 }
 
 .video-list {
+  margin: 0px;
   padding: 0px;
   list-style: none;
 }
@@ -123,9 +124,6 @@ app-videos {
   color: #777;
 }
 
-.video-item:first-child {
-  margin-top: 10px;
-}
 
 .video-label {
   border: 1px solid lightgray;
