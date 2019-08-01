@@ -15,7 +15,10 @@ import { AuthenticationService } from "./authentication.service";
 
 export class AuthenticationGuardService implements CanActivate, CanActivateChild, CanLoad {
 
-    constructor(private  authenticator: AuthenticationService, private router: Router) {}
+    constructor(
+      private  authenticator: AuthenticationService,
+      private router: Router
+    ) {}
 
     checkLogin(url: string): boolean {
 

@@ -54,6 +54,7 @@ export class LoginComponent implements OnInit {
                       preserveFragment: true
                   };
 
+                  this.setRedirectUrl();
                   this.router.navigate([this.authenticator.redirectUrl],navigationExtras);
               })
               .catch(this.errorParser.handleError)
@@ -69,6 +70,23 @@ export class LoginComponent implements OnInit {
           },2500)
         })
 
+    }
+
+    setRedirectUrl(): void {
+      if (this.authenticator.isPermitted['to_view_images'] || this.authenticator.isPermitted['to_view_videos']) {
+        this.authenticator.redirectUrl = '/private/user-domain';
+        this.authenticator.startPage = this.authenticator.isPermitted['to_view_images'] ?
+          '/images':
+          '/videos';
+      }
+      else if (this.authenticator.isPermitted['to_view_users'] || this.authenticator.isPermitted['to_view_accounts'] || this.authenticator.isPermitted['to_view_permissions']) {
+        this.authenticator.redirectUrl = '/private/admin-domain';
+        this.authenticator.startPage = this.authenticator.isPermitted['to_view_users'] ?
+          '/users':
+          this.authenticator.isPermitted['to_view_accounts'] ?
+            '/accounts':
+            '/permissions';
+      }
     }
 
     onCancel(): void {

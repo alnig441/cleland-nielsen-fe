@@ -145,6 +145,7 @@ export class ImagesComponent implements OnInit, DoCheck {
 
     onSubmit() {
       let list = this.get_ids();
+      this.doAnd = true;
 
       if (list.length > 1) {
         this.mongoImageService.updateMany(list, this.imageModel)

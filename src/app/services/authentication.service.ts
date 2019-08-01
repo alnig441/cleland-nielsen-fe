@@ -18,6 +18,7 @@ export class AuthenticationService {
     language: string;
 
     redirectUrl: string;
+    startPage: string;
 
     constructor(
         private http: HttpClient,
@@ -26,8 +27,6 @@ export class AuthenticationService {
     ) {}
 
     login(form: LoginModel): Promise<any> {
-
-      this.redirectUrl = '/private/user-domain';
 
       return this.http.post('/login', form, { observe: "body"})
         .toPromise()
@@ -68,6 +67,7 @@ export class AuthenticationService {
         this.isLoggedIn = false;
         this.isPermitted = {};
         this.redirectUrl = "/home";
+        this.startPage = '';
         this.router.navigate([this.redirectUrl]);
     }
 }
