@@ -14,7 +14,11 @@ export class AccountServices {
     accounts: AccountModel[] = new Array();
     baseUrl = '/accountsDb';
 
-    constructor(private message: SetMessageService, private http: HttpClient, private activeUser: AuthenticationService) {}
+    constructor(
+      private message: SetMessageService,
+      private http: HttpClient,
+      private activeUser: AuthenticationService
+    ) {}
 
     getAll(): Promise<any> {
         if(!this.activeUser.isPermitted['to_view_accounts']){

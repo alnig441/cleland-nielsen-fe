@@ -14,7 +14,11 @@ export class UserServices {
     users: UserModel[] = new Array();
     baseUrl = '/usersDb';
 
-    constructor(private message: SetMessageService, private http: HttpClient, private activeUser: AuthenticationService) {}
+    constructor(
+      private message: SetMessageService,
+      private http: HttpClient,
+      private activeUser: AuthenticationService
+    ) {}
 
     getAll(): Promise<any> {
         if(!this.activeUser.isPermitted['to_view_users']){

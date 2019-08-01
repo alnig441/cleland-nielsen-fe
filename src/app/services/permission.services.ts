@@ -13,8 +13,12 @@ export class PermissionServices {
     errorParser = new ErrorParser();
     permissions: PermissionModel[] = new Array();
     baseUrl = '/permissionsDb';
-    
-    constructor(private message: SetMessageService, private http: HttpClient, private activeUser: AuthenticationService) {}
+
+    constructor(
+      private message: SetMessageService,
+      private http: HttpClient,
+      private activeUser: AuthenticationService
+    ) {}
 
     getAll(): Promise<any> {
         if(!this.activeUser.isPermitted['to_view_permissions']){

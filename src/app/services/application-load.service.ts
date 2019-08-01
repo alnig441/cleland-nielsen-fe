@@ -7,7 +7,9 @@ import "rxjs/add/operator/toPromise";
 @Injectable()
 export class AppLoadService {
 
-    constructor(private http: HttpClient) {}
+    constructor(
+      private http: HttpClient
+    ) {}
 
     initializeApp(): Promise<any> {
 
