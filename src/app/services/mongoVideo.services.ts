@@ -21,10 +21,8 @@ export class MongoVideoServices {
   ) {}
 
   generateTabs(year?: number): Promise<any> {
-    if(!this.activeUser.isPermitted['to_view_videos']){
-        this.message.set({ status: 405, message: 'insufficient permissions'});
-    }
-    else{
+
+    if (this.activeUser.isAdmin || this.activeUser.isPermitted['to_view_videos']) {
       let params = new HttpParams({ fromString: 'endpoint'});
       params = params.set('endpoint', 'Videos');
       params = year ?
@@ -34,21 +32,21 @@ export class MongoVideoServices {
       return this.http.get(this.baseUrl + '/generate_tabs?', { params : params , observe: 'body'})
         .toPromise()
         .then((res : any) => {
-            console.log('mong serv; ', res);
             return Promise.resolve(res);
         })
         .catch(this.errorParser.handleError)
         .catch((error: any) => {
             this.message.set(error)
         })
+    } else {
+      this.message.set({ status: 405, message: 'insufficient permissions'});
     }
+
   }
 
   search(form: MongoVideoModel, page?: any, doAnd?: boolean): Promise<any> {
-    if(!this.activeUser.isPermitted['to_view_videos']){
-        this.message.set({ status: 405, message: 'insufficient permissions'});
-    }
-    else{
+
+    if (this.activeUser.isAdmin || this.activeUser.isPermitted['to_view_videos']) {
       let params = new HttpParams({ fromString: 'doAnd' });
       let keys = Object.keys(form);
       keys.forEach( key => {
@@ -68,6 +66,9 @@ export class MongoVideoServices {
         .catch((error: any) => {
             this.message.set(error)
         })
+    } else {
+      this.message.set({ status: 405, message: 'insufficient permissions'});
     }
+
   }
 }
