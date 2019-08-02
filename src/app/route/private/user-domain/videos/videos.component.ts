@@ -51,12 +51,10 @@ export class VideosComponent implements OnInit {
     this.mongoVideoService.generateTabs()
         .then((years: number[]) => {
           if (years.length > 0) {
-            console.log('years: ', years);
             this.years = years.reverse();
             this.albumViewSelector['year'] = this.years[0];
             this.mongoVideoService.generateTabs(this.years[0])
                 .then((months: number[]) => {
-                  console.log('months: ', months);
                   this.months = months;
                   this.albumViewSelector['month'] = this.months[this.months.length - 1];
                   let model = new MongoVideoModel( null, this.years[0], this.months[this.months.length - 1] );
@@ -125,7 +123,12 @@ export class VideosComponent implements OnInit {
     })
   }
 
-  cancelModal(): void {
+  stopPropagation(event: any):void {
+    event.stopPropagation();
+  }
+
+  cancelModal(event: any): void {
+    console.log('what event: ', event);
       $('.video-modal').modal('hide');
       this.modalSource = undefined;
   }
