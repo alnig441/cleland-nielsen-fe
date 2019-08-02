@@ -25,7 +25,10 @@ export class MongoImageServices {
 
     if (this.activeUser.isAdmin || this.activeUser.isPermitted['to_view_images']) {
       let params = new HttpParams();
-      params = year ? params.append('year', year.toString()): params;
+      params = params.set('endpoint', 'Photos');
+      params = year ?
+        params.append('year', year.toString()):
+        params;
 
       return this.http.get(this.baseUrl + '/generate_tabs?', { params : params , observe: 'body'})
         .toPromise()
