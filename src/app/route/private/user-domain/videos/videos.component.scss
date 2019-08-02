@@ -137,3 +137,17 @@ app-videos {
   margin: 0px;
   padding: 3px;
 }
+
+.modal-video-overlay-positioner {
+  background-color: lightgray;
+  margin-left: 0px;
+  margin-right: 0px;
+  display: inline-block;
+  padding: 5px;
+}
+
+.modal-video-container {
+  position: relative;
+  top: 25%;
+  text-align: center;
+}
