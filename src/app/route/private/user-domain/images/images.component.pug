@@ -81,9 +81,9 @@ div(*imageEditor='this.editImages' id='image-editor')
 
 
 div((click)='this.cancelModal()' class='modal fade assetviewer-modal' tabindex='1' role='dialog' aria-labelledby='assetviewerModal')
-  div(class='modal-image-container')
+  div(stop-propagation-on-click, class='modal-image-container')
     span(class='modal-image-overlay-positioner')
-      img(*modalImage="this.modalSource", (click)="this.stopPropagation($event)" class="modal-image" src="{{ this.modalSource }}" id="{{this.documents[this.albumViewSelector['selectedIndex']]['_id']}}")
+      img(*modalImage="this.modalSource", class="modal-image" src="{{ this.modalSource }}" id="{{this.documents[this.albumViewSelector['selectedIndex']]['_id']}}")
       ul(class="modal-image-overlay")
         li((click)="this.flipThroughImages('previous')" class="button-left")
           span(class="glyphicon glyphicon-step-backward") &nbsp; 
@@ -103,5 +103,3 @@ div((click)='this.cancelModal()' class='modal fade assetviewer-modal' tabindex='
         li((click)="this.cancelModal()" class='button-left')
           span(class='glyphicon glyphicon-remove') &nbsp;
           | {{ { name: 'close', language: this.activeUser.language } | labelTransform }}
-      
-          
