@@ -290,12 +290,15 @@ app-images {
 }
 
 .modal {
+  text-align: center;
   top: 10px;
 }
 
 .modal-image-container {
-  position: relative;
-  text-align: center;
+  background-color: lightgray;
+  margin-left: 0px;
+  margin-right: 0px;
+  display: inline-block;
 }
 
 .modal-image-overlay-positioner {
@@ -304,7 +307,6 @@ app-images {
 
 .modal-image {
   border: 5px solid lightgray;
-  // max-height: 900px;
 }
 
 @media screen and (min-height: 600px) {
@@ -440,14 +442,12 @@ app-images {
   color: black;
   opacity: .8;
   border-radius: 5px;
-  // padding: 5px 0px;
   margin: 40px;
 }
 
 .infobox p {
   font-size: x-small;
   margin: 3px;
-  // margin-left: 3px;
 }
 
 .infobox .info-key {
