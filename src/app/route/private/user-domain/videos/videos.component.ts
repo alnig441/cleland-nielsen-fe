@@ -123,14 +123,13 @@ export class VideosComponent implements OnInit {
     })
   }
 
-  stopPropagation(event: any):void {
-    event.stopPropagation();
-  }
+  // stopPropagation(event: any):void {
+  //   event.stopPropagation();
+  // }
 
   cancelModal(event: any): void {
-    console.log('what event: ', event);
-      $('.video-modal').modal('hide');
-      this.modalSource = undefined;
+    $('.video-modal').modal('hide');
+    this.modalSource = undefined;
   }
 
   openEditor() : void {

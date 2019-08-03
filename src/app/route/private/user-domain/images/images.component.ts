@@ -222,10 +222,6 @@ export class ImagesComponent implements OnInit, DoCheck {
         this.modalSource = undefined;
     }
 
-    stopPropagation(event:any): void {
-      event.stopPropagation();
-    }
-
     flipThroughImages(step: string): void {
       var length = this.documents.length;
       var imageIndex = this.albumViewSelector['selectedIndex'];
