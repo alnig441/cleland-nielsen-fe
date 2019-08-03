@@ -15,6 +15,8 @@ import { InfoboxDirective } from "../../../directives/infobox.directive";
 import { ModalImageDirective } from "../../../directives/modalImage.directive";
 import { ModalVideoDirective } from "../../../directives/modalVideo.directive";
 import { ImageEditorDirective } from "../../../directives/image-editor.directive";
+import { StopPropagationOnClick } from "../../../directives/stop-propagation-on-click.directive";
+import { DestroyVideoOnEnded } from "../../../directives/destroy-video-on-ended.directive";
 
 import { AuthenticationGuardService } from "../../../services/authentication-guard.service";
 
@@ -35,7 +37,9 @@ import { AuthenticationGuardService } from "../../../services/authentication-gua
       ModalImageDirective,
       ModalVideoDirective,
       InfoboxDirective,
-      ImageEditorDirective
+      ImageEditorDirective,
+      StopPropagationOnClick,
+      DestroyVideoOnEnded
     ],
     exports: [
     ],
