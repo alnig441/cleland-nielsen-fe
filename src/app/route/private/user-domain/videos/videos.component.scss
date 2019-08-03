@@ -138,16 +138,16 @@ app-videos {
   padding: 3px;
 }
 
-.modal-video-overlay-positioner {
+.video-modal {
+  text-align: center;
+}
+
+.modal-video-container {
   background-color: lightgray;
   margin-left: 0px;
   margin-right: 0px;
   display: inline-block;
   padding: 5px;
-}
-
-.modal-video-container {
   position: relative;
   top: 25%;
-  text-align: center;
 }
