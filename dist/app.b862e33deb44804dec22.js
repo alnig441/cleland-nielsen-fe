@@ -13324,16 +13324,13 @@ let VideosComponent = class VideosComponent {
     openModal(videoId) {
         this.documents.forEach((document, index) => {
             if (document['_id'] == videoId) {
-                this.modalSource = 'videos/' + document['video']['fileName'];
+                this.modalSource = 'videos/James/' + document['video']['fileName'];
                 this.albumViewSelector['selectedIndex'] = index;
                 $('.video-modal').modal('show');
             }
             ;
         });
     }
-    // stopPropagation(event: any):void {
-    //   event.stopPropagation();
-    // }
     cancelModal(event) {
         $('.video-modal').modal('hide');
         this.modalSource = undefined;
@@ -33091,4 +33088,4 @@ exports.AuthenticationGuardService = AuthenticationGuardService;
 /***/ })
 
 },[654]);
-//# sourceMappingURL=app.011572fa2de549ad2191.js.map
+//# sourceMappingURL=app.b862e33deb44804dec22.js.map
