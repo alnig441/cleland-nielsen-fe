@@ -295,6 +295,8 @@ app-images {
 }
 
 .modal-image-container {
+  position: relative;
+  top: 10%;
   background-color: lightgray;
   margin-left: 0px;
   margin-right: 0px;
@@ -307,30 +309,6 @@ app-images {
 
 .modal-image {
   border: 5px solid lightgray;
-}
-
-@media screen and (min-height: 600px) {
-  .modal-image {
-    max-height: 580px;
-  }
-}
-
-@media screen and (min-height: 768px) {
-  .modal-image {
-    max-height: 748px;
-  }
-}
-
-@media screen and (min-height: 900px) {
-  .modal-image {
-    max-height: 880px;
-  }
-}
-
-@media screen and (min-height: 1080px) {
-  .modal-image {
-    max-height: 1060px;
-  }
 }
 
 @media print {
