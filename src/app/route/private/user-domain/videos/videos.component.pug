@@ -28,7 +28,7 @@ span(*ngIf="!this.mongoVideoService.message.failure", (keyup.esc)="this.cancelMo
 
   div((click)="this.cancelModal()" class='modal fade video-modal' tabindex='1' role='dialog' aria-labelledby='videoModal')
     div(class='modal-video-container')
-      video(*modalVideo="this.modalSource",stop-propagation-on-click, destroy-video-on-ended, id="video" controls autoplay height="400" width="225")
+      video(*modalVideo="this.modalSource",stop-propagation-on-click, destroy-video-on-ended, id="video" controls autoplay)
         source(src="{{ this.modalSource }}" type="video/mp4")  
         source(src="{{ this.modalSource }}" type="video/ogg")
         source(src="{{ this.modalSource }}" type="video/webm")
