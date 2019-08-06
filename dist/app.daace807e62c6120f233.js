@@ -1836,7 +1836,7 @@ exports.PipesModule = PipesModule;
 
 /***/ }),
 
-/***/ 20:
+/***/ 15:
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -13007,7 +13007,7 @@ const mongoImage_model_1 = __webpack_require__(138);
 const service_model_manager_service_1 = __webpack_require__(30);
 const router_1 = __webpack_require__(21);
 const set_message_service_1 = __webpack_require__(29);
-const $ = __webpack_require__(20);
+const $ = __webpack_require__(15);
 let ImagesComponent = class ImagesComponent {
     constructor(formManager, activatedRoute, activeUser, mongoImageService, message) {
         this.formManager = formManager;
@@ -13237,7 +13237,7 @@ const mongoVideo_services_1 = __webpack_require__(217);
 const mongoVideo_model_1 = __webpack_require__(724);
 const router_1 = __webpack_require__(21);
 const set_message_service_1 = __webpack_require__(29);
-const $ = __webpack_require__(20);
+const $ = __webpack_require__(15);
 let VideosComponent = class VideosComponent {
     constructor(formManager, activeUser, activatedRoute, mongoVideoService, message) {
         this.formManager = formManager;
@@ -16334,7 +16334,7 @@ __webpack_require__ (676);
 /***/ (function(module, exports, __webpack_require__) {
 
 /*** IMPORTS FROM imports-loader ***/
-var jQuery = __webpack_require__(20);
+var jQuery = __webpack_require__(15);
 
 /* ========================================================================
  * Bootstrap: transition.js v3.3.7
@@ -16404,7 +16404,7 @@ var jQuery = __webpack_require__(20);
 /***/ (function(module, exports, __webpack_require__) {
 
 /*** IMPORTS FROM imports-loader ***/
-var jQuery = __webpack_require__(20);
+var jQuery = __webpack_require__(15);
 
 /* ========================================================================
  * Bootstrap: alert.js v3.3.7
@@ -16509,7 +16509,7 @@ var jQuery = __webpack_require__(20);
 /***/ (function(module, exports, __webpack_require__) {
 
 /*** IMPORTS FROM imports-loader ***/
-var jQuery = __webpack_require__(20);
+var jQuery = __webpack_require__(15);
 
 /* ========================================================================
  * Bootstrap: button.js v3.3.7
@@ -16645,7 +16645,7 @@ var jQuery = __webpack_require__(20);
 /***/ (function(module, exports, __webpack_require__) {
 
 /*** IMPORTS FROM imports-loader ***/
-var jQuery = __webpack_require__(20);
+var jQuery = __webpack_require__(15);
 
 /* ========================================================================
  * Bootstrap: carousel.js v3.3.7
@@ -16893,7 +16893,7 @@ var jQuery = __webpack_require__(20);
 /***/ (function(module, exports, __webpack_require__) {
 
 /*** IMPORTS FROM imports-loader ***/
-var jQuery = __webpack_require__(20);
+var jQuery = __webpack_require__(15);
 
 /* ========================================================================
  * Bootstrap: collapse.js v3.3.7
@@ -17116,7 +17116,7 @@ var jQuery = __webpack_require__(20);
 /***/ (function(module, exports, __webpack_require__) {
 
 /*** IMPORTS FROM imports-loader ***/
-var jQuery = __webpack_require__(20);
+var jQuery = __webpack_require__(15);
 
 /* ========================================================================
  * Bootstrap: dropdown.js v3.3.7
@@ -17292,7 +17292,7 @@ var jQuery = __webpack_require__(20);
 /***/ (function(module, exports, __webpack_require__) {
 
 /*** IMPORTS FROM imports-loader ***/
-var jQuery = __webpack_require__(20);
+var jQuery = __webpack_require__(15);
 
 /* ========================================================================
  * Bootstrap: modal.js v3.3.7
@@ -17642,7 +17642,7 @@ var jQuery = __webpack_require__(20);
 /***/ (function(module, exports, __webpack_require__) {
 
 /*** IMPORTS FROM imports-loader ***/
-var jQuery = __webpack_require__(20);
+var jQuery = __webpack_require__(15);
 
 /* ========================================================================
  * Bootstrap: tooltip.js v3.3.7
@@ -18173,7 +18173,7 @@ var jQuery = __webpack_require__(20);
 /***/ (function(module, exports, __webpack_require__) {
 
 /*** IMPORTS FROM imports-loader ***/
-var jQuery = __webpack_require__(20);
+var jQuery = __webpack_require__(15);
 
 /* ========================================================================
  * Bootstrap: popover.js v3.3.7
@@ -18292,7 +18292,7 @@ var jQuery = __webpack_require__(20);
 /***/ (function(module, exports, __webpack_require__) {
 
 /*** IMPORTS FROM imports-loader ***/
-var jQuery = __webpack_require__(20);
+var jQuery = __webpack_require__(15);
 
 /* ========================================================================
  * Bootstrap: scrollspy.js v3.3.7
@@ -18475,7 +18475,7 @@ var jQuery = __webpack_require__(20);
 /***/ (function(module, exports, __webpack_require__) {
 
 /*** IMPORTS FROM imports-loader ***/
-var jQuery = __webpack_require__(20);
+var jQuery = __webpack_require__(15);
 
 /* ========================================================================
  * Bootstrap: tab.js v3.3.7
@@ -18641,7 +18641,7 @@ var jQuery = __webpack_require__(20);
 /***/ (function(module, exports, __webpack_require__) {
 
 /*** IMPORTS FROM imports-loader ***/
-var jQuery = __webpack_require__(20);
+var jQuery = __webpack_require__(15);
 
 /* ========================================================================
  * Bootstrap: affix.js v3.3.7
@@ -26146,7 +26146,7 @@ module.exports = "<span class=\"image-main\" *ngIf=\"!this.mongoImageService.mes
 /***/ 723:
 /***/ (function(module, exports) {
 
-module.exports = "app-images {\n  background-color: whitesmoke;\n  text-align: right; }\n\n.image-main {\n  width: 100%;\n  display: inline-block; }\n\n.image-menu {\n  position: absolute; }\n\n.image-menu .btn {\n  position: relative;\n  bottom: 5px;\n  float: left;\n  margin-right: 2px; }\n\n.month {\n  display: inline-block;\n  margin-left: 3px; }\n\n.month a {\n  cursor: pointer;\n  color: white;\n  text-decoration: none;\n  background-color: black;\n  width: auto;\n  border: 1px solid black;\n  border-bottom: 1px solid #777777;\n  border-top-left-radius: 3px;\n  border-top-right-radius: 3px;\n  padding: 0px 5px; }\n\n.month a:hover {\n  background-color: white;\n  color: black;\n  font-style: italic;\n  border-bottom: 0px; }\n\n.month.active a:hover {\n  font-style: normal;\n  border-bottom: 1px solid black; }\n\n#drag-area {\n  text-align: center; }\n\n#drag-area:hover {\n  cursor: move; }\n\n#image-editor {\n  border: steelblue;\n  position: fixed;\n  top: 50px;\n  left: 50px;\n  width: 500px; }\n\n#image-editor label {\n  color: white;\n  text-transform: capitalize;\n  font-weight: normal; }\n\n#image-editor .row {\n  border-radius: 10px;\n  border: 1px solid darkgray; }\n\n#image-editor .input-group-addon {\n  background-color: steelblue;\n  border-radius: 4px 0 0 4px;\n  border: 1px solid steelblue;\n  border-right: none;\n  width: auto; }\n\n#image-editor .form-control {\n  border: 1px solid steelblue;\n  border-radius: 4px;\n  display: table-cell; }\n\n#image-editor .image-list .form-control {\n  border-radius: 0 4px 4px 0;\n  border-left: none; }\n\n#image-editor .select_all {\n  text-align: left;\n  margin: 10px; }\n\n#image-editor .buttons {\n  margin: 0 0 15px;\n  padding: 0 15px; }\n\n#image-editor .btn {\n  margin: 10px 0 10px 10px;\n  color: #ffffff; }\n\n#image-editor .btn-danger {\n  float: left;\n  margin: 10px 0 10px; }\n\n#image-editor .background {\n  position: absolute;\n  top: 0;\n  width: 530px;\n  height: 100%;\n  padding: 0 15px;\n  background: steelblue;\n  opacity: 0.5;\n  z-index: -1; }\n\n.year {\n  list-style-type: none;\n  padding: 0;\n  float: left;\n  position: absolute; }\n\n.year li {\n  border-top: 1px solid;\n  border-left: 1px solid;\n  border-radius: 3px 0 0 3px; }\n\n.year li:first-child {\n  border-top: none;\n  border-radius: 0; }\n\n.year li:last-child {\n  border-bottom: 1px solid; }\n\n.year a {\n  color: black;\n  text-decoration: none;\n  padding: 0px 15px;\n  cursor: pointer; }\n\n.year a:hover {\n  background-color: black;\n  border-radius: 3px;\n  color: white;\n  font-style: italic; }\n\n.reel-container {\n  border-top: 1px solid;\n  background-image: linear-gradient(to right, white, lightgray, lightgray, white);\n  text-align: center;\n  opacity: .95;\n  border-radius: 3px 0 0 0; }\n\n.image-container {\n  width: 40%;\n  display: inline-block;\n  text-align: left; }\n\n.reel {\n  display: inline;\n  border-top: 1px solid black;\n  overflow: hidden; }\n\n.thumbnail {\n  border: none;\n  margin: 10px; }\n\n.thumbnail > img {\n  filter: grayscale(100%); }\n\n.thumbnail p {\n  margin: 0;\n  padding: 0px 5px; }\n\n.thumbnail > img:hover {\n  cursor: pointer;\n  border: none;\n  text-decoration: none;\n  filter: none; }\n\n.thumbnail .caption {\n  max-height: 30px;\n  font-size: x-small;\n  padding: 5px 0 0 0 !important;\n  top: -6px;\n  position: relative;\n  background-color: white;\n  color: black;\n  border-radius: 0 0 4px 4px; }\n\n.thumbnail .caption table {\n  table-layout: fixed;\n  width: 100%; }\n\n.thumbnail .caption table td:first-child {\n  text-align: left; }\n\n.thumbnail .caption table td:nth-child(2) {\n  text-align: center;\n  cursor: help; }\n\n.thumbnail .caption table td:last-child {\n  text-align: right; }\n\n.month.active a {\n  color: black;\n  padding-top: 10px;\n  padding-bottom: 10px;\n  background-color: white;\n  z-index: 1;\n  position: relative;\n  border-radius: 4px; }\n\n.year li.active {\n  padding: 5px 0px; }\n\n.year li.active a {\n  border: 2px solid white;\n  border-radius: 5px;\n  background-color: black;\n  color: white; }\n\n.year li.active a {\n  font-style: normal;\n  cursor: text; }\n\n.paginator {\n  padding: 0px;\n  display: inline-flex;\n  list-style: none;\n  position: absolute;\n  top: 49%;\n  left: -30px; }\n\n.paginator .forward {\n  position: absolute;\n  left: 820px; }\n\n.paginator .glyphicon {\n  border: 1px solid;\n  padding: 3px;\n  border-radius: 4px;\n  color: #000;\n  font-size: xx-large;\n  opacity: .5; }\n\n.paginator .glyphicon:hover {\n  cursor: pointer;\n  opacity: 1; }\n\n.assetviewer-modal {\n  margin: auto; }\n\n.modal {\n  text-align: center;\n  top: 10px; }\n\n.modal-image-container {\n  background-color: lightgray;\n  margin-left: 0px;\n  margin-right: 0px;\n  display: inline-block; }\n\n.modal-image-overlay-positioner {\n  position: relative; }\n\n.modal-image {\n  border: 5px solid lightgray; }\n\n@media screen and (min-height: 600px) {\n  .modal-image {\n    max-height: 580px; } }\n\n@media screen and (min-height: 768px) {\n  .modal-image {\n    max-height: 748px; } }\n\n@media screen and (min-height: 900px) {\n  .modal-image {\n    max-height: 880px; } }\n\n@media screen and (min-height: 1080px) {\n  .modal-image {\n    max-height: 1060px; } }\n\n@media print {\n  .modal-image {\n    border: none; }\n  li {\n    display: none; }\n  .image-main {\n    display: none; } }\n\n.modal-image-overlay {\n  display: block;\n  list-style: none;\n  color: white;\n  position: absolute;\n  top: 0px;\n  left: 0px;\n  width: 100%;\n  padding: 0px;\n  margin: 0px; }\n\n.modal-image-overlay-menu {\n  padding-left: 5px;\n  margin: 0px;\n  vertical-align: middle;\n  list-style: none;\n  position: absolute;\n  left: 0px;\n  top: 100px; }\n\n.modal-image-overlay-menu li {\n  vertical-align: middle;\n  padding-right: 5px;\n  margin-bottom: 5px; }\n\n.modal-image-overlay li,\n.modal-image-overlay-menu li {\n  text-transform: uppercase;\n  color: white;\n  background-color: gray;\n  text-align: center;\n  opacity: .3; }\n\n.modal-image-overlay li {\n  position: absolute;\n  width: 100px; }\n\n.modal-image-overlay li.button-left {\n  left: 5px; }\n\n.modal-image-overlay-menu li.button-left a {\n  color: inherit;\n  text-decoration: none; }\n\n.modal-image-overlay li.button-right {\n  right: 5px; }\n\n.modal-image-overlay li.button-left,\n.modal-image-overlay-menu li.button-left {\n  border-left: none;\n  border-radius: 0 4px 4px 0; }\n\n.modal-image-overlay li.button-right {\n  border-right: none;\n  border-radius: 4px 0 0 4px; }\n\n.modal-image-overlay li.button-left:hover,\n.modal-image-overlay li.button-right:hover,\n.modal-image-overlay-menu li.button-left:hover {\n  cursor: pointer;\n  background-color: lightgray;\n  opacity: 1;\n  color: black; }\n\n.button-left .glyphicon {\n  vertical-align: middle;\n  float: left;\n  padding-left: 5px; }\n\n.button-right .glyphicon {\n  float: right;\n  padding-right: 5px; }\n\n.infobox {\n  position: absolute;\n  z-index: 1;\n  width: 230px;\n  text-align: left;\n  background: white;\n  color: black;\n  opacity: .8;\n  border-radius: 5px;\n  margin: 40px; }\n\n.infobox p {\n  font-size: x-small;\n  margin: 3px; }\n\n.infobox .info-key {\n  text-transform: uppercase; }\n"
+module.exports = "app-images {\n  background-color: whitesmoke;\n  text-align: right; }\n\n.image-main {\n  width: 100%;\n  display: inline-block; }\n\n.image-menu {\n  position: absolute; }\n\n.image-menu .btn {\n  position: relative;\n  bottom: 5px;\n  float: left;\n  margin-right: 2px; }\n\n.month {\n  display: inline-block;\n  margin-left: 3px; }\n\n.month a {\n  cursor: pointer;\n  color: white;\n  text-decoration: none;\n  background-color: black;\n  width: auto;\n  border: 1px solid black;\n  border-bottom: 1px solid #777777;\n  border-top-left-radius: 3px;\n  border-top-right-radius: 3px;\n  padding: 0px 5px; }\n\n.month a:hover {\n  background-color: white;\n  color: black;\n  font-style: italic;\n  border-bottom: 0px; }\n\n.month.active a:hover {\n  font-style: normal;\n  border-bottom: 1px solid black; }\n\n#drag-area {\n  text-align: center; }\n\n#drag-area:hover {\n  cursor: move; }\n\n#image-editor {\n  border: steelblue;\n  position: fixed;\n  top: 50px;\n  left: 50px;\n  width: 500px; }\n\n#image-editor label {\n  color: white;\n  text-transform: capitalize;\n  font-weight: normal; }\n\n#image-editor .row {\n  border-radius: 10px;\n  border: 1px solid darkgray; }\n\n#image-editor .input-group-addon {\n  background-color: steelblue;\n  border-radius: 4px 0 0 4px;\n  border: 1px solid steelblue;\n  border-right: none;\n  width: auto; }\n\n#image-editor .form-control {\n  border: 1px solid steelblue;\n  border-radius: 4px;\n  display: table-cell; }\n\n#image-editor .image-list .form-control {\n  border-radius: 0 4px 4px 0;\n  border-left: none; }\n\n#image-editor .select_all {\n  text-align: left;\n  margin: 10px; }\n\n#image-editor .buttons {\n  margin: 0 0 15px;\n  padding: 0 15px; }\n\n#image-editor .btn {\n  margin: 10px 0 10px 10px;\n  color: #ffffff; }\n\n#image-editor .btn-danger {\n  float: left;\n  margin: 10px 0 10px; }\n\n#image-editor .background {\n  position: absolute;\n  top: 0;\n  width: 530px;\n  height: 100%;\n  padding: 0 15px;\n  background: steelblue;\n  opacity: 0.5;\n  z-index: -1; }\n\n.year {\n  list-style-type: none;\n  padding: 0;\n  float: left;\n  position: absolute; }\n\n.year li {\n  border-top: 1px solid;\n  border-left: 1px solid;\n  border-radius: 3px 0 0 3px; }\n\n.year li:first-child {\n  border-top: none;\n  border-radius: 0; }\n\n.year li:last-child {\n  border-bottom: 1px solid; }\n\n.year a {\n  color: black;\n  text-decoration: none;\n  padding: 0px 15px;\n  cursor: pointer; }\n\n.year a:hover {\n  background-color: black;\n  border-radius: 3px;\n  color: white;\n  font-style: italic; }\n\n.reel-container {\n  border-top: 1px solid;\n  background-image: linear-gradient(to right, white, lightgray, lightgray, white);\n  text-align: center;\n  opacity: .95;\n  border-radius: 3px 0 0 0; }\n\n.image-container {\n  width: 40%;\n  display: inline-block;\n  text-align: left; }\n\n.reel {\n  display: inline;\n  border-top: 1px solid black;\n  overflow: hidden; }\n\n.thumbnail {\n  border: none;\n  margin: 10px; }\n\n.thumbnail > img {\n  filter: grayscale(100%); }\n\n.thumbnail p {\n  margin: 0;\n  padding: 0px 5px; }\n\n.thumbnail > img:hover {\n  cursor: pointer;\n  border: none;\n  text-decoration: none;\n  filter: none; }\n\n.thumbnail .caption {\n  max-height: 30px;\n  font-size: x-small;\n  padding: 5px 0 0 0 !important;\n  top: -6px;\n  position: relative;\n  background-color: white;\n  color: black;\n  border-radius: 0 0 4px 4px; }\n\n.thumbnail .caption table {\n  table-layout: fixed;\n  width: 100%; }\n\n.thumbnail .caption table td:first-child {\n  text-align: left; }\n\n.thumbnail .caption table td:nth-child(2) {\n  text-align: center;\n  cursor: help; }\n\n.thumbnail .caption table td:last-child {\n  text-align: right; }\n\n.month.active a {\n  color: black;\n  padding-top: 10px;\n  padding-bottom: 10px;\n  background-color: white;\n  z-index: 1;\n  position: relative;\n  border-radius: 4px; }\n\n.year li.active {\n  padding: 5px 0px; }\n\n.year li.active a {\n  border: 2px solid white;\n  border-radius: 5px;\n  background-color: black;\n  color: white; }\n\n.year li.active a {\n  font-style: normal;\n  cursor: text; }\n\n.paginator {\n  padding: 0px;\n  display: inline-flex;\n  list-style: none;\n  position: absolute;\n  top: 49%;\n  left: -30px; }\n\n.paginator .forward {\n  position: absolute;\n  left: 820px; }\n\n.paginator .glyphicon {\n  border: 1px solid;\n  padding: 3px;\n  border-radius: 4px;\n  color: #000;\n  font-size: xx-large;\n  opacity: .5; }\n\n.paginator .glyphicon:hover {\n  cursor: pointer;\n  opacity: 1; }\n\n.assetviewer-modal {\n  margin: auto; }\n\n.modal {\n  text-align: center;\n  top: 10px; }\n\n.modal-image-container {\n  position: relative;\n  top: 10%;\n  background-color: lightgray;\n  margin-left: 0px;\n  margin-right: 0px;\n  display: inline-block; }\n\n.modal-image-overlay-positioner {\n  position: relative; }\n\n.modal-image {\n  border: 5px solid lightgray; }\n\n@media print {\n  .modal-image {\n    border: none; }\n  li {\n    display: none; }\n  .image-main {\n    display: none; } }\n\n.modal-image-overlay {\n  display: block;\n  list-style: none;\n  color: white;\n  position: absolute;\n  top: 0px;\n  left: 0px;\n  width: 100%;\n  padding: 0px;\n  margin: 0px; }\n\n.modal-image-overlay-menu {\n  padding-left: 5px;\n  margin: 0px;\n  vertical-align: middle;\n  list-style: none;\n  position: absolute;\n  left: 0px;\n  top: 100px; }\n\n.modal-image-overlay-menu li {\n  vertical-align: middle;\n  padding-right: 5px;\n  margin-bottom: 5px; }\n\n.modal-image-overlay li,\n.modal-image-overlay-menu li {\n  text-transform: uppercase;\n  color: white;\n  background-color: gray;\n  text-align: center;\n  opacity: .3; }\n\n.modal-image-overlay li {\n  position: absolute;\n  width: 100px; }\n\n.modal-image-overlay li.button-left {\n  left: 5px; }\n\n.modal-image-overlay-menu li.button-left a {\n  color: inherit;\n  text-decoration: none; }\n\n.modal-image-overlay li.button-right {\n  right: 5px; }\n\n.modal-image-overlay li.button-left,\n.modal-image-overlay-menu li.button-left {\n  border-left: none;\n  border-radius: 0 4px 4px 0; }\n\n.modal-image-overlay li.button-right {\n  border-right: none;\n  border-radius: 4px 0 0 4px; }\n\n.modal-image-overlay li.button-left:hover,\n.modal-image-overlay li.button-right:hover,\n.modal-image-overlay-menu li.button-left:hover {\n  cursor: pointer;\n  background-color: lightgray;\n  opacity: 1;\n  color: black; }\n\n.button-left .glyphicon {\n  vertical-align: middle;\n  float: left;\n  padding-left: 5px; }\n\n.button-right .glyphicon {\n  float: right;\n  padding-right: 5px; }\n\n.infobox {\n  position: absolute;\n  z-index: 1;\n  width: 230px;\n  text-align: left;\n  background: white;\n  color: black;\n  opacity: .8;\n  border-radius: 5px;\n  margin: 40px; }\n\n.infobox p {\n  font-size: x-small;\n  margin: 3px; }\n\n.infobox .info-key {\n  text-transform: uppercase; }\n"
 
 /***/ }),
 
@@ -26181,14 +26181,14 @@ exports.MongoVideoModel = MongoVideoModel;
 /***/ 725:
 /***/ (function(module, exports) {
 
-module.exports = "<span class=\"video-main\" *ngIf=\"!this.mongoVideoService.message.failure\" (keyup.esc)=\"this.cancelModal()\"><div class=\"video-menu\"><p class=\"btn btn-info btn-xs\" type=\"button\"><span class=\"glyphicon glyphicon-search\" aria-hidden=\"true\"></span></p><p class=\"btn btn-info btn-xs\" *ngIf=\"this.activeUser.isAdmin\" (click)=\"this.openEditor()\" type=\"button\"><span class=\"glyphicon glyphicon-pencil\" aria-hidden=\"true\"></span></p></div><div class=\"month {{month | monthTransform}}\" *ngFor=\"let month of this.months as months; index as i\" [ngClass]=\"{'active': month == this.albumViewSelector.month}\"><a *ngIf=\"month != null\" (click)=\"setAlbumView(month)\">{{ { name: month, language: this.activeUser.language } | monthTransform }}</a></div><div class=\"reel-container {{ year }}\"><ul class=\"year\"><li *ngFor=\"let year of this.years as years; index as m\" [ngClass]=\"{'active': year == this.albumViewSelector.year}\"><a (click)=\"setAlbumView(year)\">{{ year }}</a></li></ul><ul class=\"paginator\" *ngIf=\"this.pages &gt; 1\"><li class=\"rewind\" *ngIf=\"this.currentPage &gt; 1 &amp;&amp; this.editVideos.length == 0\" (click)=\"this.turnAlbumPage('rewind')\"><span class=\"glyphicon glyphicon-triangle-left\"></span></li><li class=\"forward\" *ngIf=\"this.currentPage != this.pages &amp;&amp; this.editVideos.length == 0\" (click)=\"this.turnAlbumPage('forward')\"><span class=\"glyphicon glyphicon-triangle-right\"></span></li></ul><div class=\"video-list-container\"><ul class=\"video-list\"><li class=\"video-item\" *ngFor=\"let video of this.documents;index as i;\" data-toggle=\"modal\" data-target-not=\".video-modal\" id=\"{{video._id}}\"><div class=\"video-label\"><p *ngIf=\"video.meta.venue\">{{ video.date.day}}/{{ video.date.month + 1 }} {{ video.meta.venue }}, {{ video.location.country }}</p><p *ngIf=\"video.location.city\">{{ video.date.day}}/{{ video.date.month + 1 }} {{ video.location.city }}, {{ video.location.country }}</p><p *ngIf=\"!video.location.city &amp;&amp; !video.meta.venue\">{{ video.date.day}}/{{ video.date.month + 1 }} {{ video.location.country }}</p></div><button class=\"btn btn-info btn-xs\" (click)=\"this.openModal(video._id)\"><span class=\"glyphicon glyphicon-play\" aria-hidden=\"true\"></span></button></li></ul></div></div><div class=\"modal fade video-modal\" (click)=\"this.cancelModal()\" tabindex=\"1\" role=\"dialog\" aria-labelledby=\"videoModal\"><div class=\"modal-video-container\"><video *modalVideo=\"this.modalSource\" stop-propagation-on-click destroy-video-on-ended id=\"video\" controls autoplay height=\"400\" width=\"225\"><source src=\"{{ this.modalSource }}\" type=\"video/mp4\"><source src=\"{{ this.modalSource }}\" type=\"video/ogg\"><source src=\"{{ this.modalSource }}\" type=\"video/webm\"></video></div></div></span>"
+module.exports = "<span class=\"video-main\" *ngIf=\"!this.mongoVideoService.message.failure\" (keyup.esc)=\"this.cancelModal()\"><div class=\"video-menu\"><p class=\"btn btn-info btn-xs\" type=\"button\"><span class=\"glyphicon glyphicon-search\" aria-hidden=\"true\"></span></p><p class=\"btn btn-info btn-xs\" *ngIf=\"this.activeUser.isAdmin\" (click)=\"this.openEditor()\" type=\"button\"><span class=\"glyphicon glyphicon-pencil\" aria-hidden=\"true\"></span></p></div><div class=\"month {{month | monthTransform}}\" *ngFor=\"let month of this.months as months; index as i\" [ngClass]=\"{'active': month == this.albumViewSelector.month}\"><a *ngIf=\"month != null\" (click)=\"setAlbumView(month)\">{{ { name: month, language: this.activeUser.language } | monthTransform }}</a></div><div class=\"reel-container {{ year }}\"><ul class=\"year\"><li *ngFor=\"let year of this.years as years; index as m\" [ngClass]=\"{'active': year == this.albumViewSelector.year}\"><a (click)=\"setAlbumView(year)\">{{ year }}</a></li></ul><ul class=\"paginator\" *ngIf=\"this.pages &gt; 1\"><li class=\"rewind\" *ngIf=\"this.currentPage &gt; 1 &amp;&amp; this.editVideos.length == 0\" (click)=\"this.turnAlbumPage('rewind')\"><span class=\"glyphicon glyphicon-triangle-left\"></span></li><li class=\"forward\" *ngIf=\"this.currentPage != this.pages &amp;&amp; this.editVideos.length == 0\" (click)=\"this.turnAlbumPage('forward')\"><span class=\"glyphicon glyphicon-triangle-right\"></span></li></ul><div class=\"video-list-container\"><ul class=\"video-list\"><li class=\"video-item\" *ngFor=\"let video of this.documents;index as i;\" data-toggle=\"modal\" data-target-not=\".video-modal\" id=\"{{video._id}}\"><div class=\"video-label\"><p *ngIf=\"video.meta.venue\">{{ video.date.day}}/{{ video.date.month + 1 }} {{ video.meta.venue }}, {{ video.location.country }}</p><p *ngIf=\"video.location.city\">{{ video.date.day}}/{{ video.date.month + 1 }} {{ video.location.city }}, {{ video.location.country }}</p><p *ngIf=\"!video.location.city &amp;&amp; !video.meta.venue\">{{ video.date.day}}/{{ video.date.month + 1 }} {{ video.location.country }}</p></div><button class=\"btn btn-info btn-xs\" (click)=\"this.openModal(video._id)\"><span class=\"glyphicon glyphicon-play\" aria-hidden=\"true\"></span></button></li></ul></div></div><div class=\"modal fade video-modal\" (click)=\"this.cancelModal()\" tabindex=\"1\" role=\"dialog\" aria-labelledby=\"videoModal\"><div class=\"modal-video-container\"><video *modalVideo=\"this.modalSource\" stop-propagation-on-click destroy-video-on-ended id=\"video\" controls autoplay><source src=\"{{ this.modalSource }}\" type=\"video/mp4\"><source src=\"{{ this.modalSource }}\" type=\"video/ogg\"><source src=\"{{ this.modalSource }}\" type=\"video/webm\"></video></div></div></span>"
 
 /***/ }),
 
 /***/ 726:
 /***/ (function(module, exports) {
 
-module.exports = "app-videos {\n  background-color: whitesmoke;\n  text-align: right; }\n\n.video-main {\n  width: 100%;\n  display: inline-block;\n  background: white; }\n\n.video-menu {\n  position: absolute; }\n\n.video-menu .btn {\n  position: relative;\n  bottom: 5px;\n  float: left;\n  margin-right: 2px; }\n\n.month {\n  display: inline-block;\n  margin-left: 3px; }\n\n.month a {\n  cursor: pointer;\n  color: white;\n  text-decoration: none;\n  background-color: black;\n  width: auto;\n  border: 1px solid black;\n  border-bottom: 1px solid #777777;\n  border-top-left-radius: 3px;\n  border-top-right-radius: 3px;\n  padding: 0px 5px; }\n\n.month a:hover {\n  background-color: white;\n  color: black;\n  font-style: italic;\n  border-bottom: 0px; }\n\n.month.active a:hover {\n  font-style: normal;\n  border-bottom: 1px solid black; }\n\n.year {\n  list-style-type: none;\n  padding: 0;\n  float: left;\n  position: absolute; }\n\n.year li {\n  border-top: 1px solid;\n  border-left: 1px solid;\n  border-radius: 3px 0 0 3px; }\n\n.year li:first-child {\n  border-top: none;\n  border-radius: 0; }\n\n.year li:last-child {\n  border-bottom: 1px solid; }\n\n.year a {\n  color: black;\n  text-decoration: none;\n  padding: 0px 15px;\n  cursor: pointer; }\n\n.year a:hover {\n  background-color: black;\n  border-radius: 3px;\n  color: white;\n  font-style: italic; }\n\n.reel-container {\n  border-top: 1px solid;\n  background-image: linear-gradient(to right, white, lightgray, lightgray, white);\n  text-align: center;\n  opacity: .95;\n  border-radius: 3px 0 0 0; }\n\n.video-list-container {\n  padding: 10px 0px; }\n\n.video-list {\n  margin: 0px;\n  padding: 0px;\n  list-style: none; }\n\n.video-item {\n  width: 60%;\n  border: 1px solid;\n  border-radius: 2px;\n  margin: auto;\n  margin-top: 0px;\n  margin-bottom: 2px;\n  padding-left: 10px;\n  text-align: left;\n  height: 35px; }\n\n.video-item button {\n  background: transparent;\n  margin: 6px;\n  float: right;\n  color: #777; }\n\n.video-label {\n  border: 1px solid lightgray;\n  background: white;\n  width: 65%;\n  margin: 3px;\n  float: left; }\n\n.video-label p {\n  margin: 0px;\n  padding: 3px; }\n\n.video-modal {\n  text-align: center; }\n\n.modal-video-container {\n  background-color: lightgray;\n  margin-left: 0px;\n  margin-right: 0px;\n  display: inline-block;\n  padding: 5px;\n  position: relative;\n  top: 25%; }\n"
+module.exports = "app-videos {\n  background-color: whitesmoke;\n  text-align: right; }\n\n.video-main {\n  width: 100%;\n  display: inline-block;\n  background: white; }\n\n.video-menu {\n  position: absolute; }\n\n.video-menu .btn {\n  position: relative;\n  bottom: 5px;\n  float: left;\n  margin-right: 2px; }\n\n.month {\n  display: inline-block;\n  margin-left: 3px; }\n\n.month a {\n  cursor: pointer;\n  color: white;\n  text-decoration: none;\n  background-color: black;\n  width: auto;\n  border: 1px solid black;\n  border-bottom: 1px solid #777777;\n  border-top-left-radius: 3px;\n  border-top-right-radius: 3px;\n  padding: 0px 5px; }\n\n.month a:hover {\n  background-color: white;\n  color: black;\n  font-style: italic;\n  border-bottom: 0px; }\n\n.month.active a:hover {\n  font-style: normal;\n  border-bottom: 1px solid black; }\n\n.year {\n  list-style-type: none;\n  padding: 0;\n  float: left;\n  position: absolute; }\n\n.year li {\n  border-top: 1px solid;\n  border-left: 1px solid;\n  border-radius: 3px 0 0 3px; }\n\n.year li:first-child {\n  border-top: none;\n  border-radius: 0; }\n\n.year li:last-child {\n  border-bottom: 1px solid; }\n\n.year a {\n  color: black;\n  text-decoration: none;\n  padding: 0px 15px;\n  cursor: pointer; }\n\n.year a:hover {\n  background-color: black;\n  border-radius: 3px;\n  color: white;\n  font-style: italic; }\n\n.reel-container {\n  border-top: 1px solid;\n  background-image: linear-gradient(to right, white, lightgray, lightgray, white);\n  text-align: center;\n  opacity: .95;\n  border-radius: 3px 0 0 0; }\n\n.video-list-container {\n  padding: 10px 0px; }\n\n.video-list {\n  margin: 0px;\n  padding: 0px;\n  list-style: none; }\n\n.video-item {\n  width: 60%;\n  border: 1px solid;\n  border-radius: 2px;\n  margin: auto;\n  margin-top: 0px;\n  margin-bottom: 2px;\n  padding-left: 10px;\n  text-align: left;\n  height: 35px; }\n\n.video-item button {\n  background: transparent;\n  margin: 6px;\n  float: right;\n  color: #777; }\n\n.video-label {\n  border: 1px solid lightgray;\n  background: white;\n  width: 65%;\n  margin: 3px;\n  float: left; }\n\n.video-label p {\n  margin: 0px;\n  padding: 3px; }\n\n.video-modal {\n  text-align: center; }\n\n.modal-video-container {\n  background-color: lightgray;\n  margin-left: 0px;\n  margin-right: 0px;\n  display: inline-block;\n  padding: 5px;\n  position: relative;\n  top: 10%; }\n"
 
 /***/ }),
 
@@ -26286,6 +26286,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 const core_1 = __webpack_require__(2);
+const $ = __webpack_require__(15);
 let ModalImageDirective = class ModalImageDirective {
     constructor(templateRef, viewContainer) {
         this.templateRef = templateRef;
@@ -26293,7 +26294,9 @@ let ModalImageDirective = class ModalImageDirective {
     }
     set modalImage(condition) {
         if (condition) {
+            let height = window.innerHeight * .8;
             this.viewContainer.createEmbeddedView(this.templateRef);
+            $('.modal-image').attr('height', height);
             if (this.viewContainer.length > 1) {
                 this.viewContainer.remove(0);
             }
@@ -26333,6 +26336,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 const core_1 = __webpack_require__(2);
+const $ = __webpack_require__(15);
 let ModalVideoDirective = class ModalVideoDirective {
     constructor(templateRef, viewContainer) {
         this.templateRef = templateRef;
@@ -26341,6 +26345,8 @@ let ModalVideoDirective = class ModalVideoDirective {
     set modalVideo(condition) {
         if (condition) {
             this.viewContainer.createEmbeddedView(this.templateRef);
+            let height = window.innerHeight * .8;
+            $('#video').attr('height', height);
             if (this.viewContainer.length > 1) {
                 this.viewContainer.remove(0);
             }
@@ -26489,7 +26495,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 const core_1 = __webpack_require__(2);
-const $ = __webpack_require__(20);
+const $ = __webpack_require__(15);
 let DestroyVideoOnEnded = class DestroyVideoOnEnded {
     onEnded(event) {
         $('.video-modal').modal('hide');
@@ -26530,7 +26536,7 @@ const login_model_1 = __webpack_require__(736);
 const authentication_service_1 = __webpack_require__(11);
 const permission_services_1 = __webpack_require__(47);
 const error_parser_1 = __webpack_require__(72);
-const $ = __webpack_require__(20);
+const $ = __webpack_require__(15);
 let LoginComponent = class LoginComponent {
     constructor(http, router, authenticator, permissionService) {
         this.http = http;
@@ -33088,4 +33094,4 @@ exports.AuthenticationGuardService = AuthenticationGuardService;
 /***/ })
 
 },[654]);
-//# sourceMappingURL=app.b862e33deb44804dec22.js.map
+//# sourceMappingURL=app.daace807e62c6120f233.js.map
