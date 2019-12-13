@@ -32,43 +32,53 @@ export class LoginComponent implements OnInit {
     }
 
     onSubmit(): void {
+      
+      if(process.env.DEV_ENV) {
+        $('#loginModal').modal('hide');
+        this.authenticator.isLoggedIn = true;
+        this.authenticator.isAdmin = true;
+        this.authenticator.language = 'english';
+        this.router.navigate(['/private/user-domain/images'], {queryParamsHandling: 'preserve', preserveFragment: true});
+      }
 
-      this.authenticator.login(this.loginModel)
-        .then((user: any) => {
-          if(this.authenticator.isLoggedIn) {
+      else {
+        this.authenticator.login(this.loginModel)
+          .then((user: any) => {
+            if(this.authenticator.isLoggedIn) {
 
-            $('#loginModal').modal('hide');
+              $('#loginModal').modal('hide');
 
-            this.http.get('/permissionsDb', {observe: "response"})
-              .toPromise()
-              .then((result: any) => {
-                  user.userParameters.permissions.forEach((uuid: string) => {
-                      result.body.find((permit: any) => {
-                          return permit.permission_id === uuid ? this.authenticator.isPermitted[permit.permission_name] = true: null;
-                      })
-                  })
-              })
-              .then(() => {
-                  let navigationExtras : NavigationExtras = {
-                      queryParamsHandling: 'preserve',
-                      preserveFragment: true
-                  };
+              this.http.get('/permissionsDb', {observe: "response"})
+                .toPromise()
+                .then((result: any) => {
+                    user.userParameters.permissions.forEach((uuid: string) => {
+                        result.body.find((permit: any) => {
+                            return permit.permission_id === uuid ? this.authenticator.isPermitted[permit.permission_name] = true: null;
+                        })
+                    })
+                })
+                .then(() => {
+                    let navigationExtras : NavigationExtras = {
+                        queryParamsHandling: 'preserve',
+                        preserveFragment: true
+                    };
 
-                  this.setRedirectUrl();
-                  this.router.navigate([this.authenticator.redirectUrl],navigationExtras);
-              })
-              .catch(this.errorParser.handleError)
-              .catch(error => console.log(error));
-          }
-        })
-        .catch(this.errorParser.handleError)
-        .catch((error: any) => {
-          this.message = error.message;
-          let x = setTimeout(() => {
-            this.message = undefined;
-            clearTimeout(x);
-          },2500)
-        })
+                    this.setRedirectUrl();
+                    this.router.navigate([this.authenticator.redirectUrl],navigationExtras);
+                })
+                .catch(this.errorParser.handleError)
+                .catch(error => console.log(error));
+            }
+          })
+          .catch(this.errorParser.handleError)
+          .catch((error: any) => {
+            this.message = error.message;
+            let x = setTimeout(() => {
+              this.message = undefined;
+              clearTimeout(x);
+            },2500)
+          })
+      }
 
     }
 
