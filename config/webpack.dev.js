@@ -23,14 +23,31 @@ module.exports = webpackMerge(commonConfig, {
 
     devServer: {
         historyApiFallback: true,
-        stats: "minimal"/*,
-        TODO setup when REST service ready
+        stats: "minimal",
         proxy: {
-            "/api/**": {
-                target: "http://localhost:8080/nurdbot-rest-service",
-                secure: false,
-                changeOrigin: true
+          "/api/**": {
+            target: "http://admin:admin@localhost:4000",
+            pathRewrite: (req, options) => {
+              let endpoint = options.query.endpoint;
+              
+              if (options.method == "GET") {
+                if(req.match(/\/generate_tabs/)) {
+                  if(options.query.year) {
+                    return `/v1/Distinct/${options.query.year}/${endpoint}`;
+                  } else {
+                    return `/v1/Distinct/${endpoint}`;
+                  }
+                }
+                if(req.match(/\/photos/)) {
+                  return `/v1/Search/Photos?doAnd=${options.query.doAnd}&year=${options.query.year}&month=${options.query.month}&page=${options.query.page}`;
+                }
+                if(req.match(/\/videos/)) {
+                  return `/v1/Search/Videos?doAnd=${options.query.doAnd}&year=${options.query.year}&month=${options.query.month}&page=${options.query.page}`;
+                }
+              }
+              
             }
-        }*/
+          }
+        }
     }
 });
