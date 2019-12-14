@@ -38,7 +38,11 @@ export class LoginComponent implements OnInit {
         this.authenticator.isLoggedIn = true;
         this.authenticator.isAdmin = true;
         this.authenticator.language = 'english';
-        this.router.navigate(['/private/user-domain/images'], {queryParamsHandling: 'preserve', preserveFragment: true});
+        let navigationExtras : NavigationExtras = {
+            queryParamsHandling: 'preserve',
+            preserveFragment: true
+        };
+        this.router.navigate(['/private/user-domain/images'], navigationExtras);
       }
 
       else {

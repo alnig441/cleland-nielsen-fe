@@ -13,9 +13,10 @@ div
                 ul(*ngFor="let link of navbarLinks, let i = index" class="nav navbar-nav")
                     li(*ngIf="this.activeUser.isAdmin")
                         a(*ngIf="link.permission", routerLink="{{link.name}}" routerLinkActive="Active") {{ { name: link.name, language: this.activeUser.language } | labelTransform }}
-                    li(*ngIf="this.activeUser.isLoggedIn", class="")
+                          span(class="sr-only" current)
+                    li(*ngIf="!this.activeUser.isAdmin && this.activeUser.isLoggedIn", class="")
                         a(*ngIf="this.activeUser.isPermitted[link.permission]", routerLink="{{link.name}}" routerLinkActive="active") {{ { name: link.name, language: this.activeUser.language } | labelTransform }}
-                            span(class="sr-only" current)
+                          span(class="sr-only" current)
                     li(*ngIf="!this.activeUser.isLoggedIn" class="")
                         a(*ngIf="!link.permission", routerLink="{{link.name}}" routerLinkActive="active") {{link.name}} 
                 ul(class="nav navbar-nav navbar-right")
