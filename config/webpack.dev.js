@@ -27,23 +27,24 @@ module.exports = webpackMerge(commonConfig, {
         proxy: {
           "/api/**": {
             target: "http://admin:admin@localhost:4000",
-            pathRewrite: (req, options) => {
-              let endpoint = options.query.endpoint;
+            pathRewrite: (req, options) => {              
+              req = req.replace(/\/api/, '/v1');
+              let splitReq = req.split('/');
               
-              if (options.method == "GET") {
-                if(req.match(/\/generate_tabs/)) {
-                  if(options.query.year) {
-                    return `/v1/Distinct/${options.query.year}/${endpoint}`;
-                  } else {
-                    return `/v1/Distinct/${endpoint}`;
-                  }
-                }
-                if(req.match(/\/photos/)) {
-                  return `/v1/Search/Photos?doAnd=${options.query.doAnd}&year=${options.query.year}&month=${options.query.month}&page=${options.query.page}`;
-                }
-                if(req.match(/\/videos/)) {
-                  return `/v1/Search/Videos?doAnd=${options.query.doAnd}&year=${options.query.year}&month=${options.query.month}&page=${options.query.page}`;
-                }
+              if(req.match(/\/generate_tabs/)) {  
+                return req.replace(/\/generate_tabs/, '/Distinct');
+              } 
+              
+              if(splitReq[2].length >= 24 ) {
+                let partial = '';
+                if(options.method == 'GET') { partial = `SearchById` }
+                if(options.method == 'POST') { partial = `UpdateById` }
+                if(options.method == 'DELETE') { partial = `RemoveById` }
+                return req.replace(/\/v1/, `/v1/${partial}`);
+              }
+              
+              else {
+                return req;
               }
               
             }
