@@ -23,13 +23,12 @@ export class MongoVideoServices {
   generateTabs(year?: number): Promise<any> {
 
     if (this.activeUser.isAdmin || this.activeUser.isPermitted['to_view_videos']) {
-      let params = new HttpParams({ fromString: 'endpoint'});
-      params = params.set('endpoint', 'Videos');
+      let params = new HttpParams();
       params = year ?
         params.append('year', year.toString()):
         params;
 
-      return this.http.get(this.baseUrl + '/generate_tabs?', { params : params , observe: 'body'})
+      return this.http.get(this.baseUrl + '/generate_tabs/Videos', { params : params , observe: 'body'})
         .toPromise()
         .then((res : any) => {
             return Promise.resolve(res);
@@ -57,7 +56,7 @@ export class MongoVideoServices {
       params = page ? params.append('page', page.toString()) : params;
       params = doAnd ? params.set('doAnd', 'yes') : params;
 
-      return this.http.get(this.baseUrl + '/videos', { params : params , observe: 'body'})
+      return this.http.get(this.baseUrl + '/Search/Videos', { params : params , observe: 'body'})
         .toPromise()
         .then((res : any) => {
             return Promise.resolve(res);

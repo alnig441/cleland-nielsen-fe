@@ -25,12 +25,11 @@ export class MongoImageServices {
 
     if (this.activeUser.isAdmin || this.activeUser.isPermitted['to_view_images']) {
       let params = new HttpParams();
-      params = params.set('endpoint', 'Photos');
       params = year ?
         params.append('year', year.toString()):
         params;
 
-      return this.http.get(this.baseUrl + '/generate_tabs?', { params : params , observe: 'body'})
+      return this.http.get(this.baseUrl + '/generate_tabs/Photos', { params : params , observe: 'body'})
         .toPromise()
         .then((res : any) => {
             return Promise.resolve(res);
@@ -58,7 +57,7 @@ export class MongoImageServices {
       params = page ? params.append('page', page.toString()) : params;
       params = doAnd ? params.set('doAnd', 'yes') : params;
 
-      return this.http.get(this.baseUrl + '/photos', { params : params , observe: 'body'})
+      return this.http.get(this.baseUrl + '/Search/Photos', { params : params , observe: 'body'})
         .toPromise()
         .then((res : any) => {
             return Promise.resolve(res);
@@ -76,7 +75,7 @@ export class MongoImageServices {
   findOne(_id: string): Promise<any> {
 
     if (this.activeUser.isAdmin || this.activeUser.isPermitted['to_view_images']) {
-      return this.http.get(`${this.baseUrl}/${_id}`, { observe: 'body' })
+      return this.http.get(`${this.baseUrl}/${_id}/Photos`, { observe: 'body' })
         .toPromise()
         .then((res: any) => {
           return Promise.resolve(res);
@@ -94,7 +93,7 @@ export class MongoImageServices {
   updateOne(_id: string, form: MongoImageModel): Promise<any> {
 
     if (this.activeUser.isAdmin || this.activeUser.isPermitted['to_edit_images']) {
-      return this.http.post(`${this.baseUrl}/${_id}`, form, { observe: 'body' })
+      return this.http.post(`${this.baseUrl}/${_id}/Photos`, form, { observe: 'body' })
         .toPromise()
         .then((res: any) => {
           return Promise.resolve(res);
@@ -113,7 +112,7 @@ export class MongoImageServices {
 
     if (this.activeUser.isAdmin || this.activeUser.isPermitted['to_edit_images']) {
       let body = { form: form, _ids: _ids };
-      return this.http.post(`${this.baseUrl}/update`, body, { observe: 'body' })
+      return this.http.post(`${this.baseUrl}/Update/Photos`, body, { observe: 'body' })
         .toPromise()
         .then((result: any) => {
           return Promise.resolve(result);
@@ -142,7 +141,7 @@ export class MongoImageServices {
   deleteOne(_id: string): Promise<any> {
 
     if (this.activeUser.isAdmin || this.activeUser.isPermitted['to_delete_images']) {
-      return this.http.delete(`${this.baseUrl}/${_id}`, { observe: 'body' })
+      return this.http.delete(`${this.baseUrl}/${_id}/Photos`, { observe: 'body' })
         .toPromise()
         .then((res: any) => {
           return Promise.resolve(res);

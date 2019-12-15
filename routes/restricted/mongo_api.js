@@ -20,23 +20,16 @@ const Options = function (object) {
   return options;
 }
 
-router.get('/photos', (req, res, next) => {
-  console.log('params in /:', req.query)
-  let options = new Options({uri :'Search/Photos?', qs: req.query });
+router.get('/Search/**', (req, res, next) => {
+  let uri = req.originalUrl.replace(/api\//, '');
+  let options = new Options({uri : uri, qs: req.query });
   api.get(options, (err, result, body) => {
     res.send(body);
   })
 })
 
-router.get('/videos', (req, res, next) => {
-  let options = new Options({uri: 'Search/Videos?', qs: req.query});
-  api.get(options, (err, result, body) => {
-    res.send(body);
-  })
-})
-
-router.get('/generate_tabs?', (req, res, next) => {
-  let uri = req.query.year ? `Distinct/${req.query.year}/${req.query.endpoint}` : `Distinct/${req.query.endpoint}`;
+router.get('/generate_tabs/**', (req, res, next) => {
+  let uri = req.originalUrl.replace(/api\/generate_tabs/, 'Distinct');
   let options = new Options({ uri: uri });
   api.get(options, (error, result, body) => {
     body = body.filter( element => {
@@ -47,33 +40,41 @@ router.get('/generate_tabs?', (req, res, next) => {
   })
 })
 
-router.post('/update', (req, res, next) => {
-  let options = new Options({ uri: `Update/Photos`, body: req.body });
+router.post('/Update/**', (req, res, next) => {
+  let uri = req.originalUrl.replace(/\/api/, '');
+  let options = new Options({ uri: uri, body: req.body });
   api.post(options, (error, result, body) => {
     res.send(body);
   })
 })
 
-router.route('/:_id?')
+router.route('/:_id/**')
   .get((req, res, next) => {
-    let options = new Options({ uri: `SearchById/${req.params._id}/Photos` });
+    let uri = newPath(req.originalUrl, req.params._id, 'SearchById/');
+    let options = new Options({ uri: uri });
     api.get(options, (error, result, body) => {
       res.send(body);
     })
   })
   .post((req, res, next) => {
-    let options = new Options({ uri: `UpdateById/${req.params._id}/Photos`, body: req.body });
+    let uri = newPath(req.originalUrl, req.params._id, 'UpdateById/');
+    let options = new Options({ uri: uri, body: req.body });
     api.post(options, (error, result, body) => {
       res.send(body);
     })
   })
   .delete((req, res, next) => {
-    let options = new Options({ uri: `RemoveById/${req.params._id}/Photos` });
+    let uri = newPath(req.originalUrl, req.params._id, 'RemoveById/');
+    let options = new Options({ uri: uri });
     api.delete(options, (error, result, body) => {
       res.send(body);
     })
   })
 
-
+function newPath(url, _id, partial) {
+  let find = new RegExp('/api/' + _id);
+  let replace = partial + _id;
+  return url.replace(find, replace);
+}
 
 module.exports = router;
