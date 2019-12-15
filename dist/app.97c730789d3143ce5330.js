@@ -12353,11 +12353,10 @@ let MongoImageServices = class MongoImageServices {
     generateTabs(year) {
         if (this.activeUser.isAdmin || this.activeUser.isPermitted['to_view_images']) {
             let params = new http_1.HttpParams();
-            params = params.set('endpoint', 'Photos');
             params = year ?
                 params.append('year', year.toString()) :
                 params;
-            return this.http.get(this.baseUrl + '/generate_tabs?', { params: params, observe: 'body' })
+            return this.http.get(this.baseUrl + '/generate_tabs/Photos', { params: params, observe: 'body' })
                 .toPromise()
                 .then((res) => {
                 return Promise.resolve(res);
@@ -12382,7 +12381,7 @@ let MongoImageServices = class MongoImageServices {
             });
             params = page ? params.append('page', page.toString()) : params;
             params = doAnd ? params.set('doAnd', 'yes') : params;
-            return this.http.get(this.baseUrl + '/photos', { params: params, observe: 'body' })
+            return this.http.get(this.baseUrl + '/Search/Photos', { params: params, observe: 'body' })
                 .toPromise()
                 .then((res) => {
                 return Promise.resolve(res);
@@ -12398,7 +12397,7 @@ let MongoImageServices = class MongoImageServices {
     }
     findOne(_id) {
         if (this.activeUser.isAdmin || this.activeUser.isPermitted['to_view_images']) {
-            return this.http.get(`${this.baseUrl}/${_id}`, { observe: 'body' })
+            return this.http.get(`${this.baseUrl}/${_id}/Photos`, { observe: 'body' })
                 .toPromise()
                 .then((res) => {
                 return Promise.resolve(res);
@@ -12414,7 +12413,7 @@ let MongoImageServices = class MongoImageServices {
     }
     updateOne(_id, form) {
         if (this.activeUser.isAdmin || this.activeUser.isPermitted['to_edit_images']) {
-            return this.http.post(`${this.baseUrl}/${_id}`, form, { observe: 'body' })
+            return this.http.post(`${this.baseUrl}/${_id}/Photos`, form, { observe: 'body' })
                 .toPromise()
                 .then((res) => {
                 return Promise.resolve(res);
@@ -12431,7 +12430,7 @@ let MongoImageServices = class MongoImageServices {
     updateMany(_ids, form) {
         if (this.activeUser.isAdmin || this.activeUser.isPermitted['to_edit_images']) {
             let body = { form: form, _ids: _ids };
-            return this.http.post(`${this.baseUrl}/update`, body, { observe: 'body' })
+            return this.http.post(`${this.baseUrl}/Update/Photos`, body, { observe: 'body' })
                 .toPromise()
                 .then((result) => {
                 return Promise.resolve(result);
@@ -12456,7 +12455,7 @@ let MongoImageServices = class MongoImageServices {
     }
     deleteOne(_id) {
         if (this.activeUser.isAdmin || this.activeUser.isPermitted['to_delete_images']) {
-            return this.http.delete(`${this.baseUrl}/${_id}`, { observe: 'body' })
+            return this.http.delete(`${this.baseUrl}/${_id}/Photos`, { observe: 'body' })
                 .toPromise()
                 .then((res) => {
                 return Promise.resolve(res);
@@ -12514,12 +12513,11 @@ let MongoVideoServices = class MongoVideoServices {
     }
     generateTabs(year) {
         if (this.activeUser.isAdmin || this.activeUser.isPermitted['to_view_videos']) {
-            let params = new http_1.HttpParams({ fromString: 'endpoint' });
-            params = params.set('endpoint', 'Videos');
+            let params = new http_1.HttpParams();
             params = year ?
                 params.append('year', year.toString()) :
                 params;
-            return this.http.get(this.baseUrl + '/generate_tabs?', { params: params, observe: 'body' })
+            return this.http.get(this.baseUrl + '/generate_tabs/Videos', { params: params, observe: 'body' })
                 .toPromise()
                 .then((res) => {
                 return Promise.resolve(res);
@@ -12544,7 +12542,7 @@ let MongoVideoServices = class MongoVideoServices {
             });
             params = page ? params.append('page', page.toString()) : params;
             params = doAnd ? params.set('doAnd', 'yes') : params;
-            return this.http.get(this.baseUrl + '/videos', { params: params, observe: 'body' })
+            return this.http.get(this.baseUrl + '/Search/Videos', { params: params, observe: 'body' })
                 .toPromise()
                 .then((res) => {
                 return Promise.resolve(res);
@@ -26549,39 +26547,52 @@ let LoginComponent = class LoginComponent {
     ngOnInit() {
     }
     onSubmit() {
-        this.authenticator.login(this.loginModel)
-            .then((user) => {
-            if (this.authenticator.isLoggedIn) {
-                $('#loginModal').modal('hide');
-                this.http.get('/permissionsDb', { observe: "response" })
-                    .toPromise()
-                    .then((result) => {
-                    user.userParameters.permissions.forEach((uuid) => {
-                        result.body.find((permit) => {
-                            return permit.permission_id === uuid ? this.authenticator.isPermitted[permit.permission_name] = true : null;
+        if (Object({"ENV":"production"}).DEV_ENV) {
+            $('#loginModal').modal('hide');
+            this.authenticator.isLoggedIn = true;
+            this.authenticator.isAdmin = true;
+            this.authenticator.language = 'english';
+            let navigationExtras = {
+                queryParamsHandling: 'preserve',
+                preserveFragment: true
+            };
+            this.router.navigate(['/private/user-domain/images'], navigationExtras);
+        }
+        else {
+            this.authenticator.login(this.loginModel)
+                .then((user) => {
+                if (this.authenticator.isLoggedIn) {
+                    $('#loginModal').modal('hide');
+                    this.http.get('/permissionsDb', { observe: "response" })
+                        .toPromise()
+                        .then((result) => {
+                        user.userParameters.permissions.forEach((uuid) => {
+                            result.body.find((permit) => {
+                                return permit.permission_id === uuid ? this.authenticator.isPermitted[permit.permission_name] = true : null;
+                            });
                         });
-                    });
-                })
-                    .then(() => {
-                    let navigationExtras = {
-                        queryParamsHandling: 'preserve',
-                        preserveFragment: true
-                    };
-                    this.setRedirectUrl();
-                    this.router.navigate([this.authenticator.redirectUrl], navigationExtras);
-                })
-                    .catch(this.errorParser.handleError)
-                    .catch(error => console.log(error));
-            }
-        })
-            .catch(this.errorParser.handleError)
-            .catch((error) => {
-            this.message = error.message;
-            let x = setTimeout(() => {
-                this.message = undefined;
-                clearTimeout(x);
-            }, 2500);
-        });
+                    })
+                        .then(() => {
+                        let navigationExtras = {
+                            queryParamsHandling: 'preserve',
+                            preserveFragment: true
+                        };
+                        this.setRedirectUrl();
+                        this.router.navigate([this.authenticator.redirectUrl], navigationExtras);
+                    })
+                        .catch(this.errorParser.handleError)
+                        .catch(error => console.log(error));
+                }
+            })
+                .catch(this.errorParser.handleError)
+                .catch((error) => {
+                this.message = error.message;
+                let x = setTimeout(() => {
+                    this.message = undefined;
+                    clearTimeout(x);
+                }, 2500);
+            });
+        }
     }
     setRedirectUrl() {
         if (this.authenticator.isPermitted['to_view_images'] || this.authenticator.isPermitted['to_view_videos']) {
@@ -26715,7 +26726,7 @@ exports.GlobalnavComponent = GlobalnavComponent;
 /***/ 740:
 /***/ (function(module, exports) {
 
-module.exports = "<div><nav class=\"navbar navbar-default\"><div class=\"container-fluid\"><!-- BRANDING--><div class=\"navbar-header\"><button class=\"navbar-toggle collapsed\" type=\"button\" data-toggle=\"collapse\" data-target=\"#bs-example-navbar-collapse-1\" aria-expanded=\"false\"><span class=\"sr-only\">Toggle navigation</span><span class=\"icon-bar\"></span><span class=\"icon-bar\"></span><span class=\"icon-bar\"></span></button><a class=\"navbar-brand\" href=\"#\">Brand &#8200;</a></div><div class=\"collapse navbar-collapse\" id=\"bs-example-navbar-collapse-1\"><ul class=\"nav navbar-nav\" *ngFor=\"let link of navbarLinks, let i = index\"><li *ngIf=\"this.activeUser.isLoggedIn\"><a *ngIf=\"this.activeUser.isPermitted[link.permission]\" routerLink=\"{{link.name}}\" routerLinkActive=\"active\">{{ { name: link.name, language: this.activeUser.language } | labelTransform }}<span class=\"sr-only\" current></span></a></li><li *ngIf=\"!this.activeUser.isLoggedIn\"><a *ngIf=\"!link.permission\" routerLink=\"{{link.name}}\" routerLinkActive=\"active\">{{link.name}} </a></li></ul><ul class=\"nav navbar-nav navbar-right\"><li> <p class=\"btn btn-info\" *ngIf=\"!this.activeUser.isLoggedIn\" data-target=\"#loginModal\" data-toggle=\"modal\" type=\"button\"><span class=\"glyphicon glyphicon-log-in\" aria-hidden=\"true\"></span></p><p class=\"btn btn-warning\" *ngIf=\"this.activeUser.isLoggedIn\" (click)=\"logout()\"><span class=\"glyphicon glyphicon-log-out\" aria-hidden=\"true\"></span></p></li></ul></div></div></nav></div>"
+module.exports = "<div><nav class=\"navbar navbar-default\"><div class=\"container-fluid\"><!-- BRANDING--><div class=\"navbar-header\"><button class=\"navbar-toggle collapsed\" type=\"button\" data-toggle=\"collapse\" data-target=\"#bs-example-navbar-collapse-1\" aria-expanded=\"false\"><span class=\"sr-only\">Toggle navigation</span><span class=\"icon-bar\"></span><span class=\"icon-bar\"></span><span class=\"icon-bar\"></span></button><a class=\"navbar-brand\" href=\"#\">Brand &#8200;</a></div><div class=\"collapse navbar-collapse\" id=\"bs-example-navbar-collapse-1\"><ul class=\"nav navbar-nav\" *ngFor=\"let link of navbarLinks, let i = index\"><li *ngIf=\"this.activeUser.isAdmin\"><a *ngIf=\"link.permission\" routerLink=\"{{link.name}}\" routerLinkActive=\"Active\">{{ { name: link.name, language: this.activeUser.language } | labelTransform }}<span class=\"sr-only\" current></span></a></li><li *ngIf=\"!this.activeUser.isAdmin &amp;&amp; this.activeUser.isLoggedIn\"><a *ngIf=\"this.activeUser.isPermitted[link.permission]\" routerLink=\"{{link.name}}\" routerLinkActive=\"active\">{{ { name: link.name, language: this.activeUser.language } | labelTransform }}<span class=\"sr-only\" current></span></a></li><li *ngIf=\"!this.activeUser.isLoggedIn\"><a *ngIf=\"!link.permission\" routerLink=\"{{link.name}}\" routerLinkActive=\"active\">{{link.name}} </a></li></ul><ul class=\"nav navbar-nav navbar-right\"><li> <p class=\"btn btn-info\" *ngIf=\"!this.activeUser.isLoggedIn\" data-target=\"#loginModal\" data-toggle=\"modal\" type=\"button\"><span class=\"glyphicon glyphicon-log-in\" aria-hidden=\"true\"></span></p><p class=\"btn btn-warning\" *ngIf=\"this.activeUser.isLoggedIn\" (click)=\"logout()\"><span class=\"glyphicon glyphicon-log-out\" aria-hidden=\"true\"></span></p></li></ul></div></div></nav></div>"
 
 /***/ }),
 
@@ -33094,4 +33105,4 @@ exports.AuthenticationGuardService = AuthenticationGuardService;
 /***/ })
 
 },[654]);
-//# sourceMappingURL=app.daace807e62c6120f233.js.map
+//# sourceMappingURL=app.97c730789d3143ce5330.js.map
