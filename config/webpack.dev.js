@@ -3,6 +3,10 @@ var webpackMerge = require("webpack-merge");
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
 var commonConfig = require("./webpack.common.js");
 var helpers = require("./helpers");
+const express = require('express');
+const permissions = require('../routes/restricted/permissions');
+const users = require('../routes/restricted/users');
+const accounts = require('../routes/restricted/accounts');
 
 module.exports = webpackMerge(commonConfig, {
     devtool: "cheap-module-eval-source-map",
@@ -22,6 +26,13 @@ module.exports = webpackMerge(commonConfig, {
     ],
 
     devServer: {
+        setup: (app, server) => {
+          app.use('/photos', express.static('/Volumes/USB_Storage/photos'));
+          app.use('/videos', express.static('/Volumes/USB_Storage/videos'));
+          app.use('/usersDb', users);
+          app.use('/accountsDb', accounts);
+          app.use('/permissionsDb', permissions);
+        },
         historyApiFallback: true,
         stats: "minimal",
         proxy: {
