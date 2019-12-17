@@ -7,10 +7,10 @@ const jwtSecret = process.env.JWT_SECRET || 'some_secret_word';
 /* LOGIN ROUTE */
 
 router.post('/', (req, res, next) => {
+  
+  
 
     passport.authenticate('local', {session: false}, (err, user, info) => {
-
-        // console.log('returned from passport: ', user);
 
         if (err || !user) {
             return res.status(400).json({

@@ -7,6 +7,8 @@ const express = require('express');
 const permissions = require('../routes/restricted/permissions');
 const users = require('../routes/restricted/users');
 const accounts = require('../routes/restricted/accounts');
+const logout = require('../routes/logout');
+require('dotenv').config();
 
 module.exports = webpackMerge(commonConfig, {
     devtool: "cheap-module-eval-source-map",
@@ -21,17 +23,20 @@ module.exports = webpackMerge(commonConfig, {
     plugins: [
         new ExtractTextPlugin("[name].css"),
         new webpack.DefinePlugin({
-          "process.env.DEV_ENV" : JSON.stringify(true),
+          "process.env" : {
+            NODE_ENV : JSON.stringify(process.env.NODE_ENV)
+          }
         })
     ],
 
     devServer: {
         setup: (app, server) => {
-          app.use('/photos', express.static('/Volumes/USB_Storage/photos'));
-          app.use('/videos', express.static('/Volumes/USB_Storage/videos'));
+          app.use('/photos', express.static(process.env.PHOTOS_MOUNT_POINT));
+          app.use('/videos', express.static(process.env.VIDEOS_MOUNT_POINT));
           app.use('/usersDb', users);
           app.use('/accountsDb', accounts);
           app.use('/permissionsDb', permissions);
+          app.use('/logout', logout);
         },
         historyApiFallback: true,
         stats: "minimal",

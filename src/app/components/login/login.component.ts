@@ -33,7 +33,7 @@ export class LoginComponent implements OnInit {
 
     onSubmit(): void {
       
-      if(process.env.DEV_ENV) {
+      if(process.env.NODE_ENV) {
         $('#loginModal').modal('hide');
         this.authenticator.isLoggedIn = true;
         this.authenticator.isAdmin = true;
