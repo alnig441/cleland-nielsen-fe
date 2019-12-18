@@ -38,11 +38,12 @@ export class LoginComponent implements OnInit {
         this.authenticator.isLoggedIn = true;
         this.authenticator.isAdmin = true;
         this.authenticator.language = 'english';
+        this.authenticator.redirectUrl = '/private/user-domain';
         let navigationExtras : NavigationExtras = {
             queryParamsHandling: 'preserve',
             preserveFragment: true
         };
-        this.router.navigate(['/private/user-domain/images'], navigationExtras);
+        this.router.navigate([this.authenticator.redirectUrl], navigationExtras);
       }
 
       else {
@@ -86,7 +87,7 @@ export class LoginComponent implements OnInit {
 
     }
 
-    setRedirectUrl(): void {
+    setRedirectUrl(): void {            
       if (this.authenticator.isPermitted['to_view_images'] || this.authenticator.isPermitted['to_view_videos']) {
         this.authenticator.redirectUrl = '/private/user-domain';
         this.authenticator.startPage = this.authenticator.isPermitted['to_view_images'] ?

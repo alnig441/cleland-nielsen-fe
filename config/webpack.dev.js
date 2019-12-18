@@ -31,6 +31,11 @@ module.exports = webpackMerge(commonConfig, {
 
     devServer: {
         setup: (app, server) => {
+          let bodyParser = require('body-parser');
+          app.use(bodyParser.json());
+          app.all("/**", bodyParser.json(), (req, res, next) => {
+            next();
+          })
           app.use('/photos', express.static(process.env.PHOTOS_MOUNT_POINT));
           app.use('/videos', express.static(process.env.VIDEOS_MOUNT_POINT));
           app.use('/usersDb', users);

@@ -3,7 +3,7 @@ const express = require('express'),
 const passport = require('passport');
 
 const { Client } = require('pg'),
-    connectionString = process.env.MYDB || 'postgresql://allannielsen:1109721405@localhost:5432/jacn2014_ng4';
+    connectionString = process.env.MYDB;
 
 const bcrypt = require('bcrypt'),
     saltRounds = 10,
@@ -11,7 +11,7 @@ const bcrypt = require('bcrypt'),
 
 router.get('/', (req, res, next) => {
     const client = new Client({
-        connectionString: connectionString
+        connectionString: connectionString || process.env.MYDB 
     })
 
     client.connect();
@@ -28,9 +28,8 @@ router.get('/', (req, res, next) => {
 })
 
 router.post('/', (req, res, next) => {
-    console.log('posting user: ', req.body);
     const client = new Client({
-        connectionString: connectionString
+        connectionString: connectionString || process.env.MYDB
     })
     client.connect();
 
@@ -40,7 +39,6 @@ router.post('/', (req, res, next) => {
                 return Promise.reject({ status: err.statusCode, message: err.message})
             }
             else {
-                // return client.query(`INSERT INTO users VALUES( ${req.body.user_id},(SELECT account_id FROM accounts WHERE account_name='${req.body.account_type}'), '${req.body.user_name}', '${hash}')`)
                 return client.query(`INSERT INTO users VALUES( ${req.body.user_id}, '${req.body.account_type}', '${req.body.user_name}', '${hash}')`)
                     .then((result) => {
                         res.status(200).send({message: `${result.command} SUCCESS`});
@@ -56,6 +54,7 @@ router.post('/', (req, res, next) => {
 })
 
 router.param('user_id', (req, res, next, user_id) => {
+  console.log('next: ', next)
     req.user = {id: user_id, language: req.body.language, type: req.body.account_type }
     next();
 })
@@ -67,10 +66,9 @@ router.route('/:user_id?')
     .get((req, res, next) => {
         console.log('fetching user: ', req.user )
     })
-    .put((req, res, next) =>{
-        console.log('modifying user: ')
+    .put((req, res, next) =>{      
         const client = new Client({
-            connectionString: connectionString
+            connectionString: connectionString || process.env.MYDB 
         })
 
         client.connect();
@@ -89,7 +87,7 @@ router.route('/:user_id?')
     })
     .delete((req, res, next) => {
         const client = new Client({
-            connectionString: connectionString
+            connectionString: connectionString || process.env.MYDB 
         })
 
         client.connect();

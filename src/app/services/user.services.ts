@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpParams } from "@angular/common/http";
 import 'rxjs/add/operator/toPromise';
 import { ErrorParser } from './error-parser';
 import { UserModel } from "../models/user.model";
@@ -17,7 +17,7 @@ export class UserServices {
     constructor(
       private message: SetMessageService,
       private http: HttpClient,
-      private activeUser: AuthenticationService
+      private activeUser: AuthenticationService,
     ) {}
 
     getAll(): Promise<any> {
@@ -98,7 +98,7 @@ export class UserServices {
     }
 
     editRecord(user: UserModel): Promise<any> {
-
+    
       if (this.activeUser.isAdmin || this.activeUser.isPermitted['to_edit_users']) {
         return this.http.put(`${this.baseUrl}/${user.user_id}`, user, { observe: "response"})
           .toPromise()

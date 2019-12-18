@@ -3,10 +3,10 @@ const passport = require('passport'),
     JWTStrategy = require('passport-jwt').Strategy,
     ExtractJWT = require('passport-jwt').ExtractJwt;
 
-const jwtSecret = process.env.JWT_SECRET || 'some_secret_word';
+const jwtSecret = process.env.JWT_SECRET;
 const { Pool } = require('pg');
 
-const connectionString = process.env.MYDB || 'postgresql://allannielsen:1109721405@localhost:5432/jacn2014_ng4';
+const connectionString = process.env.MYDB;
 
 const jwt = require('jsonwebtoken');
 

@@ -10,7 +10,7 @@ span(*ngIf="this.formManager.getService() == 'images'")
             p names:
 
 
-span(*ngIf="this.activeUser.isPermitted['to_add_'+ this.formManager.getService()] && this.formManager.getService() !='images' && this.formManager.getService() !='videos'")
+span(*ngIf="this.activeUser.isAdmin || this.activeUser.isPermitted['to_add_'+ this.formManager.getService()]")
     form(#addrecordModel="ngForm" class="panel panel-default box-shadow")
         div(class="panel-heading")
             h3(class="panel-title") add {{this.formManager.getService()}}
