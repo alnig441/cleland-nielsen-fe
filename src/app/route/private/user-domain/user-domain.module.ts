@@ -6,6 +6,7 @@ import { MessageBarModule } from "../../../modules/message-bar/message-bar.modul
 import { SidebarCtaModule } from "../../../modules/sidebar-cta/sidebar-cta.module";
 import { FormSubmissionModule } from "../../../modules/form-submission/form-submission.module";
 import { PipesModule } from "../../../pipes/pipes.module";
+import { SearchFieldModule } from '../../../modules/search-field/search-field.module';
 
 import { VideosComponent } from "./videos/videos.component";
 import { ImagesComponent } from "./images/images.component";
@@ -28,7 +29,8 @@ import { AuthenticationGuardService } from "../../../services/authentication-gua
       MessageBarModule,
       SidebarCtaModule,
       FormSubmissionModule,
-      PipesModule
+      PipesModule,
+      SearchFieldModule
     ],
     declarations: [
       UserDomainComponent,
@@ -39,7 +41,7 @@ import { AuthenticationGuardService } from "../../../services/authentication-gua
       InfoboxDirective,
       ImageEditorDirective,
       StopPropagationOnClick,
-      DestroyVideoOnEnded
+      DestroyVideoOnEnded,
     ],
     exports: [
     ],

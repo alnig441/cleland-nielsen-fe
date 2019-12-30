@@ -1,6 +1,7 @@
 span(*ngIf="!this.mongoImageService.message.failure" class='image-main')
   div(class='image-menu')
-    p(type='button' class='btn btn-info btn-xs')
+    app-search-field
+    p((click)='this.openSearch()' type='button' class='btn btn-info btn-xs')
       span(class='glyphicon glyphicon-search' aria-hidden='true')
     p(*ngIf='this.activeUser.isAdmin', (click)='this.openEditor()' type='button' class='btn btn-info btn-xs')
       span(class='glyphicon glyphicon-pencil' aria-hidden='true')
@@ -79,7 +80,6 @@ div(*imageEditor='this.editImages' id='image-editor')
         p((click)='this.onSubmit(e)' type='button' class='btn btn-info') {{ {name: 'update', language: this.activeUser.language} | labelTransform }}
   div(class='row background')
 
-
 div((click)='this.cancelModal()' class='modal fade assetviewer-modal' tabindex='1' role='dialog' aria-labelledby='assetviewerModal')
   div(stop-propagation-on-click, class='modal-image-container')
     span(class='modal-image-overlay-positioner')
@@ -103,3 +103,4 @@ div((click)='this.cancelModal()' class='modal fade assetviewer-modal' tabindex='
         li((click)="this.cancelModal()" class='button-left')
           span(class='glyphicon glyphicon-remove') &nbsp;
           | {{ { name: 'close', language: this.activeUser.language } | labelTransform }}
+          
