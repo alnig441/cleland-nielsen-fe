@@ -1,7 +1,10 @@
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
-import { SearchFieldComponent } from "./search-field.component";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+
+import { SearchFieldComponent } from "./search-field.component";
+
+import { MongoImageServices} from "../../services/mongoImage.services";
 
 @NgModule({
   imports: [
@@ -15,6 +18,7 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
     SearchFieldComponent
   ],
   providers: [
+    MongoImageServices
   ]
 })
 

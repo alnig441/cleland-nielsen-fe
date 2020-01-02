@@ -1,6 +1,10 @@
 import { Component, DoCheck, OnInit, ViewEncapsulation, HostListener } from "@angular/core";
 import { state, style, animate, transition, trigger, AnimationEvent } from "@angular/animations";
 
+import { MongoImageServices } from "../../services/mongoImage.services";
+
+const autoComplete = require('../../../js/autoComplete.js');
+
 @Component({
   selector: 'app-search-field',
   template: require('./search-field.component.pug'),
@@ -11,47 +15,143 @@ import { state, style, animate, transition, trigger, AnimationEvent } from "@ang
         width: '25px',
         background: 'transparent'
       })),
-      state('in', style({
+      state('openSearch', style({
         width: '200px',
         position: 'absolute',
-        transform: 'translate(50px,50px)',
+        transform: 'translate(75px,75px)',
+        opacity: 0.75,
         background: 'white',
         color: 'black',
-        zIndex: 10000000,
+        zIndex: 1000,
       })),
-      transition('* => in', [
+      transition('* => openSearch', [
         animate('200ms')
       ]),
-      transition('in => *', [
+      transition('openSearch => *', [
         animate('100ms')
       ])
-    ])
+    ]),
   ]
 })
 
 export class SearchFieldComponent implements OnInit {
-  state: string;
-  test: any;
+  private searchState: string;
+  private searchIsDone: boolean = true;
+  private searchTerms: any;
+  private autoComplete : HTMLInputElement;
 
-  constructor() {}
+  constructor(
+    private mongoImageService: MongoImageServices,
+  ) {}
 
   @HostListener('click', ['$event']) onClickHandler(event: MouseEvent) {
-    this.state = 'in';
+    this.searchIsDone = false;
+    this.searchState = 'openSearch';
+    this.autoComplete.focus();
   }
 
-  @HostListener('document:keydown', ['$event']) onKeydownHandler(event: KeyboardEvent) {
-    if (event.key == 'Enter' || event.key == 'Escape') {
-      this.state = null;
+  @HostListener('document:keyup', ['$event']) keyupEventHandler(event: KeyboardEvent) {
+    if (event.key == 'Escape') {
+      if (document.querySelector("#autoComplete_list")) {
+        document.querySelector("#autoComplete_list").remove();
+      }
+      this.autoComplete.value = '';
+      this.searchState = null;
     }
   }
 
   ngOnInit(): void {
+    this.autoComplete = document.querySelector("#autoComplete") as HTMLInputElement;
+
+    this.mongoImageService.getSearchTerms()
+      .then((res) => {
+        console.log('search terms: ', res);
+        this.searchTerms = res;
+      })
   }
 
-  onBegin(event: AnimationEvent) {
+  onBegin(event: AnimationEvent) { }
+
+  onSelection(selection: string) {
+    this.autoComplete.blur();
+
+    if ( document.querySelector("#autoComplete_list")) {
+      document.querySelector("#autoComplete_list").remove();
+    }
+
+    // simulate api call
+    setTimeout(() => {
+      this.autoComplete.value = '';
+      this.searchState = null;
+    }, 1500)
   }
 
   onDone(event: AnimationEvent) {
+    let inputField = event.element;
+
+    if (event.toState =='openSearch') {
+
+      new autoComplete({
+          data: {                              // Data src [Array, Function, Async] | (REQUIRED)
+            src: async () => {
+              const query = inputField.value;
+              const data = this.searchTerms;
+              return data;
+            },
+            key: ["title"],
+            cache: false
+          },
+          // query: {                               // Query Interceptor               | (Optional)
+          //       manipulate: (query:any) => {
+          //         return query.replace("pizza", "burger");
+          //       }
+          // },
+          sort: (a:any , b:any) => {                    // Sort rendered results ascendingly | (Optional)
+              if (a.match < b.match) return -1;
+              if (a.match > b.match) return 1;
+              return 0;
+          },
+          placeHolder: "enter search terms ...",     // Place Holder text                 | (Optional)
+          selector: "#autoComplete",           // Input field selector              | (Optional)
+          threshold: 1,                        // Min. Chars length to start Engine | (Optional)
+          debounce: 300,                       // Post duration for engine to start | (Optional)
+          searchEngine: "strict",              // Search Engine type/mode           | (Optional)
+          resultsList: {                       // Rendered results list object      | (Optional)
+              render: true,
+              container: (source:any) => {
+                  source.setAttribute("id", "autoComplete_list");
+              },
+              destination: document.querySelector("#autoComplete"),
+              position: "afterend",
+              element: "ul"
+          },
+          maxResults: 5,                         // Max. number of rendered results | (Optional)
+          highlight: true,                       // Highlight matching results      | (Optional)
+          resultItem: {                          // Rendered result item            | (Optional)
+              content: (data:any, source:any) => {
+                  source.innerHTML = data.match;
+              },
+              element: "li"
+          },
+          noResults: () => {                     // Action script on noResults      | (Optional)
+              const result = document.createElement("li");
+              result.setAttribute("class", "no_result");
+              result.setAttribute("tabindex", "1");
+              result.innerHTML = "Not Found";
+              document.querySelector("#autoComplete_list").appendChild(result);
+          },
+          onSelection: (feedback : any) => {             // Action script onSelection event | (Optional)
+              this.onSelection(feedback.selection.value.title);
+              inputField.value = feedback.selection.value.title;
+          }
+
+      })
+
+    }
+    if (event.fromState == 'openSearch') {
+      this.autoComplete.placeholder = '';
+      this.searchIsDone = true;
+    }
   }
 
 }
