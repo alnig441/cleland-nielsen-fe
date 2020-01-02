@@ -1,1 +1,4 @@
-input([@search]='state', (click)='onClickHandler($event)', (@search.start)="this.onBegin($event)", (@search.done)="this.onDone($event)", class='btn btn-info btn-xs')
+span
+  i(*ngIf="this.searchIsDone", class='glyphicon glyphicon-search')
+  input([@search]='searchState',(@search.start)="this.onBegin($event)", (@search.done)="this.onDone($event)", class='btn btn-info btn-xs', id="autoComplete")
+

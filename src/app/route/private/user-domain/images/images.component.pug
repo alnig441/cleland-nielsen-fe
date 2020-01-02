@@ -1,8 +1,6 @@
 span(*ngIf="!this.mongoImageService.message.failure" class='image-main')
   div(class='image-menu')
     app-search-field
-    p((click)='this.openSearch()' type='button' class='btn btn-info btn-xs')
-      span(class='glyphicon glyphicon-search' aria-hidden='true')
     p(*ngIf='this.activeUser.isAdmin', (click)='this.openEditor()' type='button' class='btn btn-info btn-xs')
       span(class='glyphicon glyphicon-pencil' aria-hidden='true')
   div(*ngFor='let month of this.months as months; index as i' class='month {{month | monthTransform}}', [ngClass]="{'active': month == this.albumViewSelector.month}")

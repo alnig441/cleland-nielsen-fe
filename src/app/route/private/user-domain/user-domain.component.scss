@@ -8,3 +8,34 @@ app-form-submission {
 }
 
 app-form-submission {}
+
+app-search-field #autoComplete_list {
+  width: 190px;
+  background: white;
+  opacity: 0.75;
+  list-style: none;
+  text-align: center;
+  position: absolute;
+  top: 75px;
+  left: 80px;
+  z-index: 1000;
+  margin: 0;
+  padding: 0;
+  border-radius: 3px;
+}
+
+app-search-field .autoComplete_result {
+  // background: white;
+  // opacity: 0.75;
+}
+
+app-search-field .autoComplete_result:hover, app-search-field .autoComplete_selected {
+  border-left: 2px solid #46b8da;
+  font-style: italic;
+  // font-weight: bold;
+  // text-transform: uppercase;
+}
+
+app-search-field .autoComplete_highlighted {
+  color: #46b8da;
+}
