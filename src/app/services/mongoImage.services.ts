@@ -156,4 +156,20 @@ export class MongoImageServices {
 
   }
 
+  getSearchTerms(): Promise<any> {
+    if (this.activeUser.isAdmin || this.activeUser.isPermitted['to_delete_images']) {
+      return this.http.get(`${this.baseUrl}/searchTerms/Photos`, { observe: 'body' })
+        .toPromise()
+        .then((res: any) => {
+          return Promise.resolve(res);
+        })
+        .catch(this.errorParser.handleError)
+        .catch((error: any) => {
+          this.message.set(error);
+        })
+    } else {
+      this.message.set({ status: 405, message: 'insufficient permissions'});
+    }
+  }
+
 }

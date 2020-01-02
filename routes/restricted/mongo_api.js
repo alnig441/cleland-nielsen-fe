@@ -40,6 +40,17 @@ router.get('/generate_tabs/**', (req, res, next) => {
   })
 })
 
+router.get('/searchTerms/**', (req, res, next) => {
+  let uri = req.originalUrl.replace(/api\/searchTerms/, 'Terms');
+  let options = new Options({ uri: uri });
+  api.get(options, (error, result, body) => {
+    body = body.filter( element => {
+      return element != null;
+    })
+    res.send(body);
+  })
+})
+
 router.post('/Update/**', (req, res, next) => {
   let uri = req.originalUrl.replace(/\/api/, '');
   let options = new Options({ uri: uri, body: req.body });

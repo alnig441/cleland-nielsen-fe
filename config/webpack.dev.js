@@ -56,6 +56,10 @@ module.exports = webpackMerge(commonConfig, {
                 return req.replace(/\/generate_tabs/, '/Distinct');
               } 
               
+              if(req.match(/\/searchTerms/)) {
+                return req.replace(/searchTerms/, 'Terms');
+              }
+              
               if(splitReq[2].length >= 24 ) {
                 let partial = '';
                 if(options.method == 'GET') { partial = `SearchById` }
