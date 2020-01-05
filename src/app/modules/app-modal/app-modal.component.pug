@@ -2,7 +2,7 @@ div(class='modal fade assetviewer-modal' tabindex='1' role='dialog' aria-labelle
   div(class='modal-image-container')
     span(class='modal-image-overlay-positioner')
       img(*appModal="this.mongoImageService.modalAssets", class="modal-image app-modal" src="{{ this.mongoImageService.modalSource }}")
-      ul(class="modal-image-overlay")
+      ul(*ngIf="this.mongoImageService.modalSource && this.mongoImageService.modalAssets.length > 1", class="modal-image-overlay")
         li((click)="this.flip('previous')" class="button-left")
           span(class="glyphicon glyphicon-step-backward") &nbsp; 
           | {{ { name: 'rwd', language: this.activeUser.language } | labelTransform }}
