@@ -32,6 +32,7 @@ export class ImagesComponent implements OnInit, DoCheck {
     private imageList: string[] = new Array(6);
     private selectAll: boolean = false;
     private modalSource: string;
+    private modalAssets: any[];
 
     constructor(
         private formManager: ServiceModelManagerService,
@@ -207,37 +208,12 @@ export class ImagesComponent implements OnInit, DoCheck {
       return ids;
     }
 
-    openModal(imageId: any):void {
-      this.documents.forEach((document, index) => {
-        if(document['_id'] == imageId){
-          this.modalSource = 'photos/James/' + document['image']['fileName'];
-          this.albumViewSelector['selectedIndex'] = index;
-          $('.assetviewer-modal').modal('show');
-        };
+    openModal(id: string): void {
+      let index: number;
+      this.documents.forEach((document, i) => {
+        if(document._id == id) index = i;
       })
+      this.mongoImageService.initialiseModal(this.documents, index);
     }
 
-    cancelModal(): void {
-        $('.assetviewer-modal').modal('hide');
-        this.modalSource = undefined;
-    }
-
-    flipThroughImages(step: string): void {
-      var length = this.documents.length;
-      var imageIndex = this.albumViewSelector['selectedIndex'];
-
-      switch(step) {
-          case 'next':
-              this.albumViewSelector['selectedIndex'] = imageIndex == length - 1 ?
-                0 :
-                this.albumViewSelector['selectedIndex'] + 1;
-              break
-          case 'previous':
-              this.albumViewSelector['selectedIndex'] = imageIndex == 0 ?
-                length - 1 :
-                this.albumViewSelector['selectedIndex'] - 1;
-              break
-      }
-      this.modalSource = 'photos/James/' + this.documents[this.albumViewSelector['selectedIndex']]['image']['fileName'];
-    }
 }

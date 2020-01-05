@@ -2,8 +2,11 @@ import { Component, DoCheck, OnInit, ViewEncapsulation, HostListener } from "@an
 import { state, style, animate, transition, trigger, AnimationEvent } from "@angular/animations";
 
 import { MongoImageServices } from "../../services/mongoImage.services";
+import { MongoImageModel } from "../../models/mongoImage.model";
 
 const autoComplete = require('../../../js/autoComplete.js');
+
+const $ = require('jquery');
 
 @Component({
   selector: 'app-search-field',
@@ -39,6 +42,8 @@ export class SearchFieldComponent implements OnInit {
   private searchIsDone: boolean = true;
   private searchTerms: any;
   private autoComplete : HTMLInputElement;
+  private images: any;
+  private modalSource: string;
 
   constructor(
     private mongoImageService: MongoImageServices,
@@ -65,25 +70,53 @@ export class SearchFieldComponent implements OnInit {
 
     this.mongoImageService.getSearchTerms()
       .then((res) => {
-        console.log('search terms: ', res);
         this.searchTerms = res;
       })
   }
 
   onBegin(event: AnimationEvent) { }
 
-  onSelection(selection: string) {
+  onSelection(item: any) {
+    let selection = item.selection.value;
+    let model = new MongoImageModel();
+
     this.autoComplete.blur();
 
     if ( document.querySelector("#autoComplete_list")) {
       document.querySelector("#autoComplete_list").remove();
     }
 
-    // simulate api call
-    setTimeout(() => {
-      this.autoComplete.value = '';
-      this.searchState = null;
-    }, 1500)
+    switch(selection.queryTerm) {
+      case 'location.city'    :
+        model.setCity(selection.title);
+        break;
+      case 'location.state'   :
+        model.setState(selection.title);
+        break;
+      case 'location.country' :
+        model.setCountry(selection.title);
+        break;
+      case 'meta.names'       :
+        model.setNames(selection.title);
+        break;
+      case 'meta.keywords'    :
+        model.setKeywords(selection.title);
+        break;
+      case 'meta.occasion'    :
+        model.setOccasion(selection.title);
+        break;
+      case 'meta.venue'       :
+        model.setVenue(selection.title);
+        break;
+    }
+
+    this.mongoImageService.search(model, true, true)
+      .then(res => {
+        this.autoComplete.value = '';
+        this.searchState = null;
+        this.mongoImageService.initialiseModal(res.docs, 0);
+      })
+
   }
 
   onDone(event: AnimationEvent) {
@@ -141,7 +174,7 @@ export class SearchFieldComponent implements OnInit {
               document.querySelector("#autoComplete_list").appendChild(result);
           },
           onSelection: (feedback : any) => {             // Action script onSelection event | (Optional)
-              this.onSelection(feedback.selection.value.title);
+              this.onSelection(feedback);
               inputField.value = feedback.selection.value.title;
           }
 

@@ -77,28 +77,4 @@ div(*imageEditor='this.editImages' id='image-editor')
         p((click)='this.clearEditor()' type='button' class='btn btn-warning') {{ {name: 'cancel', language: this.activeUser.language} | labelTransform }}
         p((click)='this.onSubmit(e)' type='button' class='btn btn-info') {{ {name: 'update', language: this.activeUser.language} | labelTransform }}
   div(class='row background')
-
-div((click)='this.cancelModal()' class='modal fade assetviewer-modal' tabindex='1' role='dialog' aria-labelledby='assetviewerModal')
-  div(stop-propagation-on-click, class='modal-image-container')
-    span(class='modal-image-overlay-positioner')
-      img(*appModal="this.modalSource", class="modal-image app-modal" src="{{ this.modalSource }}" id="{{this.documents[this.albumViewSelector['selectedIndex']]['_id']}}")
-      ul(class="modal-image-overlay")
-        li((click)="this.flipThroughImages('previous')" class="button-left")
-          span(class="glyphicon glyphicon-step-backward") &nbsp; 
-          | {{ { name: 'rwd', language: this.activeUser.language } | labelTransform }}
-        li((click)="this.flipThroughImages('next')" class="button-right") 
-          | {{ { name: 'fwd', language: this.activeUser.language } | labelTransform}} 
-          | &nbsp;
-          span(class="glyphicon glyphicon-step-forward")
-      ul(class="modal-image-overlay-menu")
-        li(onclick="window.print(); return null;" class='button-left')
-          span(class='glyphicon glyphicon-print') &nbsp;
-          | {{ { name: 'print', language: this.activeUser.language } | labelTransform }}
-        li(class='button-left')
-          a(href="{{ this.modalSource }}" download)  
-            span(class='glyphicon glyphicon-download') &nbsp;
-            | {{ { name: 'save', language: this.activeUser.language} | labelTransform }}
-        li((click)="this.cancelModal()" class='button-left')
-          span(class='glyphicon glyphicon-remove') &nbsp;
-          | {{ { name: 'close', language: this.activeUser.language } | labelTransform }}
           
