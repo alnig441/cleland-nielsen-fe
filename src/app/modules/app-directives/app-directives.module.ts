@@ -7,6 +7,7 @@ import { InfoboxDirective } from "../../directives/infobox.directive";
 import { DestroyVideoOnEnded } from "../../directives/destroy-video-on-ended.directive";
 import { StopPropagationOnClick } from "../../directives/stop-propagation-on-click.directive";
 import { ImageEditorDirective } from "../../directives/image-editor.directive";
+import { AppVideoModalDirective } from "../../directives/app-video-modal.directive";
 
 @NgModule({
   imports: [
@@ -17,14 +18,16 @@ import { ImageEditorDirective } from "../../directives/image-editor.directive";
     InfoboxDirective,
     DestroyVideoOnEnded,
     StopPropagationOnClick,
-    ImageEditorDirective
+    ImageEditorDirective,
+    AppVideoModalDirective
   ],
   exports: [
     AppModalDirective,
     InfoboxDirective,
     DestroyVideoOnEnded,
     StopPropagationOnClick,
-    ImageEditorDirective
+    ImageEditorDirective,
+    AppVideoModalDirective
   ],
   providers: [
   ]
