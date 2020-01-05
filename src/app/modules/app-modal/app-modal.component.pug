@@ -1,0 +1,23 @@
+div(class='modal fade assetviewer-modal' tabindex='1' role='dialog' aria-labelledby='assetviewerModal')
+  div(class='modal-image-container')
+    span(class='modal-image-overlay-positioner')
+      img(*appModal="this.mongoImageService.modalAssets", class="modal-image app-modal" src="{{ this.mongoImageService.modalSource }}")
+      ul(class="modal-image-overlay")
+        li((click)="this.flip('previous')" class="button-left")
+          span(class="glyphicon glyphicon-step-backward") &nbsp; 
+          | {{ { name: 'rwd', language: this.activeUser.language } | labelTransform }}
+        li((click)="this.flip('next')" class="button-right") 
+          | {{ { name: 'fwd', language: this.activeUser.language } | labelTransform}} 
+          | &nbsp;
+          span(class="glyphicon glyphicon-step-forward")
+      ul(class="modal-image-overlay-menu")
+        li(onclick="window.print(); return null;" class='button-left')
+          span(class='glyphicon glyphicon-print') &nbsp;
+          | {{ { name: 'print', language: this.activeUser.language } | labelTransform }}
+        li(class='button-left')
+          a(href="{{ this.modalSource }}" download)  
+            span(class='glyphicon glyphicon-download') &nbsp;
+            | {{ { name: 'save', language: this.activeUser.language } | labelTransform }}
+        li((click)="this.cancelModal()" class='button-left')
+          span(class='glyphicon glyphicon-remove') &nbsp;
+          | {{ { name: 'close', language: this.activeUser.language } | labelTransform }}
