@@ -14,8 +14,6 @@ export class AppModalDirective {
 
     if(condition){
 
-      console.log('condition: ', condition, '\ntempplateREf: ', this);
-
       let height = window.innerHeight * .8;
 
       this.viewContainer.createEmbeddedView(this.templateRef);

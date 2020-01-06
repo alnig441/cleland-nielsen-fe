@@ -40,8 +40,8 @@ const $ = require('jquery');
 export class SearchFieldComponent implements OnInit {
   private searchState: string;
   private searchIsDone: boolean = true;
-  private searchTerms: any;
-  private autoComplete : HTMLInputElement;
+  private searchTerms: any ;
+  private autoCompleteElement : HTMLInputElement;
   private images: any;
   private modalSource: string;
 
@@ -52,7 +52,7 @@ export class SearchFieldComponent implements OnInit {
   @HostListener('click', ['$event']) onClickHandler(event: MouseEvent) {
     this.searchIsDone = false;
     this.searchState = 'openSearch';
-    this.autoComplete.focus();
+    this.autoCompleteElement.focus();
   }
 
   @HostListener('document:keyup', ['$event']) keyupEventHandler(event: KeyboardEvent) {
@@ -60,17 +60,20 @@ export class SearchFieldComponent implements OnInit {
       if (document.querySelector("#autoComplete_list")) {
         document.querySelector("#autoComplete_list").remove();
       }
-      this.autoComplete.value = '';
+      this.autoCompleteElement.value = '';
       this.searchState = null;
     }
   }
 
   ngOnInit(): void {
-    this.autoComplete = document.querySelector("#autoComplete") as HTMLInputElement;
+    this.autoCompleteElement = document.querySelector("#autoComplete") as HTMLInputElement;
 
     this.mongoImageService.getSearchTerms()
       .then((res) => {
         this.searchTerms = res;
+      })
+      .catch((error) => {
+        this.searchTerms = [];
       })
   }
 
@@ -80,7 +83,7 @@ export class SearchFieldComponent implements OnInit {
     let selection = item.selection.value;
     let model = new MongoImageModel();
 
-    this.autoComplete.blur();
+    this.autoCompleteElement.blur();
 
     if ( document.querySelector("#autoComplete_list")) {
       document.querySelector("#autoComplete_list").remove();
@@ -112,7 +115,7 @@ export class SearchFieldComponent implements OnInit {
 
     this.mongoImageService.search(model, true, true)
       .then(res => {
-        this.autoComplete.value = '';
+        this.autoCompleteElement.value = '';
         this.searchState = null;
         this.mongoImageService.initialiseModal(res.docs, 0);
       })
@@ -182,7 +185,7 @@ export class SearchFieldComponent implements OnInit {
 
     }
     if (event.fromState == 'openSearch') {
-      this.autoComplete.placeholder = '';
+      this.autoCompleteElement.placeholder = '';
       this.searchIsDone = true;
     }
   }

@@ -22,26 +22,25 @@ export class MongoImageServices {
     private http: HttpClient,
     private activeUser: AuthenticationService
   ) {}
-  
+
   initialiseModal(assets: any, index: number ): void {
-    console.log('initialising: ', assets, index);
     this.modalAssets = assets;
     this.setModalSource(index);
   }
-  
+
   clearModal(): void {
     this.modalAssets = null ;
     this.modalSource = null ;
   }
-  
+
   setModalSource(index: number): void {
     this.modalSource = `photos/James/${this.modalAssets[index].image.fileName}`;
   }
-  
+
   getModalAssets(): any {
     return this.modalAssets;
   }
-  
+
   getModalSource(): any {
     return this.modalSource;
   }
@@ -182,7 +181,7 @@ export class MongoImageServices {
   }
 
   getSearchTerms(): Promise<any> {
-    if (this.activeUser.isAdmin || this.activeUser.isPermitted['to_delete_images']) {
+    if (this.activeUser.isAdmin || this.activeUser.isPermitted['to_view_images']) {
       return this.http.get(`${this.baseUrl}/searchTerms/Photos`, { observe: 'body' })
         .toPromise()
         .then((res: any) => {
@@ -194,6 +193,7 @@ export class MongoImageServices {
         })
     } else {
       this.message.set({ status: 405, message: 'insufficient permissions'});
+      return Promise.reject('not allowed');
     }
   }
 
