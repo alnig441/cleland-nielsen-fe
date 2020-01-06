@@ -27014,7 +27014,7 @@ exports.SearchFieldComponent = SearchFieldComponent;
 /***/ 733:
 /***/ (function(module, exports) {
 
-module.exports = "<span><i class=\"glyphicon glyphicon-search\" *ngIf=\"this.searchIsDone\"></i><input class=\"btn btn-info btn-xs\" [@search]=\"searchState\" (@search.start)=\"this.onBegin($event)\" (@search.done)=\"this.onDone($event)\" id=\"autoComplete\"></span>"
+module.exports = "<span><i class=\"glyphicon glyphicon-search\" *ngIf=\"this.searchIsDone\"></i><input class=\"btn btn-info btn-xs\" [@search]=\"searchState\" (@search.start)=\"this.onBegin($event)\" (@search.done)=\"this.onDone($event)\" id=\"autoComplete\" autocomplete=\"off\"></span>"
 
 /***/ }),
 
@@ -34075,4 +34075,4 @@ exports.AuthenticationGuardService = AuthenticationGuardService;
 /***/ })
 
 },[656]);
-//# sourceMappingURL=app.6388e251622037af02d5.js.map
+//# sourceMappingURL=app.322299aff09f9520111d.js.map
