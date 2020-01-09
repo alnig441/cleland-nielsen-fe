@@ -61,7 +61,7 @@ div(*imageEditor='this.editImages' id='image-editor')
           label(for='{{ i }}') image# {{ i + 1 }}
           div(class='image-list')
             span(class='input-group-addon')
-              input(class='checkbox' id='{{ i }}' type='checkbox' aria-label='fileId' value='{{ document._id }}',[(ngModel)]='imageList[i]', name='document.image.fileName')
+              input(class='checkbox' id='{{ i }}' type='checkbox' aria-label='fileId' value='{{ document._id }}',[(ngModel)]='imageList[i]', name='document.image.fileName', autocomplete="off")
             p(class='form-control') {{ document.image.fileName }}
       div(class='col-md-6')
         span(*ngFor='let property of this.editImages.form as properties')
