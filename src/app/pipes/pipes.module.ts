@@ -6,6 +6,7 @@ import { MonthTransform } from "./month.transform";
 import { ExtTransform } from "./ext.transform";
 import { UuidTransformPipe } from './uuid.transform';
 import { ValueTransform } from './value.transform';
+import { KeyvalueTransform } from './keyvalue.transform.ts';
 
 @NgModule({
     imports: [
@@ -16,7 +17,8 @@ import { ValueTransform } from './value.transform';
       MonthTransform,
       ExtTransform,
       UuidTransformPipe,
-      ValueTransform
+      ValueTransform,
+      KeyvalueTransform
     ],
     exports: [
       LabelTransform,
@@ -24,7 +26,8 @@ import { ValueTransform } from './value.transform';
       MonthTransform,
       ExtTransform,
       UuidTransformPipe,
-      ValueTransform
+      ValueTransform,
+      KeyvalueTransform
     ],
     providers: [  ]
 })
