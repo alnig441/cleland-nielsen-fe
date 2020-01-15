@@ -1,14 +1,18 @@
 import { Injectable } from "@angular/core";
+import { BehaviorSubject } from "rxjs";
 import { UserModel } from "../models/user.model";
 import { AccountModel } from "../models/account.model";
 import { PermissionModel } from "../models/permission.model";
 import { ImageModel } from "../models/image.model";
 import { MongoImageModel } from "../models/mongoImage.model";
+import { MongoVideoModel } from "../models/mongoVideo.model";
 
 @Injectable()
 
 export class ServiceModelManagerService {
-
+    
+    private serviceAnnouncement = new BehaviorSubject(null);
+    serviceReady = this.serviceAnnouncement.asObservable();
     private service: string;
     private recordModel: any;
     private formProperties: any;
@@ -25,9 +29,10 @@ export class ServiceModelManagerService {
 
     }
 
-    setService(service: string) {
+    setService(service?: string) {
         this.service = service;
         this.initializeRecordModel(service);
+        this.serviceAnnouncement.next(service);
     }
 
     getService(): string {
@@ -64,6 +69,8 @@ export class ServiceModelManagerService {
             case 'images':
                 this.recordModel = new MongoImageModel();
                 break;
+            case 'video':
+                this.recordModel = new MongoVideoModel();
             default:
                 this.recordModel = '';
                 break;
@@ -72,7 +79,10 @@ export class ServiceModelManagerService {
         if(this.recordModel){
             this.formProperties = Object.keys(this.recordModel);
         }
+        
+        this.serviceAnnouncement.next(service);
     }
+    
 
     setRecordModelProperty(property: string, value: any) {
         if(Array.isArray(this.recordModel[property])){
