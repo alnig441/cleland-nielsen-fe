@@ -1,21 +1,18 @@
 import { Directive, Input, TemplateRef, ViewContainerRef } from "@angular/core";
 import { MongoImageModel } from '../models/mongoImage.model';
 
-@Directive({ selector: '[imageEditor]' })
+@Directive({ selector: '[appEditor]' })
 
-export class ImageEditorDirective {
+export class AppEditorDirective {
 
     constructor(
         private templateRef: TemplateRef<any>,
         private viewContainer: ViewContainerRef
     ){}
 
-    @Input() set imageEditor(condition: any[]){
-
-      let model = new MongoImageModel();
+    @Input() set appEditor(condition: any[]){
 
         if(condition && condition.length > 0) {
-          condition['form'] = Object.keys(model);
           this.viewContainer.createEmbeddedView(this.templateRef);
           initialiseDragElement(document.getElementById('image-editor'));
 

@@ -9,6 +9,7 @@ import { PipesModule } from "../../../pipes/pipes.module";
 import { SearchFieldModule } from '../../../modules/search-field/search-field.module';
 import { AppDirectivesModule } from "../../../modules/app-directives/app-directives.module";
 import { AppModalModule } from "../../../modules/app-modal/app-modal.module";
+import { AppEditorModule } from "../../../modules/app-editor/app-editor.module";
 
 import { VideosComponent } from "./videos/videos.component";
 import { ImagesComponent } from "./images/images.component";
@@ -28,6 +29,7 @@ import { AuthenticationGuardService } from "../../../services/authentication-gua
       SearchFieldModule,
       AppDirectivesModule,
       AppModalModule,
+      AppEditorModule
     ],
     declarations: [
       UserDomainComponent,

@@ -6,7 +6,7 @@ import { AppModalDirective } from "../../directives/app-modal.directive";
 import { InfoboxDirective } from "../../directives/infobox.directive";
 import { DestroyVideoOnEnded } from "../../directives/destroy-video-on-ended.directive";
 import { StopPropagationOnClick } from "../../directives/stop-propagation-on-click.directive";
-import { ImageEditorDirective } from "../../directives/image-editor.directive";
+import { AppEditorDirective } from "../../directives/app-editor.directive";
 import { AppVideoModalDirective } from "../../directives/app-video-modal.directive";
 
 @NgModule({
@@ -18,7 +18,7 @@ import { AppVideoModalDirective } from "../../directives/app-video-modal.directi
     InfoboxDirective,
     DestroyVideoOnEnded,
     StopPropagationOnClick,
-    ImageEditorDirective,
+    AppEditorDirective,
     AppVideoModalDirective
   ],
   exports: [
@@ -26,7 +26,7 @@ import { AppVideoModalDirective } from "../../directives/app-video-modal.directi
     InfoboxDirective,
     DestroyVideoOnEnded,
     StopPropagationOnClick,
-    ImageEditorDirective,
+    AppEditorDirective,
     AppVideoModalDirective
   ],
   providers: [

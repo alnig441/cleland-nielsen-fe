@@ -1,0 +1,27 @@
+
+div(*appEditor='this.editor.doEdit' id='image-editor')
+  div(class='row')
+    form(#imageEditorForm='ngForm')
+      div(class='col-md-12' id="drag-area" onmousedown onmousemove onmouseup)
+        span(class="glyphicon glyphicon-transfer")
+      div(class='col-md-6')
+        span(*ngFor='let document of this.editor.assets; index as i')
+          label(for='{{ i }}') image# {{ i + 1 }}
+          div(class='image-list')
+            span(class='input-group-addon')
+              input(class='checkbox' id='{{ i }}' type='checkbox' aria-label='fileId' value='{{ document._id }}',[(ngModel)]='this.editor.selection[document._id]' #ctrl="ngModel", name='document.image.fileName' selected="document._id")
+            p(class='form-control') {{ document.image.fileName }}
+      div(class='col-md-6')
+        span(*ngFor='let property of this.editor.model | keyvalueTransform;')
+          div(*ngIf='property.key')
+            label(for='{{ property.key }}') {{ property.key }}
+            input([(ngModel)]='this.editor.model[property.key]', id='{{ property.key }}' type='text' class='form-control' placeholder='{{ property.key }}' name='{{ property.key }}' autocomplete='off')
+      div(class='col-md-12')
+        div(class='select_all')
+          label(for='select_all') Select All
+          input(class='checkbox' id='select_all' type='checkbox' aria-label='select_all', placeholder='select all',[(ngModel)]='editor.selectAll', name='selectAll')
+      div(class='buttons')
+        p((click)='this.editor.onDelete()' type='button' class='btn btn-danger') {{ {name: 'delete', language: 'english'} | labelTransform }}
+        p((click)='this.editor.onCancel()' type='button' class='btn btn-warning') {{ {name: 'cancel', language: 'english'} | labelTransform }}
+        p((click)='this.editor.onSubmit()' type='button' class='btn btn-info') {{ {name: 'update', language: 'english'} | labelTransform }}
+  div(class='row background')
