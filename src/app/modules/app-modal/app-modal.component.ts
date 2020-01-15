@@ -47,7 +47,7 @@ export class AppModalComponent implements OnInit, AfterContentInit, AfterViewIni
     let currentImage = source.split('/')[2];
     let length = assets.length;
     let index: number;
-
+    
     assets.forEach(( asset: any, i: number ) => {
       if (asset.image.fileName == currentImage) {
         index = i;

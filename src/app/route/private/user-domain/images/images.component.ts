@@ -4,7 +4,7 @@ import { AuthenticationService } from "../../../../services/authentication.servi
 import { MongoImageModel } from "../../../../models/mongoImage.model";
 import { ServiceModelManagerService } from "../../../../services/service-model-manager.service";
 import { ActivatedRoute } from "@angular/router";
-import { SetMessageService } from "../../../../services/set-message.service";
+import { AppEditorServices } from "../../../../services/app-editor.services";
 
 
 const $ = require('jquery');
@@ -16,7 +16,7 @@ const $ = require('jquery');
     encapsulation: ViewEncapsulation.None
 })
 
-export class ImagesComponent implements OnInit, DoCheck {
+export class ImagesComponent implements OnInit {
 
     private albumViewSelector: object = new Object();
     private showImageInformation: any[] = new Array();
@@ -25,55 +25,41 @@ export class ImagesComponent implements OnInit, DoCheck {
     private currentPage: number;
     private doAnd: boolean = false;
     private pages: number;
-    private total: number;
     private documents: any[] = new Array();
-    private editImages: any[] = new Array();
     private imageModel = new MongoImageModel();
-    private imageList: string[] = new Array(6);
-    private selectAll: boolean = false;
-    private modalSource: string;
-    private modalAssets: any[];
 
     constructor(
-        private formManager: ServiceModelManagerService,
+        private models: ServiceModelManagerService,
         private activatedRoute: ActivatedRoute,
         private activeUser: AuthenticationService,
-        private mongoImageService: MongoImageServices,
-        private message: SetMessageService
+        private images: MongoImageServices,
+        private editor: AppEditorServices
     ){}
 
     ngOnInit(): void {
-      this.formManager.setService(this.activatedRoute.snapshot.url[0].path);
+      this.models.setService(this.activatedRoute.snapshot.url[0].path);
       this.currentPage = 1;
       this.buildAlbum();
-    }
-
-    ngDoCheck(): void {
+      this.images.onUpdatedView.subscribe((view: any) => {
+        this.documents = view.docs;
+      })
     }
 
     buildAlbum() {
-      this.mongoImageService.generateTabs()
-          .then((years: number[]) => {
-            if (years.length > 0) {
-              this.years = years.reverse();
-              this.albumViewSelector['year'] = this.years[0];
-              this.mongoImageService.generateTabs(this.years[0])
-                  .then((months: number[]) => {
-                    this.months = months;
-                    this.albumViewSelector['month'] = this.months[this.months.length - 1];
-                    let model = new MongoImageModel( null, this.years[0], this.months[this.months.length - 1] );
-                    this.mongoImageService.search(model, this.currentPage, true)
-                        .then((result: any) => {
-                          this.pages = result.pages;
-                          this.total = result.total;
-                          this.documents = result.docs;
-                        })
-                  })
-            }
-            else {
-              this.message.set({ status: 200, message: 'db currently empty'})
-            }
-          })
+      this.images.getTabs()
+        .subscribe((years: number[]) => {
+          if (years.length > 0) {
+            this.years = years.reverse();
+            this.albumViewSelector['year'] = this.years[0];
+            this.images.getTabs(this.years[0])
+                .subscribe((months: number[]) => {
+                  this.months = months;
+                  this.albumViewSelector['month'] = this.months[this.months.length - 1];
+                  let model = new MongoImageModel( null, this.years[0], this.months[this.months.length - 1] );
+                  this.images.getView(model, this.currentPage, true)
+                })
+          }
+        })
     }
 
     setAlbumView(selector?: any): void {
@@ -99,8 +85,8 @@ export class ImagesComponent implements OnInit, DoCheck {
     }
 
     getTabs ( selector: number, cb: any ) {
-      this.mongoImageService.generateTabs( selector )
-        .then((months: any) => {
+      this.images.getTabs( selector )
+        .subscribe((months: any) => {
           this.months = months;
           this.albumViewSelector['month'] = this.months[this.months.length -1];
           let model = this.setModel(this.albumViewSelector['year'], this.albumViewSelector['month']);
@@ -109,12 +95,7 @@ export class ImagesComponent implements OnInit, DoCheck {
     }
 
     getDocs ( model: MongoImageModel, page: number, doAnd: boolean ) {
-      this.mongoImageService.search( model, page, doAnd )
-        .then((body: any) => {
-          this.pages = body.pages;
-          this.total = body.total;
-          this.documents = body.docs;
-        })
+      this.images.getView( model, page, doAnd )
     }
 
     turnAlbumPage(direction: string): void {
@@ -134,86 +115,17 @@ export class ImagesComponent implements OnInit, DoCheck {
     }
 
     openEditor() : void {
-      this.editImages = this.documents;
-    }
-
-    clearEditor() : void {
-      this.editImages = new Array();
-      this.imageList = new Array(6);
-      this.imageModel = new MongoImageModel();
-      this.selectAll = false;
-    }
-
-    onSubmit() {
-      let list = this.get_ids();
-      this.doAnd = true;
-
-      if (list.length > 1) {
-        this.mongoImageService.updateMany(list, this.imageModel)
-          .then(res => {
-            this.message.set({ status: 200, message: 'update success'})
-            this.getDocs(this.setModel(this.albumViewSelector['year'], this.albumViewSelector['month']), this.currentPage, this.doAnd);
-          })
-      }
-      else if (list.length == 1){
-        this.mongoImageService.updateOne(list[0], this.imageModel)
-          .then(res => {
-            this.message.set({status: 200, message: 'update success'})
-            this.getDocs(this.setModel(this.albumViewSelector['year'], this.albumViewSelector['month']), this.currentPage, this.doAnd);
-          })
-      }
-
-      this.imageList = new Array(6);
-      this.imageModel = new MongoImageModel();
-      this.selectAll = false;
-
-    }
-
-
-
-    onDelete() {
-      let list = this.get_ids();
-
-      if (list.length > 1) {
-        this.mongoImageService.deleteMany(list)
-          .then((result: any) => {
-            console.log(result);
-            this.clearEditor();
-          })
-      }
-      else if (list.length == 1) {
-        this.mongoImageService.deleteOne(list[0])
-          .then((result: any) => {
-            this.message.set({status: 200, message: 'photo deleted'});
-            this.documents.length > 1 ?
-              this.getDocs(this.setModel(this.albumViewSelector['year'], this.albumViewSelector['month']), this.currentPage, this.doAnd) :
-              this.buildAlbum();
-            this.clearEditor();
-          })
-      }
-
-    }
-
-    get_ids() {
-      let ids = new Array();
-
-      this.selectAll ?
-        this.documents.forEach(doc => {
-          ids.push(doc['_id']);
-        }) :
-        this.imageList.forEach((image, index) => {
-          ids.push(this.documents[index]['_id']);
-        }) ;
-
-      return ids;
+      this.editor.setAssets(this.documents);
+      this.editor.setDoEdit();
     }
 
     openModal(id: string): void {
       let index: number;
+
       this.documents.forEach((document, i) => {
         if(document._id == id) index = i;
       })
-      this.mongoImageService.initialiseModal(this.documents, index);
+      this.images.initialiseModal(this.documents, index);
     }
 
 }

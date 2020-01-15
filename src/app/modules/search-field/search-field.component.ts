@@ -69,11 +69,8 @@ export class SearchFieldComponent implements OnInit {
     this.autoCompleteElement = document.querySelector("#autoComplete") as HTMLInputElement;
 
     this.mongoImageService.getSearchTerms()
-      .then((res) => {
-        this.searchTerms = res;
-      })
-      .catch((error) => {
-        this.searchTerms = [];
+      .subscribe(( result: any ) => {
+        this.searchTerms = result;
       })
   }
 
@@ -114,12 +111,11 @@ export class SearchFieldComponent implements OnInit {
     }
 
     this.mongoImageService.search(model, true, true)
-      .then(res => {
+      .subscribe((result: any) => {
         this.autoCompleteElement.value = '';
         this.searchState = null;
-        this.mongoImageService.initialiseModal(res.docs, 0);
+        this.mongoImageService.initialiseModal(result.docs, 0);
       })
-
   }
 
   onDone(event: AnimationEvent) {

@@ -1,51 +1,99 @@
 import { Injectable } from "@angular/core";
-import { HttpClient, HttpParams } from "@angular/common/http";
+import { HttpClient, HttpParams, HttpErrorResponse } from "@angular/common/http";
+
 import { MongoImageModel } from "../models/mongoImage.model";
-import 'rxjs/add/operator/toPromise';
 import { ErrorParser } from "./error-parser";
 import { AuthenticationService } from "./authentication.service";
 import { SetMessageService } from "./set-message.service";
+
+// rxjs constants
+import { BehaviorSubject } from 'rxjs';
+import { Observable } from 'rxjs';
+import 'rxjs/add/operator/catch';
+import 'rxjs/add/operator/toPromise';
+import 'rxjs/add/operator/retry';
+import 'rxjs/add/observable/of';
+
 
 @Injectable()
 
 export class MongoImageServices {
 
-  errorParser = new ErrorParser();
-  images: MongoImageModel[] = new Array();
-  imagesUpdated: boolean = false;
-  baseUrl = '/api';
-  private modalAssets: any;
+  private errorParser = new ErrorParser();
+  private assets: any[] = new Array();
+  private baseUrl = '/api';
   private modalSource: string;
 
+  // view observable/modal observable
+  private viewSubject = new BehaviorSubject(this.assets);
+  onUpdatedView = this.viewSubject.asObservable();
+
+  private setParams = (form : MongoImageModel, page : number, doAnd : boolean) : HttpParams => {
+    let params = new HttpParams({ fromString: 'doAnd' });
+    let keys = Object.keys(form);
+    keys.forEach( key => {
+      if ( form[key] || ( typeof form[key] == 'number' && form[key] == 0 ) ){
+        params = params.append(key, form[key]);
+      }
+    })
+    params = page ? params.append('page', page.toString()) : params;
+    params = doAnd ? params.set('doAnd', 'yes') : params;
+    this.currentView = params;
+    return this.currentView;
+  }
+
+  private currentView: HttpParams;
+
   constructor(
-    private message: SetMessageService,
     private http: HttpClient,
-    private activeUser: AuthenticationService
+    private activeUser: AuthenticationService,
+    private message: SetMessageService,
   ) {}
 
   initialiseModal(assets: any, index: number ): void {
-    this.modalAssets = assets;
+    this.assets = assets;
     this.setModalSource(index);
   }
 
   clearModal(): void {
-    this.modalAssets = null ;
+    this.assets = null;
     this.modalSource = null ;
   }
 
   setModalSource(index: number): void {
-    this.modalSource = `photos/James/${this.modalAssets[index].image.fileName}`;
+    this.modalSource = `photos/James/${this.assets[index].image.fileName}`;
   }
 
   getModalAssets(): any {
-    return this.modalAssets;
+    return this.assets;
   }
 
   getModalSource(): any {
     return this.modalSource;
   }
 
-  generateTabs(year?: number): Promise<any> {
+  getSearchTerms(): Observable<any> {
+    if (this.activeUser.isAdmin || this.activeUser.isPermitted['to_view_images']) {
+
+      try {
+        let result = this.http.get(`${this.baseUrl}/searchTerms/Photos`, { observe: 'body'})
+        
+        result.subscribe(() => {}, (error: HttpErrorResponse) => {
+          this.message.set({ status: error.status , message: error.statusText });
+          throw error;
+        });
+        
+        return result;
+      }
+      catch(e) {}
+      finally {}
+
+    } else {
+      this.message.set({ status: 405, message: 'insufficient permissions' })
+    }
+  }
+
+  getTabs(year?: number): Observable<any> {
 
     if (this.activeUser.isAdmin || this.activeUser.isPermitted['to_view_images']) {
       let params = new HttpParams();
@@ -53,148 +101,99 @@ export class MongoImageServices {
         params.append('year', year.toString()):
         params;
 
-      return this.http.get(this.baseUrl + '/generate_tabs/Photos', { params : params , observe: 'body'})
-        .toPromise()
-        .then((res : any) => {
-            return Promise.resolve(res);
-        })
-        .catch(this.errorParser.handleError)
-        .catch((error: any) => {
-            this.message.set(error)
-        })
+      try {
+        let tabs = this.http.get(`${this.baseUrl}/generate_tabs/Photos`, { params : params , observe : 'body' })
+        
+        tabs.subscribe(
+          (result:any) => {
+            if(result.length == 0) {
+              this.message.set({ status: 200 , message: 'database currently empty' })
+            }
+           },
+          (error:HttpErrorResponse) => {
+            this.message.set({ status : error.status , message : error.statusText })
+            throw error;
+          })
+        
+        return tabs;
+      }
+      catch(error) {}
+      finally {}
+
     } else {
       this.message.set({ status: 405, message: 'insufficient permissions'});
     }
 
   }
 
-  search(form: MongoImageModel, page?: any, doAnd?: boolean): Promise<any> {
+  getView(form?: MongoImageModel, page?: any, doAnd?: boolean): void {
+    if(this.activeUser.isAdmin || this.activeUser.isPermitted['to_view_images']) {
 
+      let params = form ? this.setParams(form, page, doAnd) : this.currentView;
+
+      try {
+        this.http.get(`${this.baseUrl}/Search/Photos`, { params: params, observe: 'body' })
+          .subscribe(( result: MongoImageModel[]) => {
+            this.assets = result;
+            this.viewSubject.next(result);
+          }, ( error: HttpErrorResponse) => {
+            this.message.set({ status: error.status , message: error.statusText });
+            throw error
+          })
+      }
+      catch(error) {}
+      finally {}
+
+    } else {
+      this.message.set({ status: 405, message: 'insufficient permissions'});
+    }
+  }
+
+  search(form? : MongoImageModel , page? : any , doAnd? : boolean) : Observable<any> {
     if (this.activeUser.isAdmin || this.activeUser.isPermitted['to_view_images']) {
-      let params = new HttpParams({ fromString: 'doAnd' });
-      let keys = Object.keys(form);
-      keys.forEach( key => {
-        if ( form[key] || ( typeof form[key] == 'number' && form[key] == 0 ) ){
-          params = params.append(key, form[key]);
-        }
-      })
-      params = page ? params.append('page', page.toString()) : params;
-      params = doAnd ? params.set('doAnd', 'yes') : params;
+      let params = form ? this.setParams(form, page, doAnd) : this.currentView;
 
-      return this.http.get(this.baseUrl + '/Search/Photos', { params : params , observe: 'body'})
-        .toPromise()
-        .then((res : any) => {
-            return Promise.resolve(res);
+      try {
+        let result = this.http.get(`${this.baseUrl}/Search/Photos`, { params: params , observe: 'body' })
+
+        result.subscribe(( result: any ) => {}, ( error: HttpErrorResponse ) => {
+          this.message.set({ status: error.status , message: error.statusText });
+          throw error;
         })
-        .catch(this.errorParser.handleError)
-        .catch((error: any) => {
-            this.message.set(error)
-        })
+
+        return result;
+      }
+      catch(error) {}
+      finally {}
+
     } else {
       this.message.set({ status: 405, message: 'insufficient permissions'});
     }
-
   }
 
-  findOne(_id: string): Promise<any> {
 
-    if (this.activeUser.isAdmin || this.activeUser.isPermitted['to_view_images']) {
-      return this.http.get(`${this.baseUrl}/${_id}/Photos`, { observe: 'body' })
-        .toPromise()
-        .then((res: any) => {
-          return Promise.resolve(res);
-        })
-        .catch(this.errorParser.handleError)
-        .catch((error: any) => {
-          this.message.set(error);
-        })
-    } else {
-      this.message.set({ status: 405, message: 'insufficient permissions'});
-    }
-
-  }
-
-  updateOne(_id: string, form: MongoImageModel): Promise<any> {
-
-    if (this.activeUser.isAdmin || this.activeUser.isPermitted['to_edit_images']) {
-      return this.http.post(`${this.baseUrl}/${_id}/Photos`, form, { observe: 'body' })
-        .toPromise()
-        .then((res: any) => {
-          return Promise.resolve(res);
-        })
-        .catch(this.errorParser.handleError)
-        .catch((error: any) => {
-          this.message.set(error);
-        })
-    } else {
-      this.message.set({ status: 405, message: 'insufficient permissions'});
-    }
-
-  }
-
-  updateMany(_ids: string[], form: MongoImageModel): Promise<any> {
-
-    if (this.activeUser.isAdmin || this.activeUser.isPermitted['to_edit_images']) {
+  update(_ids: string[], form: MongoImageModel[]): void {
+    if(this.activeUser.isAdmin || this.activeUser.isPermitted['to_edit_images']) {
       let body = { form: form, _ids: _ids };
-      return this.http.post(`${this.baseUrl}/Update/Photos`, body, { observe: 'body' })
-        .toPromise()
-        .then((result: any) => {
-          return Promise.resolve(result);
-        })
-        .catch(this.errorParser.handleError)
-        .catch((error: any) =>{
-          this.message.set(error);
-        })
+
+      try {
+        this.http.post(`${this.baseUrl}/Update/Photos`, body, { observe: 'body' })
+          .subscribe(( result: any) => {
+            this.message.set({ status: 200, message: 'update success' })
+            this.getView();
+          }, (error: HttpErrorResponse) => {
+            this.message.set({ status: error.status, message: error.statusText });
+            throw error;
+          })
+      }
+      catch(error) {}
+      finally {}
+
     } else {
-      this.message.set({ status: 405, message: 'insufficient permissions'});
-    }
-
-  }
-
-  deleteMany(_ids: string[]): Promise<any> {
-
-    if (this.activeUser.isAdmin || this.activeUser.isPermitted['to_delete_images']) {
-      this.message.set({ status: 300, message: 'not yet implemented' });
-      return Promise.resolve({message: 'done'});
-    } else {
-      this.message.set({ status: 405, message: 'insufficient permissions'});
-    }
-
-  }
-
-  deleteOne(_id: string): Promise<any> {
-
-    if (this.activeUser.isAdmin || this.activeUser.isPermitted['to_delete_images']) {
-      return this.http.delete(`${this.baseUrl}/${_id}/Photos`, { observe: 'body' })
-        .toPromise()
-        .then((res: any) => {
-          return Promise.resolve(res);
-        })
-        .catch(this.errorParser.handleError)
-        .catch((error: any) => {
-          this.message.set(error);
-        })
-    } else {
-      this.message.set({ status: 405, message: 'insufficient permissions'});
-    }
-
-  }
-
-  getSearchTerms(): Promise<any> {
-    if (this.activeUser.isAdmin || this.activeUser.isPermitted['to_view_images']) {
-      return this.http.get(`${this.baseUrl}/searchTerms/Photos`, { observe: 'body' })
-        .toPromise()
-        .then((res: any) => {
-          return Promise.resolve(res);
-        })
-        .catch(this.errorParser.handleError)
-        .catch((error: any) => {
-          this.message.set(error);
-        })
-    } else {
-      this.message.set({ status: 405, message: 'insufficient permissions'});
-      return Promise.reject('not allowed');
+      this.message.set({ status: 405, message: 'insufficient permissions' })
     }
   }
+
+  delete(): void {}
 
 }
