@@ -4,7 +4,7 @@ import { ServiceModelManagerService } from "../../../../services/service-model-m
 import { MongoVideoServices } from "../../../../services/mongoVideo.services";
 import { MongoVideoModel } from "../../../../models/mongoVideo.model";
 import { ActivatedRoute } from "@angular/router";
-import { SetMessageService } from "../../../../services/set-message.service";
+import { AppEditorServices } from "../../../../services/app-editor.services";
 
 const $ = require('jquery');
 
@@ -18,26 +18,22 @@ const $ = require('jquery');
 export class VideosComponent implements OnInit {
 
   private albumViewSelector: object = new Object();
-  // private showVideoInformation: any[] = new Array();
   private years: number[] = new Array();
   private months: number[] = new Array();
   private currentPage: number;
   private doAnd: boolean = false;
   private pages: number;
-  private total: number;
   private documents: any[] = new Array();
   private editVideos: any[] = new Array();
   private videoModel = new MongoVideoModel();
-  // private videoList: string[] = new Array(6);
-  private selectAll: boolean = false;
   private modalSource: string;
 
   constructor(
     private formManager: ServiceModelManagerService,
     private activeUser: AuthenticationService,
     private activatedRoute: ActivatedRoute,
-    private mongoVideoService: MongoVideoServices,
-    private message: SetMessageService
+    private videos: MongoVideoServices,
+    private editor: AppEditorServices
   ){}
 
   ngOnInit(): void {
@@ -45,29 +41,24 @@ export class VideosComponent implements OnInit {
     this.formManager.setService(this.activatedRoute.snapshot.url[0].path);
     this.currentPage = 1;
     this.buildAlbum();
+    this.videos.onUpdatedView.subscribe((videos: any) => {
+      this.documents = videos.docs;
+    })
   }
 
   buildAlbum() {
-    this.mongoVideoService.generateTabs()
-        .then((years: number[]) => {
+    this.videos.getTabs()
+        .subscribe((years: number[]) => {
           if (years.length > 0) {
             this.years = years.reverse();
             this.albumViewSelector['year'] = this.years[0];
-            this.mongoVideoService.generateTabs(this.years[0])
-                .then((months: number[]) => {
+            this.videos.getTabs(this.years[0])
+                .subscribe((months: number[]) => {
                   this.months = months;
                   this.albumViewSelector['month'] = this.months[this.months.length - 1];
                   let model = new MongoVideoModel( null, this.years[0], this.months[this.months.length - 1] );
-                  this.mongoVideoService.search(model, this.currentPage, true)
-                      .then((result: any) => {
-                        this.pages = result.pages;
-                        this.total = result.total;
-                        this.documents = result.docs;
-                      })
+                  this.videos.getView(model, this.currentPage, true)
                 })
-          }
-          else {
-            this.message.set({ status: 200, message: 'db currently empty'})
           }
         })
   }
@@ -91,8 +82,8 @@ export class VideosComponent implements OnInit {
   }
 
   getTabs ( selector: number, cb: any ) {
-    this.mongoVideoService.generateTabs( selector )
-      .then((months: any) => {
+    this.videos.getTabs( selector )
+      .subscribe((months: any) => {
         this.months = months;
         this.albumViewSelector['month'] = this.months[this.months.length -1];
         let model = this.setModel(this.albumViewSelector['year'], this.albumViewSelector['month']);
@@ -101,12 +92,7 @@ export class VideosComponent implements OnInit {
   }
 
   getDocs ( model: MongoVideoModel, page: number, doAnd: boolean ) {
-    this.mongoVideoService.search( model, page, doAnd )
-      .then((body: any) => {
-        this.pages = body.pages;
-        this.total = body.total;
-        this.documents = body.docs;
-      })
+    this.videos.getView( model, page, doAnd )
   }
 
   setModel ( year: number, month: number ) {
@@ -127,8 +113,10 @@ export class VideosComponent implements OnInit {
     $('.video-modal').modal('hide');
     this.modalSource = undefined;
   }
-
+  
   openEditor() : void {
-    this.editVideos = this.documents;
+    this.editor.setAssets(this.documents);
+    this.editor.setDoEdit();
   }
+
 }

@@ -1,4 +1,4 @@
-span(*ngIf="!this.mongoVideoService.message.failure", (keyup.esc)="this.cancelModal()" class='video-main')
+span(*ngIf="!this.videos.message.failure", (keyup.esc)="this.cancelModal()" class='video-main')
   div(class='video-menu')
     p(*ngIf='this.activeUser.isAdmin', (click)='this.openEditor()' type='button' class='btn btn-info btn-xs')
       span(class='glyphicon glyphicon-pencil' aria-hidden='true')
