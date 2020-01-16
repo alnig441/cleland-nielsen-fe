@@ -31,27 +31,7 @@ export class UserServices {
             this.message.set(error);
           })
       } else {
-        this.message.set({ status: 405, message: 'Get Users'});
-      }
-
-    }
-
-    getOne(): Promise<any> {
-
-      if (this.activeUser.isAdmin || this.activeUser.isPermitted['to_view_users']) {
-        return Promise.reject({ status: null, message: 'method not yet defined'});
-      } else {
-        this.message.set({ status: 405, message: 'Get User'});
-      }
-
-    }
-
-    getList(): Promise<any> {
-
-      if (this.activeUser.isAdmin || this.activeUser.isPermitted['to_view_users']) {
-        return Promise.reject({ status: null , message: 'method not yet defined'});
-      } else {
-        this.message.set({ status: 405, message: 'Get All Users'});
+        this.message.set({ status: 403, message: 'Get Users'});
       }
 
     }
@@ -69,7 +49,7 @@ export class UserServices {
             this.message.set(error);
           })
       } else {
-        this.message.set({ status: 405, statusText: 'Add Users'});
+        this.message.set({ status: 403, statusText: 'Add Users'});
       }
 
     }
@@ -87,7 +67,7 @@ export class UserServices {
             this.message.set(error);
           })
       } else {
-        this.message.set({ status: 405, statusText: 'Delete Users'});
+        this.message.set({ status: 403, statusText: 'Delete Users'});
       }
 
     }
@@ -105,7 +85,7 @@ export class UserServices {
             this.message.set(error);
           })
       } else {
-        this.message.set({ status: 405, statusText: 'Update Users'});
+        this.message.set({ status: 403, statusText: 'Update Users'});
       }
 
     }

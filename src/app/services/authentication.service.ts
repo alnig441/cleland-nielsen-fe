@@ -52,8 +52,8 @@ export class AuthenticationService {
         this.timer = setInterval(() => {
             this.activityTimer ++;
 
-            if (this.activityTimer == 600) {
-                this.message.set({ status: 408, message: 'Logging out in 10 secs. Press cancel to continue.', forceLogout: true })
+            if (this.activityTimer == 300) {
+                this.message.set({ status: 408, statusText: 'Inactivity alert! Logging out in 10 secs. Press cancel to continue.', forceLogout: true })
             }
 
         }, 1000)
