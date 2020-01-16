@@ -25,6 +25,7 @@ export class MongoImageServices {
   // view observable/modal observable
   private viewSubject = new BehaviorSubject(this.assets);
   onUpdatedView = this.viewSubject.asObservable();
+  private currentView: HttpParams;
 
   private setParams = (form : MongoImageModel, page : number, doAnd : boolean) : HttpParams => {
     let params = new HttpParams({ fromString: 'doAnd' });
@@ -39,8 +40,6 @@ export class MongoImageServices {
     this.currentView = params;
     return this.currentView;
   }
-
-  private currentView: HttpParams;
 
   constructor(
     private http: HttpClient,
@@ -74,9 +73,9 @@ export class MongoImageServices {
     if (this.activeUser.isAdmin || this.activeUser.isPermitted['to_view_images']) {
 
       try {
-        let result = this.http.get(`${this.baseUrl}/searchTerms/Photos`, { observe: 'body'})
+        let searchTerms = this.http.get(`${this.baseUrl}/searchTerms/Photos`, { observe: 'body'})
         
-        result.subscribe(
+        searchTerms.subscribe(
           (result: any) => {}, 
           (error: HttpErrorResponse) => {
             this.message.set(error);
@@ -84,7 +83,7 @@ export class MongoImageServices {
           }
         );
         
-        return result;
+        return searchTerms;
       }
       catch(e) {}
       finally {}
@@ -106,14 +105,13 @@ export class MongoImageServices {
         let tabs = this.http.get(`${this.baseUrl}/generate_tabs/Photos`, { params : params , observe : 'body' })
         
         tabs.subscribe(
-          (result:any) => {
+          (result : any) => {
             if(result.length == 0) {
               this.message.set({ status: 200 , statusText: 'database currently empty' })
             }
            },
-          (error:HttpErrorResponse) => {
+          (error : HttpErrorResponse) => {
             this.message.set(error);
-            // this.message.set({ status : error.status , message : error.statusText })
             throw error;
           })
         
@@ -135,13 +133,15 @@ export class MongoImageServices {
 
       try {
         this.http.get(`${this.baseUrl}/Search/Photos`, { params: params, observe: 'body' })
-          .subscribe(( result: MongoImageModel[]) => {
-            this.assets = result;
-            this.viewSubject.next(result);
-          }, ( error: HttpErrorResponse) => {
-            this.message.set(error);
-            throw error
-          })
+          .subscribe(
+            ( images : MongoImageModel[]) => {
+              this.assets = images;
+              this.viewSubject.next(images);
+            }, 
+            ( error : HttpErrorResponse) => {
+              this.message.set(error);
+              throw error
+            })
       }
       catch(error) {}
       finally {}
@@ -156,16 +156,16 @@ export class MongoImageServices {
       let params = form ? this.setParams(form, page, doAnd) : this.currentView;
 
       try {
-        let result = this.http.get(`${this.baseUrl}/Search/Photos`, { params: params , observe: 'body' })
+        let searchResult = this.http.get(`${this.baseUrl}/Search/Photos`, { params: params , observe: 'body' })
         
-        result.subscribe(
-          (result: any) => {}, 
-          (error: HttpErrorResponse) => {
+        searchResult.subscribe(
+          (result : any) => {}, 
+          (error : HttpErrorResponse) => {
             this.message.set(error)
           }
         )
 
-        return result;
+        return searchResult;
       }
       catch(error) {}
       finally {}
@@ -182,13 +182,15 @@ export class MongoImageServices {
 
       try {
         this.http.post(`${this.baseUrl}/Update/Photos`, body, { observe: 'body' })
-          .subscribe(( result: any) => {
-            this.message.set({ status: 200, statusText: 'Update Images' })
-            this.getView();
-          }, (error: HttpErrorResponse) => {
-            this.message.set(error);
-            throw error;
-          })
+          .subscribe(
+            ( result : any) => {
+              this.message.set({ status: 200, statusText: 'Update Images' })
+              this.getView();
+            }, 
+            (error : HttpErrorResponse) => {
+              this.message.set(error);
+              throw error;
+            })
       }
       catch(error) {}
       finally {}
@@ -199,7 +201,9 @@ export class MongoImageServices {
   }
 
   delete(_ids: string[]) : void {
-    if(this.activeUser.isAdmin || this.activeUser.isPermitted['to_edit_images']) {
+    console.log('deleting images')
+    
+    if(this.activeUser.isAdmin || this.activeUser.isPermitted['to_delete_images']) {
       let params = new HttpParams();
       let body = 'body';
       let options = {
@@ -208,7 +212,7 @@ export class MongoImageServices {
       };
 
       try {
-        this.http.delete(`${this.baseUrl}/Update/Photos`, options)
+        this.http.delete(`${this.baseUrl}/Delete/Photos`, options)
           .subscribe(
             ( result: any) => {
               this.message.set({ status: 200, statusText: 'Delete Images' })
