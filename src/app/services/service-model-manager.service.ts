@@ -54,7 +54,7 @@ export class ServiceModelManagerService {
     initializeRecordModel(service?: string) {
 
         service ? service = service : service = this.getService();
-
+        
         switch (service) {
             case 'users':
                 this.recordModel = new UserModel('uuid_generate_v4()');
@@ -69,8 +69,9 @@ export class ServiceModelManagerService {
             case 'images':
                 this.recordModel = new MongoImageModel();
                 break;
-            case 'video':
+            case 'videos':
                 this.recordModel = new MongoVideoModel();
+                break;
             default:
                 this.recordModel = '';
                 break;
