@@ -4,7 +4,7 @@ import { HttpClient } from "@angular/common/http";
 import { LoginModel } from "../../models/login.model";
 import { AuthenticationService } from "../../services/authentication.service";
 import { PermissionServices } from "../../services/permission.services";
-import { ErrorParser } from "../../services/error-parser";
+// import { ErrorParser } from "../../services/error-parser";
 
 const $ = require('jquery');
 
@@ -17,7 +17,7 @@ const $ = require('jquery');
 
 export class LoginComponent implements OnInit {
 
-    errorParser = new ErrorParser();
+    // errorParser = new ErrorParser();
     loginModel = new LoginModel('', '');
     message: string;
 
@@ -33,6 +33,7 @@ export class LoginComponent implements OnInit {
 
     onSubmit(): void {
       
+      // webpack dev login bypass
       if(process.env.NODE_ENV) {
         $('#loginModal').modal('hide');
         this.authenticator.isLoggedIn = true;
@@ -71,11 +72,11 @@ export class LoginComponent implements OnInit {
                     this.setRedirectUrl();
                     this.router.navigate([this.authenticator.redirectUrl],navigationExtras);
                 })
-                .catch(this.errorParser.handleError)
+                // .catch(this.errorParser.handleError)
                 .catch(error => console.log(error));
             }
           })
-          .catch(this.errorParser.handleError)
+          // .catch(this.errorParser.handleError)
           .catch((error: any) => {
             this.message = error.message;
             let x = setTimeout(() => {

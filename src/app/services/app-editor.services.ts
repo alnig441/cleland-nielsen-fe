@@ -71,9 +71,14 @@ export class AppEditorServices {
 
   onDelete(): void {
     console.log('deleting assets: ', this.selection)
-    this.models.initializeRecordModel();
-    this.selection = new Array();
-    this.selectAll = false;
+    let assetIds = this.getIds();
+    
+    if(assetIds){
+      this.service.delete(assetIds);
+      this.models.initializeRecordModel();
+      this.selection = new Array();
+      this.selectAll = false;
+    }
   }
 
   onCancel(): void {

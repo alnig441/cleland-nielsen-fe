@@ -2,7 +2,6 @@ import { Injectable } from "@angular/core";
 import { HttpClient, HttpParams } from "@angular/common/http";
 import { MongoVideoModel } from "../models/mongoVideo.model";
 import 'rxjs/add/operator/toPromise';
-import { ErrorParser } from "./error-parser";
 import { AuthenticationService } from "./authentication.service";
 import { SetMessageService } from "./set-message.service";
 
@@ -10,7 +9,6 @@ import { SetMessageService } from "./set-message.service";
 
 export class MongoVideoServices {
   videos  : MongoVideoModel[] = new Array();
-  errorParser = new ErrorParser();
   videosUpdated : boolean = false;
   baseUrl = '/api';
 
@@ -33,12 +31,11 @@ export class MongoVideoServices {
         .then((res : any) => {
             return Promise.resolve(res);
         })
-        .catch(this.errorParser.handleError)
         .catch((error: any) => {
             this.message.set(error)
         })
     } else {
-      this.message.set({ status: 405, message: 'insufficient permissions'});
+      this.message.set({ status: 405, statusText: 'Get Tabs'});
     }
 
   }
@@ -61,12 +58,11 @@ export class MongoVideoServices {
         .then((res : any) => {
             return Promise.resolve(res);
         })
-        .catch(this.errorParser.handleError)
         .catch((error: any) => {
             this.message.set(error)
         })
     } else {
-      this.message.set({ status: 405, message: 'insufficient permissions'});
+      this.message.set({ status: 405, statusText: 'Search Videos'});
     }
 
   }

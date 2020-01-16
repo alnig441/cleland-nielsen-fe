@@ -1,30 +1,54 @@
+import { Observable } from 'rxjs';
+import { HttpErrorResponse } from "@angular/common/http";
+import { SetMessageService } from "./set-message.service";
+
 export class ErrorParser {
 
-    handleError(error: any): Promise<any> {
-        let err = {};
+    
+    handleError(error: HttpErrorResponse): any {      
+        let err = error;
+
+        if(error.status === 200) {
+          err = new HttpErrorResponse({
+            error: 'HttpErrorResponse',
+            status: error.status,
+            statusText: `Method Completed Succesfully: ${error.statusText}`
+          })
+        }
 
         if (error.status === 401) {
-            err = {
-                status: error.status,
-                message: `${error.statusText}/expired token - please login again`,
-                forceLogout: true
-            }
+          err = new HttpErrorResponse({
+            error: 'HttpErrorResponse',
+            status: error.status,
+            statusText: `${error.statusText}. Expired Token - Please Login Again`,
+          })
         }
-
-        else if(error.statusText) {
-            err = {
-                status: `${error.status} - ${error.statusText}`,
-                message: error.error.message,
-            };
+        
+        if(error.status == 404) {
+          err = new HttpErrorResponse({
+            error: 'HttpErrorResponse',
+            status: error.status,
+            statusText: `${error.statusText} or Not Yet Implemented`,
+          })
         }
-
-        else {
-            err = {
-                status: error.status,
-                message: error.message
-            }
+        
+        if(error.status == 405) {
+          err = new HttpErrorResponse({
+            error: 'HttpErrorResponse',
+            status: error.status,
+            statusText: `Insufficient Permissions: ${error.statusText}`
+          })
         }
-
-        throw err;
+        
+        if(error.status == 504) {
+          err = new HttpErrorResponse({
+            error: 'HttpErrorResponse',
+            status: error.status,
+            statusText: `${error.statusText}. Check If The Database Is Running`,
+          })
+        }
+        
+        return err;
+        // throw err;
     }
 }

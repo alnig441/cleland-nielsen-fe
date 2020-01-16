@@ -1,4 +1,5 @@
 div([@message]="state", class="panel panel-{{this.message.type}} message-panel", (@message.start)="this.onBegin($event)", (@message.done)="this.onEnd($event)")
-    div(class="panel-heading") status: {{ this.message.status }}
-    div(class="panel-body") message: {{ this.message.message }}
+    div(class="panel-heading") STATUS: {{ this.message.status }}
+    div(class='panel-body') {{ this.message.statusText }}
+    //- div(class="panel-body") {{ this.message.message }}
     div((click)="this.cancel()" class="panel-footer") Cancel

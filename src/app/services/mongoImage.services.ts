@@ -2,7 +2,6 @@ import { Injectable } from "@angular/core";
 import { HttpClient, HttpParams, HttpErrorResponse } from "@angular/common/http";
 
 import { MongoImageModel } from "../models/mongoImage.model";
-import { ErrorParser } from "./error-parser";
 import { AuthenticationService } from "./authentication.service";
 import { SetMessageService } from "./set-message.service";
 
@@ -19,7 +18,6 @@ import 'rxjs/add/observable/of';
 
 export class MongoImageServices {
 
-  private errorParser = new ErrorParser();
   private assets: any[] = new Array();
   private baseUrl = '/api';
   private modalSource: string;
@@ -78,10 +76,13 @@ export class MongoImageServices {
       try {
         let result = this.http.get(`${this.baseUrl}/searchTerms/Photos`, { observe: 'body'})
         
-        result.subscribe(() => {}, (error: HttpErrorResponse) => {
-          this.message.set({ status: error.status , message: error.statusText });
-          throw error;
-        });
+        result.subscribe(
+          (result: any) => {}, 
+          (error: HttpErrorResponse) => {
+            this.message.set(error);
+            throw error;
+          }
+        );
         
         return result;
       }
@@ -89,7 +90,7 @@ export class MongoImageServices {
       finally {}
 
     } else {
-      this.message.set({ status: 405, message: 'insufficient permissions' })
+      this.message.set({ status: 405, statusText: 'Get Search Terms' })
     }
   }
 
@@ -107,11 +108,12 @@ export class MongoImageServices {
         tabs.subscribe(
           (result:any) => {
             if(result.length == 0) {
-              this.message.set({ status: 200 , message: 'database currently empty' })
+              this.message.set({ status: 200 , statusText: 'database currently empty' })
             }
            },
           (error:HttpErrorResponse) => {
-            this.message.set({ status : error.status , message : error.statusText })
+            this.message.set(error);
+            // this.message.set({ status : error.status , message : error.statusText })
             throw error;
           })
         
@@ -121,7 +123,7 @@ export class MongoImageServices {
       finally {}
 
     } else {
-      this.message.set({ status: 405, message: 'insufficient permissions'});
+      this.message.set({ status: 405, statusText: 'Get Tabs'});
     }
 
   }
@@ -137,7 +139,7 @@ export class MongoImageServices {
             this.assets = result;
             this.viewSubject.next(result);
           }, ( error: HttpErrorResponse) => {
-            this.message.set({ status: error.status , message: error.statusText });
+            this.message.set(error);
             throw error
           })
       }
@@ -145,7 +147,7 @@ export class MongoImageServices {
       finally {}
 
     } else {
-      this.message.set({ status: 405, message: 'insufficient permissions'});
+      this.message.set({ status: 405, statusText: 'Get View'});
     }
   }
 
@@ -155,11 +157,13 @@ export class MongoImageServices {
 
       try {
         let result = this.http.get(`${this.baseUrl}/Search/Photos`, { params: params , observe: 'body' })
-
-        result.subscribe(( result: any ) => {}, ( error: HttpErrorResponse ) => {
-          this.message.set({ status: error.status , message: error.statusText });
-          throw error;
-        })
+        
+        result.subscribe(
+          (result: any) => {}, 
+          (error: HttpErrorResponse) => {
+            this.message.set(error)
+          }
+        )
 
         return result;
       }
@@ -167,7 +171,7 @@ export class MongoImageServices {
       finally {}
 
     } else {
-      this.message.set({ status: 405, message: 'insufficient permissions'});
+      this.message.set({ status: 405, statusText: 'Search'});
     }
   }
 
@@ -179,10 +183,10 @@ export class MongoImageServices {
       try {
         this.http.post(`${this.baseUrl}/Update/Photos`, body, { observe: 'body' })
           .subscribe(( result: any) => {
-            this.message.set({ status: 200, message: 'update success' })
+            this.message.set({ status: 200, statusText: 'Update Images' })
             this.getView();
           }, (error: HttpErrorResponse) => {
-            this.message.set({ status: error.status, message: error.statusText });
+            this.message.set(error);
             throw error;
           })
       }
@@ -190,10 +194,38 @@ export class MongoImageServices {
       finally {}
 
     } else {
-      this.message.set({ status: 405, message: 'insufficient permissions' })
+      this.message.set({ status: 405, statusText: 'Update Images' })
     }
   }
 
-  delete(): void {}
+  delete(_ids: string[]) : void {
+    if(this.activeUser.isAdmin || this.activeUser.isPermitted['to_edit_images']) {
+      let params = new HttpParams();
+      let body = 'body';
+      let options = {
+        params : params,
+        body: body
+      };
+
+      try {
+        this.http.delete(`${this.baseUrl}/Update/Photos`, options)
+          .subscribe(
+            ( result: any) => {
+              this.message.set({ status: 200, statusText: 'Delete Images' })
+              this.getView();
+            }, 
+            (error: HttpErrorResponse) => {
+              this.message.set(error);
+            }
+          )
+      }
+      catch(error) {
+      }
+      finally {}
+
+    } else {
+      this.message.set({ status: 405, statusText: 'Delete Images' })
+    }
+  }
 
 }
