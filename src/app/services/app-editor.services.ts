@@ -41,10 +41,13 @@ export class AppEditorServices {
               this.service = this.videos;
               break;
           }
-          this.model = this.models.getRecordModel();
         }
+        this.model = this.models.getRecordModel();
       })
       this.images.onUpdatedView.subscribe((view: any) => {
+        this.assets = view.docs;
+      })
+      this.videos.onUpdatedView.subscribe((view: any) => {
         this.assets = view.docs;
       })
     }
@@ -62,29 +65,28 @@ export class AppEditorServices {
 
     if(assetIds){
       this.service.update(assetIds, this.model)
-      this.models.initializeRecordModel();
-      this.selection = new Array();
-      this.selectAll = false;
+      this.clearEditor()
     }
 
   }
 
   onDelete(): void {
-    console.log('deleting assets: ', this.selection)
     let assetIds = this.getIds();
     
     if(assetIds){
       this.service.delete(assetIds);
-      this.models.initializeRecordModel();
-      this.selection = new Array();
-      this.selectAll = false;
+      this.clearEditor();
     }
   }
 
   onCancel(): void {
-    this.models.initializeRecordModel();
     this.doEdit = null;
     this.assets = null;
+    this.clearEditor();
+  }
+  
+  clearEditor() {
+    this.models.initializeRecordModel();
     this.selection = new Array();
     this.selectAll = false;
   }

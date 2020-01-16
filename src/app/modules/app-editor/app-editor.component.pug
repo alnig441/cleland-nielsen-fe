@@ -6,11 +6,12 @@ div(*appEditor='this.editor.doEdit' id='image-editor')
         span(class="glyphicon glyphicon-transfer")
       div(class='col-md-6')
         span(*ngFor='let document of this.editor.assets; index as i')
-          label(for='{{ i }}') image# {{ i + 1 }}
+          label(for='{{ i }}') Asset# {{ i + 1 }}
           div(class='image-list')
             span(class='input-group-addon')
               input(class='checkbox' id='{{ i }}' type='checkbox' aria-label='fileId' value='{{ document._id }}',[(ngModel)]='this.editor.selection[document._id]' #ctrl="ngModel", name='document.image.fileName' selected="document._id")
-            p(class='form-control') {{ document.image.fileName }}
+            p(*ngIf='document.image' class='form-control') {{ document.image.fileName }}
+            p(*ngIf='document.video' class='form-control') {{ document.video.fileName }}
       div(class='col-md-6')
         span(*ngFor='let property of this.editor.model | keyvalueTransform;')
           div(*ngIf='property.key')
