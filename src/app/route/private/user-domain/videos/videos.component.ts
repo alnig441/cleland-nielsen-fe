@@ -99,19 +99,13 @@ export class VideosComponent implements OnInit {
     return new MongoVideoModel( null, year, month );
   }
 
-  openModal(videoId: any):void {
-    this.documents.forEach((document, index) => {
-      if(document['_id'] == videoId){
-        this.modalSource = 'videos/James/' + document['video']['fileName'];
-        this.albumViewSelector['selectedIndex'] = index;
-        $('.video-modal').modal('show');
-      };
-    })
-  }
+  openModal(id: string): void {
+    let index: number;
 
-  cancelModal(event: any): void {
-    $('.video-modal').modal('hide');
-    this.modalSource = undefined;
+    this.documents.forEach((document, i) => {
+      if(document._id == id) index = i;
+    })
+    this.videos.initialiseModal(this.documents, index);
   }
   
   openEditor() : void {

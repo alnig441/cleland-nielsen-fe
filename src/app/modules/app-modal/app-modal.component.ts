@@ -1,6 +1,8 @@
 import { Component, OnInit, AfterContentInit, AfterViewInit, ViewEncapsulation, HostListener } from "@angular/core";
 import { AuthenticationService } from "../../services/authentication.service";
 import { MongoImageServices } from "../../services/mongoImage.services";
+import { MongoVideoServices } from "../../services/mongoVideo.services";
+import { ServiceModelManagerService } from "../../services/service-model-manager.service";
 
 const $ = require('jquery');
 
@@ -10,13 +12,17 @@ const $ = require('jquery');
   styleUrls: ['./app-modal.component.scss']
 })
 
-export class AppModalComponent implements OnInit, AfterContentInit, AfterViewInit {
+export class AppModalComponent implements OnInit {
 
   private modalSource: any;
+  private activeService: string;
+  private service: any; 
 
   constructor(
     private activeUser: AuthenticationService,
-    private mongoImageService: MongoImageServices
+    private images: MongoImageServices,
+    private videos: MongoVideoServices,
+    private models: ServiceModelManagerService,
   ) {}
 
   @HostListener('click', ['$event']) clickHandler( event: MouseEvent ) {
@@ -26,24 +32,22 @@ export class AppModalComponent implements OnInit, AfterContentInit, AfterViewIni
 
     if (event.key == 'Escape') {
       $('.assetviewer-modal').modal('hide');
-      this.mongoImageService.clearModal();
+      this.service.clearModal();
     }
 
   }
 
   ngOnInit(): void {
-  }
-
-  ngAfterContentInit(): void {
-  }
-
-  ngAfterViewInit(): void {
+    this.models.serviceReady.subscribe((service: string) => {
+      this.activeService = service;
+      this.service = this[service];
+    })
   }
 
   flip(direction: string): void {
     
-    let assets = this.mongoImageService.getModalAssets();
-    let source = this.mongoImageService.getModalSource();
+    let assets = this.service.getModalAssets();
+    let source = this.service.getModalSource();
     let currentImage = source.split('/')[2];
     let length = assets.length;
     let index: number;
@@ -62,12 +66,12 @@ export class AppModalComponent implements OnInit, AfterContentInit, AfterViewIni
         index == 0 ? index = length - 1 : index --;
         break;
     }
-    this.mongoImageService.setModalSource(index);
+    this.service.setModalSource(index);
   }
 
   cancelModal(): void {
     $('.assetviewer-modal').modal('hide');
-    this.mongoImageService.clearModal();
+    this.service.clearModal();
   }
 
 }
