@@ -5,6 +5,7 @@ import { MongoImageModel } from "../../../../models/mongoImage.model";
 import { ServiceModelManagerService } from "../../../../services/service-model-manager.service";
 import { ActivatedRoute } from "@angular/router";
 import { AppEditorServices } from "../../../../services/app-editor.services";
+import { AppModalServices } from "../../../../services/app-modal.services";
 
 
 const $ = require('jquery');
@@ -33,10 +34,12 @@ export class ImagesComponent implements OnInit {
         private activatedRoute: ActivatedRoute,
         private activeUser: AuthenticationService,
         private images: MongoImageServices,
-        private editor: AppEditorServices
+        private editor: AppEditorServices,
+        private modal: AppModalServices
     ){}
 
     ngOnInit(): void {
+      this.modal.clear();
       this.models.setService(this.activatedRoute.snapshot.url[0].path);
       this.currentPage = 1;
       this.buildAlbum();
@@ -125,7 +128,7 @@ export class ImagesComponent implements OnInit {
       this.documents.forEach((document, i) => {
         if(document._id == id) index = i;
       })
-      this.images.initialiseModal(this.documents, index);
+      this.modal.initialise(this.documents, index);
     }
 
 }

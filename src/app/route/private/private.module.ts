@@ -13,6 +13,7 @@ import { AdminDomainModule } from "./admin-domain/admin-domain.module";
 import { UserDomainModule } from "./user-domain/user-domain.module";
 import { ServiceModelManagerService } from "../../services/service-model-manager.service";
 import { AppEditorServices } from "../../services/app-editor.services";
+import { AppModalServices } from "../../services/app-modal.services";
 
 @NgModule({
     imports: [
@@ -35,6 +36,7 @@ import { AppEditorServices } from "../../services/app-editor.services";
         SetMessageService,
         ServiceModelManagerService,
         AppEditorServices,
+        AppModalServices,
         httpInterceptorProviders,
     ]
 })

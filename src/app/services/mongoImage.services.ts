@@ -20,7 +20,6 @@ export class MongoImageServices {
 
   private assets: any[] = new Array();
   private baseUrl = '/api';
-  private modalSource: string;
 
   // view observable/modal observable
   private viewSubject = new BehaviorSubject(this.assets);
@@ -46,28 +45,6 @@ export class MongoImageServices {
     private activeUser: AuthenticationService,
     private message: SetMessageService,
   ) {}
-
-  initialiseModal(assets: any, index: number ): void {
-    this.assets = assets;
-    this.setModalSource(index);
-  }
-
-  clearModal(): void {
-    this.assets = null;
-    this.modalSource = null ;
-  }
-
-  setModalSource(index: number): void {
-    this.modalSource = `photos/James/${this.assets[index].image.fileName}`;
-  }
-
-  getModalAssets(): any {
-    return this.assets;
-  }
-
-  getModalSource(): any {
-    return this.modalSource;
-  }
 
   getSearchTerms(): Observable<any> {
     if (this.activeUser.isAdmin || this.activeUser.isPermitted['to_view_images']) {

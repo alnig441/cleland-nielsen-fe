@@ -3,6 +3,7 @@ import { state, style, animate, transition, trigger, AnimationEvent } from "@ang
 
 import { MongoImageServices } from "../../services/mongoImage.services";
 import { MongoImageModel } from "../../models/mongoImage.model";
+import { AppModalServices } from "../../services/app-modal.services";
 
 const autoComplete = require('../../../js/autoComplete.js');
 
@@ -47,6 +48,7 @@ export class SearchFieldComponent implements OnInit {
 
   constructor(
     private mongoImageService: MongoImageServices,
+    private modal: AppModalServices
   ) {}
 
   @HostListener('click', ['$event']) onClickHandler(event: MouseEvent) {
@@ -114,7 +116,7 @@ export class SearchFieldComponent implements OnInit {
       .subscribe((result: any) => {
         this.autoCompleteElement.value = '';
         this.searchState = null;
-        this.mongoImageService.initialiseModal(result.docs, 0);
+        this.modal.initialise(result.docs, 0);
       })
   }
 

@@ -5,6 +5,7 @@ import { MongoVideoServices } from "../../../../services/mongoVideo.services";
 import { MongoVideoModel } from "../../../../models/mongoVideo.model";
 import { ActivatedRoute } from "@angular/router";
 import { AppEditorServices } from "../../../../services/app-editor.services";
+import { AppModalServices } from "../../../../services/app-modal.services";
 
 const $ = require('jquery');
 
@@ -33,10 +34,12 @@ export class VideosComponent implements OnInit {
     private activeUser: AuthenticationService,
     private activatedRoute: ActivatedRoute,
     private videos: MongoVideoServices,
-    private editor: AppEditorServices
+    private editor: AppEditorServices,
+    private modal: AppModalServices
   ){}
 
   ngOnInit(): void {
+    this.modal.clear();
     this.years = [];
     this.formManager.setService(this.activatedRoute.snapshot.url[0].path);
     this.currentPage = 1;
@@ -105,7 +108,7 @@ export class VideosComponent implements OnInit {
     this.documents.forEach((document, i) => {
       if(document._id == id) index = i;
     })
-    this.videos.initialiseModal(this.documents, index);
+    this.modal.initialise(this.documents, index);
   }
   
   openEditor() : void {

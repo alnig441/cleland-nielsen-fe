@@ -1,4 +1,4 @@
-import { Component, DoCheck, OnInit, ViewEncapsulation } from "@angular/core";
+import { Component, DoCheck, OnInit, ViewEncapsulation, HostListener } from "@angular/core";
 import { AuthenticationService } from "../../../services/authentication.service";
 import { SetMessageService } from "../../../services/set-message.service";
 import { ServiceModelManagerService } from "../../../services/service-model-manager.service";

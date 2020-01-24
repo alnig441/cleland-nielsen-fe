@@ -1,8 +1,6 @@
 import { Component, OnInit, AfterContentInit, AfterViewInit, ViewEncapsulation, HostListener } from "@angular/core";
 import { AuthenticationService } from "../../services/authentication.service";
-import { MongoImageServices } from "../../services/mongoImage.services";
-import { MongoVideoServices } from "../../services/mongoVideo.services";
-import { ServiceModelManagerService } from "../../services/service-model-manager.service";
+import { AppModalServices } from "../../services/app-modal.services";
 
 const $ = require('jquery');
 
@@ -12,42 +10,24 @@ const $ = require('jquery');
   styleUrls: ['./app-modal.component.scss']
 })
 
-export class AppModalComponent implements OnInit {
-
-  private modalSource: any;
-  private activeService: string;
-  private service: any; 
+export class AppModalComponent {
 
   constructor(
     private activeUser: AuthenticationService,
-    private images: MongoImageServices,
-    private videos: MongoVideoServices,
-    private models: ServiceModelManagerService,
+    private modal:      AppModalServices,
   ) {}
 
-  @HostListener('click', ['$event']) clickHandler( event: MouseEvent ) {
-  }
-
   @HostListener('document:keyup', ['$event']) keyupHandler( event: KeyboardEvent) {
-
     if (event.key == 'Escape') {
       $('.assetviewer-modal').modal('hide');
-      this.service.clearModal();
+      this.modal.clear();
     }
-
-  }
-
-  ngOnInit(): void {
-    this.models.serviceReady.subscribe((service: string) => {
-      this.activeService = service;
-      this.service = this[service];
-    })
   }
 
   flip(direction: string): void {
     
-    let assets = this.service.getModalAssets();
-    let source = this.service.getModalSource();
+    let assets = this.modal.getAssets();
+    let source = this.modal.getSource();
     let currentImage = source.split('/')[2];
     let length = assets.length;
     let index: number;
@@ -66,12 +46,12 @@ export class AppModalComponent implements OnInit {
         index == 0 ? index = length - 1 : index --;
         break;
     }
-    this.service.setModalSource(index);
+    this.modal.setSource(index);
   }
 
   cancelModal(): void {
     $('.assetviewer-modal').modal('hide');
-    this.service.clearModal();
+    this.modal.clear();
   }
 
 }

@@ -17,7 +17,6 @@ import 'rxjs/add/observable/of';
 export class MongoVideoServices {
   private assets: any[] = new Array();
   private baseUrl = '/api';
-  private modalSource: string;
 
   private viewSubject = new BehaviorSubject(this.assets);
   onUpdatedView = this.viewSubject.asObservable();
@@ -43,28 +42,6 @@ export class MongoVideoServices {
     private http: HttpClient,
     private activeUser: AuthenticationService,
   ) {}
-  
-  initialiseModal(assets: any, index: number ): void {
-    this.assets = assets;
-    this.setModalSource(index);
-  }
-  
-  clearModal(): void {
-    this.assets = null;
-    this.modalSource = null ;
-  }
-
-  setModalSource(index: number): void {
-    this.modalSource = `videos/James/${this.assets[index].video.fileName}`;
-  }
-
-  getModalAssets(): any {
-    return this.assets;
-  }
-
-  getModalSource(): any {
-    return this.modalSource;
-  }
   
   getTabs(year?: number): Observable<any> {
 
