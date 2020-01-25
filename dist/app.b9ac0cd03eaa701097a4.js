@@ -13874,6 +13874,7 @@ let ImagesComponent = class ImagesComponent {
         this.buildAlbum();
         this.images.onUpdatedView.subscribe((view) => {
             this.documents = view.docs;
+            this.pages = view.pages;
         });
     }
     buildAlbum() {
@@ -34254,4 +34255,4 @@ exports.AppModalServices = AppModalServices;
 /***/ })
 
 },[658]);
-//# sourceMappingURL=app.d76e677255757c8fb047.js.map
+//# sourceMappingURL=app.b9ac0cd03eaa701097a4.js.map
