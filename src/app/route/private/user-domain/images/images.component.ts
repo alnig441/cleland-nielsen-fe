@@ -45,6 +45,7 @@ export class ImagesComponent implements OnInit {
       this.buildAlbum();
       this.images.onUpdatedView.subscribe((view: any) => {
         this.documents = view.docs;
+        this.pages = view.pages;
       })
     }
 
