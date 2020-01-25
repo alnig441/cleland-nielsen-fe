@@ -10,9 +10,9 @@ span(*ngIf="!this.images.message.failure" class='image-main')
       li(*ngFor='let year of this.years as years; index as m', [ngClass]="{'active': year == this.albumViewSelector.year}")
         a((click)='setAlbumView(year)') {{ year }}
     ul(*ngIf="this.pages > 1" class='paginator')
-      li(*ngIf='this.currentPage > 1 && this.editImages.length == 0', (click)="this.turnAlbumPage('rewind')" class='rewind')
+      li(*ngIf='this.currentPage > 1', (click)="this.turnAlbumPage('rewind')" class='rewind')
         span(class='glyphicon glyphicon-triangle-left')
-      li(*ngIf="this.currentPage != this.pages && this.editImages.length == 0", (click)="this.turnAlbumPage('forward')" class='forward')
+      li(*ngIf="this.currentPage != this.pages", (click)="this.turnAlbumPage('forward')" class='forward')
         span(class='glyphicon glyphicon-triangle-right')
               
     div(*ngFor='let document of this.documents as documents; index as j' class='image-container')
