@@ -24,7 +24,13 @@ export class AuthenticationService {
         private http: HttpClient,
         private router: Router,
         private message: SetMessageService,
-    ) {}
+    ) {
+      this.message.onForceLogout.subscribe((logout: boolean) => {
+        if (logout){
+          this.logout();
+        }
+      })
+    }
 
     login(form: LoginModel): Promise<any> {
 
@@ -48,12 +54,11 @@ export class AuthenticationService {
 
     setActivityTimer(): void {
         this.activityTimer = 0;
-
         this.timer = setInterval(() => {
             this.activityTimer ++;
-
-            if (this.activityTimer == 300) {
-                this.message.set({ status: 408, statusText: 'Inactivity alert! Logging out in 10 secs. Press cancel to continue.', forceLogout: true })
+            console.log('timer: ', this.activityTimer)
+            if (this.activityTimer == 30) {
+                this.message.set({ status: null, statusText: 'Logging out in 10 secs. Press cancel to continue.', forceLogout: true })
             }
 
         }, 1000)

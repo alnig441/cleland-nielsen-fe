@@ -1,6 +1,5 @@
 import { Component, DoCheck, OnInit, ViewEncapsulation, HostListener } from "@angular/core";
 import { AuthenticationService } from "../../../services/authentication.service";
-import { SetMessageService } from "../../../services/set-message.service";
 import { ServiceModelManagerService } from "../../../services/service-model-manager.service";
 
 @Component({
@@ -16,7 +15,6 @@ export class UserDomainComponent implements OnInit, DoCheck {
 
     constructor(
         private activeUser: AuthenticationService,
-        private setMessage: SetMessageService,
         private formManager: ServiceModelManagerService
     ){}
 

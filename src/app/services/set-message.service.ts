@@ -1,58 +1,58 @@
 import { Injectable } from "@angular/core";
 import { ErrorParser } from "./error-parser";
 
+import { BehaviorSubject } from 'rxjs';
+
+
 @Injectable()
 
 export class SetMessageService {
 
-    private message: any = {};
-    private state : string = 'hidden';
+    private message: any = { type: undefined, status: undefined };
     private forceLogout: boolean = false;
     private parser = new ErrorParser();
+
+    private messageSubject = new BehaviorSubject(this.message);
+    onUpdatedMessage = this.messageSubject.asObservable();
+
+    private forceLogoutSubject = new BehaviorSubject(this.forceLogout);
+    onForceLogout = this.forceLogoutSubject.asObservable();
 
     constructor(
     ) {}
 
     set(message?: any): any {
-            
       message = this.parser.handleError(message);
-              
+
+      let httpStatus = parseInt(message.status) ? parseInt(message.status): null;
+      let delay = 3500;
+
       this.message = {}
 
       this.message = message;
-      this.state = 'visible';
-      
-      this.forceLogout = message.forceLogout ? message.forceLogout : false;
-      let delay = this.forceLogout ? 10000 : 3500 ;
 
-      let httpStatus = parseInt(message.status) ? parseInt(message.status): null;
-      this.message.type = httpStatus == null ? 'info': httpStatus < 300 ? 'success': httpStatus < 400 ? 'warning' : 'danger';
+      if (message.forceLogout) {
+        this.forceLogout = true;
+        delay = 10000;
+        this.message.type = 'danger';
+        this.message.status = 'Inactivity Alert!';
+      } else {
+        this.message.type = httpStatus == null ? 'info': httpStatus < 300 ? 'success': httpStatus < 400 ? 'warning' : 'danger';
+      }
 
-      setTimeout(() => {
-          this.state = 'hidden';
-      },delay)
+      this.messageSubject.next(this.message);
 
     }
 
-    get(): any {
-      return this.message;
-    }
-
-    getState(): string {
-      return this.state;
-    }
-
-    getForceLogout(): boolean {
-      return this.forceLogout;
-    }
-
-    cancel(): void {
-      this.forceLogout = false;
-      this.state = 'hidden';
+    setForceLogout(): void {
+      // this.forceLogout = true;
+      this.forceLogoutSubject.next(true);
     }
 
     clear(): any {
-      this.message = {};
+      this.message = { type: undefined , status: undefined };
+      this.forceLogout = false;
+      this.messageSubject.next(this.message);
     }
 
 }

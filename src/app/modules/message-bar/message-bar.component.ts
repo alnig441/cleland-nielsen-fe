@@ -23,27 +23,33 @@ import { AuthenticationService } from "../../services/authentication.service";
     ]
 })
 
-export class MessagebarComponent implements OnInit, DoCheck {
+export class MessagebarComponent {
 
-    state: string;
-    message: { status: any };
+    state: string = 'hidden';
+    message: any;
 
     constructor(
-        private messageService: SetMessageService,
+        private alert: SetMessageService,
         private activeUser: AuthenticationService,
-    ){}
+    ){
+      this.alert.clear();
 
-    ngOnInit(): void {
-        this.messageService.clear();
-        this.state = this.messageService.getState();
-        this.message = this.messageService.get();
+      this.alert.onUpdatedMessage.subscribe((message: any) => {
+
+        this.message = message;
+
+        if (message.type) {
+          let delay = message.forceLogout ? 10000 : 3500;
+          this.state = 'visible';
+
+          setTimeout(() => {
+            this.state = 'hidden';
+          }, delay)
+        }
+
+      })
     }
 
-    ngDoCheck(): void {
-        this.state = this.messageService.getState();
-        this.message = this.messageService.get();
-
-    }
 
     onBegin(event?:any): void {
         if (event.fromState == 'hidden' && event.phaseName == 'start'){
@@ -51,15 +57,17 @@ export class MessagebarComponent implements OnInit, DoCheck {
     }
 
     onEnd(event?:any): void {
-        if (event.fromState == 'visible' && event.phaseName == 'done'){
-            if (this.messageService.getForceLogout() || this.message.status == 401) {
-                this.activeUser.logout();
-            }
+      if (event.fromState == 'visible' && event.phaseName == 'done')
+        if (this.message.forceLogout || this.message.status == 401) {
+          this.alert.setForceLogout();
         }
     }
 
     cancel(): void {
-        this.messageService.cancel();
+      if (this.message.forceLogout) {
+        this.message.forceLogout = false;
+      }
+      this.state = 'hidden';
     }
 
 }

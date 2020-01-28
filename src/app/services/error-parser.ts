@@ -35,13 +35,6 @@ export class ErrorParser {
           })
         }
         
-        if(error.status == 408) {
-          err = new HttpErrorResponse({
-            status: error.status,
-            statusText: `${error.statusText}`,
-          })
-        }
-        
         if(error.status == 504) {
           err = new HttpErrorResponse({
             status: error.status,
@@ -50,6 +43,5 @@ export class ErrorParser {
         }
         
         return err;
-        // throw err;
     }
 }
