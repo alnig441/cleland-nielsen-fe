@@ -1,5 +1,5 @@
 import { Component, OnInit, AfterContentInit, AfterViewInit, ViewEncapsulation, HostListener } from "@angular/core";
-import { AuthenticationService } from "../../services/authentication.service";
+import { AuthenticationServices } from "../../services/authentication.services";
 import { AppModalServices } from "../../services/app-modal.services";
 
 const $ = require('jquery');
@@ -13,7 +13,7 @@ const $ = require('jquery');
 export class AppModalComponent {
 
   constructor(
-    private activeUser: AuthenticationService,
+    private activeUser: AuthenticationServices,
     private modal:      AppModalServices,
   ) {}
 

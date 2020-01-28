@@ -3,12 +3,12 @@ import { HttpClient } from "@angular/common/http";
 import "rxjs/add/operator/toPromise";
 import { Router } from "@angular/router";
 import { LoginModel } from "../models/login.model";
-import { SetMessageService } from "./set-message.service";
+import { AppAlertsServices } from "./app-alerts.services";
 
 
 @Injectable()
 
-export class AuthenticationService {
+export class AuthenticationServices {
 
     activityTimer : any;
     isLoggedIn = false;
@@ -23,7 +23,7 @@ export class AuthenticationService {
     constructor(
         private http: HttpClient,
         private router: Router,
-        private message: SetMessageService,
+        private message: AppAlertsServices,
     ) {
       this.message.onForceLogout.subscribe((logout: boolean) => {
         if (logout){

@@ -1,9 +1,9 @@
 import { Component, OnInit, ViewEncapsulation, DoCheck } from "@angular/core";
-import { AuthenticationService } from "../../services/authentication.service";
+import { AuthenticationServices } from "../../services/authentication.services";
 import { UserServices } from "../../services/user.services";
 import { AccountServices } from "../../services/account.services";
 import { PermissionServices } from "../../services/permission.services";
-import { ServiceModelManagerService } from "../../services/service-model-manager.service";
+import { ServiceModelManagerServices } from "../../services/service-model-manager.services";
 
 
 @Component({
@@ -17,11 +17,11 @@ export class FormSubmissionComponent implements OnInit, DoCheck {
     recordModel: any;
 
     constructor(
-        private formManager: ServiceModelManagerService,
+        private formManager: ServiceModelManagerServices,
         private users: UserServices,
         private accounts: AccountServices,
         private permissions: PermissionServices,
-        private activeUser: AuthenticationService
+        private activeUser: AuthenticationServices
     ) {}
 
     ngOnInit(): void {

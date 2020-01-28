@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewEncapsulation } from "@angular/core";
-import { AuthenticationService } from "../../../../services/authentication.service";
-import { ServiceModelManagerService } from "../../../../services/service-model-manager.service";
+import { AuthenticationServices } from "../../../../services/authentication.services";
+import { ServiceModelManagerServices } from "../../../../services/service-model-manager.services";
 import { MongoVideoServices } from "../../../../services/mongoVideo.services";
 import { MongoVideoModel } from "../../../../models/mongoVideo.model";
 import { ActivatedRoute } from "@angular/router";
@@ -30,8 +30,8 @@ export class VideosComponent implements OnInit {
   private modalSource: string;
 
   constructor(
-    private formManager: ServiceModelManagerService,
-    private activeUser: AuthenticationService,
+    private formManager: ServiceModelManagerServices,
+    private activeUser: AuthenticationServices,
     private activatedRoute: ActivatedRoute,
     private videos: MongoVideoServices,
     private editor: AppEditorServices,

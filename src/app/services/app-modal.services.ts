@@ -3,7 +3,7 @@ import { HttpClient, HttpParams, HttpErrorResponse } from "@angular/common/http"
 
 import { MongoImageServices } from "./mongoImage.services";
 import { MongoVideoServices } from "./mongoVideo.services";
-import { ServiceModelManagerService } from "./service-model-manager.service";
+import { ServiceModelManagerServices } from "./service-model-manager.services";
 
 @Injectable()
 
@@ -17,7 +17,7 @@ export class AppModalServices {
   constructor(
     private images: MongoImageServices,
     private videos: MongoVideoServices,
-    private modelManager: ServiceModelManagerService
+    private modelManager: ServiceModelManagerServices
   ) {
     this.modelManager.serviceReady.subscribe((service: string) => {
       this.activeService = service;

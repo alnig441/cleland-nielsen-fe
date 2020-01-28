@@ -1,7 +1,7 @@
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { FormSubmissionComponent } from "./form-submission.component";
-import { ServiceModelManagerService } from "../../services/service-model-manager.service";
+import { ServiceModelManagerServices } from "../../services/service-model-manager.services";
 import { UserServices } from "../../services/user.services";
 import { AccountServices } from "../../services/account.services";
 import { PermissionServices } from "../../services/permission.services";
@@ -19,7 +19,7 @@ import { FormsModule } from "@angular/forms";
         FormSubmissionComponent
     ],
     providers: [
-        ServiceModelManagerService,
+        ServiceModelManagerServices,
         UserServices,
         AccountServices,
         PermissionServices

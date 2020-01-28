@@ -3,9 +3,8 @@ import { HttpClient } from "@angular/common/http";
 import { UserServices } from "../../../services/user.services";
 import { AccountServices } from "../../../services/account.services";
 import { PermissionServices } from "../../../services/permission.services";
-import { ServiceModelManagerService } from "../../../services/service-model-manager.service";
-import { AuthenticationService } from "../../../services/authentication.service";
-import { SetMessageService } from "../../../services/set-message.service";
+import { ServiceModelManagerServices } from "../../../services/service-model-manager.services";
+import { AuthenticationServices } from "../../../services/authentication.services";
 
 @Component({
     selector: 'app-admin-domain',
@@ -19,8 +18,8 @@ export class AdminDomainComponent implements OnInit, DoCheck {
     private recordModel: any;
 
     constructor(
-        private formManager: ServiceModelManagerService,
-        private activeUser: AuthenticationService,
+        private formManager: ServiceModelManagerServices,
+        private activeUser: AuthenticationServices,
         private users: UserServices,
         private accounts: AccountServices,
         private permissions: PermissionServices,

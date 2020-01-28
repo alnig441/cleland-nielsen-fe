@@ -1,6 +1,6 @@
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
-import { AuthenticationGuardService  } from "../../../services/authentication-guard.service";
+import { AuthenticationGuardServices  } from "../../../services/authentication-guard.services";
 import { ImagesComponent } from "./images/images.component";
 import { VideosComponent } from "./videos/videos.component";
 import { UserDomainComponent } from "./user-domain.component";
@@ -9,7 +9,7 @@ const USER_ROUTES: Routes = [
     {
         path: '',
         component: UserDomainComponent,
-        canActivateChild: [ AuthenticationGuardService ],
+        canActivateChild: [ AuthenticationGuardServices ],
         children: [
             {
                 path: 'images',
@@ -30,7 +30,7 @@ const USER_ROUTES: Routes = [
     exports: [
         RouterModule
     ],
-    providers: [ AuthenticationGuardService ]
+    providers: [ AuthenticationGuardServices ]
 })
 
 export class UserDomainRoutingModule {}

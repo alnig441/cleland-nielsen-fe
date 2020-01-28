@@ -2,7 +2,7 @@ import { Component, OnInit, ViewEncapsulation } from "@angular/core";
 import { UserServices } from "../../services/user.services";
 import { AccountServices } from "../../services/account.services";
 import { PermissionServices } from "../../services/permission.services";
-import { ServiceModelManagerService } from "../../services/service-model-manager.service";
+import { ServiceModelManagerServices } from "../../services/service-model-manager.services";
 
 @Component({
     selector: 'app-sidebar-cta',
@@ -14,7 +14,7 @@ import { ServiceModelManagerService } from "../../services/service-model-manager
 export class SidebarCtaComponent implements OnInit {
 
     constructor(
-        private formManager: ServiceModelManagerService,
+        private formManager: ServiceModelManagerServices,
         private permissions: PermissionServices,
         private accounts: AccountServices,
         private users: UserServices

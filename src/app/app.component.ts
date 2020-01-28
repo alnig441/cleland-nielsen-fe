@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewEncapsulation, HostListener } from "@angular/core";
-import { AuthenticationService } from "./services/authentication.service";
+import { AuthenticationServices } from "./services/authentication.services";
 
 @Component({
     selector: "app-root",
@@ -10,7 +10,7 @@ import { AuthenticationService } from "./services/authentication.service";
 export class AppComponent implements OnInit {
 
     constructor(
-        private user : AuthenticationService
+        private user : AuthenticationServices
     ) {}
 
     public ngOnInit(): void {

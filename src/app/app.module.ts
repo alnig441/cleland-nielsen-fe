@@ -14,7 +14,7 @@ import { PipesModule } from "./pipes/pipes.module";
 import { LoginComponent } from "./components/login/login.component";
 import { GlobalnavComponent } from "./components/globalnav/globalnav.component";
 import { AppLoadModule } from "./load/app-load.module";
-import { AuthenticationService } from "./services/authentication.service";
+import { AuthenticationServices } from "./services/authentication.services";
 
 @NgModule({
     imports: [
@@ -36,7 +36,7 @@ import { AuthenticationService } from "./services/authentication.service";
     exports: [
     ],
     providers: [
-        AuthenticationService
+        AuthenticationServices
     ],
     bootstrap: [
         AppComponent

@@ -6,7 +6,7 @@ import { PipesModule } from "../../pipes/pipes.module";
 
 import { AppModalComponent } from "./app-modal.component";
 
-import { AuthenticationService } from "../../services/authentication.service";
+import { AuthenticationServices } from "../../services/authentication.services";
 import { MongoImageServices} from "../../services/mongoImage.services";
 
 @NgModule({
@@ -22,7 +22,7 @@ import { MongoImageServices} from "../../services/mongoImage.services";
     AppModalComponent
   ],
   providers: [
-    AuthenticationService,
+    AuthenticationServices,
     MongoImageServices
   ]
 })

@@ -2,7 +2,7 @@ import { Component, OnInit, ViewEncapsulation } from "@angular/core";
 import { NavigationExtras, Router } from "@angular/router";
 import { HttpClient } from "@angular/common/http";
 import { LoginModel } from "../../models/login.model";
-import { AuthenticationService } from "../../services/authentication.service";
+import { AuthenticationServices } from "../../services/authentication.services";
 import { PermissionServices } from "../../services/permission.services";
 // import { ErrorParser } from "../../services/error-parser";
 
@@ -24,7 +24,7 @@ export class LoginComponent implements OnInit {
     constructor(
         private http: HttpClient,
         private router: Router,
-        private authenticator: AuthenticationService,
+        private authenticator: AuthenticationServices,
         private permissionService: PermissionServices
     ){}
 

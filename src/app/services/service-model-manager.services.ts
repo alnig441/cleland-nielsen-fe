@@ -9,7 +9,7 @@ import { MongoVideoModel } from "../models/mongoVideo.model";
 
 @Injectable()
 
-export class ServiceModelManagerService {
+export class ServiceModelManagerServices {
     
     private serviceAnnouncement = new BehaviorSubject(null);
     serviceReady = this.serviceAnnouncement.asObservable();

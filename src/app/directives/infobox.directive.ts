@@ -1,5 +1,5 @@
 import { Directive, Input, TemplateRef, ViewContainerRef } from "@angular/core";
-import { AuthenticationService } from "../services/authentication.service";
+import { AuthenticationServices } from "../services/authentication.services";
 
 @Directive({ selector: '[infobox]' })
 
@@ -8,7 +8,7 @@ export class InfoboxDirective {
     constructor(
         private templateRef: TemplateRef<any>,
         private viewContainer: ViewContainerRef,
-        private activeUser: AuthenticationService
+        private activeUser: AuthenticationServices
     ){}
 
     @Input() set infobox(condition: boolean){

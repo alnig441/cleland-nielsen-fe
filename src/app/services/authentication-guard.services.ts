@@ -9,14 +9,14 @@ import {
     CanLoad,
     Route
 } from "@angular/router";
-import { AuthenticationService } from "./authentication.service";
+import { AuthenticationServices } from "./authentication.services";
 
 @Injectable()
 
-export class AuthenticationGuardService implements CanActivate, CanActivateChild, CanLoad {
+export class AuthenticationGuardServices implements CanActivate, CanActivateChild, CanLoad {
 
     constructor(
-      private  authenticator: AuthenticationService,
+      private  authenticator: AuthenticationServices,
       private router: Router
     ) {}
 

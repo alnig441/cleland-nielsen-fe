@@ -1,6 +1,6 @@
 import { Component, DoCheck, OnInit, ViewEncapsulation, HostListener } from "@angular/core";
-import { AuthenticationService } from "../../../services/authentication.service";
-import { ServiceModelManagerService } from "../../../services/service-model-manager.service";
+import { AuthenticationServices } from "../../../services/authentication.services";
+import { ServiceModelManagerServices } from "../../../services/service-model-manager.services";
 
 @Component({
     selector: 'app-user-domain',
@@ -14,8 +14,8 @@ export class UserDomainComponent implements OnInit, DoCheck {
     private recordModel: any;
 
     constructor(
-        private activeUser: AuthenticationService,
-        private formManager: ServiceModelManagerService
+        private activeUser: AuthenticationServices,
+        private formManager: ServiceModelManagerServices
     ){}
 
     ngOnInit(): void {}

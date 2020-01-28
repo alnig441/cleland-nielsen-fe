@@ -1,12 +1,12 @@
 import { NgModule, APP_INITIALIZER } from "@angular/core";
 import { HttpClientModule } from "@angular/common/http";
-import { AppLoadService } from "../services/application-load.service";
+import { AppLoadServices } from "../services/application-load.services";
 
-export function init_app(appLoad: AppLoadService) {
+export function init_app(appLoad: AppLoadServices) {
     return () => appLoad.initializeApp();
 }
 
-export function get_settings(appLoad: AppLoadService) {
+export function get_settings(appLoad: AppLoadServices) {
     return () => appLoad.getSettings();
 }
 
@@ -16,9 +16,9 @@ export function get_settings(appLoad: AppLoadService) {
         HttpClientModule
     ],
     providers: [
-        AppLoadService,
-        { provide: APP_INITIALIZER, useFactory: init_app, deps: [AppLoadService], multi: true},
-        { provide: APP_INITIALIZER, useFactory: get_settings, deps: [AppLoadService], multi: true},
+        AppLoadServices,
+        { provide: APP_INITIALIZER, useFactory: init_app, deps: [AppLoadServices], multi: true},
+        { provide: APP_INITIALIZER, useFactory: get_settings, deps: [AppLoadServices], multi: true},
     ]
 })
 

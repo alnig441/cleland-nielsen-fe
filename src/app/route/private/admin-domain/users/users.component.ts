@@ -1,10 +1,10 @@
 import { Component, OnInit, ViewEncapsulation } from "@angular/core";
 import { AccountServices } from "../../../../services/account.services";
-import { AuthenticationService } from "../../../../services/authentication.service";
+import { AuthenticationServices } from "../../../../services/authentication.services";
 import { UserModel } from "../../../../models/user.model";
 import { UserServices } from "../../../../services/user.services";
 import { ActivatedRoute } from "@angular/router";
-import {ServiceModelManagerService} from "../../../../services/service-model-manager.service";
+import {ServiceModelManagerServices} from "../../../../services/service-model-manager.services";
 
 @Component({
     selector: 'app-users',
@@ -18,9 +18,9 @@ export class UsersComponent implements OnInit {
     doEdit = {};
 
     constructor(
-        private formManager: ServiceModelManagerService,
+        private formManager: ServiceModelManagerServices,
         private activatedRoute: ActivatedRoute,
-        private activeUser: AuthenticationService,
+        private activeUser: AuthenticationServices,
         private accountService: AccountServices,
         private userService: UserServices
     ) {}

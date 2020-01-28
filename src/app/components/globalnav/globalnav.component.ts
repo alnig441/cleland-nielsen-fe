@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewEncapsulation } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { HttpClient } from "@angular/common/http";
-import { AuthenticationService } from "../../services/authentication.service";
+import { AuthenticationServices } from "../../services/authentication.services";
 
 @Component({
     selector: 'app-globalnav',
@@ -28,7 +28,7 @@ export class GlobalnavComponent implements OnInit {
         private http: HttpClient,
         private router: Router,
         private activatedRoute: ActivatedRoute,
-        private activeUser: AuthenticationService
+        private activeUser: AuthenticationServices
     ) {}
 
     ngOnInit(): void {

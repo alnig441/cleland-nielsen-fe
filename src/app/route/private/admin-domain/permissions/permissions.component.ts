@@ -1,8 +1,8 @@
 import { Component, OnInit, ViewEncapsulation } from "@angular/core";
-import { AuthenticationService } from "../../../../services/authentication.service";
+import { AuthenticationServices } from "../../../../services/authentication.services";
 import { PermissionModel } from "../../../../models/permission.model";
 import { ActivatedRoute } from "@angular/router";
-import { ServiceModelManagerService } from "../../../../services/service-model-manager.service";
+import { ServiceModelManagerServices } from "../../../../services/service-model-manager.services";
 import { PermissionServices } from "../../../../services/permission.services";
 
 @Component({
@@ -17,9 +17,9 @@ export class PermissionsComponent implements OnInit {
 
     constructor(
         private permissionService: PermissionServices,
-        private formManager: ServiceModelManagerService,
+        private formManager: ServiceModelManagerServices,
         private activatedRoute: ActivatedRoute,
-        private activeUser: AuthenticationService
+        private activeUser: AuthenticationServices
     ){}
 
     ngOnInit(): void {

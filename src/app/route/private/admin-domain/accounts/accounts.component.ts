@@ -1,9 +1,9 @@
 import { Component, OnInit, ViewEncapsulation } from "@angular/core";
 import { AccountServices } from "../../../../services/account.services";
 import { PermissionServices } from "../../../../services/permission.services";
-import { AuthenticationService } from "../../../../services/authentication.service";
+import { AuthenticationServices } from "../../../../services/authentication.services";
 import { ActivatedRoute } from "@angular/router";
-import { ServiceModelManagerService } from "../../../../services/service-model-manager.service";
+import { ServiceModelManagerServices } from "../../../../services/service-model-manager.services";
 import { ListValidator } from "../../../../classes/listValidator";
 import { PermissionModel } from "../../../../models/permission.model";
 
@@ -21,9 +21,9 @@ export class AccountsComponent implements OnInit {
     accountUpdated: boolean = false;
 
     constructor(
-        private formManager: ServiceModelManagerService,
+        private formManager: ServiceModelManagerServices,
         private activatedRoute: ActivatedRoute,
-        private activeUser: AuthenticationService,
+        private activeUser: AuthenticationServices,
         private accountService: AccountServices,
         private permissionService: PermissionServices
     ){}

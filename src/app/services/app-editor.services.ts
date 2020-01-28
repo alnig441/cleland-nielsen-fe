@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { ServiceModelManagerService } from "./service-model-manager.service";
+import { ServiceModelManagerServices } from "./service-model-manager.services";
 import { MongoImageServices } from "./mongoImage.services";
 import { MongoVideoServices } from "./mongoVideo.services";
 
@@ -27,7 +27,7 @@ export class AppEditorServices {
   };
 
   constructor(
-    private models: ServiceModelManagerService,
+    private models: ServiceModelManagerServices,
     private images: MongoImageServices,
     private videos: MongoVideoServices
     ) {

@@ -5,7 +5,7 @@ import "rxjs/add/operator/toPromise";
 // import { APP_SETTINGS } from "../settings"
 
 @Injectable()
-export class AppLoadService {
+export class AppLoadServices {
 
     constructor(
       private http: HttpClient

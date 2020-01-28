@@ -1,8 +1,8 @@
 import { Component, OnInit, ViewEncapsulation, DoCheck } from "@angular/core";
 import { MongoImageServices } from "../../../../services/mongoImage.services";
-import { AuthenticationService } from "../../../../services/authentication.service";
+import { AuthenticationServices } from "../../../../services/authentication.services";
 import { MongoImageModel } from "../../../../models/mongoImage.model";
-import { ServiceModelManagerService } from "../../../../services/service-model-manager.service";
+import { ServiceModelManagerServices } from "../../../../services/service-model-manager.services";
 import { ActivatedRoute } from "@angular/router";
 import { AppEditorServices } from "../../../../services/app-editor.services";
 import { AppModalServices } from "../../../../services/app-modal.services";
@@ -30,9 +30,9 @@ export class ImagesComponent implements OnInit {
     private imageModel = new MongoImageModel();
 
     constructor(
-        private models: ServiceModelManagerService,
+        private models: ServiceModelManagerServices,
         private activatedRoute: ActivatedRoute,
-        private activeUser: AuthenticationService,
+        private activeUser: AuthenticationServices,
         private images: MongoImageServices,
         private editor: AppEditorServices,
         private modal: AppModalServices
