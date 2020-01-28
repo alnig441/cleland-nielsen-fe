@@ -16,9 +16,9 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 const core_1 = __webpack_require__(2);
 const http_1 = __webpack_require__(27);
-const authentication_service_1 = __webpack_require__(11);
-const set_message_service_1 = __webpack_require__(39);
-const rxjs_1 = __webpack_require__(102);
+const authentication_services_1 = __webpack_require__(11);
+const app_alerts_services_1 = __webpack_require__(46);
+const rxjs_1 = __webpack_require__(82);
 __webpack_require__(145);
 __webpack_require__(61);
 __webpack_require__(146);
@@ -157,9 +157,9 @@ let MongoVideoServices = class MongoVideoServices {
 };
 MongoVideoServices = __decorate([
     core_1.Injectable(),
-    __metadata("design:paramtypes", [set_message_service_1.SetMessageService,
+    __metadata("design:paramtypes", [app_alerts_services_1.AppAlertsServices,
         http_1.HttpClient,
-        authentication_service_1.AuthenticationService])
+        authentication_services_1.AuthenticationServices])
 ], MongoVideoServices);
 exports.MongoVideoServices = MongoVideoServices;
 
@@ -1505,7 +1505,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 const core_1 = __webpack_require__(2);
-const service_model_manager_service_1 = __webpack_require__(24);
+const service_model_manager_services_1 = __webpack_require__(24);
 const mongoImage_services_1 = __webpack_require__(62);
 const mongoVideo_services_1 = __webpack_require__(106);
 let AppEditorServices = class AppEditorServices {
@@ -1581,7 +1581,7 @@ let AppEditorServices = class AppEditorServices {
 };
 AppEditorServices = __decorate([
     core_1.Injectable(),
-    __metadata("design:paramtypes", [service_model_manager_service_1.ServiceModelManagerService,
+    __metadata("design:paramtypes", [service_model_manager_services_1.ServiceModelManagerServices,
         mongoImage_services_1.MongoImageServices,
         mongoVideo_services_1.MongoVideoServices])
 ], AppEditorServices);
@@ -1655,8 +1655,8 @@ const core_1 = __webpack_require__(2);
 const http_1 = __webpack_require__(27);
 __webpack_require__(61);
 const router_1 = __webpack_require__(22);
-const set_message_service_1 = __webpack_require__(39);
-let AuthenticationService = class AuthenticationService {
+const app_alerts_services_1 = __webpack_require__(46);
+let AuthenticationServices = class AuthenticationServices {
     constructor(http, router, message) {
         this.http = http;
         this.router = router;
@@ -1664,6 +1664,11 @@ let AuthenticationService = class AuthenticationService {
         this.isLoggedIn = false;
         this.isAdmin = false;
         this.isPermitted = {};
+        this.message.onForceLogout.subscribe((logout) => {
+            if (logout) {
+                this.logout();
+            }
+        });
     }
     login(form) {
         return this.http.post('/login', form, { observe: "body" })
@@ -1687,7 +1692,7 @@ let AuthenticationService = class AuthenticationService {
         this.timer = setInterval(() => {
             this.activityTimer++;
             if (this.activityTimer == 300) {
-                this.message.set({ status: 408, statusText: 'Inactivity alert! Logging out in 10 secs. Press cancel to continue.', forceLogout: true });
+                this.message.set({ status: null, statusText: 'Logging out in 10 secs. Press cancel to continue.', forceLogout: true });
             }
         }, 1000);
     }
@@ -1703,13 +1708,13 @@ let AuthenticationService = class AuthenticationService {
         this.router.navigate([this.redirectUrl]);
     }
 };
-AuthenticationService = __decorate([
+AuthenticationServices = __decorate([
     core_1.Injectable(),
     __metadata("design:paramtypes", [http_1.HttpClient,
         router_1.Router,
-        set_message_service_1.SetMessageService])
-], AuthenticationService);
-exports.AuthenticationService = AuthenticationService;
+        app_alerts_services_1.AppAlertsServices])
+], AuthenticationServices);
+exports.AuthenticationServices = AuthenticationServices;
 
 
 /***/ }),
@@ -12632,10 +12637,10 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 const core_1 = __webpack_require__(2);
 const account_services_1 = __webpack_require__(54);
-const authentication_service_1 = __webpack_require__(11);
+const authentication_services_1 = __webpack_require__(11);
 const user_services_1 = __webpack_require__(63);
 const router_1 = __webpack_require__(22);
-const service_model_manager_service_1 = __webpack_require__(24);
+const service_model_manager_services_1 = __webpack_require__(24);
 let UsersComponent = class UsersComponent {
     constructor(formManager, activatedRoute, activeUser, accountService, userService) {
         this.formManager = formManager;
@@ -12669,9 +12674,9 @@ UsersComponent = __decorate([
         template: __webpack_require__(703),
         encapsulation: core_1.ViewEncapsulation.None
     }),
-    __metadata("design:paramtypes", [service_model_manager_service_1.ServiceModelManagerService,
+    __metadata("design:paramtypes", [service_model_manager_services_1.ServiceModelManagerServices,
         router_1.ActivatedRoute,
-        authentication_service_1.AuthenticationService,
+        authentication_services_1.AuthenticationServices,
         account_services_1.AccountServices,
         user_services_1.UserServices])
 ], UsersComponent);
@@ -12743,8 +12748,8 @@ const http_1 = __webpack_require__(27);
 const user_services_1 = __webpack_require__(63);
 const account_services_1 = __webpack_require__(54);
 const permission_services_1 = __webpack_require__(47);
-const service_model_manager_service_1 = __webpack_require__(24);
-const authentication_service_1 = __webpack_require__(11);
+const service_model_manager_services_1 = __webpack_require__(24);
+const authentication_services_1 = __webpack_require__(11);
 let AdminDomainComponent = class AdminDomainComponent {
     constructor(formManager, activeUser, users, accounts, permissions, http) {
         this.formManager = formManager;
@@ -12778,8 +12783,8 @@ AdminDomainComponent = __decorate([
         styles: [__webpack_require__(705)],
         encapsulation: core_1.ViewEncapsulation.None
     }),
-    __metadata("design:paramtypes", [service_model_manager_service_1.ServiceModelManagerService,
-        authentication_service_1.AuthenticationService,
+    __metadata("design:paramtypes", [service_model_manager_services_1.ServiceModelManagerServices,
+        authentication_services_1.AuthenticationServices,
         user_services_1.UserServices,
         account_services_1.AccountServices,
         permission_services_1.PermissionServices,
@@ -12807,9 +12812,9 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 const core_1 = __webpack_require__(2);
 const account_services_1 = __webpack_require__(54);
 const permission_services_1 = __webpack_require__(47);
-const authentication_service_1 = __webpack_require__(11);
+const authentication_services_1 = __webpack_require__(11);
 const router_1 = __webpack_require__(22);
-const service_model_manager_service_1 = __webpack_require__(24);
+const service_model_manager_services_1 = __webpack_require__(24);
 const listValidator_1 = __webpack_require__(706);
 let AccountsComponent = class AccountsComponent {
     constructor(formManager, activatedRoute, activeUser, accountService, permissionService) {
@@ -12868,9 +12873,9 @@ AccountsComponent = __decorate([
         template: __webpack_require__(707),
         encapsulation: core_1.ViewEncapsulation.None
     }),
-    __metadata("design:paramtypes", [service_model_manager_service_1.ServiceModelManagerService,
+    __metadata("design:paramtypes", [service_model_manager_services_1.ServiceModelManagerServices,
         router_1.ActivatedRoute,
-        authentication_service_1.AuthenticationService,
+        authentication_services_1.AuthenticationServices,
         account_services_1.AccountServices,
         permission_services_1.PermissionServices])
 ], AccountsComponent);
@@ -12894,10 +12899,10 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 const core_1 = __webpack_require__(2);
-const authentication_service_1 = __webpack_require__(11);
+const authentication_services_1 = __webpack_require__(11);
 const permission_model_1 = __webpack_require__(225);
 const router_1 = __webpack_require__(22);
-const service_model_manager_service_1 = __webpack_require__(24);
+const service_model_manager_services_1 = __webpack_require__(24);
 const permission_services_1 = __webpack_require__(47);
 let PermissionsComponent = class PermissionsComponent {
     constructor(permissionService, formManager, activatedRoute, activeUser) {
@@ -12921,9 +12926,9 @@ PermissionsComponent = __decorate([
         encapsulation: core_1.ViewEncapsulation.None
     }),
     __metadata("design:paramtypes", [permission_services_1.PermissionServices,
-        service_model_manager_service_1.ServiceModelManagerService,
+        service_model_manager_services_1.ServiceModelManagerServices,
         router_1.ActivatedRoute,
-        authentication_service_1.AuthenticationService])
+        authentication_services_1.AuthenticationServices])
 ], PermissionsComponent);
 exports.PermissionsComponent = PermissionsComponent;
 
@@ -12943,29 +12948,29 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 const core_1 = __webpack_require__(2);
 const common_1 = __webpack_require__(17);
-const message_bar_component_1 = __webpack_require__(709);
-const set_message_service_1 = __webpack_require__(39);
+const app_alerts_component_1 = __webpack_require__(709);
+const app_alerts_services_1 = __webpack_require__(46);
 const animations_1 = __webpack_require__(231);
-let MessageBarModule = class MessageBarModule {
+let AppAlertsModule = class AppAlertsModule {
 };
-MessageBarModule = __decorate([
+AppAlertsModule = __decorate([
     core_1.NgModule({
         imports: [
             common_1.CommonModule,
             animations_1.BrowserAnimationsModule
         ],
         declarations: [
-            message_bar_component_1.MessagebarComponent
+            app_alerts_component_1.AppAlertsComponent
         ],
         exports: [
-            message_bar_component_1.MessagebarComponent
+            app_alerts_component_1.AppAlertsComponent
         ],
         providers: [
-            set_message_service_1.SetMessageService,
+            app_alerts_services_1.AppAlertsServices,
         ]
     })
-], MessageBarModule);
-exports.MessageBarModule = MessageBarModule;
+], AppAlertsModule);
+exports.AppAlertsModule = AppAlertsModule;
 
 
 /***/ }),
@@ -13752,7 +13757,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 const core_1 = __webpack_require__(2);
 const common_1 = __webpack_require__(17);
 const sidebar_cta_component_1 = __webpack_require__(713);
-const service_model_manager_service_1 = __webpack_require__(24);
+const service_model_manager_services_1 = __webpack_require__(24);
 const permission_services_1 = __webpack_require__(47);
 const account_services_1 = __webpack_require__(54);
 const user_services_1 = __webpack_require__(63);
@@ -13770,7 +13775,7 @@ SidebarCtaModule = __decorate([
             sidebar_cta_component_1.SidebarCtaComponent
         ],
         providers: [
-            service_model_manager_service_1.ServiceModelManagerService,
+            service_model_manager_services_1.ServiceModelManagerServices,
             permission_services_1.PermissionServices,
             account_services_1.AccountServices,
             user_services_1.UserServices,
@@ -13796,7 +13801,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 const core_1 = __webpack_require__(2);
 const common_1 = __webpack_require__(17);
 const form_submission_component_1 = __webpack_require__(716);
-const service_model_manager_service_1 = __webpack_require__(24);
+const service_model_manager_services_1 = __webpack_require__(24);
 const user_services_1 = __webpack_require__(63);
 const account_services_1 = __webpack_require__(54);
 const permission_services_1 = __webpack_require__(47);
@@ -13816,7 +13821,7 @@ FormSubmissionModule = __decorate([
             form_submission_component_1.FormSubmissionComponent
         ],
         providers: [
-            service_model_manager_service_1.ServiceModelManagerService,
+            service_model_manager_services_1.ServiceModelManagerServices,
             user_services_1.UserServices,
             account_services_1.AccountServices,
             permission_services_1.PermissionServices
@@ -13844,12 +13849,12 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 const core_1 = __webpack_require__(2);
 const mongoImage_services_1 = __webpack_require__(62);
-const authentication_service_1 = __webpack_require__(11);
+const authentication_services_1 = __webpack_require__(11);
 const mongoImage_model_1 = __webpack_require__(148);
-const service_model_manager_service_1 = __webpack_require__(24);
+const service_model_manager_services_1 = __webpack_require__(24);
 const router_1 = __webpack_require__(22);
 const app_editor_services_1 = __webpack_require__(108);
-const app_modal_services_1 = __webpack_require__(86);
+const app_modal_services_1 = __webpack_require__(87);
 const $ = __webpack_require__(14);
 let ImagesComponent = class ImagesComponent {
     constructor(models, activatedRoute, activeUser, images, editor, modal) {
@@ -13956,9 +13961,9 @@ ImagesComponent = __decorate([
         styles: [__webpack_require__(728)],
         encapsulation: core_1.ViewEncapsulation.None
     }),
-    __metadata("design:paramtypes", [service_model_manager_service_1.ServiceModelManagerService,
+    __metadata("design:paramtypes", [service_model_manager_services_1.ServiceModelManagerServices,
         router_1.ActivatedRoute,
-        authentication_service_1.AuthenticationService,
+        authentication_services_1.AuthenticationServices,
         mongoImage_services_1.MongoImageServices,
         app_editor_services_1.AppEditorServices,
         app_modal_services_1.AppModalServices])
@@ -13983,13 +13988,13 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 const core_1 = __webpack_require__(2);
-const authentication_service_1 = __webpack_require__(11);
-const service_model_manager_service_1 = __webpack_require__(24);
+const authentication_services_1 = __webpack_require__(11);
+const service_model_manager_services_1 = __webpack_require__(24);
 const mongoVideo_services_1 = __webpack_require__(106);
 const mongoVideo_model_1 = __webpack_require__(226);
 const router_1 = __webpack_require__(22);
 const app_editor_services_1 = __webpack_require__(108);
-const app_modal_services_1 = __webpack_require__(86);
+const app_modal_services_1 = __webpack_require__(87);
 const $ = __webpack_require__(14);
 let VideosComponent = class VideosComponent {
     constructor(formManager, activeUser, activatedRoute, videos, editor, modal) {
@@ -14083,8 +14088,8 @@ VideosComponent = __decorate([
         styles: [__webpack_require__(730)],
         encapsulation: core_1.ViewEncapsulation.None
     }),
-    __metadata("design:paramtypes", [service_model_manager_service_1.ServiceModelManagerService,
-        authentication_service_1.AuthenticationService,
+    __metadata("design:paramtypes", [service_model_manager_services_1.ServiceModelManagerServices,
+        authentication_services_1.AuthenticationServices,
         router_1.ActivatedRoute,
         mongoVideo_services_1.MongoVideoServices,
         app_editor_services_1.AppEditorServices,
@@ -14110,13 +14115,11 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 const core_1 = __webpack_require__(2);
-const authentication_service_1 = __webpack_require__(11);
-const set_message_service_1 = __webpack_require__(39);
-const service_model_manager_service_1 = __webpack_require__(24);
+const authentication_services_1 = __webpack_require__(11);
+const service_model_manager_services_1 = __webpack_require__(24);
 let UserDomainComponent = class UserDomainComponent {
-    constructor(activeUser, setMessage, formManager) {
+    constructor(activeUser, formManager) {
         this.activeUser = activeUser;
-        this.setMessage = setMessage;
         this.formManager = formManager;
     }
     ngOnInit() { }
@@ -14137,9 +14140,8 @@ UserDomainComponent = __decorate([
         styles: [__webpack_require__(732)],
         encapsulation: core_1.ViewEncapsulation.None
     }),
-    __metadata("design:paramtypes", [authentication_service_1.AuthenticationService,
-        set_message_service_1.SetMessageService,
-        service_model_manager_service_1.ServiceModelManagerService])
+    __metadata("design:paramtypes", [authentication_services_1.AuthenticationServices,
+        service_model_manager_services_1.ServiceModelManagerServices])
 ], UserDomainComponent);
 exports.UserDomainComponent = UserDomainComponent;
 
@@ -14161,13 +14163,13 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 const core_1 = __webpack_require__(2);
-const rxjs_1 = __webpack_require__(102);
+const rxjs_1 = __webpack_require__(82);
 const user_model_1 = __webpack_require__(701);
 const account_model_1 = __webpack_require__(702);
 const permission_model_1 = __webpack_require__(225);
 const mongoImage_model_1 = __webpack_require__(148);
 const mongoVideo_model_1 = __webpack_require__(226);
-let ServiceModelManagerService = class ServiceModelManagerService {
+let ServiceModelManagerServices = class ServiceModelManagerServices {
     constructor() {
         this.serviceAnnouncement = new rxjs_1.BehaviorSubject(null);
         this.serviceReady = this.serviceAnnouncement.asObservable();
@@ -14237,11 +14239,11 @@ let ServiceModelManagerService = class ServiceModelManagerService {
         return this.recordModel[property];
     }
 };
-ServiceModelManagerService = __decorate([
+ServiceModelManagerServices = __decorate([
     core_1.Injectable(),
     __metadata("design:paramtypes", [])
-], ServiceModelManagerService);
-exports.ServiceModelManagerService = ServiceModelManagerService;
+], ServiceModelManagerServices);
+exports.ServiceModelManagerServices = ServiceModelManagerServices;
 
 
 /***/ }),
@@ -14287,7 +14289,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_observable_of___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs_observable_of__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_operator_concatMap__ = __webpack_require__(136);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_operator_concatMap___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_rxjs_operator_concatMap__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_operator_filter__ = __webpack_require__(101);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_operator_filter__ = __webpack_require__(102);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_operator_filter___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_rxjs_operator_filter__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_rxjs_operator_map__ = __webpack_require__(72);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_rxjs_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_rxjs_operator_map__);
@@ -16438,7 +16440,7 @@ HttpClientJsonpModule.ctorParameters = function () { return []; };
 
 /***/ }),
 
-/***/ 39:
+/***/ 46:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16454,48 +16456,48 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 const core_1 = __webpack_require__(2);
 const error_parser_1 = __webpack_require__(684);
-let SetMessageService = class SetMessageService {
+const rxjs_1 = __webpack_require__(82);
+let AppAlertsServices = class AppAlertsServices {
     constructor() {
-        this.message = {};
-        this.state = 'hidden';
+        this.message = { type: undefined, status: undefined };
         this.forceLogout = false;
         this.parser = new error_parser_1.ErrorParser();
+        this.messageSubject = new rxjs_1.BehaviorSubject(this.message);
+        this.onUpdatedMessage = this.messageSubject.asObservable();
+        this.forceLogoutSubject = new rxjs_1.BehaviorSubject(this.forceLogout);
+        this.onForceLogout = this.forceLogoutSubject.asObservable();
     }
     set(message) {
         message = this.parser.handleError(message);
+        let httpStatus = parseInt(message.status) ? parseInt(message.status) : null;
+        let delay = 3500;
         this.message = {};
         this.message = message;
-        this.state = 'visible';
-        this.forceLogout = message.forceLogout ? message.forceLogout : false;
-        let delay = this.forceLogout ? 10000 : 3500;
-        let httpStatus = parseInt(message.status) ? parseInt(message.status) : null;
-        this.message.type = httpStatus == null ? 'info' : httpStatus < 300 ? 'success' : httpStatus < 400 ? 'warning' : 'danger';
-        setTimeout(() => {
-            this.state = 'hidden';
-        }, delay);
+        if (message.forceLogout) {
+            this.forceLogout = true;
+            delay = 10000;
+            this.message.type = 'danger';
+            this.message.status = 'Inactivity Alert!';
+        }
+        else {
+            this.message.type = httpStatus == null ? 'info' : httpStatus < 300 ? 'success' : httpStatus < 400 ? 'warning' : 'danger';
+        }
+        this.messageSubject.next(this.message);
     }
-    get() {
-        return this.message;
-    }
-    getState() {
-        return this.state;
-    }
-    getForceLogout() {
-        return this.forceLogout;
-    }
-    cancel() {
-        this.forceLogout = false;
-        this.state = 'hidden';
+    setForceLogout() {
+        this.forceLogoutSubject.next(true);
     }
     clear() {
-        this.message = {};
+        this.message = { type: undefined, status: undefined };
+        this.forceLogout = false;
+        this.messageSubject.next(this.message);
     }
 };
-SetMessageService = __decorate([
+AppAlertsServices = __decorate([
     core_1.Injectable(),
     __metadata("design:paramtypes", [])
-], SetMessageService);
-exports.SetMessageService = SetMessageService;
+], AppAlertsServices);
+exports.AppAlertsServices = AppAlertsServices;
 
 
 /***/ }),
@@ -16517,8 +16519,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 const core_1 = __webpack_require__(2);
 const http_1 = __webpack_require__(27);
 __webpack_require__(61);
-const authentication_service_1 = __webpack_require__(11);
-const set_message_service_1 = __webpack_require__(39);
+const authentication_services_1 = __webpack_require__(11);
+const app_alerts_services_1 = __webpack_require__(46);
 let PermissionServices = class PermissionServices {
     constructor(message, http, activeUser) {
         this.message = message;
@@ -16578,9 +16580,9 @@ let PermissionServices = class PermissionServices {
 };
 PermissionServices = __decorate([
     core_1.Injectable(),
-    __metadata("design:paramtypes", [set_message_service_1.SetMessageService,
+    __metadata("design:paramtypes", [app_alerts_services_1.AppAlertsServices,
         http_1.HttpClient,
-        authentication_service_1.AuthenticationService])
+        authentication_services_1.AuthenticationServices])
 ], PermissionServices);
 exports.PermissionServices = PermissionServices;
 
@@ -16604,8 +16606,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 const core_1 = __webpack_require__(2);
 const http_1 = __webpack_require__(27);
 __webpack_require__(61);
-const authentication_service_1 = __webpack_require__(11);
-const set_message_service_1 = __webpack_require__(39);
+const authentication_services_1 = __webpack_require__(11);
+const app_alerts_services_1 = __webpack_require__(46);
 let AccountServices = class AccountServices {
     constructor(message, http, activeUser) {
         this.message = message;
@@ -16681,9 +16683,9 @@ let AccountServices = class AccountServices {
 };
 AccountServices = __decorate([
     core_1.Injectable(),
-    __metadata("design:paramtypes", [set_message_service_1.SetMessageService,
+    __metadata("design:paramtypes", [app_alerts_services_1.AppAlertsServices,
         http_1.HttpClient,
-        authentication_service_1.AuthenticationService])
+        authentication_services_1.AuthenticationServices])
 ], AccountServices);
 exports.AccountServices = AccountServices;
 
@@ -16706,10 +16708,10 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 const core_1 = __webpack_require__(2);
 const http_1 = __webpack_require__(27);
-const authentication_service_1 = __webpack_require__(11);
-const set_message_service_1 = __webpack_require__(39);
+const authentication_services_1 = __webpack_require__(11);
+const app_alerts_services_1 = __webpack_require__(46);
 // rxjs constants
-const rxjs_1 = __webpack_require__(102);
+const rxjs_1 = __webpack_require__(82);
 __webpack_require__(145);
 __webpack_require__(61);
 __webpack_require__(146);
@@ -16867,8 +16869,8 @@ let MongoImageServices = class MongoImageServices {
 MongoImageServices = __decorate([
     core_1.Injectable(),
     __metadata("design:paramtypes", [http_1.HttpClient,
-        authentication_service_1.AuthenticationService,
-        set_message_service_1.SetMessageService])
+        authentication_services_1.AuthenticationServices,
+        app_alerts_services_1.AppAlertsServices])
 ], MongoImageServices);
 exports.MongoImageServices = MongoImageServices;
 
@@ -16892,8 +16894,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 const core_1 = __webpack_require__(2);
 const http_1 = __webpack_require__(27);
 __webpack_require__(61);
-const authentication_service_1 = __webpack_require__(11);
-const set_message_service_1 = __webpack_require__(39);
+const authentication_services_1 = __webpack_require__(11);
+const app_alerts_services_1 = __webpack_require__(46);
 let UserServices = class UserServices {
     constructor(message, http, activeUser) {
         this.message = message;
@@ -16969,9 +16971,9 @@ let UserServices = class UserServices {
 };
 UserServices = __decorate([
     core_1.Injectable(),
-    __metadata("design:paramtypes", [set_message_service_1.SetMessageService,
+    __metadata("design:paramtypes", [app_alerts_services_1.AppAlertsServices,
         http_1.HttpClient,
-        authentication_service_1.AuthenticationService])
+        authentication_services_1.AuthenticationServices])
 ], UserServices);
 exports.UserServices = UserServices;
 
@@ -19714,10 +19716,10 @@ const common_1 = __webpack_require__(17);
 const app_routing_1 = __webpack_require__(687);
 const public_module_1 = __webpack_require__(688);
 const private_module_1 = __webpack_require__(695);
-const pipes_module_1 = __webpack_require__(85);
+const pipes_module_1 = __webpack_require__(86);
 const login_component_1 = __webpack_require__(751);
 const globalnav_component_1 = __webpack_require__(755);
-const authentication_service_1 = __webpack_require__(11);
+const authentication_services_1 = __webpack_require__(11);
 let AppModule = class AppModule {
 };
 AppModule = __decorate([
@@ -19740,7 +19742,7 @@ AppModule = __decorate([
         ],
         exports: [],
         providers: [
-            authentication_service_1.AuthenticationService
+            authentication_services_1.AuthenticationServices
         ],
         bootstrap: [
             app_component_1.AppComponent
@@ -19767,7 +19769,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 const core_1 = __webpack_require__(2);
-const authentication_service_1 = __webpack_require__(11);
+const authentication_services_1 = __webpack_require__(11);
 let AppComponent = class AppComponent {
     constructor(user) {
         this.user = user;
@@ -19823,7 +19825,7 @@ AppComponent = __decorate([
         styles: [__webpack_require__(686)],
         encapsulation: core_1.ViewEncapsulation.None
     }),
-    __metadata("design:paramtypes", [authentication_service_1.AuthenticationService])
+    __metadata("design:paramtypes", [authentication_services_1.AuthenticationServices])
 ], AppComponent);
 exports.AppComponent = AppComponent;
 
@@ -19836,6 +19838,7 @@ exports.AppComponent = AppComponent;
 "use strict";
 
 const http_1 = __webpack_require__(27);
+// import { AppAlertsServices } from "./app-alerts.services";
 class ErrorParser {
     handleError(error) {
         let err = error;
@@ -19862,12 +19865,6 @@ class ErrorParser {
                 statusText: `${error.statusText} or Not Yet Implemented`,
             });
         }
-        if (error.status == 408) {
-            err = new http_1.HttpErrorResponse({
-                status: error.status,
-                statusText: `${error.statusText}`,
-            });
-        }
         if (error.status == 504) {
             err = new http_1.HttpErrorResponse({
                 status: error.status,
@@ -19875,7 +19872,6 @@ class ErrorParser {
             });
         }
         return err;
-        // throw err;
     }
 }
 exports.ErrorParser = ErrorParser;
@@ -19910,7 +19906,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 const router_1 = __webpack_require__(22);
 const core_1 = __webpack_require__(2);
-const authentication_guard_service_1 = __webpack_require__(84);
+const authentication_guard_services_1 = __webpack_require__(85);
 const APP_ROUTES = [
     {
         path: 'private/user-domain',
@@ -19941,7 +19937,7 @@ AppRouting = __decorate([
             router_1.RouterModule
         ],
         providers: [
-            authentication_guard_service_1.AuthenticationGuardService
+            authentication_guard_services_1.AuthenticationGuardServices
         ]
     })
 ], AppRouting);
@@ -20104,12 +20100,12 @@ const user_services_1 = __webpack_require__(63);
 const forms_1 = __webpack_require__(73);
 const account_services_1 = __webpack_require__(54);
 const permission_services_1 = __webpack_require__(47);
-const set_message_service_1 = __webpack_require__(39);
+const app_alerts_services_1 = __webpack_require__(46);
 const admin_domain_module_1 = __webpack_require__(699);
 const user_domain_module_1 = __webpack_require__(725);
-const service_model_manager_service_1 = __webpack_require__(24);
+const service_model_manager_services_1 = __webpack_require__(24);
 const app_editor_services_1 = __webpack_require__(108);
-const app_modal_services_1 = __webpack_require__(86);
+const app_modal_services_1 = __webpack_require__(87);
 let PrivateModule = class PrivateModule {
 };
 PrivateModule = __decorate([
@@ -20129,8 +20125,8 @@ PrivateModule = __decorate([
             user_services_1.UserServices,
             mongoImage_services_1.MongoImageServices,
             mongoVideo_services_1.MongoVideoServices,
-            set_message_service_1.SetMessageService,
-            service_model_manager_service_1.ServiceModelManagerService,
+            app_alerts_services_1.AppAlertsServices,
+            service_model_manager_services_1.ServiceModelManagerServices,
             app_editor_services_1.AppEditorServices,
             app_modal_services_1.AppModalServices,
             http_interceptors_1.httpInterceptorProviders,
@@ -20155,7 +20151,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 const core_1 = __webpack_require__(2);
 const router_1 = __webpack_require__(22);
-const authentication_guard_service_1 = __webpack_require__(84);
+const authentication_guard_services_1 = __webpack_require__(85);
 const privateRoutes = [
     {
         path: 'user-domain',
@@ -20177,7 +20173,7 @@ PrivateRoutingModule = __decorate([
             router_1.RouterModule
         ],
         providers: [
-            authentication_guard_service_1.AuthenticationGuardService
+            authentication_guard_services_1.AuthenticationGuardServices
         ]
     })
 ], PrivateRoutingModule);
@@ -20244,10 +20240,10 @@ const users_component_1 = __webpack_require__(224);
 const accounts_component_1 = __webpack_require__(228);
 const permissions_component_1 = __webpack_require__(229);
 const forms_1 = __webpack_require__(73);
-const message_bar_module_1 = __webpack_require__(230);
+const app_alerts_module_1 = __webpack_require__(230);
 const sidebar_cta_module_1 = __webpack_require__(232);
 const form_submission_module_1 = __webpack_require__(233);
-const pipes_module_1 = __webpack_require__(85);
+const pipes_module_1 = __webpack_require__(86);
 let AdminDomainModule = class AdminDomainModule {
 };
 AdminDomainModule = __decorate([
@@ -20256,7 +20252,7 @@ AdminDomainModule = __decorate([
             common_1.CommonModule,
             forms_1.FormsModule,
             admin_domain_routing_module_1.AdminDomainRoutingModule,
-            message_bar_module_1.MessageBarModule,
+            app_alerts_module_1.AppAlertsModule,
             sidebar_cta_module_1.SidebarCtaModule,
             form_submission_module_1.FormSubmissionModule,
             pipes_module_1.PipesModule
@@ -20291,14 +20287,14 @@ const core_1 = __webpack_require__(2);
 const router_1 = __webpack_require__(22);
 const users_component_1 = __webpack_require__(224);
 const admin_domain_component_1 = __webpack_require__(227);
-const authentication_guard_service_1 = __webpack_require__(84);
+const authentication_guard_services_1 = __webpack_require__(85);
 const accounts_component_1 = __webpack_require__(228);
 const permissions_component_1 = __webpack_require__(229);
 const ADMIN_ROUTES = [
     {
         path: '',
         component: admin_domain_component_1.AdminDomainComponent,
-        canActivateChild: [authentication_guard_service_1.AuthenticationGuardService],
+        canActivateChild: [authentication_guard_services_1.AuthenticationGuardServices],
         children: [
             {
                 path: 'users',
@@ -20325,7 +20321,7 @@ AdminDomainRoutingModule = __decorate([
         exports: [
             router_1.RouterModule
         ],
-        providers: [authentication_guard_service_1.AuthenticationGuardService]
+        providers: [authentication_guard_services_1.AuthenticationGuardServices]
     })
 ], AdminDomainRoutingModule);
 exports.AdminDomainRoutingModule = AdminDomainRoutingModule;
@@ -20379,7 +20375,7 @@ module.exports = "<span *ngIf=\"!this.userService.message.failure\"><div *ngFor=
 /***/ 704:
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"col-sm-2\"><app-sidebar-cta></app-sidebar-cta></div><div class=\"col-sm-8\"><app-messagebar></app-messagebar><router-outlet></router-outlet></div><div class=\"col-sm-2\"><app-form-submission></app-form-submission></div>"
+module.exports = "<div class=\"col-sm-2\"><app-sidebar-cta></app-sidebar-cta></div><div class=\"col-sm-8\"><app-alerts></app-alerts><router-outlet></router-outlet></div><div class=\"col-sm-2\"><app-form-submission></app-form-submission></div>"
 
 /***/ }),
 
@@ -20436,41 +20432,46 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 const core_1 = __webpack_require__(2);
-const set_message_service_1 = __webpack_require__(39);
+const app_alerts_services_1 = __webpack_require__(46);
 const animations_1 = __webpack_require__(107);
-const authentication_service_1 = __webpack_require__(11);
-let MessagebarComponent = class MessagebarComponent {
-    constructor(messageService, activeUser) {
-        this.messageService = messageService;
+const authentication_services_1 = __webpack_require__(11);
+let AppAlertsComponent = class AppAlertsComponent {
+    constructor(alert, activeUser) {
+        this.alert = alert;
         this.activeUser = activeUser;
-    }
-    ngOnInit() {
-        this.messageService.clear();
-        this.state = this.messageService.getState();
-        this.message = this.messageService.get();
-    }
-    ngDoCheck() {
-        this.state = this.messageService.getState();
-        this.message = this.messageService.get();
+        this.state = 'hidden';
+        this.alert.clear();
+        this.alert.onUpdatedMessage.subscribe((message) => {
+            this.message = message;
+            if (message.type) {
+                let delay = message.forceLogout ? 10000 : 3500;
+                this.state = 'visible';
+                setTimeout(() => {
+                    this.state = 'hidden';
+                }, delay);
+            }
+        });
     }
     onBegin(event) {
         if (event.fromState == 'hidden' && event.phaseName == 'start') {
         }
     }
     onEnd(event) {
-        if (event.fromState == 'visible' && event.phaseName == 'done') {
-            if (this.messageService.getForceLogout() || this.message.status == 401) {
-                this.activeUser.logout();
+        if (event.fromState == 'visible' && event.phaseName == 'done')
+            if (this.message.forceLogout || this.message.status == 401) {
+                this.alert.setForceLogout();
             }
-        }
     }
     cancel() {
-        this.messageService.cancel();
+        if (this.message.forceLogout) {
+            this.message.forceLogout = false;
+        }
+        this.state = 'hidden';
     }
 };
-MessagebarComponent = __decorate([
+AppAlertsComponent = __decorate([
     core_1.Component({
-        selector: "app-messagebar",
+        selector: "app-alerts",
         template: __webpack_require__(710),
         styles: [__webpack_require__(711)],
         encapsulation: core_1.ViewEncapsulation.None,
@@ -20488,10 +20489,10 @@ MessagebarComponent = __decorate([
             ])
         ]
     }),
-    __metadata("design:paramtypes", [set_message_service_1.SetMessageService,
-        authentication_service_1.AuthenticationService])
-], MessagebarComponent);
-exports.MessagebarComponent = MessagebarComponent;
+    __metadata("design:paramtypes", [app_alerts_services_1.AppAlertsServices,
+        authentication_services_1.AuthenticationServices])
+], AppAlertsComponent);
+exports.AppAlertsComponent = AppAlertsComponent;
 
 
 /***/ }),
@@ -25742,7 +25743,7 @@ const core_1 = __webpack_require__(2);
 const user_services_1 = __webpack_require__(63);
 const account_services_1 = __webpack_require__(54);
 const permission_services_1 = __webpack_require__(47);
-const service_model_manager_service_1 = __webpack_require__(24);
+const service_model_manager_services_1 = __webpack_require__(24);
 let SidebarCtaComponent = class SidebarCtaComponent {
     constructor(formManager, permissions, accounts, users) {
         this.formManager = formManager;
@@ -25775,7 +25776,7 @@ SidebarCtaComponent = __decorate([
         styles: [__webpack_require__(715)],
         encapsulation: core_1.ViewEncapsulation.None
     }),
-    __metadata("design:paramtypes", [service_model_manager_service_1.ServiceModelManagerService,
+    __metadata("design:paramtypes", [service_model_manager_services_1.ServiceModelManagerServices,
         permission_services_1.PermissionServices,
         account_services_1.AccountServices,
         user_services_1.UserServices])
@@ -25814,11 +25815,11 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 const core_1 = __webpack_require__(2);
-const authentication_service_1 = __webpack_require__(11);
+const authentication_services_1 = __webpack_require__(11);
 const user_services_1 = __webpack_require__(63);
 const account_services_1 = __webpack_require__(54);
 const permission_services_1 = __webpack_require__(47);
-const service_model_manager_service_1 = __webpack_require__(24);
+const service_model_manager_services_1 = __webpack_require__(24);
 let FormSubmissionComponent = class FormSubmissionComponent {
     constructor(formManager, users, accounts, permissions, activeUser) {
         this.formManager = formManager;
@@ -25848,11 +25849,11 @@ FormSubmissionComponent = __decorate([
         template: __webpack_require__(717),
         encapsulation: core_1.ViewEncapsulation.None
     }),
-    __metadata("design:paramtypes", [service_model_manager_service_1.ServiceModelManagerService,
+    __metadata("design:paramtypes", [service_model_manager_services_1.ServiceModelManagerServices,
         user_services_1.UserServices,
         account_services_1.AccountServices,
         permission_services_1.PermissionServices,
-        authentication_service_1.AuthenticationService])
+        authentication_services_1.AuthenticationServices])
 ], FormSubmissionComponent);
 exports.FormSubmissionComponent = FormSubmissionComponent;
 
@@ -26185,10 +26186,10 @@ const core_1 = __webpack_require__(2);
 const common_1 = __webpack_require__(17);
 const forms_1 = __webpack_require__(73);
 const user_domain_routing_module_1 = __webpack_require__(726);
-const message_bar_module_1 = __webpack_require__(230);
+const app_alerts_module_1 = __webpack_require__(230);
 const sidebar_cta_module_1 = __webpack_require__(232);
 const form_submission_module_1 = __webpack_require__(233);
-const pipes_module_1 = __webpack_require__(85);
+const pipes_module_1 = __webpack_require__(86);
 const search_field_module_1 = __webpack_require__(733);
 const app_directives_module_1 = __webpack_require__(109);
 const app_modal_module_1 = __webpack_require__(743);
@@ -26196,7 +26197,7 @@ const app_editor_module_1 = __webpack_require__(747);
 const videos_component_1 = __webpack_require__(235);
 const images_component_1 = __webpack_require__(234);
 const user_domain_component_1 = __webpack_require__(236);
-const authentication_guard_service_1 = __webpack_require__(84);
+const authentication_guard_services_1 = __webpack_require__(85);
 let UserDomainModule = class UserDomainModule {
 };
 UserDomainModule = __decorate([
@@ -26205,7 +26206,7 @@ UserDomainModule = __decorate([
             common_1.CommonModule,
             forms_1.FormsModule,
             user_domain_routing_module_1.UserDomainRoutingModule,
-            message_bar_module_1.MessageBarModule,
+            app_alerts_module_1.AppAlertsModule,
             sidebar_cta_module_1.SidebarCtaModule,
             form_submission_module_1.FormSubmissionModule,
             pipes_module_1.PipesModule,
@@ -26221,7 +26222,7 @@ UserDomainModule = __decorate([
         ],
         exports: [],
         providers: [
-            authentication_guard_service_1.AuthenticationGuardService
+            authentication_guard_services_1.AuthenticationGuardServices
         ]
     })
 ], UserDomainModule);
@@ -26243,7 +26244,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 const core_1 = __webpack_require__(2);
 const router_1 = __webpack_require__(22);
-const authentication_guard_service_1 = __webpack_require__(84);
+const authentication_guard_services_1 = __webpack_require__(85);
 const images_component_1 = __webpack_require__(234);
 const videos_component_1 = __webpack_require__(235);
 const user_domain_component_1 = __webpack_require__(236);
@@ -26251,7 +26252,7 @@ const USER_ROUTES = [
     {
         path: '',
         component: user_domain_component_1.UserDomainComponent,
-        canActivateChild: [authentication_guard_service_1.AuthenticationGuardService],
+        canActivateChild: [authentication_guard_services_1.AuthenticationGuardServices],
         children: [
             {
                 path: 'images',
@@ -26274,7 +26275,7 @@ UserDomainRoutingModule = __decorate([
         exports: [
             router_1.RouterModule
         ],
-        providers: [authentication_guard_service_1.AuthenticationGuardService]
+        providers: [authentication_guard_services_1.AuthenticationGuardServices]
     })
 ], UserDomainRoutingModule);
 exports.UserDomainRoutingModule = UserDomainRoutingModule;
@@ -32493,7 +32494,7 @@ module.exports = "app-videos {\n  background-color: whitesmoke;\n  text-align: r
 /***/ 731:
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"col-sm-2\"><!--app-sidebar-cta--></div><div class=\"col-sm-8\"><app-messagebar></app-messagebar><router-outlet></router-outlet><app-modal></app-modal><app-editor></app-editor></div><div class=\"col-sm-2\"><!--app-form-submission--></div>"
+module.exports = "<div class=\"col-sm-2\"><!--app-sidebar-cta--></div><div class=\"col-sm-8\"><app-alerts></app-alerts><router-outlet></router-outlet><app-modal></app-modal><app-editor></app-editor></div><div class=\"col-sm-2\"><!--app-form-submission--></div>"
 
 /***/ }),
 
@@ -32572,7 +32573,7 @@ const core_1 = __webpack_require__(2);
 const animations_1 = __webpack_require__(107);
 const mongoImage_services_1 = __webpack_require__(62);
 const mongoImage_model_1 = __webpack_require__(148);
-const app_modal_services_1 = __webpack_require__(86);
+const app_modal_services_1 = __webpack_require__(87);
 const autoComplete = __webpack_require__(735);
 const $ = __webpack_require__(14);
 let SearchFieldComponent = class SearchFieldComponent {
@@ -33306,7 +33307,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 const core_1 = __webpack_require__(2);
-const authentication_service_1 = __webpack_require__(11);
+const authentication_services_1 = __webpack_require__(11);
 let InfoboxDirective = class InfoboxDirective {
     constructor(templateRef, viewContainer, activeUser) {
         this.templateRef = templateRef;
@@ -33349,7 +33350,7 @@ InfoboxDirective = __decorate([
     core_1.Directive({ selector: '[infobox]' }),
     __metadata("design:paramtypes", [core_1.TemplateRef,
         core_1.ViewContainerRef,
-        authentication_service_1.AuthenticationService])
+        authentication_services_1.AuthenticationServices])
 ], InfoboxDirective);
 exports.InfoboxDirective = InfoboxDirective;
 
@@ -33511,9 +33512,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 const core_1 = __webpack_require__(2);
 const common_1 = __webpack_require__(17);
 const app_directives_module_1 = __webpack_require__(109);
-const pipes_module_1 = __webpack_require__(85);
+const pipes_module_1 = __webpack_require__(86);
 const app_modal_component_1 = __webpack_require__(744);
-const authentication_service_1 = __webpack_require__(11);
+const authentication_services_1 = __webpack_require__(11);
 const mongoImage_services_1 = __webpack_require__(62);
 let AppModalModule = class AppModalModule {
 };
@@ -33531,7 +33532,7 @@ AppModalModule = __decorate([
             app_modal_component_1.AppModalComponent
         ],
         providers: [
-            authentication_service_1.AuthenticationService,
+            authentication_services_1.AuthenticationServices,
             mongoImage_services_1.MongoImageServices
         ]
     })
@@ -33556,8 +33557,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 const core_1 = __webpack_require__(2);
-const authentication_service_1 = __webpack_require__(11);
-const app_modal_services_1 = __webpack_require__(86);
+const authentication_services_1 = __webpack_require__(11);
+const app_modal_services_1 = __webpack_require__(87);
 const $ = __webpack_require__(14);
 let AppModalComponent = class AppModalComponent {
     constructor(activeUser, modal) {
@@ -33608,7 +33609,7 @@ AppModalComponent = __decorate([
         template: __webpack_require__(745),
         styles: [__webpack_require__(746)]
     }),
-    __metadata("design:paramtypes", [authentication_service_1.AuthenticationService,
+    __metadata("design:paramtypes", [authentication_services_1.AuthenticationServices,
         app_modal_services_1.AppModalServices])
 ], AppModalComponent);
 exports.AppModalComponent = AppModalComponent;
@@ -33644,7 +33645,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 const core_1 = __webpack_require__(2);
 const common_1 = __webpack_require__(17);
 const forms_1 = __webpack_require__(73);
-const pipes_module_1 = __webpack_require__(85);
+const pipes_module_1 = __webpack_require__(86);
 const app_directives_module_1 = __webpack_require__(109);
 const app_editor_component_1 = __webpack_require__(748);
 let AppEditorModule = class AppEditorModule {
@@ -33746,7 +33747,7 @@ const core_1 = __webpack_require__(2);
 const router_1 = __webpack_require__(22);
 const http_1 = __webpack_require__(27);
 const login_model_1 = __webpack_require__(752);
-const authentication_service_1 = __webpack_require__(11);
+const authentication_services_1 = __webpack_require__(11);
 const permission_services_1 = __webpack_require__(47);
 // import { ErrorParser } from "../../services/error-parser";
 const $ = __webpack_require__(14);
@@ -33839,7 +33840,7 @@ LoginComponent = __decorate([
     }),
     __metadata("design:paramtypes", [http_1.HttpClient,
         router_1.Router,
-        authentication_service_1.AuthenticationService,
+        authentication_services_1.AuthenticationServices,
         permission_services_1.PermissionServices])
 ], LoginComponent);
 exports.LoginComponent = LoginComponent;
@@ -33895,7 +33896,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 const core_1 = __webpack_require__(2);
 const router_1 = __webpack_require__(22);
 const http_1 = __webpack_require__(27);
-const authentication_service_1 = __webpack_require__(11);
+const authentication_services_1 = __webpack_require__(11);
 let GlobalnavComponent = class GlobalnavComponent {
     constructor(http, router, activatedRoute, activeUser) {
         this.http = http;
@@ -33931,7 +33932,7 @@ GlobalnavComponent = __decorate([
     __metadata("design:paramtypes", [http_1.HttpClient,
         router_1.Router,
         router_1.ActivatedRoute,
-        authentication_service_1.AuthenticationService])
+        authentication_services_1.AuthenticationServices])
 ], GlobalnavComponent);
 exports.GlobalnavComponent = GlobalnavComponent;
 
@@ -34087,7 +34088,7 @@ module.exports = "data:application/font-woff;base64,bW9kdWxlLmV4cG9ydHMgPSBfX3dl
 
 /***/ }),
 
-/***/ 84:
+/***/ 85:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -34103,8 +34104,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 const core_1 = __webpack_require__(2);
 const router_1 = __webpack_require__(22);
-const authentication_service_1 = __webpack_require__(11);
-let AuthenticationGuardService = class AuthenticationGuardService {
+const authentication_services_1 = __webpack_require__(11);
+let AuthenticationGuardServices = class AuthenticationGuardServices {
     constructor(authenticator, router) {
         this.authenticator = authenticator;
         this.router = router;
@@ -34129,17 +34130,17 @@ let AuthenticationGuardService = class AuthenticationGuardService {
         return this.checkLogin(url);
     }
 };
-AuthenticationGuardService = __decorate([
+AuthenticationGuardServices = __decorate([
     core_1.Injectable(),
-    __metadata("design:paramtypes", [authentication_service_1.AuthenticationService,
+    __metadata("design:paramtypes", [authentication_services_1.AuthenticationServices,
         router_1.Router])
-], AuthenticationGuardService);
-exports.AuthenticationGuardService = AuthenticationGuardService;
+], AuthenticationGuardServices);
+exports.AuthenticationGuardServices = AuthenticationGuardServices;
 
 
 /***/ }),
 
-/***/ 85:
+/***/ 86:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -34189,7 +34190,7 @@ exports.PipesModule = PipesModule;
 
 /***/ }),
 
-/***/ 86:
+/***/ 87:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -34206,7 +34207,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 const core_1 = __webpack_require__(2);
 const mongoImage_services_1 = __webpack_require__(62);
 const mongoVideo_services_1 = __webpack_require__(106);
-const service_model_manager_service_1 = __webpack_require__(24);
+const service_model_manager_services_1 = __webpack_require__(24);
 let AppModalServices = class AppModalServices {
     constructor(images, videos, modelManager) {
         this.images = images;
@@ -34247,7 +34248,7 @@ AppModalServices = __decorate([
     core_1.Injectable(),
     __metadata("design:paramtypes", [mongoImage_services_1.MongoImageServices,
         mongoVideo_services_1.MongoVideoServices,
-        service_model_manager_service_1.ServiceModelManagerService])
+        service_model_manager_services_1.ServiceModelManagerServices])
 ], AppModalServices);
 exports.AppModalServices = AppModalServices;
 
@@ -34255,4 +34256,4 @@ exports.AppModalServices = AppModalServices;
 /***/ })
 
 },[658]);
-//# sourceMappingURL=app.fa86aab2f0a214231c82.js.map
+//# sourceMappingURL=app.fab9d70a78abfdfab0ee.js.map
