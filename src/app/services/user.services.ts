@@ -2,8 +2,8 @@ import { Injectable } from "@angular/core";
 import { HttpClient, HttpParams } from "@angular/common/http";
 import 'rxjs/add/operator/toPromise';
 import { UserModel } from "../models/user.model";
-import { AuthenticationService } from "./authentication.service";
-import { SetMessageService } from "./set-message.service";
+import { AuthenticationServices } from "./authentication.services";
+import { AppAlertsServices } from "./app-alerts.services";
 
 @Injectable()
 
@@ -13,9 +13,9 @@ export class UserServices {
     baseUrl = '/usersDb';
 
     constructor(
-      private message: SetMessageService,
+      private message: AppAlertsServices,
       private http: HttpClient,
-      private activeUser: AuthenticationService,
+      private activeUser: AuthenticationServices,
     ) {}
 
     getAll(): Promise<any> {

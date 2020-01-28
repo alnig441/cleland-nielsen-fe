@@ -6,7 +6,7 @@ import { BehaviorSubject } from 'rxjs';
 
 @Injectable()
 
-export class SetMessageService {
+export class AppAlertsServices {
 
     private message: any = { type: undefined, status: undefined };
     private forceLogout: boolean = false;
@@ -45,7 +45,6 @@ export class SetMessageService {
     }
 
     setForceLogout(): void {
-      // this.forceLogout = true;
       this.forceLogoutSubject.next(true);
     }
 

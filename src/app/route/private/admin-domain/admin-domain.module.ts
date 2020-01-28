@@ -6,7 +6,7 @@ import { UsersComponent } from "./users/users.component";
 import { AccountsComponent } from "./accounts/accounts.component";
 import { PermissionsComponent } from "./permissions/permissions.component";
 import { FormsModule } from "@angular/forms";
-import { MessageBarModule } from "../../../modules/message-bar/message-bar.module";
+import { AppAlertsModule } from "../../../modules/app-alerts/app-alerts.module";
 import { SidebarCtaModule } from "../../../modules/sidebar-cta/sidebar-cta.module";
 import { FormSubmissionModule } from "../../../modules/form-submission/form-submission.module";
 import { PipesModule } from "../../../pipes/pipes.module";
@@ -16,7 +16,7 @@ import { PipesModule } from "../../../pipes/pipes.module";
         CommonModule,
         FormsModule,
         AdminDomainRoutingModule,
-        MessageBarModule,
+        AppAlertsModule,
         SidebarCtaModule,
         FormSubmissionModule,
         PipesModule

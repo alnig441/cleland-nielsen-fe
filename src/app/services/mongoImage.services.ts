@@ -2,8 +2,8 @@ import { Injectable } from "@angular/core";
 import { HttpClient, HttpParams, HttpErrorResponse } from "@angular/common/http";
 
 import { MongoImageModel } from "../models/mongoImage.model";
-import { AuthenticationService } from "./authentication.service";
-import { SetMessageService } from "./set-message.service";
+import { AuthenticationServices } from "./authentication.services";
+import { AppAlertsServices } from "./app-alerts.services";
 
 // rxjs constants
 import { BehaviorSubject } from 'rxjs';
@@ -42,8 +42,8 @@ export class MongoImageServices {
 
   constructor(
     private http: HttpClient,
-    private activeUser: AuthenticationService,
-    private message: SetMessageService,
+    private activeUser: AuthenticationServices,
+    private message: AppAlertsServices,
   ) {}
 
   getSearchTerms(): Observable<any> {

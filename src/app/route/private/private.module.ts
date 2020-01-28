@@ -8,10 +8,10 @@ import { UserServices } from "../../services/user.services";
 import { FormsModule } from "@angular/forms";
 import { AccountServices } from "../../services/account.services";
 import { PermissionServices } from "../../services/permission.services";
-import { SetMessageService } from "../../services/set-message.service";
+import { AppAlertsServices } from "../../services/app-alerts.services";
 import { AdminDomainModule } from "./admin-domain/admin-domain.module";
 import { UserDomainModule } from "./user-domain/user-domain.module";
-import { ServiceModelManagerService } from "../../services/service-model-manager.service";
+import { ServiceModelManagerServices } from "../../services/service-model-manager.services";
 import { AppEditorServices } from "../../services/app-editor.services";
 import { AppModalServices } from "../../services/app-modal.services";
 
@@ -33,8 +33,8 @@ import { AppModalServices } from "../../services/app-modal.services";
         UserServices,
         MongoImageServices,
         MongoVideoServices,
-        SetMessageService,
-        ServiceModelManagerService,
+        AppAlertsServices,
+        ServiceModelManagerServices,
         AppEditorServices,
         AppModalServices,
         httpInterceptorProviders,

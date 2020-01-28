@@ -1,7 +1,7 @@
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
-import { MessagebarComponent } from "./message-bar.component";
-import { SetMessageService } from "../../services/set-message.service";
+import { AppAlertsComponent } from "./app-alerts.component";
+import { AppAlertsServices } from "../../services/app-alerts.services";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 
 @NgModule({
@@ -10,14 +10,14 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
         BrowserAnimationsModule
     ],
     declarations: [
-        MessagebarComponent
+        AppAlertsComponent
     ],
     exports: [
-        MessagebarComponent
+        AppAlertsComponent
     ],
     providers: [
-        SetMessageService,
+        AppAlertsServices,
     ]
 })
 
-export class MessageBarModule {}
+export class AppAlertsModule {}

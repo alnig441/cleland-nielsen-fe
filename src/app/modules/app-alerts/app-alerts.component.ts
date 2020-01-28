@@ -1,12 +1,12 @@
 import { Component, DoCheck, OnInit, ViewEncapsulation } from "@angular/core";
-import { SetMessageService } from "../../services/set-message.service";
+import { AppAlertsServices } from "../../services/app-alerts.services";
 import { state, style, animate, transition, trigger } from "@angular/animations";
-import { AuthenticationService } from "../../services/authentication.service";
+import { AuthenticationServices } from "../../services/authentication.services";
 
 @Component({
-    selector: "app-messagebar",
-    template: require('./message-bar.component.pug'),
-    styleUrls: ['./message-bar.component.scss'],
+    selector: "app-alerts",
+    template: require('./app-alerts.component.pug'),
+    styleUrls: ['./app-alerts.component.scss'],
     encapsulation: ViewEncapsulation.None,
     animations: [
         trigger('message', [
@@ -23,14 +23,14 @@ import { AuthenticationService } from "../../services/authentication.service";
     ]
 })
 
-export class MessagebarComponent {
+export class AppAlertsComponent {
 
     state: string = 'hidden';
     message: any;
 
     constructor(
-        private alert: SetMessageService,
-        private activeUser: AuthenticationService,
+        private alert: AppAlertsServices,
+        private activeUser: AuthenticationServices,
     ){
       this.alert.clear();
 

@@ -2,8 +2,8 @@ import { Injectable } from "@angular/core";
 import { HttpClient, HttpParams, HttpErrorResponse } from "@angular/common/http";
 
 import { MongoVideoModel } from "../models/mongoVideo.model";
-import { AuthenticationService } from "./authentication.service";
-import { SetMessageService } from "./set-message.service";
+import { AuthenticationServices } from "./authentication.services";
+import { AppAlertsServices } from "./app-alerts.services";
 
 import { BehaviorSubject } from 'rxjs';
 import { Observable } from 'rxjs';
@@ -38,9 +38,9 @@ export class MongoVideoServices {
   }
   
   constructor(
-    private message: SetMessageService,
+    private message: AppAlertsServices,
     private http: HttpClient,
-    private activeUser: AuthenticationService,
+    private activeUser: AuthenticationServices,
   ) {}
   
   getTabs(year?: number): Observable<any> {
