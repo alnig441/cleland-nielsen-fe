@@ -2,6 +2,8 @@ import { Component, DoCheck, OnInit, ViewEncapsulation, HostListener } from "@an
 import { AuthenticationServices } from "../../../services/authentication.services";
 import { ServiceModelManagerServices } from "../../../services/service-model-manager.services";
 
+const $ = require('jquery');
+
 @Component({
     selector: 'app-user-domain',
     template: require('./user-domain.component.pug'),
@@ -17,7 +19,7 @@ export class UserDomainComponent implements OnInit, DoCheck {
         private activeUser: AuthenticationServices,
         private formManager: ServiceModelManagerServices
     ){}
-
+    
     ngOnInit(): void {}
 
     ngDoCheck(): void {

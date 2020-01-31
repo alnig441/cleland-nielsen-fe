@@ -1,8 +1,8 @@
 div(class='modal fade assetviewer-modal' tabindex='1' role='dialog' aria-labelledby='assetviewerModal')
   
-  div(id="ticker")
+  div(*ngIf="this.keyword", id="ticker")
     label Keywords
-    p somthing
+    p {{ this.keyword }}
   
   div(*ngIf="this.modal.activeService == 'images'" class='modal-image-container')
     span(class='modal-image-overlay-positioner')
