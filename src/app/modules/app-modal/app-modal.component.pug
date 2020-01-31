@@ -6,8 +6,8 @@ div(class='modal fade assetviewer-modal' tabindex='1' role='dialog' aria-labelle
   
   div(*ngIf="this.modal.activeService == 'images'" class='modal-image-container')
     span(class='modal-image-overlay-positioner')
-      img(*appModal="this.modal.modalSource", class="modal-image app-modal" src="{{ this.modal.modalSource }}")
-      ul(*ngIf="this.modal.modalSource && this.modal.assets.length > 1", class="modal-image-overlay")
+      img(*appModal="this.modal.source", class="modal-image app-modal" src="{{ this.modal.source }}")
+      ul(*ngIf="this.modal.source && this.modal.assets.length > 1", class="modal-image-overlay")
         li((click)="this.flip('previous')" class="button-left")
           span(class="glyphicon glyphicon-step-backward") &nbsp; 
           | {{ { name: 'rwd', language: this.activeUser.language } | labelTransform }}
@@ -20,7 +20,7 @@ div(class='modal fade assetviewer-modal' tabindex='1' role='dialog' aria-labelle
           span(class='glyphicon glyphicon-print') &nbsp;
           | {{ { name: 'print', language: this.activeUser.language } | labelTransform }}
         li(class='button-left')
-          a(href="{{ this.modal.modalSource }}" download)  
+          a(href="{{ this.modal.source }}" download)  
             span(class='glyphicon glyphicon-download') &nbsp;
             | {{ { name: 'save', language: this.activeUser.language } | labelTransform }}
         li((click)="this.cancelModal()" class='button-left')
@@ -28,7 +28,7 @@ div(class='modal fade assetviewer-modal' tabindex='1' role='dialog' aria-labelle
           | {{ { name: 'close', language: this.activeUser.language } | labelTransform }}
 
   div(*ngIf="this.modal.activeService == 'videos'" class='modal-video-container')
-    video(*appModal="this.modal.modalSource",stop-propagation-on-click, destroy-video-on-ended, class="app-modal", controls autoplay)
-      source(src="{{ this.modal.modalSource }}" type="video/mp4")  
-      source(src="{{ this.modal.modalSource }}" type="video/ogg")
-      source(src="{{ this.modal.modalSource }}" type="video/webm")
+    video(*appModal="this.modal.source",stop-propagation-on-click, destroy-video-on-ended, class="app-modal", controls autoplay)
+      source(src="{{ this.modal.source }}" type="video/mp4")  
+      source(src="{{ this.modal.source }}" type="video/ogg")
+      source(src="{{ this.modal.source }}" type="video/webm")

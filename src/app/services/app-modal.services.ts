@@ -12,7 +12,7 @@ export class AppModalServices {
   private assets: any[];
   private service: any;
   private activeService: string;
-  private modalSource: string;
+  private source: string;
 
   constructor(
     private images: MongoImageServices,
@@ -38,17 +38,17 @@ export class AppModalServices {
 
   clear(): void {
     this.assets = null;
-    this.modalSource = null ;
+    this.source = null ;
   }
 
   setSource(index: number): void {
     let assetType = this.activeService == 'images' ? 'image' : 'video';
     let folder = this.activeService == 'images' ? 'photos' : this.activeService;
-    this.modalSource = `${folder}/James/${this.assets[index][assetType].fileName}`;
+    this.source = `${folder}/James/${this.assets[index][assetType].fileName}`;
   }
 
   getSource(): any {
-    return this.modalSource;
+    return this.source;
   }
 
   getAssets(): any {
