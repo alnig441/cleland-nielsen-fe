@@ -14,18 +14,21 @@ const $ = require('jquery');
 export class AppModalComponent {
   
    keyword: any;
-   interval: any;
    inc: number = 0;
    keywords: any;
+   ticker: any;
   
   constructor(
     private activeUser: AuthenticationServices,
     private modal:      AppModalServices,
   ) { 
-    this.modal.activeAsset.subscribe((asset: any) => {      
+    this.modal.activeAsset.subscribe((asset: any) => {  
+      console.log('constructor')   
       let keywords = asset.meta.keywords;
       this.keywords = asset.meta.keywords;
-      this.keyword = keywords.length > 0 ? keywords[this.inc] : undefined ;
+      if(this.keywords.length > 0){
+        this.setKeyword();
+      }
     })
   }
 
@@ -33,26 +36,21 @@ export class AppModalComponent {
     let id = $(event.target).attr('id');
     let keywordsIsEmpty = this.keywords.length > 0 ? false : true;
     
+    this.ticker = !keywordsIsEmpty ? $('#keyword') : null;
+        
     let type = !id ? 
       'modal':
       event.elapsedTime == 0.5 ?
         'keyword_begin':
         'keyword_end';
     
-    if(!keywordsIsEmpty && type != 'keyword_begin'){
-      switch(type){
-        case 'modal':
-          $('#ticker p').addClass('begin');
-          break;
-        case 'keyword_end':
-          this.setKeyword();
-          break;
-      }
+    if(!keywordsIsEmpty && type == 'keyword_end'){
+      this.setKeyword();
     }
     
-    if( type == 'keyword_begin' ) {
+    if( type == 'keyword_begin' || type == 'modal' ) {
       setTimeout(() => {
-        $(event.target).removeClass('begin');
+        $('#keyword').removeClass('begin');
       }, 500)
     }
   }
@@ -61,24 +59,23 @@ export class AppModalComponent {
     if (event.key == 'Escape') {
       $('.assetviewer-modal').modal('hide');
       this.modal.clear();
-      clearInterval(this.interval);
     }
   }
   
-  @HostListener('click', ['$event']) clickHandler( event: MouseEvent) {
-    if($(event.target).hasClass('assetviewer-modal')){ 
-      clearInterval(this.interval)
+  @HostListener('click', ['$event']) clickHandler(event: MouseEvent) {
+    if ($(event.target).hasClass('assetviewer-modal')) {
+      this.modal.clear();
     }
   }
   
   setKeyword() {
-    this.inc = (this.inc == this.keywords.length - 1) ? 0 : this.inc+=1 ;
     this.keyword = this.keywords[this.inc];
     $('#ticker p').addClass('begin');
+    this.inc = (this.inc == this.keywords.length - 1) ? 0 : this.inc+=1 ;
   }
 
-  flip(direction: string): void {
-    clearInterval(this.interval);
+  flip(direction: string, event: any): void {
+    
     this.keyword = null;
     let assets = this.modal.getAssets();
     let source = this.modal.getSource();
@@ -104,7 +101,6 @@ export class AppModalComponent {
   }
 
   cancelModal(): void {
-    clearInterval(this.interval);
     $('.assetviewer-modal').modal('hide');
     this.modal.clear();
   }

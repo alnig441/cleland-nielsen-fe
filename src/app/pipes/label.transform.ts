@@ -64,6 +64,9 @@ export class LabelTransform implements PipeTransform {
             case 'permissions':
               label = language == 'english' ? name : 'rettigheder';
               return label;
+            case 'keywords':
+              label = language == 'english' ? name: 'søgeord';
+              return label;
             default:
               return label.name;
           }

@@ -1,8 +1,8 @@
 div(class='modal fade assetviewer-modal' tabindex='1' role='dialog' aria-labelledby='assetviewerModal')
   
-  div(*ngIf="this.keyword", id="ticker")
-    label Keywords
-    p(id='keyword') {{ this.keyword }}
+  div(id="ticker")
+    label {{ { name: 'Keywords', language: this.activeUser.language } | labelTransform }}
+    p(id='keyword') {{ this.keyword }} 
   
   div(*ngIf="this.modal.activeService == 'images'" class='modal-image-container')
     span(class='modal-image-overlay-positioner')
@@ -11,7 +11,7 @@ div(class='modal fade assetviewer-modal' tabindex='1' role='dialog' aria-labelle
         li((click)="this.flip('previous')" class="button-left")
           span(class="glyphicon glyphicon-step-backward") &nbsp; 
           | {{ { name: 'rwd', language: this.activeUser.language } | labelTransform }}
-        li((click)="this.flip('next')" class="button-right") 
+        li((click)="this.flip('next', $event)" class="button-right") 
           | {{ { name: 'fwd', language: this.activeUser.language } | labelTransform}} 
           | &nbsp;
           span(class="glyphicon glyphicon-step-forward")
