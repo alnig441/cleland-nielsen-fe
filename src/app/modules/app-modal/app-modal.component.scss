@@ -6,6 +6,18 @@
   right: 0;
 }
 
+#keyword {
+  opacity: 0;
+  -webkit-transition: opacity 1.5s, -webkit-transform 1.5s; /* Safari */
+  transition: opacity 1.5s, transform 1.5s;
+}
+
+#keyword.begin {
+  opacity: 1;
+  -webkit-transition: opacity 0.5s, -webkit-transform 0.5s; /* Safari */
+  transition: opacity 0.5s, transform 0.5s;
+}
+
 .assetviewer-modal {
   margin:auto;
 }
