@@ -23,7 +23,6 @@ export class AppModalComponent {
     private modal:      AppModalServices,
   ) { 
     this.modal.activeAsset.subscribe((asset: any) => {  
-      console.log('constructor')   
       let keywords = asset.meta.keywords;
       this.keywords = asset.meta.keywords;
       if(this.keywords.length > 0){
@@ -31,6 +30,7 @@ export class AppModalComponent {
       }
     })
   }
+
 
   @HostListener('transitionend', ['$event']) handler(event: TransitionEvent) {    
     let id = $(event.target).attr('id');
