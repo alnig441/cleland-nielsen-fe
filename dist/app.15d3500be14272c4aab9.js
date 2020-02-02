@@ -33568,8 +33568,8 @@ let AppModalComponent = class AppModalComponent {
     constructor(activeUser, modal) {
         this.activeUser = activeUser;
         this.modal = modal;
-        this.inc = 0;
         this.modal.activeAsset.subscribe((asset) => {
+            this.inc = 0;
             let keywords = asset.meta.keywords;
             this.keywords = asset.meta.keywords;
             if (this.keywords.length > 0) {
@@ -33578,18 +33578,26 @@ let AppModalComponent = class AppModalComponent {
         });
     }
     handler(event) {
-        let id = $(event.target).attr('id');
         let keywordsIsEmpty = this.keywords.length > 0 ? false : true;
-        this.ticker = !keywordsIsEmpty ? $('#keyword') : null;
-        let type = !id ?
-            'modal' :
-            event.elapsedTime == 0.5 ?
-                'keyword_begin' :
-                'keyword_end';
+        let type = null;
+        switch (event.elapsedTime) {
+            case 0.15:
+                type = 'modal';
+                break;
+            case 0.5:
+                type = 'keyword_begin';
+                break;
+            case 1.5:
+                type = 'keyword_end';
+                break;
+            default:
+                type = null;
+                break;
+        }
         if (!keywordsIsEmpty && type == 'keyword_end') {
             this.setKeyword();
         }
-        if (type == 'keyword_begin' || type == 'modal') {
+        if (type != 'keyword_end') {
             setTimeout(() => {
                 $('#keyword').removeClass('begin');
             }, 500);
@@ -33599,11 +33607,13 @@ let AppModalComponent = class AppModalComponent {
         if (event.key == 'Escape') {
             $('.assetviewer-modal').modal('hide');
             this.modal.clear();
+            this.keyword = null;
         }
     }
     clickHandler(event) {
         if ($(event.target).hasClass('assetviewer-modal')) {
             this.modal.clear();
+            this.keyword = null;
         }
     }
     setKeyword() {
@@ -33636,6 +33646,7 @@ let AppModalComponent = class AppModalComponent {
     cancelModal() {
         $('.assetviewer-modal').modal('hide');
         this.modal.clear();
+        this.keyword = null;
     }
 };
 __decorate([
@@ -34312,4 +34323,4 @@ exports.AppModalServices = AppModalServices;
 /***/ })
 
 },[658]);
-//# sourceMappingURL=app.654c8fa7f9c2f695bc6e.js.map
+//# sourceMappingURL=app.15d3500be14272c4aab9.js.map
