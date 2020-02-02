@@ -14,7 +14,7 @@ const $ = require('jquery');
 export class AppModalComponent {
   
    keyword: any;
-   inc: number = 0;
+   inc: number;
    keywords: any;
    ticker: any;
   
@@ -23,7 +23,7 @@ export class AppModalComponent {
     private modal:      AppModalServices,
   ) { 
     this.modal.activeAsset.subscribe((asset: any) => {  
-      console.log('constructor')   
+      this.inc = 0;
       let keywords = asset.meta.keywords;
       this.keywords = asset.meta.keywords;
       if(this.keywords.length > 0){
@@ -32,23 +32,31 @@ export class AppModalComponent {
     })
   }
 
+
   @HostListener('transitionend', ['$event']) handler(event: TransitionEvent) {    
-    let id = $(event.target).attr('id');
     let keywordsIsEmpty = this.keywords.length > 0 ? false : true;
-    
-    this.ticker = !keywordsIsEmpty ? $('#keyword') : null;
+    let type = null;
         
-    let type = !id ? 
-      'modal':
-      event.elapsedTime == 0.5 ?
-        'keyword_begin':
-        'keyword_end';
-    
+    switch(event.elapsedTime) {
+      case 0.15:
+        type = 'modal';
+        break;
+      case 0.5:
+        type = 'keyword_begin';
+        break;
+      case 1.5:
+        type = 'keyword_end';
+        break;
+      default:
+        type = null;
+        break;
+    }    
+        
     if(!keywordsIsEmpty && type == 'keyword_end'){
       this.setKeyword();
     }
     
-    if( type == 'keyword_begin' || type == 'modal' ) {
+    if( type != 'keyword_end') {
       setTimeout(() => {
         $('#keyword').removeClass('begin');
       }, 500)
@@ -59,12 +67,14 @@ export class AppModalComponent {
     if (event.key == 'Escape') {
       $('.assetviewer-modal').modal('hide');
       this.modal.clear();
+      this.keyword = null;
     }
   }
   
   @HostListener('click', ['$event']) clickHandler(event: MouseEvent) {
     if ($(event.target).hasClass('assetviewer-modal')) {
       this.modal.clear();
+      this.keyword = null;
     }
   }
   
@@ -103,6 +113,7 @@ export class AppModalComponent {
   cancelModal(): void {
     $('.assetviewer-modal').modal('hide');
     this.modal.clear();
+    this.keyword = null;
   }
 
 }

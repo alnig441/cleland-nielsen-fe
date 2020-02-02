@@ -1,7 +1,7 @@
 div(class='modal fade assetviewer-modal' tabindex='1' role='dialog' aria-labelledby='assetviewerModal')
   
   div(id="ticker")
-    label {{ { name: 'Keywords', language: this.activeUser.language } | labelTransform }}
+    label(*ngIf='this.keyword') {{ { name: 'Keywords', language: this.activeUser.language } | labelTransform }}
     p(id='keyword') {{ this.keyword }} 
   
   div(*ngIf="this.modal.activeService == 'images'" class='modal-image-container')
