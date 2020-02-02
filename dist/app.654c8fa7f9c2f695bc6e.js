@@ -18,7 +18,7 @@ const core_1 = __webpack_require__(2);
 const http_1 = __webpack_require__(27);
 const authentication_services_1 = __webpack_require__(11);
 const app_alerts_services_1 = __webpack_require__(46);
-const rxjs_1 = __webpack_require__(82);
+const rxjs_1 = __webpack_require__(73);
 __webpack_require__(145);
 __webpack_require__(61);
 __webpack_require__(146);
@@ -1719,7 +1719,7 @@ exports.AuthenticationServices = AuthenticationServices;
 
 /***/ }),
 
-/***/ 14:
+/***/ 12:
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -13805,7 +13805,7 @@ const service_model_manager_services_1 = __webpack_require__(24);
 const user_services_1 = __webpack_require__(63);
 const account_services_1 = __webpack_require__(54);
 const permission_services_1 = __webpack_require__(47);
-const forms_1 = __webpack_require__(73);
+const forms_1 = __webpack_require__(74);
 let FormSubmissionModule = class FormSubmissionModule {
 };
 FormSubmissionModule = __decorate([
@@ -13855,7 +13855,7 @@ const service_model_manager_services_1 = __webpack_require__(24);
 const router_1 = __webpack_require__(22);
 const app_editor_services_1 = __webpack_require__(108);
 const app_modal_services_1 = __webpack_require__(87);
-const $ = __webpack_require__(14);
+const $ = __webpack_require__(12);
 let ImagesComponent = class ImagesComponent {
     constructor(models, activatedRoute, activeUser, images, editor, modal) {
         this.models = models;
@@ -13995,7 +13995,7 @@ const mongoVideo_model_1 = __webpack_require__(226);
 const router_1 = __webpack_require__(22);
 const app_editor_services_1 = __webpack_require__(108);
 const app_modal_services_1 = __webpack_require__(87);
-const $ = __webpack_require__(14);
+const $ = __webpack_require__(12);
 let VideosComponent = class VideosComponent {
     constructor(formManager, activeUser, activatedRoute, videos, editor, modal) {
         this.formManager = formManager;
@@ -14117,6 +14117,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 const core_1 = __webpack_require__(2);
 const authentication_services_1 = __webpack_require__(11);
 const service_model_manager_services_1 = __webpack_require__(24);
+const $ = __webpack_require__(12);
 let UserDomainComponent = class UserDomainComponent {
     constructor(activeUser, formManager) {
         this.activeUser = activeUser;
@@ -14163,7 +14164,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 const core_1 = __webpack_require__(2);
-const rxjs_1 = __webpack_require__(82);
+const rxjs_1 = __webpack_require__(73);
 const user_model_1 = __webpack_require__(701);
 const account_model_1 = __webpack_require__(702);
 const permission_model_1 = __webpack_require__(225);
@@ -16456,7 +16457,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 const core_1 = __webpack_require__(2);
 const error_parser_1 = __webpack_require__(684);
-const rxjs_1 = __webpack_require__(82);
+const rxjs_1 = __webpack_require__(73);
 let AppAlertsServices = class AppAlertsServices {
     constructor() {
         this.message = { type: undefined, status: undefined };
@@ -16711,7 +16712,7 @@ const http_1 = __webpack_require__(27);
 const authentication_services_1 = __webpack_require__(11);
 const app_alerts_services_1 = __webpack_require__(46);
 // rxjs constants
-const rxjs_1 = __webpack_require__(82);
+const rxjs_1 = __webpack_require__(73);
 __webpack_require__(145);
 __webpack_require__(61);
 __webpack_require__(146);
@@ -17201,7 +17202,7 @@ __webpack_require__ (680);
 /***/ (function(module, exports, __webpack_require__) {
 
 /*** IMPORTS FROM imports-loader ***/
-var jQuery = __webpack_require__(14);
+var jQuery = __webpack_require__(12);
 
 /* ========================================================================
  * Bootstrap: transition.js v3.3.7
@@ -17271,7 +17272,7 @@ var jQuery = __webpack_require__(14);
 /***/ (function(module, exports, __webpack_require__) {
 
 /*** IMPORTS FROM imports-loader ***/
-var jQuery = __webpack_require__(14);
+var jQuery = __webpack_require__(12);
 
 /* ========================================================================
  * Bootstrap: alert.js v3.3.7
@@ -17376,7 +17377,7 @@ var jQuery = __webpack_require__(14);
 /***/ (function(module, exports, __webpack_require__) {
 
 /*** IMPORTS FROM imports-loader ***/
-var jQuery = __webpack_require__(14);
+var jQuery = __webpack_require__(12);
 
 /* ========================================================================
  * Bootstrap: button.js v3.3.7
@@ -17512,7 +17513,7 @@ var jQuery = __webpack_require__(14);
 /***/ (function(module, exports, __webpack_require__) {
 
 /*** IMPORTS FROM imports-loader ***/
-var jQuery = __webpack_require__(14);
+var jQuery = __webpack_require__(12);
 
 /* ========================================================================
  * Bootstrap: carousel.js v3.3.7
@@ -17760,7 +17761,7 @@ var jQuery = __webpack_require__(14);
 /***/ (function(module, exports, __webpack_require__) {
 
 /*** IMPORTS FROM imports-loader ***/
-var jQuery = __webpack_require__(14);
+var jQuery = __webpack_require__(12);
 
 /* ========================================================================
  * Bootstrap: collapse.js v3.3.7
@@ -17983,7 +17984,7 @@ var jQuery = __webpack_require__(14);
 /***/ (function(module, exports, __webpack_require__) {
 
 /*** IMPORTS FROM imports-loader ***/
-var jQuery = __webpack_require__(14);
+var jQuery = __webpack_require__(12);
 
 /* ========================================================================
  * Bootstrap: dropdown.js v3.3.7
@@ -18159,7 +18160,7 @@ var jQuery = __webpack_require__(14);
 /***/ (function(module, exports, __webpack_require__) {
 
 /*** IMPORTS FROM imports-loader ***/
-var jQuery = __webpack_require__(14);
+var jQuery = __webpack_require__(12);
 
 /* ========================================================================
  * Bootstrap: modal.js v3.3.7
@@ -18509,7 +18510,7 @@ var jQuery = __webpack_require__(14);
 /***/ (function(module, exports, __webpack_require__) {
 
 /*** IMPORTS FROM imports-loader ***/
-var jQuery = __webpack_require__(14);
+var jQuery = __webpack_require__(12);
 
 /* ========================================================================
  * Bootstrap: tooltip.js v3.3.7
@@ -19040,7 +19041,7 @@ var jQuery = __webpack_require__(14);
 /***/ (function(module, exports, __webpack_require__) {
 
 /*** IMPORTS FROM imports-loader ***/
-var jQuery = __webpack_require__(14);
+var jQuery = __webpack_require__(12);
 
 /* ========================================================================
  * Bootstrap: popover.js v3.3.7
@@ -19159,7 +19160,7 @@ var jQuery = __webpack_require__(14);
 /***/ (function(module, exports, __webpack_require__) {
 
 /*** IMPORTS FROM imports-loader ***/
-var jQuery = __webpack_require__(14);
+var jQuery = __webpack_require__(12);
 
 /* ========================================================================
  * Bootstrap: scrollspy.js v3.3.7
@@ -19342,7 +19343,7 @@ var jQuery = __webpack_require__(14);
 /***/ (function(module, exports, __webpack_require__) {
 
 /*** IMPORTS FROM imports-loader ***/
-var jQuery = __webpack_require__(14);
+var jQuery = __webpack_require__(12);
 
 /* ========================================================================
  * Bootstrap: tab.js v3.3.7
@@ -19508,7 +19509,7 @@ var jQuery = __webpack_require__(14);
 /***/ (function(module, exports, __webpack_require__) {
 
 /*** IMPORTS FROM imports-loader ***/
-var jQuery = __webpack_require__(14);
+var jQuery = __webpack_require__(12);
 
 /* ========================================================================
  * Bootstrap: affix.js v3.3.7
@@ -19710,7 +19711,7 @@ const core_1 = __webpack_require__(2);
 const http_1 = __webpack_require__(27);
 const app_component_1 = __webpack_require__(683);
 const platform_browser_1 = __webpack_require__(60);
-const forms_1 = __webpack_require__(73);
+const forms_1 = __webpack_require__(74);
 const http_2 = __webpack_require__(191);
 const common_1 = __webpack_require__(17);
 const app_routing_1 = __webpack_require__(687);
@@ -20097,7 +20098,7 @@ const mongoImage_services_1 = __webpack_require__(62);
 const mongoVideo_services_1 = __webpack_require__(106);
 const http_interceptors_1 = __webpack_require__(697);
 const user_services_1 = __webpack_require__(63);
-const forms_1 = __webpack_require__(73);
+const forms_1 = __webpack_require__(74);
 const account_services_1 = __webpack_require__(54);
 const permission_services_1 = __webpack_require__(47);
 const app_alerts_services_1 = __webpack_require__(46);
@@ -20239,7 +20240,7 @@ const admin_domain_component_1 = __webpack_require__(227);
 const users_component_1 = __webpack_require__(224);
 const accounts_component_1 = __webpack_require__(228);
 const permissions_component_1 = __webpack_require__(229);
-const forms_1 = __webpack_require__(73);
+const forms_1 = __webpack_require__(74);
 const app_alerts_module_1 = __webpack_require__(230);
 const sidebar_cta_module_1 = __webpack_require__(232);
 const form_submission_module_1 = __webpack_require__(233);
@@ -25939,6 +25940,9 @@ let LabelTransform = class LabelTransform {
                 case 'permissions':
                     label = language == 'english' ? name : 'rettigheder';
                     return label;
+                case 'keywords':
+                    label = language == 'english' ? name : 'søgeord';
+                    return label;
                 default:
                     return label.name;
             }
@@ -26184,7 +26188,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 const core_1 = __webpack_require__(2);
 const common_1 = __webpack_require__(17);
-const forms_1 = __webpack_require__(73);
+const forms_1 = __webpack_require__(74);
 const user_domain_routing_module_1 = __webpack_require__(726);
 const app_alerts_module_1 = __webpack_require__(230);
 const sidebar_cta_module_1 = __webpack_require__(232);
@@ -26293,7 +26297,7 @@ module.exports = "<span class=\"image-main\" *ngIf=\"!this.images.message.failur
 /***/ 728:
 /***/ (function(module, exports) {
 
-module.exports = "app-images {\n  background-color: whitesmoke;\n  text-align: right; }\n\n.image-main {\n  width: 100%;\n  display: inline-block; }\n\n.image-menu {\n  position: absolute; }\n\n.image-menu .btn {\n  position: relative;\n  bottom: 5px;\n  float: left;\n  margin-right: 2px; }\n\n.month {\n  display: inline-block;\n  margin-left: 3px; }\n\n.month a {\n  cursor: pointer;\n  color: white;\n  text-decoration: none;\n  background-color: black;\n  width: auto;\n  border: 1px solid black;\n  border-bottom: 1px solid #777777;\n  border-top-left-radius: 3px;\n  border-top-right-radius: 3px;\n  padding: 0px 5px; }\n\n.month a:hover {\n  background-color: white;\n  color: black;\n  font-style: italic;\n  border-bottom: 0px; }\n\n.month.active a:hover {\n  font-style: normal;\n  border-bottom: 1px solid black; }\n\n#drag-area {\n  text-align: center; }\n\n#drag-area:hover {\n  cursor: move; }\n\n#image-editor {\n  border: steelblue;\n  position: fixed;\n  top: 50px;\n  left: 50px;\n  width: 500px;\n  z-index: 1000; }\n\n#image-editor label {\n  color: white;\n  text-transform: capitalize;\n  font-weight: normal; }\n\n#image-editor .row {\n  border-radius: 10px;\n  border: 1px solid darkgray; }\n\n#image-editor .input-group-addon {\n  background-color: steelblue;\n  border-radius: 4px 0 0 4px;\n  border: 1px solid steelblue;\n  border-right: none;\n  width: auto; }\n\n#image-editor .form-control {\n  border: 1px solid steelblue;\n  border-radius: 4px;\n  display: table-cell; }\n\n#image-editor .image-list .form-control {\n  border-radius: 0 4px 4px 0;\n  border-left: none; }\n\n#image-editor .select_all {\n  text-align: left;\n  margin: 10px; }\n\n#image-editor .buttons {\n  margin: 0 0 15px;\n  padding: 0 15px; }\n\n#image-editor .btn {\n  margin: 10px 0 10px 10px;\n  color: #ffffff; }\n\n#image-editor .btn-danger {\n  float: left;\n  margin: 10px 0 10px; }\n\n#image-editor .background {\n  position: absolute;\n  top: 0;\n  width: 530px;\n  height: 100%;\n  padding: 0 15px;\n  background: steelblue;\n  opacity: 0.5;\n  z-index: -1; }\n\n.year {\n  list-style-type: none;\n  padding: 0;\n  float: left;\n  position: absolute; }\n\n.year li {\n  border-top: 1px solid;\n  border-left: 1px solid;\n  border-radius: 3px 0 0 3px; }\n\n.year li:first-child {\n  border-top: none;\n  border-radius: 0; }\n\n.year li:last-child {\n  border-bottom: 1px solid; }\n\n.year a {\n  color: black;\n  text-decoration: none;\n  padding: 0px 15px;\n  cursor: pointer; }\n\n.year a:hover {\n  background-color: black;\n  border-radius: 3px;\n  color: white;\n  font-style: italic; }\n\n.reel-container {\n  border-top: 1px solid;\n  background-image: linear-gradient(to right, white, lightgray, lightgray, white);\n  text-align: center;\n  opacity: .95;\n  border-radius: 3px 0 0 0; }\n\n.image-container {\n  width: 40%;\n  display: inline-block;\n  text-align: left; }\n\n.reel {\n  display: inline;\n  border-top: 1px solid black;\n  overflow: hidden; }\n\n.thumbnail {\n  border: none;\n  margin: 10px; }\n\n.thumbnail > img {\n  filter: grayscale(100%); }\n\n.thumbnail p {\n  margin: 0;\n  padding: 0px 5px; }\n\n.thumbnail > img:hover {\n  cursor: pointer;\n  border: none;\n  text-decoration: none;\n  filter: none; }\n\n.thumbnail .caption {\n  max-height: 30px;\n  font-size: x-small;\n  padding: 5px 0 0 0 !important;\n  top: -6px;\n  position: relative;\n  background-color: white;\n  color: black;\n  border-radius: 0 0 4px 4px; }\n\n.thumbnail .caption table {\n  table-layout: fixed;\n  width: 100%; }\n\n.thumbnail .caption table td:first-child {\n  text-align: left; }\n\n.thumbnail .caption table td:nth-child(2) {\n  text-align: center;\n  cursor: help; }\n\n.thumbnail .caption table td:last-child {\n  text-align: right; }\n\n.month.active a {\n  color: black;\n  padding-top: 10px;\n  padding-bottom: 10px;\n  background-color: white;\n  z-index: 1;\n  position: relative;\n  border-radius: 4px; }\n\n.year li.active {\n  padding: 5px 0px; }\n\n.year li.active a {\n  border: 2px solid white;\n  border-radius: 5px;\n  background-color: black;\n  color: white; }\n\n.year li.active a {\n  font-style: normal;\n  cursor: text; }\n\n.paginator {\n  padding: 0px;\n  display: inline-flex;\n  list-style: none;\n  position: absolute;\n  top: 49%;\n  left: -30px; }\n\n.paginator .forward {\n  position: absolute;\n  left: 820px; }\n\n.paginator .glyphicon {\n  border: 1px solid;\n  padding: 3px;\n  border-radius: 4px;\n  color: #000;\n  font-size: xx-large;\n  opacity: .5; }\n\n.paginator .glyphicon:hover {\n  cursor: pointer;\n  opacity: 1; }\n\n.infobox {\n  position: absolute;\n  z-index: 1;\n  width: 230px;\n  text-align: left;\n  background: white;\n  color: black;\n  opacity: .8;\n  border-radius: 5px;\n  margin: 40px; }\n\n.infobox p {\n  font-size: x-small;\n  margin: 3px; }\n\n.infobox .info-key {\n  text-transform: uppercase; }\n"
+module.exports = "app-images {\n  background-color: whitesmoke;\n  text-align: right; }\n\n.image-main {\n  width: 100%;\n  display: inline-block; }\n\n.image-menu {\n  position: absolute; }\n\n.image-menu .btn {\n  position: relative;\n  bottom: 5px;\n  float: left;\n  margin-right: 2px; }\n\n.month {\n  display: inline-block;\n  margin-left: 3px; }\n\n.month a {\n  cursor: pointer;\n  color: white;\n  text-decoration: none;\n  background-color: black;\n  width: auto;\n  border: 1px solid black;\n  border-bottom: 1px solid #777777;\n  border-top-left-radius: 3px;\n  border-top-right-radius: 3px;\n  padding: 0px 5px; }\n\n.month a:hover {\n  background-color: white;\n  color: black;\n  font-style: italic;\n  border-bottom: 0px; }\n\n.month.active a:hover {\n  font-style: normal;\n  border-bottom: 1px solid black; }\n\n.year {\n  list-style-type: none;\n  padding: 0;\n  float: left;\n  position: absolute; }\n\n.year li {\n  border-top: 1px solid;\n  border-left: 1px solid;\n  border-radius: 3px 0 0 3px; }\n\n.year li:first-child {\n  border-top: none;\n  border-radius: 0; }\n\n.year li:last-child {\n  border-bottom: 1px solid; }\n\n.year a {\n  color: black;\n  text-decoration: none;\n  padding: 0px 15px;\n  cursor: pointer; }\n\n.year a:hover {\n  background-color: black;\n  border-radius: 3px;\n  color: white;\n  font-style: italic; }\n\n.reel-container {\n  border-top: 1px solid;\n  background-image: linear-gradient(to right, white, lightgray, lightgray, white);\n  text-align: center;\n  opacity: .95;\n  border-radius: 3px 0 0 0; }\n\n.image-container {\n  width: 40%;\n  display: inline-block;\n  text-align: left; }\n\n.reel {\n  display: inline;\n  border-top: 1px solid black;\n  overflow: hidden; }\n\n.thumbnail {\n  border: none;\n  margin: 10px; }\n\n.thumbnail > img {\n  filter: grayscale(100%); }\n\n.thumbnail p {\n  margin: 0;\n  padding: 0px 5px; }\n\n.thumbnail > img:hover {\n  cursor: pointer;\n  border: none;\n  text-decoration: none;\n  filter: none; }\n\n.thumbnail .caption {\n  max-height: 30px;\n  font-size: x-small;\n  padding: 5px 0 0 0 !important;\n  top: -6px;\n  position: relative;\n  background-color: white;\n  color: black;\n  border-radius: 0 0 4px 4px; }\n\n.thumbnail .caption table {\n  table-layout: fixed;\n  width: 100%; }\n\n.thumbnail .caption table td:first-child {\n  text-align: left; }\n\n.thumbnail .caption table td:nth-child(2) {\n  text-align: center;\n  cursor: help; }\n\n.thumbnail .caption table td:last-child {\n  text-align: right; }\n\n.month.active a {\n  color: black;\n  padding-top: 10px;\n  padding-bottom: 10px;\n  background-color: white;\n  z-index: 1;\n  position: relative;\n  border-radius: 4px; }\n\n.year li.active {\n  padding: 5px 0px; }\n\n.year li.active a {\n  border: 2px solid white;\n  border-radius: 5px;\n  background-color: black;\n  color: white; }\n\n.year li.active a {\n  font-style: normal;\n  cursor: text; }\n\n.paginator {\n  padding: 0px;\n  display: inline-flex;\n  list-style: none;\n  position: absolute;\n  top: 49%;\n  left: -30px; }\n\n.paginator .forward {\n  position: absolute;\n  left: 820px; }\n\n.paginator .glyphicon {\n  border: 1px solid;\n  padding: 3px;\n  border-radius: 4px;\n  color: #000;\n  font-size: xx-large;\n  opacity: .5; }\n\n.paginator .glyphicon:hover {\n  cursor: pointer;\n  opacity: 1; }\n\n.infobox {\n  position: absolute;\n  z-index: 1;\n  width: 230px;\n  text-align: left;\n  background: white;\n  color: black;\n  opacity: .8;\n  border-radius: 5px;\n  margin: 40px; }\n\n.infobox p {\n  font-size: x-small;\n  margin: 3px; }\n\n.infobox .info-key {\n  text-transform: uppercase; }\n"
 
 /***/ }),
 
@@ -26304,7 +26308,880 @@ module.exports = "<span class=\"video-main\" *ngIf=\"!this.videos.message.failur
 
 /***/ }),
 
-/***/ 73:
+/***/ 730:
+/***/ (function(module, exports) {
+
+module.exports = "app-videos {\n  background-color: whitesmoke;\n  text-align: right; }\n\n.video-main {\n  width: 100%;\n  display: inline-block;\n  background: white; }\n\n.video-menu {\n  position: absolute; }\n\n.video-menu .btn {\n  position: relative;\n  bottom: 5px;\n  float: left;\n  margin-right: 2px; }\n\n.month {\n  display: inline-block;\n  margin-left: 3px; }\n\n.month a {\n  cursor: pointer;\n  color: white;\n  text-decoration: none;\n  background-color: black;\n  width: auto;\n  border: 1px solid black;\n  border-bottom: 1px solid #777777;\n  border-top-left-radius: 3px;\n  border-top-right-radius: 3px;\n  padding: 0px 5px; }\n\n.month a:hover {\n  background-color: white;\n  color: black;\n  font-style: italic;\n  border-bottom: 0px; }\n\n.month.active a:hover {\n  font-style: normal;\n  border-bottom: 1px solid black; }\n\n.year {\n  list-style-type: none;\n  padding: 0;\n  float: left;\n  position: absolute; }\n\n.year li {\n  border-top: 1px solid;\n  border-left: 1px solid;\n  border-radius: 3px 0 0 3px; }\n\n.year li:first-child {\n  border-top: none;\n  border-radius: 0; }\n\n.year li:last-child {\n  border-bottom: 1px solid; }\n\n.year a {\n  color: black;\n  text-decoration: none;\n  padding: 0px 15px;\n  cursor: pointer; }\n\n.year a:hover {\n  background-color: black;\n  border-radius: 3px;\n  color: white;\n  font-style: italic; }\n\n.reel-container {\n  border-top: 1px solid;\n  background-image: linear-gradient(to right, white, lightgray, lightgray, white);\n  text-align: center;\n  opacity: .95;\n  border-radius: 3px 0 0 0; }\n\n.video-list-container {\n  padding: 10px 0px; }\n\n.video-list {\n  margin: 0px;\n  padding: 0px;\n  list-style: none; }\n\n.video-item {\n  width: 60%;\n  border: 1px solid;\n  border-radius: 2px;\n  margin: auto;\n  margin-top: 0px;\n  margin-bottom: 2px;\n  padding-left: 10px;\n  text-align: left;\n  height: 35px; }\n\n.video-item button {\n  background: transparent;\n  margin: 6px;\n  float: right;\n  color: #777; }\n\n.video-label {\n  border: 1px solid lightgray;\n  background: white;\n  width: 65%;\n  margin: 3px;\n  float: left; }\n\n.video-label p {\n  margin: 0px;\n  padding: 3px; }\n\n.video-modal {\n  text-align: center; }\n\n.modal-video-container {\n  background-color: lightgray;\n  margin-left: 0px;\n  margin-right: 0px;\n  display: inline-block;\n  padding: 5px;\n  position: relative;\n  top: 10%; }\n"
+
+/***/ }),
+
+/***/ 731:
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"col-sm-2\"><!--app-sidebar-cta--></div><div class=\"col-sm-8\"><app-alerts></app-alerts><router-outlet></router-outlet><app-modal></app-modal><app-editor></app-editor></div><div class=\"col-sm-2\"><!--app-form-submission--></div>"
+
+/***/ }),
+
+/***/ 732:
+/***/ (function(module, exports) {
+
+module.exports = "app-sidebar-cta,\napp-form-submission {\n  position: fixed;\n  bottom: 25px;\n  z-index: 1;\n  opacity: .7; }\n\napp-search-field #autoComplete_list {\n  width: 190px;\n  background: white;\n  opacity: 0.75;\n  list-style: none;\n  text-align: center;\n  position: absolute;\n  top: 75px;\n  left: 80px;\n  z-index: 1;\n  margin: 0;\n  padding: 0;\n  border-radius: 3px; }\n\napp-search-field .autoComplete_result:hover, app-search-field .autoComplete_selected {\n  border-left: 2px solid #46b8da;\n  font-style: italic; }\n\napp-search-field .autoComplete_highlighted {\n  color: #46b8da; }\n"
+
+/***/ }),
+
+/***/ 733:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+const core_1 = __webpack_require__(2);
+const common_1 = __webpack_require__(17);
+const animations_1 = __webpack_require__(231);
+const search_field_component_1 = __webpack_require__(734);
+const app_directives_module_1 = __webpack_require__(109);
+const mongoImage_services_1 = __webpack_require__(62);
+let SearchFieldModule = class SearchFieldModule {
+};
+SearchFieldModule = __decorate([
+    core_1.NgModule({
+        imports: [
+            common_1.CommonModule,
+            animations_1.BrowserAnimationsModule,
+            app_directives_module_1.AppDirectivesModule,
+        ],
+        declarations: [
+            search_field_component_1.SearchFieldComponent,
+        ],
+        exports: [
+            search_field_component_1.SearchFieldComponent
+        ],
+        providers: [
+            mongoImage_services_1.MongoImageServices
+        ]
+    })
+], SearchFieldModule);
+exports.SearchFieldModule = SearchFieldModule;
+
+
+/***/ }),
+
+/***/ 734:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+const core_1 = __webpack_require__(2);
+const animations_1 = __webpack_require__(107);
+const mongoImage_services_1 = __webpack_require__(62);
+const mongoImage_model_1 = __webpack_require__(148);
+const app_modal_services_1 = __webpack_require__(87);
+const autoComplete = __webpack_require__(735);
+const $ = __webpack_require__(12);
+let SearchFieldComponent = class SearchFieldComponent {
+    constructor(mongoImageService, modal) {
+        this.mongoImageService = mongoImageService;
+        this.modal = modal;
+        this.searchIsDone = true;
+    }
+    onClickHandler(event) {
+        this.searchIsDone = false;
+        this.searchState = 'openSearch';
+        this.autoCompleteElement.focus();
+    }
+    keyupEventHandler(event) {
+        if (event.key == 'Escape') {
+            if (document.querySelector("#autoComplete_list")) {
+                document.querySelector("#autoComplete_list").remove();
+            }
+            this.autoCompleteElement.value = '';
+            this.searchState = null;
+        }
+    }
+    ngOnInit() {
+        this.autoCompleteElement = document.querySelector("#autoComplete");
+        this.mongoImageService.getSearchTerms()
+            .subscribe((result) => {
+            this.searchTerms = result;
+        });
+    }
+    onBegin(event) { }
+    onSelection(item) {
+        let selection = item.selection.value;
+        let model = new mongoImage_model_1.MongoImageModel();
+        this.autoCompleteElement.blur();
+        if (document.querySelector("#autoComplete_list")) {
+            document.querySelector("#autoComplete_list").remove();
+        }
+        switch (selection.queryTerm) {
+            case 'location.city':
+                model.setCity(selection.title);
+                break;
+            case 'location.state':
+                model.setState(selection.title);
+                break;
+            case 'location.country':
+                model.setCountry(selection.title);
+                break;
+            case 'meta.names':
+                model.setNames(selection.title);
+                break;
+            case 'meta.keywords':
+                model.setKeywords(selection.title);
+                break;
+            case 'meta.occasion':
+                model.setOccasion(selection.title);
+                break;
+            case 'meta.venue':
+                model.setVenue(selection.title);
+                break;
+        }
+        this.mongoImageService.search(model, true, true)
+            .subscribe((result) => {
+            this.autoCompleteElement.value = '';
+            this.searchState = null;
+            this.modal.initialise(result.docs, 0);
+        });
+    }
+    onDone(event) {
+        let inputField = event.element;
+        if (event.toState == 'openSearch') {
+            new autoComplete({
+                data: {
+                    src: () => __awaiter(this, void 0, void 0, function* () {
+                        const query = inputField.value;
+                        const data = this.searchTerms;
+                        return data;
+                    }),
+                    key: ["title"],
+                    cache: false
+                },
+                // query: {                               // Query Interceptor               | (Optional)
+                //       manipulate: (query:any) => {
+                //         return query.replace("pizza", "burger");
+                //       }
+                // },
+                sort: (a, b) => {
+                    if (a.match < b.match)
+                        return -1;
+                    if (a.match > b.match)
+                        return 1;
+                    return 0;
+                },
+                placeHolder: "enter search terms ...",
+                selector: "#autoComplete",
+                threshold: 1,
+                debounce: 300,
+                searchEngine: "strict",
+                resultsList: {
+                    render: true,
+                    container: (source) => {
+                        source.setAttribute("id", "autoComplete_list");
+                    },
+                    destination: document.querySelector("#autoComplete"),
+                    position: "afterend",
+                    element: "ul"
+                },
+                maxResults: 5,
+                highlight: true,
+                resultItem: {
+                    content: (data, source) => {
+                        source.innerHTML = data.match;
+                    },
+                    element: "li"
+                },
+                noResults: () => {
+                    const result = document.createElement("li");
+                    result.setAttribute("class", "no_result");
+                    result.setAttribute("tabindex", "1");
+                    result.innerHTML = "Not Found";
+                    document.querySelector("#autoComplete_list").appendChild(result);
+                },
+                onSelection: (feedback) => {
+                    this.onSelection(feedback);
+                    inputField.value = feedback.selection.value.title;
+                }
+            });
+        }
+        if (event.fromState == 'openSearch') {
+            this.autoCompleteElement.placeholder = '';
+            this.searchIsDone = true;
+        }
+    }
+};
+__decorate([
+    core_1.HostListener('click', ['$event']),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [MouseEvent]),
+    __metadata("design:returntype", void 0)
+], SearchFieldComponent.prototype, "onClickHandler", null);
+__decorate([
+    core_1.HostListener('document:keyup', ['$event']),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [KeyboardEvent]),
+    __metadata("design:returntype", void 0)
+], SearchFieldComponent.prototype, "keyupEventHandler", null);
+SearchFieldComponent = __decorate([
+    core_1.Component({
+        selector: 'app-search-field',
+        template: __webpack_require__(736),
+        styles: [__webpack_require__(737)],
+        animations: [
+            animations_1.trigger('search', [
+                animations_1.state('*', animations_1.style({
+                    width: '25px',
+                    background: 'transparent'
+                })),
+                animations_1.state('openSearch', animations_1.style({
+                    width: '200px',
+                    position: 'absolute',
+                    transform: 'translate(75px,75px)',
+                    opacity: 0.75,
+                    background: 'white',
+                    color: 'black',
+                    zIndex: 1000,
+                })),
+                animations_1.transition('* => openSearch', [
+                    animations_1.animate('200ms')
+                ]),
+                animations_1.transition('openSearch => *', [
+                    animations_1.animate('100ms')
+                ])
+            ]),
+        ]
+    }),
+    __metadata("design:paramtypes", [mongoImage_services_1.MongoImageServices,
+        app_modal_services_1.AppModalServices])
+], SearchFieldComponent);
+exports.SearchFieldComponent = SearchFieldComponent;
+
+
+/***/ }),
+
+/***/ 735:
+/***/ (function(module, exports, __webpack_require__) {
+
+(function (global, factory) {
+   true ? module.exports = factory() :
+  typeof define === 'function' && define.amd ? define(factory) :
+  (global.autoComplete = factory());
+}(this, (function () { 'use strict';
+
+  function _classCallCheck(instance, Constructor) {
+    if (!(instance instanceof Constructor)) {
+      throw new TypeError("Cannot call a class as a function");
+    }
+  }
+
+  function _defineProperties(target, props) {
+    for (var i = 0; i < props.length; i++) {
+      var descriptor = props[i];
+      descriptor.enumerable = descriptor.enumerable || false;
+      descriptor.configurable = true;
+      if ("value" in descriptor) descriptor.writable = true;
+      Object.defineProperty(target, descriptor.key, descriptor);
+    }
+  }
+
+  function _createClass(Constructor, protoProps, staticProps) {
+    if (protoProps) _defineProperties(Constructor.prototype, protoProps);
+    if (staticProps) _defineProperties(Constructor, staticProps);
+    return Constructor;
+  }
+
+  var dataAttribute = "data-id";
+  var select = {
+    resultsList: "autoComplete_list",
+    result: "autoComplete_result",
+    highlight: "autoComplete_highlighted",
+    selectedResult: "autoComplete_selected"
+  };
+  var keys = {
+    ENTER: 13,
+    ARROW_UP: 38,
+    ARROW_DOWN: 40
+  };
+  var getInput = function getInput(selector) {
+    return typeof selector === "string" ? document.querySelector(selector) : selector();
+  };
+  var createResultsList = function createResultsList(renderResults) {
+    var resultsList = document.createElement(renderResults.element);
+    resultsList.setAttribute("id", select.resultsList);
+    if (renderResults.container) {
+      renderResults.container(resultsList);
+    }
+    renderResults.destination.insertAdjacentElement(renderResults.position, resultsList);
+    return resultsList;
+  };
+  var highlight = function highlight(value) {
+    return "<span class=".concat(select.highlight, ">").concat(value, "</span>");
+  };
+  var addResultsToList = function addResultsToList(resultsList, dataSrc, resultItem) {
+    var fragment = document.createDocumentFragment();
+    dataSrc.forEach(function (event, record) {
+      var result = document.createElement(resultItem.element);
+      var resultIndex = dataSrc[record].index;
+      result.setAttribute(dataAttribute, resultIndex);
+      result.setAttribute("class", select.result);
+      resultItem.content ? resultItem.content(event, result) : result.innerHTML = event.match || event;
+      fragment.appendChild(result);
+    });
+    resultsList.appendChild(fragment);
+  };
+  var clearResults = function clearResults(resultsList) {
+    return resultsList.innerHTML = "";
+  };
+  var onSelection = function onSelection(event, field, resultsList, feedback, resultsValues, selection) {
+    feedback({
+      event: event,
+      query: field instanceof HTMLInputElement ? field.value : field.innerHTML,
+      matches: resultsValues.matches,
+      results: resultsValues.list.map(function (record) {
+        return record.value;
+      }),
+      selection: resultsValues.list.find(function (value) {
+        if (event.keyCode === keys.ENTER) {
+          return value.index === Number(selection.getAttribute(dataAttribute));
+        } else if (event.type === "mousedown") {
+          return value.index === Number(event.currentTarget.getAttribute(dataAttribute));
+        }
+      })
+    });
+    clearResults(resultsList);
+  };
+  var navigation = function navigation(input, resultsList, feedback, resultsValues) {
+    var li = resultsList.childNodes,
+        liLength = li.length - 1;
+    var liSelected = undefined,
+        next;
+    var removeSelection = function removeSelection(direction) {
+      liSelected.classList.remove(select.selectedResult);
+      if (direction === 1) {
+        next = liSelected.nextSibling;
+      } else {
+        next = liSelected.previousSibling;
+      }
+    };
+    var highlightSelection = function highlightSelection(current) {
+      liSelected = current;
+      liSelected.classList.add(select.selectedResult);
+    };
+    input.onkeydown = function (event) {
+      if (li.length > 0) {
+        switch (event.keyCode) {
+          case keys.ARROW_UP:
+            if (liSelected) {
+              removeSelection(0);
+              if (next) {
+                highlightSelection(next);
+              } else {
+                highlightSelection(li[liLength]);
+              }
+            } else {
+              highlightSelection(li[liLength]);
+            }
+            break;
+          case keys.ARROW_DOWN:
+            if (liSelected) {
+              removeSelection(1);
+              if (next) {
+                highlightSelection(next);
+              } else {
+                highlightSelection(li[0]);
+              }
+            } else {
+              highlightSelection(li[0]);
+            }
+            break;
+          case keys.ENTER:
+            if (liSelected) {
+              onSelection(event, input, resultsList, feedback, resultsValues, liSelected);
+            }
+        }
+      }
+    };
+    li.forEach(function (selection) {
+      selection.onmousedown = function (event) {
+        return onSelection(event, input, resultsList, feedback, resultsValues);
+      };
+    });
+  };
+  var autoCompleteView = {
+    getInput: getInput,
+    createResultsList: createResultsList,
+    highlight: highlight,
+    addResultsToList: addResultsToList,
+    navigation: navigation,
+    clearResults: clearResults
+  };
+
+  var CustomEventPolyfill = function CustomEventPolyfill(event, params) {
+    params = params || {
+      bubbles: false,
+      cancelable: false,
+      detail: undefined
+    };
+    var evt = document.createEvent("CustomEvent");
+    evt.initCustomEvent(event, params.bubbles, params.cancelable, params.detail);
+    return evt;
+  };
+  CustomEventPolyfill.prototype = window.Event.prototype;
+  var CustomEventWrapper = typeof window.CustomEvent === "function" && window.CustomEvent || CustomEventPolyfill;
+  var initElementClosestPolyfill = function initElementClosestPolyfill() {
+    if (!Element.prototype.matches) {
+      Element.prototype.matches = Element.prototype.msMatchesSelector || Element.prototype.webkitMatchesSelector;
+    }
+    if (!Element.prototype.closest) {
+      Element.prototype.closest = function (s) {
+        var el = this;
+        do {
+          if (el.matches(s)) {
+            return el;
+          }
+          el = el.parentElement || el.parentNode;
+        } while (el !== null && el.nodeType === 1);
+        return null;
+      };
+    }
+  };
+  var Polyfill = {
+    CustomEventWrapper: CustomEventWrapper,
+    initElementClosestPolyfill: initElementClosestPolyfill
+  };
+
+  var autoComplete =
+  function () {
+    function autoComplete(config) {
+      _classCallCheck(this, autoComplete);
+      var _config$selector = config.selector,
+          selector = _config$selector === void 0 ? "#autoComplete" : _config$selector,
+          _config$data = config.data,
+          key = _config$data.key,
+          _src = _config$data.src,
+          _config$data$cache = _config$data.cache,
+          cache = _config$data$cache === void 0 ? true : _config$data$cache,
+          query = config.query,
+          _config$trigger = config.trigger;
+      _config$trigger = _config$trigger === void 0 ? {} : _config$trigger;
+      var _config$trigger$event = _config$trigger.event,
+          event = _config$trigger$event === void 0 ? ["input"] : _config$trigger$event,
+          _config$trigger$condi = _config$trigger.condition,
+          condition = _config$trigger$condi === void 0 ? false : _config$trigger$condi,
+          _config$searchEngine = config.searchEngine,
+          searchEngine = _config$searchEngine === void 0 ? "strict" : _config$searchEngine,
+          _config$threshold = config.threshold,
+          threshold = _config$threshold === void 0 ? 0 : _config$threshold,
+          _config$debounce = config.debounce,
+          debounce = _config$debounce === void 0 ? 0 : _config$debounce,
+          _config$resultsList = config.resultsList;
+      _config$resultsList = _config$resultsList === void 0 ? {} : _config$resultsList;
+      var _config$resultsList$r = _config$resultsList.render,
+          render = _config$resultsList$r === void 0 ? false : _config$resultsList$r,
+          _config$resultsList$c = _config$resultsList.container,
+          container = _config$resultsList$c === void 0 ? false : _config$resultsList$c,
+          destination = _config$resultsList.destination,
+          _config$resultsList$p = _config$resultsList.position,
+          position = _config$resultsList$p === void 0 ? "afterend" : _config$resultsList$p,
+          _config$resultsList$e = _config$resultsList.element,
+          resultsListElement = _config$resultsList$e === void 0 ? "ul" : _config$resultsList$e,
+          _config$resultsList$n = _config$resultsList.navigation,
+          navigation = _config$resultsList$n === void 0 ? false : _config$resultsList$n,
+          _config$sort = config.sort,
+          sort = _config$sort === void 0 ? false : _config$sort,
+          placeHolder = config.placeHolder,
+          _config$maxResults = config.maxResults,
+          maxResults = _config$maxResults === void 0 ? 5 : _config$maxResults,
+          _config$resultItem = config.resultItem;
+      _config$resultItem = _config$resultItem === void 0 ? {} : _config$resultItem;
+      var _config$resultItem$co = _config$resultItem.content,
+          content = _config$resultItem$co === void 0 ? false : _config$resultItem$co,
+          _config$resultItem$el = _config$resultItem.element,
+          resultItemElement = _config$resultItem$el === void 0 ? "li" : _config$resultItem$el,
+          noResults = config.noResults,
+          _config$highlight = config.highlight,
+          highlight = _config$highlight === void 0 ? false : _config$highlight,
+          onSelection = config.onSelection;
+      var resultsListView = render ? autoCompleteView.createResultsList({
+        container: container,
+        destination: destination || autoCompleteView.getInput(selector),
+        position: position,
+        element: resultsListElement
+      }) : null;
+      this.selector = selector;
+      this.data = {
+        src: function src() {
+          return typeof _src === "function" ? _src() : _src;
+        },
+        key: key,
+        cache: cache
+      };
+      this.query = query;
+      this.trigger = {
+        event: event,
+        condition: condition
+      };
+      this.searchEngine = searchEngine === "loose" ? "loose" : typeof searchEngine === "function" ? searchEngine : "strict";
+      this.threshold = threshold;
+      this.debounce = debounce;
+      this.resultsList = {
+        render: render,
+        view: resultsListView,
+        navigation: navigation
+      };
+      this.sort = sort;
+      this.placeHolder = placeHolder;
+      this.maxResults = maxResults;
+      this.resultItem = {
+        content: content,
+        element: resultItemElement
+      };
+      this.noResults = noResults;
+      this.highlight = highlight;
+      this.onSelection = onSelection;
+      this.init();
+    }
+    _createClass(autoComplete, [{
+      key: "search",
+      value: function search(query, record) {
+        var recordLowerCase = record.toLowerCase();
+        if (this.searchEngine === "loose") {
+          query = query.replace(/ /g, "");
+          var match = [];
+          var searchPosition = 0;
+          for (var number = 0; number < recordLowerCase.length; number++) {
+            var recordChar = record[number];
+            if (searchPosition < query.length && recordLowerCase[number] === query[searchPosition]) {
+              recordChar = this.highlight ? autoCompleteView.highlight(recordChar) : recordChar;
+              searchPosition++;
+            }
+            match.push(recordChar);
+          }
+          if (searchPosition !== query.length) {
+            return false;
+          }
+          return match.join("");
+        } else {
+          if (recordLowerCase.includes(query)) {
+            var pattern = new RegExp("".concat(query), "i");
+            query = pattern.exec(record);
+            return this.highlight ? record.replace(query, autoCompleteView.highlight(query)) : record;
+          }
+        }
+      }
+    }, {
+      key: "listMatchedResults",
+      value: function listMatchedResults(data) {
+        var _this = this;
+        return new Promise(function (resolve) {
+          var resList = [];
+          data.filter(function (record, index) {
+            var search = function search(key) {
+              var recordValue = key ? record[key] : record;
+              if (recordValue) {
+                var match = typeof _this.searchEngine === "function" ? _this.searchEngine(_this.queryValue, recordValue) : _this.search(_this.queryValue, recordValue);
+                if (match && key) {
+                  resList.push({
+                    key: key,
+                    index: index,
+                    match: match,
+                    value: record
+                  });
+                } else if (match && !key) {
+                  resList.push({
+                    index: index,
+                    match: match,
+                    value: record
+                  });
+                }
+              }
+            };
+            if (_this.data.key) {
+              var _iteratorNormalCompletion = true;
+              var _didIteratorError = false;
+              var _iteratorError = undefined;
+              try {
+                for (var _iterator = _this.data.key[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+                  var key = _step.value;
+                  search(key);
+                }
+              } catch (err) {
+                _didIteratorError = true;
+                _iteratorError = err;
+              } finally {
+                try {
+                  if (!_iteratorNormalCompletion && _iterator["return"] != null) {
+                    _iterator["return"]();
+                  }
+                } finally {
+                  if (_didIteratorError) {
+                    throw _iteratorError;
+                  }
+                }
+              }
+            } else {
+              search();
+            }
+          });
+          var list = _this.sort ? resList.sort(_this.sort).slice(0, _this.maxResults) : resList.slice(0, _this.maxResults);
+          return resolve({
+            matches: resList.length,
+            list: list
+          });
+        });
+      }
+    }, {
+      key: "ignite",
+      value: function ignite() {
+        var _this2 = this;
+        var input = autoCompleteView.getInput(this.selector);
+        if (this.placeHolder) {
+          input.setAttribute("placeholder", this.placeHolder);
+        }
+        var debounce = function debounce(func, delay) {
+          var inDebounce;
+          return function () {
+            var context = this;
+            var args = arguments;
+            clearTimeout(inDebounce);
+            inDebounce = setTimeout(function () {
+              return func.apply(context, args);
+            }, delay);
+          };
+        };
+        var exec = function exec(event) {
+          var inputValue = input instanceof HTMLInputElement || input instanceof HTMLTextAreaElement ? input.value.toLowerCase() : input.innerHTML.toLowerCase();
+          var queryValue = _this2.queryValue = _this2.query && _this2.query.manipulate ? _this2.query.manipulate(inputValue) : inputValue;
+          var renderResultsList = _this2.resultsList.render;
+          var triggerCondition = _this2.trigger.condition ? _this2.trigger.condition(queryValue) : queryValue.length > _this2.threshold && queryValue.replace(/ /g, "").length;
+          var eventEmitter = function eventEmitter(event, results) {
+            input.dispatchEvent(new Polyfill.CustomEventWrapper("autoComplete", {
+              bubbles: true,
+              detail: {
+                event: event,
+                input: inputValue,
+                query: queryValue,
+                matches: results ? results.matches : null,
+                results: results ? results.list : null
+              },
+              cancelable: true
+            }));
+          };
+          if (renderResultsList) {
+            var resultsList = _this2.resultsList.view;
+            var clearResults = autoCompleteView.clearResults(resultsList);
+            if (triggerCondition) {
+              _this2.listMatchedResults(_this2.dataStream, event).then(function (list) {
+                eventEmitter(event, list);
+                if (_this2.resultsList.render) {
+                  if (list.list.length === 0 && _this2.noResults) {
+                    _this2.noResults();
+                  } else {
+                    autoCompleteView.addResultsToList(resultsList, list.list, _this2.resultItem);
+                    if (_this2.onSelection) {
+                      _this2.resultsList.navigation ? _this2.resultsList.navigation(event, input, resultsList, _this2.onSelection, list) : autoCompleteView.navigation(input, resultsList, _this2.onSelection, list);
+                    }
+                  }
+                }
+              });
+            } else {
+              eventEmitter(event);
+            }
+          } else if (!renderResultsList && triggerCondition) {
+            _this2.listMatchedResults(_this2.dataStream, event).then(function (list) {
+              eventEmitter(event, list);
+            });
+          }
+        };
+        var run = function run(event) {
+          Promise.resolve(_this2.data.cache ? _this2.dataStream : _this2.data.src()).then(function (data) {
+            _this2.dataStream = data;
+            exec(event);
+          });
+        };
+        this.trigger.event.forEach(function (eventType) {
+          input.addEventListener(eventType, debounce(function (event) {
+            return run(event);
+          }, _this2.debounce));
+        });
+      }
+    }, {
+      key: "init",
+      value: function init() {
+        var _this3 = this;
+        if (this.data.cache) {
+          Promise.resolve(this.data.src()).then(function (data) {
+            _this3.dataStream = data;
+            _this3.ignite();
+          });
+        } else {
+          this.ignite();
+        }
+        Polyfill.initElementClosestPolyfill();
+      }
+    }]);
+    return autoComplete;
+  }();
+
+  return autoComplete;
+
+})));
+
+
+/***/ }),
+
+/***/ 736:
+/***/ (function(module, exports) {
+
+module.exports = "<span><i class=\"glyphicon glyphicon-search\" *ngIf=\"this.searchIsDone\"></i><input class=\"btn btn-info btn-xs\" [@search]=\"searchState\" (@search.start)=\"this.onBegin($event)\" (@search.done)=\"this.onDone($event)\" id=\"autoComplete\" autocomplete=\"off\"></span>"
+
+/***/ }),
+
+/***/ 737:
+/***/ (function(module, exports) {
+
+module.exports = "span {\n  position: absolute; }\n\nspan i {\n  position: absolute;\n  display: block;\n  top: -4px;\n  z-index: 1000;\n  color: #777;\n  padding: 3px 5px;\n  border-radius: 3px;\n  left: 1px; }\n\ni:hover {\n  background: #46b8da;\n  color: white !important; }\n"
+
+/***/ }),
+
+/***/ 738:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+const core_1 = __webpack_require__(2);
+const $ = __webpack_require__(12);
+let AppModalDirective = class AppModalDirective {
+    constructor(templateRef, viewContainer) {
+        this.templateRef = templateRef;
+        this.viewContainer = viewContainer;
+    }
+    set appModal(condition) {
+        if (condition) {
+            let height = window.innerHeight * .8;
+            this.viewContainer.createEmbeddedView(this.templateRef);
+            $('.app-modal').attr('height', height);
+            $('.assetviewer-modal').modal('show');
+            if (this.viewContainer.length > 1) {
+                this.viewContainer.remove(0);
+            }
+        }
+        else {
+            this.viewContainer.clear();
+        }
+    }
+};
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", Object),
+    __metadata("design:paramtypes", [Object])
+], AppModalDirective.prototype, "appModal", null);
+AppModalDirective = __decorate([
+    core_1.Directive({ selector: '[appModal]' }),
+    __metadata("design:paramtypes", [core_1.TemplateRef,
+        core_1.ViewContainerRef])
+], AppModalDirective);
+exports.AppModalDirective = AppModalDirective;
+
+
+/***/ }),
+
+/***/ 739:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+const core_1 = __webpack_require__(2);
+const authentication_services_1 = __webpack_require__(11);
+let InfoboxDirective = class InfoboxDirective {
+    constructor(templateRef, viewContainer, activeUser) {
+        this.templateRef = templateRef;
+        this.viewContainer = viewContainer;
+        this.activeUser = activeUser;
+    }
+    set infobox(condition) {
+        if (condition) {
+            condition['what'] = condition['meta']['event'] ?
+                this.activeUser.language == 'english' ?
+                    condition['meta']['event']['en'] :
+                    condition['meta']['event']['da'] :
+                null;
+            condition['who'] = condition['meta']['names'].length > 0 ?
+                condition['meta']['names'].toString().replace(/,/g, ', ') :
+                null;
+            condition['where'] = condition['meta']['venue'] ?
+                condition['location']['country'] == 'United States' ?
+                    `${condition['meta']['venue']}, ${condition['location']['city']}, ${condition['location']['state']}` :
+                    `${condition['meta']['venue']}, ${condition['location']['city']}, ${condition['location']['country']}` :
+                condition['location']['country'] == 'United States' ?
+                    `${condition['location']['city']}, ${condition['location']['state']}` :
+                    `${condition['location']['city']}, ${condition['location']['country']}`;
+            condition['why'] = condition['meta']['occasion'] ?
+                condition['meta']['occasion'] :
+                null;
+            this.viewContainer.createEmbeddedView(this.templateRef);
+        }
+        else {
+            this.viewContainer.clear();
+        }
+    }
+};
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", Boolean),
+    __metadata("design:paramtypes", [Boolean])
+], InfoboxDirective.prototype, "infobox", null);
+InfoboxDirective = __decorate([
+    core_1.Directive({ selector: '[infobox]' }),
+    __metadata("design:paramtypes", [core_1.TemplateRef,
+        core_1.ViewContainerRef,
+        authentication_services_1.AuthenticationServices])
+], InfoboxDirective);
+exports.InfoboxDirective = InfoboxDirective;
+
+
+/***/ }),
+
+/***/ 74:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -32484,879 +33361,6 @@ ReactiveFormsModule.ctorParameters = function () { return []; };
 
 /***/ }),
 
-/***/ 730:
-/***/ (function(module, exports) {
-
-module.exports = "app-videos {\n  background-color: whitesmoke;\n  text-align: right; }\n\n.video-main {\n  width: 100%;\n  display: inline-block;\n  background: white; }\n\n.video-menu {\n  position: absolute; }\n\n.video-menu .btn {\n  position: relative;\n  bottom: 5px;\n  float: left;\n  margin-right: 2px; }\n\n.month {\n  display: inline-block;\n  margin-left: 3px; }\n\n.month a {\n  cursor: pointer;\n  color: white;\n  text-decoration: none;\n  background-color: black;\n  width: auto;\n  border: 1px solid black;\n  border-bottom: 1px solid #777777;\n  border-top-left-radius: 3px;\n  border-top-right-radius: 3px;\n  padding: 0px 5px; }\n\n.month a:hover {\n  background-color: white;\n  color: black;\n  font-style: italic;\n  border-bottom: 0px; }\n\n.month.active a:hover {\n  font-style: normal;\n  border-bottom: 1px solid black; }\n\n.year {\n  list-style-type: none;\n  padding: 0;\n  float: left;\n  position: absolute; }\n\n.year li {\n  border-top: 1px solid;\n  border-left: 1px solid;\n  border-radius: 3px 0 0 3px; }\n\n.year li:first-child {\n  border-top: none;\n  border-radius: 0; }\n\n.year li:last-child {\n  border-bottom: 1px solid; }\n\n.year a {\n  color: black;\n  text-decoration: none;\n  padding: 0px 15px;\n  cursor: pointer; }\n\n.year a:hover {\n  background-color: black;\n  border-radius: 3px;\n  color: white;\n  font-style: italic; }\n\n.reel-container {\n  border-top: 1px solid;\n  background-image: linear-gradient(to right, white, lightgray, lightgray, white);\n  text-align: center;\n  opacity: .95;\n  border-radius: 3px 0 0 0; }\n\n.video-list-container {\n  padding: 10px 0px; }\n\n.video-list {\n  margin: 0px;\n  padding: 0px;\n  list-style: none; }\n\n.video-item {\n  width: 60%;\n  border: 1px solid;\n  border-radius: 2px;\n  margin: auto;\n  margin-top: 0px;\n  margin-bottom: 2px;\n  padding-left: 10px;\n  text-align: left;\n  height: 35px; }\n\n.video-item button {\n  background: transparent;\n  margin: 6px;\n  float: right;\n  color: #777; }\n\n.video-label {\n  border: 1px solid lightgray;\n  background: white;\n  width: 65%;\n  margin: 3px;\n  float: left; }\n\n.video-label p {\n  margin: 0px;\n  padding: 3px; }\n\n.video-modal {\n  text-align: center; }\n\n.modal-video-container {\n  background-color: lightgray;\n  margin-left: 0px;\n  margin-right: 0px;\n  display: inline-block;\n  padding: 5px;\n  position: relative;\n  top: 10%; }\n"
-
-/***/ }),
-
-/***/ 731:
-/***/ (function(module, exports) {
-
-module.exports = "<div class=\"col-sm-2\"><!--app-sidebar-cta--></div><div class=\"col-sm-8\"><app-alerts></app-alerts><router-outlet></router-outlet><app-modal></app-modal><app-editor></app-editor></div><div class=\"col-sm-2\"><!--app-form-submission--></div>"
-
-/***/ }),
-
-/***/ 732:
-/***/ (function(module, exports) {
-
-module.exports = "app-sidebar-cta,\napp-form-submission {\n  position: fixed;\n  bottom: 25px;\n  z-index: 1;\n  opacity: .7; }\n\napp-search-field #autoComplete_list {\n  width: 190px;\n  background: white;\n  opacity: 0.75;\n  list-style: none;\n  text-align: center;\n  position: absolute;\n  top: 75px;\n  left: 80px;\n  z-index: 1;\n  margin: 0;\n  padding: 0;\n  border-radius: 3px; }\n\napp-search-field .autoComplete_result:hover, app-search-field .autoComplete_selected {\n  border-left: 2px solid #46b8da;\n  font-style: italic; }\n\napp-search-field .autoComplete_highlighted {\n  color: #46b8da; }\n"
-
-/***/ }),
-
-/***/ 733:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-const core_1 = __webpack_require__(2);
-const common_1 = __webpack_require__(17);
-const animations_1 = __webpack_require__(231);
-const search_field_component_1 = __webpack_require__(734);
-const app_directives_module_1 = __webpack_require__(109);
-const mongoImage_services_1 = __webpack_require__(62);
-let SearchFieldModule = class SearchFieldModule {
-};
-SearchFieldModule = __decorate([
-    core_1.NgModule({
-        imports: [
-            common_1.CommonModule,
-            animations_1.BrowserAnimationsModule,
-            app_directives_module_1.AppDirectivesModule,
-        ],
-        declarations: [
-            search_field_component_1.SearchFieldComponent,
-        ],
-        exports: [
-            search_field_component_1.SearchFieldComponent
-        ],
-        providers: [
-            mongoImage_services_1.MongoImageServices
-        ]
-    })
-], SearchFieldModule);
-exports.SearchFieldModule = SearchFieldModule;
-
-
-/***/ }),
-
-/***/ 734:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
-const core_1 = __webpack_require__(2);
-const animations_1 = __webpack_require__(107);
-const mongoImage_services_1 = __webpack_require__(62);
-const mongoImage_model_1 = __webpack_require__(148);
-const app_modal_services_1 = __webpack_require__(87);
-const autoComplete = __webpack_require__(735);
-const $ = __webpack_require__(14);
-let SearchFieldComponent = class SearchFieldComponent {
-    constructor(mongoImageService, modal) {
-        this.mongoImageService = mongoImageService;
-        this.modal = modal;
-        this.searchIsDone = true;
-    }
-    onClickHandler(event) {
-        this.searchIsDone = false;
-        this.searchState = 'openSearch';
-        this.autoCompleteElement.focus();
-    }
-    keyupEventHandler(event) {
-        if (event.key == 'Escape') {
-            if (document.querySelector("#autoComplete_list")) {
-                document.querySelector("#autoComplete_list").remove();
-            }
-            this.autoCompleteElement.value = '';
-            this.searchState = null;
-        }
-    }
-    ngOnInit() {
-        this.autoCompleteElement = document.querySelector("#autoComplete");
-        this.mongoImageService.getSearchTerms()
-            .subscribe((result) => {
-            this.searchTerms = result;
-        });
-    }
-    onBegin(event) { }
-    onSelection(item) {
-        let selection = item.selection.value;
-        let model = new mongoImage_model_1.MongoImageModel();
-        this.autoCompleteElement.blur();
-        if (document.querySelector("#autoComplete_list")) {
-            document.querySelector("#autoComplete_list").remove();
-        }
-        switch (selection.queryTerm) {
-            case 'location.city':
-                model.setCity(selection.title);
-                break;
-            case 'location.state':
-                model.setState(selection.title);
-                break;
-            case 'location.country':
-                model.setCountry(selection.title);
-                break;
-            case 'meta.names':
-                model.setNames(selection.title);
-                break;
-            case 'meta.keywords':
-                model.setKeywords(selection.title);
-                break;
-            case 'meta.occasion':
-                model.setOccasion(selection.title);
-                break;
-            case 'meta.venue':
-                model.setVenue(selection.title);
-                break;
-        }
-        this.mongoImageService.search(model, true, true)
-            .subscribe((result) => {
-            this.autoCompleteElement.value = '';
-            this.searchState = null;
-            this.modal.initialise(result.docs, 0);
-        });
-    }
-    onDone(event) {
-        let inputField = event.element;
-        if (event.toState == 'openSearch') {
-            new autoComplete({
-                data: {
-                    src: () => __awaiter(this, void 0, void 0, function* () {
-                        const query = inputField.value;
-                        const data = this.searchTerms;
-                        return data;
-                    }),
-                    key: ["title"],
-                    cache: false
-                },
-                // query: {                               // Query Interceptor               | (Optional)
-                //       manipulate: (query:any) => {
-                //         return query.replace("pizza", "burger");
-                //       }
-                // },
-                sort: (a, b) => {
-                    if (a.match < b.match)
-                        return -1;
-                    if (a.match > b.match)
-                        return 1;
-                    return 0;
-                },
-                placeHolder: "enter search terms ...",
-                selector: "#autoComplete",
-                threshold: 1,
-                debounce: 300,
-                searchEngine: "strict",
-                resultsList: {
-                    render: true,
-                    container: (source) => {
-                        source.setAttribute("id", "autoComplete_list");
-                    },
-                    destination: document.querySelector("#autoComplete"),
-                    position: "afterend",
-                    element: "ul"
-                },
-                maxResults: 5,
-                highlight: true,
-                resultItem: {
-                    content: (data, source) => {
-                        source.innerHTML = data.match;
-                    },
-                    element: "li"
-                },
-                noResults: () => {
-                    const result = document.createElement("li");
-                    result.setAttribute("class", "no_result");
-                    result.setAttribute("tabindex", "1");
-                    result.innerHTML = "Not Found";
-                    document.querySelector("#autoComplete_list").appendChild(result);
-                },
-                onSelection: (feedback) => {
-                    this.onSelection(feedback);
-                    inputField.value = feedback.selection.value.title;
-                }
-            });
-        }
-        if (event.fromState == 'openSearch') {
-            this.autoCompleteElement.placeholder = '';
-            this.searchIsDone = true;
-        }
-    }
-};
-__decorate([
-    core_1.HostListener('click', ['$event']),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [MouseEvent]),
-    __metadata("design:returntype", void 0)
-], SearchFieldComponent.prototype, "onClickHandler", null);
-__decorate([
-    core_1.HostListener('document:keyup', ['$event']),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [KeyboardEvent]),
-    __metadata("design:returntype", void 0)
-], SearchFieldComponent.prototype, "keyupEventHandler", null);
-SearchFieldComponent = __decorate([
-    core_1.Component({
-        selector: 'app-search-field',
-        template: __webpack_require__(736),
-        styles: [__webpack_require__(737)],
-        animations: [
-            animations_1.trigger('search', [
-                animations_1.state('*', animations_1.style({
-                    width: '25px',
-                    background: 'transparent'
-                })),
-                animations_1.state('openSearch', animations_1.style({
-                    width: '200px',
-                    position: 'absolute',
-                    transform: 'translate(75px,75px)',
-                    opacity: 0.75,
-                    background: 'white',
-                    color: 'black',
-                    zIndex: 1000,
-                })),
-                animations_1.transition('* => openSearch', [
-                    animations_1.animate('200ms')
-                ]),
-                animations_1.transition('openSearch => *', [
-                    animations_1.animate('100ms')
-                ])
-            ]),
-        ]
-    }),
-    __metadata("design:paramtypes", [mongoImage_services_1.MongoImageServices,
-        app_modal_services_1.AppModalServices])
-], SearchFieldComponent);
-exports.SearchFieldComponent = SearchFieldComponent;
-
-
-/***/ }),
-
-/***/ 735:
-/***/ (function(module, exports, __webpack_require__) {
-
-(function (global, factory) {
-   true ? module.exports = factory() :
-  typeof define === 'function' && define.amd ? define(factory) :
-  (global.autoComplete = factory());
-}(this, (function () { 'use strict';
-
-  function _classCallCheck(instance, Constructor) {
-    if (!(instance instanceof Constructor)) {
-      throw new TypeError("Cannot call a class as a function");
-    }
-  }
-
-  function _defineProperties(target, props) {
-    for (var i = 0; i < props.length; i++) {
-      var descriptor = props[i];
-      descriptor.enumerable = descriptor.enumerable || false;
-      descriptor.configurable = true;
-      if ("value" in descriptor) descriptor.writable = true;
-      Object.defineProperty(target, descriptor.key, descriptor);
-    }
-  }
-
-  function _createClass(Constructor, protoProps, staticProps) {
-    if (protoProps) _defineProperties(Constructor.prototype, protoProps);
-    if (staticProps) _defineProperties(Constructor, staticProps);
-    return Constructor;
-  }
-
-  var dataAttribute = "data-id";
-  var select = {
-    resultsList: "autoComplete_list",
-    result: "autoComplete_result",
-    highlight: "autoComplete_highlighted",
-    selectedResult: "autoComplete_selected"
-  };
-  var keys = {
-    ENTER: 13,
-    ARROW_UP: 38,
-    ARROW_DOWN: 40
-  };
-  var getInput = function getInput(selector) {
-    return typeof selector === "string" ? document.querySelector(selector) : selector();
-  };
-  var createResultsList = function createResultsList(renderResults) {
-    var resultsList = document.createElement(renderResults.element);
-    resultsList.setAttribute("id", select.resultsList);
-    if (renderResults.container) {
-      renderResults.container(resultsList);
-    }
-    renderResults.destination.insertAdjacentElement(renderResults.position, resultsList);
-    return resultsList;
-  };
-  var highlight = function highlight(value) {
-    return "<span class=".concat(select.highlight, ">").concat(value, "</span>");
-  };
-  var addResultsToList = function addResultsToList(resultsList, dataSrc, resultItem) {
-    var fragment = document.createDocumentFragment();
-    dataSrc.forEach(function (event, record) {
-      var result = document.createElement(resultItem.element);
-      var resultIndex = dataSrc[record].index;
-      result.setAttribute(dataAttribute, resultIndex);
-      result.setAttribute("class", select.result);
-      resultItem.content ? resultItem.content(event, result) : result.innerHTML = event.match || event;
-      fragment.appendChild(result);
-    });
-    resultsList.appendChild(fragment);
-  };
-  var clearResults = function clearResults(resultsList) {
-    return resultsList.innerHTML = "";
-  };
-  var onSelection = function onSelection(event, field, resultsList, feedback, resultsValues, selection) {
-    feedback({
-      event: event,
-      query: field instanceof HTMLInputElement ? field.value : field.innerHTML,
-      matches: resultsValues.matches,
-      results: resultsValues.list.map(function (record) {
-        return record.value;
-      }),
-      selection: resultsValues.list.find(function (value) {
-        if (event.keyCode === keys.ENTER) {
-          return value.index === Number(selection.getAttribute(dataAttribute));
-        } else if (event.type === "mousedown") {
-          return value.index === Number(event.currentTarget.getAttribute(dataAttribute));
-        }
-      })
-    });
-    clearResults(resultsList);
-  };
-  var navigation = function navigation(input, resultsList, feedback, resultsValues) {
-    var li = resultsList.childNodes,
-        liLength = li.length - 1;
-    var liSelected = undefined,
-        next;
-    var removeSelection = function removeSelection(direction) {
-      liSelected.classList.remove(select.selectedResult);
-      if (direction === 1) {
-        next = liSelected.nextSibling;
-      } else {
-        next = liSelected.previousSibling;
-      }
-    };
-    var highlightSelection = function highlightSelection(current) {
-      liSelected = current;
-      liSelected.classList.add(select.selectedResult);
-    };
-    input.onkeydown = function (event) {
-      if (li.length > 0) {
-        switch (event.keyCode) {
-          case keys.ARROW_UP:
-            if (liSelected) {
-              removeSelection(0);
-              if (next) {
-                highlightSelection(next);
-              } else {
-                highlightSelection(li[liLength]);
-              }
-            } else {
-              highlightSelection(li[liLength]);
-            }
-            break;
-          case keys.ARROW_DOWN:
-            if (liSelected) {
-              removeSelection(1);
-              if (next) {
-                highlightSelection(next);
-              } else {
-                highlightSelection(li[0]);
-              }
-            } else {
-              highlightSelection(li[0]);
-            }
-            break;
-          case keys.ENTER:
-            if (liSelected) {
-              onSelection(event, input, resultsList, feedback, resultsValues, liSelected);
-            }
-        }
-      }
-    };
-    li.forEach(function (selection) {
-      selection.onmousedown = function (event) {
-        return onSelection(event, input, resultsList, feedback, resultsValues);
-      };
-    });
-  };
-  var autoCompleteView = {
-    getInput: getInput,
-    createResultsList: createResultsList,
-    highlight: highlight,
-    addResultsToList: addResultsToList,
-    navigation: navigation,
-    clearResults: clearResults
-  };
-
-  var CustomEventPolyfill = function CustomEventPolyfill(event, params) {
-    params = params || {
-      bubbles: false,
-      cancelable: false,
-      detail: undefined
-    };
-    var evt = document.createEvent("CustomEvent");
-    evt.initCustomEvent(event, params.bubbles, params.cancelable, params.detail);
-    return evt;
-  };
-  CustomEventPolyfill.prototype = window.Event.prototype;
-  var CustomEventWrapper = typeof window.CustomEvent === "function" && window.CustomEvent || CustomEventPolyfill;
-  var initElementClosestPolyfill = function initElementClosestPolyfill() {
-    if (!Element.prototype.matches) {
-      Element.prototype.matches = Element.prototype.msMatchesSelector || Element.prototype.webkitMatchesSelector;
-    }
-    if (!Element.prototype.closest) {
-      Element.prototype.closest = function (s) {
-        var el = this;
-        do {
-          if (el.matches(s)) {
-            return el;
-          }
-          el = el.parentElement || el.parentNode;
-        } while (el !== null && el.nodeType === 1);
-        return null;
-      };
-    }
-  };
-  var Polyfill = {
-    CustomEventWrapper: CustomEventWrapper,
-    initElementClosestPolyfill: initElementClosestPolyfill
-  };
-
-  var autoComplete =
-  function () {
-    function autoComplete(config) {
-      _classCallCheck(this, autoComplete);
-      var _config$selector = config.selector,
-          selector = _config$selector === void 0 ? "#autoComplete" : _config$selector,
-          _config$data = config.data,
-          key = _config$data.key,
-          _src = _config$data.src,
-          _config$data$cache = _config$data.cache,
-          cache = _config$data$cache === void 0 ? true : _config$data$cache,
-          query = config.query,
-          _config$trigger = config.trigger;
-      _config$trigger = _config$trigger === void 0 ? {} : _config$trigger;
-      var _config$trigger$event = _config$trigger.event,
-          event = _config$trigger$event === void 0 ? ["input"] : _config$trigger$event,
-          _config$trigger$condi = _config$trigger.condition,
-          condition = _config$trigger$condi === void 0 ? false : _config$trigger$condi,
-          _config$searchEngine = config.searchEngine,
-          searchEngine = _config$searchEngine === void 0 ? "strict" : _config$searchEngine,
-          _config$threshold = config.threshold,
-          threshold = _config$threshold === void 0 ? 0 : _config$threshold,
-          _config$debounce = config.debounce,
-          debounce = _config$debounce === void 0 ? 0 : _config$debounce,
-          _config$resultsList = config.resultsList;
-      _config$resultsList = _config$resultsList === void 0 ? {} : _config$resultsList;
-      var _config$resultsList$r = _config$resultsList.render,
-          render = _config$resultsList$r === void 0 ? false : _config$resultsList$r,
-          _config$resultsList$c = _config$resultsList.container,
-          container = _config$resultsList$c === void 0 ? false : _config$resultsList$c,
-          destination = _config$resultsList.destination,
-          _config$resultsList$p = _config$resultsList.position,
-          position = _config$resultsList$p === void 0 ? "afterend" : _config$resultsList$p,
-          _config$resultsList$e = _config$resultsList.element,
-          resultsListElement = _config$resultsList$e === void 0 ? "ul" : _config$resultsList$e,
-          _config$resultsList$n = _config$resultsList.navigation,
-          navigation = _config$resultsList$n === void 0 ? false : _config$resultsList$n,
-          _config$sort = config.sort,
-          sort = _config$sort === void 0 ? false : _config$sort,
-          placeHolder = config.placeHolder,
-          _config$maxResults = config.maxResults,
-          maxResults = _config$maxResults === void 0 ? 5 : _config$maxResults,
-          _config$resultItem = config.resultItem;
-      _config$resultItem = _config$resultItem === void 0 ? {} : _config$resultItem;
-      var _config$resultItem$co = _config$resultItem.content,
-          content = _config$resultItem$co === void 0 ? false : _config$resultItem$co,
-          _config$resultItem$el = _config$resultItem.element,
-          resultItemElement = _config$resultItem$el === void 0 ? "li" : _config$resultItem$el,
-          noResults = config.noResults,
-          _config$highlight = config.highlight,
-          highlight = _config$highlight === void 0 ? false : _config$highlight,
-          onSelection = config.onSelection;
-      var resultsListView = render ? autoCompleteView.createResultsList({
-        container: container,
-        destination: destination || autoCompleteView.getInput(selector),
-        position: position,
-        element: resultsListElement
-      }) : null;
-      this.selector = selector;
-      this.data = {
-        src: function src() {
-          return typeof _src === "function" ? _src() : _src;
-        },
-        key: key,
-        cache: cache
-      };
-      this.query = query;
-      this.trigger = {
-        event: event,
-        condition: condition
-      };
-      this.searchEngine = searchEngine === "loose" ? "loose" : typeof searchEngine === "function" ? searchEngine : "strict";
-      this.threshold = threshold;
-      this.debounce = debounce;
-      this.resultsList = {
-        render: render,
-        view: resultsListView,
-        navigation: navigation
-      };
-      this.sort = sort;
-      this.placeHolder = placeHolder;
-      this.maxResults = maxResults;
-      this.resultItem = {
-        content: content,
-        element: resultItemElement
-      };
-      this.noResults = noResults;
-      this.highlight = highlight;
-      this.onSelection = onSelection;
-      this.init();
-    }
-    _createClass(autoComplete, [{
-      key: "search",
-      value: function search(query, record) {
-        var recordLowerCase = record.toLowerCase();
-        if (this.searchEngine === "loose") {
-          query = query.replace(/ /g, "");
-          var match = [];
-          var searchPosition = 0;
-          for (var number = 0; number < recordLowerCase.length; number++) {
-            var recordChar = record[number];
-            if (searchPosition < query.length && recordLowerCase[number] === query[searchPosition]) {
-              recordChar = this.highlight ? autoCompleteView.highlight(recordChar) : recordChar;
-              searchPosition++;
-            }
-            match.push(recordChar);
-          }
-          if (searchPosition !== query.length) {
-            return false;
-          }
-          return match.join("");
-        } else {
-          if (recordLowerCase.includes(query)) {
-            var pattern = new RegExp("".concat(query), "i");
-            query = pattern.exec(record);
-            return this.highlight ? record.replace(query, autoCompleteView.highlight(query)) : record;
-          }
-        }
-      }
-    }, {
-      key: "listMatchedResults",
-      value: function listMatchedResults(data) {
-        var _this = this;
-        return new Promise(function (resolve) {
-          var resList = [];
-          data.filter(function (record, index) {
-            var search = function search(key) {
-              var recordValue = key ? record[key] : record;
-              if (recordValue) {
-                var match = typeof _this.searchEngine === "function" ? _this.searchEngine(_this.queryValue, recordValue) : _this.search(_this.queryValue, recordValue);
-                if (match && key) {
-                  resList.push({
-                    key: key,
-                    index: index,
-                    match: match,
-                    value: record
-                  });
-                } else if (match && !key) {
-                  resList.push({
-                    index: index,
-                    match: match,
-                    value: record
-                  });
-                }
-              }
-            };
-            if (_this.data.key) {
-              var _iteratorNormalCompletion = true;
-              var _didIteratorError = false;
-              var _iteratorError = undefined;
-              try {
-                for (var _iterator = _this.data.key[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-                  var key = _step.value;
-                  search(key);
-                }
-              } catch (err) {
-                _didIteratorError = true;
-                _iteratorError = err;
-              } finally {
-                try {
-                  if (!_iteratorNormalCompletion && _iterator["return"] != null) {
-                    _iterator["return"]();
-                  }
-                } finally {
-                  if (_didIteratorError) {
-                    throw _iteratorError;
-                  }
-                }
-              }
-            } else {
-              search();
-            }
-          });
-          var list = _this.sort ? resList.sort(_this.sort).slice(0, _this.maxResults) : resList.slice(0, _this.maxResults);
-          return resolve({
-            matches: resList.length,
-            list: list
-          });
-        });
-      }
-    }, {
-      key: "ignite",
-      value: function ignite() {
-        var _this2 = this;
-        var input = autoCompleteView.getInput(this.selector);
-        if (this.placeHolder) {
-          input.setAttribute("placeholder", this.placeHolder);
-        }
-        var debounce = function debounce(func, delay) {
-          var inDebounce;
-          return function () {
-            var context = this;
-            var args = arguments;
-            clearTimeout(inDebounce);
-            inDebounce = setTimeout(function () {
-              return func.apply(context, args);
-            }, delay);
-          };
-        };
-        var exec = function exec(event) {
-          var inputValue = input instanceof HTMLInputElement || input instanceof HTMLTextAreaElement ? input.value.toLowerCase() : input.innerHTML.toLowerCase();
-          var queryValue = _this2.queryValue = _this2.query && _this2.query.manipulate ? _this2.query.manipulate(inputValue) : inputValue;
-          var renderResultsList = _this2.resultsList.render;
-          var triggerCondition = _this2.trigger.condition ? _this2.trigger.condition(queryValue) : queryValue.length > _this2.threshold && queryValue.replace(/ /g, "").length;
-          var eventEmitter = function eventEmitter(event, results) {
-            input.dispatchEvent(new Polyfill.CustomEventWrapper("autoComplete", {
-              bubbles: true,
-              detail: {
-                event: event,
-                input: inputValue,
-                query: queryValue,
-                matches: results ? results.matches : null,
-                results: results ? results.list : null
-              },
-              cancelable: true
-            }));
-          };
-          if (renderResultsList) {
-            var resultsList = _this2.resultsList.view;
-            var clearResults = autoCompleteView.clearResults(resultsList);
-            if (triggerCondition) {
-              _this2.listMatchedResults(_this2.dataStream, event).then(function (list) {
-                eventEmitter(event, list);
-                if (_this2.resultsList.render) {
-                  if (list.list.length === 0 && _this2.noResults) {
-                    _this2.noResults();
-                  } else {
-                    autoCompleteView.addResultsToList(resultsList, list.list, _this2.resultItem);
-                    if (_this2.onSelection) {
-                      _this2.resultsList.navigation ? _this2.resultsList.navigation(event, input, resultsList, _this2.onSelection, list) : autoCompleteView.navigation(input, resultsList, _this2.onSelection, list);
-                    }
-                  }
-                }
-              });
-            } else {
-              eventEmitter(event);
-            }
-          } else if (!renderResultsList && triggerCondition) {
-            _this2.listMatchedResults(_this2.dataStream, event).then(function (list) {
-              eventEmitter(event, list);
-            });
-          }
-        };
-        var run = function run(event) {
-          Promise.resolve(_this2.data.cache ? _this2.dataStream : _this2.data.src()).then(function (data) {
-            _this2.dataStream = data;
-            exec(event);
-          });
-        };
-        this.trigger.event.forEach(function (eventType) {
-          input.addEventListener(eventType, debounce(function (event) {
-            return run(event);
-          }, _this2.debounce));
-        });
-      }
-    }, {
-      key: "init",
-      value: function init() {
-        var _this3 = this;
-        if (this.data.cache) {
-          Promise.resolve(this.data.src()).then(function (data) {
-            _this3.dataStream = data;
-            _this3.ignite();
-          });
-        } else {
-          this.ignite();
-        }
-        Polyfill.initElementClosestPolyfill();
-      }
-    }]);
-    return autoComplete;
-  }();
-
-  return autoComplete;
-
-})));
-
-
-/***/ }),
-
-/***/ 736:
-/***/ (function(module, exports) {
-
-module.exports = "<span><i class=\"glyphicon glyphicon-search\" *ngIf=\"this.searchIsDone\"></i><input class=\"btn btn-info btn-xs\" [@search]=\"searchState\" (@search.start)=\"this.onBegin($event)\" (@search.done)=\"this.onDone($event)\" id=\"autoComplete\" autocomplete=\"off\"></span>"
-
-/***/ }),
-
-/***/ 737:
-/***/ (function(module, exports) {
-
-module.exports = "span {\n  position: absolute; }\n\nspan i {\n  position: absolute;\n  display: block;\n  top: -4px;\n  z-index: 1000;\n  color: #777;\n  padding: 3px 5px;\n  border-radius: 3px;\n  left: 1px; }\n\ni:hover {\n  background: #46b8da;\n  color: white !important; }\n"
-
-/***/ }),
-
-/***/ 738:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-const core_1 = __webpack_require__(2);
-const $ = __webpack_require__(14);
-let AppModalDirective = class AppModalDirective {
-    constructor(templateRef, viewContainer) {
-        this.templateRef = templateRef;
-        this.viewContainer = viewContainer;
-    }
-    set appModal(condition) {
-        if (condition) {
-            let height = window.innerHeight * .8;
-            this.viewContainer.createEmbeddedView(this.templateRef);
-            $('.app-modal').attr('height', height);
-            $('.assetviewer-modal').modal('show');
-            if (this.viewContainer.length > 1) {
-                this.viewContainer.remove(0);
-            }
-        }
-        else {
-            this.viewContainer.clear();
-        }
-    }
-};
-__decorate([
-    core_1.Input(),
-    __metadata("design:type", Object),
-    __metadata("design:paramtypes", [Object])
-], AppModalDirective.prototype, "appModal", null);
-AppModalDirective = __decorate([
-    core_1.Directive({ selector: '[appModal]' }),
-    __metadata("design:paramtypes", [core_1.TemplateRef,
-        core_1.ViewContainerRef])
-], AppModalDirective);
-exports.AppModalDirective = AppModalDirective;
-
-
-/***/ }),
-
-/***/ 739:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-const core_1 = __webpack_require__(2);
-const authentication_services_1 = __webpack_require__(11);
-let InfoboxDirective = class InfoboxDirective {
-    constructor(templateRef, viewContainer, activeUser) {
-        this.templateRef = templateRef;
-        this.viewContainer = viewContainer;
-        this.activeUser = activeUser;
-    }
-    set infobox(condition) {
-        if (condition) {
-            condition['what'] = condition['meta']['event'] ?
-                this.activeUser.language == 'english' ?
-                    condition['meta']['event']['en'] :
-                    condition['meta']['event']['da'] :
-                null;
-            condition['who'] = condition['meta']['names'].length > 0 ?
-                condition['meta']['names'].toString().replace(/,/g, ', ') :
-                null;
-            condition['where'] = condition['meta']['venue'] ?
-                condition['location']['country'] == 'United States' ?
-                    `${condition['meta']['venue']}, ${condition['location']['city']}, ${condition['location']['state']}` :
-                    `${condition['meta']['venue']}, ${condition['location']['city']}, ${condition['location']['country']}` :
-                condition['location']['country'] == 'United States' ?
-                    `${condition['location']['city']}, ${condition['location']['state']}` :
-                    `${condition['location']['city']}, ${condition['location']['country']}`;
-            condition['why'] = condition['meta']['occasion'] ?
-                condition['meta']['occasion'] :
-                null;
-            this.viewContainer.createEmbeddedView(this.templateRef);
-        }
-        else {
-            this.viewContainer.clear();
-        }
-    }
-};
-__decorate([
-    core_1.Input(),
-    __metadata("design:type", Boolean),
-    __metadata("design:paramtypes", [Boolean])
-], InfoboxDirective.prototype, "infobox", null);
-InfoboxDirective = __decorate([
-    core_1.Directive({ selector: '[infobox]' }),
-    __metadata("design:paramtypes", [core_1.TemplateRef,
-        core_1.ViewContainerRef,
-        authentication_services_1.AuthenticationServices])
-], InfoboxDirective);
-exports.InfoboxDirective = InfoboxDirective;
-
-
-/***/ }),
-
 /***/ 740:
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -33372,7 +33376,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 const core_1 = __webpack_require__(2);
-const $ = __webpack_require__(14);
+const $ = __webpack_require__(12);
 let DestroyVideoOnEnded = class DestroyVideoOnEnded {
     onEnded(event) {
         $('.video-modal').modal('hide');
@@ -33559,11 +33563,37 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 const core_1 = __webpack_require__(2);
 const authentication_services_1 = __webpack_require__(11);
 const app_modal_services_1 = __webpack_require__(87);
-const $ = __webpack_require__(14);
+const $ = __webpack_require__(12);
 let AppModalComponent = class AppModalComponent {
     constructor(activeUser, modal) {
         this.activeUser = activeUser;
         this.modal = modal;
+        this.inc = 0;
+        this.modal.activeAsset.subscribe((asset) => {
+            let keywords = asset.meta.keywords;
+            this.keywords = asset.meta.keywords;
+            if (this.keywords.length > 0) {
+                this.setKeyword();
+            }
+        });
+    }
+    handler(event) {
+        let id = $(event.target).attr('id');
+        let keywordsIsEmpty = this.keywords.length > 0 ? false : true;
+        this.ticker = !keywordsIsEmpty ? $('#keyword') : null;
+        let type = !id ?
+            'modal' :
+            event.elapsedTime == 0.5 ?
+                'keyword_begin' :
+                'keyword_end';
+        if (!keywordsIsEmpty && type == 'keyword_end') {
+            this.setKeyword();
+        }
+        if (type == 'keyword_begin' || type == 'modal') {
+            setTimeout(() => {
+                $('#keyword').removeClass('begin');
+            }, 500);
+        }
     }
     keyupHandler(event) {
         if (event.key == 'Escape') {
@@ -33571,7 +33601,18 @@ let AppModalComponent = class AppModalComponent {
             this.modal.clear();
         }
     }
-    flip(direction) {
+    clickHandler(event) {
+        if ($(event.target).hasClass('assetviewer-modal')) {
+            this.modal.clear();
+        }
+    }
+    setKeyword() {
+        this.keyword = this.keywords[this.inc];
+        $('#ticker p').addClass('begin');
+        this.inc = (this.inc == this.keywords.length - 1) ? 0 : this.inc += 1;
+    }
+    flip(direction, event) {
+        this.keyword = null;
         let assets = this.modal.getAssets();
         let source = this.modal.getSource();
         let currentImage = source.split('/')[2];
@@ -33598,11 +33639,23 @@ let AppModalComponent = class AppModalComponent {
     }
 };
 __decorate([
+    core_1.HostListener('transitionend', ['$event']),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [TransitionEvent]),
+    __metadata("design:returntype", void 0)
+], AppModalComponent.prototype, "handler", null);
+__decorate([
     core_1.HostListener('document:keyup', ['$event']),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [KeyboardEvent]),
     __metadata("design:returntype", void 0)
 ], AppModalComponent.prototype, "keyupHandler", null);
+__decorate([
+    core_1.HostListener('click', ['$event']),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [MouseEvent]),
+    __metadata("design:returntype", void 0)
+], AppModalComponent.prototype, "clickHandler", null);
 AppModalComponent = __decorate([
     core_1.Component({
         selector: 'app-modal',
@@ -33620,14 +33673,14 @@ exports.AppModalComponent = AppModalComponent;
 /***/ 745:
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"modal fade assetviewer-modal\" tabindex=\"1\" role=\"dialog\" aria-labelledby=\"assetviewerModal\"><div class=\"modal-image-container\" *ngIf=\"this.modal.activeService == 'images'\"><span class=\"modal-image-overlay-positioner\"><img class=\"modal-image app-modal\" *appModal=\"this.modal.modalSource\" src=\"{{ this.modal.modalSource }}\"><ul class=\"modal-image-overlay\" *ngIf=\"this.modal.modalSource &amp;&amp; this.modal.assets.length &gt; 1\"><li class=\"button-left\" (click)=\"this.flip('previous')\"><span class=\"glyphicon glyphicon-step-backward\">&nbsp; </span>{{ { name: 'rwd', language: this.activeUser.language } | labelTransform }}</li><li class=\"button-right\" (click)=\"this.flip('next')\"> {{ { name: 'fwd', language: this.activeUser.language } | labelTransform}} \n&nbsp;<span class=\"glyphicon glyphicon-step-forward\"></span></li></ul><ul class=\"modal-image-overlay-menu\"><li class=\"button-left\" onclick=\"window.print(); return null;\"><span class=\"glyphicon glyphicon-print\">&nbsp;</span>{{ { name: 'print', language: this.activeUser.language } | labelTransform }}</li><li class=\"button-left\"><a href=\"{{ this.modal.modalSource }}\" download> <span class=\"glyphicon glyphicon-download\">&nbsp;</span>{{ { name: 'save', language: this.activeUser.language } | labelTransform }}</a></li><li class=\"button-left\" (click)=\"this.cancelModal()\"><span class=\"glyphicon glyphicon-remove\">&nbsp;</span>{{ { name: 'close', language: this.activeUser.language } | labelTransform }}</li></ul></span></div><div class=\"modal-video-container\" *ngIf=\"this.modal.activeService == 'videos'\"><video class=\"app-modal\" *appModal=\"this.modal.modalSource\" stop-propagation-on-click destroy-video-on-ended controls autoplay><source src=\"{{ this.modal.modalSource }}\" type=\"video/mp4\"><source src=\"{{ this.modal.modalSource }}\" type=\"video/ogg\"><source src=\"{{ this.modal.modalSource }}\" type=\"video/webm\"></video></div></div>"
+module.exports = "<div class=\"modal fade assetviewer-modal\" tabindex=\"1\" role=\"dialog\" aria-labelledby=\"assetviewerModal\"><div id=\"ticker\"><label *ngIf=\"this.keyword\">{{ { name: 'Keywords', language: this.activeUser.language } | labelTransform }}</label><p id=\"keyword\">{{ this.keyword }} </p></div><div class=\"modal-image-container\" *ngIf=\"this.modal.activeService == 'images'\"><span class=\"modal-image-overlay-positioner\"><img class=\"modal-image app-modal\" *appModal=\"this.modal.source\" src=\"{{ this.modal.source }}\"><ul class=\"modal-image-overlay\" *ngIf=\"this.modal.source &amp;&amp; this.modal.assets.length &gt; 1\"><li class=\"button-left\" (click)=\"this.flip('previous')\"><span class=\"glyphicon glyphicon-step-backward\">&nbsp; </span>{{ { name: 'rwd', language: this.activeUser.language } | labelTransform }}</li><li class=\"button-right\" (click)=\"this.flip('next', $event)\"> {{ { name: 'fwd', language: this.activeUser.language } | labelTransform}} \n&nbsp;<span class=\"glyphicon glyphicon-step-forward\"></span></li></ul><ul class=\"modal-image-overlay-menu\"><li class=\"button-left\" onclick=\"window.print(); return null;\"><span class=\"glyphicon glyphicon-print\">&nbsp;</span>{{ { name: 'print', language: this.activeUser.language } | labelTransform }}</li><li class=\"button-left\"><a href=\"{{ this.modal.source }}\" download> <span class=\"glyphicon glyphicon-download\">&nbsp;</span>{{ { name: 'save', language: this.activeUser.language } | labelTransform }}</a></li><li class=\"button-left\" (click)=\"this.cancelModal()\"><span class=\"glyphicon glyphicon-remove\">&nbsp;</span>{{ { name: 'close', language: this.activeUser.language } | labelTransform }}</li></ul></span></div><div class=\"modal-video-container\" *ngIf=\"this.modal.activeService == 'videos'\"><video class=\"app-modal\" *appModal=\"this.modal.source\" stop-propagation-on-click destroy-video-on-ended controls autoplay><source src=\"{{ this.modal.source }}\" type=\"video/mp4\"><source src=\"{{ this.modal.source }}\" type=\"video/ogg\"><source src=\"{{ this.modal.source }}\" type=\"video/webm\"></video></div></div>"
 
 /***/ }),
 
 /***/ 746:
 /***/ (function(module, exports) {
 
-module.exports = ".assetviewer-modal {\n  margin: auto; }\n\n.modal {\n  text-align: center;\n  top: 10px; }\n\n.modal-image-container {\n  position: relative;\n  top: 10%;\n  background-color: lightgray;\n  margin-left: 0px;\n  margin-right: 0px;\n  display: inline-block; }\n\n.modal-image-overlay-positioner {\n  position: relative; }\n\n.modal-image {\n  border: 5px solid lightgray; }\n\n@media print {\n  .modal-image {\n    border: none; }\n  li {\n    display: none; }\n  .image-main {\n    display: none; } }\n\n.modal-image-overlay {\n  display: block;\n  list-style: none;\n  color: white;\n  position: absolute;\n  top: 0px;\n  left: 0px;\n  width: 100%;\n  padding: 0px;\n  margin: 0px; }\n\n.modal-image-overlay-menu {\n  padding-left: 5px;\n  margin: 0px;\n  vertical-align: middle;\n  list-style: none;\n  position: absolute;\n  left: 0px;\n  top: 100px; }\n\n.modal-image-overlay-menu li {\n  vertical-align: middle;\n  padding-right: 5px;\n  margin-bottom: 5px; }\n\n.modal-image-overlay li,\n.modal-image-overlay-menu li {\n  text-transform: uppercase;\n  color: white;\n  background-color: gray;\n  text-align: center;\n  opacity: .3; }\n\n.modal-image-overlay li {\n  position: absolute;\n  width: 100px; }\n\n.modal-image-overlay li.button-left {\n  left: 5px; }\n\n.modal-image-overlay-menu li.button-left a {\n  color: inherit;\n  text-decoration: none; }\n\n.modal-image-overlay li.button-right {\n  right: 5px; }\n\n.modal-image-overlay li.button-left,\n.modal-image-overlay-menu li.button-left {\n  border-left: none;\n  border-radius: 0 4px 4px 0; }\n\n.modal-image-overlay li.button-right {\n  border-right: none;\n  border-radius: 4px 0 0 4px; }\n\n.modal-image-overlay li.button-left:hover,\n.modal-image-overlay li.button-right:hover,\n.modal-image-overlay-menu li.button-left:hover {\n  cursor: pointer;\n  background-color: lightgray;\n  opacity: 1;\n  color: black; }\n\n.button-left .glyphicon {\n  vertical-align: middle;\n  float: left;\n  padding-left: 5px; }\n\n.button-right .glyphicon {\n  float: right;\n  padding-right: 5px; }\n"
+module.exports = "#ticker {\n  color: ghostwhite;\n  position: absolute;\n  top: 15px;\n  left: 0;\n  right: 0; }\n\n#keyword {\n  opacity: 0;\n  -webkit-transition: opacity 1.5s, -webkit-transform 1.5s;\n  /* Safari */\n  transition: opacity 1.5s, transform 1.5s; }\n\n#keyword.begin {\n  opacity: 1;\n  -webkit-transition: opacity 0.5s, -webkit-transform 0.5s;\n  /* Safari */\n  transition: opacity 0.5s, transform 0.5s; }\n\n.assetviewer-modal {\n  margin: auto; }\n\n.modal {\n  text-align: center;\n  top: 10px; }\n\n.modal-image-container {\n  position: relative;\n  top: 10%;\n  background-color: lightgray;\n  margin-left: 0px;\n  margin-right: 0px;\n  display: inline-block; }\n\n.modal-image-overlay-positioner {\n  position: relative; }\n\n.modal-image {\n  border: 5px solid lightgray; }\n\n@media print {\n  .modal-image {\n    border: none; }\n  li {\n    display: none; }\n  .image-main {\n    display: none; } }\n\n.modal-image-overlay {\n  display: block;\n  list-style: none;\n  color: white;\n  position: absolute;\n  top: 0px;\n  left: 0px;\n  width: 100%;\n  padding: 0px;\n  margin: 0px; }\n\n.modal-image-overlay-menu {\n  padding-left: 5px;\n  margin: 0px;\n  vertical-align: middle;\n  list-style: none;\n  position: absolute;\n  left: 0px;\n  top: 100px; }\n\n.modal-image-overlay-menu li {\n  vertical-align: middle;\n  padding-right: 5px;\n  margin-bottom: 5px; }\n\n.modal-image-overlay li,\n.modal-image-overlay-menu li {\n  text-transform: uppercase;\n  color: white;\n  background-color: gray;\n  text-align: center;\n  opacity: .3; }\n\n.modal-image-overlay li {\n  position: absolute;\n  width: 100px; }\n\n.modal-image-overlay li.button-left {\n  left: 5px; }\n\n.modal-image-overlay-menu li.button-left a {\n  color: inherit;\n  text-decoration: none; }\n\n.modal-image-overlay li.button-right {\n  right: 5px; }\n\n.modal-image-overlay li.button-left,\n.modal-image-overlay-menu li.button-left {\n  border-left: none;\n  border-radius: 0 4px 4px 0; }\n\n.modal-image-overlay li.button-right {\n  border-right: none;\n  border-radius: 4px 0 0 4px; }\n\n.modal-image-overlay li.button-left:hover,\n.modal-image-overlay li.button-right:hover,\n.modal-image-overlay-menu li.button-left:hover {\n  cursor: pointer;\n  background-color: lightgray;\n  opacity: 1;\n  color: black; }\n\n.button-left .glyphicon {\n  vertical-align: middle;\n  float: left;\n  padding-left: 5px; }\n\n.button-right .glyphicon {\n  float: right;\n  padding-right: 5px; }\n"
 
 /***/ }),
 
@@ -33644,7 +33697,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 const core_1 = __webpack_require__(2);
 const common_1 = __webpack_require__(17);
-const forms_1 = __webpack_require__(73);
+const forms_1 = __webpack_require__(74);
 const pipes_module_1 = __webpack_require__(86);
 const app_directives_module_1 = __webpack_require__(109);
 const app_editor_component_1 = __webpack_require__(748);
@@ -33725,7 +33778,7 @@ module.exports = "<div *appEditor=\"this.editor.doEdit\" id=\"image-editor\"><di
 /***/ 750:
 /***/ (function(module, exports) {
 
-module.exports = ""
+module.exports = "#drag-area {\n  text-align: center; }\n\n#drag-area:hover {\n  cursor: move; }\n\n#image-editor {\n  border: steelblue;\n  position: fixed;\n  top: 85px;\n  left: 35px;\n  width: 500px;\n  z-index: 1000; }\n\n#image-editor label {\n  color: white;\n  text-transform: capitalize;\n  font-weight: normal; }\n\n#image-editor .row {\n  border-radius: 10px;\n  border: 1px solid darkgray; }\n\n#image-editor .input-group-addon {\n  background-color: steelblue;\n  border-radius: 4px 0 0 4px;\n  border: 1px solid steelblue;\n  border-right: none;\n  width: auto; }\n\n#image-editor .form-control {\n  border: 1px solid steelblue;\n  border-radius: 4px;\n  display: table-cell; }\n\n#image-editor .image-list .form-control {\n  border-radius: 0 4px 4px 0;\n  border-left: none; }\n\n#image-editor .select_all {\n  text-align: left;\n  margin: 10px; }\n\n#image-editor .buttons {\n  margin: 0 0 15px;\n  padding: 0 15px; }\n\n#image-editor .btn {\n  margin: 10px 0 10px 10px;\n  color: #ffffff; }\n\n#image-editor .btn-danger {\n  float: left;\n  margin: 10px 0 10px; }\n\n#image-editor .background {\n  position: absolute;\n  top: 0;\n  width: 530px;\n  height: 100%;\n  padding: 0 15px;\n  background: steelblue;\n  opacity: 0.5;\n  z-index: -1; }\n"
 
 /***/ }),
 
@@ -33750,7 +33803,7 @@ const login_model_1 = __webpack_require__(752);
 const authentication_services_1 = __webpack_require__(11);
 const permission_services_1 = __webpack_require__(47);
 // import { ErrorParser } from "../../services/error-parser";
-const $ = __webpack_require__(14);
+const $ = __webpack_require__(12);
 let LoginComponent = class LoginComponent {
     constructor(http, router, authenticator, permissionService) {
         this.http = http;
@@ -34208,11 +34261,13 @@ const core_1 = __webpack_require__(2);
 const mongoImage_services_1 = __webpack_require__(62);
 const mongoVideo_services_1 = __webpack_require__(106);
 const service_model_manager_services_1 = __webpack_require__(24);
+const rxjs_1 = __webpack_require__(73);
 let AppModalServices = class AppModalServices {
     constructor(images, videos, modelManager) {
         this.images = images;
         this.videos = videos;
         this.modelManager = modelManager;
+        this.activeAsset = new rxjs_1.Subject();
         this.modelManager.serviceReady.subscribe((service) => {
             this.activeService = service;
             this.service = this[service];
@@ -34230,15 +34285,16 @@ let AppModalServices = class AppModalServices {
     }
     clear() {
         this.assets = null;
-        this.modalSource = null;
+        this.source = null;
     }
     setSource(index) {
         let assetType = this.activeService == 'images' ? 'image' : 'video';
         let folder = this.activeService == 'images' ? 'photos' : this.activeService;
-        this.modalSource = `${folder}/James/${this.assets[index][assetType].fileName}`;
+        this.source = `${folder}/James/${this.assets[index][assetType].fileName}`;
+        this.activeAsset.next(this.assets[index]);
     }
     getSource() {
-        return this.modalSource;
+        return this.source;
     }
     getAssets() {
         return this.assets;
@@ -34256,4 +34312,4 @@ exports.AppModalServices = AppModalServices;
 /***/ })
 
 },[658]);
-//# sourceMappingURL=app.fab9d70a78abfdfab0ee.js.map
+//# sourceMappingURL=app.654c8fa7f9c2f695bc6e.js.map
