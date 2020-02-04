@@ -12,9 +12,13 @@ import { Subject } from "rxjs";
 export class AppModalServices {
 
   private assets: any[];
-  private service: any;
-  private activeService: string;
+  activeService: string;
   private source: string;
+  private assetIndex: number;
+  
+  asset: any;
+  model: any;
+  service: any;
 
   activeAsset = new Subject();
 
@@ -26,12 +30,19 @@ export class AppModalServices {
     this.modelManager.serviceReady.subscribe((service: string) => {
       this.activeService = service;
       this.service = this[service];
+      this.model = this.modelManager.getRecordModel();
     })
-    this.images.onUpdatedView.subscribe((view: any) => {
-      this.assets = view.docs;
+    this.images.onUpdatedView.subscribe((updatedView: any) => {
+      this.assets = updatedView.images.docs;
+      if(updatedView.images.docs) {
+        this.activeAsset.next(this.assets[this.assetIndex]);
+      }
     })
     this.videos.onUpdatedView.subscribe((view: any) => {
       this.assets = view.docs;
+      if(view.docs) {
+        this.activeAsset.next(this.assets[this.assetIndex]);
+      }
     })
   }
 
@@ -45,11 +56,13 @@ export class AppModalServices {
     this.source = null ;
   }
 
-  setSource(index: number): void {
+  setSource(index: any): void {
     let assetType = this.activeService == 'images' ? 'image' : 'video';
     let folder = this.activeService == 'images' ? 'photos' : this.activeService;
     this.source = `${folder}/James/${this.assets[index][assetType].fileName}`;
     this.activeAsset.next(this.assets[index]);
+    this.asset = this.assets[index];
+    this.assetIndex = index;
   }
 
   getSource(): any {

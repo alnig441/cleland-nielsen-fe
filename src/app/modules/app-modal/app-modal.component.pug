@@ -1,7 +1,7 @@
 div(class='modal fade assetviewer-modal' tabindex='1' role='dialog' aria-labelledby='assetviewerModal')
   
   div(id="ticker")
-    label(*ngIf='this.keyword') {{ { name: 'Keywords', language: this.activeUser.language } | labelTransform }}
+    label(*ngIf='this.keyword') {{ { name: 'Categories', language: this.activeUser.language } | labelTransform }}
     p(id='keyword') {{ this.keyword }} 
   
   div(*ngIf="this.modal.activeService == 'images'" class='modal-image-container')
@@ -32,3 +32,8 @@ div(class='modal fade assetviewer-modal' tabindex='1' role='dialog' aria-labelle
       source(src="{{ this.modal.source }}" type="video/mp4")  
       source(src="{{ this.modal.source }}" type="video/ogg")
       source(src="{{ this.modal.source }}" type="video/webm")
+   
+  form(*ngIf="this.activeUser.isAdmin", #modalAssetForm='ngForm')
+    input([(ngModel)]="this.modal.model.keywords", type='text' name='keywords' id='keywords' class='form-control' autocomplete='off' placeholder='enter new category')
+      
+      

@@ -1,9 +1,11 @@
 .message-panel {
   position: fixed;
-  top: 25px;
   width: 30%;
-  left: 35%;
+  bottom: 0px;
+  right: 0px;
   z-index: -10;
+  margin-bottom: 0;
+  padding-bottom: 0;
 }
 
 .panel-footer {

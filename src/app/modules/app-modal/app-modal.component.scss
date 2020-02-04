@@ -18,6 +18,18 @@
   transition: opacity 0.5s, transform 0.5s;
 }
 
+form {
+  width: 200px;
+  display: flex;
+  position: absolute;
+  right: 275px;
+  top: 20px;
+}
+
+form input {
+  text-align: unset;
+}
+
 .assetviewer-modal {
   margin:auto;
 }

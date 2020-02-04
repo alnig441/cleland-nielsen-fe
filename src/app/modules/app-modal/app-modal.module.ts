@@ -1,5 +1,6 @@
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
+import { FormsModule } from "@angular/forms";
 
 import { AppDirectivesModule } from "../../modules/app-directives/app-directives.module";
 import { PipesModule } from "../../pipes/pipes.module";
@@ -12,6 +13,7 @@ import { MongoImageServices} from "../../services/mongoImage.services";
 @NgModule({
   imports: [
     CommonModule,
+    FormsModule,
     AppDirectivesModule,
     PipesModule
   ],

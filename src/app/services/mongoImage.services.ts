@@ -7,6 +7,7 @@ import { AppAlertsServices } from "./app-alerts.services";
 
 // rxjs constants
 import { BehaviorSubject } from 'rxjs';
+import { Subject } from 'rxjs';
 import { Observable } from 'rxjs';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/toPromise';
@@ -22,9 +23,12 @@ export class MongoImageServices {
   private baseUrl = '/api';
 
   // view observable/modal observable
-  private viewSubject = new BehaviorSubject(this.assets);
+  private viewSubject = new BehaviorSubject({images: this.assets, isSearch: false});
   onUpdatedView = this.viewSubject.asObservable();
   private currentView: HttpParams;
+  
+  private searchTermsSubject = new Subject();
+  onUpdatedSearchTerms = this.searchTermsSubject.asObservable();
 
   private setParams = (form : MongoImageModel, page : number, doAnd : boolean) : HttpParams => {
     let params = new HttpParams({ fromString: 'doAnd' });
@@ -44,7 +48,9 @@ export class MongoImageServices {
     private http: HttpClient,
     private activeUser: AuthenticationServices,
     private message: AppAlertsServices,
-  ) {}
+  ) {
+    this.getSearchTerms();
+  }
 
   getSearchTerms(): Observable<any> {
     if (this.activeUser.isAdmin || this.activeUser.isPermitted['to_view_images']) {
@@ -53,7 +59,9 @@ export class MongoImageServices {
         let searchTerms = this.http.get(`${this.baseUrl}/searchTerms/Photos`, { observe: 'body'})
         
         searchTerms.subscribe(
-          (result: any) => {}, 
+          (result: any) => {
+            this.searchTermsSubject.next(result);
+          }, 
           (error: HttpErrorResponse) => {
             this.message.set(error);
             throw error;
@@ -107,13 +115,14 @@ export class MongoImageServices {
     if(this.activeUser.isAdmin || this.activeUser.isPermitted['to_view_images']) {
 
       let params = form ? this.setParams(form, page, doAnd) : this.currentView;
+      let isSearch = isNaN(parseInt(this.currentView.get('page')));
 
       try {
         this.http.get(`${this.baseUrl}/Search/Photos`, { params: params, observe: 'body' })
           .subscribe(
             ( images : MongoImageModel[]) => {
               this.assets = images;
-              this.viewSubject.next(images);
+              this.viewSubject.next({ images: images, isSearch: isSearch });
             }, 
             ( error : HttpErrorResponse) => {
               this.message.set(error);
@@ -163,6 +172,7 @@ export class MongoImageServices {
             ( result : any) => {
               this.message.set({ status: 200, statusText: 'Update Images' })
               this.getView();
+              this.getSearchTerms();
             }, 
             (error : HttpErrorResponse) => {
               this.message.set(error);
