@@ -44,8 +44,8 @@ export class AppEditorServices {
         }
         this.model = this.models.getRecordModel();
       })
-      this.images.onUpdatedView.subscribe((view: any) => {
-        this.assets = view.docs;
+      this.images.onUpdatedView.subscribe((updatedView: any) => {
+        this.assets = updatedView.images.docs;
       })
       this.videos.onUpdatedView.subscribe((view: any) => {
         this.assets = view.docs;

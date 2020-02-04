@@ -32,9 +32,9 @@ export class AppModalServices {
       this.service = this[service];
       this.model = this.modelManager.getRecordModel();
     })
-    this.images.onUpdatedView.subscribe((view: any) => {
-      this.assets = view.docs;
-      if(view.docs) {
+    this.images.onUpdatedView.subscribe((updatedView: any) => {
+      this.assets = updatedView.images.docs;
+      if(updatedView.images.docs) {
         this.activeAsset.next(this.assets[this.assetIndex]);
       }
     })

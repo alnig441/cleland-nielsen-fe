@@ -43,9 +43,11 @@ export class ImagesComponent implements OnInit {
       this.models.setService(this.activatedRoute.snapshot.url[0].path);
       this.currentPage = 1;
       this.buildAlbum();
-      this.images.onUpdatedView.subscribe((view: any) => {
-        this.documents = view.docs;
-        this.pages = view.pages;
+      this.images.onUpdatedView.subscribe((updatedView: any) => {
+        if(!updatedView.isSearch){
+          this.documents = updatedView.images.docs;
+          this.pages = updatedView.images.pages;
+        }
       })
     }
 

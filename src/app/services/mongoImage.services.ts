@@ -23,7 +23,7 @@ export class MongoImageServices {
   private baseUrl = '/api';
 
   // view observable/modal observable
-  private viewSubject = new BehaviorSubject(this.assets);
+  private viewSubject = new BehaviorSubject({images: this.assets, isSearch: false});
   onUpdatedView = this.viewSubject.asObservable();
   private currentView: HttpParams;
   
@@ -115,13 +115,14 @@ export class MongoImageServices {
     if(this.activeUser.isAdmin || this.activeUser.isPermitted['to_view_images']) {
 
       let params = form ? this.setParams(form, page, doAnd) : this.currentView;
+      let isSearch = isNaN(parseInt(this.currentView.get('page')));
 
       try {
         this.http.get(`${this.baseUrl}/Search/Photos`, { params: params, observe: 'body' })
           .subscribe(
             ( images : MongoImageModel[]) => {
               this.assets = images;
-              this.viewSubject.next(images);
+              this.viewSubject.next({ images: images, isSearch: isSearch });
             }, 
             ( error : HttpErrorResponse) => {
               this.message.set(error);
