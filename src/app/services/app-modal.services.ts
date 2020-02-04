@@ -40,6 +40,9 @@ export class AppModalServices {
     })
     this.videos.onUpdatedView.subscribe((view: any) => {
       this.assets = view.docs;
+      if(view.docs) {
+        this.activeAsset.next(this.assets[this.assetIndex]);
+      }
     })
   }
 

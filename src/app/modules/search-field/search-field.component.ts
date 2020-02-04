@@ -49,7 +49,13 @@ export class SearchFieldComponent implements OnInit {
   constructor(
     private mongoImageService: MongoImageServices,
     private modal: AppModalServices
-  ) {}
+  ) {
+    this.mongoImageService.onUpdatedSearchTerms.subscribe((terms: any) => {
+      if (terms) {
+        this.searchTerms = terms;
+      }
+    })
+  }
 
   @HostListener('click', ['$event']) onClickHandler(event: MouseEvent) {
     this.searchIsDone = false;
@@ -69,11 +75,6 @@ export class SearchFieldComponent implements OnInit {
 
   ngOnInit(): void {
     this.autoCompleteElement = document.querySelector("#autoComplete") as HTMLInputElement;
-
-    this.mongoImageService.getSearchTerms()
-      .subscribe(( result: any ) => {
-        this.searchTerms = result;
-      })
   }
 
   onBegin(event: AnimationEvent) { }

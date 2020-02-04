@@ -7,6 +7,7 @@ import { AppAlertsServices } from "./app-alerts.services";
 
 // rxjs constants
 import { BehaviorSubject } from 'rxjs';
+import { Subject } from 'rxjs';
 import { Observable } from 'rxjs';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/toPromise';
@@ -25,6 +26,9 @@ export class MongoImageServices {
   private viewSubject = new BehaviorSubject(this.assets);
   onUpdatedView = this.viewSubject.asObservable();
   private currentView: HttpParams;
+  
+  private searchTermsSubject = new Subject();
+  onUpdatedSearchTerms = this.searchTermsSubject.asObservable();
 
   private setParams = (form : MongoImageModel, page : number, doAnd : boolean) : HttpParams => {
     let params = new HttpParams({ fromString: 'doAnd' });
@@ -44,7 +48,9 @@ export class MongoImageServices {
     private http: HttpClient,
     private activeUser: AuthenticationServices,
     private message: AppAlertsServices,
-  ) {}
+  ) {
+    this.getSearchTerms();
+  }
 
   getSearchTerms(): Observable<any> {
     if (this.activeUser.isAdmin || this.activeUser.isPermitted['to_view_images']) {
@@ -53,7 +59,9 @@ export class MongoImageServices {
         let searchTerms = this.http.get(`${this.baseUrl}/searchTerms/Photos`, { observe: 'body'})
         
         searchTerms.subscribe(
-          (result: any) => {}, 
+          (result: any) => {
+            this.searchTermsSubject.next(result);
+          }, 
           (error: HttpErrorResponse) => {
             this.message.set(error);
             throw error;
@@ -163,6 +171,7 @@ export class MongoImageServices {
             ( result : any) => {
               this.message.set({ status: 200, statusText: 'Update Images' })
               this.getView();
+              this.getSearchTerms();
             }, 
             (error : HttpErrorResponse) => {
               this.message.set(error);
