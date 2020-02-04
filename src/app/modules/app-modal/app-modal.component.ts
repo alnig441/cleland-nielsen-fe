@@ -23,11 +23,13 @@ export class AppModalComponent {
     private modal:      AppModalServices,
   ) { 
     this.modal.activeAsset.subscribe((asset: any) => {  
-      this.inc = 0;
-      let keywords = asset.meta.keywords;
-      this.keywords = asset.meta.keywords;
-      if(this.keywords.length > 0){
-        this.setKeyword();
+      if (asset) {
+        this.inc = 0;
+        let keywords = asset.meta.keywords;
+        this.keywords = asset.meta.keywords;
+        if(this.keywords.length > 0){
+          this.setKeyword();
+        }
       }
     })
   }
@@ -68,6 +70,11 @@ export class AppModalComponent {
       $('.assetviewer-modal').modal('hide');
       this.modal.clear();
       this.keyword = null;
+    } 
+    
+    if(event.key == 'Enter' && $(event.target).attr('id') == 'keywords') {
+      this.modal.service.update([this.modal.asset._id], this.modal.model);
+      $(event.target).val('');
     }
   }
   
