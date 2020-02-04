@@ -84,7 +84,7 @@ export class AppModalComponent {
       this.keyword = null;
     }
   }
-  
+    
   setKeyword() {
     this.keyword = this.keywords[this.inc];
     $('#ticker p').addClass('begin');

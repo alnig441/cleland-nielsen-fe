@@ -57,13 +57,14 @@ form input {
 }
 
 @media print {
+  .assetviewer-modal {
+    background: white !important;
+  }
   .modal-image {
+    position: sticky !important;
     border: none;
   }
-  li {
-    display: none;
-  }
-  .image-main {
+  ul, form, #ticker {
     display: none;
   }
 }
