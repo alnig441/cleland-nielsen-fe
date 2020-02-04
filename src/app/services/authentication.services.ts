@@ -5,6 +5,7 @@ import { Router } from "@angular/router";
 import { LoginModel } from "../models/login.model";
 import { AppAlertsServices } from "./app-alerts.services";
 
+const $ = require('jquery');
 
 @Injectable()
 
@@ -72,6 +73,7 @@ export class AuthenticationServices {
         this.isPermitted = {};
         this.redirectUrl = "/home";
         this.startPage = '';
+        $('.assetviewer-modal').modal('hide');
         this.router.navigate([this.redirectUrl]);
     }
 }
