@@ -17,7 +17,7 @@ const $ = require('jquery');
     encapsulation: ViewEncapsulation.None
 })
 
-export class ImagesComponent implements OnInit {
+export class ImagesComponent {
 
     private albumViewSelector: object = new Object();
     private showImageInformation: any[] = new Array();
@@ -36,9 +36,7 @@ export class ImagesComponent implements OnInit {
         private images: MongoImageServices,
         private editor: AppEditorServices,
         private modal: AppModalServices
-    ){}
-
-    ngOnInit(): void {
+    ){
       this.modal.clear();
       this.models.setService(this.activatedRoute.snapshot.url[0].path);
       this.currentPage = 1;
