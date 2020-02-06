@@ -22,12 +22,11 @@ export class MongoImageServices {
   private assets: any[] = new Array();
   private baseUrl = '/api';
 
-  // view observable/modal observable
   private viewSubject = new BehaviorSubject({images: this.assets, isSearch: false});
   onUpdatedView = this.viewSubject.asObservable();
   private currentView: HttpParams;
   
-  private searchTermsSubject = new Subject();
+  private searchTermsSubject = new BehaviorSubject(null);
   onUpdatedSearchTerms = this.searchTermsSubject.asObservable();
 
   private setParams = (form : MongoImageModel, page : number, doAnd : boolean) : HttpParams => {
