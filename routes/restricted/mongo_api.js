@@ -52,10 +52,12 @@ router.get('/searchTerms/**', (req, res, next) => {
 })
 
 router.post('/Update/**', (req, res, next) => {
+  let io = req.app.get('socketio');
   let uri = req.originalUrl.replace(/\/api/, '');
   let options = new Options({ uri: uri, body: req.body });
   api.post(options, (error, result, body) => {
     res.send(body);
+    io.emit('update', { endpoint: uri, whatever: body })
   })
 })
 
