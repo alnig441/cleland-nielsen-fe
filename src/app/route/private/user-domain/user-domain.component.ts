@@ -2,6 +2,7 @@ import { Component, DoCheck, OnInit, ViewEncapsulation, HostListener } from "@an
 import { AuthenticationServices } from "../../../services/authentication.services";
 import { MongoImageServices } from "../../../services/mongoImage.services";
 import { MongoVideoServices } from "../../../services/mongoVideo.services";
+import { AppAlertsServices } from "../../../services/app-alerts.services";
 import { ServiceModelManagerServices } from "../../../services/service-model-manager.services";
 
 
@@ -24,6 +25,7 @@ export class UserDomainComponent {
     constructor(
         private activeUser: AuthenticationServices,
         private formManager: ServiceModelManagerServices,
+        private alerts: AppAlertsServices,
         private images: MongoImageServices,
         private videos: MongoVideoServices
     ){
@@ -31,14 +33,16 @@ export class UserDomainComponent {
         if(service) {
           this.recordModel = this.formManager.getRecordModel();
           this.service = this[service];
+          
         }
       })
       
       if(this.activeUser.isLoggedIn && !this.activeUser.isAdmin){
         var socket = io();
         socket.on('update', (arg: any)=> {
-          console.log('message received: ', arg, this.service);
           this.service.getView();
+          this.service.getSearchTerms();
+          this.alerts.set({ status: null, statusText: 'app updated' })
         })
       }
     }
