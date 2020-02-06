@@ -45,7 +45,6 @@ export class ImagesComponent {
         if(!updatedView.isSearch){
           this.documents = updatedView.images.docs;
           this.pages = updatedView.images.pages;
-          console.log('blah docs: ', this.documents)
         }
       })
     }
