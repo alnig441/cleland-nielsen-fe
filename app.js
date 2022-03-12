@@ -16,7 +16,6 @@ const authenticate = require('./routes/authenticate/authentication'),
     permissions = require('./routes/restricted/permissions'),
     mongo_api = require('./routes/restricted/mongo_api');
 
-
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));

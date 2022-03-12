@@ -34,18 +34,18 @@ module.exports = webpackMerge(commonConfig, {
         setup: (app, server) => {
           const proxy = require('http-proxy-middleware');
           const bodyParser = require('body-parser');
-          
+
           let options = {
-            target: "http://admin:admin@localhost:4000",
-            pathRewrite: { 
+            target: "http://admin:admin@192.168.86.200:4444",
+            pathRewrite: {
               '^/api/generate_tabs':'/v1/Distinct',
               '^/api/searchTerms':'/v1/Terms',
               '^/api/Search': '/v1/Search',
               '^/api/*':'/v1/',
               },
-            } 
+            }
           let myProxy = proxy(options);
-          
+
           app.use('/api', myProxy);
           app.use(bodyParser.json());
           app.all("/**", bodyParser.json(), (req, res, next) => {

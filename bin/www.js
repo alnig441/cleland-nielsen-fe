@@ -6,9 +6,6 @@ const port = process.env.PORT ;
 const httpsPort = process.env.HTTPS_PORT;
 const hostName = process.env.NODE_ENV === 'development' ? "localhost" : "0.0.0.0" ;
 
-
-
-
 if (httpsPort) {
     const credentials = {
         ca      : fs.readFileSync(process.env.CA),
@@ -37,7 +34,7 @@ if (httpsPort) {
         if (err) {
             console.log('show me error: ', err);
         }
-        console.info(`==> 🌎 Listening on port ${port}. Open up http://${hostName}:${port}/ in your browser.`, httpServer.socket);
+        console.info(`==> 🌎 Listening on port ${port}. Open up http://${hostName}:${port}/ in your browser.`);
 
     })
 }
