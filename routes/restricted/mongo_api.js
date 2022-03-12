@@ -32,11 +32,15 @@ router.get('/generate_tabs/**', (req, res, next) => {
   let uri = req.originalUrl.replace(/api\/generate_tabs/, 'Distinct');
   let options = new Options({ uri: uri });
   api.get(options, (error, result, body) => {
-    body = body.filter( element => {
-      return element != null;
-    })
-    req.query.year ? null : body.sort()  ;
-    res.send(body);
+    if(body && body != 'undefined') {
+      body = body.filter( element => {
+        return element != null;
+      })
+      req.query.year ? null : body.sort()  ;
+      res.send(body);
+    } else {
+      res.status(504).send('check connection')
+    }
   })
 })
 
@@ -44,10 +48,12 @@ router.get('/searchTerms/**', (req, res, next) => {
   let uri = req.originalUrl.replace(/api\/searchTerms/, 'Terms');
   let options = new Options({ uri: uri });
   api.get(options, (error, result, body) => {
-    body = body.filter( element => {
-      return element != null;
-    })
-    res.send(body);
+    if(body && body != 'undefined') {
+      body = body.filter( element => {
+        return element != null;
+      })
+      res.send(body);
+    }
   })
 })
 
