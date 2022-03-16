@@ -20,11 +20,9 @@ import 'rxjs/add/observable/of';
 export class MongoImageServices {
 
   private assets: any[] = new Array();
-  // private assets: any = new Object;
   private baseUrl = '/api';
 
   private viewSubject = new BehaviorSubject({images: this.assets, isSearch: false});
-  // private viewSubject = new BehaviorSubject({images: this.assets, isSearch: false, total: this.assets.total});
   onUpdatedView = this.viewSubject.asObservable();
   private currentView: HttpParams;
 
@@ -125,7 +123,6 @@ export class MongoImageServices {
             ( images : MongoImageModel[]) => {
               this.assets = images;
               this.viewSubject.next({ images: images, isSearch: isSearch });
-              // this.viewSubject.next({ images: images, isSearch: isSearch, total: images.total });
             },
             ( error : HttpErrorResponse) => {
               this.message.set(error);
