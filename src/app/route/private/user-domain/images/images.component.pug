@@ -14,7 +14,7 @@ span(*ngIf="!this.images.message.failure" class='image-main')
         span(class='glyphicon glyphicon-triangle-left')
       li(*ngIf="this.currentPage != this.pages", (click)="this.turnAlbumPage('forward')" class='forward')
         span(class='glyphicon glyphicon-triangle-right')
-              
+
     div(*ngFor='let document of this.documents as documents; index as j' class='image-container')
       span(*infobox='this.showImageInformation[j]' class='infobox row')
         ng-container
@@ -34,12 +34,13 @@ span(*ngIf="!this.images.message.failure" class='image-main')
             div(class='info-value col-sm-9')
               p {{ document.where }}
           div(class='row')
-            div(class='info-key col-sm-3')  
+            div(class='info-key col-sm-3')
               p(*ngIf='document.why') {{ { name: 'why', language: this.activeUser.language } | labelTransform }}
             div(class='info-value col-sm-9')
               p {{ document.why }}
       div(data-toggle='modal' class="thumbnail" data-target-not='.assetviewer-modal' id="{{document._id}}")
-        img((click)='this.openModal(document._id)' src="photos/photoapp/{{document.image.fileName | extTransform}}")
+        img(*ngIf="!this.activeUser.isGuest", (click)='this.openModal(document._id)' src="photos/photoapp/{{document.image.fileName | extTransform}}")
+        img(*ngIf="this.activeUser.isGuest", (click)="this.openModal('photos/photoapp/private-no-access.jpeg')", src="photos/photoapp/private-no-access.jpeg")
         div(class='caption')
           table
             tr
@@ -49,5 +50,4 @@ span(*ngIf="!this.images.message.failure" class='image-main')
                 p((mouseenter)="this.setImageInfo(j)", (mouseleave)="this.setImageInfo()")
                   span(class="glyphicon glyphicon-info-sign" aria-hidden="true")
               td
-                p {{(j + 1) + ((this.currentPage - 1) * 6)}} of {{this.total}}                 
-                                  
+                p {{(j + 1) + ((this.currentPage - 1) * 6)}} of {{ this.total }}
