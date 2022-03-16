@@ -7,7 +7,6 @@ import { ActivatedRoute } from "@angular/router";
 import { AppEditorServices } from "../../../../services/app-editor.services";
 import { AppModalServices } from "../../../../services/app-modal.services";
 
-
 const $ = require('jquery');
 
 @Component({
@@ -28,6 +27,7 @@ export class ImagesComponent {
     private pages: number;
     private documents: any[] = new Array();
     private imageModel = new MongoImageModel();
+    private total: number;
 
     constructor(
         private models: ServiceModelManagerServices,
@@ -45,6 +45,7 @@ export class ImagesComponent {
         if(!updatedView.isSearch){
           this.documents = updatedView.images.docs;
           this.pages = updatedView.images.pages;
+          this.total = updatedView.images.total;
         }
       })
     }
@@ -99,7 +100,7 @@ export class ImagesComponent {
     }
 
     getDocs ( model: MongoImageModel, page: number, doAnd: boolean ) {
-      this.images.getView( model, page, doAnd )
+      this.images.getView( model, page, doAnd );
     }
 
     turnAlbumPage(direction: string): void {
