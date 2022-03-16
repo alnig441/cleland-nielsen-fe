@@ -14,6 +14,7 @@ export class AuthenticationServices {
     activityTimer : any;
     isLoggedIn = false;
     isAdmin = false;
+    isGuest = false;
     isPermitted = {};
     timer: any;
     language: string;
@@ -41,6 +42,7 @@ export class AuthenticationServices {
           if (activeUser && activeUser['token']) {
             localStorage.setItem('token', activeUser['token']);
             this.isLoggedIn = true;
+            this.isGuest = activeUser['userParameters']['type'] == 'guest' ? true : false;
             this.isAdmin = activeUser['userParameters']['administrator'] ? true : false;
             this.language = activeUser['userParameters']['language'] ? activeUser['userParameters']['language'] : 'english' ;
           }
