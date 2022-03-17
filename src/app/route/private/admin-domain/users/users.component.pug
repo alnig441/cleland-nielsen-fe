@@ -4,6 +4,7 @@ span(*ngIf="!this.userService.message.failure")
             form(#editUserForm="ngForm", id="{{user.user_id}}" class="box-shadow panel panel-info")
                 div(class="panel-heading")
                     h3(*ngIf="!this.activeUser.isGuest", class="panel-title") {{user.user_name}}
+                    h3(*ngIf="this.activeUser.isGuest", class="panel-title") restricted
                 div(class="panel-body")
                     div(class="input-group input-group-sm")
                         span(class="input-group-addon" disabled) Id
