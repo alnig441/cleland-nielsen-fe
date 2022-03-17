@@ -1,18 +1,18 @@
 div(class='modal fade assetviewer-modal' tabindex='1' role='dialog' aria-labelledby='assetviewerModal')
-  
+
   div(id="ticker")
     label(*ngIf='this.keyword') {{ { name: 'Categories', language: this.activeUser.language } | labelTransform }}
-    p(id='keyword') {{ this.keyword }} 
-  
+    p(id='keyword') {{ this.keyword }}
+
   div(*ngIf="this.modal.activeService == 'images'" class='modal-image-container')
     span(class='modal-image-overlay-positioner')
       img(*appModal="this.modal.source", class="modal-image app-modal" src="{{ this.modal.source }}")
       ul(*ngIf="this.modal.source && this.modal.assets.length > 1", class="modal-image-overlay")
         li((click)="this.flip('previous')" class="button-left")
-          span(class="glyphicon glyphicon-step-backward") &nbsp; 
+          span(class="glyphicon glyphicon-step-backward") &nbsp;
           | {{ { name: 'rwd', language: this.activeUser.language } | labelTransform }}
-        li((click)="this.flip('next', $event)" class="button-right") 
-          | {{ { name: 'fwd', language: this.activeUser.language } | labelTransform}} 
+        li((click)="this.flip('next', $event)" class="button-right")
+          | {{ { name: 'fwd', language: this.activeUser.language } | labelTransform}}
           | &nbsp;
           span(class="glyphicon glyphicon-step-forward")
       ul(class="modal-image-overlay-menu")
@@ -20,7 +20,7 @@ div(class='modal fade assetviewer-modal' tabindex='1' role='dialog' aria-labelle
           span(class='glyphicon glyphicon-print') &nbsp;
           | {{ { name: 'print', language: this.activeUser.language } | labelTransform }}
         li(class='button-left')
-          a(href="{{ this.modal.source }}" download)  
+          a(href="{{ this.modal.source }}" download)
             span(class='glyphicon glyphicon-download') &nbsp;
             | {{ { name: 'save', language: this.activeUser.language } | labelTransform }}
         li((click)="this.cancelModal()" class='button-left')
@@ -29,11 +29,9 @@ div(class='modal fade assetviewer-modal' tabindex='1' role='dialog' aria-labelle
 
   div(*ngIf="this.modal.activeService == 'videos'" class='modal-video-container')
     video(*appModal="this.modal.source",stop-propagation-on-click, destroy-video-on-ended, class="app-modal", controls autoplay)
-      source(src="{{ this.modal.source }}" type="video/mp4")  
+      source(src="{{ this.modal.source }}" type="video/mp4")
       source(src="{{ this.modal.source }}" type="video/ogg")
       source(src="{{ this.modal.source }}" type="video/webm")
-   
+
   form(*ngIf="this.activeUser.isAdmin", #modalAssetForm='ngForm')
     input([(ngModel)]="this.modal.model.keywords", type='text' name='keywords' id='keywords' class='form-control' autocomplete='off' placeholder='enter new category')
-      
-      

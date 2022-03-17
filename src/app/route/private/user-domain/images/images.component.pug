@@ -40,7 +40,7 @@ span(*ngIf="!this.images.message.failure" class='image-main')
               p {{ document.why }}
       div(data-toggle='modal' class="thumbnail" data-target-not='.assetviewer-modal' id="{{document._id}}")
         img(*ngIf="!this.activeUser.isGuest", (click)='this.openModal(document._id)' src="photos/photoapp/{{document.image.fileName | extTransform}}")
-        img(*ngIf="this.activeUser.isGuest", (click)="this.openModal('photos/photoapp/private-no-access.jpeg')", src="photos/photoapp/private-no-access.jpeg")
+        img(*ngIf="this.activeUser.isGuest", (click)="this.openModal(document._id)", src="photos/photoapp/private-no-access.jpeg")
         div(class='caption')
           table
             tr

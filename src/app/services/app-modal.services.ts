@@ -1,6 +1,7 @@
 import { Injectable } from "@angular/core";
 import { HttpClient, HttpParams, HttpErrorResponse } from "@angular/common/http";
 
+import { AuthenticationServices } from "./authentication.services";
 import { MongoImageServices } from "./mongoImage.services";
 import { MongoVideoServices } from "./mongoVideo.services";
 import { ServiceModelManagerServices } from "./service-model-manager.services";
@@ -15,7 +16,7 @@ export class AppModalServices {
   activeService: string;
   private source: string;
   private assetIndex: number;
-  
+
   asset: any;
   model: any;
   service: any;
@@ -23,6 +24,7 @@ export class AppModalServices {
   activeAsset = new Subject();
 
   constructor(
+    private activeUser: AuthenticationServices,
     private images: MongoImageServices,
     private videos: MongoVideoServices,
     private modelManager: ServiceModelManagerServices
@@ -59,7 +61,13 @@ export class AppModalServices {
   setSource(index: any): void {
     let assetType = this.activeService == 'images' ? 'image' : 'video';
     let folder = this.activeService == 'images' ? 'photos' : this.activeService;
-    this.source = `${folder}/James/${this.assets[index][assetType].fileName}`;
+    if(this.activeUser.isGuest) {
+      this.source = folder == 'photos' ?
+        "photos/photoapp/private-no-access.jpeg" :
+        "photos/photoapp/tv-test-screen.mp4" ;
+    } else {
+      this.source = `${folder}/James/${this.assets[index][assetType].fileName}`;
+    }
     this.activeAsset.next(this.assets[index]);
     this.asset = this.assets[index];
     this.assetIndex = index;
