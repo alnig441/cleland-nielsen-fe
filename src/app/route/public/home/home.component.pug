@@ -2,7 +2,9 @@ div(class='card')
   div(id='form')
     p Login
     label Username
-    input
+    input(type="text" placeholder="enter username" required)
+    div(class="alert alert-danger") Username Required
     label Password
-    input
+    input(type="password" placeholder="enter password" required)
+    div(class="alert alert-danger") Password Required
     button Login
