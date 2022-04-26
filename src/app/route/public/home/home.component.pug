@@ -1,10 +1,10 @@
 div(class='card')
-  div(id='form')
+  form((ngSubmit)="onSubmit()" #loginForm="ngForm")
     p Login
     label Username
-    input(type="text" placeholder="enter username" required)
-    div(class="alert alert-danger") Username Required
+    input(name="username" type="text" placeholder="enter username" required [(ngModel)]="loginModel.username" #username="ngModel")
+    div(class="alert alert-danger", [hidden]="username.valid || username.pristine") Username Required
     label Password
-    input(type="password" placeholder="enter password" required)
-    div(class="alert alert-danger") Password Required
+    input(name="password" type="password" placeholder="enter password" required [(ngModel)]="loginModel.password" #password="ngModel")
+    div(class="alert alert-danger", [hidden]="password.valid || password.pristine") Password Required
     button Login
